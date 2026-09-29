@@ -34,6 +34,8 @@ The [case prompt index](docs/case-prompts.md) links each instance to its archive
 port (default 16060 + task index); policy and idle gate use port+1000 and
 port+2000. `--write-video` enables evaluator video output. Different tasks
 can be launched independently when GPU and host memory permit.
+The interface UI is served at `http://127.0.0.1:<port>/`; use SSH port
+forwarding when running on a remote machine.
 
 The runner starts the observation interface, fail-closed idle gate, official
 evaluator and selected harness, waits for each instance to finish loading,
