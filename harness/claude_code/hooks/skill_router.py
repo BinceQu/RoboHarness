@@ -15,7 +15,8 @@ _SRC_DIR = str(Path(__file__).resolve().parents[1] / "src")
 if _SRC_DIR not in sys.path:
     sys.path.insert(0, _SRC_DIR)
 from embodied_claude_code import skill_state
-from embodied_claude_code.config import behavior_urlopen as urlopen, validate_owned_origin
+from embodied_claude_code.config import archived_context, behavior_urlopen as urlopen, validate_owned_origin
+from embodied_claude_code.skills import ARCHIVED_HIDDEN_TASK_SKILLS, ARCHIVED_TASK_SKILLS
 
 
 BASELINE_SKILL = "behavior-v2-baseline"
@@ -91,13 +92,14 @@ def read_skill(path: Path, skill_root: Path) -> SkillDocument | None:
 
 def discover_skills(plugin_root: Path) -> list[SkillDocument]:
     skill_root = plugin_root / "skills"
+    hidden = ARCHIVED_HIDDEN_TASK_SKILLS if archived_context() else HIDDEN_TASK_SKILLS
     documents = []
     for path in sorted(skill_root.glob("*/SKILL.md")):
         document = read_skill(path, skill_root)
         if (
             document is not None
             and document.name != BASELINE_SKILL
-            and document.name not in HIDDEN_TASK_SKILLS
+            and document.name not in hidden
         ):
             documents.append(document)
     return documents
@@ -120,10 +122,11 @@ def render_task_skill_catalog(plugin_root: Path | None = None) -> str:
 
 def known_task_skill_names(plugin_root: Path | None = None) -> tuple[str, ...]:
     """磁盘上的任务 skill 名；baseline 不算任务 skill。"""
+    default = ARCHIVED_TASK_SKILLS if archived_context() else DEFAULT_TASK_SKILLS
     if plugin_root is None:
-        return DEFAULT_TASK_SKILLS
+        return default
     names = tuple(document.name for document in discover_skills(Path(plugin_root)))
-    return names or DEFAULT_TASK_SKILLS
+    return names or default
 
 
 def is_native_skill_tool(tool_name: str) -> bool:

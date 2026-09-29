@@ -64,6 +64,30 @@ CLI changes, floating point simulation and sampling can change outcomes;
 replaying the same setup is not a guarantee of identical stochastic scores.
 New results are stored separately under runs and never replace reference data.
 
+## Harness context
+
+The archive's initial Claude Code context exposes seven task skills:
+close-box, cut-object, navigate-to-target, open-doors-and-drawers, pick-up-object,
+place-object-in-container and traverse-narrow-passages. The supplied later
+working tree hid four of these and added rollout-budget telemetry to MCP
+instructions and replies. These changes affect the model-visible context.
+
+The reproduction runner selects the recovered archive contract through
+`ROBOHARNESS_PROTOCOL=archived-v391-x2`: it restores the seven-skill catalog
+and omits that later telemetry. The evaluator and UI still enforce/display
+the explicit 2025 ×2 budget. Standalone harness use retains its supplied
+default behavior.
+
+The initial context matches all 11 inspected archived Claude transcripts
+byte for byte (SHA-256
+`a1ef3ea478487ad0e8d5dc8a162b0042365e874908f22169b785df75b0f838ff`).
+The activated pick-up-object, place-object-in-container and
+open-doors-and-drawers bodies also match the saved tool responses.
+[The regression fixture](../harness/claude_code/tests/fixtures/archive_context.json)
+records source transcript hashes and recovered context/skill hashes.
+This verifies the recovered model context; it does not establish that every
+simulator or interface implementation file is identical to its historical version.
+
 ## Evaluation budgets
 
 These experiments use **Challenge 2025, multiplier 2**. The exact final integer

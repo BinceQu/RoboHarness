@@ -22,6 +22,11 @@ DEFAULT_MODEL_IMAGE_JPEG_QUALITY = 95
 DEFAULT_IMAGE_CONVERTER = "/usr/bin/convert"
 
 
+def archived_context() -> bool:
+    """Use the model-visible harness contract recovered from the paper runs."""
+    return os.environ.get('ROBOHARNESS_PROTOCOL') == 'archived-v391-x2'
+
+
 def official_task_index_for_port(port: int) -> int | None:
     """Catalog ports: task10–45 on 15010–15045, task0–9 on 15060–15069."""
     if os.environ.get('ROBOHARNESS_HTTP_PORT') == str(port):

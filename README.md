@@ -32,6 +32,9 @@ A task defaults to all five archived instance IDs: 301, 304, 306, 308, 310.
 Rollout budgets use **Challenge 2025 ×2**, with the exact integer limits from
 the archived plans. The launcher rejects a changed year, multiplier, step
 limit or evaluator revision. See the [budget table](docs/provenance.md#evaluation-budgets).
+Claude Code reproduction also uses the archived seven-skill catalog and tool
+replies without the later rollout-budget telemetry. The recovered startup
+context and activated skill bodies are checked against archived transcripts.
 The [case prompt index](docs/case-prompts.md) links each instance to its archived prompt.
 `--instances` takes actual IDs, not slot indices. `--port` selects the HTTP
 port (default 16060 + task index); policy and idle gate use port+1000 and
