@@ -1,0 +1,907 @@
+{
+  "source": "2026-challenge-task-instances/metadata/task.jsonl",
+  "source_sha256": "7dbb5f7f00a2e06c693dfbb3045e5c28e627b6179e775f1ad93ca4b61f08e6dc",
+  "runtime_tag": "v3.9.3",
+  "tasks": [
+    {
+      "task_index": 0,
+      "task_name": "turning_on_radio",
+      "num_episodes": 200,
+      "length": 2149.64,
+      "distance_traveled": 5.6955,
+      "left_eef_displacement": 3.2579,
+      "right_eef_displacement": 4.0725
+    },
+    {
+      "task_index": 1,
+      "task_name": "picking_up_trash",
+      "num_episodes": 200,
+      "length": 5267.75,
+      "distance_traveled": 16.1977,
+      "left_eef_displacement": 10.557,
+      "right_eef_displacement": 9.2015
+    },
+    {
+      "task_index": 2,
+      "task_name": "putting_away_Halloween_decorations",
+      "num_episodes": 200,
+      "length": 13788.06,
+      "distance_traveled": 47.1353,
+      "left_eef_displacement": 19.8696,
+      "right_eef_displacement": 20.3038
+    },
+    {
+      "task_index": 3,
+      "task_name": "cleaning_up_plates_and_food",
+      "num_episodes": 200,
+      "length": 13696.19,
+      "distance_traveled": 35.9744,
+      "left_eef_displacement": 14.5901,
+      "right_eef_displacement": 19.9447
+    },
+    {
+      "task_index": 4,
+      "task_name": "can_meat",
+      "num_episodes": 200,
+      "length": 11847.075,
+      "distance_traveled": 31.6605,
+      "left_eef_displacement": 26.0583,
+      "right_eef_displacement": 28.4575
+    },
+    {
+      "task_index": 5,
+      "task_name": "setting_mousetraps",
+      "num_episodes": 200,
+      "length": 10196.11,
+      "distance_traveled": 31.6006,
+      "left_eef_displacement": 13.1544,
+      "right_eef_displacement": 12.3781
+    },
+    {
+      "task_index": 6,
+      "task_name": "hiding_Easter_eggs",
+      "num_episodes": 200,
+      "length": 7619.725,
+      "distance_traveled": 21.8954,
+      "left_eef_displacement": 10.7223,
+      "right_eef_displacement": 12.2295
+    },
+    {
+      "task_index": 7,
+      "task_name": "picking_up_toys",
+      "num_episodes": 200,
+      "length": 18890.55,
+      "distance_traveled": 47.049,
+      "left_eef_displacement": 20.4051,
+      "right_eef_displacement": 21.5533
+    },
+    {
+      "task_index": 8,
+      "task_name": "rearranging_kitchen_furniture",
+      "num_episodes": 200,
+      "length": 8943.015,
+      "distance_traveled": 25.8899,
+      "left_eef_displacement": 14.5261,
+      "right_eef_displacement": 16.366
+    },
+    {
+      "task_index": 9,
+      "task_name": "putting_up_Christmas_decorations_inside",
+      "num_episodes": 200,
+      "length": 13718.76,
+      "distance_traveled": 41.3256,
+      "left_eef_displacement": 16.7478,
+      "right_eef_displacement": 22.5356
+    },
+    {
+      "task_index": 10,
+      "task_name": "set_up_a_coffee_station_in_your_kitchen",
+      "num_episodes": 200,
+      "length": 6266.215,
+      "distance_traveled": 17.3596,
+      "left_eef_displacement": 9.5662,
+      "right_eef_displacement": 10.7172
+    },
+    {
+      "task_index": 11,
+      "task_name": "putting_dishes_away_after_cleaning",
+      "num_episodes": 200,
+      "length": 10953.43,
+      "distance_traveled": 33.0487,
+      "left_eef_displacement": 28.343,
+      "right_eef_displacement": 31.5145
+    },
+    {
+      "task_index": 12,
+      "task_name": "preparing_lunch_box",
+      "num_episodes": 200,
+      "length": 8245.3,
+      "distance_traveled": 21.398,
+      "left_eef_displacement": 14.0886,
+      "right_eef_displacement": 17.2403
+    },
+    {
+      "task_index": 13,
+      "task_name": "loading_the_car",
+      "num_episodes": 200,
+      "length": 19226.37,
+      "distance_traveled": 48.3176,
+      "left_eef_displacement": 18.5855,
+      "right_eef_displacement": 22.0973
+    },
+    {
+      "task_index": 14,
+      "task_name": "carrying_in_groceries",
+      "num_episodes": 200,
+      "length": 14274.805,
+      "distance_traveled": 37.0952,
+      "left_eef_displacement": 20.0611,
+      "right_eef_displacement": 19.4066
+    },
+    {
+      "task_index": 15,
+      "task_name": "bringing_in_wood",
+      "num_episodes": 200,
+      "length": 13535.655,
+      "distance_traveled": 36.3806,
+      "left_eef_displacement": 14.5503,
+      "right_eef_displacement": 16.9711
+    },
+    {
+      "task_index": 16,
+      "task_name": "moving_boxes_to_storage",
+      "num_episodes": 200,
+      "length": 14596.225,
+      "distance_traveled": 36.8051,
+      "left_eef_displacement": 8.3621,
+      "right_eef_displacement": 10.7875
+    },
+    {
+      "task_index": 17,
+      "task_name": "bringing_water",
+      "num_episodes": 200,
+      "length": 9438.545,
+      "distance_traveled": 26.2495,
+      "left_eef_displacement": 9.3574,
+      "right_eef_displacement": 11.0538
+    },
+    {
+      "task_index": 18,
+      "task_name": "tidying_bedroom",
+      "num_episodes": 200,
+      "length": 11037.445,
+      "distance_traveled": 33.3982,
+      "left_eef_displacement": 12.6534,
+      "right_eef_displacement": 12.5928
+    },
+    {
+      "task_index": 19,
+      "task_name": "outfit_a_basic_toolbox",
+      "num_episodes": 200,
+      "length": 10637.97,
+      "distance_traveled": 31.6827,
+      "left_eef_displacement": 18.1761,
+      "right_eef_displacement": 20.0662
+    },
+    {
+      "task_index": 20,
+      "task_name": "sorting_vegetables",
+      "num_episodes": 200,
+      "length": 11903.7,
+      "distance_traveled": 33.9547,
+      "left_eef_displacement": 46.3001,
+      "right_eef_displacement": 22.8779
+    },
+    {
+      "task_index": 21,
+      "task_name": "collecting_childrens_toys",
+      "num_episodes": 200,
+      "length": 19186.325,
+      "distance_traveled": 58.4048,
+      "left_eef_displacement": 24.1457,
+      "right_eef_displacement": 25.8095
+    },
+    {
+      "task_index": 22,
+      "task_name": "putting_shoes_on_rack",
+      "num_episodes": 200,
+      "length": 7726.145,
+      "distance_traveled": 27.0157,
+      "left_eef_displacement": 8.8518,
+      "right_eef_displacement": 9.7536
+    },
+    {
+      "task_index": 23,
+      "task_name": "boxing_books_up_for_storage",
+      "num_episodes": 200,
+      "length": 24227.5,
+      "distance_traveled": 72.27,
+      "left_eef_displacement": 26.0507,
+      "right_eef_displacement": 24.4705
+    },
+    {
+      "task_index": 24,
+      "task_name": "storing_food",
+      "num_episodes": 200,
+      "length": 19869.12,
+      "distance_traveled": 55.6409,
+      "left_eef_displacement": 30.6866,
+      "right_eef_displacement": 27.5186
+    },
+    {
+      "task_index": 25,
+      "task_name": "clearing_food_from_table_into_fridge",
+      "num_episodes": 200,
+      "length": 13068.16,
+      "distance_traveled": 31.8313,
+      "left_eef_displacement": 15.7462,
+      "right_eef_displacement": 16.9056
+    },
+    {
+      "task_index": 26,
+      "task_name": "assembling_gift_baskets",
+      "num_episodes": 200,
+      "length": 26060.055,
+      "distance_traveled": 79.7083,
+      "left_eef_displacement": 40.2501,
+      "right_eef_displacement": 38.5946
+    },
+    {
+      "task_index": 27,
+      "task_name": "sorting_household_items",
+      "num_episodes": 200,
+      "length": 15807.755,
+      "distance_traveled": 50.9062,
+      "left_eef_displacement": 25.343,
+      "right_eef_displacement": 28.2382
+    },
+    {
+      "task_index": 28,
+      "task_name": "getting_organized_for_work",
+      "num_episodes": 200,
+      "length": 15671.01,
+      "distance_traveled": 47.3433,
+      "left_eef_displacement": 17.2703,
+      "right_eef_displacement": 26.5933
+    },
+    {
+      "task_index": 29,
+      "task_name": "clean_up_your_desk",
+      "num_episodes": 200,
+      "length": 21417.875,
+      "distance_traveled": 60.5127,
+      "left_eef_displacement": 38.1787,
+      "right_eef_displacement": 35.5689
+    },
+    {
+      "task_index": 30,
+      "task_name": "setting_the_fire",
+      "num_episodes": 200,
+      "length": 9118.13,
+      "distance_traveled": 31.8047,
+      "left_eef_displacement": 11.4036,
+      "right_eef_displacement": 12.9476
+    },
+    {
+      "task_index": 31,
+      "task_name": "clean_boxing_gloves",
+      "num_episodes": 200,
+      "length": 8235.36,
+      "distance_traveled": 28.582,
+      "left_eef_displacement": 10.6524,
+      "right_eef_displacement": 11.1744
+    },
+    {
+      "task_index": 32,
+      "task_name": "wash_a_baseball_cap",
+      "num_episodes": 200,
+      "length": 8349.41,
+      "distance_traveled": 28.9362,
+      "left_eef_displacement": 10.7124,
+      "right_eef_displacement": 11.4883
+    },
+    {
+      "task_index": 33,
+      "task_name": "wash_dog_toys",
+      "num_episodes": 200,
+      "length": 11222.8,
+      "distance_traveled": 46.5824,
+      "left_eef_displacement": 16.0025,
+      "right_eef_displacement": 15.8822
+    },
+    {
+      "task_index": 34,
+      "task_name": "hanging_pictures",
+      "num_episodes": 200,
+      "length": 2387.415,
+      "distance_traveled": 6.6305,
+      "left_eef_displacement": 2.3685,
+      "right_eef_displacement": 3.942
+    },
+    {
+      "task_index": 35,
+      "task_name": "attach_a_camera_to_a_tripod",
+      "num_episodes": 200,
+      "length": 3911.575,
+      "distance_traveled": 11.3036,
+      "left_eef_displacement": 7.9194,
+      "right_eef_displacement": 5.829
+    },
+    {
+      "task_index": 36,
+      "task_name": "clean_a_patio",
+      "num_episodes": 200,
+      "length": 12070.81,
+      "distance_traveled": 37.2109,
+      "left_eef_displacement": 11.7318,
+      "right_eef_displacement": 11.2542
+    },
+    {
+      "task_index": 37,
+      "task_name": "clean_a_trumpet",
+      "num_episodes": 200,
+      "length": 5307.16,
+      "distance_traveled": 12.3853,
+      "left_eef_displacement": 7.6569,
+      "right_eef_displacement": 11.4991
+    },
+    {
+      "task_index": 38,
+      "task_name": "spraying_for_bugs",
+      "num_episodes": 200,
+      "length": 6479.475,
+      "distance_traveled": 21.9792,
+      "left_eef_displacement": 12.2261,
+      "right_eef_displacement": 7.0703
+    },
+    {
+      "task_index": 39,
+      "task_name": "spraying_fruit_trees",
+      "num_episodes": 200,
+      "length": 8345.87,
+      "distance_traveled": 23.4965,
+      "left_eef_displacement": 21.5924,
+      "right_eef_displacement": 7.564
+    },
+    {
+      "task_index": 40,
+      "task_name": "make_microwave_popcorn",
+      "num_episodes": 200,
+      "length": 3237.775,
+      "distance_traveled": 8.6032,
+      "left_eef_displacement": 2.8263,
+      "right_eef_displacement": 8.6885
+    },
+    {
+      "task_index": 41,
+      "task_name": "cook_cabbage",
+      "num_episodes": 200,
+      "length": 14144.81,
+      "distance_traveled": 39.3143,
+      "left_eef_displacement": 20.8745,
+      "right_eef_displacement": 22.8551
+    },
+    {
+      "task_index": 42,
+      "task_name": "chop_an_onion",
+      "num_episodes": 200,
+      "length": 6399.8,
+      "distance_traveled": 16.9982,
+      "left_eef_displacement": 6.3667,
+      "right_eef_displacement": 11.0499
+    },
+    {
+      "task_index": 43,
+      "task_name": "slicing_vegetables",
+      "num_episodes": 200,
+      "length": 14844.94,
+      "distance_traveled": 40.6344,
+      "left_eef_displacement": 17.7467,
+      "right_eef_displacement": 22.4704
+    },
+    {
+      "task_index": 44,
+      "task_name": "chopping_wood",
+      "num_episodes": 200,
+      "length": 10751.985,
+      "distance_traveled": 37.8297,
+      "left_eef_displacement": 18.5278,
+      "right_eef_displacement": 16.5819
+    },
+    {
+      "task_index": 45,
+      "task_name": "cook_hot_dogs",
+      "num_episodes": 200,
+      "length": 9144.855,
+      "distance_traveled": 25.7822,
+      "left_eef_displacement": 14.8412,
+      "right_eef_displacement": 16.541
+    },
+    {
+      "task_index": 46,
+      "task_name": "cook_bacon",
+      "num_episodes": 200,
+      "length": 7679.545,
+      "distance_traveled": 20.9167,
+      "left_eef_displacement": 8.2031,
+      "right_eef_displacement": 11.2599
+    },
+    {
+      "task_index": 47,
+      "task_name": "freeze_pies",
+      "num_episodes": 200,
+      "length": 12455.23,
+      "distance_traveled": 35.4388,
+      "left_eef_displacement": 26.413,
+      "right_eef_displacement": 31.1398
+    },
+    {
+      "task_index": 48,
+      "task_name": "canning_food",
+      "num_episodes": 200,
+      "length": 22975.49,
+      "distance_traveled": 64.4919,
+      "left_eef_displacement": 45.9693,
+      "right_eef_displacement": 45.9911
+    },
+    {
+      "task_index": 49,
+      "task_name": "make_pizza",
+      "num_episodes": 200,
+      "length": 19186.925,
+      "distance_traveled": 56.8705,
+      "left_eef_displacement": 33.5179,
+      "right_eef_displacement": 44.0735
+    },
+    {
+      "task_index": 50,
+      "task_name": "freeze_fruit",
+      "num_episodes": 200,
+      "length": 12618.78,
+      "distance_traveled": 25.4002,
+      "left_eef_displacement": 28.6477,
+      "right_eef_displacement": 38.6419
+    },
+    {
+      "task_index": 51,
+      "task_name": "cook_a_brisket",
+      "num_episodes": 200,
+      "length": 7334.995,
+      "distance_traveled": 14.2032,
+      "left_eef_displacement": 11.9717,
+      "right_eef_displacement": 16.5149
+    },
+    {
+      "task_index": 52,
+      "task_name": "sorting_bottles_cans_and_paper",
+      "num_episodes": 200,
+      "length": 10263.835,
+      "distance_traveled": 26.7573,
+      "left_eef_displacement": 22.3654,
+      "right_eef_displacement": 23.4602
+    },
+    {
+      "task_index": 53,
+      "task_name": "tidying_living_room",
+      "num_episodes": 200,
+      "length": 12565.88,
+      "distance_traveled": 20.6534,
+      "left_eef_displacement": 18.4715,
+      "right_eef_displacement": 18.561
+    },
+    {
+      "task_index": 54,
+      "task_name": "putting_away_toys",
+      "num_episodes": 200,
+      "length": 11296.755,
+      "distance_traveled": 35.1468,
+      "left_eef_displacement": 28.6707,
+      "right_eef_displacement": 28.3961
+    },
+    {
+      "task_index": 55,
+      "task_name": "re_shelving_library_books",
+      "num_episodes": 200,
+      "length": 9528.43,
+      "distance_traveled": 19.6242,
+      "left_eef_displacement": 18.9446,
+      "right_eef_displacement": 16.5616
+    },
+    {
+      "task_index": 56,
+      "task_name": "make_rose_centerpieces",
+      "num_episodes": 200,
+      "length": 4532.155,
+      "distance_traveled": 9.0471,
+      "left_eef_displacement": 9.8679,
+      "right_eef_displacement": 9.7403
+    },
+    {
+      "task_index": 57,
+      "task_name": "sweeping_garage",
+      "num_episodes": 200,
+      "length": 4473.03,
+      "distance_traveled": 19.0765,
+      "left_eef_displacement": 4.3321,
+      "right_eef_displacement": 4.4401
+    },
+    {
+      "task_index": 58,
+      "task_name": "stacking_wood",
+      "num_episodes": 200,
+      "length": 15939.34,
+      "distance_traveled": 85.9645,
+      "left_eef_displacement": 21.4499,
+      "right_eef_displacement": 21.7195
+    },
+    {
+      "task_index": 59,
+      "task_name": "organizing_art_supplies",
+      "num_episodes": 200,
+      "length": 6194.365,
+      "distance_traveled": 11.5079,
+      "left_eef_displacement": 12.29,
+      "right_eef_displacement": 12.3566
+    },
+    {
+      "task_index": 60,
+      "task_name": "scrubbing_bathroom_floor",
+      "num_episodes": 200,
+      "length": 3153.83,
+      "distance_traveled": 5.3838,
+      "left_eef_displacement": 7.7988,
+      "right_eef_displacement": 7.8396
+    },
+    {
+      "task_index": 61,
+      "task_name": "bringing_paper_to_recycling",
+      "num_episodes": 200,
+      "length": 11214.26,
+      "distance_traveled": 35.2436,
+      "left_eef_displacement": 23.5734,
+      "right_eef_displacement": 25.0631
+    },
+    {
+      "task_index": 62,
+      "task_name": "halve_an_egg",
+      "num_episodes": 200,
+      "length": 6377.04,
+      "distance_traveled": 14.0643,
+      "left_eef_displacement": 16.5473,
+      "right_eef_displacement": 15.6253
+    },
+    {
+      "task_index": 63,
+      "task_name": "installing_smoke_detectors",
+      "num_episodes": 200,
+      "length": 2568.77,
+      "distance_traveled": 8.6081,
+      "left_eef_displacement": 6.7902,
+      "right_eef_displacement": 3.2471
+    },
+    {
+      "task_index": 64,
+      "task_name": "setting_the_table",
+      "num_episodes": 200,
+      "length": 17808.505,
+      "distance_traveled": 55.4631,
+      "left_eef_displacement": 38.1259,
+      "right_eef_displacement": 46.9068
+    },
+    {
+      "task_index": 65,
+      "task_name": "unloading_the_car",
+      "num_episodes": 200,
+      "length": 11323.43,
+      "distance_traveled": 33.706,
+      "left_eef_displacement": 18.2906,
+      "right_eef_displacement": 20.6897
+    },
+    {
+      "task_index": 66,
+      "task_name": "turning_out_all_lights_before_sleep",
+      "num_episodes": 200,
+      "length": 10006.11,
+      "distance_traveled": 40.2489,
+      "left_eef_displacement": 16.5591,
+      "right_eef_displacement": 16.975
+    },
+    {
+      "task_index": 67,
+      "task_name": "boxing_food_after_dinner",
+      "num_episodes": 200,
+      "length": 6697.715,
+      "distance_traveled": 16.1108,
+      "left_eef_displacement": 11.1626,
+      "right_eef_displacement": 17.701
+    },
+    {
+      "task_index": 68,
+      "task_name": "cleaning_up_branches_and_twigs",
+      "num_episodes": 200,
+      "length": 12527.07,
+      "distance_traveled": 40.8589,
+      "left_eef_displacement": 24.8249,
+      "right_eef_displacement": 25.2606
+    },
+    {
+      "task_index": 69,
+      "task_name": "vacuuming_floors",
+      "num_episodes": 200,
+      "length": 2411.785,
+      "distance_traveled": 4.9572,
+      "left_eef_displacement": 2.4423,
+      "right_eef_displacement": 3.733
+    },
+    {
+      "task_index": 70,
+      "task_name": "thawing_frozen_food",
+      "num_episodes": 200,
+      "length": 8229.62,
+      "distance_traveled": 17.4536,
+      "left_eef_displacement": 7.3009,
+      "right_eef_displacement": 23.0254
+    },
+    {
+      "task_index": 71,
+      "task_name": "clean_your_rusty_garden_tools",
+      "num_episodes": 200,
+      "length": 15157.91,
+      "distance_traveled": 68.579,
+      "left_eef_displacement": 23.2586,
+      "right_eef_displacement": 24.9389
+    },
+    {
+      "task_index": 72,
+      "task_name": "cook_a_frozen_pie",
+      "num_episodes": 200,
+      "length": 8667.96,
+      "distance_traveled": 18.9939,
+      "left_eef_displacement": 14.494,
+      "right_eef_displacement": 19.4444
+    },
+    {
+      "task_index": 73,
+      "task_name": "organizing_school_stuff",
+      "num_episodes": 200,
+      "length": 14591.9,
+      "distance_traveled": 26.1584,
+      "left_eef_displacement": 24.2446,
+      "right_eef_displacement": 27.6098
+    },
+    {
+      "task_index": 74,
+      "task_name": "carrying_out_garden_furniture",
+      "num_episodes": 200,
+      "length": 11058.805,
+      "distance_traveled": 61.164,
+      "left_eef_displacement": 11.4607,
+      "right_eef_displacement": 13.7753
+    },
+    {
+      "task_index": 75,
+      "task_name": "put_together_a_basic_pruning_kit",
+      "num_episodes": 200,
+      "length": 11264.475,
+      "distance_traveled": 19.4443,
+      "left_eef_displacement": 18.0706,
+      "right_eef_displacement": 18.6867
+    },
+    {
+      "task_index": 76,
+      "task_name": "dispose_of_glass",
+      "num_episodes": 200,
+      "length": 9195.33,
+      "distance_traveled": 18.1259,
+      "left_eef_displacement": 16.0032,
+      "right_eef_displacement": 15.7775
+    },
+    {
+      "task_index": 77,
+      "task_name": "installing_a_modem",
+      "num_episodes": 200,
+      "length": 2412.985,
+      "distance_traveled": 2.6609,
+      "left_eef_displacement": 5.0635,
+      "right_eef_displacement": 3.2098
+    },
+    {
+      "task_index": 78,
+      "task_name": "make_cabinet_doors",
+      "num_episodes": 200,
+      "length": 3442.525,
+      "distance_traveled": 4.4664,
+      "left_eef_displacement": 5.7108,
+      "right_eef_displacement": 4.2765
+    },
+    {
+      "task_index": 79,
+      "task_name": "polishing_shoes",
+      "num_episodes": 200,
+      "length": 10737.985,
+      "distance_traveled": 17.158,
+      "left_eef_displacement": 20.0972,
+      "right_eef_displacement": 21.1142
+    },
+    {
+      "task_index": 80,
+      "task_name": "clean_up_broken_glass",
+      "num_episodes": 200,
+      "length": 8691.415,
+      "distance_traveled": 29.1154,
+      "left_eef_displacement": 14.6504,
+      "right_eef_displacement": 13.5075
+    },
+    {
+      "task_index": 81,
+      "task_name": "packing_meal_for_delivery",
+      "num_episodes": 200,
+      "length": 8859.895,
+      "distance_traveled": 19.6145,
+      "left_eef_displacement": 21.6715,
+      "right_eef_displacement": 16.5244
+    },
+    {
+      "task_index": 82,
+      "task_name": "store_batteries",
+      "num_episodes": 200,
+      "length": 7704.235,
+      "distance_traveled": 14.1564,
+      "left_eef_displacement": 12.8752,
+      "right_eef_displacement": 16.4904
+    },
+    {
+      "task_index": 83,
+      "task_name": "store_honey",
+      "num_episodes": 200,
+      "length": 6766.84,
+      "distance_traveled": 12.0735,
+      "left_eef_displacement": 7.5574,
+      "right_eef_displacement": 15.3248
+    },
+    {
+      "task_index": 84,
+      "task_name": "tidying_bathroom",
+      "num_episodes": 200,
+      "length": 13003.15,
+      "distance_traveled": 19.012,
+      "left_eef_displacement": 19.4227,
+      "right_eef_displacement": 20.5473
+    },
+    {
+      "task_index": 85,
+      "task_name": "putting_dirty_dishes_in_sink",
+      "num_episodes": 200,
+      "length": 12148.58,
+      "distance_traveled": 57.395,
+      "left_eef_displacement": 18.0193,
+      "right_eef_displacement": 25.6506
+    },
+    {
+      "task_index": 86,
+      "task_name": "make_gift_bags_for_baby_showers",
+      "num_episodes": 200,
+      "length": 9650.92,
+      "distance_traveled": 16.7904,
+      "left_eef_displacement": 18.3234,
+      "right_eef_displacement": 21.5594
+    },
+    {
+      "task_index": 87,
+      "task_name": "collecting_aluminum_cans",
+      "num_episodes": 200,
+      "length": 10202.875,
+      "distance_traveled": 18.5138,
+      "left_eef_displacement": 21.3103,
+      "right_eef_displacement": 20.3374
+    },
+    {
+      "task_index": 88,
+      "task_name": "rearrange_your_room",
+      "num_episodes": 200,
+      "length": 12854.955,
+      "distance_traveled": 24.028,
+      "left_eef_displacement": 18.5804,
+      "right_eef_displacement": 18.7572
+    },
+    {
+      "task_index": 89,
+      "task_name": "installing_a_fax_machine",
+      "num_episodes": 200,
+      "length": 4076.89,
+      "distance_traveled": 10.2326,
+      "left_eef_displacement": 5.8924,
+      "right_eef_displacement": 7.4034
+    },
+    {
+      "task_index": 90,
+      "task_name": "composting_waste",
+      "num_episodes": 200,
+      "length": 3638.62,
+      "distance_traveled": 6.4352,
+      "left_eef_displacement": 10.552,
+      "right_eef_displacement": 4.4448
+    },
+    {
+      "task_index": 91,
+      "task_name": "store_produce",
+      "num_episodes": 200,
+      "length": 9522.355,
+      "distance_traveled": 26.5297,
+      "left_eef_displacement": 18.9635,
+      "right_eef_displacement": 22.6036
+    },
+    {
+      "task_index": 92,
+      "task_name": "installing_a_scanner",
+      "num_episodes": 200,
+      "length": 4258.535,
+      "distance_traveled": 6.4139,
+      "left_eef_displacement": 7.0658,
+      "right_eef_displacement": 7.8887
+    },
+    {
+      "task_index": 93,
+      "task_name": "clean_a_keyboard",
+      "num_episodes": 200,
+      "length": 3876.065,
+      "distance_traveled": 4.4593,
+      "left_eef_displacement": 3.1973,
+      "right_eef_displacement": 9.7266
+    },
+    {
+      "task_index": 94,
+      "task_name": "dispose_of_batteries",
+      "num_episodes": 200,
+      "length": 14428.39,
+      "distance_traveled": 46.6197,
+      "left_eef_displacement": 19.6368,
+      "right_eef_displacement": 13.1188
+    },
+    {
+      "task_index": 95,
+      "task_name": "cook_brussels_sprouts",
+      "num_episodes": 200,
+      "length": 15661.77,
+      "distance_traveled": 34.869,
+      "left_eef_displacement": 36.1291,
+      "right_eef_displacement": 26.9862
+    },
+    {
+      "task_index": 96,
+      "task_name": "cook_broccolini",
+      "num_episodes": 200,
+      "length": 4617.76,
+      "distance_traveled": 10.8674,
+      "left_eef_displacement": 5.9119,
+      "right_eef_displacement": 6.3132
+    },
+    {
+      "task_index": 97,
+      "task_name": "setup_a_bar_for_a_cocktail_party",
+      "num_episodes": 200,
+      "length": 13418.895,
+      "distance_traveled": 22.8071,
+      "left_eef_displacement": 20.5781,
+      "right_eef_displacement": 29.4866
+    },
+    {
+      "task_index": 98,
+      "task_name": "laying_tile_floors",
+      "num_episodes": 200,
+      "length": 14350.96,
+      "distance_traveled": 64.8431,
+      "left_eef_displacement": 22.5205,
+      "right_eef_displacement": 21.336
+    },
+    {
+      "task_index": 99,
+      "task_name": "sorting_books_on_shelf",
+      "num_episodes": 200,
+      "length": 7739.35,
+      "distance_traveled": 10.2308,
+      "left_eef_displacement": 10.2698,
+      "right_eef_displacement": 13.8422
+    }
+  ]
+}

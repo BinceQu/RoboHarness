@@ -462,6 +462,8 @@ class Run:
                'delta_q': result['q_score']['final'] - case['reference_q'], 'steps': result['steps'],
                'success': result['success'], 'result': str(path.relative_to(self.path)),
                'result_sha256': sha(path.read_bytes()), 'finish_reason': reason or 'evaluator_end'}
+        row['archive_reported_q'] = case.get('archive_reported_q', case['reference_q'])
+        row['delta_archive_q'] = row['q'] - row['archive_reported_q']
         atomic_json(case_dir / 'comparison.json', row)
         self.results.append(row)
         self.write_summary('running')
@@ -475,6 +477,8 @@ class Run:
                   'reference_mean_q': sum(x['reference_q'] for x in self.plan['cases']) / len(self.plan['cases'])}
         result['archive_reported_mean_q'] = sum(
             x.get('archive_reported_q', x['reference_q']) for x in self.plan['cases']) / len(self.plan['cases'])
+        result['delta_archive_mean_q'] = (result['mean_q'] - result['archive_reported_mean_q']
+                                         if len(self.results) == len(self.plan['cases']) else None)
         if error:
             result['error'] = str(error)
         atomic_json(self.path / 'summary.json', result)
