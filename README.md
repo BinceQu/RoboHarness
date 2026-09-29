@@ -49,6 +49,16 @@ for task00, task02 and task05. Use new evaluator JSON to assess reproduction;
 reference JSON files are never used as outputs of a new run. GPU validation
 results are documented in [validation](docs/validation.md).
 
+To collect several completed or ongoing runs into one report:
+
+```bash
+python3 scripts/report_validation.py runs/YOUR_RUN_A runs/YOUR_RUN_B --watch
+```
+
+The report is written to `validation_results/latest/`. An incomplete run
+never receives a final score comparison. Completed official JSON files are
+copied into the report alongside their hashes and per-case differences.
+
 Code is MIT licensed; see [LICENSE](LICENSE) and
 [third-party notices](THIRD_PARTY_NOTICES.md). External datasets, keys and
 model credentials are not included.
