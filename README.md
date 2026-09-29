@@ -29,6 +29,7 @@ Follow [installation and model setup](docs/setup.md), then:
 ```
 
 A task defaults to all five archived instance IDs: 301, 304, 306, 308, 310.
+The [case prompt index](docs/case-prompts.md) links each instance to its archived prompt.
 `--instances` takes actual IDs, not slot indices. `--port` selects the HTTP
 port (default 16060 + task index); policy and idle gate use port+1000 and
 port+2000. `--write-video` enables evaluator video output. Different tasks
