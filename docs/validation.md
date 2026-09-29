@@ -6,9 +6,12 @@ with BEHAVIOR v3.9.1 at `26f2c7ef7b9cf96bd0414f81e1e751e493762779`.
 ## Automated checks
 
 The independent Git clone passed all 360 tests in `scripts/check.sh`:
-344 passed and 16 were skipped. Four additional result-reporting tests cover
+344 passed and 16 were skipped. Five additional result-reporting tests cover
 incomplete runs, incomplete completion claims, modified scoring files, and
-superseded attempts that must not count as reproduction claims.
+superseded attempts or an unavailable archived starting state that must not
+count as reproduction claims. All 15 current runner/report/budget checks pass.
+The scratch-space preflight also passes with real free space and rejects a
+simulated full filesystem before launching the simulator.
 Two budget regression tests also pass: all nine tasks use the archived 2025
 ×2 limits in the launcher, catalog and monitor, and altered budget/protocol
 manifests are rejected before launch.
@@ -19,6 +22,8 @@ bodies found there, the seven-skill catalog, and MCP replies without later
 the recorded 2,048-character prefix is verified separately.
 The full updated Claude suite passes: 170 passed, 15 optional checks skipped
 (185 total). All 14 runner/report/budget checks also pass with the new manifests.
+The independent clone was updated to `680288e`; its 14 runner/report/budget
+checks pass with the exact transcript prompts and per-case namespace manifests.
 The real Claude CLI also passes both recorded MCP namespace variants, with
 native Skill activation, deactivation and compaction against a local test model.
 This covers the task/result manifests, owned-process cleanup, cross-session
@@ -79,9 +84,18 @@ the matching archived prompts, and all five instances per task:
 
 | Task | Run directory | Archived mean Q | Status |
 | --- | --- | ---: | --- |
-| task01 | `runs/validation-20260930-task01-r2` | 0.866667 | Pending restart |
-| task06 | `runs/validation-20260930-task06-r2` | 0.422222 | Pending restart |
-| task08 | `runs/validation-20260930-task08-r2` | 0.400000 | Pending restart |
+| task01 | `runs/validation-20260930-task01-r3` | 0.866667 | Running |
+| task03 | `runs/validation-20260930-task03` | 0.257143 | Running |
+| task08 | `runs/validation-20260930-task08-r3` | 0.400000 | Running |
+
+The [current live audit](../validation_results/gpu5-20260930-r2/budget_audit.json)
+confirms 10535, 27392 and 17886 steps for these three runs through evaluator
+arguments, environment, monitor and evaluator logs. Their first Claude sessions
+match the archived SessionStart text, recorded MCP instruction preview, native
+plugin skill listing, tool namespace and source prompt bytes. Initial camera
+frames were also visually compared against the archived first frames; scene
+layout and starting viewpoint agree, with small rendering differences. This
+visual check does not claim pixel-identical or complete simulator states.
 
 The [first-attempt budget audit](../validation_results/gpu5-20260929/budget_audit.json)
 matches all nine limits to their original archive JSON fields and hashes.
@@ -108,6 +122,23 @@ prompt bytes, including final newlines stripped by monitor records.
 Those [intermediate attempts](../validation_results/gpu5-20260930/README.md)
 are retained separately. The observed score difference
 does not establish that this context drift caused the failure.
+
+The next task01/task08 initialization attempts exhausted local scratch space
+and exited with signal 11 after texture-cache write errors. No agent case or
+official score was produced. Their
+[failure summaries](../validation_results/gpu5-20260930-r2/initialization_failures.json)
+are retained. Caches from stopped validation attempts were removed, and the
+two runs were restarted. The launcher now checks scratch space before launch.
+
+Task06's corrected harness did match the archived startup text, native skills,
+tool namespace and 15239-step limit. Comparing first observations then exposed
+a different archived starting state in instance 301: the source scene had
+already received seven interface operations before the selected Claude session.
+The [live context audit](../validation_results/gpu5-20260930-r2/task06_context_audit.json)
+and [archived initial-state evidence](../reference_results/initial_states.json)
+preserve this finding. That fresh-reset attempt was stopped as a diagnostic;
+task03 replaces task06 in the three-task score validation. The source Q=1.0 and
+task06 mean remain unchanged. See [provenance](provenance.md) for the limitation.
 
 **Full task scores are not available yet; this is not a claim that the archived
 means have been reproduced.** Each run writes its official results and

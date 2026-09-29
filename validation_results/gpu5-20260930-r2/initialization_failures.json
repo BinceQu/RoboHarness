@@ -1,0 +1,52 @@
+{
+  "checked_at": "2026-09-30T01:18:14.909605+08:00",
+  "recovered_free_bytes": 50016108544,
+  "failures": [
+    {
+      "task": "task01",
+      "run_dir": "runs/validation-20260930-task01-r2",
+      "summary": {
+        "status": "failed",
+        "run_id": "task01-20260930-010635-fcd0982d",
+        "task": "task01",
+        "harness": "claude_code",
+        "model": "Qwen3.8-Flash-Next-FP8",
+        "protocol": "archived-v391-x2",
+        "n_expected": 5,
+        "n_finished": 0,
+        "cases": [],
+        "mean_q": null,
+        "reference_mean_q": 0.8666666666666666,
+        "archive_reported_mean_q": 0.8666666666666666,
+        "delta_archive_mean_q": null,
+        "error": "evaluator exited (-11); see /mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task01-r2/logs/evaluator.log"
+      },
+      "evaluator_log_sha256": "b688ab3df2179a3c8ba96aeae3cab6af0cadadc82e6df6a370ed9f17eca05686",
+      "observed_issue": "Local scratch filesystem filled during initialization; texture cache writes failed before evaluator exited with signal 11. No case or official score was produced.",
+      "replacement_run": "runs/validation-20260930-task01-r3"
+    },
+    {
+      "task": "task08",
+      "run_dir": "runs/validation-20260930-task08-r2",
+      "summary": {
+        "status": "failed",
+        "run_id": "task08-20260930-010701-c3eb5966",
+        "task": "task08",
+        "harness": "claude_code",
+        "model": "Qwen3.8-Flash-Next-FP8",
+        "protocol": "archived-v391-x2",
+        "n_expected": 5,
+        "n_finished": 0,
+        "cases": [],
+        "mean_q": null,
+        "reference_mean_q": 0.4,
+        "archive_reported_mean_q": 0.4,
+        "delta_archive_mean_q": null,
+        "error": "evaluator exited (-11); see /mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task08-r2/logs/evaluator.log"
+      },
+      "evaluator_log_sha256": "af35a4db83c3f846e30f656a89195fa2aaf3acf681fc7c7e032f98ca4459f33a",
+      "observed_issue": "Local scratch filesystem filled during initialization; texture cache writes failed before evaluator exited with signal 11. No case or official score was produced.",
+      "replacement_run": "runs/validation-20260930-task08-r3"
+    }
+  ]
+}

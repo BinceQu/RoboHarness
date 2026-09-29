@@ -1,0 +1,164 @@
+{
+  "challenge_year": 2025,
+  "budget_multiplier": 2,
+  "evaluator_commit": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+  "archived_budgets": [
+    {
+      "task": "task00",
+      "max_steps": 4299,
+      "source": "test_results/task00/eval_runs/t00-15060-09171200/plan.json",
+      "source_field": "task.timeout_steps",
+      "source_sha256": "9356ccdaa6e1176b349fba9569c95e5bd0e276796c70981e44d0b94713d38d2c"
+    },
+    {
+      "task": "task01",
+      "max_steps": 10535,
+      "source": "test_results/task01/09152118/plan.json",
+      "source_field": "task.timeout_steps",
+      "source_sha256": "08c5e14b680a1081439f6d62629bbde6e1a4b818fec3bc24efc52b3d0252b4b3"
+    },
+    {
+      "task": "task02",
+      "max_steps": 27664,
+      "source": "test_results/task02/instance_310/plan.json",
+      "source_field": "task.timeout_steps",
+      "source_sha256": "b6560bb915f1c09abcd1e0733e5e779946734b587ec59a65b0ef34ab9c31416c"
+    },
+    {
+      "task": "task03",
+      "max_steps": 27392,
+      "source": "test_results/task03/02_plans/plan_t03-15063-09171758.json",
+      "source_field": "task.timeout_steps",
+      "source_sha256": "f63fa8c7037948c62a98f3404b90a6480a0a1f064375d971dee772dd5e3b5def"
+    },
+    {
+      "task": "task05",
+      "max_steps": 20343,
+      "source": "test_results/task05/plan_jsons/t05-15065-09181018_plan.json",
+      "source_field": "task.timeout_steps",
+      "source_sha256": "104dabebf5c6525fcd0b56c4e1c0a499b59f25a8405de4b584056a3e76bb15f6"
+    },
+    {
+      "task": "task06",
+      "max_steps": 15239,
+      "source": "test_results/task06/02_plans/plan_t06-15066-09172335.json",
+      "source_field": "task.timeout_steps",
+      "source_sha256": "9131183d3bb9b462a228d4ce2108c6506af62416d9f668e8c93790f15fd77715"
+    },
+    {
+      "task": "task07",
+      "max_steps": 37781,
+      "source": "test_results/task07/manifest.json",
+      "source_field": "run.timeout_steps",
+      "source_sha256": "26b76c66c1bc7969f540bac2323b9f8540a4c91681c312784eea159c84f0e288"
+    },
+    {
+      "task": "task08",
+      "max_steps": 17886,
+      "source": "test_results/task08/summary.json",
+      "source_field": "max_ticks",
+      "source_sha256": "b5c9768e1eeb383d0c20c9b482d2ce9dfc2a6a13bac1090640f75839406d55b2"
+    },
+    {
+      "task": "task09",
+      "max_steps": 27437,
+      "source": "test_results/task09/_meta/run_09171200/plan.json",
+      "source_field": "task.timeout_steps",
+      "source_sha256": "17e25539a88b16d957f24edd5c6081f99da75edc2e52d92a7c959e7122282a72"
+    }
+  ],
+  "checked_at": "2026-09-30T01:27:40+08:00",
+  "live_runs": [
+    {
+      "task": "task06",
+      "run_dir": "runs/validation-20260930-task06-r2",
+      "evaluator_pid": 1156619,
+      "evaluator_max_steps_argument": 15239,
+      "ROBOHARNESS_MAX_STEPS": 15239,
+      "BEHAVIOR_AGENT_MAX_TICKS": 15239,
+      "monitor_max_ticks": 15239,
+      "session_id": "t06p16066i0-d01ba6dd44644097",
+      "evaluator_log": "runs/validation-20260930-task06-r2/logs/evaluator.log",
+      "evaluator_log_budget_lines": [
+        "[00:00:22.649] [INFO] [omnigibson.eval.evaluator] Setting timeout to be 15239 steps through config."
+      ],
+      "contexts": [
+        {
+          "instance_id": 301,
+          "transcript": "runs/validation-20260930-task06-r2/instance_301/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/b06f037f-b8bf-4d70-a17a-834b7ee3402e.jsonl",
+          "archived_transcript": "test_results/task06/06_claude_transcripts/claude_t06p15066i0-09162346_301.jsonl",
+          "archived_transcript_sha256": "9cadbd5e6d29da7aa0db8c5f5c395407af7a0d4e7fe6ac6366cec97fc674a653",
+          "startup_context_sha256": "a1ef3ea478487ad0e8d5dc8a162b0042365e874908f22169b785df75b0f838ff",
+          "mcp_names": [
+            "behavior-v2"
+          ],
+          "mcp_instructions_preview_sha256": "53f6468a436c6628b85bc23fe514669aee41c777c370dbbdce9f1d6dbeb23614",
+          "mcp_instructions_archive_truncated": true,
+          "native_plugin_skills": [
+            "embodied-claude-code:behavior-v2-baseline",
+            "embodied-claude-code:close-box",
+            "embodied-claude-code:cut-object",
+            "embodied-claude-code:navigate-to-target",
+            "embodied-claude-code:open-doors-and-drawers",
+            "embodied-claude-code:pick-up-object",
+            "embodied-claude-code:place-object-in-container",
+            "embodied-claude-code:traverse-narrow-passages"
+          ],
+          "tool_calls_observed": 11,
+          "first_tool": "mcp__behavior-v2__capture_head_camera",
+          "tool_text_blocks_checked_without_rollout_budget": 46,
+          "first_observed_robot": {
+            "base_pose": {
+              "pos": [
+                0.0013797640258211186,
+                -6.392026180396377e-08,
+                0.0
+              ],
+              "yaw_deg": -0.0008637209515159432
+            },
+            "base_qvel": [
+              5.958666406513657e-06,
+              2.498850335541647e-06,
+              3.583365923987003e-07
+            ],
+            "eef_left": {
+              "frame": "local_command_odometry",
+              "pos": [
+                0.38321187092887393,
+                0.2519940351169962,
+                1.2554000616073608
+              ]
+            },
+            "eef_right": {
+              "frame": "local_command_odometry",
+              "pos": [
+                0.38320427323255934,
+                -0.2520066285830613,
+                1.2554001808166504
+              ]
+            },
+            "frame": "local_command_odometry",
+            "gripper_left_qpos": [
+              0.0498967319726944,
+              0.04998905211687088
+            ],
+            "gripper_right_qpos": [
+              0.04982249438762665,
+              0.049994729459285736
+            ],
+            "motion_epoch": 2,
+            "trunk_qpos": [
+              1.0251089334487915,
+              -1.4501413106918335,
+              -0.47001582384109497,
+              2.3573315743874446e-08
+            ]
+          },
+          "source_prompt_sha256": "625983041765177cfb0fe7427c1cba23b2c4503df171d4d768fbc4a34aea3eab",
+          "rendered_prompt_sha256": "802ba13bb35e6def470c1c54d08de1772129eaef7b3206058ee1f1943c817466"
+        }
+      ]
+    }
+  ],
+  "scope": "Live budget and recorded context verification only; this is not a score or scene-state reproduction claim."
+}
