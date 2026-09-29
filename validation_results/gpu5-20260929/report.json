@@ -1,0 +1,53 @@
+{
+  "updated_at_utc": "2026-09-29T10:17:48+00:00",
+  "runs": [
+    {
+      "task": "task01",
+      "task_name": "picking_up_trash",
+      "run_directory": "validation-task01-r2",
+      "status": "running",
+      "model": "Qwen3.8-Flash-Next-FP8",
+      "harness": "claude_code",
+      "n_finished": 0,
+      "n_expected": 5,
+      "cases": [],
+      "mean_q": null,
+      "archive_mean_q": 0.8666666666666666,
+      "delta_archive_mean_q": null,
+      "matches_archive_mean": null,
+      "error": null
+    },
+    {
+      "task": "task06",
+      "task_name": "hiding_Easter_eggs",
+      "run_directory": "validation-task06",
+      "status": "running",
+      "model": "Qwen3.8-Flash-Next-FP8",
+      "harness": "claude_code",
+      "n_finished": 0,
+      "n_expected": 5,
+      "cases": [],
+      "mean_q": null,
+      "archive_mean_q": 0.4222222222222222,
+      "delta_archive_mean_q": null,
+      "matches_archive_mean": null,
+      "error": null
+    },
+    {
+      "task": "task08",
+      "task_name": "rearranging_kitchen_furniture",
+      "run_directory": "validation-task08",
+      "status": "running",
+      "model": "Qwen3.8-Flash-Next-FP8",
+      "harness": "claude_code",
+      "n_finished": 0,
+      "n_expected": 5,
+      "cases": [],
+      "mean_q": null,
+      "archive_mean_q": 0.4,
+      "delta_archive_mean_q": null,
+      "matches_archive_mean": null,
+      "error": null
+    }
+  ]
+}

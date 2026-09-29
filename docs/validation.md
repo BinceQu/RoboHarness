@@ -5,8 +5,9 @@ with BEHAVIOR v3.9.1 at `26f2c7ef7b9cf96bd0414f81e1e751e493762779`.
 
 ## Automated checks
 
-`scripts/check.sh` plus the added case-handoff regression completed 360 tests:
-344 passed and 16 were skipped.
+The independent Git clone passed all 360 tests in `scripts/check.sh`:
+344 passed and 16 were skipped. Three additional result-reporting tests cover
+incomplete runs, incomplete completion claims, and modified scoring files.
 This covers the task/result manifests, owned-process cleanup, cross-session
 request rejection, the official observation protocol, RGBD wrapper, custom
 robot, both MCP adapters, image coordinates, skill lifecycle and launchers.
@@ -51,6 +52,10 @@ have executed real camera and chassis calls through the new interface.
 **Final scores are not available yet; this is not a claim that the archived
 means have been reproduced.** Each run writes its official results and
 per-case differences to its own `summary.json` when cases finish.
+
+A local watcher updates the [combined result report](../validation_results/gpu5-20260929/README.md)
+as cases finish and copies their original official scoring JSON. It does not
+substitute archived scores for missing new results.
 
 The host uses the existing interface and evaluator environments described in
 [setup](setup.md), a new agent virtual environment, Claude Code 2.1.259 and

@@ -402,6 +402,7 @@ class Run:
             command = [str(harness / 'scripts/run'), '--port', str(self.port), '--', 'exec', '--json', '-']
         proc = self.spawn('agent', command, env, stdin=case_dir / 'prompt.txt',
                           stdout=case_dir / 'agent.json', stderr=case_dir / 'agent.stderr.log')
+        self.write_summary('running')
         self.log(f'instance {iid} session {sid} prompt={case["prompt"]}')
         return proc, case_dir
 
