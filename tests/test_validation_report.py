@@ -31,11 +31,17 @@ class ValidationReport(unittest.TestCase):
         (self.root / 'summary.json').write_text(json.dumps(self.summary))
 
     def test_partial_score_is_not_a_reproduction_claim(self):
-        self.add_case(301, 1.0)
+        plan_path = self.root / 'plan.json'
+        plan = json.loads(plan_path.read_text())
+        plan['cases'][1]['reference_q'] = 0.0
+        plan_path.write_text(json.dumps(plan))
+        self.add_case(301, 5 / 9)
         self.save()
         row = collect(self.root)
         self.assertEqual(row['n_finished'], 1)
-        self.assertEqual(row['mean_q'], 1.0)
+        self.assertEqual(row['mean_q'], 5 / 9)
+        self.assertEqual(row['archive_mean_q'], 0.5)
+        self.assertEqual(row['completed_archive_mean_q'], 1.0)
         self.assertIsNone(row['matches_archive_mean'])
         self.assertIsNone(row['delta_archive_mean_q'])
 

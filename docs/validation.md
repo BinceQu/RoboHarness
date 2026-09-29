@@ -69,7 +69,7 @@ the matching archived prompts, and all five instances per task:
 | Task | Run directory | Archived mean Q | Status |
 | --- | --- | ---: | --- |
 | task01 | `runs/validation-task01-r2` | 0.866667 | Running |
-| task06 | `runs/validation-task06` | 0.422222 | Running |
+| task06 | `runs/validation-task06` | 0.422222 | Running, 1/5 finished |
 | task08 | `runs/validation-task08` | 0.400000 | Running |
 
 Each simulator has connected and initialized the custom robot. The agents
@@ -80,7 +80,12 @@ For the three live evaluators, command-line arguments, environment, monitor
 and evaluator log all agree on 10535, 15239 and 17886 steps respectively.
 These runs already used explicit 2025 ×2 limits; the catalog and monitor's
 unused 2026 fallback defaults have also been corrected for future launches.
-**Final scores are not available yet; this is not a claim that the archived
+The first finished case, task06 instance 301, scored **0.555556**, compared
+with **1.0** in the archive. The model declared completion after 6354 steps;
+it did not reach the 15239-step limit. This case has not reproduced its archived
+score. Its original evaluator JSON and hash are preserved in the combined report.
+
+**Full task scores are not available yet; this is not a claim that the archived
 means have been reproduced.** Each run writes its official results and
 per-case differences to its own `summary.json` when cases finish.
 

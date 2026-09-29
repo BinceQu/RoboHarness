@@ -40,6 +40,7 @@ def collect(path: Path) -> dict:
         completed.append({'instance_id': iid, 'q': q, 'archive_q': archive_q,
                           'raw_reference_q': reference['reference_q'], 'delta_archive_q': q - archive_q,
                           'steps': result['steps'], 'success': result['success'],
+                          'finish_reason': case.get('finish_reason'),
                           'result_sha256': case['result_sha256'],
                           'source_result': case['result']})
     status = summary['status']
@@ -49,11 +50,13 @@ def collect(path: Path) -> dict:
         raise ValueError(f'Run claims completion without all official scores: {path}')
     archive_mean = sum(c.get('archive_reported_q', c['reference_q']) for c in expected.values()) / len(expected)
     mean = sum(c['q'] for c in completed) / len(completed) if completed else None
+    completed_archive_mean = sum(c['archive_q'] for c in completed) / len(completed) if completed else None
     complete = status == 'complete'
     return {'task': task['task'], 'task_name': task['task_name'], 'run_directory': path.name,
             'status': status, 'model': plan['model'], 'harness': plan['harness'],
             'n_finished': len(completed), 'n_expected': len(expected), 'cases': completed,
             'mean_q': mean, 'archive_mean_q': archive_mean,
+            'completed_archive_mean_q': completed_archive_mean,
             'delta_archive_mean_q': mean - archive_mean if complete else None,
             'matches_archive_mean': abs(mean - archive_mean) < 1e-6 if complete else None,
             'error': summary.get('error')}
@@ -68,13 +71,15 @@ def write_report(output: Path, rows: list[dict], run_paths: list[Path]):
              'run has no final mean comparison and is not a successful reproduction claim.', '',
              'Comparisons cover only the selected instances. Run all five archived instances',
              'to compare a complete task mean.', '',
-             '| Task | Status | Completed | New Q (completed cases) | Archived selected-case Q | Final difference |',
+             '| Task | Status | Completed | New Q (completed cases) | Archived Q (same completed cases) | Final difference |',
              '| --- | --- | ---: | ---: | ---: | ---: |']
     for row, run in zip(rows, run_paths):
         mean = '—' if row['mean_q'] is None else f'{row["mean_q"]:.6f}'
+        archive = ('—' if row['completed_archive_mean_q'] is None
+                   else f'{row["completed_archive_mean_q"]:.6f}')
         delta = '—' if row['delta_archive_mean_q'] is None else f'{row["delta_archive_mean_q"]:+.6f}'
         lines.append(f'| {row["task"]} | {row["status"]} | {row["n_finished"]}/{row["n_expected"]} | '
-                     f'{mean} | {row["archive_mean_q"]:.6f} | {delta} |')
+                     f'{mean} | {archive} | {delta} |')
         for case in row['cases']:
             source = run / case['source_result']
             target = output / row['task'] / source.name

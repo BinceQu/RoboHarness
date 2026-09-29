@@ -1,5 +1,5 @@
 {
-  "updated_at_utc": "2026-09-29T10:45:15+00:00",
+  "updated_at_utc": "2026-09-29T15:42:32+00:00",
   "runs": [
     {
       "task": "task01",
@@ -13,6 +13,7 @@
       "cases": [],
       "mean_q": null,
       "archive_mean_q": 0.8666666666666666,
+      "completed_archive_mean_q": null,
       "delta_archive_mean_q": null,
       "matches_archive_mean": null,
       "error": null
@@ -24,11 +25,25 @@
       "status": "running",
       "model": "Qwen3.8-Flash-Next-FP8",
       "harness": "claude_code",
-      "n_finished": 0,
+      "n_finished": 1,
       "n_expected": 5,
-      "cases": [],
-      "mean_q": null,
+      "cases": [
+        {
+          "instance_id": 301,
+          "q": 0.5555555555555556,
+          "archive_q": 1.0,
+          "raw_reference_q": 1.0,
+          "delta_archive_q": -0.4444444444444444,
+          "steps": 6354,
+          "success": false,
+          "finish_reason": "model_done",
+          "result_sha256": "23eed847ef7a3324e709633e56026f0da5f3d2ce0f7a99a7b609f4c8bcc64b6b",
+          "source_result": "output/json/hiding_Easter_eggs_301_0.json"
+        }
+      ],
+      "mean_q": 0.5555555555555556,
       "archive_mean_q": 0.4222222222222222,
+      "completed_archive_mean_q": 1.0,
       "delta_archive_mean_q": null,
       "matches_archive_mean": null,
       "error": null
@@ -45,6 +60,7 @@
       "cases": [],
       "mean_q": null,
       "archive_mean_q": 0.4,
+      "completed_archive_mean_q": null,
       "delta_archive_mean_q": null,
       "matches_archive_mean": null,
       "error": null
