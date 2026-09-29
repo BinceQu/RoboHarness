@@ -66,7 +66,9 @@ def write_report(output: Path, rows: list[dict], run_paths: list[Path]):
     lines = ['# GPU validation results', '', f'Updated: {timestamp}', '',
              'Only fresh official evaluator JSON contributes to new scores. An incomplete',
              'run has no final mean comparison and is not a successful reproduction claim.', '',
-             '| Task | Status | Completed | New Q (completed cases) | Archived full-set Q | Final difference |',
+             'Comparisons cover only the selected instances. Run all five archived instances',
+             'to compare a complete task mean.', '',
+             '| Task | Status | Completed | New Q (completed cases) | Archived selected-case Q | Final difference |',
              '| --- | --- | ---: | ---: | ---: | ---: |']
     for row, run in zip(rows, run_paths):
         mean = '—' if row['mean_q'] is None else f'{row["mean_q"]:.6f}'
