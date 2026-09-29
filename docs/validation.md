@@ -28,6 +28,8 @@ arm configurations. All 172 cuRobo Python, C++/CUDA and YAML source/configuratio
 files match those in the original runtime environment byte for byte.
 The 11 runner/report checks and 62 selected interface checks were repeated
 in this fresh environment: 71 passed and two optional checks were skipped.
+The fresh environment also starts the interface HTTP service successfully:
+session isolation is enabled and the UI returns HTTP 200.
 The installer explicitly provides cuRobo's build tools and skips its unused
 Git LFS example assets. Evaluator setup also isolates the caller's Conda
 prefix so upstream cleanup cannot affect a separate active environment.
