@@ -50,6 +50,9 @@ class ArchiveMCP(unittest.IsolatedAsyncioTestCase):
                 record=False, record_root=Path(tmp), session_id='archive-context-test'), client=fake)
             server = create_mcp_server(service)
             self.assertNotIn('rollout_budget', server.instructions)
+            prefix = server.instructions[:REFERENCE['mcp_instructions_prefix_length']]
+            self.assertEqual(hashlib.sha256(prefix.encode()).hexdigest(),
+                             REFERENCE['mcp_instructions_prefix_sha256'])
             async with Client(server, mode='legacy') as client:
                 for tool in (await client.list_tools()).tools:
                     self.assertNotIn('rollout_budget', tool.description)
@@ -60,6 +63,8 @@ class ArchiveMCP(unittest.IsolatedAsyncioTestCase):
                               ('deactivate_skill', {'name': 'place-object-in-container'}),
                               ('activate_skill', {'name': 'open-doors-and-drawers'}),
                               ('deactivate_skill', {'name': 'open-doors-and-drawers'}),
+                              ('activate_skill', {'name': 'traverse-narrow-passages'}),
+                              ('deactivate_skill', {'name': 'traverse-narrow-passages'}),
                               ('activate_skill', {'name': 'missing-skill'})]
                 for name, args in operations:
                     with self.subTest(name=name, args=args):

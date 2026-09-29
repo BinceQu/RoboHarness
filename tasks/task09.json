@@ -21,10 +21,13 @@
     {
       "instance_id": 301,
       "slot": 0,
-      "prompt": "prompt/task09/v3_7f566b4822c4.txt",
-      "prompt_sha256": "7f566b4822c4aba160e170311be389a3a44ac3c47d94c2b16d4b18c34cfa58ad",
-      "prompt_source": "test_results/task09/instance_301/t09p15069i0-09152352/session.json",
-      "prompt_source_sha256": "61150bc0af56e79125869f3f999c1b9f66183c060f021ccb8a447ca6207d1663",
+      "prompt": "prompt/task09/v3_bde4c7512f25.txt",
+      "prompt_sha256": "bde4c7512f25417f5575935e299377540c792d97562cb7465fa95e0d31b4b9e4",
+      "prompt_source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/16688701-d7b7-4561-8181-73b4eb654eec.jsonl",
+      "prompt_source_sha256": "26b801e2f225c7e911e559c914075c76180aa933863ca3db8f658091073b7500",
+      "archive_prompt_record": "test_results/task09/instance_301/t09p15069i0-09152352/session.json",
+      "archive_prompt_record_sha256": "61150bc0af56e79125869f3f999c1b9f66183c060f021ccb8a447ca6207d1663",
+      "claude_mcp_name": "behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v3.txt"
       ],
@@ -41,10 +44,13 @@
     {
       "instance_id": 304,
       "slot": 3,
-      "prompt": "prompt/task09/v3_7f566b4822c4.txt",
-      "prompt_sha256": "7f566b4822c4aba160e170311be389a3a44ac3c47d94c2b16d4b18c34cfa58ad",
-      "prompt_source": "test_results/task09/instance_304/t09p15069i3-09160931/session.json",
-      "prompt_source_sha256": "4f0791b5c38370c53fb478a8a78ebce9a1576c81cbbf9bb193349aa7d30a35a8",
+      "prompt": "prompt/task09/v3_bde4c7512f25.txt",
+      "prompt_sha256": "bde4c7512f25417f5575935e299377540c792d97562cb7465fa95e0d31b4b9e4",
+      "prompt_source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/baf7fe5a-e28d-423c-8b35-aeb911fa00aa.jsonl",
+      "prompt_source_sha256": "51de8e8588469e62ecc76dd052f758d593436bb3746ad78f373c3db1775fc406",
+      "archive_prompt_record": "test_results/task09/instance_304/t09p15069i3-09160931/session.json",
+      "archive_prompt_record_sha256": "4f0791b5c38370c53fb478a8a78ebce9a1576c81cbbf9bb193349aa7d30a35a8",
+      "claude_mcp_name": "behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v3.txt"
       ],
@@ -61,10 +67,13 @@
     {
       "instance_id": 306,
       "slot": 5,
-      "prompt": "prompt/task09/v3_7f566b4822c4.txt",
-      "prompt_sha256": "7f566b4822c4aba160e170311be389a3a44ac3c47d94c2b16d4b18c34cfa58ad",
-      "prompt_source": "test_results/task09/instance_306/t09p15069i5-09161316/session.json",
-      "prompt_source_sha256": "657bd2a5a5e3d11bcac5e0c43c432352420f359379844aff5f83cc6457f7a2d7",
+      "prompt": "prompt/task09/v3_bde4c7512f25.txt",
+      "prompt_sha256": "bde4c7512f25417f5575935e299377540c792d97562cb7465fa95e0d31b4b9e4",
+      "prompt_source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/87c33b29-838a-42b7-8db0-b5ced0bf7f28.jsonl",
+      "prompt_source_sha256": "bb7d51d6b4ef8976ac2bc0b331206ec7747195aa20645f677d8c6e626a11c161",
+      "archive_prompt_record": "test_results/task09/instance_306/t09p15069i5-09161316/session.json",
+      "archive_prompt_record_sha256": "657bd2a5a5e3d11bcac5e0c43c432352420f359379844aff5f83cc6457f7a2d7",
+      "claude_mcp_name": "behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v3.txt"
       ],
@@ -81,10 +90,13 @@
     {
       "instance_id": 308,
       "slot": 7,
-      "prompt": "prompt/task09/v3_7f566b4822c4.txt",
-      "prompt_sha256": "7f566b4822c4aba160e170311be389a3a44ac3c47d94c2b16d4b18c34cfa58ad",
-      "prompt_source": "test_results/task09/instance_308/t09p15069i7-09171216/session.json",
-      "prompt_source_sha256": "3fbd72dbf951dde6de7959e953b8175c6fbd1d03b5543193815ea0edc7c609c5",
+      "prompt": "prompt/task09/v3_bde4c7512f25.txt",
+      "prompt_sha256": "bde4c7512f25417f5575935e299377540c792d97562cb7465fa95e0d31b4b9e4",
+      "prompt_source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/6e78c33d-b12d-4ee3-a8bf-d37e08cd1339.jsonl",
+      "prompt_source_sha256": "3d0aa4419ecd17f2fa253e2e7b121993206fbc85637ff321eac4ea4eaec2601c",
+      "archive_prompt_record": "test_results/task09/instance_308/t09p15069i7-09171216/session.json",
+      "archive_prompt_record_sha256": "3fbd72dbf951dde6de7959e953b8175c6fbd1d03b5543193815ea0edc7c609c5",
+      "claude_mcp_name": "behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v3.txt"
       ],
@@ -99,10 +111,13 @@
     {
       "instance_id": 310,
       "slot": 9,
-      "prompt": "prompt/task09/v3_7f566b4822c4.txt",
-      "prompt_sha256": "7f566b4822c4aba160e170311be389a3a44ac3c47d94c2b16d4b18c34cfa58ad",
-      "prompt_source": "test_results/task09/instance_310/t09p15069i9-09171809/session.json",
-      "prompt_source_sha256": "9d7001c8f48e617164f6e3670545da0c4193e93a3e4242774ccf86e10cedced6",
+      "prompt": "prompt/task09/v3_bde4c7512f25.txt",
+      "prompt_sha256": "bde4c7512f25417f5575935e299377540c792d97562cb7465fa95e0d31b4b9e4",
+      "prompt_source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/c1783e34-33a3-40a9-8b41-4dd57554427e.jsonl",
+      "prompt_source_sha256": "77f419e310d6c0e375d99dd8d1f2a1a33b722a0eb7ae438f4a70846f4696748c",
+      "archive_prompt_record": "test_results/task09/instance_310/t09p15069i9-09171809/session.json",
+      "archive_prompt_record_sha256": "9d7001c8f48e617164f6e3670545da0c4193e93a3e4242774ccf86e10cedced6",
+      "claude_mcp_name": "behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v3.txt"
       ],

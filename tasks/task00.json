@@ -21,10 +21,13 @@
     {
       "instance_id": 301,
       "slot": 0,
-      "prompt": "prompt/task00/recovered_f8da4e6ee555.txt",
-      "prompt_sha256": "f8da4e6ee555d10f15652248e3f62d7bc0b02bf3fd27115f5af0392ce0ec058b",
-      "prompt_source": "test_results/task00/agent_sessions/t00p15060i0-09161944/session.json",
-      "prompt_source_sha256": "c7feafb348008cc1841b4169d7a110c20783f925d969923b5bc4253e88245336",
+      "prompt": "prompt/task00/recovered_206fb2452f46.txt",
+      "prompt_sha256": "206fb2452f46bb34d273ea9bfb3b49cc309ae16c6bed6fd06da61513b7d1f593",
+      "prompt_source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/40dafba2-4756-4f87-8142-29596e01cf48.jsonl",
+      "prompt_source_sha256": "cbfd2c28cd9ef44a3d4309a42bfb74d1ebbf170465af4aa6769b48d1649fbfb5",
+      "archive_prompt_record": "test_results/task00/agent_sessions/t00p15060i0-09161944/session.json",
+      "archive_prompt_record_sha256": "c7feafb348008cc1841b4169d7a110c20783f925d969923b5bc4253e88245336",
+      "claude_mcp_name": "behavior-v2",
       "matching_prompt_filenames": [],
       "reference_result": "reference_results/task00/turning_on_radio_301_0.json",
       "reference_sha256": "b556990bb3148c89ec68f2ef7ef82c16a6fc4518390c019bb29ec495977b7529",
@@ -41,10 +44,13 @@
     {
       "instance_id": 304,
       "slot": 3,
-      "prompt": "prompt/task00/v24_3c86ccc27027.txt",
-      "prompt_sha256": "3c86ccc27027deb565a2075c6e313580ad7c65635cb6c9f0738a77c35f6d12d8",
-      "prompt_source": "test_results/task00/agent_sessions/t00p15060i3-09162209/session.json",
-      "prompt_source_sha256": "aa4828133427e8c5c7313919d5c0d70291a95e7ac681fed5cdcb1de74807aa19",
+      "prompt": "prompt/task00/v24_ecaa0bd65dcf.txt",
+      "prompt_sha256": "ecaa0bd65dcfbf28dceae8e6fdccc38297a2e2a6a655d54cbfaa2a6e0a7ed9b3",
+      "prompt_source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/63bc81fe-f611-4647-993d-e2f957251356.jsonl",
+      "prompt_source_sha256": "100c9760ad41a1da150b768114c372232ebcc5f66b487d79a79ea1f8996db07b",
+      "archive_prompt_record": "test_results/task00/agent_sessions/t00p15060i3-09162209/session.json",
+      "archive_prompt_record_sha256": "aa4828133427e8c5c7313919d5c0d70291a95e7ac681fed5cdcb1de74807aa19",
+      "claude_mcp_name": "behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v24.txt"
       ],
@@ -62,10 +68,13 @@
     {
       "instance_id": 306,
       "slot": 5,
-      "prompt": "prompt/task00/v24_3c86ccc27027.txt",
-      "prompt_sha256": "3c86ccc27027deb565a2075c6e313580ad7c65635cb6c9f0738a77c35f6d12d8",
-      "prompt_source": "test_results/task00/agent_sessions/t00p15060i5-09171213/session.json",
-      "prompt_source_sha256": "0ed3933a684e933131e6beb6f989d449591603a24951b2e64ecc8e828ad3fbdd",
+      "prompt": "prompt/task00/v24_ecaa0bd65dcf.txt",
+      "prompt_sha256": "ecaa0bd65dcfbf28dceae8e6fdccc38297a2e2a6a655d54cbfaa2a6e0a7ed9b3",
+      "prompt_source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/54d0dd0e-d8f4-4595-8b96-86543f432552.jsonl",
+      "prompt_source_sha256": "84060c6a642b8c9d92587c456f9afdbcb49fa317184030f85e210ac53eb62465",
+      "archive_prompt_record": "test_results/task00/agent_sessions/t00p15060i5-09171213/session.json",
+      "archive_prompt_record_sha256": "0ed3933a684e933131e6beb6f989d449591603a24951b2e64ecc8e828ad3fbdd",
+      "claude_mcp_name": "behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v24.txt"
       ],
@@ -83,10 +92,13 @@
     {
       "instance_id": 308,
       "slot": 7,
-      "prompt": "prompt/task00/v24_3c86ccc27027.txt",
-      "prompt_sha256": "3c86ccc27027deb565a2075c6e313580ad7c65635cb6c9f0738a77c35f6d12d8",
-      "prompt_source": "test_results/task00/agent_sessions/t00p15060i7-09171540/session.json",
-      "prompt_source_sha256": "9da96826967fc9c3bed2bbd84ccd7ad1ab94ee90ef3a7e65a1bba0130d9ed389",
+      "prompt": "prompt/task00/v24_ecaa0bd65dcf.txt",
+      "prompt_sha256": "ecaa0bd65dcfbf28dceae8e6fdccc38297a2e2a6a655d54cbfaa2a6e0a7ed9b3",
+      "prompt_source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/ade09be5-501d-47c8-aaca-fe047cf6e6c5.jsonl",
+      "prompt_source_sha256": "9923cad447a36b444e220efc2fb77fd568bacde0eb8135f25c37e40cebe67e16",
+      "archive_prompt_record": "test_results/task00/agent_sessions/t00p15060i7-09171540/session.json",
+      "archive_prompt_record_sha256": "9da96826967fc9c3bed2bbd84ccd7ad1ab94ee90ef3a7e65a1bba0130d9ed389",
+      "claude_mcp_name": "behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v24.txt"
       ],
@@ -104,10 +116,13 @@
     {
       "instance_id": 310,
       "slot": 9,
-      "prompt": "prompt/task00/v24_3c86ccc27027.txt",
-      "prompt_sha256": "3c86ccc27027deb565a2075c6e313580ad7c65635cb6c9f0738a77c35f6d12d8",
-      "prompt_source": "test_results/task00/agent_sessions/t00p15060i9-09171640/session.json",
-      "prompt_source_sha256": "64bd8eaa67c6a1c5502fb0e26e7a1bc462d42615b4d6f3074b99638b43290e8d",
+      "prompt": "prompt/task00/v24_ecaa0bd65dcf.txt",
+      "prompt_sha256": "ecaa0bd65dcfbf28dceae8e6fdccc38297a2e2a6a655d54cbfaa2a6e0a7ed9b3",
+      "prompt_source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/f3f3a6ad-ad82-4165-b158-da6f3f9f3341.jsonl",
+      "prompt_source_sha256": "cedc0b00f8478b8e208f828e93688629c148f50bf21c69aee3f54a840b48c929",
+      "archive_prompt_record": "test_results/task00/agent_sessions/t00p15060i9-09171640/session.json",
+      "archive_prompt_record_sha256": "64bd8eaa67c6a1c5502fb0e26e7a1bc462d42615b4d6f3074b99638b43290e8d",
+      "claude_mcp_name": "behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v24.txt"
       ],

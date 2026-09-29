@@ -25,6 +25,9 @@
       "prompt_sha256": "625983041765177cfb0fe7427c1cba23b2c4503df171d4d768fbc4a34aea3eab",
       "prompt_source": "test_results/task06/06_claude_transcripts/claude_t06p15066i0-09162346_301.jsonl",
       "prompt_source_sha256": "9cadbd5e6d29da7aa0db8c5f5c395407af7a0d4e7fe6ac6366cec97fc674a653",
+      "archive_prompt_record": "test_results/task06/06_claude_transcripts/claude_t06p15066i0-09162346_301.jsonl",
+      "archive_prompt_record_sha256": "9cadbd5e6d29da7aa0db8c5f5c395407af7a0d4e7fe6ac6366cec97fc674a653",
+      "claude_mcp_name": "behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v7.txt"
       ],
@@ -44,6 +47,9 @@
       "prompt_sha256": "b5ec2bb4b4ef49da86058d5475504a6882a117b6b8633b44802bee56cdf84520",
       "prompt_source": "test_results/task06/06_claude_transcripts/claude_t06p15066i3-09171214_304.jsonl",
       "prompt_source_sha256": "608103692658a2c39efd25682dfe2f4f8baea81a91923861f581e2655b4d4e72",
+      "archive_prompt_record": "test_results/task06/06_claude_transcripts/claude_t06p15066i3-09171214_304.jsonl",
+      "archive_prompt_record_sha256": "608103692658a2c39efd25682dfe2f4f8baea81a91923861f581e2655b4d4e72",
+      "claude_mcp_name": "behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v8.txt"
       ],
@@ -61,6 +67,9 @@
       "prompt_sha256": "b5ec2bb4b4ef49da86058d5475504a6882a117b6b8633b44802bee56cdf84520",
       "prompt_source": "test_results/task06/06_claude_transcripts/claude_t06p15066i5-09171413_306.jsonl",
       "prompt_source_sha256": "5771becf40a8e53c3699521067770f54303a4a4c5af2f92d8d8fbc57922f874e",
+      "archive_prompt_record": "test_results/task06/06_claude_transcripts/claude_t06p15066i5-09171413_306.jsonl",
+      "archive_prompt_record_sha256": "5771becf40a8e53c3699521067770f54303a4a4c5af2f92d8d8fbc57922f874e",
+      "claude_mcp_name": "behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v8.txt"
       ],
@@ -78,6 +87,9 @@
       "prompt_sha256": "6df0ac887d1edf93c4d01b910089abf55849aa9e8bf1320b53fd6e08a50e1867",
       "prompt_source": "test_results/task06/06_claude_transcripts/claude_t06p15066i7-09172338_308_v9.jsonl",
       "prompt_source_sha256": "3c43d44db56af6213f6f02f3f30865ef2b485d0eab8c3ed6b5ab873b8f42ff8a",
+      "archive_prompt_record": "test_results/task06/06_claude_transcripts/claude_t06p15066i7-09172338_308_v9.jsonl",
+      "archive_prompt_record_sha256": "3c43d44db56af6213f6f02f3f30865ef2b485d0eab8c3ed6b5ab873b8f42ff8a",
+      "claude_mcp_name": "behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v9.txt"
       ],
@@ -95,6 +107,9 @@
       "prompt_sha256": "6df0ac887d1edf93c4d01b910089abf55849aa9e8bf1320b53fd6e08a50e1867",
       "prompt_source": "test_results/task06/06_claude_transcripts/claude_t06p15066i9-09180340_310_v9.jsonl",
       "prompt_source_sha256": "65dc20c785e220469a79ec5a4a8b9ab4c3396eebea44470bb25532da7a83325a",
+      "archive_prompt_record": "test_results/task06/06_claude_transcripts/claude_t06p15066i9-09180340_310_v9.jsonl",
+      "archive_prompt_record_sha256": "65dc20c785e220469a79ec5a4a8b9ab4c3396eebea44470bb25532da7a83325a",
+      "claude_mcp_name": "behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v9.txt"
       ],

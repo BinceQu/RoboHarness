@@ -15,6 +15,9 @@ class ArchivedCases(unittest.TestCase):
     def test_all_cases_have_exact_prompts_and_unmodified_scores(self):
         used = set()
         count = 0
+        contexts = runner.read_json(runner.ROOT /
+            'harness/claude_code/tests/fixtures/archive_context.json')['sources']
+        contexts = {(row['task'], row['instance_id']): row for row in contexts}
         for path in sorted((runner.ROOT / 'tasks').glob('*.json')):
             task = runner.load_task(path.stem)
             self.assertEqual([301, 304, 306, 308, 310], [c['instance_id'] for c in task['cases']])
@@ -22,9 +25,14 @@ class ArchivedCases(unittest.TestCase):
                 result = runner.official_result(runner.ROOT / case['reference_result'], task, case['instance_id'])
                 self.assertEqual(result['q_score']['final'], case['reference_q'])
                 self.assertEqual(case['slot'] + 301, case['instance_id'])
+                context = contexts[(task['task'], case['instance_id'])]
+                self.assertEqual(case['claude_mcp_name'], context['mcp_server_name'])
+                self.assertEqual(case['prompt_sha256'], context['prompt_sha256'])
+                self.assertEqual(case['prompt_source_sha256'], context['sha256'])
                 used.add(case['prompt'])
                 count += 1
         self.assertEqual(count, 45)
+        self.assertEqual(len(contexts), count)
         self.assertEqual(used, {str(p.relative_to(runner.ROOT)) for p in (runner.ROOT / 'prompt').rglob('*.txt')})
 
     def test_instance_ids_are_not_silently_interpreted_as_slots(self):

@@ -22,6 +22,7 @@ import uuid
 ROOT = Path(__file__).resolve().parents[1]
 INTERFACE = ROOT / 'interface'
 COMMIT = '26f2c7ef7b9cf96bd0414f81e1e751e493762779'
+CLAUDE_VERSION = '2.1.259'
 PROFILE = INTERFACE / 'behavior_interface_eval_test/robot_profiles/r1pro_8dof_hf250'
 # Final integer limits from the archived Challenge 2025 plans. Do not derive
 # these from the different 2026 human statistics or its 1.5 multiplier.
@@ -69,6 +70,10 @@ def load_task(token: str) -> dict:
         if key in (task['task'], task['task_name']):
             validate_archive_protocol(task)
             for case in task['cases']:
+                if case.get('claude_mcp_name') not in {
+                    'behavior-v2', 'plugin:embodied-claude-code:behavior-v2',
+                }:
+                    raise ValueError(f'Missing archived Claude MCP name for {key}/{case["instance_id"]}')
                 if sha((ROOT / case['prompt']).read_bytes()) != case['prompt_sha256']:
                     raise ValueError(f'Prompt checksum mismatch: {case["prompt"]}')
                 if sha((ROOT / case['reference_result']).read_bytes()) != case['reference_sha256']:
@@ -403,6 +408,7 @@ class Run:
         env = dict(self.env)
         env.update({
             'BEHAVIOR_SESSION_ID': sid, 'BEHAVIOR_PORT': str(self.port),
+            'ROBOHARNESS_MCP_NAME': case['claude_mcp_name'],
             'BEHAVIOR_BASE_URL': f'http://127.0.0.1:{self.port}', 'BEHAVIOR_ALLOW_REMOTE': '0',
             'BEHAVIOR_EVAL_OWNER_PORT': str(self.port), 'BEHAVIOR_EVAL_OWNER_RUN': self.token,
             'EMBODIED_ANTHROPIC_BASE_URL': self.config['model_url'], 'QWEN_MODEL': self.config['model'],
@@ -542,6 +548,10 @@ def preflight(config, harness):
     binary = config['claude_bin' if harness == 'claude_code' else 'codex_bin']
     if not shutil.which(binary):
         raise ValueError(f'Agent CLI is not executable: {binary}')
+    if harness == 'claude_code':
+        version = subprocess.check_output([binary, '--version'], text=True, timeout=20).strip()
+        if not version.startswith(CLAUDE_VERSION + ' '):
+            raise ValueError(f'Archived runs require Claude Code {CLAUDE_VERSION}; found {version}')
 
 
 def main(argv=None):

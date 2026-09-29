@@ -1,11 +1,11 @@
 {
-  "updated_at_utc": "2026-09-29T16:33:30+00:00",
+  "updated_at_utc": "2026-09-29T16:46:01+00:00",
   "runs": [
     {
       "task": "task01",
       "task_name": "picking_up_trash",
       "run_directory": "validation-20260930-task01",
-      "status": "starting",
+      "status": "failed",
       "model": "Qwen3.8-Flash-Next-FP8",
       "harness": "claude_code",
       "n_finished": 0,
@@ -16,14 +16,18 @@
       "completed_archive_mean_q": null,
       "delta_archive_mean_q": null,
       "matches_archive_mean": null,
-      "error": null,
-      "superseded": null
+      "error": "Received signal 15",
+      "superseded": {
+        "superseded_at": "2026-09-29T16:45:49.772443+00:00",
+        "reason": "SessionStart and MCP instruction bodies match the archive, but the CLI advertises plugin-prefixed MCP names and suppresses the native skill listing found in archived sessions. Restoring those launcher settings before score validation.",
+        "replacement_run": "validation-20260930-task01-r2"
+      }
     },
     {
       "task": "task06",
       "task_name": "hiding_Easter_eggs",
       "run_directory": "validation-20260930-task06",
-      "status": "starting",
+      "status": "failed",
       "model": "Qwen3.8-Flash-Next-FP8",
       "harness": "claude_code",
       "n_finished": 0,
@@ -34,14 +38,18 @@
       "completed_archive_mean_q": null,
       "delta_archive_mean_q": null,
       "matches_archive_mean": null,
-      "error": null,
-      "superseded": null
+      "error": "Received signal 15",
+      "superseded": {
+        "superseded_at": "2026-09-29T16:45:49.773435+00:00",
+        "reason": "SessionStart and MCP instruction bodies match the archive, but the CLI advertises plugin-prefixed MCP names and suppresses the native skill listing found in archived sessions. Restoring those launcher settings before score validation.",
+        "replacement_run": "validation-20260930-task06-r2"
+      }
     },
     {
       "task": "task08",
       "task_name": "rearranging_kitchen_furniture",
       "run_directory": "validation-20260930-task08",
-      "status": "starting",
+      "status": "failed",
       "model": "Qwen3.8-Flash-Next-FP8",
       "harness": "claude_code",
       "n_finished": 0,
@@ -52,8 +60,12 @@
       "completed_archive_mean_q": null,
       "delta_archive_mean_q": null,
       "matches_archive_mean": null,
-      "error": null,
-      "superseded": null
+      "error": "Received signal 15",
+      "superseded": {
+        "superseded_at": "2026-09-29T16:45:49.774548+00:00",
+        "reason": "SessionStart and MCP instruction bodies match the archive, but the CLI advertises plugin-prefixed MCP names and suppresses the native skill listing found in archived sessions. Restoring those launcher settings before score validation.",
+        "replacement_run": "validation-20260930-task08-r2"
+      }
     }
   ]
 }

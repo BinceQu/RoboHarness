@@ -67,6 +67,9 @@ def main():
     args = ap.parse_args()
     source, output = args.behavior_source.resolve(), args.output.resolve()
     root = source / 'test_results'
+    context_index = load(Path(__file__).resolve().parents[1] /
+                         'harness/claude_code/tests/fixtures/archive_context.json')
+    contexts = {(s['task'], s['instance_id']): s for s in context_index['sources']}
     summary = []
     for index, (name, budget) in TASKS.items():
         key = f'task{index:02d}'
@@ -119,7 +122,7 @@ def main():
                 score = archive / f'instance_{iid}' / stem
                 session = load(archive / f'instance_{iid}/session_end_{iid}.json')['session_id']
                 prompt = source / 'work/agent_monitor/t08_rearranging_kitchen_furniture' / session / 'session.json'
-                notes.append('Prompt recovered from the matching monitor session outside test_results; session ID is recorded in the archived session_end JSON.')
+                notes.append('The archived session_end JSON identifies the monitor session; the matching Claude transcript preserves the exact prompt bytes.')
             else:
                 score = archive / '_meta/official_score_json' / stem
                 prompt = one((archive / f'instance_{iid}').glob('*/session.json'))
@@ -128,8 +131,16 @@ def main():
             raw_score = load(score)
             # The scoreboard is an original evaluator JSON, not a derived mean.
             assert raw_score['task'] == name and int(raw_score['instance_id']) == iid, score
+            archived_prompt_record = prompt
+            context = contexts[(key, iid)]
+            prompt = source / context['path']
+            if sha(prompt.read_bytes()) != context['sha256']:
+                raise ValueError(f'Archived transcript checksum mismatch: {prompt}')
             text = first_user_prompt(prompt)
+            if text.strip() != first_user_prompt(archived_prompt_record).strip():
+                raise ValueError(f'Transcript prompt disagrees with the selected archive: {prompt}')
             digest = sha(text.encode())
+            assert digest == context['prompt_sha256'], prompt
             matches = sorted({p.name for p in prompt_candidates if p.read_text().strip() == text.strip()})
             versions = [m for m in matches if re.search(r'_v\d+\.txt$', m) and '_wins_' not in m]
             label = re.search(r'_v(\d+)\.txt$', versions[0])[0][1:-4] if versions else 'recovered'
@@ -146,7 +157,10 @@ def main():
                 'prompt': dest_prompt.relative_to(output).as_posix(),
                 'prompt_sha256': digest,
                 'prompt_source': prompt.relative_to(source).as_posix(),
-                'prompt_source_sha256': sha(prompt.read_bytes()),
+                'prompt_source_sha256': context['sha256'],
+                'archive_prompt_record': archived_prompt_record.relative_to(source).as_posix(),
+                'archive_prompt_record_sha256': sha(archived_prompt_record.read_bytes()),
+                'claude_mcp_name': context['mcp_server_name'],
                 'matching_prompt_filenames': versions,
                 'reference_result': dest_score.relative_to(output).as_posix(),
                 'reference_sha256': sha(score.read_bytes()),
@@ -155,8 +169,10 @@ def main():
                 'reference_steps': raw_score['steps'],
                 'notes': notes,
             }
-            if prompt.name == 'session.json':
-                case['source_session_id'] = load(prompt).get('session_id')
+            if context.get('source_session_id'):
+                case['source_session_id'] = context['source_session_id']
+            elif archived_prompt_record.name == 'session.json':
+                case['source_session_id'] = load(archived_prompt_record).get('session_id')
             elif index == 8:
                 case['source_session_id'] = session
             cases.append(case)
@@ -190,6 +206,10 @@ def main():
         summary.append({k: config[k] for k in ['task', 'task_name', 'archive_reported_mean_q', 'reference_mean_q']})
         print(key, f'mean={config["reference_mean_q"]:.6f}', [(c['instance_id'], Path(c['prompt']).name) for c in cases])
     (output / 'reference_results/summary.json').write_text(json.dumps(summary, indent=2) + '\n')
+    used = {c['prompt'] for path in (output / 'tasks').glob('*.json') for c in load(path)['cases']}
+    for path in (output / 'prompt').glob('*/*.txt'):
+        if path.relative_to(output).as_posix() not in used:
+            path.unlink()
 
 
 if __name__ == '__main__':

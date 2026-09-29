@@ -15,11 +15,10 @@ If the back faces the camera (wide red plane, no button),
 grasp any solid point on the radio, then flip with
 wrist-frame pitch +50 on the hold arm, then press.
 
-Prefer plan_arm=left, grasp with the left arm, and press
-the button with the right.
-The arm the planner selects is the hold arm; the other
-empty arm is the poke arm. After the radio is held, close
-the poke gripper and press the button with it.
+Pass plan_arm=any. The arm the planner selects is the hold
+arm; the other empty arm is the poke arm. After the radio
+is held, close the poke gripper and press the button with
+it. Do not hard-code left or right.
 
 Facing is one move_chassis_to_directly_facing_surface call
 on the wide red face, and only after the approach and
@@ -79,7 +78,7 @@ Do these steps in order:
    from that leaned posture. Do not stand back up first.
    Do not lean during facing.
 3. Only after that move_to_reach_point has finished from
-   the faced pose, activate pick-up-object with plan_arm=left.
+   the faced pose, activate pick-up-object with plan_arm=any.
    If the button is visible, pick the handle. If only the
    red plane is visible, pick any solid point on the radio.
    After pick is active, spin_to_facing_point may only

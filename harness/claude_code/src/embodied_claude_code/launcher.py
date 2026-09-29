@@ -18,7 +18,7 @@ from urllib.request import ProxyHandler, Request, build_opener
 
 from .qwen_bridge import DEFAULT_MODEL, DEFAULT_UPSTREAM, normalize_upstream_url
 from . import skill_state
-from .config import OwnedPortRedirectHandler, validate_owned_origin
+from .config import OwnedPortRedirectHandler, archived_context, validate_owned_origin
 
 
 MAX_PROMPT_IMAGES = 8
@@ -573,16 +573,35 @@ def launch(argv: list[str]) -> int:
         "--permission-mode",
         "dontAsk",
         "--allowedTools",
+        *(["Skill"] if archived_context() else []),
         *EMBODIED_TOOL_GLOBS,
         "--tools",
-        "",
-        "--disable-slash-commands",
+        "Skill" if archived_context() else "",
+        *([] if archived_context() else ["--disable-slash-commands"]),
     ]
     if os.environ.get("BEHAVIOR_EVAL_OWNER_PORT"):
         # Only the explicit current plugin settings; no user/project history.
         command.extend(["--setting-sources", ""])
     direct_anthropic = os.environ.get("EMBODIED_ANTHROPIC_BASE_URL", "").strip().rstrip("/")
     gemini_origin = _is_gemini_origin(options.qwen_model, direct_anthropic)
+    archived_mcp_name = os.environ.get("ROBOHARNESS_MCP_NAME", "behavior-v2")
+    if archived_context() and archived_mcp_name not in {
+        "behavior-v2", "plugin:embodied-claude-code:behavior-v2",
+    }:
+        raise UsageError(f"Unknown archived MCP server name: {archived_mcp_name}")
+    if archived_context() and archived_mcp_name == "behavior-v2" and not gemini_origin:
+        # These cases advertise mcp__behavior-v2__*. Keep plugin hooks / native Skills, but load
+        # exactly one MCP server through an explicit configuration.
+        config_dir = Path(env["CLAUDE_CONFIG_DIR"])
+        config_dir.mkdir(parents=True, exist_ok=True)
+        mcp_path = config_dir / "archived-behavior-v2-mcp.json"
+        mcp_path.write_text(json.dumps({"mcpServers": {"behavior-v2": {
+            "command": "/bin/sh",
+            "args": [str(root / "scripts/embodied-claude-code-mcp")],
+            "alwaysLoad": True,
+            "env": {"EMBODIED_PLUGIN_ROOT": str(root)},
+        }}}), encoding="utf-8")
+        command.extend(["--strict-mcp-config", "--mcp-config", str(mcp_path)])
     if direct_anthropic and gemini_origin:
         # Gemini must not also load the plugin MCP (that publishes the
         # original Qwen coordinate strings).  strict-mcp-config keeps a

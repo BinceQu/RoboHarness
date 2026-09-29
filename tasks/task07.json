@@ -21,10 +21,13 @@
     {
       "instance_id": 301,
       "slot": 0,
-      "prompt": "prompt/task07/v18_6ab9a3152f1a.txt",
-      "prompt_sha256": "6ab9a3152f1a3c7bfc970d460ead949e8c740ca2e2e6b771806a59320cae0f55",
-      "prompt_source": "test_results/task07/agent_sessions/t07p15067i0-0920230454-cda49370334a/session.json",
-      "prompt_source_sha256": "eaa6bae7a5f4375577d65e74fc756d33e9ae2accd857595ee591112715b4d9ed",
+      "prompt": "prompt/task07/v18_420cc8ac0d5d.txt",
+      "prompt_sha256": "420cc8ac0d5d4a0c3e01bb9584e8308e46a7b230ebdb6362aff62f781ab6e82e",
+      "prompt_source": "test_results/task07/eval_runs/t07-15067-0920225625-49ffc84ef87e/p15067/runtime/t07p15067i0-0920230454-cda49370334a/claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/bf48f706-e310-45e3-8d28-6a4ccfda8e53.jsonl",
+      "prompt_source_sha256": "e6f6e0e8333c6f92917104a1b5d200e62b14cc6634928d90d1d64c85d5c0c157",
+      "archive_prompt_record": "test_results/task07/agent_sessions/t07p15067i0-0920230454-cda49370334a/session.json",
+      "archive_prompt_record_sha256": "eaa6bae7a5f4375577d65e74fc756d33e9ae2accd857595ee591112715b4d9ed",
+      "claude_mcp_name": "plugin:embodied-claude-code:behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v18.txt"
       ],
@@ -39,10 +42,13 @@
     {
       "instance_id": 304,
       "slot": 3,
-      "prompt": "prompt/task07/v18_6ab9a3152f1a.txt",
-      "prompt_sha256": "6ab9a3152f1a3c7bfc970d460ead949e8c740ca2e2e6b771806a59320cae0f55",
-      "prompt_source": "test_results/task07/agent_sessions/t07p15067i3-0921031841-14bb0e8c9acf/session.json",
-      "prompt_source_sha256": "1dfcb1166585b436549fba2e4f9107070a4606fe07c92453eeb7546764160778",
+      "prompt": "prompt/task07/v18_420cc8ac0d5d.txt",
+      "prompt_sha256": "420cc8ac0d5d4a0c3e01bb9584e8308e46a7b230ebdb6362aff62f781ab6e82e",
+      "prompt_source": "test_results/task07/eval_runs/t07-15067-0920225625-49ffc84ef87e/p15067/runtime/t07p15067i3-0921031841-14bb0e8c9acf/claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/23888660-662f-4da7-85fa-386f5cc1f83b.jsonl",
+      "prompt_source_sha256": "7b4ed0a4153855328f69f4db1e0060a744dc8ef49d4f05a3cf89f26278fd7f16",
+      "archive_prompt_record": "test_results/task07/agent_sessions/t07p15067i3-0921031841-14bb0e8c9acf/session.json",
+      "archive_prompt_record_sha256": "1dfcb1166585b436549fba2e4f9107070a4606fe07c92453eeb7546764160778",
+      "claude_mcp_name": "plugin:embodied-claude-code:behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v18.txt"
       ],
@@ -57,10 +63,13 @@
     {
       "instance_id": 306,
       "slot": 5,
-      "prompt": "prompt/task07/v18_6ab9a3152f1a.txt",
-      "prompt_sha256": "6ab9a3152f1a3c7bfc970d460ead949e8c740ca2e2e6b771806a59320cae0f55",
-      "prompt_source": "test_results/task07/agent_sessions/t07p15067i5-0921061445-5212922c582b/session.json",
-      "prompt_source_sha256": "407d1142aaf00ac7559b22e3ca423a1d95027161647b4fb5eff9583ee22093c7",
+      "prompt": "prompt/task07/v18_420cc8ac0d5d.txt",
+      "prompt_sha256": "420cc8ac0d5d4a0c3e01bb9584e8308e46a7b230ebdb6362aff62f781ab6e82e",
+      "prompt_source": "test_results/task07/eval_runs/t07-15067-0920225625-49ffc84ef87e/p15067/runtime/t07p15067i5-0921061445-5212922c582b/claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/f784c58a-c806-4577-b4ae-0664e9bd5e89.jsonl",
+      "prompt_source_sha256": "ff2089a5981e9397fb487512c319b5e60309c78475d9eec178ce5fda15c2123b",
+      "archive_prompt_record": "test_results/task07/agent_sessions/t07p15067i5-0921061445-5212922c582b/session.json",
+      "archive_prompt_record_sha256": "407d1142aaf00ac7559b22e3ca423a1d95027161647b4fb5eff9583ee22093c7",
+      "claude_mcp_name": "plugin:embodied-claude-code:behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v18.txt"
       ],
@@ -75,10 +84,13 @@
     {
       "instance_id": 308,
       "slot": 7,
-      "prompt": "prompt/task07/v18_6ab9a3152f1a.txt",
-      "prompt_sha256": "6ab9a3152f1a3c7bfc970d460ead949e8c740ca2e2e6b771806a59320cae0f55",
-      "prompt_source": "test_results/task07/agent_sessions/t07p15067i7-0921113556-5276fa5537f4/session.json",
-      "prompt_source_sha256": "0f31729c26527fc1521340223affbcce604ef26d4a8428b0899c4d4d8fb5362f",
+      "prompt": "prompt/task07/v18_420cc8ac0d5d.txt",
+      "prompt_sha256": "420cc8ac0d5d4a0c3e01bb9584e8308e46a7b230ebdb6362aff62f781ab6e82e",
+      "prompt_source": "test_results/task07/eval_runs/t07-15067-0920225625-49ffc84ef87e/p15067/runtime/t07p15067i7-0921113556-5276fa5537f4/claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/c4028dee-a7d7-472a-8d54-0e634d072b75.jsonl",
+      "prompt_source_sha256": "0b6fadac9d2b957b929f75e2a790488584cb84d050fc19355504685ebe62e412",
+      "archive_prompt_record": "test_results/task07/agent_sessions/t07p15067i7-0921113556-5276fa5537f4/session.json",
+      "archive_prompt_record_sha256": "0f31729c26527fc1521340223affbcce604ef26d4a8428b0899c4d4d8fb5362f",
+      "claude_mcp_name": "plugin:embodied-claude-code:behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v18.txt"
       ],
@@ -93,10 +105,13 @@
     {
       "instance_id": 310,
       "slot": 9,
-      "prompt": "prompt/task07/v18_6ab9a3152f1a.txt",
-      "prompt_sha256": "6ab9a3152f1a3c7bfc970d460ead949e8c740ca2e2e6b771806a59320cae0f55",
-      "prompt_source": "test_results/task07/agent_sessions/t07p15067i9-0921165909-f915cd1b87c5/session.json",
-      "prompt_source_sha256": "0e88e1e19f56e6c7528d967f936fca7bf9cbf3199e598a5eca2ff72398643d44",
+      "prompt": "prompt/task07/v18_420cc8ac0d5d.txt",
+      "prompt_sha256": "420cc8ac0d5d4a0c3e01bb9584e8308e46a7b230ebdb6362aff62f781ab6e82e",
+      "prompt_source": "test_results/task07/eval_runs/t07-15067-0920225625-49ffc84ef87e/p15067/runtime/t07p15067i9-0921165909-f915cd1b87c5/claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/9367879e-b16d-4f11-9a32-2dbcaa246d3e.jsonl",
+      "prompt_source_sha256": "dc046e49057629e84f6fc97ac28dfc4bb86ccc63f11a74907d76f24d76de88f8",
+      "archive_prompt_record": "test_results/task07/agent_sessions/t07p15067i9-0921165909-f915cd1b87c5/session.json",
+      "archive_prompt_record_sha256": "0e88e1e19f56e6c7528d967f936fca7bf9cbf3199e598a5eca2ff72398643d44",
+      "claude_mcp_name": "plugin:embodied-claude-code:behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v18.txt"
       ],
