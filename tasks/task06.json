@@ -38,6 +38,9 @@
       "reference_steps": 14557,
       "notes": [
         "The actual transcript prompt differs from the archived v8 filename snapshot; the transcript text is preserved verbatim."
+      ],
+      "reproduction_caveats": [
+        "The archived Claude session starts after earlier navigation and arm operations in an already running scene. Their request parameters and a complete scene snapshot were not found in the supplied archive. A fresh reset does not reproduce that starting state; see reference_results/initial_states.json and docs/provenance.md."
       ]
     },
     {

@@ -40,6 +40,19 @@ edited to reconcile conflicting records.
 - task08's matching prompt text was recovered from the monitor session named
   by `session_end_<id>.json`; that monitor lived outside test_results. Its
   source path, session ID and hash are recorded in the task manifest.
+- task06/301: the selected session starts in a scene that had already received
+  seven navigation/arm API operations, before Claude started at 23:46 on
+  September 16. Its first observation is at local odometry (-5.999, -2.411)
+  m, yaw -149.374 degrees, looking down at the basket. A fresh reset starts
+  near local odometry (0, 0), looking toward the lawn fence. The earlier
+  request parameters and a full scene snapshot were not found in this run's
+  saved files. The archived Q=1.0 is preserved, but the fresh-reset launcher
+  cannot reproduce this case's starting state from the available records.
+  This limitation is recorded in its manifest and prevents a final strict
+  reproduction claim in the combined report, even if numerical means match.
+  [Initial observation evidence](../reference_results/initial_states.json)
+  records all 45 first robot observations and the earlier task06/301 API log
+  entries. These observations are not complete simulator snapshots.
 
 Every `tasks/taskXX.json` records the source paths and SHA-256 of the prompt,
 source Claude transcript, original archive prompt record and official result.

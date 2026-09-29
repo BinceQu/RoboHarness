@@ -4,6 +4,11 @@ Use Linux x86-64 with an NVIDIA RTX GPU, a compatible driver, Python 3.11 and
 the CUDA 12.4 toolkit for the interface's cuRobo build. The validation host has
 48 GB VRAM per GPU. A run also needs sufficient RAM and local scratch space
 for Isaac Sim and decrypted scene assets. Leave at least 30 GB free scratch.
+Each simulator run creates a private cache (about 7–8 GB on the validation
+host); completed and failed attempts retain theirs. The launcher checks for
+at least 10 GiB free at `cache_dir` before starting. Concurrent runs require
+additional headroom. Remove only caches belonging to stopped runs, or select
+a larger scratch filesystem in `configs/local.json`.
 
 Clone this repository with its submodule, then install:
 

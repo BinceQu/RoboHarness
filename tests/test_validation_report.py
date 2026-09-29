@@ -80,3 +80,18 @@ class ValidationReport(unittest.TestCase):
         self.assertEqual(row['superseded']['replacement_run'], 'corrected')
         self.assertIsNone(row['matches_archive_mean'])
         self.assertIsNone(row['delta_archive_mean_q'])
+
+    def test_matching_scores_do_not_hide_different_archived_starting_state(self):
+        plan_path = self.root / 'plan.json'
+        plan = json.loads(plan_path.read_text())
+        plan['cases'][0]['reproduction_caveats'] = ['Archived scene snapshot unavailable']
+        plan_path.write_text(json.dumps(plan))
+        self.add_case(301, 1.0)
+        self.add_case(304, 1.0)
+        self.summary['status'] = 'complete'
+        self.save()
+        row = collect(self.root)
+        self.assertEqual(row['mean_q'], 1.0)
+        self.assertEqual(row['reproduction_caveats'][0]['instance_id'], 301)
+        self.assertIsNone(row['matches_archive_mean'])
+        self.assertIsNone(row['delta_archive_mean_q'])

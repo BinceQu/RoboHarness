@@ -1,0 +1,2517 @@
+{
+  "scope": "First robot observation in each selected archived transcript; this is not a full simulator state or a pixel-equivalence check.",
+  "observations": [
+    {
+      "task": "task00",
+      "instance_id": 301,
+      "timestamp": "2026-09-16T11:44:36.143Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.00048524443092847825,
+            7.768503747338619e-09,
+            0.0
+          ],
+          "yaw_deg": 0.0002970763084332867
+        },
+        "base_qvel": [
+          -8.178560165106319e-06,
+          2.4257824406959116e-06,
+          4.465077267923334e-07
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38231272276519906,
+            0.25200071008523633,
+            1.2553999423980713
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3823129517991449,
+            -0.25199929802658255,
+            1.2554010152816772
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.04998965561389923,
+          0.049994707107543945
+        ],
+        "gripper_right_qpos": [
+          0.049918074160814285,
+          0.04998544231057167
+        ],
+        "motion_epoch": 2448,
+        "trunk_qpos": [
+          1.0251089334487915,
+          -1.4501398801803589,
+          -0.47001418471336365,
+          2.4507839313514523e-08
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/40dafba2-4756-4f87-8142-29596e01cf48.jsonl",
+      "source_sha256": "cbfd2c28cd9ef44a3d4309a42bfb74d1ebbf170465af4aa6769b48d1649fbfb5"
+    },
+    {
+      "task": "task00",
+      "instance_id": 304,
+      "timestamp": "2026-09-16T14:09:22.881Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.0006513541696030002,
+            -9.354306375003515e-10,
+            0.0
+          ],
+          "yaw_deg": -0.0014735520448533109
+        },
+        "base_qvel": [
+          -2.3512145617132774e-06,
+          9.64471951192536e-07,
+          -1.517496343694802e-06
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38249305730424804,
+            0.2519900338566184,
+            1.2553642988204956
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3824791415843455,
+            -0.25201015287233963,
+            1.2553642988204956
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.04978417232632637,
+          0.04994664713740349
+        ],
+        "gripper_right_qpos": [
+          0.04994511604309082,
+          0.049930449575185776
+        ],
+        "motion_epoch": 2965,
+        "trunk_qpos": [
+          1.0252152681350708,
+          -1.4502767324447632,
+          -0.4700285792350769,
+          3.233881074038436e-08
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/63bc81fe-f611-4647-993d-e2f957251356.jsonl",
+      "source_sha256": "100c9760ad41a1da150b768114c372232ebcc5f66b487d79a79ea1f8996db07b"
+    },
+    {
+      "task": "task00",
+      "instance_id": 306,
+      "timestamp": "2026-09-17T04:13:23.502Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.0006326754290005942,
+            3.316382084815868e-08,
+            0.0
+          ],
+          "yaw_deg": 0.010237744061484696
+        },
+        "base_qvel": [
+          -1.7623542589717545e-05,
+          2.6523044653004035e-05,
+          -1.626924131414853e-05
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38241738002652764,
+            0.25206811041399807,
+            1.255399465560913
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38250505177398686,
+            -0.25193206888647734,
+            1.25540030002594
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.04999995976686478,
+          0.04997532069683075
+        ],
+        "gripper_right_qpos": [
+          0.04978621006011963,
+          0.04997652396559715
+        ],
+        "motion_epoch": 2,
+        "trunk_qpos": [
+          1.0251092910766602,
+          -1.4501386880874634,
+          -0.4700142443180084,
+          -4.678872755903285e-08
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/54d0dd0e-d8f4-4595-8b96-86543f432552.jsonl",
+      "source_sha256": "84060c6a642b8c9d92587c456f9afdbcb49fa317184030f85e210ac53eb62465"
+    },
+    {
+      "task": "task00",
+      "instance_id": 308,
+      "timestamp": "2026-09-17T07:44:40.790Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.0006324497584384374,
+            -9.912069466629366e-09,
+            0.0
+          ],
+          "yaw_deg": -0.00048585709701465246
+        },
+        "base_qvel": [
+          -5.612940299215552e-07,
+          8.537354005966336e-07,
+          5.614517561980392e-08
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38247004730127004,
+            0.2519946998810969,
+            1.2553651332855225
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38246541586574767,
+            -0.2520035796692831,
+            1.2553648948669434
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.049997761845588684,
+          0.04995988681912422
+        ],
+        "gripper_right_qpos": [
+          0.0499991849064827,
+          0.04995013028383255
+        ],
+        "motion_epoch": 813,
+        "trunk_qpos": [
+          1.0252140760421753,
+          -1.4502735137939453,
+          -0.47002774477005005,
+          1.164292928734767e-08
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/ade09be5-501d-47c8-aaca-fe047cf6e6c5.jsonl",
+      "source_sha256": "9923cad447a36b444e220efc2fb77fd568bacde0eb8135f25c37e40cebe67e16"
+    },
+    {
+      "task": "task00",
+      "instance_id": 310,
+      "timestamp": "2026-09-17T08:44:11.890Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.0005595282225392703,
+            -1.3348589756545932e-08,
+            0.0
+          ],
+          "yaw_deg": -0.0055333431167704185
+        },
+        "base_qvel": [
+          -0.0006883204914629459,
+          -0.0001647492899792269,
+          0.0005494565702974796
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3824264764700617,
+            0.2519620103717243,
+            1.2553279399871826
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3823758953673236,
+            -0.25203722033958775,
+            1.2553281784057617
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.04999910667538643,
+          0.04998672381043434
+        ],
+        "gripper_right_qpos": [
+          0.04971585422754288,
+          0.049961794167757034
+        ],
+        "motion_epoch": 1864,
+        "trunk_qpos": [
+          1.0253221988677979,
+          -1.4504129886627197,
+          -0.47004225850105286,
+          -1.0876264155967874e-07
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/f3f3a6ad-ad82-4165-b158-da6f3f9f3341.jsonl",
+      "source_sha256": "cedc0b00f8478b8e208f828e93688629c148f50bf21c69aee3f54a840b48c929"
+    },
+    {
+      "task": "task01",
+      "instance_id": 301,
+      "timestamp": "2026-09-15T13:49:22.921Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.0004350894435301293,
+            9.609921036034589e-09,
+            0.0
+          ],
+          "yaw_deg": 0.0037190959543998967
+        },
+        "base_qvel": [
+          0.00039973159437067807,
+          0.00038544327253475785,
+          0.00014257655129767954
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38224846981168403,
+            0.25202488728674355,
+            1.255399465560913
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38228023102615905,
+            -0.25197529863355655,
+            1.2553999423980713
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.04985066503286362,
+          0.049988921731710434
+        ],
+        "gripper_right_qpos": [
+          0.04998910054564476,
+          0.049986906349658966
+        ],
+        "motion_epoch": 2,
+        "trunk_qpos": [
+          1.0251108407974243,
+          -1.4501402378082275,
+          -0.47001445293426514,
+          1.4711565654579317e-07
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/282de2ac-1724-4003-b69e-0060656cbebb.jsonl",
+      "source_sha256": "9bde08ae54db3055b6b72ce5997312d40e0e07ad3777ebd4c53f60196ffbfe31"
+    },
+    {
+      "task": "task01",
+      "instance_id": 304,
+      "timestamp": "2026-09-15T16:55:18.821Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.00048807546610957485,
+            3.017884940427614e-08,
+            0.0
+          ],
+          "yaw_deg": 0.009033491052511507
+        },
+        "base_qvel": [
+          0.0005124114686623216,
+          -8.476991206407547e-05,
+          0.00021164037752896547
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3822828463160704,
+            0.2520603817287161,
+            1.2553638219833374
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38236183224561465,
+            -0.25193979900241475,
+            1.2553640604019165
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.04981754720211029,
+          0.04997966066002846
+        ],
+        "gripper_right_qpos": [
+          0.04997127130627632,
+          0.04999670758843422
+        ],
+        "motion_epoch": 5986,
+        "trunk_qpos": [
+          1.0252177715301514,
+          -1.450278401374817,
+          -0.4700280725955963,
+          2.5033190809153893e-07
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/6a82d31a-8045-4462-8c4c-2acc323dc127.jsonl",
+      "source_sha256": "5281377e5a46c0bf7b436bd66aa8a81f1f3d4d498689c7288b63ca2f0545e84f"
+    },
+    {
+      "task": "task01",
+      "instance_id": 306,
+      "timestamp": "2026-09-15T22:13:31.896Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.015857615314065803,
+            -9.607779779394299e-05,
+            0.0
+          ],
+          "yaw_deg": -1.3964856999163302
+        },
+        "base_qvel": [
+          -5.5403783335350454e-05,
+          0.00016308232443407178,
+          0.0002870490134228021
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.40372823303386346,
+            0.24252405173549435,
+            1.2553268671035767
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.39144409841983663,
+            -0.26132497972120966,
+            1.2553273439407349
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.049796510487794876,
+          0.04995198920369148
+        ],
+        "gripper_right_qpos": [
+          0.049998797476291656,
+          0.049935758113861084
+        ],
+        "motion_epoch": 11903,
+        "trunk_qpos": [
+          1.0253252983093262,
+          -1.450416088104248,
+          -0.47004249691963196,
+          9.719891380655099e-08
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/4edbee83-f50d-4b8b-9e88-eb0752086c47.jsonl",
+      "source_sha256": "b108a58eb5dbe51fd33a57a7614a70798e513a183f9d185d110a59f6b67ab182"
+    },
+    {
+      "task": "task01",
+      "instance_id": 308,
+      "timestamp": "2026-09-16T01:16:45.057Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.0003728653886787102,
+            -3.8484653391432754e-08,
+            0.0
+          ],
+          "yaw_deg": -0.01108812295567369
+        },
+        "base_qvel": [
+          -0.00013412228145170957,
+          4.523322422755882e-05,
+          0.00010653554636519402
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38226996154173976,
+            0.25192567650582304,
+            1.2552911043167114
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.382171948399151,
+            -0.25207473930282215,
+            1.2552911043167114
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.04999977722764015,
+          0.04999932646751404
+        ],
+        "gripper_right_qpos": [
+          0.04989763721823692,
+          0.04993519186973572
+        ],
+        "motion_epoch": 15982,
+        "trunk_qpos": [
+          1.025431752204895,
+          -1.4505547285079956,
+          -0.4700561463832855,
+          -4.405152864705997e-08
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/9c151129-9bc7-41f3-99ed-01691c862f23.jsonl",
+      "source_sha256": "341b91498e73b5a349cf5839279c0d2b12061d70a578c08ea037ad8c4e660886"
+    },
+    {
+      "task": "task01",
+      "instance_id": 310,
+      "timestamp": "2026-09-16T04:36:25.742Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.0004287518163989521,
+            -1.7654305768776726e-09,
+            0.0
+          ],
+          "yaw_deg": -0.002131077087502924
+        },
+        "base_qvel": [
+          -4.204718152323039e-06,
+          -6.207892056409037e-06,
+          -6.993710144342913e-07
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3822933739006155,
+            0.251985173421403,
+            1.255253791809082
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3822746279427893,
+            -0.2520154899872997,
+            1.2552534341812134
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.049998994916677475,
+          0.04999304935336113
+        ],
+        "gripper_right_qpos": [
+          0.04991256445646286,
+          0.04999858886003494
+        ],
+        "motion_epoch": 18781,
+        "trunk_qpos": [
+          1.0255416631698608,
+          -1.4506945610046387,
+          -0.4700709581375122,
+          4.059831937297531e-08
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/48c73b78-c55b-4a92-a844-5a8040ff34fa.jsonl",
+      "source_sha256": "b3f595cf1778a3f0c4d28470e66d5ff7417289354e5159dffa33e62c35003a91"
+    },
+    {
+      "task": "task02",
+      "instance_id": 301,
+      "timestamp": "2026-09-17T04:15:07.141Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.0006640927138642133,
+            -1.492826106112614e-08,
+            0.0
+          ],
+          "yaw_deg": -0.001828235454615804
+        },
+        "base_qvel": [
+          -9.209904237650335e-05,
+          0.00066336989402771,
+          0.0004561256500892341
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38250187210847725,
+            0.2519869410278766,
+            1.2553986310958862
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38248579015676387,
+            -0.2520115767056584,
+            1.2553988695144653
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.04979490861296654,
+          0.04999713599681854
+        ],
+        "gripper_right_qpos": [
+          0.04999755695462227,
+          0.049984294921159744
+        ],
+        "motion_epoch": 2,
+        "trunk_qpos": [
+          1.0251132249832153,
+          -1.4501420259475708,
+          -0.4700148403644562,
+          2.6703634148361743e-07
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/1ba35d25-0c07-4456-9fb4-916eabebbff9.jsonl",
+      "source_sha256": "d212716369c538c4d5caf63af6902d656ee0f2b470d6fe6114bf7400796428fc"
+    },
+    {
+      "task": "task02",
+      "instance_id": 304,
+      "timestamp": "2026-09-18T02:18:51.473Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.0005128652953334988,
+            8.972868307585743e-11,
+            0.0
+          ],
+          "yaw_deg": -0.004565321887356064
+        },
+        "base_qvel": [
+          -8.393215466639958e-06,
+          2.1144342099432833e-06,
+          -1.873175278888084e-05
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3823746029709066,
+            0.25196966764526635,
+            1.2553263902664185
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38233349061297467,
+            -0.25203051759899103,
+            1.2553272247314453
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.0496671125292778,
+          0.049946628510951996
+        ],
+        "gripper_right_qpos": [
+          0.04999847710132599,
+          0.04999435693025589
+        ],
+        "motion_epoch": 7292,
+        "trunk_qpos": [
+          1.0253252983093262,
+          -1.4504170417785645,
+          -0.47004255652427673,
+          2.8931296469636436e-08
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/3df4ef3d-ccc0-4118-bf80-410c5f92f21d.jsonl",
+      "source_sha256": "ac264b4d3ba7004dfa9bdcba54da2ebd741199c711571b77a9208b6fbde73ee8"
+    },
+    {
+      "task": "task02",
+      "instance_id": 306,
+      "timestamp": "2026-09-19T03:18:43.188Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.0005398370367743879,
+            -1.0077953521715577e-08,
+            0.0
+          ],
+          "yaw_deg": 0.0022873126269583348
+        },
+        "base_qvel": [
+          -1.3746613149123732e-05,
+          -6.618370662181405e-06,
+          -2.4565993044234347e-06
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3823585616116754,
+            0.2520136572902581,
+            1.2554007768630981
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38237820501566533,
+            -0.25198605241017413,
+            1.2554007768630981
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.049968112260103226,
+          0.04999006167054176
+        ],
+        "gripper_right_qpos": [
+          0.049987901002168655,
+          0.04997393116354942
+        ],
+        "motion_epoch": 2,
+        "trunk_qpos": [
+          1.0251084566116333,
+          -1.450137972831726,
+          -0.4700143337249756,
+          1.1204781102946981e-08
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/8a55a347-e9ad-432a-8d7e-f95e703f96d3.jsonl",
+      "source_sha256": "e955d8de2390e0a36fc10647442df07480910de7a8842f7e847fec8da2f47d9f"
+    },
+    {
+      "task": "task02",
+      "instance_id": 308,
+      "timestamp": "2026-09-19T10:45:30.288Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.0006854556889631436,
+            2.245154462293327e-08,
+            0.0
+          ],
+          "yaw_deg": 0.00243974618007871
+        },
+        "base_qvel": [
+          3.910651139449328e-05,
+          4.6452070819213986e-05,
+          -9.722136383061297e-06
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38250887418608887,
+            0.2520151827007142,
+            1.2553637027740479
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38253045455192836,
+            -0.2519854805946086,
+            1.2553634643554688
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.049970608204603195,
+          0.04994133859872818
+        ],
+        "gripper_right_qpos": [
+          0.049929969012737274,
+          0.0499318428337574
+        ],
+        "motion_epoch": 12796,
+        "trunk_qpos": [
+          1.0252172946929932,
+          -1.4502798318862915,
+          -0.47002920508384705,
+          3.276250026829075e-08
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/845ae2c6-aac9-4112-ac64-b1312ad59777.jsonl",
+      "source_sha256": "704be938458da48e848a3c080391392fa0362abccc58a2b2f58a19cb01aa08d5"
+    },
+    {
+      "task": "task02",
+      "instance_id": 310,
+      "timestamp": "2026-09-20T03:54:49.406Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.0006826680705901031,
+            4.1981564683550776e-08,
+            0.0
+          ],
+          "yaw_deg": 0.0024455936742967498
+        },
+        "base_qvel": [
+          -2.5852956241578795e-05,
+          -4.655220891436329e-06,
+          -7.984048124853871e-07
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3825016500580397,
+            0.252016313894216,
+            1.2554006576538086
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3825236394788843,
+            -0.25198411096505796,
+            1.2554007768630981
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.049994658678770065,
+          0.04997405782341957
+        ],
+        "gripper_right_qpos": [
+          0.04999786242842674,
+          0.04998894780874252
+        ],
+        "motion_epoch": 2,
+        "trunk_qpos": [
+          1.0251073837280273,
+          -1.4501346349716187,
+          -0.4700133800506592,
+          -9.590657157332316e-09
+        ]
+      },
+      "source_transcript": "experimental_gpu3_interface/eval_runs/t02-15062-0920114651-db5318bac7e0/p15062/runtime/t02p15062i9-0920115421-dceabceee1ae/claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/39b18317-b9f0-4c41-a6b0-83df5713d89a.jsonl",
+      "source_sha256": "0dc0210a2f9e9ffce4cd3d32a2ba4a121acd30d73b9247eba9a5b9d85b5c2c86"
+    },
+    {
+      "task": "task03",
+      "instance_id": 301,
+      "timestamp": "2026-09-15T15:28:59.351Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.00043057336751630554,
+            1.6622584400368435e-08,
+            0.0
+          ],
+          "yaw_deg": 0.007915308647194997
+        },
+        "base_qvel": [
+          -2.6061923108500196e-07,
+          4.3326190279913135e-06,
+          2.10505504583125e-07
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38222346852327577,
+            0.25205214123213165,
+            1.255401849746704
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3822930953061426,
+            -0.2519485177157853,
+            1.2554017305374146
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.049854543060064316,
+          0.04999758303165436
+        ],
+        "gripper_right_qpos": [
+          0.049979180097579956,
+          0.049965281039476395
+        ],
+        "motion_epoch": 2,
+        "trunk_qpos": [
+          1.025105357170105,
+          -1.4501339197158813,
+          -0.47001343965530396,
+          3.525422620498375e-09
+        ]
+      },
+      "source_transcript": "test_results/task03/06_claude_transcripts/claude_t03p15063i0-09152328_301.jsonl",
+      "source_sha256": "f05ef5d7e525533f87e8313fff26b9c44f7f827e10887451352639f1e98d0ce1"
+    },
+    {
+      "task": "task03",
+      "instance_id": 304,
+      "timestamp": "2026-09-17T10:08:53.742Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.000439197874602196,
+            -6.892747643737791e-09,
+            0.0
+          ],
+          "yaw_deg": -0.0007817119218463284
+        },
+        "base_qvel": [
+          2.943965228041634e-05,
+          2.2867487132316455e-05,
+          -0.00025101297069340944
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38227094408140033,
+            0.2519939234153421,
+            1.255400538444519
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3822631141138332,
+            -0.25200578660774614,
+            1.2554006576538086
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.049936432391405106,
+          0.049999795854091644
+        ],
+        "gripper_right_qpos": [
+          0.049997806549072266,
+          0.04999929666519165
+        ],
+        "motion_epoch": 2,
+        "trunk_qpos": [
+          1.0251084566116333,
+          -1.4501382112503052,
+          -0.47001349925994873,
+          7.930764667207768e-08
+        ]
+      },
+      "source_transcript": "test_results/task03/06_claude_transcripts/claude_t03p15063i3-09171808_304.jsonl",
+      "source_sha256": "c66fb5b28c37320ed5c6e3b586e45b740d47f190255cb9876578d32f130ebbf5"
+    },
+    {
+      "task": "task03",
+      "instance_id": 306,
+      "timestamp": "2026-09-17T21:47:59.952Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.00039665830026801936,
+            5.5229354163296846e-08,
+            0.0
+          ],
+          "yaw_deg": 0.014061305387443827
+        },
+        "base_qvel": [
+          -5.139559561939677e-06,
+          -1.543386679259129e-05,
+          -6.101859071350191e-07
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3821702624152781,
+            0.2520945649158359,
+            1.2553645372390747
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38229299872204325,
+            -0.2519065607349386,
+            1.2553640604019165
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.04999953880906105,
+          0.04997849836945534
+        ],
+        "gripper_right_qpos": [
+          0.04999961704015732,
+          0.049996212124824524
+        ],
+        "motion_epoch": 6430,
+        "trunk_qpos": [
+          1.0252158641815186,
+          -1.4502757787704468,
+          -0.4700273275375366,
+          -9.03939145757704e-09
+        ]
+      },
+      "source_transcript": "test_results/task03/06_claude_transcripts/claude_t03p15063i5-09180547_306.jsonl",
+      "source_sha256": "abf46514cabced8b430ad49a4918f67d32b0bba372b77338c3a8376527980137"
+    },
+    {
+      "task": "task03",
+      "instance_id": 308,
+      "timestamp": "2026-09-18T03:40:46.313Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.00046480349534054626,
+            1.6371967128566944e-08,
+            0.0
+          ],
+          "yaw_deg": 0.0019139904844987122
+        },
+        "base_qvel": [
+          -0.00023593746300321072,
+          -0.00022365956101566553,
+          0.0002159788564313203
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.382299475214503,
+            0.2520114348148006,
+            1.2553273439407349
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38231535786218107,
+            -0.2519880366002737,
+            1.2553277015686035
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.049985695630311966,
+          0.04999997839331627
+        ],
+        "gripper_right_qpos": [
+          0.04996268078684807,
+          0.04997315630316734
+        ],
+        "motion_epoch": 11488,
+        "trunk_qpos": [
+          1.0253238677978516,
+          -1.4504135847091675,
+          -0.470041424036026,
+          -2.3173096508344315e-07
+        ]
+      },
+      "source_transcript": "test_results/task03/06_claude_transcripts/claude_t03p15063i7-09181140_308.jsonl",
+      "source_sha256": "c075a03da39ad1f891734059de03e2de395734062c2849aefbf59e7c34f49676"
+    },
+    {
+      "task": "task03",
+      "instance_id": 310,
+      "timestamp": "2026-09-18T13:35:35.211Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.00028027825803732774,
+            1.136233002692863e-08,
+            0.0
+          ],
+          "yaw_deg": 0.0031473551998322043
+        },
+        "base_qvel": [
+          -1.1751833881135099e-05,
+          -5.971549398964271e-06,
+          3.2309202424585237e-07
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3821152470281954,
+            0.25202036479504153,
+            1.2552907466888428
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3821429325945831,
+            -0.25197934452755855,
+            1.2552905082702637
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.04999727010726929,
+          0.04998952895402908
+        ],
+        "gripper_right_qpos": [
+          0.04999735951423645,
+          0.049985915422439575
+        ],
+        "motion_epoch": 19192,
+        "trunk_qpos": [
+          1.025432825088501,
+          -1.4505538940429688,
+          -0.4700556993484497,
+          5.55707524441118e-09
+        ]
+      },
+      "source_transcript": "test_results/task03/06_claude_transcripts/claude_t03p15063i9-09182135_310.jsonl",
+      "source_sha256": "d930d7065a7c1985026587998f3a6ddc2a7737d12017db1b272128f945e5d2bc"
+    },
+    {
+      "task": "task05",
+      "instance_id": 301,
+      "timestamp": "2026-09-15T13:50:16.086Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.0002462407448930138,
+            -8.522513025645244e-09,
+            0.0
+          ],
+          "yaw_deg": 0.0006903843891748753
+        },
+        "base_qvel": [
+          2.1910364012001082e-05,
+          4.853682912653312e-05,
+          0.0004375572025310248
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38207163156741675,
+            0.25200420891638164,
+            1.2554020881652832
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.382076989255075,
+            -0.25199621639439396,
+            1.2554023265838623
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.04976419359445572,
+          0.04999836906790733
+        ],
+        "gripper_right_qpos": [
+          0.04996354505419731,
+          0.05000000074505806
+        ],
+        "motion_epoch": 2,
+        "trunk_qpos": [
+          1.0251041650772095,
+          -1.450133204460144,
+          -0.4700135886669159,
+          -7.142951119476493e-08
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/ad7ab8a4-7037-4308-8e5f-3f0f923e24a3.jsonl",
+      "source_sha256": "a06f204b46c20a0e3726fdc5a92b28e6d7bea00c3e29de96c43bb16f4a7b63ef"
+    },
+    {
+      "task": "task05",
+      "instance_id": 304,
+      "timestamp": "2026-09-15T17:26:35.089Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.00023256265077666337,
+            -1.8576068717544392e-09,
+            0.0
+          ],
+          "yaw_deg": -0.0029198251375723567
+        },
+        "base_qvel": [
+          -0.00023014444741420448,
+          9.031615627463907e-05,
+          -0.00013031470007263124
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3820782422798824,
+            0.25198063285915856,
+            1.255366563796997
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3820522005069843,
+            -0.2520197918069224,
+            1.255366325378418
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.04946286231279373,
+          0.04999503493309021
+        ],
+        "gripper_right_qpos": [
+          0.04990043118596077,
+          0.04999300464987755
+        ],
+        "motion_epoch": 3881,
+        "trunk_qpos": [
+          1.025209903717041,
+          -1.4502711296081543,
+          -0.47002771496772766,
+          5.397264146722591e-08
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/91213fa6-ec37-40d4-8f53-574063741536.jsonl",
+      "source_sha256": "79fde6016b4f698c2a689d99270a40e46a1010b5dfe816c6af6be59d1ed3b89e"
+    },
+    {
+      "task": "task05",
+      "instance_id": 306,
+      "timestamp": "2026-09-16T03:31:48.735Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.00030733451411278715,
+            -3.785221027392231e-09,
+            0.0
+          ],
+          "yaw_deg": -5.7772278149234414e-05
+        },
+        "base_qvel": [
+          4.38247989222873e-05,
+          0.00011669097875710577,
+          0.0002546861069276929
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3821466255511114,
+            0.25199952584620966,
+            1.2553303241729736
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3821458789406025,
+            -0.2520008994920388,
+            1.255330204963684
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.04891354218125343,
+          0.0499877855181694
+        ],
+        "gripper_right_qpos": [
+          0.04995742440223694,
+          0.04998638853430748
+        ],
+        "motion_epoch": 10322,
+        "trunk_qpos": [
+          1.0253163576126099,
+          -1.450408697128296,
+          -0.4700417220592499,
+          1.824723057097799e-07
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/f448ac33-8c36-4309-8e11-309219026782.jsonl",
+      "source_sha256": "6975cb0899c21aa09d26d8c7b67cf9a08cdfc30a5be5365a8e27c8470decba1b"
+    },
+    {
+      "task": "task05",
+      "instance_id": 308,
+      "timestamp": "2026-09-17T04:11:56.028Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.00026743968438994013,
+            1.0962678546769016e-09,
+            0.0
+          ],
+          "yaw_deg": -0.0008560470826097922
+        },
+        "base_qvel": [
+          -5.006187711842358e-05,
+          6.087157817091793e-05,
+          -0.0002184466429753229
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3820976054796986,
+            0.25199358505830355,
+            1.2554012537002563
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3820903137142792,
+            -0.25200645279755907,
+            1.2554008960723877
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.049916770309209824,
+          0.04996493086218834
+        ],
+        "gripper_right_qpos": [
+          0.049856916069984436,
+          0.04999064654111862
+        ],
+        "motion_epoch": 2,
+        "trunk_qpos": [
+          1.025107979774475,
+          -1.4501398801803589,
+          -0.4700142741203308,
+          6.355431025895086e-08
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/dd4ad37e-aed8-4074-92e6-9a9e129719b2.jsonl",
+      "source_sha256": "2d9f7e23e4c1e664b8ae8131e2f8112cf888255c063cbd4231210874981d06ec"
+    },
+    {
+      "task": "task05",
+      "instance_id": 310,
+      "timestamp": "2026-09-18T02:19:02.928Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.00019216050528247523,
+            2.2482033808477116e-09,
+            0.0
+          ],
+          "yaw_deg": -0.0003990477435778232
+        },
+        "base_qvel": [
+          -0.00025708781322464347,
+          0.00013938217307440937,
+          0.00011795030150096864
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38202770732978314,
+            0.25199695950835327,
+            1.255365014076233
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38202372028320586,
+            -0.2520033466055575,
+            1.255365014076233
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.04999878257513046,
+          0.04999181628227234
+        ],
+        "gripper_right_qpos": [
+          0.049861304461956024,
+          0.04999915882945061
+        ],
+        "motion_epoch": 14583,
+        "trunk_qpos": [
+          1.0252138376235962,
+          -1.45027494430542,
+          -0.47002795338630676,
+          5.882619191766025e-08
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/41965ee2-cf50-4baa-a7f6-db673e558959.jsonl",
+      "source_sha256": "96a4500e2b358bd82f6a0281bd0d2068480bf442850f4d4a3fbc978a0bbd9a5b"
+    },
+    {
+      "task": "task06",
+      "instance_id": 301,
+      "timestamp": "2026-09-16T15:46:40.881Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            -5.999085656942943,
+            -2.4109717047044983,
+            0.0
+          ],
+          "yaw_deg": -149.37437090190923
+        },
+        "base_qvel": [
+          5.09132441948168e-05,
+          -0.0001306659250985831,
+          -8.479302050545812e-05
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            -6.575849582241862,
+            -2.8521093472115138,
+            0.3574710488319397
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            -6.455256131177498,
+            -2.3881826712733125,
+            0.5888497829437256
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.05000000074505806,
+          0.04992012679576874
+        ],
+        "gripper_right_qpos": [
+          0.049999989569187164,
+          0.04999960586428642
+        ],
+        "motion_epoch": 524,
+        "trunk_qpos": [
+          -0.9922865629196167,
+          2.5281732082366943,
+          0.46641555428504944,
+          8.637109203846194e-06
+        ]
+      },
+      "source_transcript": "test_results/task06/06_claude_transcripts/claude_t06p15066i0-09162346_301.jsonl",
+      "source_sha256": "9cadbd5e6d29da7aa0db8c5f5c395407af7a0d4e7fe6ac6366cec97fc674a653"
+    },
+    {
+      "task": "task06",
+      "instance_id": 304,
+      "timestamp": "2026-09-17T04:14:40.741Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.0007907660700389241,
+            1.4588152689068446e-07,
+            0.0
+          ],
+          "yaw_deg": 0.013010446559824073
+        },
+        "base_qvel": [
+          8.547183824703097e-06,
+          5.009836968383752e-06,
+          1.6628007870167494e-05
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38256422540129625,
+            0.25208765235357516,
+            1.2553997039794922
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3826791484700674,
+            -0.2519139519758411,
+            1.2553998231887817
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.04989089071750641,
+          0.04999293386936188
+        ],
+        "gripper_right_qpos": [
+          0.049945320934057236,
+          0.04999782517552376
+        ],
+        "motion_epoch": 2,
+        "trunk_qpos": [
+          1.0251106023788452,
+          -1.4501392841339111,
+          -0.4700140357017517,
+          1.6175137673712925e-08
+        ]
+      },
+      "source_transcript": "test_results/task06/06_claude_transcripts/claude_t06p15066i3-09171214_304.jsonl",
+      "source_sha256": "608103692658a2c39efd25682dfe2f4f8baea81a91923861f581e2655b4d4e72"
+    },
+    {
+      "task": "task06",
+      "instance_id": 306,
+      "timestamp": "2026-09-17T06:20:16.641Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.0015616042918716723,
+            -1.844402173312689e-07,
+            0.0
+          ],
+          "yaw_deg": -0.009388507744399173
+        },
+        "base_qvel": [
+          0.00019809183140750974,
+          0.0002905089932028204,
+          -9.161763591691852e-05
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38344264430896924,
+            0.25193805248890905,
+            1.2553625106811523
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3833629191271955,
+            -0.25206546599386953,
+            1.2553629875183105
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.049972016364336014,
+          0.049994420260190964
+        ],
+        "gripper_right_qpos": [
+          0.0498509407043457,
+          0.049997907131910324
+        ],
+        "motion_epoch": 11130,
+        "trunk_qpos": [
+          1.0252184867858887,
+          -1.450271487236023,
+          -0.47002556920051575,
+          6.79548293192056e-08
+        ]
+      },
+      "source_transcript": "test_results/task06/06_claude_transcripts/claude_t06p15066i5-09171413_306.jsonl",
+      "source_sha256": "5771becf40a8e53c3699521067770f54303a4a4c5af2f92d8d8fbc57922f874e"
+    },
+    {
+      "task": "task06",
+      "instance_id": 308,
+      "timestamp": "2026-09-17T15:39:44.962Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.0010325128457418704,
+            2.286121754795392e-08,
+            0.0
+          ],
+          "yaw_deg": 0.0045396544943171555
+        },
+        "base_qvel": [
+          -4.803410320164403e-06,
+          1.805274405342061e-05,
+          -2.890737960115075e-08
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3828341777518518,
+            0.25202822222327603,
+            1.2554032802581787
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38287506421417705,
+            -0.25197053252787827,
+            1.255403757095337
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.04999947547912598,
+          0.04879829287528992
+        ],
+        "gripper_right_qpos": [
+          0.04999799653887749,
+          0.04920152202248573
+        ],
+        "motion_epoch": 2,
+        "trunk_qpos": [
+          1.025100588798523,
+          -1.4501376152038574,
+          -0.4700167179107666,
+          -1.6177365225189533e-08
+        ]
+      },
+      "source_transcript": "test_results/task06/06_claude_transcripts/claude_t06p15066i7-09172338_308_v9.jsonl",
+      "source_sha256": "3c43d44db56af6213f6f02f3f30865ef2b485d0eab8c3ed6b5ab873b8f42ff8a"
+    },
+    {
+      "task": "task06",
+      "instance_id": 310,
+      "timestamp": "2026-09-17T19:41:38.452Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.001376382771064686,
+            9.449296026915055e-09,
+            0.0
+          ],
+          "yaw_deg": -0.0035015658644858647
+        },
+        "base_qvel": [
+          0.0013056725729256868,
+          0.0005800899816676974,
+          -3.4945122024510056e-05
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38321818343874137,
+            0.25197557546325633,
+            1.2553671598434448
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3831859515629379,
+            -0.2520241335911324,
+            1.2553678750991821
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.049964677542448044,
+          0.048631682991981506
+        ],
+        "gripper_right_qpos": [
+          0.049917228519916534,
+          0.0489872507750988
+        ],
+        "motion_epoch": 8616,
+        "trunk_qpos": [
+          1.0252059698104858,
+          -1.4502804279327393,
+          -0.47003403306007385,
+          -2.9273978796595657e-08
+        ]
+      },
+      "source_transcript": "test_results/task06/06_claude_transcripts/claude_t06p15066i9-09180340_310_v9.jsonl",
+      "source_sha256": "65dc20c785e220469a79ec5a4a8b9ab4c3396eebea44470bb25532da7a83325a"
+    },
+    {
+      "task": "task07",
+      "instance_id": 301,
+      "timestamp": "2026-09-20T15:05:09.018Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.0012728111224667921,
+            -9.76515769584415e-08,
+            0.0
+          ],
+          "yaw_deg": -0.02032173800620633
+        },
+        "base_qvel": [
+          -0.00011211544915568084,
+          -0.001014461973682046,
+          0.0015278926584869623
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.383190475844591,
+            0.25186717522790075,
+            1.2554017305374146
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38301171660724737,
+            -0.25213250315383295,
+            1.2554019689559937
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.05000000074505806,
+          0.04999982938170433
+        ],
+        "gripper_right_qpos": [
+          0.049962904304265976,
+          0.04999786987900734
+        ],
+        "motion_epoch": 2,
+        "trunk_qpos": [
+          1.0251051187515259,
+          -1.4501346349716187,
+          -0.47001299262046814,
+          2.989127665387059e-07
+        ]
+      },
+      "source_transcript": "test_results/task07/eval_runs/t07-15067-0920225625-49ffc84ef87e/p15067/runtime/t07p15067i0-0920230454-cda49370334a/claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/bf48f706-e310-45e3-8d28-6a4ccfda8e53.jsonl",
+      "source_sha256": "e6f6e0e8333c6f92917104a1b5d200e62b14cc6634928d90d1d64c85d5c0c157"
+    },
+    {
+      "task": "task07",
+      "instance_id": 304,
+      "timestamp": "2026-09-20T19:18:51.813Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.0015362571046349492,
+            -1.4290864828754693e-07,
+            0.0
+          ],
+          "yaw_deg": -0.010797823514043086
+        },
+        "base_qvel": [
+          -0.00043643172830343246,
+          0.00010412737901788205,
+          0.001982226734980941
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3834196797336259,
+            0.2519310856444594,
+            1.2553651332855225
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3833208821156988,
+            -0.2520705221181473,
+            1.255365252494812
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.04999568313360214,
+          0.04999755695462227
+        ],
+        "gripper_right_qpos": [
+          0.04976961016654968,
+          0.049997515976428986
+        ],
+        "motion_epoch": 14719,
+        "trunk_qpos": [
+          1.025213360786438,
+          -1.4502737522125244,
+          -0.4700266718864441,
+          7.358859193118406e-07
+        ]
+      },
+      "source_transcript": "test_results/task07/eval_runs/t07-15067-0920225625-49ffc84ef87e/p15067/runtime/t07p15067i3-0921031841-14bb0e8c9acf/claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/23888660-662f-4da7-85fa-386f5cc1f83b.jsonl",
+      "source_sha256": "7b4ed0a4153855328f69f4db1e0060a744dc8ef49d4f05a3cf89f26278fd7f16"
+    },
+    {
+      "task": "task07",
+      "instance_id": 306,
+      "timestamp": "2026-09-20T22:14:55.978Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.001143046266273465,
+            1.7626366555857056e-07,
+            0.0
+          ],
+          "yaw_deg": -0.002116105604444463
+        },
+        "base_qvel": [
+          0.00045755007886327803,
+          -7.60160619392991e-05,
+          0.00044173153582960367
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38299019800289963,
+            0.2519868823866315,
+            1.2553269863128662
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38297539849138623,
+            -0.2520123506563669,
+            1.2553274631500244
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.04892228543758392,
+          0.04999246448278427
+        ],
+        "gripper_right_qpos": [
+          0.049997031688690186,
+          0.049997590482234955
+        ],
+        "motion_epoch": 25001,
+        "trunk_qpos": [
+          1.0253242254257202,
+          -1.4504156112670898,
+          -0.470041424036026,
+          -3.7451832213264424e-07
+        ]
+      },
+      "source_transcript": "test_results/task07/eval_runs/t07-15067-0920225625-49ffc84ef87e/p15067/runtime/t07p15067i5-0921061445-5212922c582b/claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/f784c58a-c806-4577-b4ae-0664e9bd5e89.jsonl",
+      "source_sha256": "ff2089a5981e9397fb487512c319b5e60309c78475d9eec178ce5fda15c2123b"
+    },
+    {
+      "task": "task07",
+      "instance_id": 308,
+      "timestamp": "2026-09-21T03:36:06.309Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.0013986883099934557,
+            2.783014819622613e-07,
+            0.0
+          ],
+          "yaw_deg": 0.013778311173158343
+        },
+        "base_qvel": [
+          1.2281147064641118e-05,
+          -0.001255698036402464,
+          -0.003624842269346118
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3831873658378977,
+            0.25209290566141324,
+            1.2552907466888428
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3833028445352008,
+            -0.2519086985732579,
+            1.2552913427352905
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.04872465506196022,
+          0.04998408630490303
+        ],
+        "gripper_right_qpos": [
+          0.04996718466281891,
+          0.04999255761504173
+        ],
+        "motion_epoch": 45360,
+        "trunk_qpos": [
+          1.0254316329956055,
+          -1.4505559206008911,
+          -0.47005560994148254,
+          -5.940354981248674e-07
+        ]
+      },
+      "source_transcript": "test_results/task07/eval_runs/t07-15067-0920225625-49ffc84ef87e/p15067/runtime/t07p15067i7-0921113556-5276fa5537f4/claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/c4028dee-a7d7-472a-8d54-0e634d072b75.jsonl",
+      "source_sha256": "0b6fadac9d2b957b929f75e2a790488584cb84d050fc19355504685ebe62e412"
+    },
+    {
+      "task": "task07",
+      "instance_id": 310,
+      "timestamp": "2026-09-21T08:59:18.957Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.0014486384989241471,
+            -2.9163550248249567e-07,
+            0.0
+          ],
+          "yaw_deg": -0.004649955804601544
+        },
+        "base_qvel": [
+          -6.310202934400877e-06,
+          2.236915497633163e-05,
+          3.2587217901891563e-07
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38331647055001006,
+            0.2519704803219805,
+            1.2552547454833984
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38327556727120227,
+            -0.25203113544986566,
+            1.2552553415298462
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.048002637922763824,
+          0.049998436123132706
+        ],
+        "gripper_right_qpos": [
+          0.04872407019138336,
+          0.04999744892120361
+        ],
+        "motion_epoch": 62048,
+        "trunk_qpos": [
+          1.025539517402649,
+          -1.4506990909576416,
+          -0.4700697362422943,
+          6.758357429248463e-09
+        ]
+      },
+      "source_transcript": "test_results/task07/eval_runs/t07-15067-0920225625-49ffc84ef87e/p15067/runtime/t07p15067i9-0921165909-f915cd1b87c5/claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/9367879e-b16d-4f11-9a32-2dbcaa246d3e.jsonl",
+      "source_sha256": "dc046e49057629e84f6fc97ac28dfc4bb86ccc63f11a74907d76f24d76de88f8"
+    },
+    {
+      "task": "task08",
+      "instance_id": 301,
+      "timestamp": "2026-09-18T07:11:12.032Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.00039306539654907055,
+            -1.0044380878041676e-08,
+            0.0
+          ],
+          "yaw_deg": -0.0022657410607603745
+        },
+        "base_qvel": [
+          9.178234176943079e-05,
+          -9.599978511687368e-05,
+          3.554773502401076e-05
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3822307423632354,
+            0.2519837918857841,
+            1.2554019689559937
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3822093813261991,
+            -0.25201687142089824,
+            1.255401849746704
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.04977303743362427,
+          0.04998286813497543
+        ],
+        "gripper_right_qpos": [
+          0.04994061589241028,
+          0.049972888082265854
+        ],
+        "motion_epoch": 2,
+        "trunk_qpos": [
+          1.0251054763793945,
+          -1.4501352310180664,
+          -0.47001346945762634,
+          -1.0099925873419124e-07
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/8d684dd8-d87c-4bb5-9543-80e6f8beae63.jsonl",
+      "source_sha256": "c8f7ab1c55c06bf7f8f4fa4e9f4fc3e55eacd31bf6adb471f3a47e863013ae3f"
+    },
+    {
+      "task": "task08",
+      "instance_id": 304,
+      "timestamp": "2026-09-19T12:28:53.974Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.0003568062994895049,
+            2.180882469721625e-08,
+            0.0
+          ],
+          "yaw_deg": 0.006433644363096751
+        },
+        "base_qvel": [
+          7.572668982902542e-05,
+          0.00022778779384680092,
+          0.0005477763479575515
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38215848436528227,
+            0.25204215424534754,
+            1.2553991079330444
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3822146008807819,
+            -0.25195838717884533,
+            1.255399227142334
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.049994997680187225,
+          0.049996305257081985
+        ],
+        "gripper_right_qpos": [
+          0.0499996691942215,
+          0.04999299719929695
+        ],
+        "motion_epoch": 2,
+        "trunk_qpos": [
+          1.025112271308899,
+          -1.450141191482544,
+          -0.4700143337249756,
+          9.47154887853685e-09
+        ]
+      },
+      "source_transcript": "test_results/task08/instance_304/claude-home/claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/3234697d-b93f-4a8b-87b8-7b72c98034e1.jsonl",
+      "source_sha256": "8736d63d5def9e4814c839ab159289c206f31d9fc49af334e5e372799b7b09f2"
+    },
+    {
+      "task": "task08",
+      "instance_id": 306,
+      "timestamp": "2026-09-18T15:46:48.049Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.0004623782197186009,
+            -3.645962881282355e-09,
+            0.0
+          ],
+          "yaw_deg": 0.005134697933885041
+        },
+        "base_qvel": [
+          0.00026293963310308754,
+          -2.6221488951705396e-05,
+          0.000359788304194808
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3822814527070027,
+            0.25203359319742724,
+            1.2553263902664185
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38232566625417486,
+            -0.2519670686214786,
+            1.2553263902664185
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.04999744892120361,
+          0.0499873086810112
+        ],
+        "gripper_right_qpos": [
+          0.04980795457959175,
+          0.049989741295576096
+        ],
+        "motion_epoch": 9575,
+        "trunk_qpos": [
+          1.0253279209136963,
+          -1.4504213333129883,
+          -0.4700426161289215,
+          -1.5944918629884341e-07
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/b73151ea-7a52-44d9-b1f1-bc9cd1c6a1de.jsonl",
+      "source_sha256": "51005a135a83f174092233ef829ef5173e899addce9e439aaa90d1046ad2dfb9"
+    },
+    {
+      "task": "task08",
+      "instance_id": 308,
+      "timestamp": "2026-09-18T23:28:29.284Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.0003409805558758202,
+            1.1061355848133487e-08,
+            0.0
+          ],
+          "yaw_deg": 0.0008813713912677293
+        },
+        "base_qvel": [
+          -1.7969348391488893e-06,
+          7.210890998976538e-06,
+          -4.61558784081717e-07
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38218746587045466,
+            0.2520052631761222,
+            1.2552886009216309
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3821952188136807,
+            -0.2519944468472545,
+            1.2552884817123413
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.049797866493463516,
+          0.04998341202735901
+        ],
+        "gripper_right_qpos": [
+          0.04999993368983269,
+          0.04997175186872482
+        ],
+        "motion_epoch": 18016,
+        "trunk_qpos": [
+          1.0254371166229248,
+          -1.4505579471588135,
+          -0.4700568616390228,
+          2.6941446851225237e-09
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/50d96073-c3f1-4839-8f8b-6fbd0f4bcc38.jsonl",
+      "source_sha256": "2844192f36b7bcb7098f38cca885bb09616f77b706752c8651fb73653f871e90"
+    },
+    {
+      "task": "task08",
+      "instance_id": 310,
+      "timestamp": "2026-09-19T05:41:41.769Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.00036670991356911923,
+            8.255683048079434e-09,
+            0.0
+          ],
+          "yaw_deg": 0.0010382182690636932
+        },
+        "base_qvel": [
+          -5.040356336394325e-05,
+          0.00022183968394529074,
+          9.321821562480181e-05
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3822188234647266,
+            0.252005828949463,
+            1.255252718925476
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3822279561216369,
+            -0.25199483472511786,
+            1.2552525997161865
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.049922242760658264,
+          0.049996256828308105
+        ],
+        "gripper_right_qpos": [
+          0.049891095608472824,
+          0.049958083778619766
+        ],
+        "motion_epoch": 24143,
+        "trunk_qpos": [
+          1.0255430936813354,
+          -1.450695276260376,
+          -0.47007110714912415,
+          -1.1568162960884365e-07
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/45107895-0575-43e9-9260-06715f8268bd.jsonl",
+      "source_sha256": "5f617686b41fcb9a16b74b59304c61406f728ac946f3b5a2976f9cbfd47b22cd"
+    },
+    {
+      "task": "task09",
+      "instance_id": 301,
+      "timestamp": "2026-09-15T15:53:14.189Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.0007797155355910647,
+            5.6170801828560767e-08,
+            0.0
+          ],
+          "yaw_deg": 0.010938870781987384
+        },
+        "base_qvel": [
+          1.5530380551354028e-05,
+          -4.9512641453475226e-06,
+          6.975835731282132e-07
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3825627660437871,
+            0.25207292477238563,
+            1.2553995847702026
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3826580359197093,
+            -0.2519282068187046,
+            1.2553995847702026
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.048770513385534286,
+          0.049994755536317825
+        ],
+        "gripper_right_qpos": [
+          0.048412956297397614,
+          0.04998816177248955
+        ],
+        "motion_epoch": 2,
+        "trunk_qpos": [
+          1.025112271308899,
+          -1.450140118598938,
+          -0.4700128436088562,
+          1.1153355572446344e-08
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/16688701-d7b7-4561-8181-73b4eb654eec.jsonl",
+      "source_sha256": "26b801e2f225c7e911e559c914075c76180aa933863ca3db8f658091073b7500"
+    },
+    {
+      "task": "task09",
+      "instance_id": 304,
+      "timestamp": "2026-09-16T01:31:53.300Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.000760522517917968,
+            -5.931432791801496e-08,
+            0.0
+          ],
+          "yaw_deg": -0.00653148110212486
+        },
+        "base_qvel": [
+          -1.974673978111241e-06,
+          -2.819113205987378e-06,
+          1.1377104556231643e-06
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38262375374571317,
+            0.2519543591919897,
+            1.2553638219833374
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3825658230331988,
+            -0.25204534756190894,
+            1.2553640604019165
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.0485413558781147,
+          0.049996860325336456
+        ],
+        "gripper_right_qpos": [
+          0.04809947684407234,
+          0.049979228526353836
+        ],
+        "motion_epoch": 12634,
+        "trunk_qpos": [
+          1.0252174139022827,
+          -1.4502774477005005,
+          -0.47002729773521423,
+          -1.0496882474342328e-08
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/baf7fe5a-e28d-423c-8b35-aeb911fa00aa.jsonl",
+      "source_sha256": "51de8e8588469e62ecc76dd052f758d593436bb3746ad78f373c3db1775fc406"
+    },
+    {
+      "task": "task09",
+      "instance_id": 306,
+      "timestamp": "2026-09-16T05:18:56.804Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.0004888354571875459,
+            -9.259590030793443e-09,
+            0.0
+          ],
+          "yaw_deg": -0.0024815484840393334
+        },
+        "base_qvel": [
+          0.00020720930479001254,
+          5.4458112572319806e-05,
+          -0.0002013528865063563
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3823409321804829,
+            0.25198235387462253,
+            1.255326747894287
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38231910326987323,
+            -0.25201926308430006,
+            1.2553263902664185
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.04852849617600441,
+          0.04995971545577049
+        ],
+        "gripper_right_qpos": [
+          0.048082318156957626,
+          0.04997910559177399
+        ],
+        "motion_epoch": 23359,
+        "trunk_qpos": [
+          1.025327205657959,
+          -1.450419545173645,
+          -0.4700418710708618,
+          1.8224373121711324e-08
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/87c33b29-838a-42b7-8db0-b5ced0bf7f28.jsonl",
+      "source_sha256": "bb7d51d6b4ef8976ac2bc0b331206ec7747195aa20645f677d8c6e626a11c161"
+    },
+    {
+      "task": "task09",
+      "instance_id": 308,
+      "timestamp": "2026-09-17T04:16:44.418Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.0005463985548142536,
+            -2.9274569593437646e-08,
+            0.0
+          ],
+          "yaw_deg": -0.003443739392588918
+        },
+        "base_qvel": [
+          4.001958586741239e-07,
+          9.017437696456909e-05,
+          -0.00044833822175860405
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.3823888986444846,
+            0.25197687573480204,
+            1.2554007768630981
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38235860589075343,
+            -0.25202378711215545,
+            1.2554004192352295
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.04989836737513542,
+          0.04999272897839546
+        ],
+        "gripper_right_qpos": [
+          0.04990759119391441,
+          0.04999664053320885
+        ],
+        "motion_epoch": 2,
+        "trunk_qpos": [
+          1.0251097679138184,
+          -1.4501405954360962,
+          -0.4700136184692383,
+          1.2294701434711897e-07
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/6e78c33d-b12d-4ee3-a8bf-d37e08cd1339.jsonl",
+      "source_sha256": "3d0aa4419ecd17f2fa253e2e7b121993206fbc85637ff321eac4ea4eaec2601c"
+    },
+    {
+      "task": "task09",
+      "instance_id": 310,
+      "timestamp": "2026-09-17T10:09:54.486Z",
+      "first_tool": "capture_head_camera",
+      "robot": {
+        "base_pose": {
+          "pos": [
+            0.000670834262984297,
+            -4.9095006802402026e-08,
+            0.0
+          ],
+          "yaw_deg": -0.0075234926294054875
+        },
+        "base_qvel": [
+          -6.581688467122149e-06,
+          -3.040099545614794e-05,
+          1.0708745321608149e-06
+        ],
+        "eef_left": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38253795102700133,
+            0.2519487115811301,
+            1.2553646564483643
+          ]
+        },
+        "eef_right": {
+          "frame": "local_command_odometry",
+          "pos": [
+            0.38247272464188176,
+            -0.252050994282062,
+            1.2553640604019165
+          ]
+        },
+        "frame": "local_command_odometry",
+        "gripper_left_qpos": [
+          0.04998530447483063,
+          0.049892179667949677
+        ],
+        "gripper_right_qpos": [
+          0.04983514919877052,
+          0.04996466636657715
+        ],
+        "motion_epoch": 5757,
+        "trunk_qpos": [
+          1.02521550655365,
+          -1.4502750635147095,
+          -0.4700271189212799,
+          3.3154218925801615e-08
+        ]
+      },
+      "source_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/c1783e34-33a3-40a9-8b41-4dd57554427e.jsonl",
+      "source_sha256": "77f419e310d6c0e375d99dd8d1f2a1a33b722a0eb7ae438f4a70846f4696748c"
+    }
+  ],
+  "known_starting_state_difference": {
+    "task": "task06",
+    "instance_id": 301,
+    "description": "The selected Claude session starts in an already running scene after the seven API operations below. No request bodies or full scene snapshot were found in its archived run directory. The release uses a fresh reset; its full task score cannot be claimed as a strict reproduction of this archived starting state.",
+    "policy_log_source": "experimental_gpu3_interface/eval_runs/t06-15066-09152118/p15066/runtime/official_policy_interface.log",
+    "policy_log_sha256": "8ddbfff37290aa55306bfa23b98d4c2ee855a245ee5891b06a5b6868cac9cb0e",
+    "pre_session_operations": [
+      {
+        "line": 327348,
+        "text": "127.0.0.1 - - [16/Sep/2026 22:48:41] \"POST /api/v2/adjust_chassis HTTP/1.1\" 200 -"
+      },
+      {
+        "line": 328541,
+        "text": "127.0.0.1 - - [16/Sep/2026 22:51:38] \"POST /api/v2/move_to_reach_point HTTP/1.1\" 200 -"
+      },
+      {
+        "line": 330273,
+        "text": "127.0.0.1 - - [16/Sep/2026 22:58:21] \"POST /api/v2/move_to_reach_point HTTP/1.1\" 200 -"
+      },
+      {
+        "line": 330872,
+        "text": "127.0.0.1 - - [16/Sep/2026 23:00:08] \"POST /api/v2/track_object_distance HTTP/1.1\" 200 -"
+      },
+      {
+        "line": 331597,
+        "text": "127.0.0.1 - - [16/Sep/2026 23:02:57] \"POST /api/v2/move_tracked_point HTTP/1.1\" 200 -"
+      },
+      {
+        "line": 331886,
+        "text": "127.0.0.1 - - [16/Sep/2026 23:04:02] \"POST /api/v2/exec_plan_pose HTTP/1.1\" 200 -"
+      },
+      {
+        "line": 332247,
+        "text": "127.0.0.1 - - [16/Sep/2026 23:05:22] \"POST /api/v2/exec_plan_pose HTTP/1.1\" 200 -"
+      }
+    ]
+  }
+}
