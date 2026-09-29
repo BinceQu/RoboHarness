@@ -151,27 +151,6 @@ class MoveTrackedAxialOrderTest(unittest.TestCase):
                 "tools": [{"name": "move_tracked_point", "desc": "stale description"}]}))
             self.assertEqual(view().get_json()["tools"][0]["desc"], MOVE_TRACKED_POINT_ORDER_DESCRIPTION)
 
-    def test_legacy_mcp_metadata_refresh_uses_same_generation_and_is_idempotent(self):
-        from flask import Flask, jsonify
-        from behavior_interface_eval_test.live_move_tracked_point_test import (
-            _install_committed_move_tools_description,
-        )
-        from behavior_interface_eval_test.tool.official_v2.registry import build_registry
-
-        spec = build_registry(None)["move_tracked_point"]
-        app = Flask(__name__)
-
-        @app.get("/api/v2/tools")
-        def metadata():
-            return jsonify({"tools": [{"name": spec.name, "desc": "stale", "args": spec.params}]})
-
-        with app.test_request_context():
-            self.assertTrue(_install_committed_move_tools_description())
-            self.assertTrue(_install_committed_move_tools_description())
-        self.assertEqual(len(app.after_request_funcs[None]), 1)
-        payload = app.test_client().get("/api/v2/tools").get_json()
-        self.assertEqual(payload["tools"][0]["desc"], spec.description)
-        self.assertIn(MOVE_TRACKED_POINT_ORDER_DESCRIPTION, spec.description)
 
     def test_frontend_preserves_each_groups_exact_rows(self):
         node = os.environ.get("BEHAVIOR_TEST_NODE") or shutil.which("node")

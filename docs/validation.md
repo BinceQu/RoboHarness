@@ -37,6 +37,12 @@ benchmark and its tests were excluded because they are not these nine tasks.
 An existing lifecycle regression exposed two errors: an empty skill name could
 deactivate an already inactive state, and corrupt state could raise outside
 the error handler. Both are fixed and covered by the existing regression tests.
+Tests for unshipped development benchmarks, live benchmark launchers and
+submission utilities were also excluded. Remaining runtime tests are retained;
+the optional interface suite collects 1,280 tests without missing-module errors.
+Collection alone does not assert that this larger suite passes.
+The two retained test modules edited during this cleanup passed 13 tests;
+three Node.js-dependent UI checks were skipped because Node.js is unavailable.
 
 ## GPU evaluation
 
