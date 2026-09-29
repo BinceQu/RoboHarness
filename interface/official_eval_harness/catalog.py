@@ -1,4 +1,4 @@
-"""任务表、BEHAVIOR Challenge 2026 超时、以及 public instance 抽样。"""
+"""任务表、归档使用的 Challenge 2025 ×2 预算、以及 public instance 抽样。"""
 
 from __future__ import annotations
 
@@ -63,8 +63,8 @@ TASK_NAMES: dict[int, str] = {
     49: "make_pizza",
 }
 
-# 保留 2025 表仅用于审计旧结果；新的默认评测必须使用 2026 规则。
-# 这些值是同一批 200 个 human demonstrations 的 ``2×`` 基准帧数。
+# 归档原始的 Challenge 2025 预算，已经包含 ×2 和取整。
+# 不得从 2026 的统计或 ×1.5 预算反推这些值。
 TIMEOUT_STEPS_X2: dict[int, int] = {
     0: 4299,
     1: 10535,
@@ -132,7 +132,9 @@ TIMEOUT_STEPS_X15: dict[int, int] = {
     task_id: int(_HUMAN_ROWS[task_id]['length'] * 1.5)
     for task_id in TASK_NAMES
 }
-TIMEOUT_STEPS: dict[int, int] = TIMEOUT_STEPS_X15
+# RoboHarness reproduces the archived 2025 protocol by default. The explicitly
+# named 2026 lookup remains available only for auditing other source records.
+TIMEOUT_STEPS: dict[int, int] = TIMEOUT_STEPS_X2
 
 # 官方文档：报榜用 public_test slot 0–9。槽位 i 对应真实 ID 301+i。
 PUBLIC_REPORT_SLOTS: tuple[int, ...] = tuple(range(10))
@@ -169,14 +171,14 @@ def challenge_2026_max_ticks(
     """
     if task_id is not None and str(task_id).strip() != "":
         try:
-            return int(TIMEOUT_STEPS[int(task_id)])
+            return int(TIMEOUT_STEPS_X15[int(task_id)])
         except (KeyError, TypeError, ValueError):
             pass
     key = str(task_name or "").replace("-", "_").strip().lower()
     if key:
         index = _NAME_BY_LOWER.get(key)
         if index is not None:
-            return int(TIMEOUT_STEPS[index])
+            return int(TIMEOUT_STEPS_X15[index])
     if port is not None and str(port).strip() != "":
         try:
             http_port = int(port)
@@ -184,7 +186,7 @@ def challenge_2026_max_ticks(
             http_port = -1
         mapped = mapped_task_for_port(http_port)
         if mapped is not None:
-            return int(TIMEOUT_STEPS[mapped])
+            return int(TIMEOUT_STEPS_X15[mapped])
     return None
 
 
@@ -193,7 +195,7 @@ def challenge_2025_max_ticks(
     task_name: str | None = None,
     port: int | str | None = None,
 ) -> int | None:
-    """Compatibility lookup for archived 2025 results (mean demo time ×2)."""
+    """Archived Challenge 2025 budget (original mean demonstration length ×2)."""
     if task_id is not None and str(task_id).strip() != "":
         try:
             return int(TIMEOUT_STEPS_X2[int(task_id)])

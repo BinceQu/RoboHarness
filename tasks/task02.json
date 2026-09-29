@@ -6,6 +6,8 @@
   "scene": "house_double_floor_lower",
   "protocol": "archived-v391-x2",
   "evaluator_commit": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+  "challenge_year": 2025,
+  "budget_multiplier": 2,
   "max_steps": 27664,
   "sample_seed": 20260911,
   "evaluator_seed": 0,

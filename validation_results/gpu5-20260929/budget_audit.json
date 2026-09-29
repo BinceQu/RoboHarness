@@ -1,0 +1,116 @@
+{
+  "checked_at": "2026-09-29T22:21:26+08:00",
+  "challenge_year": 2025,
+  "budget_multiplier": 2,
+  "evaluator_commit": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+  "archived_budgets": [
+    {
+      "task": "task00",
+      "max_steps": 4299,
+      "source": "test_results/task00/eval_runs/t00-15060-09171200/plan.json",
+      "source_field": "task.timeout_steps",
+      "source_sha256": "9356ccdaa6e1176b349fba9569c95e5bd0e276796c70981e44d0b94713d38d2c"
+    },
+    {
+      "task": "task01",
+      "max_steps": 10535,
+      "source": "test_results/task01/09152118/plan.json",
+      "source_field": "task.timeout_steps",
+      "source_sha256": "08c5e14b680a1081439f6d62629bbde6e1a4b818fec3bc24efc52b3d0252b4b3"
+    },
+    {
+      "task": "task02",
+      "max_steps": 27664,
+      "source": "test_results/task02/instance_310/plan.json",
+      "source_field": "task.timeout_steps",
+      "source_sha256": "b6560bb915f1c09abcd1e0733e5e779946734b587ec59a65b0ef34ab9c31416c"
+    },
+    {
+      "task": "task03",
+      "max_steps": 27392,
+      "source": "test_results/task03/02_plans/plan_t03-15063-09171758.json",
+      "source_field": "task.timeout_steps",
+      "source_sha256": "f63fa8c7037948c62a98f3404b90a6480a0a1f064375d971dee772dd5e3b5def"
+    },
+    {
+      "task": "task05",
+      "max_steps": 20343,
+      "source": "test_results/task05/plan_jsons/t05-15065-09181018_plan.json",
+      "source_field": "task.timeout_steps",
+      "source_sha256": "104dabebf5c6525fcd0b56c4e1c0a499b59f25a8405de4b584056a3e76bb15f6"
+    },
+    {
+      "task": "task06",
+      "max_steps": 15239,
+      "source": "test_results/task06/02_plans/plan_t06-15066-09172335.json",
+      "source_field": "task.timeout_steps",
+      "source_sha256": "9131183d3bb9b462a228d4ce2108c6506af62416d9f668e8c93790f15fd77715"
+    },
+    {
+      "task": "task07",
+      "max_steps": 37781,
+      "source": "test_results/task07/manifest.json",
+      "source_field": "run.timeout_steps",
+      "source_sha256": "26b76c66c1bc7969f540bac2323b9f8540a4c91681c312784eea159c84f0e288"
+    },
+    {
+      "task": "task08",
+      "max_steps": 17886,
+      "source": "test_results/task08/summary.json",
+      "source_field": "max_ticks",
+      "source_sha256": "b5c9768e1eeb383d0c20c9b482d2ce9dfc2a6a13bac1090640f75839406d55b2"
+    },
+    {
+      "task": "task09",
+      "max_steps": 27437,
+      "source": "test_results/task09/_meta/run_09171200/plan.json",
+      "source_field": "task.timeout_steps",
+      "source_sha256": "17e25539a88b16d957f24edd5c6081f99da75edc2e52d92a7c959e7122282a72"
+    }
+  ],
+  "live_runs": [
+    {
+      "task": "task01",
+      "run_dir": "runs/validation-task01-r2",
+      "evaluator_pid": 2657605,
+      "evaluator_max_steps_argument": 10535,
+      "ROBOHARNESS_MAX_STEPS": 10535,
+      "BEHAVIOR_AGENT_MAX_TICKS": 10535,
+      "monitor_max_ticks": 10535,
+      "session_id": "t01p16061i0-eb8c7a06bc1245a3",
+      "evaluator_log": "runs/validation-task01-r2/logs/evaluator.log",
+      "evaluator_log_budget_lines": [
+        "[00:00:21.325] [INFO] [omnigibson.eval.evaluator] Setting timeout to be 10535 steps through config."
+      ]
+    },
+    {
+      "task": "task06",
+      "run_dir": "runs/validation-task06",
+      "evaluator_pid": 2770319,
+      "evaluator_max_steps_argument": 15239,
+      "ROBOHARNESS_MAX_STEPS": 15239,
+      "BEHAVIOR_AGENT_MAX_TICKS": 15239,
+      "monitor_max_ticks": 15239,
+      "session_id": "t06p16066i0-0db9423a86b24fd1",
+      "evaluator_log": "runs/validation-task06/logs/evaluator.log",
+      "evaluator_log_budget_lines": [
+        "[00:00:22.950] [INFO] [omnigibson.eval.evaluator] Setting timeout to be 15239 steps through config."
+      ]
+    },
+    {
+      "task": "task08",
+      "run_dir": "runs/validation-task08",
+      "evaluator_pid": 2771307,
+      "evaluator_max_steps_argument": 17886,
+      "ROBOHARNESS_MAX_STEPS": 17886,
+      "BEHAVIOR_AGENT_MAX_TICKS": 17886,
+      "monitor_max_ticks": 17886,
+      "session_id": "t08p16068i0-dd0ae7bd33a94437",
+      "evaluator_log": "runs/validation-task08/logs/evaluator.log",
+      "evaluator_log_budget_lines": [
+        "[00:00:24.836] [INFO] [omnigibson.eval.evaluator] Setting timeout to be 17886 steps through config."
+      ]
+    }
+  ],
+  "scope": "Budget configuration only; this is not a score reproduction claim."
+}

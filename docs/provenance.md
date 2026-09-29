@@ -63,3 +63,34 @@ the declared budget and report their actual official scores. Model serving,
 CLI changes, floating point simulation and sampling can change outcomes;
 replaying the same setup is not a guarantee of identical stochastic scores.
 New results are stored separately under runs and never replace reference data.
+
+## Evaluation budgets
+
+These experiments use **Challenge 2025, multiplier 2**. The exact final integer
+limits are taken from the archived plans and original ×2 task table, including
+their original rounding. They are not recalculated from the 2026 statistics.
+The [archive budget audit](../validation_results/gpu5-20260929/budget_audit.json)
+records each source JSON field and SHA-256, alongside the live evaluator checks.
+
+| Task | Maximum simulation steps |
+| --- | ---: |
+| task00 | 4299 |
+| task01 | 10535 |
+| task02 | 27664 |
+| task03 | 27392 |
+| task05 | 20343 |
+| task06 | 15239 |
+| task07 | 37781 |
+| task08 | 17886 |
+| task09 | 27437 |
+
+Each manifest records `challenge_year: 2025`, `budget_multiplier: 2` and its
+exact `max_steps`. The runner validates these fields and the pinned evaluator
+revision, then supplies the same limit explicitly to the evaluator and monitor.
+The interface task catalog and monitor fallback also default to 2025 ×2.
+The explicit 2026 lookup is retained only to interpret other source records;
+it is not used by the reproduction launcher.
+
+The upstream dataset directory is named `2026-challenge-task-instances` even
+with the pinned v3.9.1 evaluator. This name does not select the budget year:
+the evaluator receives the explicit archived `--max-steps` value above.
