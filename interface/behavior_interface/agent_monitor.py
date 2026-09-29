@@ -665,13 +665,13 @@ def challenge_instance_max_ticks(
     task_name: str | None = None,
     port: int | str | None = None,
 ) -> int | None:
-    """本任务 Challenge 2026 最大 ticks；查不到就空着，不猜预算。"""
+    """归档任务 Challenge 2025 ×2 最大 ticks；查不到就空着，不猜预算。"""
     if os.environ.get('ROBOHARNESS_MAX_STEPS'):
         return int(os.environ['ROBOHARNESS_MAX_STEPS'])
     try:
-        from official_eval_harness.catalog import challenge_2026_max_ticks
+        from official_eval_harness.catalog import challenge_2025_max_ticks
 
-        value = challenge_2026_max_ticks(
+        value = challenge_2025_max_ticks(
             task_id=task_id,
             task_name=task_name,
             port=port,

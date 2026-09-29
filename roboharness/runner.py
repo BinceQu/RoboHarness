@@ -23,6 +23,13 @@ ROOT = Path(__file__).resolve().parents[1]
 INTERFACE = ROOT / 'interface'
 COMMIT = '26f2c7ef7b9cf96bd0414f81e1e751e493762779'
 PROFILE = INTERFACE / 'behavior_interface_eval_test/robot_profiles/r1pro_8dof_hf250'
+# Final integer limits from the archived Challenge 2025 plans. Do not derive
+# these from the different 2026 human statistics or its 1.5 multiplier.
+ARCHIVED_MAX_STEPS = {
+    'task00': 4299, 'task01': 10535, 'task02': 27664, 'task03': 27392,
+    'task05': 20343, 'task06': 15239, 'task07': 37781, 'task08': 17886,
+    'task09': 27437,
+}
 
 
 def read_json(path):
@@ -40,6 +47,19 @@ def sha(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def validate_archive_protocol(task: dict) -> None:
+    expected = ARCHIVED_MAX_STEPS.get(task.get('task'))
+    if (expected is None or type(task.get('max_steps')) is not int
+            or task.get('max_steps') != expected
+            or task.get('challenge_year') != 2025 or task.get('budget_multiplier') != 2
+            or task.get('protocol') != 'archived-v391-x2'
+            or task.get('evaluator_commit') != COMMIT):
+        raise ValueError(
+            f'{task.get("task")}: archived reproduction requires Challenge 2025 ×2, '
+            f'BEHAVIOR v3.9.1, and exactly {expected} max_steps.'
+        )
+
+
 def load_task(token: str) -> dict:
     match = re.fullmatch(r'(?:task)?(\d{1,2})', token)
     key = f'task{int(match[1]):02d}' if match else token
@@ -47,6 +67,7 @@ def load_task(token: str) -> dict:
     for path in candidates:
         task = read_json(path)
         if key in (task['task'], task['task_name']):
+            validate_archive_protocol(task)
             for case in task['cases']:
                 if sha((ROOT / case['prompt']).read_bytes()) != case['prompt_sha256']:
                     raise ValueError(f'Prompt checksum mismatch: {case["prompt"]}')

@@ -164,6 +164,7 @@ def main():
             'schema_version': 1, 'task': key, 'task_index': index, 'task_name': name,
             'scene': 'house_single_floor' if index in (7, 9) else 'house_double_floor_lower',
             'protocol': 'archived-v391-x2', 'evaluator_commit': '26f2c7ef7b9cf96bd0414f81e1e751e493762779',
+            'challenge_year': 2025, 'budget_multiplier': 2,
             'max_steps': budget, 'sample_seed': 20260911, 'evaluator_seed': 0,
             'model': 'Qwen3.8-Flash-Next-FP8', 'harness': 'claude_code',
             'robot_profile': 'r1pro_8dof_hf250', 'annotator': 'cpu',

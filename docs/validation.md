@@ -8,6 +8,9 @@ with BEHAVIOR v3.9.1 at `26f2c7ef7b9cf96bd0414f81e1e751e493762779`.
 The independent Git clone passed all 360 tests in `scripts/check.sh`:
 344 passed and 16 were skipped. Three additional result-reporting tests cover
 incomplete runs, incomplete completion claims, and modified scoring files.
+Two budget regression tests also pass: all nine tasks use the archived 2025
+×2 limits in the launcher, catalog and monitor, and altered budget/protocol
+manifests are rejected before launch.
 This covers the task/result manifests, owned-process cleanup, cross-session
 request rejection, the official observation protocol, RGBD wrapper, custom
 robot, both MCP adapters, image coordinates, skill lifecycle and launchers.
@@ -26,8 +29,8 @@ cuRobo commit built successfully with CUDA 12.4 for SM 8.9; all five CUDA
 extensions load, and CUDA forward kinematics succeeds for both custom R1Pro
 arm configurations. All 172 cuRobo Python, C++/CUDA and YAML source/configuration
 files match those in the original runtime environment byte for byte.
-The 11 runner/report checks and 62 selected interface checks were repeated
-in this fresh environment: 71 passed and two optional checks were skipped.
+The 13 runner/report/budget checks and 62 selected interface checks were repeated
+in this fresh environment: 73 passed and two optional checks were skipped.
 The fresh environment also starts the interface HTTP service successfully:
 session isolation is enabled and the UI returns HTTP 200.
 The installer explicitly provides cuRobo's build tools and skips its unused
@@ -71,6 +74,12 @@ the matching archived prompts, and all five instances per task:
 
 Each simulator has connected and initialized the custom robot. The agents
 have executed real camera and chassis calls through the new interface.
+The [budget audit](../validation_results/gpu5-20260929/budget_audit.json)
+matches all nine limits to their original archive JSON fields and hashes.
+For the three live evaluators, command-line arguments, environment, monitor
+and evaluator log all agree on 10535, 15239 and 17886 steps respectively.
+These runs already used explicit 2025 ×2 limits; the catalog and monitor's
+unused 2026 fallback defaults have also been corrected for future launches.
 **Final scores are not available yet; this is not a claim that the archived
 means have been reproduced.** Each run writes its official results and
 per-case differences to its own `summary.json` when cases finish.
