@@ -18,7 +18,7 @@ if [[ "$mode" == agent ]]; then exit 0; fi
 "$PYTHON_BIN" -m venv .venv-interface
 .venv-interface/bin/python -m pip install torch==2.6.0 torchvision==0.21.0 --index-url https://download.pytorch.org/whl/cu124
 .venv-interface/bin/python -m pip install -r requirements/interface.txt
-.venv-interface/bin/python -m pip install --no-build-isolation 'nvidia-curobo @ git+https://github.com/NVlabs/curobo@cbaf7d32436160956dad190a9465360fad6aba73'
+.venv-interface/bin/python -m pip install --no-build-isolation -c requirements/interface.txt 'nvidia-curobo @ git+https://github.com/NVlabs/curobo@cbaf7d32436160956dad190a9465360fad6aba73'
 "$PYTHON_BIN" -m venv .venv-evaluator
 (
   source .venv-evaluator/bin/activate
