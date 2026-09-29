@@ -20,9 +20,17 @@ prompt texts and original scoring JSON are distinct from new run output.
 Python syntax checks passed for the curated source files. Shell syntax checks
 passed for all 13 release launch/build scripts. The external SAM 2 source
 (34 model/configuration files) and checkpoint hashes also match their pins.
-The interface requirements also resolve successfully with pip on Python 3.11
-using `--dry-run --ignore-installed`. This checks package compatibility and
-availability; it does not replace a fresh installation or a CUDA build check.
+The interface requirements were also installed in a new Python 3.11.16
+virtual environment in the independent clone. `pip check` passes. The pinned
+cuRobo commit built successfully with CUDA 12.4 for SM 8.9; all five CUDA
+extensions load, and CUDA forward kinematics succeeds for both custom R1Pro
+arm configurations. All 172 cuRobo Python, C++/CUDA and YAML source/configuration
+files match those in the original runtime environment byte for byte.
+The 11 runner/report checks and 62 selected interface checks were repeated
+in this fresh environment: 71 passed and two optional checks were skipped.
+The installer explicitly provides cuRobo's build tools and skips its unused
+Git LFS example assets. Evaluator setup also isolates the caller's Conda
+prefix so upstream cleanup cannot affect a separate active environment.
 
 The Codex plugin manifest passes the plugin validator. Codex CLI 0.153.4
 successfully installed it in a private home and loaded its `embodied` profile
@@ -76,7 +84,7 @@ compatibility option `unmask_evaluator_cuda=true`. At the initial live check,
 GPU 5 used approximately 38 GB for the three runs. The shared model server
 has a request queue, so wall time includes model waiting time.
 
-The complete fresh-machine installer has not been executed on a clean host.
-The GPU runs reuse existing numerical/simulator environments but import all
+The full evaluator and dataset installation has not been executed on a clean
+host. The GPU evaluations reuse existing numerical/simulator environments but import all
 RoboHarness interface, evaluator wrapper and harness code from this checkout.
 Datasets and the SAM 2 checkpoint remain external dependencies.

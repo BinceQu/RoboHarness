@@ -24,6 +24,8 @@ psutil>=5.9,<8
 requests>=2.32,<3
 ninja>=1.11,<2
 setuptools>=71,<81
+setuptools-scm==10.2.1
+wheel==0.47.0
 einops>=0.8,<0.9
 tqdm>=4.66,<5
 networkx>=3.2,<4
