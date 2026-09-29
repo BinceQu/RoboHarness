@@ -13,7 +13,7 @@ import uuid
 from .catalog import ToolCatalog
 from .client import RestClient
 from .rollout_budget import normalize_budget, unavailable_budget
-from .config import Settings
+from .config import Settings, archived_context
 from .coordinates import (
     VLM_IMAGE_COORDINATE_SYSTEM, arguments_to_interface, contains_uv,
     response_to_pixels,
@@ -508,12 +508,13 @@ class EmbodiedService:
         result.data["image_geometry"] = binding
 
     def _attach_persistent_tracking(self, result: ToolResult) -> None:
-        result.data['rollout_budget'] = unavailable_budget()
+        if not archived_context():
+            result.data['rollout_budget'] = unavailable_budget()
         try:
             memory = self.client.get_memory(
                 timeout_s=self.settings.memory_timeout_s
             )
-            if isinstance(memory, dict):
+            if isinstance(memory, dict) and not archived_context():
                 result.data['rollout_budget'] = normalize_budget(memory.get('rollout_budget'))
             tracking = _compact_persistent_tracking(memory)
         except (EmbodiedError, ValueError):

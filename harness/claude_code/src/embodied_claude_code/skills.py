@@ -11,6 +11,7 @@ from urllib.error import URLError
 from urllib.request import Request, urlopen
 
 from . import skill_state
+from .config import archived_context
 
 
 BASELINE_SKILL = "behavior-v2-baseline"
@@ -24,6 +25,13 @@ HIDDEN_TASK_SKILLS = frozenset({
     "stand-trash-can-upright",
     "traverse-narrow-passages",
 })
+ARCHIVED_HIDDEN_TASK_SKILLS = frozenset({
+    "pick-up-object-on-ground", "stand-trash-can-upright",
+})
+ARCHIVED_TASK_SKILLS = (
+    "close-box", "cut-object", "navigate-to-target", "open-doors-and-drawers",
+    "pick-up-object", "place-object-in-container", "traverse-narrow-passages",
+)
 SKILL_NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 
 
@@ -108,6 +116,7 @@ def read_skill(path: Path, skill_root: Path) -> SkillDocument | None:
 
 def discover_task_skills(root: Path | None = None) -> list[SkillDocument]:
     skill_root = (root or plugin_root()) / "skills"
+    hidden = ARCHIVED_HIDDEN_TASK_SKILLS if archived_context() else HIDDEN_TASK_SKILLS
     documents = []
     if not skill_root.is_dir():
         return documents
@@ -116,7 +125,7 @@ def discover_task_skills(root: Path | None = None) -> list[SkillDocument]:
         if (
             document is not None
             and document.name != BASELINE_SKILL
-            and document.name not in HIDDEN_TASK_SKILLS
+            and document.name not in hidden
         ):
             documents.append(document)
     return documents

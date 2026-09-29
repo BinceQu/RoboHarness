@@ -255,6 +255,7 @@ class Run:
             'ROBOHARNESS_ROOT': str(ROOT), 'ROBOHARNESS_HTTP_PORT': str(self.port),
             'ROBOHARNESS_TASK_ID': str(self.task['task_index']), 'ROBOHARNESS_GPU': gpu,
             'ROBOHARNESS_MAX_STEPS': str(self.task['max_steps']),
+            'ROBOHARNESS_PROTOCOL': self.task['protocol'],
             'CUDA_VISIBLE_DEVICES': gpu, 'BEHAVIOR_EVAL_TEST_PHYSICAL_GPU': gpu,
             'BEHAVIOR_INTERFACE_PHYSICAL_GPU': gpu, 'OMNIGIBSON_GPU_ID': '0',
             'BEHAVIOR_EVAL_TEST_PORT': str(self.port), 'PORT': str(self.port),

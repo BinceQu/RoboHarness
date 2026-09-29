@@ -7,6 +7,7 @@ import re
 from typing import Any, Callable
 
 from . import __version__
+from .config import archived_context
 from .coordinates import (
     VLM_IMAGE_COORDINATE_CONTRACT,
     VLM_IMAGE_COORDINATE_SYSTEM,
@@ -52,7 +53,6 @@ ROLLOUT_BUDGET_DESCRIPTION = (
     'counters; available=false means unknown, not zero. These are simulation '
     'steps, not wall-clock time, tokens, or a live goal score.'
 )
-SERVER_INSTRUCTIONS += ' ' + ROLLOUT_BUDGET_DESCRIPTION
 
 
 def _rollout_budget_text(budget: Any) -> str:
@@ -648,8 +648,9 @@ def _model_structured_content(result: ToolResult) -> dict[str, Any]:
         "tool_name": tool_name,
         "response": evidence,
         "persistent_tracking": tracking,
-        'rollout_budget': normalize_budget(result.data.get('rollout_budget')),
     }
+    if not archived_context():
+        structured['rollout_budget'] = normalize_budget(result.data.get('rollout_budget'))
     if warnings is not None:
         structured["warnings"] = warnings
     if capture_quality is not None:
@@ -898,7 +899,7 @@ def create_mcp_server(service: EmbodiedService | None = None) -> Any:
             )
 
     def as_mcp(result: ToolResult) -> Any:
-        if 'rollout_budget' not in result.data:
+        if not archived_context() and 'rollout_budget' not in result.data:
             result.data['rollout_budget'] = embodied.read_rollout_budget()
         emitted_images = len(result.media)
         response = result.data.get("response")
@@ -916,8 +917,9 @@ def create_mcp_server(service: EmbodiedService | None = None) -> Any:
             content.append(
                 TextContent(type="text", text=_persistent_tracking_text(result))
             )
-        content.append(TextContent(type='text', text=_rollout_budget_text(
-            result.data.get('rollout_budget'))))
+        if not archived_context():
+            content.append(TextContent(type='text', text=_rollout_budget_text(
+                result.data.get('rollout_budget'))))
         warning = _nearby_object_warning_text(result)
         if warning:
             content.append(TextContent(type="text", text=warning))
@@ -957,13 +959,13 @@ def create_mcp_server(service: EmbodiedService | None = None) -> Any:
 
     def error_result(tool_name: str, exc: Exception) -> Any:
         payload = _model_error_payload(exc, tool_name=tool_name)
-        payload['rollout_budget'] = embodied.read_rollout_budget()
+        content = [TextContent(type='text', text=json.dumps(
+            payload['error'], ensure_ascii=True, separators=(',', ':'), sort_keys=True))]
+        if not archived_context():
+            payload['rollout_budget'] = embodied.read_rollout_budget()
+            content.append(TextContent(type='text', text=_rollout_budget_text(payload['rollout_budget'])))
         return CallToolResult(
-            content=[
-                TextContent(type='text', text=json.dumps(
-                    payload['error'], ensure_ascii=True, separators=(',', ':'), sort_keys=True)),
-                TextContent(type='text', text=_rollout_budget_text(payload['rollout_budget'])),
-            ],
+            content=content,
             structured_content=payload, is_error=True,
         )
 
@@ -987,10 +989,9 @@ def create_mcp_server(service: EmbodiedService | None = None) -> Any:
         claude_schema, argument_requirements = _claude_input_schema(
             spec.name, spec.input_schema
         )
-        description = (
-            f"{spec.description.rstrip()} {PERSISTENT_TRACKING_TOOL_DESCRIPTION} "
-            'The result also includes rollout_budget simulation-step usage.'
-        )
+        description = f"{spec.description.rstrip()} {PERSISTENT_TRACKING_TOOL_DESCRIPTION}"
+        if not archived_context():
+            description += ' The result also includes rollout_budget simulation-step usage.'
         if schema_uses_image_coordinates(spec.input_schema):
             description += " " + VLM_IMAGE_COORDINATE_CONTRACT
         if argument_requirements:
@@ -1015,11 +1016,15 @@ def create_mcp_server(service: EmbodiedService | None = None) -> Any:
     tools.append(_activate_skill_mcp_tool(session_id, embodied.settings.base_url, embodied.read_rollout_budget))
     tools.append(_deactivate_skill_mcp_tool(session_id, embodied.settings.base_url, embodied.read_rollout_budget))
 
-    return BudgetMCPServer(
+    server_class = MCPServer if archived_context() else BudgetMCPServer
+    instructions = SERVER_INSTRUCTIONS
+    if not archived_context():
+        instructions += ' ' + ROLLOUT_BUDGET_DESCRIPTION
+    return server_class(
         "embodied-claude-code-behavior-v2",
         title="Embodied Claude Code BEHAVIOR v2",
         description="Direct, recordable mirror of the BEHAVIOR v2 REST tool catalog.",
-        instructions=SERVER_INSTRUCTIONS,
+        instructions=instructions,
         version=__version__,
         lifespan=lifespan,
         tools=tools,
@@ -1082,7 +1087,8 @@ def _activate_skill_mcp_tool(session_id: str = "", base_url: str = "",
             payload = load_task_skill(name or "", session_id=session_id, base_url=base_url)
         except Exception as exc:
             payload = {'ok': False, **_model_error_payload(exc, tool_name='activate_skill')}
-        payload = {**payload, 'rollout_budget': _skill_budget(budget_provider)}
+        if not archived_context():
+            payload = {**payload, 'rollout_budget': _skill_budget(budget_provider)}
         text = json.dumps(payload, ensure_ascii=True, indent=2)
         if payload.get("mode") == "activated" and payload.get("body"):
             text = (
@@ -1092,9 +1098,11 @@ def _activate_skill_mcp_tool(session_id: str = "", base_url: str = "",
                 + "\n" + payload["instruction"]
                 + "\n" + payload["state_notice"]
             )
+        content = [TextContent(type="text", text=text)]
+        if not archived_context():
+            content.append(TextContent(type='text', text=_rollout_budget_text(payload['rollout_budget'])))
         return CallToolResult(
-            content=[TextContent(type="text", text=text),
-                     TextContent(type='text', text=_rollout_budget_text(payload['rollout_budget']))],
+            content=content,
             structured_content=payload,
             is_error=not bool(payload.get("ok")),
         )
@@ -1139,10 +1147,13 @@ def _deactivate_skill_mcp_tool(session_id: str = "", base_url: str = "",
             payload = leave_task_skill(name, reason, session_id=session_id, base_url=base_url)
         except Exception as exc:
             payload = {'ok': False, **_model_error_payload(exc, tool_name='deactivate_skill')}
-        payload = {**payload, 'rollout_budget': _skill_budget(budget_provider)}
+        if not archived_context():
+            payload = {**payload, 'rollout_budget': _skill_budget(budget_provider)}
+        content = [TextContent(type="text", text=json.dumps(payload, ensure_ascii=True))]
+        if not archived_context():
+            content.append(TextContent(type='text', text=_rollout_budget_text(payload['rollout_budget'])))
         return CallToolResult(
-            content=[TextContent(type="text", text=json.dumps(payload, ensure_ascii=True)),
-                     TextContent(type='text', text=_rollout_budget_text(payload['rollout_budget']))],
+            content=content,
             structured_content=payload,
             is_error=not bool(payload.get("ok")),
         )

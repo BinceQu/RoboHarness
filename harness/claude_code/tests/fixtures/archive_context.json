@@ -1,0 +1,90 @@
+{
+  "protocol": "archived-v391-x2",
+  "startup_revision": 1,
+  "startup_context_sha256": "a1ef3ea478487ad0e8d5dc8a162b0042365e874908f22169b785df75b0f838ff",
+  "pick_up_object_body_sha256": "93e2648b4d6f3bd6e064355b84057c50c7710219b1e892e336a3f732595ce9c9",
+  "available_task_skills": [
+    "close-box",
+    "cut-object",
+    "navigate-to-target",
+    "open-doors-and-drawers",
+    "pick-up-object",
+    "place-object-in-container",
+    "traverse-narrow-passages"
+  ],
+  "sources": [
+    {
+      "path": "test_results/task03/06_claude_transcripts/claude_t03p15063i0-09152328_301.jsonl",
+      "sha256": "f05ef5d7e525533f87e8313fff26b9c44f7f827e10887451352639f1e98d0ce1"
+    },
+    {
+      "path": "test_results/task03/06_claude_transcripts/claude_t03p15063i3-09171808_304.jsonl",
+      "sha256": "c66fb5b28c37320ed5c6e3b586e45b740d47f190255cb9876578d32f130ebbf5"
+    },
+    {
+      "path": "test_results/task03/06_claude_transcripts/claude_t03p15063i5-09180547_306.jsonl",
+      "sha256": "abf46514cabced8b430ad49a4918f67d32b0bba372b77338c3a8376527980137"
+    },
+    {
+      "path": "test_results/task03/06_claude_transcripts/claude_t03p15063i7-09181140_308.jsonl",
+      "sha256": "c075a03da39ad1f891734059de03e2de395734062c2849aefbf59e7c34f49676"
+    },
+    {
+      "path": "test_results/task03/06_claude_transcripts/claude_t03p15063i9-09182135_310.jsonl",
+      "sha256": "d930d7065a7c1985026587998f3a6ddc2a7737d12017db1b272128f945e5d2bc"
+    },
+    {
+      "path": "test_results/task06/06_claude_transcripts/claude_t06p15066i0-09162346_301.jsonl",
+      "sha256": "9cadbd5e6d29da7aa0db8c5f5c395407af7a0d4e7fe6ac6366cec97fc674a653"
+    },
+    {
+      "path": "test_results/task06/06_claude_transcripts/claude_t06p15066i3-09171214_304.jsonl",
+      "sha256": "608103692658a2c39efd25682dfe2f4f8baea81a91923861f581e2655b4d4e72"
+    },
+    {
+      "path": "test_results/task06/06_claude_transcripts/claude_t06p15066i5-09171413_306.jsonl",
+      "sha256": "5771becf40a8e53c3699521067770f54303a4a4c5af2f92d8d8fbc57922f874e"
+    },
+    {
+      "path": "test_results/task06/06_claude_transcripts/claude_t06p15066i7-09172338_308_v9.jsonl",
+      "sha256": "3c43d44db56af6213f6f02f3f30865ef2b485d0eab8c3ed6b5ab873b8f42ff8a"
+    },
+    {
+      "path": "test_results/task06/06_claude_transcripts/claude_t06p15066i9-09180340_310_v9.jsonl",
+      "sha256": "65dc20c785e220469a79ec5a4a8b9ab4c3396eebea44470bb25532da7a83325a"
+    },
+    {
+      "path": "test_results/task08/instance_304/claude-home/claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/3234697d-b93f-4a8b-87b8-7b72c98034e1.jsonl",
+      "sha256": "8736d63d5def9e4814c839ab159289c206f31d9fc49af334e5e372799b7b09f2"
+    }
+  ],
+  "activated_skill_body_sources": {
+    "pick-up-object": {
+      "93e2648b4d6f3bd6e064355b84057c50c7710219b1e892e336a3f732595ce9c9": [
+        "test_results/task03/06_claude_transcripts/claude_t03p15063i0-09152328_301.jsonl",
+        "test_results/task03/06_claude_transcripts/claude_t03p15063i3-09171808_304.jsonl",
+        "test_results/task03/06_claude_transcripts/claude_t03p15063i5-09180547_306.jsonl",
+        "test_results/task03/06_claude_transcripts/claude_t03p15063i7-09181140_308.jsonl",
+        "test_results/task03/06_claude_transcripts/claude_t03p15063i9-09182135_310.jsonl",
+        "test_results/task06/06_claude_transcripts/claude_t06p15066i0-09162346_301.jsonl",
+        "test_results/task06/06_claude_transcripts/claude_t06p15066i5-09171413_306.jsonl",
+        "test_results/task06/06_claude_transcripts/claude_t06p15066i7-09172338_308_v9.jsonl",
+        "test_results/task08/instance_304/claude-home/claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/3234697d-b93f-4a8b-87b8-7b72c98034e1.jsonl"
+      ]
+    },
+    "place-object-in-container": {
+      "b226ace85b05b0b347adc1b54e9b270b6ed6da2b26636ea4c3dbf8443977146d": [
+        "test_results/task03/06_claude_transcripts/claude_t03p15063i0-09152328_301.jsonl",
+        "test_results/task03/06_claude_transcripts/claude_t03p15063i3-09171808_304.jsonl",
+        "test_results/task03/06_claude_transcripts/claude_t03p15063i5-09180547_306.jsonl",
+        "test_results/task03/06_claude_transcripts/claude_t03p15063i7-09181140_308.jsonl",
+        "test_results/task03/06_claude_transcripts/claude_t03p15063i9-09182135_310.jsonl"
+      ]
+    },
+    "open-doors-and-drawers": {
+      "7806371c5d48986837575914d194d7d9b7a2ef87aab9eb03b4eb01f3452d7541": [
+        "test_results/task08/instance_304/claude-home/claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/3234697d-b93f-4a8b-87b8-7b72c98034e1.jsonl"
+      ]
+    }
+  }
+}
