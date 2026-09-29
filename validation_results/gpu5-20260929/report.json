@@ -1,11 +1,11 @@
 {
-  "updated_at_utc": "2026-09-29T15:42:32+00:00",
+  "updated_at_utc": "2026-09-29T16:33:30+00:00",
   "runs": [
     {
       "task": "task01",
       "task_name": "picking_up_trash",
       "run_directory": "validation-task01-r2",
-      "status": "running",
+      "status": "failed",
       "model": "Qwen3.8-Flash-Next-FP8",
       "harness": "claude_code",
       "n_finished": 0,
@@ -16,13 +16,21 @@
       "completed_archive_mean_q": null,
       "delta_archive_mean_q": null,
       "matches_archive_mean": null,
-      "error": null
+      "error": "Received signal 15",
+      "superseded": {
+        "superseded_at": "2026-09-29T16:29:58.669142+00:00",
+        "reason": "Model-visible harness context differed from archived transcripts: three rather than seven advertised skills and added rollout_budget telemetry. Restarting with archived context restoration in a3d0e3f. Preserve all official results; this attempt is diagnostic, not strict reproduction.",
+        "replacement_run": "validation-20260930-task01",
+        "owner_pid": 2653411,
+        "owner_start": "119739475",
+        "run_id": "task01-20260929-172629-dca5e69f"
+      }
     },
     {
       "task": "task06",
       "task_name": "hiding_Easter_eggs",
       "run_directory": "validation-task06",
-      "status": "running",
+      "status": "failed",
       "model": "Qwen3.8-Flash-Next-FP8",
       "harness": "claude_code",
       "n_finished": 1,
@@ -46,13 +54,21 @@
       "completed_archive_mean_q": 1.0,
       "delta_archive_mean_q": null,
       "matches_archive_mean": null,
-      "error": null
+      "error": "Received signal 15",
+      "superseded": {
+        "superseded_at": "2026-09-29T16:29:58.670365+00:00",
+        "reason": "Model-visible harness context differed from archived transcripts: three rather than seven advertised skills and added rollout_budget telemetry. Restarting with archived context restoration in a3d0e3f. Preserve all official results; this attempt is diagnostic, not strict reproduction.",
+        "replacement_run": "validation-20260930-task06",
+        "owner_pid": 2769625,
+        "owner_start": "119773820",
+        "run_id": "task06-20260929-173206-c8bf3881"
+      }
     },
     {
       "task": "task08",
       "task_name": "rearranging_kitchen_furniture",
       "run_directory": "validation-task08",
-      "status": "running",
+      "status": "failed",
       "model": "Qwen3.8-Flash-Next-FP8",
       "harness": "claude_code",
       "n_finished": 0,
@@ -63,7 +79,15 @@
       "completed_archive_mean_q": null,
       "delta_archive_mean_q": null,
       "matches_archive_mean": null,
-      "error": null
+      "error": "Received signal 15",
+      "superseded": {
+        "superseded_at": "2026-09-29T16:29:58.671374+00:00",
+        "reason": "Model-visible harness context differed from archived transcripts: three rather than seven advertised skills and added rollout_budget telemetry. Restarting with archived context restoration in a3d0e3f. Preserve all official results; this attempt is diagnostic, not strict reproduction.",
+        "replacement_run": "validation-20260930-task08",
+        "owner_pid": 2769807,
+        "owner_start": "119773937",
+        "run_id": "task08-20260929-173207-ce2ebfb7"
+      }
     }
   ]
 }
