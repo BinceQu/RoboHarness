@@ -1,7 +1,7 @@
 # Installation
 
 Use Linux x86-64 with an NVIDIA RTX GPU, a compatible driver, Python 3.11 and
-the CUDA toolkit (cuRobo builds a CUDA extension). The validation host has
+the CUDA 12.4 toolkit for the interface's cuRobo build. The validation host has
 48 GB VRAM per GPU. A run also needs sufficient RAM and local scratch space
 for Isaac Sim and decrypted scene assets. Leave at least 30 GB free scratch.
 
@@ -11,6 +11,10 @@ Clone this repository with its submodule, then install:
 git submodule update --init --recursive
 ./scripts/setup.sh
 ```
+
+The installer builds the pinned cuRobo source with the interface environment's
+build tools. Its example meshes and videos are skipped; RoboHarness supplies
+the custom robot's URDF and collision configuration.
 
 The pinned upstream installer asks for its license agreements. Its flags can
 be supplied after `all`, for example `./scripts/setup.sh all --accept-nvidia-eula`.

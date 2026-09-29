@@ -16,12 +16,19 @@ git submodule update --init --recursive
 harness/claude_code/.venv/bin/python -m pip install -r requirements/agent.txt -e harness/claude_code -e harness/codex
 if [[ "$mode" == agent ]]; then exit 0; fi
 "$PYTHON_BIN" -m venv .venv-interface
-.venv-interface/bin/python -m pip install torch==2.6.0 torchvision==0.21.0 --index-url https://download.pytorch.org/whl/cu124
+.venv-interface/bin/python -m pip install -c requirements/interface.txt torch==2.6.0 torchvision==0.21.0 --index-url https://download.pytorch.org/whl/cu124
 .venv-interface/bin/python -m pip install -r requirements/interface.txt
-.venv-interface/bin/python -m pip install --no-build-isolation -c requirements/interface.txt 'nvidia-curobo @ git+https://github.com/NVlabs/curobo@cbaf7d32436160956dad190a9465360fad6aba73'
+# The custom robot assets ship here; cuRobo's demo meshes and videos are not
+# needed. Put the installed ninja executable on PATH for CUDA extension builds.
+PATH="$ROOT/.venv-interface/bin:$PATH" GIT_LFS_SKIP_SMUDGE=1 \
+  .venv-interface/bin/python -m pip install --no-build-isolation -c requirements/interface.txt 'nvidia-curobo @ git+https://github.com/NVlabs/curobo@cbaf7d32436160956dad190a9465360fad6aba73'
 "$PYTHON_BIN" -m venv .venv-evaluator
+.venv-evaluator/bin/python -m pip install 'setuptools>=71,<81' wheel
 (
   source .venv-evaluator/bin/activate
+  # Upstream uses CONDA_PREFIX for package cleanup. A venv must not inherit
+  # the caller's conda prefix and accidentally edit that separate environment.
+  unset CONDA_PREFIX CONDA_DEFAULT_ENV CONDA_PROMPT_MODIFIER
   cd BEHAVIOR
   bash setup.sh --bddl --omnigibson --joylo --eval --confirm-no-conda "$@"
 )
