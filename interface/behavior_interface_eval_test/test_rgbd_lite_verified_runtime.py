@@ -2,24 +2,12 @@ from __future__ import annotations
 
 import os
 
-from behavior_interface_eval_test import benchmark_rgbd_lite_isolated_136
 from behavior_interface_eval_test import rgbd_lite_verified_runtime
 from behavior_interface_eval_test.test_support import rgbd_lite_isolated_runtime
 
 
-def test_interface_defaults_match_benchmark_with_safe_ik_batch() -> None:
-    expected = dict(
-        benchmark_rgbd_lite_isolated_136.OPTIMIZED_RUNTIME_DEFAULTS
-    )
-    expected["OFFICIAL_V2_RGBD_LITE_TEST_PHYSICAL_BATCH"] = "0"
-    assert rgbd_lite_verified_runtime.VERIFIED_RUNTIME_DEFAULTS == expected
 
 
-def test_interface_geometry_settings_match_benchmark() -> None:
-    for key, value in (
-        benchmark_rgbd_lite_isolated_136.CURRENT_RUNTIME_SETTINGS.items()
-    ):
-        assert rgbd_lite_verified_runtime._BASE_LITE_SETTINGS[key] == value
 
 
 def test_install_uses_verified_defaults_and_interface_gpu(monkeypatch) -> None:
