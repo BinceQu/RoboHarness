@@ -1,16 +1,22 @@
 # Release validation
 
-Validation date: September 29, 2026. The source checkout is RoboHarness,
+Validation dates: September 29–30, 2026. The source checkout is RoboHarness,
 with BEHAVIOR v3.9.1 at `26f2c7ef7b9cf96bd0414f81e1e751e493762779`.
 
 ## Automated checks
 
 The independent Git clone passed all 360 tests in `scripts/check.sh`:
-344 passed and 16 were skipped. Three additional result-reporting tests cover
-incomplete runs, incomplete completion claims, and modified scoring files.
+344 passed and 16 were skipped. Four additional result-reporting tests cover
+incomplete runs, incomplete completion claims, modified scoring files, and
+superseded attempts that must not count as reproduction claims.
 Two budget regression tests also pass: all nine tasks use the archived 2025
 ×2 limits in the launcher, catalog and monitor, and altered budget/protocol
 manifests are rejected before launch.
+Two additional archived-context regressions verify the SessionStart text
+against all 11 inspected archived transcripts, all three activated skill
+bodies found there, the seven-skill catalog, and MCP replies without later
+`rollout_budget` additions. The full Claude suite was repeated after this fix:
+170 passed and 14 were skipped (184 total).
 This covers the task/result manifests, owned-process cleanup, cross-session
 request rejection, the official observation protocol, RGBD wrapper, custom
 robot, both MCP adapters, image coordinates, skill lifecycle and launchers.
@@ -45,7 +51,8 @@ configuration check; the historical scores were not obtained with Codex.
 
 Historical tests that compared old skill prose verbatim were removed from the
 release test suite without changing those skill documents. Tests for disabled
-skills now verify that they cannot activate. A separate image-grounding
+skills verify the standalone default profile; the archived reproduction profile
+exposes the seven skills recorded in the original sessions. A separate image-grounding
 benchmark and its tests were excluded because they are not these nine tasks.
 An existing lifecycle regression exposed two errors: an empty skill name could
 deactivate an already inactive state, and corrupt state could raise outside
@@ -68,36 +75,42 @@ the matching archived prompts, and all five instances per task:
 
 | Task | Run directory | Archived mean Q | Status |
 | --- | --- | ---: | --- |
-| task01 | `runs/validation-task01-r2` | 0.866667 | Running |
-| task06 | `runs/validation-task06` | 0.422222 | Running, 1/5 finished |
-| task08 | `runs/validation-task08` | 0.400000 | Running |
+| task01 | `runs/validation-20260930-task01` | 0.866667 | Starting |
+| task06 | `runs/validation-20260930-task06` | 0.422222 | Starting |
+| task08 | `runs/validation-20260930-task08` | 0.400000 | Starting |
 
-Each simulator has connected and initialized the custom robot. The agents
-have executed real camera and chassis calls through the new interface.
-The [budget audit](../validation_results/gpu5-20260929/budget_audit.json)
+The [first-attempt budget audit](../validation_results/gpu5-20260929/budget_audit.json)
 matches all nine limits to their original archive JSON fields and hashes.
-For the three live evaluators, command-line arguments, environment, monitor
+For those three evaluators, command-line arguments, environment, monitor
 and evaluator log all agree on 10535, 15239 and 17886 steps respectively.
 These runs already used explicit 2025 ×2 limits; the catalog and monitor's
 unused 2026 fallback defaults have also been corrected for future launches.
-The first finished case, task06 instance 301, scored **0.555556**, compared
+The first attempt's task06 instance 301 scored **0.555556**, compared
 with **1.0** in the archive. The model declared completion after 6354 steps;
 it did not reach the 15239-step limit. This case has not reproduced its archived
-score. Its original evaluator JSON and hash are preserved in the combined report.
+score. Its original evaluator JSON and hash are preserved in the
+[first-attempt report](../validation_results/gpu5-20260929/README.md).
+
+Those three attempts were stopped after finding model-visible context drift:
+the later source harness advertised three skills instead of the archived seven,
+and added `rollout_budget` fields absent from the archived tool replies. They
+are retained as superseded diagnostic attempts. Commit `a3d0e3f` restores the
+archived context when the launcher selects `archived-v391-x2`; the corrected
+attempts in the table started on September 30. The observed score difference
+does not establish that this context drift caused the failure.
 
 **Full task scores are not available yet; this is not a claim that the archived
 means have been reproduced.** Each run writes its official results and
 per-case differences to its own `summary.json` when cases finish.
 
-A local watcher updates the [combined result report](../validation_results/gpu5-20260929/README.md)
+A local watcher updates the [combined result report](../validation_results/gpu5-20260930/README.md)
 as cases finish and copies their original official scoring JSON. It does not
 substitute archived scores for missing new results.
 
 The host uses the existing interface and evaluator environments described in
 [setup](setup.md), a new agent virtual environment, Claude Code 2.1.259 and
 the existing Qwen3.8-Flash-Next-FP8 model server. The evaluator uses the host
-compatibility option `unmask_evaluator_cuda=true`. At the initial live check,
-GPU 5 used approximately 38 GB for the three runs. The shared model server
+compatibility option `unmask_evaluator_cuda=true`. The shared model server
 has a request queue, so wall time includes model waiting time.
 
 The full evaluator and dataset installation has not been executed on a clean

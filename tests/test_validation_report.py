@@ -66,3 +66,17 @@ class ValidationReport(unittest.TestCase):
         path.write_text(json.dumps(body))
         with self.assertRaises(ValueError):
             collect(self.root)
+
+    def test_superseded_scores_remain_visible_without_reproduction_claim(self):
+        self.add_case(301, 1.0)
+        self.add_case(304, 1.0)
+        self.summary['status'] = 'complete'
+        self.save()
+        (self.root / 'superseded_context.json').write_text(json.dumps({
+            'reason': 'Different model-visible context', 'replacement_run': 'corrected'}))
+        row = collect(self.root)
+        self.assertEqual(row['n_finished'], 2)
+        self.assertEqual(row['mean_q'], 1.0)
+        self.assertEqual(row['superseded']['replacement_run'], 'corrected')
+        self.assertIsNone(row['matches_archive_mean'])
+        self.assertIsNone(row['delta_archive_mean_q'])
