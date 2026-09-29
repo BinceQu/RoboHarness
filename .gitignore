@@ -6,9 +6,9 @@ __pycache__/
 *.egg-info/
 build/
 dist/
-runs/
-data/
-configs/local.json
+/runs/
+/data/
+/configs/local.json
 .env
 .env.*
 !.env.example
@@ -25,4 +25,4 @@ relay_auth.json
 !interface/behavior_interface/rtabmap_slam/upstream.lock
 .codex-home/
 .claude-home/
-data__*/
+/data__*/

@@ -37,7 +37,9 @@ can be launched independently when GPU and host memory permit.
 The runner starts the observation interface, fail-closed idle gate, official
 evaluator and selected harness, waits for each instance to finish loading,
 and uses that case's exact prompt. It records the rendered prompt, session,
-agent trajectory, evaluator JSON and Q difference under `runs/<run-id>/`.
+agent trajectory, evaluator JSON and Q differences under `runs/<run-id>/`.
+Both the directory-reported score and the raw reference JSON score are kept
+when an archive contains conflicting records.
 Ctrl-C stops only that run's owned processes. A failed startup or model error
 is recorded as a failure; it is not fabricated into a scored episode.
 
