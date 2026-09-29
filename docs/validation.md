@@ -20,6 +20,9 @@ prompt texts and original scoring JSON are distinct from new run output.
 Python syntax checks passed for the curated source files. Shell syntax checks
 passed for all 13 release launch/build scripts. The external SAM 2 source
 (34 model/configuration files) and checkpoint hashes also match their pins.
+The interface requirements also resolve successfully with pip on Python 3.11
+using `--dry-run --ignore-installed`. This checks package compatibility and
+availability; it does not replace a fresh installation or a CUDA build check.
 
 The Codex plugin manifest passes the plugin validator. Codex CLI 0.153.4
 successfully installed it in a private home and loaded its `embodied` profile
