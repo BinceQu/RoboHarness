@@ -1,0 +1,42 @@
+diff --git a/corelib/src/Memory.cpp b/corelib/src/Memory.cpp
+--- a/corelib/src/Memory.cpp
++++ b/corelib/src/Memory.cpp
+@@ -6859,7 +6859,21 @@
+ 	// Occupancy grid map stuff
+ 	if(_createOccupancyGrid && !isIntermediateNode)
+ 	{
+-		if( (_localMapMaker->isGridFromDepth() && !data.depthOrRightRaw().empty()) ||
++		if(data.gridCellSize() != 0.0f)
++		{
++			// A caller-supplied local grid may summarize multiple sensor origins.
++			// Rebuilding it from the representative frame's raw scan would discard
++			// those independent free-space rays. Keep the raw RGB-D/scan payload for
++			// future registration, but make the explicit occupancy payload
++			// authoritative.
++			s->sensorData().setOccupancyGrid(
++					data.gridGroundCellsRaw(),
++					data.gridObstacleCellsRaw(),
++					data.gridEmptyCellsRaw(),
++					data.gridCellSize(),
++					data.gridViewPoint());
++		}
++		else if( (_localMapMaker->isGridFromDepth() && !data.depthOrRightRaw().empty()) ||
+ 			(!_localMapMaker->isGridFromDepth() && !data.laserScanRaw().empty()))
+ 		{
+ 			cv::Mat ground, obstacles, empty;
+@@ -6873,15 +6887,6 @@
+ 			if(stats) stats->addStatistic(Statistics::kTimingMemOccupancy_grid(), t*1000.0f);
+ 			UDEBUG("time grid map = %fs", t);
+ 		}
+-		else if(data.gridCellSize() != 0.0f)
+-		{
+-			s->sensorData().setOccupancyGrid(
+-					data.gridGroundCellsRaw(),
+-					data.gridObstacleCellsRaw(),
+-					data.gridEmptyCellsRaw(),
+-					data.gridCellSize(),
+-					data.gridViewPoint());
+-		}
+ 	}
+ 
+ 	// prior

@@ -1,0 +1,5 @@
+# Provenance hashes refer to these exact archived bytes.
+prompt/** -text -whitespace
+reference_results/** -text
+# Whitespace in unified diff context is part of the patch itself.
+*.patch -text -whitespace

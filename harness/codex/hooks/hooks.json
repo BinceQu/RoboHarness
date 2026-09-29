@@ -1,0 +1,44 @@
+{
+  "description": "Load the embodied-agent boundary and reject non-BEHAVIOR tools.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ${PLUGIN_ROOT}/hooks/session_start.py",
+            "statusMessage": "Loading Embodied Codex context",
+            "additionalContextLimit": 8000
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ${PLUGIN_ROOT}/hooks/skill_router.py",
+            "statusMessage": "Publishing Embodied Codex prompt",
+            "additionalContextLimit": 256,
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ${PLUGIN_ROOT}/hooks/tool_policy.py",
+            "timeout": 3
+          }
+        ]
+      }
+    ]
+  }
+}

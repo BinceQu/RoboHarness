@@ -1,0 +1,192 @@
+This is a new picking_up_trash episode on port 15061.
+The live task is picking_up_trash. Stay on this episode
+and this task. Do not reset. Do not start a new spawn.
+Do not switch tasks.
+
+The official parent goal is that every requested can of soda
+is inside the kitchen trash can (`ashcan 1`). Placing one can
+and stowing the unused placing arm with
+`set_arm_to_grasp_position` (`gripper="open"`) exits the
+placement Skill only. A small EEF withdrawal is not that stow.
+It is not parent-task completion and not a reason
+to end this session.
+
+There are exactly three soda cans. Work one unused can at a
+time. Ignore a can left outside the ashcan after a miss.
+Do not queue it as a last pickup.
+
+The only allowed task Skills are `pick-up-object` and
+`place-object-in-container`. Do not activate any other Skill.
+There is no search, navigation, or stand-up Skill. Second
+logic runs on the baseline. Do not wrap it in a Skill.
+
+Keep at most one task Skill active. After a task Skill's
+success and required post-actions, call deactivate_skill with
+that Skill's name and return to the baseline and this parent
+task. Required post-actions include stowing any unused arm.
+You may also deactivate to cancel or hand control back.
+Deactivation does not move the robot.
+
+After any step finishes, if an arm is no longer needed, call
+`set_arm_to_grasp_position` with `gripper="open"` on that arm
+before the next approach. Keep this habit. Keep the workspace
+clean. Do not start chassis motion or `move_to_reach_point`
+with an outstretched unused arm.
+
+Judge the ashcan only from the current head image:
+- If the interior is visible, the ashcan is upright. Use the
+  pick/place loop below.
+- If the interior is not visible, the ashcan has fallen. Do
+  not start pick/place. Run Second logic on the baseline.
+
+For each remaining unused can, while the ashcan is upright:
+prefer an unused can that is not sitting outside the ashcan
+after a miss. Ignore every can left outside after a miss.
+Do not pick those yet.
+1. activate_skill with name="pick-up-object" and follow only
+   that Skill until its exit condition.
+2. activate_skill with name="place-object-in-container" and
+   follow only that Skill until that can is verified inside
+   the trash can and the unused placing arm has been stowed
+   with `set_arm_to_grasp_position`.
+Then look for the next remaining unused can and repeat.
+
+If a can is released or falls outside the ashcan, it is not
+inside. A can on the floor beside the bin is not inside.
+Ignore that can. Do not pick it now. Do not save it as a
+last-step pickup.
+Stow the unused placing arm with `set_arm_to_grasp_position`
+(`gripper="open"`) and deactivate place if it is still active.
+Steer around the ashcan so the chassis and arms will not tip
+it. Then pick and place every remaining unused can that has
+not yet been left outside after a miss.
+
+When no such unused can remains, that is the last step.
+Look at each ignored outside can. On the current head image,
+bind that can and the ashcan (`interior` or `near_rim`) and
+read robot-base XY distance.
+- If that distance is less than 0.5 m, do not pick the can.
+  If every remaining outside can is under 0.5 m from the
+  ashcan, end the session. That is the hand-in. Do not
+  retry those cans.
+- Only if an outside can is clearly far from the ashcan —
+  robot-base XY distance 0.5 m or more — pick and place
+  that can, one at a time.
+
+After every `track_object_distance` during place:
+- If `interior` is the empty ashcan bottom, its Z must be
+  below 0.01 m. If `interior` Z is greater than 0.01 m, the
+  click is the side wall, not the floor. Re-bind on the
+  visible bottom disk. Do not start XY or release on that
+  wall click. Do not use the place Skill `far_wall` XY band
+  on an ashcan.
+- If `interior` is an already-placed can inside the ashcan,
+  this Z gate does not apply.
+- `near_rim` Z must be greater than 0.2 m. That is rim
+  height, not hover clearance. If `near_rim` Z is not
+  greater than 0.2 m, re-bind on the rim band. If it is
+  below 0.01 m, the click is the room floor. Do not use
+  that floor click as rim height.
+
+Release only when the held can is aligned over the bottom
+`interior`. If the image shows the can sitting on the ashcan
+opening boundary, do not release: re-bind the full point set
+and re-align. A can that strikes the rim on the way down can
+tip the ashcan and fail the whole task.
+
+If the empty ashcan bottom is not visible, lean the trunk
+forward with one `adjust_pitch` of `-10` degrees, then look
+again. Do not command a larger pitch. Do not keep pitching
+once the bottom disk or an in-can soda is visible. After
+each lean, re-bind and keep `held_z - near_rim_z` at least
+0.20 m.
+
+When placing the second or third can and a previous can is
+already inside the ashcan, bind `interior` on that in-can
+soda. Do not click the empty funnel wall.
+If the held object is not visible, call
+`set_arm_to_grasp_position` with `gripper="keep"` on the
+holding arm. Then bring it into the head image: left arm
+`adjust_left_eef_pose_in_head_frame` `leftward=-0.1`; right
+arm `adjust_right_eef_pose_in_head_frame` `leftward=0.1`.
+Then `track_object_distance` on the new image.
+
+If you do not trust the latest `persistent_tracking` — the
+image disagrees, a bind looks stale, or a click may have
+missed — immediately call `track_object_distance` on the
+current clickable head `image_id` and replace the full
+point set. Do not release, do not descend to release, and
+do not waive the classified XY band on vision alone.
+Pure-visual override of the latest tracker is forbidden.
+Until that new bind satisfies the place Skill XY band, do
+not call `open_gripper`.
+
+Second logic, only when the interior is not visible. Stay on
+the baseline. Do not activate a Skill for this.
+
+1. On the current head image, pick one point on the ashcan
+   near its upper edge. Leave a small inset from that edge
+   so the click is still on the ashcan, not the floor. Call
+   `move_to_reach_point` on that point.
+
+2. On the new head image, call
+   `plan_grasp_point_filter_rgbd_lite` on a point near that
+   same upper edge, again with a small inset from the floor.
+   A side grasp is enough.
+
+3. `exec_plan_pose`, then `close_gripper` on the planned arm,
+   then `adjust_left_eef_pose_in_head_frame` or
+   `adjust_right_eef_pose_in_head_frame` on that same arm
+   with `z=0.3`.
+
+4. On the current head image, call `track_object_distance`
+   once with two points on the same visible side generatrix.
+   These two points are the side-wall top and bottom after
+   the ashcan stands upright:
+     `upper` — the higher point on that generatrix
+     `lower` — the lower point on that generatrix
+
+5. Call `move_tracked_point` with `execution_mode=exec` and
+   this input:
+   C1, equality:
+     `upper` on_hand `x,y,a`
+     `lower` on_hand `x,y,b`
+   I1, inequality:
+     `a-b` > `0`
+   Use this input as written.
+
+6. The ashcan should now be upright. Call
+   `adjust_left_eef_pose_in_head_frame` or
+   `adjust_right_eef_pose_in_head_frame` on the holding arm
+   with `z=-0.3` to set it on the floor.
+
+7. `open_gripper` on that arm, then
+   `set_arm_to_grasp_position` with `gripper="open"` on that
+   arm (or `arm="both"` if the other arm is also out). Return
+   to the pick/place loop above.
+
+Do not use mark_on_map or query_map. Ignore any map overlay.
+
+Every click uses the current 720 x 720 head image. u and v
+are integers in 0..719. If u or v is 720 or larger, do not
+call the tool. Recapture and click again on that new image.
+Do not reuse u/v from an older image_id.
+
+Treat tracker bindings from earlier sessions as untrusted.
+Re-bind on the current image. Do not use vision alone to
+keep or waive them. Temporary inability to find, grasp,
+transport, or place a can is not a reason to end the
+session: change observation or approach and continue.
+The last-step 0.5 m outside-can check is the exception:
+if every remaining outside can is under 0.5 m from the
+ashcan, end the session.
+
+End the session when the robot has fallen, the parent task
+is physically impossible, a required tool or the simulator
+has crashed, or the last-step check says every remaining
+outside can is under 0.5 m from the ashcan.
+
+Use only the current 15061 behavior tools. Do not access
+another port.
+
+First tool: capture_head_camera.

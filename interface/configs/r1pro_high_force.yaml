@@ -1,0 +1,91 @@
+model: r1pro
+robot_type: R1Pro
+arm_dof: 7
+name: robot_r1
+obs_modalities:
+  - rgb
+scale: 1.0
+self_collisions: true
+action_normalize: false
+action_type: continuous
+grasping_mode: assisted
+default_reset_mode: tuck
+
+# Door/contact pushes need more holding margin than the 100 Nm URDF torso limit.
+load_config:
+  joint_effort_overrides:
+    torso_joint1: 1000.0
+    torso_joint2: 1000.0
+    torso_joint3: 1000.0
+
+sensor_config:
+  VisionSensor:
+    sensor_kwargs:
+      image_height: 720
+      image_width: 1280
+
+controller_config:
+  base:
+    name: HolonomicBaseJointController
+    motor_type: velocity
+    vel_kp: 150
+    command_input_limits: null
+    command_output_limits: null
+    use_impedances: false
+  trunk:
+    name: JointController
+    motor_type: position
+    pos_kp: 150
+    command_input_limits: null
+    command_output_limits: null
+    use_impedances: false
+    use_delta_commands: false
+  arm_left:
+    name: JointController
+    motor_type: position
+    pos_kp: 150
+    command_input_limits: null
+    command_output_limits: null
+    use_impedances: false
+    use_delta_commands: false
+  arm_right:
+    name: JointController
+    motor_type: position
+    pos_kp: 150
+    command_input_limits: null
+    command_output_limits: null
+    use_impedances: false
+    use_delta_commands: false
+  gripper_left:
+    name: MultiFingerGripperController
+    motor_type: effort
+    mode: independent
+    command_input_limits:
+      - [-20.0, -20.0]
+      - [20.0, 20.0]
+    command_output_limits:
+      - [-20.0, -20.0]
+      - [20.0, 20.0]
+    limit_tolerance: 0.0
+    inverted: false
+  gripper_right:
+    name: MultiFingerGripperController
+    motor_type: effort
+    mode: independent
+    command_input_limits:
+      - [-20.0, -20.0]
+      - [20.0, 20.0]
+    command_output_limits:
+      - [-20.0, -20.0]
+      - [20.0, 20.0]
+    limit_tolerance: 0.0
+    inverted: false
+
+eval:
+  camera_sensor_names:
+    left_wrist: robot_r1:left_realsense_link:Camera:0
+    right_wrist: robot_r1:right_realsense_link:Camera:0
+    head: robot_r1:zed_link:Camera:0
+  episode_init:
+    reset:
+      _target_: omnigibson.eval_utils.ResetBehaviorRobot

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Navigate to Target"
+  short_description: "Drive to a marked map place, or explore toward an unseen room or object"
+  default_prompt: "Use $navigate-to-target to reach the specified marked place or explore until that unseen room or object is found."

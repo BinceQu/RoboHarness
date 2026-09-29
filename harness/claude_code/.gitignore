@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+build/
+dist/
+*.egg-info/
+.coverage
+trajectories/
+.claude-home/
+.pytest_cache/
+*.backup*
+*.pre-*

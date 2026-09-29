@@ -1,0 +1,11 @@
+#!/bin/sh
+set -eu
+launcher_dir=$(CDPATH= cd "$(dirname "$0")" && pwd)
+plugin_root=$(CDPATH= cd "$launcher_dir/.." && pwd)
+python_bin="${EMBODIED_CLAUDE_BOOTSTRAP_PYTHON:-python3}"
+if [ ! -x "$plugin_root/.venv/bin/python" ]; then
+  "$python_bin" -m venv "$plugin_root/.venv"
+fi
+"$plugin_root/.venv/bin/python" -m pip install -e "$plugin_root"
+"$plugin_root/.venv/bin/python" -c 'import mcp, jsonschema'
+echo "Embodied Claude Code Python environment is ready: $plugin_root/.venv"

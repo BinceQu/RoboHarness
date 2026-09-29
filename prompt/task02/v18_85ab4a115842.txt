@@ -1,0 +1,385 @@
+Port 15062. Task is putting_away_Halloween_decorations.
+Do not reset. Do not switch tasks. Do not activate
+open-doors-and-drawers or navigate-to-target.
+
+Authoritative success conditions (all must be true; these
+come from the task BDDL):
+- Every pumpkin must satisfy: At least one cabinet must
+  satisfy: pumpkin is inside cabinet
+- Every candle must satisfy: At least one cabinet must
+  satisfy: candle is inside cabinet
+- At least one table must satisfy: caldron 1 is next to
+  table
+- Every cabinet must satisfy: cabinet is closed
+
+There are three candles and two pumpkins. The black
+caldron next to the coffee table is also a BDDL
+condition. Do that first.
+
+Do this in order.
+
+1. Put the black caldron next to the living-room
+   coffee table. That table is the low table in
+   front of the sofa, not the TV stand. Do this
+   before you open the drawer. Do not put the
+   caldron in the drawer. Do not pick a candle
+   or pumpkin in this step. Do not activate
+   pick-up-object. Do not activate
+   open-doors-and-drawers.
+
+   Do these in order.
+   a. Find the black caldron on the floor. It is
+      a black pot, not an orange pumpkin and not
+      a white or tan candle. Turn with
+      adjust_chassis until it is clearly in the
+      head view.
+   b. Call move_to_reach_point on the caldron
+      so the head can see it up close. Click the
+      pot, not the floor, not a pumpkin.
+   c. On that new head image, call
+      plan_grasp_point_filter_rgbd_lite on an
+      edge of the pot (the rim or the outer
+      wall). Do not click the inside of the
+      bowl. An interior click cannot be grasped.
+      If the plan fails or the preview is inside
+      the bowl, re-click a rim/outer-wall point
+      and plan again.
+   d. exec_plan_pose that plan_id. When the
+      red grasp volume is on the caldron rim
+      or outer wall, close_gripper on that
+      same arm. Do not wait for a tighter
+      preview. After close, the return image
+      may show a gap between the fingers and
+      the pot; that gap is simulator error.
+      close_gripper may also return failed,
+      timeout, or empty; that is the close
+      function's normal behavior. Neither the
+      gap nor a failed close return means you
+      missed. If the caldron still has red
+      after close: you have it. Do not
+      open_gripper. Do not jog the EEF to
+      grasp again. Call adjust_eef_pose on
+      the holding arm to pull the pot back
+      (lift / retract). Only if the caldron
+      slips off during that pull is the grasp
+      a real miss. Then go back to c: plan a
+      new rim/outer-wall point and exec that
+      plan. Manual EEF jogging cannot grasp
+      the caldron. You must plan first.
+   e. reset_body with keep_ori_arm set to the
+      holding arm (left or right). Do not open
+      that gripper. Do not use keep_ori_arm=none.
+   f. Find the living-room sofa, then the low
+      coffee table in front of that sofa. Not
+      the TV stand. spin_to_facing_point or
+      adjust_chassis until that table is in
+      view, then adjust_chassis / a floor point
+      to stand next to it. Do not hit the
+      table or the sofa.
+   g. adjust_eef_pose on the holding arm (head
+      frame) to put the caldron next to that
+      coffee table. Then open_gripper on that
+      arm and set_arm_to_grasp_position.
+
+   Stay on this step until the caldron is next
+   to the coffee table. Then go to step 2.
+
+2. Open the TV-stand drawer. Do not activate
+   open-doors-and-drawers.
+
+   Cabinet is the long low dark-brown TV stand, not the
+   coffee table. Open only the fireplace-side left drawer.
+   Do not open the other drawer or the glass door. Do not
+   close any drawer in this step.
+
+   The handle is the thin metal lip at the very top of
+   the TV stand, where the top board meets the left
+   drawer front. Look at the head RGB and click that
+   lip. It is in the middle of the image, not on the
+   blue floor arrows, not the bottom third.
+   That metal bar's height is 0.37 m to 0.38 m
+   (current_robot_base, z-up). If a click or track
+   returns z outside 0.37–0.38, you bound the wrong
+   pixel. Re-click the metal lip and bind again.
+   Do not call measure_shoulder_distance to find it.
+   Do not click the chassis nearest-obstacle pixel.
+
+   Stay on this step until that left drawer is visibly
+   open (front pulled out, interior visible). A dark
+   lip shadow is not open. Do not activate
+   pick-up-object. Do not pick a candle, pumpkin, or
+   any other object before that drawer is open.
+
+   Do these in order.
+   a. First go around floor obstacles (candles, pumpkins,
+      the coffee table, the caldron) with adjust_chassis
+      or a side floor point. An approximate pose in
+      front of that drawer is enough.
+   b. Next tool: move_to_reach_point on that lip in the
+      current head image, only so the head can see it.
+      If z is not in 0.37–0.38, that pixel is not the
+      metal lip (z < 0.01 is the floor). Re-click the
+      same lip and reach again. Do not reset_body.
+   c. Then spin in place with adjust_chassis (spin only)
+      until the TV stand looks about horizontal in the
+      head view, so a later reverse can pull the drawer
+      open. After this spin, do not call adjust_pitch.
+   d. On that faced head image, call move_to_reach_point
+      again on the same lip, at the left-right center
+      of the image. The handle is a long bar, so that
+      center point does not break facing. If z is not
+      in 0.37–0.38, re-click that lip at the image
+      center and reach again.
+   e. On the new head image after that second reach,
+      immediately track_object_distance on that same
+      metal handle, name=handle. Track only handle.
+      Do not track any other name. Do not call
+      adjust_pitch. Read handle z. If z is outside
+      0.37–0.38, the bind is wrong. Re-click the metal
+      lip and re-track until z is in 0.37–0.38. Do not
+      plan on a wrong bind. Then, with no other tool
+      between this valid track and the plan below,
+      call move_tracked_point with the same JSON
+      the test page sends for that C1/C2 form
+      (preset none; coordinates as {var:...}):
+      {
+        "execution_mode": "plan",
+        "points": [
+          {"name": "left_finger_tip", "role": "on_hand",
+           "target_xyz_m": {"x": {"var": "x"}, "y": {"var": "y"}, "z": {"var": "a"}}},
+          {"name": "handle", "role": "off_hand",
+           "target_xyz_m": {"x": {"var": "x"}, "y": {"var": "y"}, "z": {"var": "z"}}},
+          {"name": "right_finger_tip", "role": "on_hand",
+           "target_xyz_m": {"x": {"var": "x"}, "y": {"var": "y"}, "z": {"var": "b"}}},
+          {"name": "gripper_slide_center", "role": "on_hand",
+           "target_xyz_m": {"x": {"var": "c"}, "y": {"var": "y"}, "z": {"var": "z"}}}
+        ],
+        "relations": [],
+        "inequalities": []
+      }
+      Use this JSON as written. Do not track
+      left_finger_tip, right_finger_tip, or
+      gripper_slide_center.
+      If that plan fails: adjust_chassis closer
+      (small forward / translation) and repeat this
+      same track-then-plan with the same JSON on the
+      new image until a plan succeeds, and only after
+      handle z is again in 0.37–0.38. Do not change
+      the JSON. Do not call adjust_pitch.
+   f. As soon as a plan_id is returned, call
+      exec_plan_pose that plan_id, back_m=0.1.
+      Do not call any other tool between plan and this
+      exec.
+   g. close_gripper on that same arm.
+      If that close is empty (air; both fingers at the
+      lower limit; no object between the fingers): do
+      not go to step 3. Do not activate
+      pick-up-object. Do not pick anything. Call
+      move_to_reach_point once on the metal lip in the
+      current head image, then redo e–g (re-track
+      until z is 0.37–0.38, the same MTP JSON, exec,
+      close). Keep doing this until the close is not
+      empty, then continue to h.
+   h. After a non-empty close_gripper, adjust_chassis
+      forward=-0.4 and look. Pull direction is flexible:
+      if the TV stand is straight ahead, just
+      forward=-0.4; if it is on the robot's right, also
+      add leftward=0.2 (so forward=-0.4 leftward=0.2);
+      if it is on the left, also add rightward=0.2
+      (so forward=-0.4 rightward=0.2). The side step
+      must point toward the cabinet, never away from
+      it. If the drawer is
+      visibly open (front pulled out, interior
+      visible): open_gripper, set_arm_to_grasp_position
+      both open, then go to step 3. If still closed:
+      do not pick anything. If the metal handle is
+      still clear and centered: repeat e–h. If the
+      handle is not clearly visible or not at the
+      image left-right center: repeat d–h. Keep
+      trying. If the drawer is half-open (you can
+      see a slit / gap and some interior, but it
+      is not fully pulled out): set the holding
+      arm to grasp position, then on the current
+      head image call plan_grasp_point_filter_rgbd_lite
+      on a visible point on the front drawer panel
+      near the handle (not the exact metal lip, not
+      the cabinet body, not the room floor). If the
+      plan fails, call move_to_reach_point first on
+      that same panel point and re-plan on the new
+      image until a plan succeeds; then
+      exec_plan_pose that plan_id; when the red
+      grasp volume is on the drawer panel,
+      close_gripper on that arm (a failed / empty
+      close return is normal — red-on-panel still
+      means you have the panel); then go back to
+      step h's pull and re-evaluate. Do not leave
+      step 2 while the drawer is closed.
+
+
+3. Pick and place one unused candle or pumpkin at a time
+   until all three candles and both pumpkins are inside that
+   open drawer. Do not start this step if the TV-stand
+   drawer is still closed. Go back to step 2 instead.
+
+   Pick: activate pick-up-object and pick up one unused
+   candle or pumpkin. Do not hit the open drawer. Do not
+   pick the caldron again in this step.
+
+   After the grasp is confirmed:
+   a. reset_body.
+   b. On the current head image, call spin_to_facing_point
+      on the open TV-stand drawer (the opening, not the
+      coffee table).
+   c. On the new head image, call move_chassis_to_floor_point
+      on a safe_chassis_floor_point in front of that open
+      drawer. That point is only a chassis stop on the room
+      floor. It is not tv_stand_drawer_beige_panel_center.
+      Not on the drawer, not on an object.
+
+      Right after that floor stop, call adjust_pitch
+      degree=-30 so the head looks at the feet and the
+      drawer front. Do not skip this pitch. Use that
+      image to see the gap between the feet and the
+      cabinet. Do not drive into the cabinet. If the
+      cabinet or drawer front is already at the feet,
+      do not call adjust_chassis forward, even if
+      chassis-forward_2m still says 0.4 m or 0.5 m.
+
+      Then look at the drawer opening in that pitched
+      image. The opening has gotten smaller if either
+      is true: a pumpkin already inside is only half
+      visible, or the opening is an obvious slit
+      (front almost flush; interior is a thin line,
+      not a box). If the opening got smaller, do not
+      place yet. Do not keep adjust_chassis forward.
+      Run this fallback. Keep the held object; use
+      the free arm, not the holding arm.
+      i. First call move_to_reach_point on the gray
+         metal handle (the same thin lip as step 2).
+         z must be 0.37–0.38. If not, re-click that
+         gray lip and reach again.
+      ii. If a gap is still visible after that reach
+          (slit or half-open box): call
+          plan_grasp_point_filter_rgbd_lite on that
+          same gray handle, then exec_plan_pose that
+          plan_id, then close_gripper on that arm,
+          then adjust_chassis forward=-0.4 to pull
+          the drawer open. Then open_gripper and
+          set_arm_to_grasp_position on that pull arm.
+          After the interior is a visible box again,
+          continue the place below.
+      iii. If there is no gap (front flush, no
+           interior): go back to step 2 and open the
+           drawer. Do not open the holding gripper.
+
+      If the opening is still a visible box (full
+      interior, not a slit; an inside pumpkin is
+      fully visible if one is there): then
+      adjust_chassis until the return chassis-forward
+      path nearest-object distance is between 0.2 m and
+      0.25 m. Do not go below 0.2 m. That band is close
+      enough and will not hit the cabinet. If the
+      nearest is still above 0.25 m, keep moving closer.
+      Do not stop at 0.4 m or 0.5 m. Stop anyway if
+      the pitched foot view already shows the cabinet
+      at the feet.
+
+   Place (only after the opening is a visible box, not
+   a slit). Do not call move_to_reach_point in this
+   place stage except the fallback above. Do not
+   freehand-lower the EEF to place.
+
+   On the current head image, call track_object_distance
+   once with two points:
+     tv_stand_drawer_beige_panel_center — the light beige
+       interior floor of the open drawer box. Click inside
+       the opening, on that light beige bottom. Dark brown
+       is the cabinet outside, the drawer front, and the
+       sides. Do not click dark brown. Do not click the
+       room floor, a divider, or one compartment edge.
+       The click must be inside the drawer.
+     held — solid body of the object in the gripper
+   Name them tv_stand_drawer_beige_panel_center and held.
+   Do not name that place target bin, inner, or floor.
+   If tv_stand_drawer_beige_panel_center has z < 0.01,
+   that pixel is the room floor, not the beige interior.
+   You picked the wrong point. Click inside the drawer on
+   the light beige bottom again and re-track. Do not
+   keep that room-floor point as the place target.
+
+   Call move_tracked_point with the same JSON the test
+   page sends for that two-point form:
+   {
+     "execution_mode": "exec",
+     "points": [
+       {"name": "held", "role": "on_hand",
+        "target_xyz_m": {"x": {"var": "x"}, "y": {"var": "y"}, "z": {"var": "a"}}},
+       {"name": "tv_stand_drawer_beige_panel_center",
+        "role": "off_hand",
+        "target_xyz_m": {"x": {"var": "x"}, "y": {"var": "y"}, "z": {"var": "b"}}}
+     ],
+     "relations": [],
+     "inequalities": []
+   }
+   Use this JSON as written.
+
+   Then read the two tracked xyz values.
+   dx = |held.x - tv_stand_drawer_beige_panel_center.x|
+   dy = |held.y - tv_stand_drawer_beige_panel_center.y|
+   If dx < 0.05 and dy < 0.05: open_gripper on the holding
+   arm.
+   If dx or dy is still >= 0.05: do not release. Recapture,
+   re-track tv_stand_drawer_beige_panel_center and held
+   on the new image, and call move_tracked_point the same
+   JSON until dx < 0.05 and dy < 0.05, then open_gripper.
+
+   After the object is released and that arm is done, call
+   set_arm_to_grasp_position on that arm. Then
+   adjust_chassis forward=-0.3 to leave space. Turn and go
+   pick the next unused candle or pumpkin.
+
+   If the drawer has closed, or the opening is only a
+   slit, or an inside pumpkin is only half visible:
+   do not place. Run the step-3c fallback, or redo
+   step 2 if there is no gap. Then place.
+
+4. When you can see all three candles and both pumpkins
+   inside the TV-stand drawer, close it.
+   Do not close if any of the five is still outside.
+   Use adjust_chassis to push that same drawer shut. Do not
+   hit the open drawer or the objects inside. After the
+   pushing arm or approach is done, call
+   set_arm_to_grasp_position if an arm was used.
+
+   After the drawer is closed, look at the coffee
+   table again. If the caldron is not next to that
+   table, go back to step 1 and do the same
+   caldron pick and place again. Stay on that
+   until it is next to the table. Do not stop.
+
+If the scene has not reset, a BDDL condition is
+still false: a pumpkin or candle is not in a
+cabinet, the caldron is not next to a table, or
+a cabinet is still open. The task is not done.
+Do not stop. Do not treat it as submitted.
+Check which condition failed and fix it. After
+every pumpkin and candle is inside and the
+drawer is closed, you must still check the
+caldron. Only after the scene resets (the head
+view returns to the spawn pose) is the task
+done; only then stop. A scene that has not
+reset means something is still unfinished.
+
+Keep this throughout:
+- Do not collide with the open TV-stand drawer.
+- After an arm finishes a job and you no longer need that
+  pose, call set_arm_to_grasp_position on that arm.
+- If the TV-stand drawer closes on its own, go back to
+  step 2 and open it again.
+- If you come back to place and the opening has become a
+  slit or an inside pumpkin is only half visible, run
+  the step-3c fallback. Do not push the drawer shut.
+- Do not activate pick-up-object and do not pick a
+  candle or pumpkin until that TV-stand drawer is
+  visibly open. The caldron in step 1 is the exception;
+  do that first, without pick-up-object.

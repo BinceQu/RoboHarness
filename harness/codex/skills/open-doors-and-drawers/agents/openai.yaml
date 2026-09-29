@@ -1,0 +1,4 @@
+interface:
+  display_name: "Open Doors and Drawers"
+  short_description: "Open hinged, sliding, appliance doors and drawers"
+  default_prompt: "Use $open-doors-and-drawers to open the specified door or drawer."

@@ -1,0 +1,12 @@
+#!/bin/sh
+set -eu
+launcher_dir=$(CDPATH= cd "$(dirname "$0")" && pwd)
+plugin_root=$(CDPATH= cd "$launcher_dir/.." && pwd)
+export EMBODIED_PLUGIN_ROOT="$plugin_root"
+export PYTHONPATH="$plugin_root/src${PYTHONPATH:+:$PYTHONPATH}"
+python_bin="${EMBODIED_CLAUDE_PYTHON:-$plugin_root/.venv/bin/python}"
+if [ ! -x "$python_bin" ]; then
+  echo "Python environment missing; run harness/claude_code/scripts/bootstrap" >&2
+  exit 1
+fi
+exec "$python_bin" -m embodied_claude_code.server "$@"

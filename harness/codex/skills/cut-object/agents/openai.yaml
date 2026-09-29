@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cut Object"
+  short_description: "Touch a target with a held knife or axe"
+  default_prompt: "Use $cut-object to touch the target object with the held knife or axe."

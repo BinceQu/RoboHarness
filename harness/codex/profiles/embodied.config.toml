@@ -1,0 +1,113 @@
+# Install as $CODEX_HOME/embodied.config.toml and launch with
+# `codex --profile embodied`.
+
+model = "gpt-5.6-sol"
+model_reasoning_effort = "high"
+service_tier = "fast"
+
+developer_instructions = """
+You are Embodied Codex, a visual embodied agent. Operate only through the
+direct mcp__behavior_v2 tools mirrored from the active interface catalog.
+functions.exec is intentionally fail-closed in this profile; do not call it,
+functions.wait, functions.request_user_input, or any other non-embodied tool
+even if its schema is visible. Do not invoke shell, file-editing, web, browser,
+computer-use, image-generation, subagent, goal, app, or another MCP server. Do
+not modify code or files, call the REST API directly, or manage the simulator
+process. The adapter owns session and recording lifecycle. Keep robot calls
+serial and base each action on current tool results. This baseline contains no
+task-specific object order, coordinates, or manipulation policy. Camera tools
+return native MCP image content; inspect it directly without using file paths,
+base64 text, OCR, view_image, or another image-loading tool. The baseline Skill
+is already active. Call activate_skill with exactly one task Skill name to load
+that SKILL.md; do not re-invoke behavior-v2-baseline. End this Codex session
+only when the robot has fallen or the parent task is otherwise physically
+impossible, or a required tool or the simulator has crashed or is unreachable.
+Do not end the session for timeout, HTTP 504, ok=false, ambiguous evidence, or
+an action that is not yet safely justified.
+"""
+
+include_apps_instructions = false
+include_collaboration_mode_instructions = false
+include_permissions_instructions = false
+suppress_unstable_features_warning = true
+web_search = "disabled"
+
+[features]
+apps = false
+auth_elicitation = false
+browser_use = false
+browser_use_external = false
+browser_use_full_cdp_access = false
+code_mode = { enabled = true, direct_only_tool_namespaces = ["mcp__behavior_v2"] }
+code_mode_host = true
+computer_use = false
+default_mode_request_user_input = false
+goals = false
+hooks = true
+image_generation = false
+in_app_browser = false
+multi_agent = false
+network_proxy = false
+plugins = true
+remote_plugin = false
+request_permissions_tool = false
+shell_tool = false
+skill_mcp_dependency_install = false
+tool_call_mcp_elicitation = false
+tool_suggest = false
+unified_exec = false
+view_image = false
+workspace_dependencies = false
+
+[agents]
+enabled = false
+
+[tools]
+web_search = false
+
+[mcp_servers."behavior-v2"]
+command = "@MCP_COMMAND@"
+args = []
+env = { BEHAVIOR_BASE_URL = "http://127.0.0.1:15060", EMBODIED_PLUGIN_ROOT = "@PLUGIN_ROOT@" }
+env_vars = [
+  "EMBODIED_CODEX_PYTHON",
+  "ROBOHARNESS_RUN_TOKEN",
+  "BEHAVIOR_BASE_URL",
+  "EMBODIED_PLUGIN_ROOT",
+  "BEHAVIOR_ALLOW_REMOTE",
+  "BEHAVIOR_HTTP_TIMEOUT_S",
+  "BEHAVIOR_MEMORY_TIMEOUT_S",
+  "BEHAVIOR_MODEL_IMAGE_MAX_BYTES",
+  "BEHAVIOR_MODEL_IMAGE_MAX_EDGE",
+  "BEHAVIOR_MODEL_IMAGE_JPEG_QUALITY",
+  "BEHAVIOR_IMAGE_CONVERTER",
+  "BEHAVIOR_PROFILE",
+  "BEHAVIOR_RECORD",
+  "BEHAVIOR_SESSION_ID",
+  "BEHAVIOR_RECORD_LABEL",
+  "BEHAVIOR_RECORD_ROOT",
+  "XDG_RUNTIME_DIR",
+]
+enabled = true
+required = true
+default_tools_approval_mode = "approve"
+startup_timeout_sec = 20
+tool_timeout_sec = 1900
+
+[mcp_servers."behavior-v2".tools.capture_head_camera]
+approval_mode = "approve"
+
+[mcp_servers."behavior-v2".tools.capture_left_wrist_camera]
+approval_mode = "approve"
+
+[mcp_servers."behavior-v2".tools.capture_right_wrist_camera]
+approval_mode = "approve"
+
+[mcp_servers."behavior-v2".tools.measure_shoulder_distance]
+approval_mode = "approve"
+
+[plugins."visualize@openai-bundled"]
+enabled = false
+
+[plugins."embodied-codex-plugin@roboharness"]
+enabled = true

@@ -1,0 +1,3 @@
+[submodule "BEHAVIOR"]
+	path = BEHAVIOR
+	url = https://github.com/StanfordVL/BEHAVIOR-1K.git

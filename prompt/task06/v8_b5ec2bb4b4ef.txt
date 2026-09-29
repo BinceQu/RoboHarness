@@ -1,0 +1,166 @@
+This is a new hiding_Easter_eggs episode. The live task is
+hiding_Easter_eggs. Stay on this episode and this task.
+Do not reset. Do not start a new spawn. Do not switch tasks.
+
+Do not use mark_on_map or query_map. Ignore any map overlay.
+Do not activate navigate-to-target.
+Do not activate place-object-in-container. Do not use plan_place.
+Do not use move_chassis_to_floor_point.
+
+Every click uses the current 720 x 720 head image. u and v are
+integers in 0..719. If u or v is 720 or larger, do not call the
+tool. Recapture and click again on that new image. Do not
+reuse u/v from an older image_id.
+
+If failed moves have left the arms tangled, off-screen, or
+blocking the view so you cannot judge or move cleanly, stop
+nudging. Call set_arm_to_grasp_position to reset the messy
+arm or both arms, recapture, then continue.
+
+Do these steps in order. First tool: capture_head_camera.
+
+1. Pick up the wicker basket, eggs still inside it.
+   Find the basket on the lawn. If it is not in view, look
+   around with adjust_pitch and spin / adjust_chassis until
+   it is. Do not use navigate-to-target.
+
+   If a gripper already holds that basket, keep it closed.
+   Skip to step 2. Do not pick an egg yet.
+
+   Otherwise activate_skill with name="pick-up-object" and
+   follow only that Skill until the basket is visually
+   confirmed in one gripper and the Skill's required stow
+   is done. Click solid basket material: rim, wall, or
+   handle. Not an egg, not the empty interior, not the lawn.
+   After exec_plan_pose, look at the returned wrist image
+   only, not ok/error/timeout/stall. If the grasp volume
+   already covers that basket, close_gripper immediately.
+   Do not exec the same plan again.
+
+   The basket is large. After the grasp, stow with reset_body
+   keep_ori_arm=the holding arm. Do not open the holding
+   gripper. When the stow returns, exit pick-up-object.
+   Carry and dump are parent-task work.
+
+2. Carry the basket next to one tree, dump every egg out.
+   Keep the holding gripper closed. Recapture. Choose any
+   one visible tree and keep it. If none is in view, look
+   around until one is.
+
+   On a current head image, click a lawn point slightly in
+   front of that tree's root — closer to the robot than the
+   trunk, on grass, not on the trunk, not on foliage. u,v
+   in 0..719. Call move_to_reach_point with that current
+   image_id, u, and v only. The blue path must be clear.
+   If the tree is off to one side, first spin so the trunk
+   is ahead, recapture, re-click, then move_to_reach_point.
+
+   As soon as the chassis is next to that tree, call
+   open_gripper on the holding arm only. Drop the basket.
+   Do not lower it. Do not track basket_bottom. Do not
+   wait for a z gate.
+
+   Recapture. Eggs may still sit inside the basket. That is
+   fine. Go to step 3. Do not reach into the opening with
+   pick-up-object or plan_grasp_point_filter_rgbd_lite.
+
+3. Pick each unused egg and place it close to that tree.
+   Work one unused egg at a time. Unused means: not already
+   sitting close to that same tree.
+
+   In-basket egg — vertical downward pose, do not skip:
+   If the current image shows that egg still inside the
+   basket, upright or on its side, stay on the baseline.
+   Do not activate pick-up-object. Do not call
+   plan_grasp_point_filter_rgbd_lite. Do not reach into
+   the opening.
+
+   Open the gripper you will use, if it is closed.
+   On the current 720 x 720 head image, click the highest
+   visible point of that egg body — the top of the shell,
+   not the basket rim, not the lawn, not another egg.
+   Call track_object_distance once on that same image_id
+   with exactly one point named egg. track_object_distance
+   replaces the whole set. left_finger_tip, right_finger_tip,
+   and gripper_slide_center are reserved on-hand names. Do
+   not track them. Do not click them.
+
+   Call move_tracked_point with execution_mode=plan and
+   quick preset none. One call. C1 plus C2. Shared letters
+   are the same free variables. This makes a straight-down
+   pose so the fingers do not jam in the basket:
+
+   C1 — finger tips keep their own x,y and drop to egg.z-0.05:
+     left_finger_tip      on_hand   a, b, z-0.05
+     egg                  off_hand  c, d, z
+     right_finger_tip     on_hand   e, f, z-0.05
+
+   C2 — gripper slide over the egg x,y, keep slide height g:
+     gripper_slide_center on_hand   c, d, g
+     egg                  off_hand  c, d, z
+
+   Concrete arguments:
+     execution_mode=plan
+     points=[
+       {name:left_finger_tip, role:on_hand,
+        target_xyz_m:{x:"a", y:"b", z:"z-0.05"}},
+       {name:"egg", role:off_hand,
+        target_xyz_m:{x:"c", y:"d", z:"z"}},
+       {name:right_finger_tip, role:on_hand,
+        target_xyz_m:{x:"e", y:"f", z:"z-0.05"}},
+       {name:gripper_slide_center, role:on_hand,
+        target_xyz_m:{x:"c", y:"d", z:"g"}}
+     ]
+
+   Do not pass plan_arm. If the plan fails or the red overlay
+   misses that egg, recapture, bind egg on the highest point
+   again, and replan with this same input. Do not exec a bad
+   plan. Do not switch to plan_grasp_point_filter_rgbd_lite.
+
+   Then call exec_plan_pose with that plan_id and back_m=0.2.
+   Look at the returned wrist image only, not
+   ok/error/timeout/stall. If the grasp volume already covers
+   that egg, close_gripper immediately. If the volume misses,
+   recapture, rebind the highest point, replan, exec back_m=0.2
+   again. After a confirmed close, stow with reset_body
+   keep_ori_arm=the holding arm. Do not open the holding
+   gripper. Then place as below.
+
+   Lawn egg — pick-up-object:
+   If that unused egg is already on the lawn and not inside
+   the basket, activate_skill with name="pick-up-object" and
+   follow only that Skill until that one egg is in one
+   gripper and the required stow is done. Click the egg body,
+   not the basket, not the lawn, not another egg, and not an
+   egg already next to the tree. u,v in 0..719. After
+   exec_plan_pose, if the wrist grasp volume already covers
+   that egg, close_gripper immediately. When the stow
+   returns, exit pick-up-object. Do not stay inside
+   pick-up-object to place.
+
+   Then place that held egg on the lawn close to the same
+   tree. Keep the holding gripper closed until the z gate.
+   Recapture. The BOTTOM of the held egg and a lawn patch
+   next to that tree must both be visible. On that current
+   head image, track_object_distance once with egg_bottom
+   on the lowest visible underside of the held egg, u,v in
+   0..719. The only place gate is:
+   egg_bottom.z < 0.20
+   While z is 0.20 or higher, move only the holding arm
+   with adjust_left_eef_pose_in_head_frame or
+   adjust_right_eef_pose_in_head_frame. Lower z slowly,
+   about 0.05 to 0.10 m per step. Leave roll, pitch, and
+   yaw unchanged. Do not mix the forward/leftward/upward
+   family in the same call. Do not use adjust_height.
+   When egg_bottom.z is below 0.20 m, open_gripper on the
+   holding arm only. Confirm the egg sits on the lawn
+   close to that tree, then go to the next unused egg.
+
+Do not pick an egg that is already close to the chosen
+tree. After an egg is on the lawn, do not spin or back
+the chassis over it.
+
+Success is visual: after a look-around, every Easter egg
+you can see is on the lawn close to that same tree, and
+none remain in the basket. Stop only when that check
+passes.

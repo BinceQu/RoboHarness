@@ -1,0 +1,21 @@
+"""图像 / 世界坐标合同。
+
+原文件是 admin 600。官方口启动只要这些公开符号；
+u/v 与 official v2 read_depth 一样走 0..1000。
+"""
+
+from __future__ import annotations
+
+from functools import wraps
+from typing import Any, Callable
+
+COORDINATE_MAX = 1000.0
+COORDINATE_SYSTEM = "image_uv_top_left_0_1000"
+
+
+def public_skill_wrapper(fn: Callable[..., Any]) -> Callable[..., Any]:
+    @wraps(fn)
+    def wrapped(*args: Any, **kwargs: Any):
+        return fn(*args, **kwargs)
+
+    return wrapped

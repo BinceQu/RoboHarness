@@ -1,0 +1,46 @@
+diff --git a/corelib/src/Rtabmap.cpp b/corelib/src/Rtabmap.cpp
+--- a/corelib/src/Rtabmap.cpp
++++ b/corelib/src/Rtabmap.cpp
+@@ -3232,12 +3232,36 @@
+ 				const Transform externalMetricGuess =
+ 					externalLoopClosureHypothesis == _loopClosureHypothesis.first
+ 					? externalLoopClosureMetricTransform : Transform();
+-				transform = _memory->computeTransform(
+-						_loopClosureHypothesis.first,
+-						signature->id(),
+-						!externalMetricGuess.isNull() ? externalMetricGuess :
+-							(_loopClosureIdentityGuess?Transform::getIdentity():Transform()),
+-						&info);
++				const Transform registrationGuess =
++					!externalMetricGuess.isNull() ? externalMetricGuess :
++						(_loopClosureIdentityGuess?Transform::getIdentity():Transform());
++				if(!externalMetricGuess.isNull())
++				{
++					// A resident historical Signature may have had its compressed
++					// RGB-D/scan payload cleared after the asynchronous database save.
++					// Standard BoW retrieval normally reactivates that payload, but an
++					// externally nominated id can already be in WM and therefore skip
++					// reactivation. Load independent copies through the public database
++					// path so the normal Vis+ICP registration still validates the edge.
++					Signature candidate = getSignatureCopy(
++						_loopClosureHypothesis.first, true, true, false, false, true, false);
++					Signature current = getSignatureCopy(
++						signature->id(), true, true, false, false, true, false);
++					if(candidate.id() > 0 && current.id() > 0)
++					{
++						transform = _memory->computeTransform(
++							candidate, current, registrationGuess, &info);
++					}
++					else
++					{
++						info.rejectedMsg = "External candidate RGB-D payload is unavailable";
++					}
++				}
++				else
++				{
++					transform = _memory->computeTransform(
++						_loopClosureHypothesis.first, signature->id(), registrationGuess, &info);
++				}
+ 
+ 				loopClosureVisualInliersMeanDist = info.inliersMeanDistance;
+ 				loopClosureVisualInliersDistribution = info.inliersDistribution;

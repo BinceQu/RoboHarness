@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "mcp__behavior-v2__*",
+      "mcp__plugin_embodied-claude-code_behavior-v2__*",
+      "mcp__behavior-robot__*",
+      "mcp__plugin_embodied-claude-code_behavior-robot__*"
+    ],
+    "defaultMode": "dontAsk"
+  }
+}

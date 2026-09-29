@@ -1,0 +1,33 @@
+diff --git a/corelib/src/python/PythonInterface.cpp b/corelib/src/python/PythonInterface.cpp
+index c1493407..04eb52e2 100644
+--- a/corelib/src/python/PythonInterface.cpp
++++ b/corelib/src/python/PythonInterface.cpp
+@@ -14,6 +14,7 @@
+ #include <pybind11/embed.h>
+ #include <filesystem>
+ #include <thread>
++#include <cstdlib>
+ 
+ namespace rtabmap {
+ 
+@@ -56,6 +57,20 @@ PythonInterface::PythonInterface(const std::string & caller)
+ 
+ PythonInterface::~PythonInterface()
+ {
++	// PyTorch's CUDA allocator is not safe to tear down through Py_FinalizeEx
++	// from a C++ static destructor.  Process-isolated users can opt out: the
++	// operating system then releases the interpreter and CUDA context together
++	// at process exit. Keep this conditional so ordinary RTAB-Map embedding
++	// retains the upstream lifetime behavior.
++	const char * skipFinalize = std::getenv("RTABMAP_PYTHON_SKIP_FINALIZE");
++	if(skipFinalize && skipFinalize[0] != '\0' &&
++	   std::string(skipFinalize).compare("0") != 0)
++	{
++		UINFO("Skip python interpreter finalization at process exit");
++		release_ = 0;
++		guard_ = 0;
++		return;
++	}
+ 	UINFO("Finalize python interpreter");
+ 	delete release_;
+ 	delete guard_;

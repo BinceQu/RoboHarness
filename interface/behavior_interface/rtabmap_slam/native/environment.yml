@@ -1,0 +1,16 @@
+name: behavior-rtabmap-native
+channels:
+  - conda-forge
+dependencies:
+  - cmake=4.4
+  - ninja=1.13
+  - gcc_linux-64=14.4
+  - gxx_linux-64=14.4
+  - opencv=4.13
+  - pcl=1.15
+  - eigen=3.4
+  - libboost=1.88
+  - flann=1.9
+  - sqlite=3.53
+  - zlib=1.3
+  - ceres-solver=2.2

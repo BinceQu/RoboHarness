@@ -1,0 +1,14 @@
+{
+  "name": "embodied-claude-code",
+  "displayName": "Embodied Claude Code",
+  "version": "0.4.0",
+  "description": "Visual robot control through the recordable BEHAVIOR v2 MCP adapter.",
+  "author": {
+    "name": "Embodied Claude Code contributors"
+  },
+  "keywords": [
+    "embodied-agent",
+    "mcp",
+    "robotics"
+  ]
+}

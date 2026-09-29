@@ -1,0 +1,20 @@
+{
+  "name": "roboharness",
+  "interface": {
+    "displayName": "RoboHarness Codex"
+  },
+  "plugins": [
+    {
+      "name": "embodied-codex-plugin",
+      "source": {
+        "source": "local",
+        "path": "."
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

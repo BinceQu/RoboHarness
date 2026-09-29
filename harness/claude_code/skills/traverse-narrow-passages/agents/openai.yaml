@@ -1,0 +1,4 @@
+interface:
+  display_name: "Traverse Narrow Passages"
+  short_description: "Guide the robot safely through an open narrow passage"
+  default_prompt: "Use $traverse-narrow-passages to guide the robot fully through the open doorway ahead."

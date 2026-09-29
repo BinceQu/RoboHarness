@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+"""Build a private Codex configuration from the checked-in embodied profile."""
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+
+repo = Path(__file__).resolve().parents[1]
+state_dir = Path(os.environ.get('CODEX_HOME', repo / '.codex-home')).resolve()
+state_dir.mkdir(parents=True, exist_ok=True)
+if state_dir == Path.home() / '.codex':
+    raise SystemExit('Use a private CODEX_HOME; this launcher does not overwrite your personal config.')
+text = (repo / 'profiles/embodied.config.toml').read_text()
+text = text.replace('@MCP_COMMAND@', str(repo / 'scripts/embodied-codex-mcp'))
+text = text.replace('@PLUGIN_ROOT@', str(repo))
+model = os.environ.get('ROBOHARNESS_CODEX_MODEL', 'gpt-5.6-sol')
+text = text.replace('model = "gpt-5.6-sol"', 'model = ' + json.dumps(model))
+endpoint = os.environ.get('ROBOHARNESS_CODEX_BASE_URL', '')
+if endpoint:
+    text = 'model_provider = "roboharness"\n' + text
+    text += '\n[model_providers.roboharness]\nname = "RoboHarness"\nwire_api = "responses"\n'
+    text += 'base_url = ' + json.dumps(endpoint) + '\nenv_key = "OPENAI_API_KEY"\n'
+text += '\n[shell_environment_policy]\ninherit = "all"\n'
+text += '\n[projects.' + json.dumps(str(repo)) + ']\ntrust_level = "trusted"\n'
+(state_dir / 'config.toml').write_text(text)
+codex = os.environ.get('CODEX_BIN') or shutil.which('codex')
+if not codex:
+    raise SystemExit('Install the Codex CLI or set CODEX_BIN to its executable.')
+env = dict(os.environ, CODEX_HOME=str(state_dir))
+# Let the CLI register, install and trust the local plugin in this run's home.
+# The manifest version must be bumped whenever a released plugin is changed.
+for args in [('marketplace', 'add', str(repo)), ('add', 'embodied-codex-plugin@roboharness')]:
+    subprocess.run([codex, 'plugin', *args], env=env, stdout=sys.stderr, check=True)
+installed = json.loads(subprocess.check_output([codex, 'plugin', 'list', '--json'], env=env))
+manifest = json.loads((repo / '.codex-plugin/plugin.json').read_text())
+matches = [p for p in installed.get('installed', [])
+           if p.get('pluginId') == 'embodied-codex-plugin@roboharness']
+if (len(matches) != 1 or matches[0].get('version') != manifest['version']
+        or Path(matches[0].get('source', {}).get('path', '')).resolve() != repo):
+    raise SystemExit('Codex installed a different plugin source or version; refusing to start.')
+(state_dir / 'embodied.config.toml').write_text((state_dir / 'config.toml').read_text())
+print('Prepared embodied Codex config:', state_dir, file=sys.stderr)

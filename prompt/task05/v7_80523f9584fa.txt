@@ -1,0 +1,176 @@
+Place four mousetraps on port 15065. The live task is
+setting_mousetraps. Do not reset. Do not start a new spawn.
+Do not switch tasks.
+
+The first attached image is a visual prompt of this same bathroom
+sink. The red rectangle marks the ONLY legal sink_near_lip: the
+thin white line where the vanity's front panel ends. On a close
+live image that line sits mid-frame and is still white porcelain.
+It is not the floor, not the tiles, not the blue path, and not
+the large white sink front above the box. Use the attached image
+only to see which edge. On every new live head image, click that
+same white edge. Do not copy u/v numbers from the attached image.
+
+Do not use mark_on_map or query_map. Ignore the SLAM map and any
+minimap. The blue overlay is not a click target. Before every
+chassis forward, still look at that blue corridor: if any object
+sits on it, do not go forward; spin or translate until it is
+empty, then face the goal, then a shorter forward. adjust_chassis
+is a straight move. Never drive into furniture, walls, the tub,
+a cabinet, or the sink. A chassis-forward warning distance is a
+stop.
+
+There are exactly four mousetraps. All four start on the brown
+tabletop — the flat upper surface of the brown dresser in this
+bathroom. They sit out in the open on that brown top, already
+visible. None of them is inside a cabinet, inside a drawer,
+behind a door, or under a lid. Do not look in the vanity, the
+sink cupboard, any closed cabinet, or any drawer.
+
+First step, before any pick or any Skill: look around the
+bathroom. Spin or recapture until you see that brown tabletop
+and the four mousetraps sitting on it. If you do not see them
+yet, keep turning; they are on that brown top, not hidden. Do
+not activate open-doors-and-drawers. Do not click a handle.
+Do not exec_plan_pose a door or drawer. Do not pry or open
+anything. Opening a cabinet cannot find a trap.
+
+Work one trap at a time. If a trap is already in a gripper, place
+that one first.
+
+First finish pick-and-place for all four mousetraps. During that
+first pass, pick unused traps from that same brown tabletop, not
+traps already on the floor, and not anything inside furniture.
+
+Parent method, repeat four times:
+1. Pick up one unused mousetrap.
+2. Place it, then release it.
+   - Traps 1 and 2: onto the floor under the same sink.
+   - Traps 3 and 4: onto the open bathroom floor, not under the
+     sink.
+
+After a trap is on the floor, do not spin or back the chassis
+over it. That sweeps the trap away.
+After you finish a job with one arm and that hand is not needed
+for the next action, call set_arm_to_grasp_position on that arm
+so the unused arm does not interfere with later motion.
+
+Find and approach each unused trap under the baseline and this parent task.
+Do not activate pick-up-object while still searching or travelling to the trap.
+Once the trap is visible and the robot is close enough to begin the picking
+procedure, activate_skill with name="pick-up-object". Follow that Skill until
+that one trap is visually confirmed in one gripper and its required stow is done.
+Then immediately call deactivate_skill with name="pick-up-object" and continue
+the placement below under the baseline and this parent task. Do not activate
+another Skill merely to clear the pick label. If you cancel or hand back control
+before the pick is complete, explicitly deactivate it and keep the unfinished
+pick in the parent task; do not proceed to placement without the confirmed grasp
+and required stow.
+Click the trap body, not the cabinet, not the sink, and not the
+floor.
+
+There is only one legal way to pick a mousetrap: the pick-up-object
+Skill sequence. After activate, stay in that Skill and do only this
+order:
+1. move_to (face, then move_to_reach_point when the blue line is clear)
+2. if the grasp plan says too far, close range with adjust_pitch /
+   adjust_chassis / another move_to_reach_point, then recapture
+3. plan_grasp (plan_grasp_point_filter_rgbd_lite on a fresh click)
+4. exec_plan_pose on that plan
+5. close_gripper on the planned arm
+
+Manual grasping is impossible. A fingertip jog will not pick a
+mousetrap. While picking, do not use
+adjust_*_eef_pose_in_head_frame to grab, do not use
+move_tracked_point, do not bind hook_pt / right_finger_tip and
+touch them together, do not open_gripper then close_gripper as a
+grasp, and do not treat track_object_distance as a pick. Those
+are not a grasp. If plan or exec fails, stay in pick-up-object:
+recapture, click the trap body again, move closer or replan, then
+exec again. Do not invent a hand-tune approach.
+
+Under-sink placement uses only this stack. Do not activate
+place-object-in-container. Do not use plan_place or exec_plan_pose.
+
+After the trap is held:
+
+Traps 1 and 2 — under the sink, this order only:
+1. Capture the head camera. Both must be visible on that image:
+   the held mousetrap, and the boxed white vanity edge.
+   If either is missing, make a small pose change and recapture.
+   Keep the holding gripper closed.
+2. On that same image_id, call track_object_distance once:
+   - trap_body: a point on the held mousetrap
+   - sink_near_lip: a point on that boxed white edge
+     Click that thin white porcelain only. Do not click the sink
+     front. Do not click the floor.
+   Click fresh u/v on this image_id only. If the bind fails, or
+   either name is not observed, recapture and bind both again.
+   Do not go to step 3 until both tracks are observed.
+3. On that same image_id, call move_to_reach_point with the
+   sink_near_lip u/v you just bound. That drives the chassis to
+   the lip. Do not use measure_shoulder_distance. Do not use
+   reset_body. Do not use a wrist camera. If the blue corridor
+   is blocked, clear it first, then reach.
+4. After the reach, capture a new head image. Bind trap_body and
+   sink_near_lip again on that new image_id. Fresh u/v. Do not
+   reuse the pre-reach u/v.
+5. Now adjust only the holding arm with
+   adjust_left_eef_pose_in_head_frame or
+   adjust_right_eef_pose_in_head_frame. Read both current
+   xyz_in_robot_base_coord_m. +X is chassis-forward, +Y left,
+   +Z up. Do z first, then x. Never mix those in the same call.
+   While trap_body.z > sink_near_lip.z:
+   - keep trap_body.x < sink_near_lip.x
+   - only lower z; do not increase x
+   Only after trap_body.z < sink_near_lip.z may you increase
+   trap_body.x toward sink_near_lip.x + 0.05.
+   Leave roll, pitch, and yaw unchanged. Do not mix the
+   forward/leftward/upward family in the same call.
+6. If either track is lost or not observed: stop the arm. Do not
+   adjust again. Recapture the head camera. Bind trap_body and
+   sink_near_lip again on the new image. Then continue from
+   step 5. Never adjust from a dead track.
+7. Do not open_gripper until both are true:
+   - trap_body.z < sink_near_lip.z
+   - trap_body.x is 0.05 m farther than sink_near_lip.x
+   Then open_gripper on the holding arm only. Confirm the trap
+   is under the sink, then go to the next unused trap.
+
+Traps 3 and 4 — open bathroom floor:
+1. Recapture the head camera. Both must be visible on the same
+   current image:
+   - the held mousetrap body
+   - the target open-floor patch, not under the sink
+   If either is missing, use small baseline pose changes until both
+   are visible. Keep the holding gripper closed.
+2. On that same current head image, call track_object_distance once
+   with exactly two named points:
+   - trap_body: a point on the held mousetrap
+   - place_floor: a point on that open-floor patch
+   Do not reuse u/v from an older image_id.
+3. After every action, read both current xyz_in_robot_base_coord_m
+   values from persistent_tracking. Compute place_floor - trap_body.
+   Move only the holding arm with
+   adjust_left_eef_pose_in_head_frame or
+   adjust_right_eef_pose_in_head_frame. Pass that difference as x, y,
+   and z; leave roll, pitch, and yaw unchanged. Do not mix the
+   forward/leftward/upward family in the same call. If the residual
+   is large, keep each step bounded; then re-read the tracks and
+   repeat.
+4. If either track is lost or not observed: stop the arm. Do not
+   adjust again. Recapture and bind trap_body and place_floor
+   again on the new image. Never adjust from a dead track.
+5. When the held trap is just above that floor patch, call
+   open_gripper on the holding arm only. Confirm the trap is on that
+   floor, then go to the next unused trap.
+
+After all four pick-and-place steps are done, look around and
+check whether exactly two mousetraps are under the sink, and
+exactly two are on the bathroom floor not under the sink. If
+that is not true, pick a trap up from the floor with
+pick-up-object using the same plan_grasp then exec then close
+sequence only, and place it again to fix the count. Then look
+around and check again.
+
+Stop when that check passes.

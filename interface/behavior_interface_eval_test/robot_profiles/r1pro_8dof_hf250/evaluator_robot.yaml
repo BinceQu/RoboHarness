@@ -1,0 +1,137 @@
+model: r1pro
+name: robot_r1
+eval:
+  camera_sensor_names:
+    left_wrist: robot_r1:left_realsense_link:Camera:0
+    right_wrist: robot_r1:right_realsense_link:Camera:0
+    head: robot_r1:zed_link:Camera:0
+action_normalize: false
+self_collisions: false
+obs_modalities:
+  - proprio
+  - rgb
+proprio_obs:
+  - base_qvel
+  - arm_left_qpos
+  - arm_left_qvel
+  - eef_left_pos
+  - eef_left_quat
+  - gripper_left_qpos
+  - gripper_left_qvel
+  - arm_right_qpos
+  - arm_right_qvel
+  - eef_right_pos
+  - eef_right_quat
+  - gripper_right_qpos
+  - gripper_right_qvel
+  - trunk_qpos
+  - trunk_qvel
+grasping_mode: assisted
+default_reset_mode: tuck
+sensor_config:
+  VisionSensor:
+    sensor_kwargs:
+      image_height: 1080
+      image_width: 1080
+controller_config:
+  arm_left:
+    name: JointController
+    motor_type: position
+    isaac_kp: 10000000.0
+    isaac_kd: 100000.0
+    command_input_limits: null
+    command_output_limits: null
+    use_impedances: false
+    use_delta_commands: false
+  arm_right:
+    name: JointController
+    motor_type: position
+    isaac_kp: 10000000.0
+    isaac_kd: 100000.0
+    command_input_limits: null
+    command_output_limits: null
+    use_impedances: false
+    use_delta_commands: false
+  gripper_left:
+    name: MultiFingerGripperController
+    motor_type: effort
+    mode: independent
+    command_input_limits:
+      - [-20.0, -20.0]
+      - [20.0, 20.0]
+    command_output_limits:
+      - [-20.0, -20.0]
+      - [20.0, 20.0]
+    limit_tolerance: 0.0
+    inverted: false
+  gripper_right:
+    name: MultiFingerGripperController
+    motor_type: effort
+    mode: independent
+    command_input_limits:
+      - [-20.0, -20.0]
+      - [20.0, 20.0]
+    command_output_limits:
+      - [-20.0, -20.0]
+      - [20.0, 20.0]
+    limit_tolerance: 0.0
+    inverted: false
+  base:
+    name: HolonomicBaseJointController
+    motor_type: velocity
+    # Per-axis damping is bounded by the submitted 250 kg base mass/inertia.
+    # Linear commands still reach the existing 10000N force cap, while the
+    # small-error response remains monotone at the 120Hz physics rate.
+    isaac_kd: [30000.0, 30000.0, 1700.0]
+    command_input_limits:
+      - [-1.0, -1.0, -1.0]
+      - [1.0, 1.0, 1.0]
+    command_output_limits:
+      - [-0.75, -0.75, -1.0]
+      - [0.75, 0.75, 1.0]
+    use_impedances: false
+  trunk:
+    name: JointController
+    motor_type: position
+    isaac_kp: 10000000.0
+    isaac_kd: 100000.0
+    command_input_limits: null
+    command_output_limits:
+      - [-1.1345, -2.7925, -1.8326, 0.0]
+      - [1.8326, 2.5307, 1.5708, 0.0]
+    use_impedances: false
+    use_delta_commands: false
+  camera:
+    name: NullJointController
+reset_joint_pos:
+  # 6 virtual base + 4 trunk + 8 left arm + 8 right arm + 4 fingers.
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 1.025
+  - -1.45
+  - -0.47
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.05
+  - 0.05
+  - 0.05
+  - 0.05

@@ -1,0 +1,13 @@
+#!/bin/sh
+# 用本仓库 src/ 启动 MCP，不依赖全局 pip 安装的旧包。
+set -eu
+launcher_dir=$(CDPATH= cd "$(dirname "$0")" && pwd)
+plugin_root=$(CDPATH= cd "$launcher_dir/.." && pwd)
+export EMBODIED_PLUGIN_ROOT="${EMBODIED_PLUGIN_ROOT:-$plugin_root}"
+export PYTHONPATH="$plugin_root/src${PYTHONPATH:+:$PYTHONPATH}"
+# 依赖用现场 venv（jsonschema / mcp），源码用本仓库 src/。
+venv_py="${EMBODIED_CODEX_PYTHON:-$plugin_root/.venv/bin/python}"
+if [ -x "$venv_py" ]; then
+  exec "$venv_py" -m embodied_codex.server "$@"
+fi
+exec python3 -m embodied_codex.server "$@"

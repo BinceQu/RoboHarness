@@ -1,0 +1,2650 @@
+{
+  "tool_version": "v2",
+  "tools": [
+    {
+      "args": [],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u62cd\u4e00\u5f20 head camera \u4e3b\u89c6\u56fe\uff0c\u8fd4\u56de image_id\uff08\u540e\u7eed\u70b9\u9009/\u89c4\u5212\u90fd\u57fa\u4e8e\u5b83\uff09\u3002",
+      "endpoint": "/api/v2/capture_head_camera",
+      "name": "capture_head_camera"
+    },
+    {
+      "args": [],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u62cd\u5de6\u8155 RGB + depth\uff0c\u4e0d\u8ffd\u52a0 head capture\u3002\u56fe\u4e2d\u7ea2\u8272\u56fe\u5c42\u5bf9\u5e94\u5de6\u5939\u722a\u4e24\u722a\u4e2d\u95f4\u533a\u57df\uff1b\u7ea2\u8272\u50cf\u7d20\u8868\u793a\u975e\u673a\u5668\u4eba\u53ef\u89c1 3D \u70b9\u4e25\u683c\u843d\u5728\u8be5\u533a\u57df\u5185\uff1b\u5e95\u8fb9 x(m) \u6807\u5c3a\u4ee5\u5939\u722a\u5f00\u53e3\u4e2d\u5fc3\u4e3a 0\uff0c\u5411\u53f3\u4e3a\u6b63\uff0c\u8303\u56f4 \u00b10.02m\uff0c\u6bcf\u683c 0.01m\u3002",
+      "endpoint": "/api/v2/capture_left_wrist_camera",
+      "name": "capture_left_wrist_camera"
+    },
+    {
+      "args": [],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u62cd\u53f3\u8155 RGB + depth\uff0c\u4e0d\u8ffd\u52a0 head capture\u3002\u56fe\u4e2d\u7ea2\u8272\u56fe\u5c42\u5bf9\u5e94\u53f3\u5939\u722a\u4e24\u722a\u4e2d\u95f4\u533a\u57df\uff1b\u7ea2\u8272\u50cf\u7d20\u8868\u793a\u975e\u673a\u5668\u4eba\u53ef\u89c1 3D \u70b9\u4e25\u683c\u843d\u5728\u8be5\u533a\u57df\u5185\uff1b\u5e95\u8fb9 x(m) \u6807\u5c3a\u4ee5\u5939\u722a\u5f00\u53e3\u4e2d\u5fc3\u4e3a 0\uff0c\u5411\u53f3\u4e3a\u6b63\uff0c\u8303\u56f4 \u00b10.02m\uff0c\u6bcf\u683c 0.01m\u3002",
+      "endpoint": "/api/v2/capture_right_wrist_camera",
+      "name": "capture_right_wrist_camera"
+    },
+    {
+      "args": [
+        {
+          "name": "image_id",
+          "required": true,
+          "widget": "image"
+        },
+        {
+          "coordinate_system": "qwen3vl_relative_0_1000",
+          "maximum": 1000,
+          "minimum": 0,
+          "name": "u",
+          "required": true,
+          "type": "integer",
+          "unit": "Qwen3-VL relative coordinate 0..1000",
+          "widget": "uv"
+        },
+        {
+          "coordinate_system": "qwen3vl_relative_0_1000",
+          "maximum": 1000,
+          "minimum": 0,
+          "name": "v",
+          "required": true,
+          "type": "integer",
+          "unit": "Qwen3-VL relative coordinate 0..1000",
+          "widget": "uv"
+        }
+      ],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u8bfb\u53d6\u51bb\u7ed3 capture \u4e2d\u6240\u9009 UV \u5355\u4e2a\u50cf\u7d20\u7684 depth_linear\uff0c\u8fd4\u56de depth_m\uff0c\u5355\u4f4d m\u3002",
+      "endpoint": "/api/v2/read_depth",
+      "name": "read_depth",
+      "pick_like": "mark_object"
+    },
+    {
+      "args": [
+        {
+          "name": "image_id",
+          "required": true,
+          "widget": "image"
+        },
+        {
+          "coordinate_system": "qwen3vl_relative_0_1000",
+          "maximum": 1000,
+          "minimum": 0,
+          "name": "u",
+          "required": true,
+          "type": "integer",
+          "unit": "Qwen3-VL relative coordinate 0..1000",
+          "widget": "uv"
+        },
+        {
+          "coordinate_system": "qwen3vl_relative_0_1000",
+          "maximum": 1000,
+          "minimum": 0,
+          "name": "v",
+          "required": true,
+          "type": "integer",
+          "unit": "Qwen3-VL relative coordinate 0..1000",
+          "widget": "uv"
+        },
+        {
+          "default": 120,
+          "name": "nav_timeout_s",
+          "required": false,
+          "type": "number",
+          "unit": "s(XY \u5e73\u79fb\u9636\u6bb5\u8d85\u65f6)",
+          "widget": "number"
+        },
+        {
+          "default": 0.04,
+          "name": "ground_tol_m",
+          "required": false,
+          "type": "number",
+          "unit": "m(\u53cd\u89e3\u70b9\u79bb\u5730\u9762\u9876\u9762\u7684\u5bb9\u5dee)",
+          "widget": "number"
+        },
+        {
+          "default": 0.12,
+          "name": "pos_tol_m",
+          "required": false,
+          "type": "number",
+          "unit": "m(XY \u5230\u70b9\u5bb9\u5dee)",
+          "widget": "number"
+        }
+      ],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u70b9\u9009\u53ef\u89c1\u5730\u677f/\u5730\u9762\u70b9\uff1a\u4fdd\u6301\u5f53\u524d yaw\uff0c\u6309\u8d77\u59cb\u673a\u4f53\u7cfb forward/leftward \u5411\u91cf\u76f4\u63a5\u540c\u6b65\u5e73\u79fb\uff0c\u4f7f\u84dd\u8272\u8def\u5f84\u8d77\u59cb\u7ebf\u4e2d\u70b9\u5230\u8fbe\u70b9\u9009\u4f4d\u7f6e\uff1b\u8eab\u4f53\u4e0d\u52a8\u3002",
+      "endpoint": "/api/v2/move_chassis_to_floor_point",
+      "name": "move_chassis_to_floor_point",
+      "pick_like": "mark_object"
+    },
+    {
+      "args": [
+        {
+          "name": "image_id",
+          "required": true,
+          "type": "string",
+          "widget": "image"
+        },
+        {
+          "arm_options": [
+            "any"
+          ],
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "u": {
+                "maximum": 1000,
+                "minimum": 0,
+                "type": "number"
+              },
+              "v": {
+                "maximum": 1000,
+                "minimum": 0,
+                "type": "number"
+              }
+            },
+            "required": [
+              "u",
+              "v"
+            ],
+            "type": "object"
+          },
+          "max_points": 3,
+          "min_points": 3,
+          "name": "points",
+          "required": true,
+          "type": "array",
+          "widget": "multi_uv_arm"
+        },
+        {
+          "default": 120.0,
+          "name": "nav_timeout_s",
+          "required": false,
+          "type": "number",
+          "unit": "s",
+          "widget": "number"
+        },
+        {
+          "default": 0.04,
+          "name": "pos_tol_m",
+          "required": false,
+          "type": "number",
+          "unit": "m",
+          "widget": "number"
+        }
+      ],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "Qwen3-VL relative image coordinates 0..1000",
+      "desc": "\u5728\u540c\u4e00\u5f20\u51bb\u7ed3 head RGB-D \u56fe\u4e0a\u9009\u62e9\u6070\u597d\u4e09\u4e2a\u4e0d\u5171\u7ebf\u7684\u8868\u9762\u70b9\u3002\u5de5\u5177\u53cd\u6295\u5f71\u4e09\u70b9\u5e76\u53d6\u4e09\u89d2\u5f62\u4e2d\u5fc3\uff1b\u6cd5\u5411\u7b26\u53f7\u81ea\u52a8\u9009\u62e9\u4e3a\u4e0e\u51bb\u7ed3 head \u76f8\u673a\u89c6\u7ebf\u6210\u949d\u89d2\u7684\u4e00\u4fa7\u3002\u5e95\u76d8\u4e2d\u5fc3\u5148\u5e73\u79fb\u5230\u4e2d\u5fc3\u6cbf\u8be5\u6cd5\u5411 0.8m \u540e\u6295\u5f71\u5230\u5730\u9762\u7684 XY \u70b9\uff0c\u518d\u539f\u5730\u65cb\u8f6c\uff0c\u4f7f\u673a\u5668\u4eba\u524d\u5411\u4e0e\u8be5\u6cd5\u5411\u7684\u6c34\u5e73\u6295\u5f71\u5e73\u884c\u4e14\u65b9\u5411\u76f8\u53cd\u3002\u4e09\u70b9\u987a\u5e8f\u4e0d\u4f1a\u7ffb\u8f6c\u6700\u7ec8\u6cd5\u5411\uff1b\u6267\u884c\u53ea\u4f7f\u7528 official action\uff0c\u5e76\u7531\u540e\u7eed base_qvel proprioception \u9a8c\u8bc1\u3002",
+      "endpoint": "/api/v2/move_chassis_to_directly_facing_surface",
+      "name": "move_chassis_to_directly_facing_surface"
+    },
+    {
+      "args": [
+        {
+          "default": 0,
+          "name": "forward",
+          "required": false,
+          "type": "number",
+          "unit": "m(+\u524d\u8fdb/-\u5012\u8f66)",
+          "widget": "number"
+        },
+        {
+          "default": 0,
+          "name": "translation",
+          "required": false,
+          "type": "number",
+          "unit": "m(+\u5de6\u79fb/-\u53f3\u79fb)",
+          "widget": "number"
+        },
+        {
+          "default": 0,
+          "name": "spin",
+          "required": false,
+          "type": "number",
+          "unit": "deg(+\u5de6\u8f6cCCW/-\u53f3\u8f6c)",
+          "widget": "number"
+        }
+      ],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u53ea\u8c03\u6574\u5e95\u76d8\uff1a\u673a\u4f53\u7cfb forward/translation(+\u5de6/-\u53f3) \u540c\u5e27\u5408\u6210\u4e3a\u4e8c\u7ef4\u76f4\u79fb\uff0c\u968f\u540e\u6267\u884c\u6c34\u5e73 spin\uff1b\u4e0d\u6539 pitch/upward\uff0c\u5b8c\u6210\u540e\u62cd head camera\u3002",
+      "endpoint": "/api/v2/adjust_chassis",
+      "name": "adjust_chassis"
+    },
+    {
+      "args": [
+        {
+          "default": 0,
+          "name": "degree",
+          "required": false,
+          "type": "number",
+          "unit": "deg(+\u4ef0\u5934/-\u4fef\u8eab\uff0c\u7eafq3)",
+          "widget": "number"
+        }
+      ],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u53ea\u8c03\u6574\u673a\u5668\u4eba\u4fef\u4ef0 pitch\uff1a\u6b63\u503c\u4ef0\u5934\uff0c\u8d1f\u503c\u4fef\u8eab\uff1b\u5b8c\u6210\u540e\u62cd head camera\u3002",
+      "endpoint": "/api/v2/adjust_pitch",
+      "name": "adjust_pitch"
+    },
+    {
+      "args": [
+        {
+          "default": 0,
+          "name": "upward",
+          "required": false,
+          "type": "number",
+          "unit": "m(+\u5347/-\u964d)",
+          "widget": "number"
+        }
+      ],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u53ea\u8c03\u6574\u673a\u5668\u4eba\u9ad8\u5ea6 upward\uff0c\u5355\u4f4d\u7c73\uff1b\u8d85\u51fa submission-local LUT \u53ef\u8fbe\u8303\u56f4\u65f6\u81ea\u52a8\u9971\u548c\u5230\u6700\u9ad8\u6216\u6700\u4f4e\u7f13\u5b58\u884c\uff0c\u5b8c\u6210\u540e\u62cd head camera\u3002",
+      "endpoint": "/api/v2/adjust_height",
+      "name": "adjust_height",
+      "workspace_saturation": "submission_local_trunk_lut"
+    },
+    {
+      "args": [
+        {
+          "name": "image_id",
+          "required": true,
+          "widget": "image"
+        },
+        {
+          "coordinate_system": "qwen3vl_relative_0_1000",
+          "maximum": 1000,
+          "minimum": 0,
+          "name": "u",
+          "required": true,
+          "type": "integer",
+          "unit": "Qwen3-VL relative coordinate 0..1000",
+          "widget": "uv"
+        },
+        {
+          "coordinate_system": "qwen3vl_relative_0_1000",
+          "maximum": 1000,
+          "minimum": 0,
+          "name": "v",
+          "required": true,
+          "type": "integer",
+          "unit": "Qwen3-VL relative coordinate 0..1000",
+          "widget": "uv"
+        },
+        {
+          "default": 60,
+          "name": "max_abs_spin",
+          "required": false,
+          "type": "number",
+          "unit": "deg(\u5b89\u5168\u9650\u5e45)",
+          "widget": "number"
+        }
+      ],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u53ea\u6c34\u5e73\u65cb\u8f6c\u5e95\u76d8\uff0c\u8ba9\u9009\u4e2d\u7684 head \u56fe\u70b9\u843d\u5230\u753b\u9762\u4e2d\u7ebf\uff1b\u4e0d\u4fef\u4ef0\u3001\u4e0d\u5e73\u79fb\u3002",
+      "endpoint": "/api/v2/spin_to_facing_point",
+      "name": "spin_to_facing_point"
+    },
+    {
+      "args": [
+        {
+          "default": "right",
+          "name": "arm",
+          "options": [
+            "right",
+            "left"
+          ],
+          "required": true,
+          "widget": "select"
+        }
+      ],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u6253\u5f00\u6307\u5b9a left/right \u5939\u722a\uff1b\u4e0d\u79fb\u52a8 EEF\u3002",
+      "endpoint": "/api/v2/open_gripper",
+      "name": "open_gripper"
+    },
+    {
+      "args": [
+        {
+          "default": "right",
+          "name": "arm",
+          "options": [
+            "right",
+            "left"
+          ],
+          "required": true,
+          "widget": "select"
+        }
+      ],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u95ed\u5408\u6307\u5b9a left/right \u5939\u722a\uff1b\u4e0d\u79fb\u52a8 EEF\uff0c\u5b8c\u6210\u540e\u8fd4\u56de\u5bf9\u5e94 wrist camera \u89c6\u56fe\u3002",
+      "endpoint": "/api/v2/close_gripper",
+      "name": "close_gripper"
+    },
+    {
+      "args": [
+        {
+          "default": 0,
+          "name": "forward",
+          "required": false,
+          "type": "number",
+          "unit": "m(+\u6cbf\u5de6\u8155\u89c6\u7ebf\u5411\u524d/-\u5411\u540e)",
+          "widget": "number"
+        },
+        {
+          "default": 0,
+          "name": "leftward",
+          "required": false,
+          "type": "number",
+          "unit": "m(+\u753b\u9762\u5411\u5de6/-\u5411\u53f3\uff0c\u4e0e\u5e95\u90e8x\u6807\u5c3a\u65b9\u5411\u76f8\u53cd)",
+          "widget": "number"
+        },
+        {
+          "default": 0,
+          "name": "upward",
+          "required": false,
+          "type": "number",
+          "unit": "m(+\u753b\u9762\u5411\u4e0a/-\u5411\u4e0b)",
+          "widget": "number"
+        },
+        {
+          "default": 0,
+          "name": "roll",
+          "required": false,
+          "type": "number",
+          "unit": "deg(\u5939\u722a\u5c40\u90e8 roll \u589e\u91cf\uff1b\u4ec5 J5-J7 \u6c42\u89e3)",
+          "widget": "number"
+        },
+        {
+          "default": 0,
+          "name": "pitch",
+          "required": false,
+          "type": "number",
+          "unit": "deg(\u5939\u722a\u5c40\u90e8 pitch \u589e\u91cf\uff1b+\u4e3a\u6307\u5c16\u4e0a\u62ac)",
+          "widget": "number"
+        },
+        {
+          "default": 0,
+          "name": "yaw",
+          "required": false,
+          "type": "number",
+          "unit": "deg(\u5939\u722a\u5c40\u90e8 yaw \u589e\u91cf\uff1b\u4ec5 J5-J7 \u6c42\u89e3)",
+          "widget": "number"
+        },
+        {
+          "default": 0.012,
+          "name": "pos_tol",
+          "required": false,
+          "type": "number",
+          "unit": "m",
+          "widget": "number"
+        },
+        {
+          "default": 3,
+          "name": "ori_tol_deg",
+          "required": false,
+          "type": "number",
+          "unit": "deg(\u6700\u7ec8\u5939\u722a\u59ff\u6001\u6536\u655b\u5bb9\u5dee)",
+          "widget": "number"
+        }
+      ],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u4ee5\u5b9e\u65f6 left wrist camera \u4e3a\u673a\u4f53\u7cfb\u8c03\u6574\u5de6 EEF\uff1b\u5e73\u79fb\u5355\u4f4d\u7edf\u4e00\u4e3a\u7c73\uff0croll/pitch/yaw \u4e3a\u5939\u722a\u5c40\u90e8\u8f74\u589e\u91cf\u3002\u65cb\u8f6c\u9636\u6bb5\u56fa\u5b9a J1-J4\uff0c\u4ec5\u6c42\u89e3\u548c\u9a71\u52a8 J5-J7\uff1bJ8 \u4e0d\u53c2\u4e0e\u5e76\u4fdd\u6301\u9501\u5b9a\u3002\u6267\u884c\u540e\u8fd4\u56de\u5de6\u8155\u89c6\u56fe\u3002",
+      "endpoint": "/api/v2/adjust_left_eef_pose_in_wrist_frame",
+      "name": "adjust_left_eef_pose_in_wrist_frame"
+    },
+    {
+      "args": [
+        {
+          "default": 0,
+          "name": "forward",
+          "required": false,
+          "type": "number",
+          "unit": "m(+\u6cbf\u53f3\u8155\u89c6\u7ebf\u5411\u524d/-\u5411\u540e)",
+          "widget": "number"
+        },
+        {
+          "default": 0,
+          "name": "leftward",
+          "required": false,
+          "type": "number",
+          "unit": "m(+\u753b\u9762\u5411\u5de6/-\u5411\u53f3\uff0c\u4e0e\u5e95\u90e8x\u6807\u5c3a\u65b9\u5411\u76f8\u53cd)",
+          "widget": "number"
+        },
+        {
+          "default": 0,
+          "name": "upward",
+          "required": false,
+          "type": "number",
+          "unit": "m(+\u753b\u9762\u5411\u4e0a/-\u5411\u4e0b)",
+          "widget": "number"
+        },
+        {
+          "default": 0,
+          "name": "roll",
+          "required": false,
+          "type": "number",
+          "unit": "deg(\u5939\u722a\u5c40\u90e8 roll \u589e\u91cf\uff1b\u4ec5 J5-J7 \u6c42\u89e3)",
+          "widget": "number"
+        },
+        {
+          "default": 0,
+          "name": "pitch",
+          "required": false,
+          "type": "number",
+          "unit": "deg(\u5939\u722a\u5c40\u90e8 pitch \u589e\u91cf\uff1b+\u4e3a\u6307\u5c16\u4e0a\u62ac)",
+          "widget": "number"
+        },
+        {
+          "default": 0,
+          "name": "yaw",
+          "required": false,
+          "type": "number",
+          "unit": "deg(\u5939\u722a\u5c40\u90e8 yaw \u589e\u91cf\uff1b\u4ec5 J5-J7 \u6c42\u89e3)",
+          "widget": "number"
+        },
+        {
+          "default": 0.012,
+          "name": "pos_tol",
+          "required": false,
+          "type": "number",
+          "unit": "m",
+          "widget": "number"
+        },
+        {
+          "default": 3,
+          "name": "ori_tol_deg",
+          "required": false,
+          "type": "number",
+          "unit": "deg(\u6700\u7ec8\u5939\u722a\u59ff\u6001\u6536\u655b\u5bb9\u5dee)",
+          "widget": "number"
+        }
+      ],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u4ee5\u5b9e\u65f6 right wrist camera \u4e3a\u673a\u4f53\u7cfb\u8c03\u6574\u53f3 EEF\uff1b\u5e73\u79fb\u5355\u4f4d\u7edf\u4e00\u4e3a\u7c73\uff0croll/pitch/yaw \u4e3a\u5939\u722a\u5c40\u90e8\u8f74\u589e\u91cf\u3002\u65cb\u8f6c\u9636\u6bb5\u56fa\u5b9a J1-J4\uff0c\u4ec5\u6c42\u89e3\u548c\u9a71\u52a8 J5-J7\uff1bJ8 \u4e0d\u53c2\u4e0e\u5e76\u4fdd\u6301\u9501\u5b9a\u3002\u6267\u884c\u540e\u8fd4\u56de\u53f3\u8155\u89c6\u56fe\u3002",
+      "endpoint": "/api/v2/adjust_right_eef_pose_in_wrist_frame",
+      "name": "adjust_right_eef_pose_in_wrist_frame"
+    },
+    {
+      "args": [
+        {
+          "name": "image_id",
+          "required": true,
+          "widget": "image"
+        },
+        {
+          "arm_options": [
+            "any"
+          ],
+          "max_points": 2,
+          "min_points": 2,
+          "name": "points",
+          "required": true,
+          "widget": "multi_uv_arm"
+        },
+        {
+          "default": 0,
+          "name": "above_target_point_m",
+          "required": false,
+          "type": "number",
+          "unit": "m(\u76ee\u6807\u70b9\u6cbf\u673a\u5668\u4eba\u57fa\u5ea7 +Z \u7684\u62ac\u9ad8\u91cf\uff0c0 \u8868\u793a\u76ee\u6807\u70b9\u672c\u8eab)",
+          "widget": "number"
+        },
+        {
+          "default": 0.012,
+          "name": "pos_tol",
+          "required": false,
+          "type": "number",
+          "unit": "m",
+          "widget": "number"
+        },
+        {
+          "default": 5,
+          "name": "ori_tol_deg",
+          "required": false,
+          "type": "number",
+          "unit": "deg",
+          "widget": "number"
+        }
+      ],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u5728\u540c\u4e00\u5f20 head RGB-D \u56fe\u4e0a\u4f9d\u6b21\u70b9\u9009\u5f85\u79fb\u52a8\u70b9\u548c\u76ee\u6807\u70b9\u3002\u9009\u62e9\u79bb\u5f85\u79fb\u52a8\u70b9\u6700\u8fd1\u4e14\u5939\u722a\u7a33\u5b9a\u5904\u4e8e\u975e\u5168\u5f00/\u975e\u5168\u5408\u72b6\u6001\u7684\u624b\uff0c\u4fdd\u6301 EEF \u59ff\u6001\u548c\u5939\u722a\u5f00\u5ea6\u4e0d\u53d8\uff0c\u628a EEF \u6309\u4e24\u70b9\u4e09\u7ef4\u5dee\u503c\u5e73\u79fb\uff0c\u4f7f\u5f85\u79fb\u52a8\u70b9\u5230\u8fbe\u76ee\u6807\u70b9\u6cbf\u673a\u5668\u4eba\u57fa\u5ea7 +Z \u4e0a\u65b9\u6307\u5b9a\u8ddd\u79bb\uff1b\u9ed8\u8ba4 0m\u3002",
+      "endpoint": "/api/v2/move_point_to_point",
+      "name": "move_point_to_point"
+    },
+    {
+      "args": [
+        {
+          "coordinate_system": "qwen3vl_relative_0_1000",
+          "maximum": 1000,
+          "minimum": 0,
+          "name": "u",
+          "required": true,
+          "type": "integer",
+          "unit": "Qwen3-VL relative coordinate 0..1000",
+          "widget": "uv"
+        },
+        {
+          "coordinate_system": "qwen3vl_relative_0_1000",
+          "maximum": 1000,
+          "minimum": 0,
+          "name": "v",
+          "required": true,
+          "type": "integer",
+          "unit": "Qwen3-VL relative coordinate 0..1000",
+          "widget": "uv"
+        },
+        {
+          "name": "depth",
+          "required": true,
+          "type": "number",
+          "unit": "m(head-camera forward z-depth)",
+          "widget": "number"
+        },
+        {
+          "default": "right",
+          "name": "arm",
+          "options": [
+            "right",
+            "left"
+          ],
+          "required": false,
+          "widget": "select"
+        },
+        {
+          "default": 0.012,
+          "name": "pos_tol",
+          "required": false,
+          "type": "number",
+          "unit": "m",
+          "widget": "number"
+        }
+      ],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u89c4\u5212\u5e76\u9884\u89c8 EEF \u5e73\u79fb\u5230 u/v/depth \u53cd\u89e3\u51fa\u76843D\u70b9\uff1b\u8fd4\u56de\u524d\u9a8c\u8bc1\u540c\u5206\u652f6D\u76f4\u7ebf\u8def\u5f84\uff1b\u4e0d\u63a5\u53d7\u589e\u91cf\u53c2\u6570\u3002",
+      "endpoint": "/api/v2/plan_eef_translation_to_uvd_point",
+      "name": "plan_eef_translation_to_uvd_point"
+    },
+    {
+      "args": [
+        {
+          "name": "plan_id",
+          "required": true,
+          "widget": "plan"
+        },
+        {
+          "default": 0,
+          "name": "forward",
+          "required": false,
+          "type": "number",
+          "unit": "m(head\u76f8\u673a\u7cfb\u5e73\u79fb\uff0c\u53ea\u6539pos)",
+          "widget": "number"
+        },
+        {
+          "default": 0,
+          "name": "upward",
+          "required": false,
+          "type": "number",
+          "unit": "m(head\u76f8\u673a\u7cfb\u5e73\u79fb\uff0c\u53ea\u6539pos)",
+          "widget": "number"
+        },
+        {
+          "default": 0,
+          "name": "leftward",
+          "required": false,
+          "type": "number",
+          "unit": "m(head\u76f8\u673a\u7cfb\u5e73\u79fb\uff0c\u53ea\u6539pos)",
+          "widget": "number"
+        },
+        {
+          "default": 0,
+          "name": "roll",
+          "required": false,
+          "type": "number",
+          "unit": "deg(+\u6309\u5939\u722a\u722a\u5c16\u8f74\u6b63\u5411)",
+          "widget": "number"
+        },
+        {
+          "default": 0,
+          "name": "pitch",
+          "required": false,
+          "type": "number",
+          "unit": "deg(+\u7fd8\u5934/fingertips-up)",
+          "widget": "number"
+        },
+        {
+          "default": 0,
+          "name": "yaw",
+          "required": false,
+          "type": "number",
+          "unit": "deg(+\u5411\u5de6\u8f6c\uff0c\u7ed5wrist camera\u8f74)",
+          "widget": "number"
+        }
+      ],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u8c03\u6574\u5df2\u6709 move \u7684 eef 6D pose\uff1a\u5e73\u79fb\u6309 head \u76f8\u673a\u7cfb\uff0c\u65cb\u8f6c\u6309 move \u7684\u5939\u722a\u5c40\u90e8\u8f74\uff1b\u8fd4\u56de\u65b0 plan_id \u548c\u7ea2\u722a\u9884\u89c8\u3002",
+      "endpoint": "/api/v2/adjust_plan_pose",
+      "name": "adjust_plan_pose"
+    },
+    {
+      "args": [
+        {
+          "name": "image_id",
+          "required": true,
+          "widget": "image"
+        },
+        {
+          "coordinate_system": "qwen3vl_relative_0_1000",
+          "maximum": 1000,
+          "minimum": 0,
+          "name": "u",
+          "required": true,
+          "type": "integer",
+          "unit": "Qwen3-VL relative coordinate 0..1000",
+          "widget": "uv"
+        },
+        {
+          "coordinate_system": "qwen3vl_relative_0_1000",
+          "maximum": 1000,
+          "minimum": 0,
+          "name": "v",
+          "required": true,
+          "type": "integer",
+          "unit": "Qwen3-VL relative coordinate 0..1000",
+          "widget": "uv"
+        },
+        {
+          "default": 0,
+          "name": "reach",
+          "required": false,
+          "type": "number",
+          "unit": "m(\u5f26\u7403\u534a\u5f84\uff0c0=\u9ed8\u8ba40.60m)",
+          "widget": "number"
+        },
+        {
+          "default": 120,
+          "name": "nav_timeout_s",
+          "required": false,
+          "type": "number",
+          "unit": "s(\u5e95\u76d8\u95ed\u73af\u5bfc\u822a\u8d85\u65f6\uff0c\u9ed8\u8ba4120)",
+          "widget": "number"
+        },
+        {
+          "default": "none",
+          "name": "keep_ori_arm",
+          "options": [
+            "none",
+            "left",
+            "right",
+            "both"
+          ],
+          "required": false,
+          "widget": "select"
+        }
+      ],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u70b9\u9009 (u,v) \u53cd\u89e3 3D reach point\uff0c\u5e76\u79fb\u52a8\u5230\u5e95\u76d8/\u80a9\u90e8\u53ef\u8fbe\u4f4d\u7f6e\uff1bkeep_ori_arm \u4ec5\u5728\u5e95\u76d8\u65cb\u8f6c\u5b8c\u6210\u540e\u7684\u6700\u7ec8\u4fef\u4ef0\u9636\u6bb5\u751f\u6548\uff0c\u4fdd\u6301\u539f J1-J4 \u8f68\u8ff9\u4e0d\u53d8\u5e76\u9010\u5e27\u4ec5\u7528 J5-J7 \u8ffd\u8e2a\u5165\u53e3\u4e16\u754c\u7cfb EEF \u59ff\u6001\uff1bEEF \u5e73\u79fb\u53ea\u76d1\u63a7\u3002",
+      "endpoint": "/api/v2/move_to_reach_point",
+      "name": "move_to_reach_point",
+      "pick_like": "mark_object"
+    },
+    {
+      "args": [
+        {
+          "name": "object_name",
+          "required": false,
+          "widget": "text"
+        },
+        {
+          "name": "image_id",
+          "required": false,
+          "widget": "image"
+        },
+        {
+          "coordinate_system": "qwen3vl_relative_0_1000",
+          "maximum": 1000,
+          "minimum": 0,
+          "name": "u",
+          "required": false,
+          "type": "integer",
+          "unit": "Qwen3-VL relative coordinate 0..1000",
+          "widget": "uv"
+        },
+        {
+          "coordinate_system": "qwen3vl_relative_0_1000",
+          "maximum": 1000,
+          "minimum": 0,
+          "name": "v",
+          "required": false,
+          "type": "integer",
+          "unit": "Qwen3-VL relative coordinate 0..1000",
+          "widget": "uv"
+        }
+      ],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u6d4b\u91cf\u5f53\u524d\u5de6\u53f3\u80a9\u5230\u76ee\u6807\u8ddd\u79bb\uff1bobject_name \u4f18\u5148\uff0c\u4f7f\u7528 AABB \u4e2d\u5fc3\uff1b\u5426\u5219\u70b9\u9009 head \u56fe\u53cd\u89e3 3D\u3002",
+      "endpoint": "/api/v2/measure_shoulder_distance",
+      "name": "measure_shoulder_distance",
+      "one_of": [
+        {
+          "fields": [
+            "object_name"
+          ],
+          "label": "\u6309\u7269\u4f53\u540d"
+        },
+        {
+          "fields": [
+            "image_id",
+            "u",
+            "v"
+          ],
+          "label": "\u70b9\u9009 head \u56fe\u53cd\u89e3 3D"
+        }
+      ],
+      "pick_like": "mark_object"
+    },
+    {
+      "args": [
+        {
+          "name": "image_id",
+          "required": true,
+          "widget": "image"
+        },
+        {
+          "coordinate_system": "qwen3vl_relative_0_1000",
+          "maximum": 1000,
+          "minimum": 0,
+          "name": "u",
+          "required": true,
+          "type": "integer",
+          "unit": "Qwen3-VL relative coordinate 0..1000",
+          "widget": "uv"
+        },
+        {
+          "coordinate_system": "qwen3vl_relative_0_1000",
+          "maximum": 1000,
+          "minimum": 0,
+          "name": "v",
+          "required": true,
+          "type": "integer",
+          "unit": "Qwen3-VL relative coordinate 0..1000",
+          "widget": "uv"
+        },
+        {
+          "default": "any",
+          "name": "plan_arm",
+          "options": [
+            "any",
+            "left",
+            "right"
+          ],
+          "required": false,
+          "widget": "select"
+        },
+        {
+          "default": 42,
+          "name": "seed",
+          "required": false,
+          "type": "number",
+          "unit": "grasp \u968f\u673a\u79cd\u5b50",
+          "widget": "number"
+        }
+      ],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u5bf9 (u,v) \u70b9 3cm \u90bb\u57df\u89c4\u5212\u6293\u53d6\uff1bplan_arm=left/right \u65f6\u53ea\u4ece\u5bf9\u5e94\u624b\u81c2 IK \u4e25\u683c\u53ef\u8fbe\u6c60\u7ee7\u7eed overlap/graspvol\uff0cany \u4fdd\u6301\u81ea\u52a8\u7b56\u7565\u3002",
+      "endpoint": "/api/v2/plan",
+      "mode": "grasp_point_filter",
+      "name": "plan_grasp_point_filter"
+    },
+    {
+      "args": [
+        {
+          "name": "image_id",
+          "required": true,
+          "widget": "image"
+        },
+        {
+          "arm_options": [
+            "any",
+            "left",
+            "right"
+          ],
+          "max_points": 16,
+          "name": "points",
+          "required": true,
+          "widget": "multi_uv_arm"
+        },
+        {
+          "default": 42,
+          "name": "seed",
+          "required": false,
+          "type": "number",
+          "unit": "\u59ff\u6001\u91c7\u6837\u79cd\u5b50",
+          "widget": "number"
+        }
+      ],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u540c\u4e00\u5f20\u51bb\u7ed3 head RGBD \u53ef\u70b9\u9009\u591a\u4e2a\u4f4d\u7f6e\uff1b\u6bcf\u70b9\u72ec\u7acb\u9009\u62e9 plan_arm \u5e76\u751f\u6210\u53ef\u6267\u884c plan_id\uff0c\u6240\u6709\u6210\u529f\u5939\u722a\u5408\u5e76\u663e\u793a\u5728\u540c\u4e00\u5f20\u56fe\u3002",
+      "endpoint": "/api/v2/plan",
+      "mode": "grasp_point_filter_rgbd",
+      "name": "plan_grasp_point_filter_rgbd"
+    },
+    {
+      "args": [
+        {
+          "name": "image_id",
+          "required": true,
+          "widget": "image"
+        },
+        {
+          "coordinate_system": "qwen3vl_relative_0_1000",
+          "maximum": 1000,
+          "minimum": 0,
+          "name": "u",
+          "required": true,
+          "type": "integer",
+          "unit": "Qwen3-VL relative coordinate 0..1000",
+          "widget": "uv"
+        },
+        {
+          "coordinate_system": "qwen3vl_relative_0_1000",
+          "maximum": 1000,
+          "minimum": 0,
+          "name": "v",
+          "required": true,
+          "type": "integer",
+          "unit": "Qwen3-VL relative coordinate 0..1000",
+          "widget": "uv"
+        },
+        {
+          "default": "any",
+          "name": "plan_arm",
+          "options": [
+            "any",
+            "left",
+            "right"
+          ],
+          "required": false,
+          "widget": "select"
+        },
+        {
+          "default": 42,
+          "name": "seed",
+          "required": false,
+          "type": "number",
+          "unit": "\u59ff\u6001\u91c7\u6837\u79cd\u5b50",
+          "widget": "number"
+        }
+      ],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u8f7b\u91cf RGBD \u6293\u53d6\uff1a\u5019\u9009\u3001\u8fc7\u6ee4\u548c\u8f93\u51fa\u4fdd\u6301\u5b8c\u6574\u7248\u672c\u903b\u8f91\uff1b\u51b7\u542f\u52a8 IK \u4f7f\u7528 split8\uff0c\u5b8c\u6574 warm-start \u9636\u6bb5\u4f7f\u7528\u7b49\u72b6\u6001\u91cf warm32x6\uff1b\u4e0d\u542f\u7528\u5019\u9009\u538b\u7f29\u3002",
+      "endpoint": "/api/v2/plan",
+      "mode": "grasp_point_filter_rgbd_lite",
+      "name": "plan_grasp_point_filter_rgbd_lite"
+    },
+    {
+      "args": [
+        {
+          "name": "image_id",
+          "required": true,
+          "widget": "image"
+        },
+        {
+          "coordinate_system": "qwen3vl_relative_0_1000",
+          "maximum": 1000,
+          "minimum": 0,
+          "name": "u",
+          "required": true,
+          "type": "integer",
+          "unit": "Qwen3-VL relative coordinate 0..1000",
+          "widget": "uv"
+        },
+        {
+          "coordinate_system": "qwen3vl_relative_0_1000",
+          "maximum": 1000,
+          "minimum": 0,
+          "name": "v",
+          "required": true,
+          "type": "integer",
+          "unit": "Qwen3-VL relative coordinate 0..1000",
+          "widget": "uv"
+        },
+        {
+          "default": "any",
+          "name": "plan_arm",
+          "options": [
+            "any",
+            "left",
+            "right"
+          ],
+          "required": false,
+          "widget": "select"
+        },
+        {
+          "default": 42,
+          "name": "seed",
+          "required": false,
+          "type": "number",
+          "unit": "\u59ff\u6001\u91c7\u6837\u79cd\u5b50",
+          "widget": "number"
+        }
+      ],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u70b9\u9009 head \u56fe\u53cd\u89e3 3D press \u70b9\uff1b\u628a\u95ed\u722a\u771f\u5b9e\u722a\u5c16\u4e25\u683c\u7ea6\u675f\u5230\u8be5\u70b9\uff0c\u4ee580\u4e2a\u8fd1\u4f3c\u5747\u5300\u5939\u722a\u8f74\u65b9\u5411\u00d78\u4e2a\u7ed5\u8f74 roll \u91c7\u6837640\u4e2a\u7a7a\u95f4\u59ff\u6001\uff1b\u5148\u7528 GPU IK \u786c\u8fc7\u6ee4\u672b\u7aef\u70b9\u4e0e\u6cbf\u5939\u722a\u5411\u91cf\u56de\u900010cm\u7684 safe \u70b9\uff0c\u4e24\u70b9\u5747\u987b\u6ee1\u8db3\u4f4d\u7f6e\u8bef\u5dee\u226410mm\u3001\u59ff\u6001\u8bef\u5dee\u22643\u00b0\uff1b\u518d\u6309\u76ee\u6807\u70b9\u5916\u6cd5\u5411\u4e0e\u722a\u5c16\u2192O_EEF\u5939\u722a\u5411\u91cf\u5939\u89d2\u4ece\u5c0f\u5230\u5927\uff0c\u7528 GPU IK \u9010\u4e2a\u9a8c\u8bc1 current\u2192safe\u2192press \u5b8c\u6574\u8f68\u8ff9\uff1bplan_arm=any \u65f6\u4efb\u610f\u624b\u81c2\u4ea7\u751f\u5b8c\u6574\u8f68\u8ff9\u5373\u53ef\uff0c\u6307\u5b9a left/right \u65f6\u5fc5\u987b\u7531\u6307\u5b9a\u624b\u81c2\u4ea7\u751f\u5b8c\u6574\u8f68\u8ff9\uff1b\u5019\u9009\u6392\u5e8f\u4e0d\u4f7f\u7528\u9608\u503c\u5185 IK \u6b8b\u5dee\uff0c\u53ea\u53d6\u5939\u89d2\u987a\u5e8f\u4e2d\u7b2c\u4e00\u4e2a\u8f68\u8ff9\u6709\u89e3\u7684 pose \u4f5c\u4e3a move\uff1b\u6267\u884c\u524d\u5148\u5bf9\u8fd4\u56de arm \u8c03\u7528 close_gripper\u3002",
+      "endpoint": "/api/v2/plan",
+      "mode": "press_point",
+      "name": "plan_press_point"
+    },
+    {
+      "args": [
+        {
+          "name": "plan_id",
+          "required": true,
+          "widget": "plan"
+        },
+        {
+          "name": "arm",
+          "options": [
+            "",
+            "left",
+            "right"
+          ],
+          "required": false,
+          "widget": "select"
+        },
+        {
+          "default": "0.10",
+          "name": "back_m",
+          "placeholder": "\u540e\u9000\u5b89\u5168\u8ddd\u79bb(m)\uff0c\u9ed8\u8ba40.10",
+          "required": false,
+          "widget": "text"
+        }
+      ],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u6267\u884c plan_id \u5bf9\u5e94\u7684 EEF pose\uff1a\u5f53\u524d\u2192safe\u2192\u76ee\u6807 pose\uff0c\u4e0d\u5408\u722a\uff1bpress_point \u76f4\u63a5\u56de\u653e\u89c4\u5212\u9636\u6bb5\u5df2\u9a8c\u8bc1\u7684 GPU IK anchors\uff1b\u5b8c\u6210\u540e\u62cd\u5b9e\u9645\u6267\u884c\u81c2\u7684 wrist camera\u3002",
+      "endpoint": "/api/v2/exec_plan_pose",
+      "name": "exec_plan_pose"
+    },
+    {
+      "args": [
+        {
+          "default": "right",
+          "name": "arm",
+          "options": [
+            "right",
+            "left",
+            "both"
+          ],
+          "required": false,
+          "widget": "select"
+        },
+        {
+          "default": "none",
+          "name": "keep_ori_arm",
+          "options": [
+            "none",
+            "left",
+            "right",
+            "both"
+          ],
+          "required": false,
+          "widget": "select"
+        },
+        {
+          "default": "keep",
+          "name": "gripper",
+          "options": [
+            "open",
+            "keep"
+          ],
+          "required": false,
+          "widget": "select"
+        },
+        {
+          "default": 0.3,
+          "name": "max_dq_per_step",
+          "required": false,
+          "type": "number",
+          "unit": "rad/frame",
+          "widget": "number"
+        },
+        {
+          "default": 0.08,
+          "name": "tol",
+          "required": false,
+          "type": "number",
+          "unit": "rad",
+          "widget": "number"
+        },
+        {
+          "default": 15,
+          "name": "timeout_s",
+          "required": false,
+          "type": "number",
+          "unit": "s",
+          "widget": "number"
+        }
+      ],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u5c06\u9009\u5b9a\u624b\u81c2\u95ed\u73af\u79fb\u52a8\u5230\u56fa\u5b9a grasp-prep\u3002\u6bcf\u6761 action \u90fd\u7531\u6700\u65b0 proprio \u7684 qpos/qvel \u8282\u6d41\uff1b\u6210\u529f\u9700\u4f4d\u7f6e\u548c\u901f\u5ea6\u8fde\u7eed\u7a33\u5b9a\uff1b\u4ecd\u6709\u5b9e\u9645\u8fdb\u5c55\u65f6 timeout_s \u6700\u591a\u7eed\u671f\u4e24\u6b21\uff0c\u5931\u8d25\u5219\u9501\u4f4f\u6700\u540e\u5b9e\u6d4b\u59ff\u6001\u3002J8 \u59cb\u7ec8\u9501\u5b9a 0rad\uff1b\u5f53\u524d official_v2 \u56fa\u5b9a\u5173\u8282\u66ff\u4ee3\u4ec5\u652f\u6301 keep_ori_arm=none\u3002\u5b8c\u6210\u6216\u5931\u8d25\u540e\u90fd\u62cd head camera\u3002",
+      "endpoint": "/api/v2/set_arm_to_grasp_position",
+      "failure_hold": "latest_evaluator_proprioception",
+      "invoke": "skill",
+      "name": "set_arm_to_grasp_position",
+      "skill_name": "set_arm_to_grasp_position",
+      "timeout_policy": "progress_aware_soft_deadline"
+    },
+    {
+      "args": [
+        {
+          "default": "none",
+          "name": "keep_ori_arm",
+          "options": [
+            "none",
+            "left",
+            "right",
+            "both"
+          ],
+          "required": false,
+          "widget": "select"
+        },
+        {
+          "default": 45,
+          "name": "timeout_s",
+          "required": false,
+          "type": "number",
+          "unit": "s",
+          "widget": "number"
+        },
+        {
+          "default": 0.06,
+          "name": "trunk_max_step",
+          "required": false,
+          "type": "number",
+          "unit": "rad/\u6b65",
+          "widget": "number"
+        },
+        {
+          "default": 4,
+          "name": "shoulder_iters",
+          "required": false,
+          "type": "number",
+          "unit": "\u517c\u5bb9\u4fdd\u7559/\u5df2\u5ffd\u7565",
+          "widget": "number"
+        }
+      ],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u8170\u90e8\u4e09\u5173\u8282\u590d\u4f4d\u76f4\u7acb\uff1bkeep_ori_arm \u4fdd\u6301\u5165\u53e3 J1-J4 \u547d\u4ee4\u4e0d\u53d8\uff0c\u6bcf\u5e27\u4ec5\u7528 J5-J7 \u8ffd\u8e2a\u5165\u53e3\u4e16\u754c\u7cfb EEF \u59ff\u6001\uff1bEEF \u5e73\u79fb\u53ea\u76d1\u63a7\uff1b\u5176\u4f59\u624b\u81c2\u5168\u5173\u8282\u9501\u5b9a\uff1b\u5b8c\u6210\u540e\u62cd\u4e3b\u89c6\u56fe\u3002",
+      "endpoint": "/api/v2/reset_body",
+      "name": "reset_body"
+    },
+    {
+      "args": [
+        {
+          "name": "fixed_north_up",
+          "options": [
+            "",
+            "1"
+          ],
+          "placeholder": "\u586b 1 \u6539\u6210\u8d77\u70b9\u671d\u5411\u671d\u4e0a\u7684\u56fa\u5b9a\u4fef\u89c6\u56fe\uff08\u9ed8\u8ba4\u8f66\u5934\u671d\u4e0a\uff09",
+          "required": false,
+          "widget": "select"
+        }
+      ],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u67e5\u8be2\u573a\u666f\u5730\u56fe\uff1a\u8f66\u5934\u671d\u4e0a\u7684\u4fef\u89c6\u5c0f\u5730\u56fe\uff0c\u7528 depth \u5efa\u51fa\u7684\u5360\u7528\u6805\u683c\u753b\u51fa\u5899\u4e0e\u5bb6\u5177\u3001\u8d70\u8fc7\u7684\u7a7a\u5730\uff0c\u53e0\u52a0\u6700\u8fd1\u4e00\u6bb5\u884c\u8fdb\u8def\u7ebf\u3001\u8d77\u70b9\u548c\u81ea\u5df1\u6807\u8bb0\u8fc7\u7684\u5730\u70b9\uff0c\u5e76\u8fd4\u56de\u6bcf\u4e2a\u5df2\u6807\u8bb0\u5730\u70b9\u7684\u65b9\u4f4d\u4e0e\u8ddd\u79bb\u3002\u53ea\u7528 depth \u89c2\u6d4b\u4e0e\u5408\u89c4\u5e95\u76d8\u5b8c\u6210\u91cf\uff0c\u4e0d\u8bfb\u4e16\u754c\u771f\u503c\u3002",
+      "endpoint": "/api/v2/query_map",
+      "name": "query_map"
+    },
+    {
+      "args": [
+        {
+          "name": "name",
+          "placeholder": "\u8d77\u4e2a\u540d\u5b57\uff0c\u5982\u300c\u8f66\u5e93\u95e8\u53e3\u300d\u300c\u76ee\u6807\u7bb1\u5b50\u300d",
+          "required": true,
+          "widget": "text"
+        },
+        {
+          "name": "image_id",
+          "placeholder": "\u8981\u70b9\u9009\u7684\u90a3\u5f20 head \u56fe\uff1b\u4e0d\u586b\u5c31\u6807\u811a\u4e0b",
+          "required": false,
+          "widget": "image"
+        },
+        {
+          "coordinate_system": "qwen3vl_relative_0_1000",
+          "maximum": 1000,
+          "minimum": 0,
+          "name": "u",
+          "required": false,
+          "type": "integer",
+          "unit": "Qwen3-VL relative coordinate 0..1000",
+          "widget": "uv"
+        },
+        {
+          "coordinate_system": "qwen3vl_relative_0_1000",
+          "maximum": 1000,
+          "minimum": 0,
+          "name": "v",
+          "required": false,
+          "type": "integer",
+          "unit": "Qwen3-VL relative coordinate 0..1000",
+          "widget": "uv"
+        }
+      ],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u5728\u5730\u56fe\u4e0a\u6807\u8bb0\u4e00\u4e2a\u4f4d\u7f6e\u5e76\u8d77\u540d\uff0c\u4e4b\u540e\u4e00\u76f4\u753b\u5728\u5c0f\u5730\u56fe\u4e0a\uff0c\u968f\u65f6\u80fd\u67e5\u5230\u5b83\u76f8\u5bf9\u5f53\u524d\u5e95\u76d8\u7684\u65b9\u4f4d\u3002\u4e24\u79cd\u7528\u6cd5\uff1a(1) \u53ea\u7ed9 name\uff0c\u6807\u8bb0\u673a\u5668\u4eba\u811a\u4e0b\u7684\u5f53\u524d\u4f4d\u7f6e\uff0c\u4f8b\u5982\u300c\u8f66\u5e93\u95e8\u53e3\u300d\uff1b(2) \u7ed9 name + image_id + u,v\uff0c\u70b9\u9009\u90a3\u5f20 head \u56fe\u4e0a\u7684\u4e00\u4e2a\u50cf\u7d20\uff0c\u7528\u8be5\u5e27 depth \u53cd\u89e3\u51fa\u5b83\u7684\u4e09\u7ef4\u4f4d\u7f6e\uff0c\u628a\u5730\u9762\u6295\u5f71\u6807\u5230\u5730\u56fe\u4e0a\uff0c\u4f8b\u5982\u70b9\u4e2d\u8fdc\u5904\u7684\u7bb1\u5b50\u6807\u6210\u300c\u76ee\u6807\u7bb1\u5b50\u300d\u3002u,v \u662f Qwen3-VL \u76f8\u5bf9\u5750\u6807 0..1000\uff0c\u4e0e track_object_distance \u7b49\u70b9\u9009\u5de5\u5177\u4e00\u81f4\uff0cimage_id \u5fc5\u987b\u662f capture_head_camera \u8fd4\u56de\u7684\u90a3\u5f20\u56fe\u3002\u8fd4\u56de\u6240\u6709\u5df2\u6807\u8bb0\u5730\u70b9\u76f8\u5bf9\u5f53\u524d\u5e95\u76d8\u7684\u65b9\u4f4d\uff1a\u8ddd\u79bb\u591a\u5c11\u7c73\u3001spin \u591a\u5c11\u5ea6\u53ef\u4ee5\u6b63\u5bf9\u8fc7\u53bb\uff08\u5de6\u6b63\u53f3\u8d1f\uff0c\u53ef\u76f4\u63a5\u586b\u7ed9 adjust_chassis \u7684 spin\uff09\u3002\u8ff7\u8def\u65f6\u5148\u6807\u8bb0\u5173\u952e\u4f4d\u7f6e\uff08\u95e8\u53e3\u3001\u76ee\u6807\u7269\u6240\u5728\u623f\u95f4\uff09\uff0c\u518d\u9760\u8fd9\u4e9b\u65b9\u4f4d\u8d70\u56de\u53bb\u3002",
+      "endpoint": "/api/v2/mark_on_map",
+      "name": "mark_on_map",
+      "one_of": [
+        {
+          "fields": [
+            "name"
+          ],
+          "label": "\u6807\u8bb0\u811a\u4e0b\u4f4d\u7f6e"
+        },
+        {
+          "fields": [
+            "name",
+            "image_id",
+            "u",
+            "v"
+          ],
+          "label": "\u70b9\u9009 head \u56fe\u6807\u8bb0\u7269\u4f53"
+        }
+      ],
+      "pick_like": "mark_object"
+    },
+    {
+      "args": [
+        {
+          "name": "name",
+          "placeholder": "\u5df2\u901a\u8fc7 mark_on_map \u4fdd\u5b58\u7684\u5730\u70b9\u540d",
+          "required": true,
+          "widget": "text"
+        },
+        {
+          "default": 0.25,
+          "name": "arrival_tolerance_m",
+          "required": false,
+          "type": "number",
+          "unit": "m",
+          "widget": "number"
+        }
+      ],
+      "coordinate_range": {
+        "u": [
+          0,
+          1000
+        ],
+        "v": [
+          0,
+          1000
+        ]
+      },
+      "coordinate_system": "qwen3vl_relative_0_1000",
+      "desc": "\u5bfc\u822a\u5230\u5df2\u6807\u8bb0\u5730\u70b9\u3002\u8bfb\u53d6\u5f53\u524d\u5408\u89c4\u5c0f\u5730\u56fe\u7684\u5360\u7528\u6805\u683c\uff0c\u5728\u672a\u77e5\u533a\u5916\u6309\u5e95\u76d8\u9759\u6001\u5c3a\u5bf8\u81a8\u80c0\u969c\u788d\uff0c\u5e76\u4f18\u5148\u89c4\u5212\u8fdc\u79bb\u5899\u9762\u7684\u6298\u7ebf\u8def\u5f84\uff1b\u968f\u540e\u53ea\u901a\u8fc7\u5b98\u65b9\u5e95\u76d8 action \u5206\u6bb5\u6267\u884c\u3002\u5730\u56fe\u540e\u7aef\u53ef\u66ff\u6362\uff0c\u4e0d\u8bfb\u53d6\u573a\u666f\u6216\u5168\u5c40\u4f4d\u59ff\u771f\u503c\u3002",
+      "endpoint": "/api/v2/navigate_to",
+      "name": "navigate_to"
+    },
+    {
+      "args": [
+        {
+          "coordinate_frame": "robot_base",
+          "description": "Robot-base delta: +X is chassis-forward. Use short +X increments for chassis-horizontal pushing. Use only with y/z; never combine with camera-frame parameters.",
+          "exclusive_group": "robot_base_xyz",
+          "mutually_exclusive_with": "head_camera_forward_leftward_upward",
+          "name": "x",
+          "positive_direction": "chassis_forward",
+          "required": false,
+          "type": "number",
+          "unit": "m",
+          "widget": "number"
+        },
+        {
+          "coordinate_frame": "robot_base",
+          "description": "Robot-base delta: +Y is chassis-left. Same positive-left sign as leftward, but base-fixed rather than camera-rotated.",
+          "exclusive_group": "robot_base_xyz",
+          "mutually_exclusive_with": "head_camera_forward_leftward_upward",
+          "name": "y",
+          "positive_direction": "chassis_left",
+          "required": false,
+          "type": "number",
+          "unit": "m",
+          "widget": "number"
+        },
+        {
+          "coordinate_frame": "robot_base",
+          "description": "Robot-base delta: +Z is chassis-up. Use only with x/y.",
+          "exclusive_group": "robot_base_xyz",
+          "mutually_exclusive_with": "head_camera_forward_leftward_upward",
+          "name": "z",
+          "positive_direction": "chassis_up",
+          "required": false,
+          "type": "number",
+          "unit": "m",
+          "widget": "number"
+        },
+        {
+          "coordinate_frame": "starting_head_camera",
+          "description": "Starting-head-camera delta along the viewing direction. This includes a vertical component when the camera is pitched and is not chassis-horizontal forward. Use only with leftward/upward; never combine with x/y/z.",
+          "exclusive_group": "head_camera_forward_leftward_upward",
+          "mutually_exclusive_with": "robot_base_xyz",
+          "name": "forward",
+          "positive_direction": "camera_forward",
+          "required": false,
+          "type": "number",
+          "unit": "m",
+          "widget": "number"
+        },
+        {
+          "coordinate_frame": "starting_head_camera",
+          "description": "Starting-head-camera delta toward image left. Same positive-left sign as y, but follows camera orientation.",
+          "exclusive_group": "head_camera_forward_leftward_upward",
+          "mutually_exclusive_with": "robot_base_xyz",
+          "name": "leftward",
+          "positive_direction": "camera_left",
+          "required": false,
+          "type": "number",
+          "unit": "m",
+          "widget": "number"
+        },
+        {
+          "coordinate_frame": "starting_head_camera",
+          "description": "Starting-head-camera delta toward image up. Use only with forward/leftward.",
+          "exclusive_group": "head_camera_forward_leftward_upward",
+          "mutually_exclusive_with": "robot_base_xyz",
+          "name": "upward",
+          "positive_direction": "camera_up",
+          "required": false,
+          "type": "number",
+          "unit": "m",
+          "widget": "number"
+        },
+        {
+          "default": 0,
+          "name": "roll",
+          "required": false,
+          "type": "number",
+          "unit": "deg(left gripper local axis)",
+          "widget": "number"
+        },
+        {
+          "default": 0,
+          "name": "pitch",
+          "required": false,
+          "type": "number",
+          "unit": "deg(+ fingertips-up)",
+          "widget": "number"
+        },
+        {
+          "default": 0,
+          "name": "yaw",
+          "required": false,
+          "type": "number",
+          "unit": "deg(left gripper local axis)",
+          "widget": "number"
+        },
+        {
+          "default": 0.012,
+          "name": "pos_tol",
+          "required": false,
+          "type": "number",
+          "unit": "m",
+          "widget": "number"
+        },
+        {
+          "default": 3,
+          "name": "ori_tol_deg",
+          "required": false,
+          "type": "number",
+          "unit": "deg",
+          "widget": "number"
+        },
+        {
+          "default": 240,
+          "name": "max_steps",
+          "required": false,
+          "type": "number",
+          "unit": "observation/action steps",
+          "widget": "number"
+        },
+        {
+          "default": 60,
+          "name": "timeout_s",
+          "required": false,
+          "type": "number",
+          "unit": "s",
+          "widget": "number"
+        }
+      ],
+      "desc": "Adjust the left EEF by incremental translation and local-gripper RPY. For translation, use only x/y/z in the current robot base frame (+X forward, +Y left, +Z up), or only forward/leftward/upward in the starting head-camera frame. Never mix the two parameter families, even when one value is zero. y and leftward have the same positive-left sign but belong to different frames. For a horizontal push, issue short +x increments and verify external-object motion from the next evaluator RGB-D observation; tool success itself means the requested EEF pose converged.",
+      "endpoint": "/api/v2/adjust_left_eef_pose_in_head_frame",
+      "name": "adjust_left_eef_pose_in_head_frame",
+      "translation_families_mutually_exclusive": true,
+      "translation_parameter_families": {
+        "head_camera_forward_leftward_upward": {
+          "axes": "starting head-camera forward, image-left, image-up",
+          "parameters": [
+            "forward",
+            "leftward",
+            "upward"
+          ]
+        },
+        "robot_base_xyz": {
+          "axes": "+X chassis-forward, +Y chassis-left, +Z chassis-up",
+          "parameters": [
+            "x",
+            "y",
+            "z"
+          ]
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "coordinate_frame": "robot_base",
+          "description": "Robot-base delta: +X is chassis-forward. Use short +X increments for chassis-horizontal pushing. Use only with y/z; never combine with camera-frame parameters.",
+          "exclusive_group": "robot_base_xyz",
+          "mutually_exclusive_with": "head_camera_forward_leftward_upward",
+          "name": "x",
+          "positive_direction": "chassis_forward",
+          "required": false,
+          "type": "number",
+          "unit": "m",
+          "widget": "number"
+        },
+        {
+          "coordinate_frame": "robot_base",
+          "description": "Robot-base delta: +Y is chassis-left. Same positive-left sign as leftward, but base-fixed rather than camera-rotated.",
+          "exclusive_group": "robot_base_xyz",
+          "mutually_exclusive_with": "head_camera_forward_leftward_upward",
+          "name": "y",
+          "positive_direction": "chassis_left",
+          "required": false,
+          "type": "number",
+          "unit": "m",
+          "widget": "number"
+        },
+        {
+          "coordinate_frame": "robot_base",
+          "description": "Robot-base delta: +Z is chassis-up. Use only with x/y.",
+          "exclusive_group": "robot_base_xyz",
+          "mutually_exclusive_with": "head_camera_forward_leftward_upward",
+          "name": "z",
+          "positive_direction": "chassis_up",
+          "required": false,
+          "type": "number",
+          "unit": "m",
+          "widget": "number"
+        },
+        {
+          "coordinate_frame": "starting_head_camera",
+          "description": "Starting-head-camera delta along the viewing direction. This includes a vertical component when the camera is pitched and is not chassis-horizontal forward. Use only with leftward/upward; never combine with x/y/z.",
+          "exclusive_group": "head_camera_forward_leftward_upward",
+          "mutually_exclusive_with": "robot_base_xyz",
+          "name": "forward",
+          "positive_direction": "camera_forward",
+          "required": false,
+          "type": "number",
+          "unit": "m",
+          "widget": "number"
+        },
+        {
+          "coordinate_frame": "starting_head_camera",
+          "description": "Starting-head-camera delta toward image left. Same positive-left sign as y, but follows camera orientation.",
+          "exclusive_group": "head_camera_forward_leftward_upward",
+          "mutually_exclusive_with": "robot_base_xyz",
+          "name": "leftward",
+          "positive_direction": "camera_left",
+          "required": false,
+          "type": "number",
+          "unit": "m",
+          "widget": "number"
+        },
+        {
+          "coordinate_frame": "starting_head_camera",
+          "description": "Starting-head-camera delta toward image up. Use only with forward/leftward.",
+          "exclusive_group": "head_camera_forward_leftward_upward",
+          "mutually_exclusive_with": "robot_base_xyz",
+          "name": "upward",
+          "positive_direction": "camera_up",
+          "required": false,
+          "type": "number",
+          "unit": "m",
+          "widget": "number"
+        },
+        {
+          "default": 0,
+          "name": "roll",
+          "required": false,
+          "type": "number",
+          "unit": "deg(right gripper local axis)",
+          "widget": "number"
+        },
+        {
+          "default": 0,
+          "name": "pitch",
+          "required": false,
+          "type": "number",
+          "unit": "deg(+ fingertips-up)",
+          "widget": "number"
+        },
+        {
+          "default": 0,
+          "name": "yaw",
+          "required": false,
+          "type": "number",
+          "unit": "deg(right gripper local axis)",
+          "widget": "number"
+        },
+        {
+          "default": 0.012,
+          "name": "pos_tol",
+          "required": false,
+          "type": "number",
+          "unit": "m",
+          "widget": "number"
+        },
+        {
+          "default": 3,
+          "name": "ori_tol_deg",
+          "required": false,
+          "type": "number",
+          "unit": "deg",
+          "widget": "number"
+        },
+        {
+          "default": 240,
+          "name": "max_steps",
+          "required": false,
+          "type": "number",
+          "unit": "observation/action steps",
+          "widget": "number"
+        },
+        {
+          "default": 60,
+          "name": "timeout_s",
+          "required": false,
+          "type": "number",
+          "unit": "s",
+          "widget": "number"
+        }
+      ],
+      "desc": "Adjust the right EEF by incremental translation and local-gripper RPY. For translation, use only x/y/z in the current robot base frame (+X forward, +Y left, +Z up), or only forward/leftward/upward in the starting head-camera frame. Never mix the two parameter families, even when one value is zero. y and leftward have the same positive-left sign but belong to different frames. For a horizontal push, issue short +x increments and verify external-object motion from the next evaluator RGB-D observation; tool success itself means the requested EEF pose converged.",
+      "endpoint": "/api/v2/adjust_right_eef_pose_in_head_frame",
+      "name": "adjust_right_eef_pose_in_head_frame",
+      "translation_families_mutually_exclusive": true,
+      "translation_parameter_families": {
+        "head_camera_forward_leftward_upward": {
+          "axes": "starting head-camera forward, image-left, image-up",
+          "parameters": [
+            "forward",
+            "leftward",
+            "upward"
+          ]
+        },
+        "robot_base_xyz": {
+          "axes": "+X chassis-forward, +Y chassis-left, +Z chassis-up",
+          "parameters": [
+            "x",
+            "y",
+            "z"
+          ]
+        }
+      }
+    },
+    {
+      "args": [
+        {
+          "name": "image_id",
+          "required": true,
+          "type": "string",
+          "widget": "image"
+        },
+        {
+          "fixed_names": [
+            "cutting_tool_point",
+            "target_object_point"
+          ],
+          "items": {
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "u": {
+                "maximum": 1000,
+                "minimum": 0,
+                "type": "number"
+              },
+              "v": {
+                "maximum": 1000,
+                "minimum": 0,
+                "type": "number"
+              }
+            },
+            "required": [
+              "name",
+              "u",
+              "v"
+            ],
+            "type": "object"
+          },
+          "max_points": 2,
+          "min_points": 2,
+          "name": "points",
+          "required": true,
+          "type": "array",
+          "widget": "named_multi_uv"
+        },
+        {
+          "default": 0.012,
+          "name": "pos_tol",
+          "required": false,
+          "type": "number",
+          "unit": "m",
+          "widget": "number"
+        },
+        {
+          "default": 5,
+          "name": "ori_tol_deg",
+          "required": false,
+          "type": "number",
+          "unit": "deg",
+          "widget": "number"
+        },
+        {
+          "default": 360,
+          "name": "max_steps",
+          "required": false,
+          "type": "integer",
+          "widget": "number"
+        },
+        {
+          "default": 90,
+          "name": "timeout_s",
+          "required": false,
+          "type": "number",
+          "unit": "s",
+          "widget": "number"
+        }
+      ],
+      "coordinate_system": "Qwen3-VL relative image coordinates 0..1000",
+      "desc": "Select cutting_tool_point first and target_object_point second on the same bound head capture. Track both points live and move the nearest eligible held-tool EEF, with orientation and grippers preserved, until their current robot-base XYZ distance converges. This performs one touch attempt and does not use contact or BDDL truth.",
+      "endpoint": "/api/v2/cut_object",
+      "name": "cut_object"
+    },
+    {
+      "args": [
+        {
+          "name": "image_id",
+          "required": true,
+          "type": "string",
+          "widget": "image"
+        },
+        {
+          "items": {
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "u": {
+                "maximum": 1000,
+                "minimum": 0,
+                "type": "number"
+              },
+              "v": {
+                "maximum": 1000,
+                "minimum": 0,
+                "type": "number"
+              }
+            },
+            "required": [
+              "name",
+              "u",
+              "v"
+            ],
+            "type": "object"
+          },
+          "max_points": 32,
+          "min_points": 1,
+          "name": "points",
+          "name_max_length": 128,
+          "required": true,
+          "type": "array",
+          "widget": "named_multi_uv"
+        }
+      ],
+      "coordinate_system": "Qwen3-VL relative image coordinates 0..1000",
+      "desc": "Bind every UV to the exact frozen head capture named by image_id, then track multiple model-named surface points; publish only current depth_m and xyz_in_robot_base_coord_m=[x, y, z] in memory. xyz_in_robot_base_coord_m is measured in meters in the current robot chassis frame: +X always points chassis-forward, +Y chassis-left, and +Z chassis-up. A stale image binding or replay gap fails instead of applying UV to a newer frame. Delete an entry when the point leaves view or tracking is lost.",
+      "endpoint": "/api/v2/track_object_distance",
+      "name": "track_object_distance"
+    },
+    {
+      "args": [
+        {
+          "default": "exec",
+          "description": "exec moves immediately; plan returns a red final-EEF overlay and a plan_id for exec_plan_pose without moving",
+          "name": "execution_mode",
+          "options": [
+            "exec",
+            "plan"
+          ],
+          "required": false,
+          "type": "string",
+          "widget": "select"
+        },
+        {
+          "coordinate_help": "finite number, variable identifier, affine expression such as z+0.08, 2*z, (a+b)/2, or a-b, or ? for an unconstrained coordinate",
+          "coordinate_pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "role": {
+                "enum": [
+                  "on_hand",
+                  "off_hand"
+                ],
+                "type": "string"
+              },
+              "target_xyz_m": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "x": {
+                        "oneOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                            "type": "string"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "expr": {
+                                "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                                "type": "string"
+                              },
+                              "free": {
+                                "const": true
+                              },
+                              "var": {
+                                "pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "var"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "expr": {
+                                "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "expr"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "free": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "free"
+                            ],
+                            "type": "object"
+                          }
+                        ]
+                      },
+                      "y": {
+                        "oneOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                            "type": "string"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "expr": {
+                                "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                                "type": "string"
+                              },
+                              "free": {
+                                "const": true
+                              },
+                              "var": {
+                                "pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "var"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "expr": {
+                                "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "expr"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "free": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "free"
+                            ],
+                            "type": "object"
+                          }
+                        ]
+                      },
+                      "z": {
+                        "oneOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                            "type": "string"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "expr": {
+                                "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                                "type": "string"
+                              },
+                              "free": {
+                                "const": true
+                              },
+                              "var": {
+                                "pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "var"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "expr": {
+                                "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "expr"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "free": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "free"
+                            ],
+                            "type": "object"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "x",
+                      "y",
+                      "z"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "items": {
+                      "oneOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                          "type": "string"
+                        },
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "expr": {
+                              "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                              "type": "string"
+                            },
+                            "free": {
+                              "const": true
+                            },
+                            "var": {
+                              "pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "var"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "expr": {
+                              "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "expr"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "free": {
+                              "const": true
+                            }
+                          },
+                          "required": [
+                            "free"
+                          ],
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "maxItems": 3,
+                    "minItems": 3,
+                    "type": "array"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "type": "object"
+          },
+          "max_points": 6,
+          "min_points": 1,
+          "name": "points",
+          "name_max_length": 128,
+          "quick_items": {
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "role": {
+                "enum": [
+                  "on_hand",
+                  "off_hand"
+                ],
+                "type": "string"
+              },
+              "target_xyz_m": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "x": {
+                        "oneOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                            "type": "string"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "expr": {
+                                "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                                "type": "string"
+                              },
+                              "free": {
+                                "const": true
+                              },
+                              "var": {
+                                "pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "var"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "expr": {
+                                "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "expr"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "free": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "free"
+                            ],
+                            "type": "object"
+                          }
+                        ]
+                      },
+                      "y": {
+                        "oneOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                            "type": "string"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "expr": {
+                                "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                                "type": "string"
+                              },
+                              "free": {
+                                "const": true
+                              },
+                              "var": {
+                                "pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "var"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "expr": {
+                                "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "expr"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "free": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "free"
+                            ],
+                            "type": "object"
+                          }
+                        ]
+                      },
+                      "z": {
+                        "oneOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                            "type": "string"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "expr": {
+                                "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                                "type": "string"
+                              },
+                              "free": {
+                                "const": true
+                              },
+                              "var": {
+                                "pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "var"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "expr": {
+                                "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "expr"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "free": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "free"
+                            ],
+                            "type": "object"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "x",
+                      "y",
+                      "z"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "items": {
+                      "oneOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                          "type": "string"
+                        },
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "expr": {
+                              "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                              "type": "string"
+                            },
+                            "free": {
+                              "const": true
+                            },
+                            "var": {
+                              "pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "var"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "expr": {
+                              "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "expr"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "free": {
+                              "const": true
+                            }
+                          },
+                          "required": [
+                            "free"
+                          ],
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "maxItems": 3,
+                    "minItems": 3,
+                    "type": "array"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "name",
+              "role"
+            ],
+            "type": "object"
+          },
+          "quick_max_points": 6,
+          "quick_presets": [
+            {
+              "off_hand_count": 1,
+              "on_hand_count": 1,
+              "type": "touch"
+            },
+            {
+              "off_hand_count": 0,
+              "on_hand_count": 3,
+              "type": "flatwise"
+            },
+            {
+              "off_hand_count": 3,
+              "on_hand_count": 3,
+              "type": "plane_parallel"
+            },
+            {
+              "off_hand_count": [
+                1,
+                2
+              ],
+              "on_hand_count": 2,
+              "type": "collinear"
+            },
+            {
+              "off_hand_count": 3,
+              "on_hand_count": 2,
+              "type": "line_vertical_to_plane"
+            },
+            {
+              "off_hand_count": 0,
+              "on_hand_count": [
+                2,
+                3
+              ],
+              "type": "vertical_to_ground"
+            }
+          ],
+          "required": true,
+          "type": "array",
+          "variable_pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+          "widget": "tracked_target_points"
+        },
+        {
+          "default": [],
+          "items": {
+            "properties": {
+              "direction_robot_base": {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              "mode": {
+                "enum": [
+                  "same",
+                  "opposite",
+                  "parallel"
+                ],
+                "type": "string"
+              },
+              "normal_robot_base": {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              "offset_m": {},
+              "point_names": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "type": {
+                "enum": [
+                  "common_plane",
+                  "oriented_plane_normal",
+                  "align_vector",
+                  "vertical_to_ground"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "point_names"
+            ],
+            "type": "object"
+          },
+          "name": "relations",
+          "required": false,
+          "type": "array"
+        },
+        {
+          "description": "Optional role-based geometry preset solved jointly with all supplied XYZ and typed relations",
+          "enum_types": [
+            "touch",
+            "flatwise",
+            "plane_parallel",
+            "collinear",
+            "line_vertical_to_plane",
+            "vertical_to_ground"
+          ],
+          "name": "quick_constraint",
+          "required": false,
+          "type": "object",
+          "widget": "quick_constraint"
+        },
+        {
+          "description": "Optional named preset groups solved simultaneously with all supplied XYZ and typed relations",
+          "items": {
+            "properties": {
+              "axial_mode": {
+                "enum": [
+                  "ordered_containment",
+                  "segment_overlap",
+                  "line_only"
+                ],
+                "type": "string"
+              },
+              "axial_point_order": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "off_hand_points": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "on_hand_points": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "type": {
+                "enum": [
+                  "touch",
+                  "flatwise",
+                  "plane_parallel",
+                  "collinear",
+                  "line_vertical_to_plane",
+                  "vertical_to_ground"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "on_hand_points",
+              "off_hand_points"
+            ],
+            "type": "object"
+          },
+          "max_items": 6,
+          "name": "quick_constraints",
+          "required": false,
+          "type": "array",
+          "widget": "quick_constraint_groups"
+        },
+        {
+          "default": 0.03,
+          "name": "pos_tol",
+          "required": false,
+          "type": "number",
+          "unit": "m",
+          "widget": "number"
+        },
+        {
+          "default": 20,
+          "name": "ori_tol_deg",
+          "required": false,
+          "type": "number",
+          "unit": "deg",
+          "widget": "number"
+        },
+        {
+          "default": 360,
+          "name": "max_steps",
+          "required": false,
+          "type": "integer",
+          "widget": "number"
+        },
+        {
+          "default": 90,
+          "name": "timeout_s",
+          "required": false,
+          "type": "number",
+          "unit": "s",
+          "widget": "number"
+        }
+      ],
+      "coordinate_system": "current robot-base frame in meters: +X chassis-forward, +Y chassis-left, +Z chassis-up",
+      "desc": "Plan or move one to six points already active in track_object_distance. execution_mode defaults to exec; plan returns the frozen-head red final-EEF overlay and a signed plan_id executable by exec_plan_pose without moving. Mark each point on-hand or frozen off-hand, optionally select touch, flatwise, plane-parallel, collinear, line-vertical-to-plane, or vertical-to-ground, and optionally enter target x/y/z as a finite number, a variable identifier, or an affine expression such as z+0.08, 2*z, (a+b)/2, or a-b. Reusing a variable imposes that relation across any point and axis; an identifier used once leaves that degree of freedom for the nearest reachable solution. All on-hand points must belong to the same rigid object. Quick geometry and XYZ constraints are solved jointly. Four-point collinear uses the submitted row order as the directed axial order (for example 1,3,4,2). Vertical-to-ground uses two on-hand points for equal X/Y, or three on-hand points for a plane whose unit normal has Z=0, with no fixed heading. Optional typed common_plane, oriented_plane_normal, and align_vector relations are checked by the local solver. The nearest EEF is selected from live local FK, and success requires subsequent proprioception and live tracked-point convergence. Collinear point rows specify spatial axial order, not execution order. Preserve each group's exact row order, including interleaved on/off-hand points; 1,3,2 means point 3 lies between 1 and 2. The canonical reading direction is robot-base left-to-right (-Y) for a Y-dominant line, top-to-bottom (-Z) for a Z-dominant line, and near-to-far (+X) for an X-dominant line; ties prefer Y, then Z, then X. It does not depend on camera viewpoint. This also applies when numeric/affine XYZ constraints imply three or more collinear points. Reversing rows requests the opposite physical order. Order violations cannot be returned as successful approximate or overlap-fallback plans.",
+      "endpoint": "/api/v2/move_tracked_point",
+      "name": "move_tracked_point"
+    }
+  ]
+}

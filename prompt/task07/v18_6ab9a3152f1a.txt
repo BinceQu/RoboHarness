@@ -1,0 +1,225 @@
+Complete picking_up_toys.
+
+The grey toy box is the open grey tray on the table, on the working
+edge in front of the red chair. The floor near that chair is the
+working spot for the table. Do not walk along the table to the far
+cabinet end.
+
+The bed has two boxes to recover later: a green-and-white box and a
+blue box. Their places on the bed change by instance. Do not assume
+the blue box is at the head or that the green-and-white box is at the
+foot. Judge each box from a fresh image.
+
+The left-side corridor is the aisle on the left of the bed. The
+right-side corridor is the aisle between the bed and the right wall.
+
+First capture a fresh head image. Then do the job in this order.
+Finish each numbered step before starting the next. Do not reset.
+
+Do not activate place-object-in-container at any time.
+Do not call move_tracked_point. Do not use exec_plan_pose to bypass
+the grasp plan — every grasp must go through plan_grasp_point_filter_rgbd_lite
+and its returned plan_id.
+
+1. Go to the floor near the red chair at the table. Work from that
+   chair-side spot. Do not start at the bed.
+
+2. Put every toy that is already on the table or cabinet into the
+   grey toy box, one at a time. Never pick up the toy box itself.
+   Never take out a toy that is already inside the toy box; do not
+   use an in-box toy as a tool. If a toy cannot be picked or
+   dropped after a serious try, skip it and do an easier remaining
+   toy first; leave the hardest for last.
+
+   For each table-side toy, run this pick-place sequence.
+
+   PICK
+
+   1. Confirm both arms are free. If either arm still holds the
+      previous toy, finish the drop and open the gripper before
+      starting. If either arm is outstretched, call
+      set_arm_to_grasp_position on that arm with gripper="open"
+      (or arm="both" if both arms are out). The chassis must not
+      start move_to_reach_point while an unused arm is outstretched.
+
+   2. On the current head image, pick one visible point on the
+      target toy. call move_to_reach_point on that same point.
+
+   3. On the new head image, call
+      plan_grasp_point_filter_rgbd_lite on a point on the visible
+      solid body of the toy. Use plan_arm="any" first; if the
+      planner returns empty or the wrist image has no red overlay,
+      run this retry chain before skipping the toy:
+
+      a. Call move_to_reach_point on another visible point on the
+         same toy, then replan (plan_grasp_point_filter_rgbd_lite).
+      b. If still no red overlay, call
+         adjust_<chassis>_pitch_in_head_frame with pitch=-5
+         (small lean-in; do not reset to -10) and replan.
+      c. If still no red overlay, call move_to_reach_point again
+         on the current image and replan.
+      d. After the chain a–b–c, if no red overlay has appeared,
+         skip this toy. Do not loop further on the same toy.
+
+   4. Once the wrist image shows a red overlay, call exec_plan_pose
+      on that plan_id. Never move the same plan by hand with
+      adjust_<arm>_eef_pose_in_head_frame. The plan pose is the
+      only thing that may carry the arm into pre-grasp; do not
+      hand-drive the arm to that pose.
+
+   5. Call close_gripper on that arm. The close_gripper return
+      value and any gap you can see in the wrist view do not by
+      themselves prove failure — the simulator has noise on both.
+      The only real grasp check is step 6.
+
+   6. Call adjust_<holding_arm>_eef_pose_in_head_frame on the
+      holding arm with z=+0.2 only (robot-base up; no x or y).
+      Then inspect the head and wrist images:
+        - If the toy clearly rises with the gripper, the grasp
+          held. Go to PLACE.
+        - If the toy is still on the surface, the grasp failed.
+          Call set_arm_to_grasp_position on that arm with
+          gripper="open", recapture, and go back to step 3 to
+          replan on this toy. Do not try the same plan_id twice.
+          If the toy has moved since the original move_to_reach_point
+          in step 2, do not replan from the old reach pose; first
+          go back to step 2 and call move_to_reach_point on the
+          toy again before replanning.
+
+   PLACE
+
+   1. On the current head image, pick one visible point on the grey
+      toy box itself (the tray, not the chair, not the floor, not
+      the cabinet). If that toy box is off to one side, call
+      spin_to_facing_point on it, then use the new image.
+      Immediately call move_to_reach_point on a visible point on
+      that same toy box.
+
+   2. On the new head image, call track_object_distance on one
+      interior point of the grey toy box. Name it toybox_center.
+      Click inside the opening, not the floor, not the chair.
+      Read that point's depth_m.
+
+   3. If depth_m is greater than 0.7, do not start the two-point
+      track yet. Look at the current image: is something between
+      you and the toy box keeping you from getting closer (desk
+      edge, chair, cabinet, bed, or a jammed footprint)? If yes,
+      go around that blocker and find a clear way to approach the
+      toy box. Hint: the floor near the red chair is the easier
+      approach. Do not go to the far cabinet end of the table.
+      Then, if the toy box is off to one side,
+      spin_to_facing_point on it; immediately call
+      move_to_reach_point on the toy box again; re-track one
+      interior point as toybox_center; read depth_m again. Repeat
+      this adjust until depth_m is 0.7 or less.
+
+   4. When depth_m is 0.7 or less, call track_object_distance once
+      with exactly these two points:
+        toybox_center — visible interior of the grey toy box opening
+        held_toy — visible solid body of the object in the gripper
+      Both clicks must be on those surfaces and inside the image.
+      Do not click the floor. Do not track a finger tip.
+
+   5. After that track is live, read both current
+      xyz_in_robot_base_coord_m from persistent_tracking. Compute
+        dx = held_toy.x - toybox_center.x
+        dy = held_toy.y - toybox_center.y
+        held_z and box_z from those same tracks.
+      Lift first. While held_z is not greater than box_z + 0.25,
+      call adjust_left_eef_pose_in_head_frame or
+      adjust_right_eef_pose_in_head_frame on the holding arm with
+      only z (robot-base up). Do not send x or y on those lift
+      calls. After each lift, re-read both tracks. If a point is
+      lost, recapture and rebind both points before the next
+      adjust.
+
+   6. Only after held_z > box_z + 0.25, adjust XY. From the latest
+      tracks, compute the held-to-center XY difference:
+        x = toybox_center.x - held_toy.x
+        y = toybox_center.y - held_toy.y
+      Call adjust_left_eef_pose_in_head_frame or
+      adjust_right_eef_pose_in_head_frame on the holding arm with
+      those x and y so held_toy moves onto toybox_center. Do not
+      lower z while aligning XY. After each move, re-read both
+      tracks and recompute dx, dy, x, y, held_z, box_z. If held_z
+      falls to box_z + 0.25 or below, lift again before any more XY.
+
+   7. When |dx| < 0.05 and |dy| < 0.05 and held_z > box_z + 0.25,
+      capture a fresh head image and inspect it carefully: is the
+      held object visibly directly above the grey toy box opening?
+      If yes, open_gripper on the holding arm. Immediately after
+      that open_gripper, call adjust_<holding_arm>_eef_pose_in_head_frame
+      on the SAME holding arm with z=+0.2 (robot-base up) and x=0,
+      y=0. Do not send x or y on that lift call. This lift keeps
+      the gripper and wrist clear of the toy box rim while you
+      withdraw, so the toy box does not get knocked over. Do not
+      lower the object by hand after that. This is the only allowed
+      open_gripper for that toy. The gripper stays closed through
+      every adjust. If the image shows the object is not over the
+      opening, do not open. Recapture, rebind both toybox_center
+      and held_toy, and go back to PLACE step 5.
+
+   8. After the withdraw lift, call set_arm_to_grasp_position on
+      the placing arm with gripper="open" (or arm="both" if the
+      other arm is also out) before moving to the next toy.
+
+3. Look at the bed. If a bed box is already gone, skip it. For each
+   box still on the bed, decide from a fresh head image which of
+   these three is nearer that box:
+     - the foot of the bed
+     - the left-side corridor
+     - the right-side corridor
+   Rank the remaining boxes by that nearness:
+     - nearer the foot: easiest. Call move_to_reach_point on the
+       box, then pick it with PICK steps 1–6 above. Do not enter a
+       corridor.
+     - nearer the left-side corridor: medium. Enter the left-side
+       corridor and pick it there with PICK steps 1–6.
+     - nearer the right-side corridor: hardest. Use the sideways
+       right-corridor pickup at the end of this prompt. This case
+       is uncommon.
+   Pick the easier remaining box first. After the grasp is
+   confirmed by PICK step 6, run PLACE steps 1–8 on it. Do the
+   hardest remaining box last. If a box cannot be picked or
+   dropped after a serious try, skip it and finish the easier
+   remaining work first. After each drop, re-check the other box
+   on a fresh image before going to it.
+
+4. Keep working until the robot has physically returned to its spawn
+   point. Only that counts as task completion. Do not stop early and
+   do not call reset before that moment. Every additional toy
+   placed in the toy box scores a point — keep trying as long as
+   the session is alive. If no bed boxes remain, stay at the toy
+   box and look for any toy you can still reach. If a toy is out
+   of reach but not yet attempted, try the reach-replan chain in
+   PICK steps 2–3 before giving up on it.
+
+Sideways right-corridor pickup
+Use this only if a bed box is nearer the right-side corridor than
+the foot or the left-side corridor. Most instances will not need
+it. Do not use it for table toys, a foot-side box, or a
+left-corridor box.
+
+S1. Activate traverse-narrow-passages and enter the right-side
+    corridor sideways. That target is only reachable after you pass
+    through this corridor; do not treat a nearer box as this target.
+
+S2. Stay in the corridor. Run PICK steps 1–6 on that target box.
+    If the planner says too far, keep adjusting in the corridor
+    instead of leaving. Leaving empty-handed does not finish this
+    pickup.
+
+S3. Leave by the same corridor. Keep the box in the gripper.
+    Then drop it with PLACE steps 1–8.
+
+Activate at most one skill at a time. The only skills this task may
+activate are traverse-narrow-passages and pick-up-object.
+
+==== REMINDER ====
+
+Keep working until the robot has physically returned to its spawn
+point — only then is the task finished. Do not stop early and do
+not finish before that moment. Every additional toy placed in the
+toy box scores a point, so keep trying as long as the session is
+alive. Place every visible toy; one more in the box is one more
+point.

@@ -1,0 +1,49 @@
+{
+  "mcpServers": {
+    "behavior-v2": {
+      "command": "/bin/sh",
+      "args": [
+        "${CODEX_PLUGIN_ROOT}/scripts/embodied-codex-mcp"
+      ],
+      "env": {
+        "EMBODIED_PLUGIN_ROOT": "${CODEX_PLUGIN_ROOT}"
+      },
+      "env_vars": [
+        "EMBODIED_CODEX_PYTHON",
+        "ROBOHARNESS_RUN_TOKEN",
+        "BEHAVIOR_BASE_URL",
+        "EMBODIED_PLUGIN_ROOT",
+        "BEHAVIOR_ALLOW_REMOTE",
+        "BEHAVIOR_HTTP_TIMEOUT_S",
+        "BEHAVIOR_MEMORY_TIMEOUT_S",
+        "BEHAVIOR_MODEL_IMAGE_MAX_BYTES",
+        "BEHAVIOR_MODEL_IMAGE_MAX_EDGE",
+        "BEHAVIOR_MODEL_IMAGE_JPEG_QUALITY",
+        "BEHAVIOR_IMAGE_CONVERTER",
+        "BEHAVIOR_PROFILE",
+        "BEHAVIOR_RECORD",
+        "BEHAVIOR_SESSION_ID",
+        "BEHAVIOR_RECORD_LABEL",
+        "BEHAVIOR_RECORD_ROOT",
+        "XDG_RUNTIME_DIR"
+      ],
+      "default_tools_approval_mode": "approve",
+      "tools": {
+        "capture_head_camera": {
+          "approval_mode": "approve"
+        },
+        "capture_left_wrist_camera": {
+          "approval_mode": "approve"
+        },
+        "capture_right_wrist_camera": {
+          "approval_mode": "approve"
+        },
+        "measure_shoulder_distance": {
+          "approval_mode": "approve"
+        }
+      },
+      "startup_timeout_sec": 20,
+      "tool_timeout_sec": 1900
+    }
+  }
+}

@@ -1,0 +1,94 @@
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+import unittest
+from unittest.mock import patch
+import uuid
+
+from roboharness import runner
+
+
+class ArchivedCases(unittest.TestCase):
+    def test_all_cases_have_exact_prompts_and_unmodified_scores(self):
+        used = set()
+        count = 0
+        for path in sorted((runner.ROOT / 'tasks').glob('*.json')):
+            task = runner.load_task(path.stem)
+            self.assertEqual([301, 304, 306, 308, 310], [c['instance_id'] for c in task['cases']])
+            for case in task['cases']:
+                result = runner.official_result(runner.ROOT / case['reference_result'], task, case['instance_id'])
+                self.assertEqual(result['q_score']['final'], case['reference_q'])
+                self.assertEqual(case['slot'] + 301, case['instance_id'])
+                used.add(case['prompt'])
+                count += 1
+        self.assertEqual(count, 45)
+        self.assertEqual(used, {str(p.relative_to(runner.ROOT)) for p in (runner.ROOT / 'prompt').rglob('*.txt')})
+
+    def test_instance_ids_are_not_silently_interpreted_as_slots(self):
+        task = runner.load_task('task01')
+        with self.assertRaises(ValueError):
+            runner.select_cases(task, '0,3,5')
+        with self.assertRaises(ValueError):
+            runner.select_cases(task, '301,301')
+        self.assertEqual([310, 301], [c['instance_id'] for c in runner.select_cases(task, '310,301')])
+
+    def test_stale_or_nonfinite_score_is_rejected(self):
+        task = runner.load_task('task01')
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'score.json'
+            body = {'task': task['task_name'], 'instance_id': 304, 'rollout_id': 0,
+                    'steps': 2, 'q_score': {'final': 1}}
+            path.write_text(json.dumps(body))
+            with self.assertRaises(ValueError):
+                runner.official_result(path, task, 301)
+            body['instance_id'] = 301
+            body['q_score']['final'] = float('nan')
+            path.write_text(json.dumps(body))
+            with self.assertRaises(ValueError):
+                runner.official_result(path, task, 301)
+
+
+class Ownership(unittest.TestCase):
+    def test_case_handoff_waits_for_reset_and_request_acknowledgement(self):
+        health = {'evaluator_connected': True, 'episode_initialization': {'ready': True},
+                  'action_source': 'hold'}
+        status = {'current_instance_id': 304, 'state': 'ready'}
+        self.assertFalse(runner.handoff_ready(301, health, status, {}))
+        request = {'op': 'finish', 'request_id': 'previous-case'}
+        self.assertFalse(runner.handoff_ready(304, health, status, request))
+        status['applied_request_id'] = request['request_id']
+        self.assertTrue(runner.handoff_ready(304, health, status, request))
+        for state in ('resetting', 'error', 'queued', 'finish_queued'):
+            self.assertFalse(runner.handoff_ready(304, health, {**status, 'state': state}, request))
+        self.assertFalse(runner.handoff_ready(304, {**health, 'action_source': 'tool'}, status, {}))
+        self.assertFalse(runner.handoff_ready(304, {**health, 'episode_initialization': {'ready': False}}, status, {}))
+
+    def test_cleanup_does_not_kill_another_run_with_similar_token(self):
+        token = 'test-' + uuid.uuid4().hex
+        children = []
+        try:
+            for value in (token, token + '-other'):
+                children.append(subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(120)'],
+                    env={**os.environ, 'ROBOHARNESS_RUN_TOKEN': value}))
+            runner.cleanup(token, grace=0.1)
+            self.assertIsNotNone(children[0].wait(timeout=3))
+            self.assertIsNone(children[1].poll())
+        finally:
+            for proc in children:
+                if proc.poll() is None:
+                    proc.terminate()
+                proc.wait(timeout=3)
+
+    def test_reused_pid_is_never_signalled(self):
+        with patch.object(runner, 'owned_pids', return_value=[1234]), \
+             patch.object(runner, 'process_start', side_effect=['old', 'new', 'new']), \
+             patch.object(runner.os, 'kill') as kill:
+            runner.cleanup('example', grace=0)
+        kill.assert_not_called()
+
+
+if __name__ == '__main__':
+    unittest.main()

@@ -1,0 +1,17 @@
+{
+  "schema_version": "embodied_claude_code.profile.v1",
+  "name": "baseline",
+  "description": "Allow advertised BEHAVIOR v2 tools except tools intentionally excluded from MCP.",
+  "allow_tools": ["*"],
+  "deny_tools": [
+    "plan_eef_translation_to_uvd_point",
+    "adjust_plan_pose",
+    "plan_grasp_point_filter",
+    "plan_grasp_point_filter_rgbd",
+    "plan_press_point",
+    "cut_object",
+    "move_point_to_point",
+    "read_depth"
+  ],
+  "fixed_arguments": {}
+}

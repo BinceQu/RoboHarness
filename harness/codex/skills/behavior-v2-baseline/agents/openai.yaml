@@ -1,0 +1,4 @@
+interface:
+  display_name: "BEHAVIOR v2 Baseline"
+  short_description: "Operate BEHAVIOR v2 through the recordable MCP bridge"
+  default_prompt: "Use $behavior-v2-baseline to inspect the active task and operate it from my instructions."

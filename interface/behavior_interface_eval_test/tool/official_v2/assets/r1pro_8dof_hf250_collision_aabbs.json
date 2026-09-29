@@ -1,0 +1,2414 @@
+{
+  "schema": "r1pro_usd_link_collision_aabbs_v1",
+  "profile": "r1pro_8dof_hf250",
+  "coordinate_contract": "Each AABB is in its owning FK link frame and conservatively contains the authored USD collision mesh after local xformOps.",
+  "source": {
+    "usd_path": "behavior_interface_eval_test/robot_profiles/r1pro_8dof_hf250/assets/models/r1pro/usd/r1pro_8dof_hf250.usda",
+    "usd_sha256": "56f12570594c80a317d6fb38c230238e666438cdbe9b035ee8f6cf942ddc395b",
+    "fk_urdf_path": "behavior_interface_eval_test/tool/official_v2/assets/r1pro_8dof_hf250_kinematics.urdf",
+    "fk_urdf_sha256": "e303a57e6d85cf054e390e0e645460b0e4be3c238f198289f9883e55f60ca4db",
+    "curobo_path": "behavior_interface_eval_test/tool/official_v2/assets/r1pro_description_curobo_arm_no_torso.yaml",
+    "curobo_sha256": "42aede22733711f13cd7063d4e958dc27575f2763e811efa63d0b9388ed68aba"
+  },
+  "navigation_contract": {
+    "base_and_wheels_radius_m": 0.42,
+    "base_and_wheels_links": [
+      "base_link",
+      "wheel_motor_link1",
+      "wheel_motor_link2",
+      "wheel_motor_link3"
+    ],
+    "dynamic_aabb_links": [
+      "left_arm_link1",
+      "left_arm_link2",
+      "left_arm_link3",
+      "left_arm_link4",
+      "left_arm_link5",
+      "left_arm_link6",
+      "left_arm_link7",
+      "left_gripper_finger_link1",
+      "left_gripper_finger_link2",
+      "left_gripper_link",
+      "left_realsense_link",
+      "right_arm_link1",
+      "right_arm_link2",
+      "right_arm_link3",
+      "right_arm_link4",
+      "right_arm_link5",
+      "right_arm_link6",
+      "right_arm_link7",
+      "right_gripper_finger_link1",
+      "right_gripper_finger_link2",
+      "right_gripper_link",
+      "right_realsense_link",
+      "torso_link1",
+      "torso_link2",
+      "torso_link3",
+      "torso_link4",
+      "zed_link"
+    ],
+    "radius_rule": "max(base_and_wheels_radius_m, XY radius of every transformed corner from every AABB in dynamic_aabb_links)"
+  },
+  "link_count": 31,
+  "mesh_count": 164,
+  "links": {
+    "base_link": [
+      {
+        "name": "base_link_col_0",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.102650729,
+          -0.195173579,
+          0.03546272
+        ],
+        "aabb_max_m": [
+          0.210442775,
+          0.195521219,
+          0.148802464
+        ]
+      },
+      {
+        "name": "base_link_col_1",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.025272098,
+          -0.317434434,
+          0.035462519
+        ],
+        "aabb_max_m": [
+          0.10265072,
+          0.317431438,
+          0.148802479
+        ]
+      },
+      {
+        "name": "base_link_col_2",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.025254609,
+          -0.065239063,
+          0.148802135
+        ],
+        "aabb_max_m": [
+          0.238803517,
+          0.341916125,
+          0.315177543
+        ]
+      },
+      {
+        "name": "base_link_col_3",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.146518983,
+          -0.342018251,
+          0.035462538
+        ],
+        "aabb_max_m": [
+          0.025264526,
+          -0.076466009,
+          0.351666668
+        ]
+      },
+      {
+        "name": "base_link_col_4",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.398309231,
+          -0.274198305,
+          0.035454453
+        ],
+        "aabb_max_m": [
+          -0.146541982,
+          0.26525465,
+          0.353015204
+        ]
+      },
+      {
+        "name": "base_link_col_5",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.025285435,
+          -0.341916012,
+          0.148716185
+        ],
+        "aabb_max_m": [
+          0.238755255,
+          -0.065237998,
+          0.314503427
+        ]
+      },
+      {
+        "name": "base_link_col_6",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.146518093,
+          -0.076465997,
+          0.035462862
+        ],
+        "aabb_max_m": [
+          0.025264525,
+          0.076619915,
+          0.410844918
+        ]
+      },
+      {
+        "name": "base_link_col_7",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.162699106,
+          0.07662506,
+          0.035461871
+        ],
+        "aabb_max_m": [
+          0.025264563,
+          0.342033066,
+          0.351616079
+        ]
+      }
+    ],
+    "left_arm_link1": [
+      {
+        "name": "collisions",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.023988845,
+          -0.000665585,
+          -0.050651375
+        ],
+        "aabb_max_m": [
+          0.025404086,
+          0.131093105,
+          0.050363128
+        ]
+      }
+    ],
+    "left_arm_link2": [
+      {
+        "name": "left_arm_link2_col_0",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.047750919,
+          -0.058373819,
+          -0.094476327
+        ],
+        "aabb_max_m": [
+          0.008194763,
+          -0.027108667,
+          -0.038354684
+        ]
+      },
+      {
+        "name": "left_arm_link2_col_1",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.003456901,
+          -0.058368106,
+          -0.063574166
+        ],
+        "aabb_max_m": [
+          0.030786939,
+          0.01111029,
+          0.055550784
+        ]
+      },
+      {
+        "name": "left_arm_link2_col_2",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.056922663,
+          0.027186082,
+          -0.094433681
+        ],
+        "aabb_max_m": [
+          0.008312031,
+          0.059186275,
+          -0.001832456
+        ]
+      },
+      {
+        "name": "left_arm_link2_col_3",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.080955692,
+          -0.058905119,
+          -0.09458759
+        ],
+        "aabb_max_m": [
+          -0.046587645,
+          0.023200159,
+          0.055558989
+        ]
+      },
+      {
+        "name": "left_arm_link2_col_4",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.065741149,
+          -0.005217945,
+          -0.067237042
+        ],
+        "aabb_max_m": [
+          -0.058667692,
+          0.005321386,
+          -0.054437994
+        ]
+      },
+      {
+        "name": "left_arm_link2_col_5",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.079494829,
+          -0.009666388,
+          -0.094429229
+        ],
+        "aabb_max_m": [
+          -0.048801166,
+          0.056715641,
+          0.047520038
+        ]
+      },
+      {
+        "name": "left_arm_link2_col_6",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.001530616,
+          -0.008992408,
+          -0.09445487
+        ],
+        "aabb_max_m": [
+          0.029495934,
+          0.056604162,
+          0.050922824
+        ]
+      },
+      {
+        "name": "left_arm_link2_col_7",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.001490599,
+          -0.051375852,
+          -0.094425676
+        ],
+        "aabb_max_m": [
+          0.029337521,
+          0.00659997,
+          -0.027842824
+        ]
+      }
+    ],
+    "left_arm_link3": [
+      {
+        "name": "left_arm_link3_col_0",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.026620568,
+          -0.048261293,
+          -0.17939252
+        ],
+        "aabb_max_m": [
+          0.023373557,
+          -0.016056712,
+          0.023989417
+        ]
+      },
+      {
+        "name": "left_arm_link3_col_1",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.013488721,
+          -0.043405069,
+          -0.230886632
+        ],
+        "aabb_max_m": [
+          0.05035163,
+          0.030563975,
+          0.024059749
+        ]
+      },
+      {
+        "name": "left_arm_link3_col_2",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.047566288,
+          0.013649204,
+          -0.173222306
+        ],
+        "aabb_max_m": [
+          -0.001266085,
+          0.048255475,
+          0.023959089
+        ]
+      },
+      {
+        "name": "left_arm_link3_col_3",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.042813173,
+          -0.039262244,
+          -0.225752256
+        ],
+        "aabb_max_m": [
+          -0.016826535,
+          0.039033332,
+          -0.152431956
+        ]
+      },
+      {
+        "name": "left_arm_link3_col_4",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.003358778,
+          0.010607266,
+          -0.204042515
+        ],
+        "aabb_max_m": [
+          0.048873587,
+          0.048701968,
+          0.024075904
+        ]
+      },
+      {
+        "name": "left_arm_link3_col_5",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.049743059,
+          -0.041444307,
+          -0.157110584
+        ],
+        "aabb_max_m": [
+          -0.026622862,
+          0.014079919,
+          0.024055593
+        ]
+      },
+      {
+        "name": "left_arm_link3_col_6",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.033938312,
+          -0.039263003,
+          -0.234377352
+        ],
+        "aabb_max_m": [
+          0.017894262,
+          0.028085627,
+          -0.212764115
+        ]
+      },
+      {
+        "name": "left_arm_link3_col_7",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.024594676,
+          0.027219041,
+          -0.233363157
+        ],
+        "aabb_max_m": [
+          0.03773719,
+          0.039269225,
+          -0.203249909
+        ]
+      }
+    ],
+    "left_arm_link4": [
+      {
+        "name": "collisions",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.042091505,
+          -0.079934471,
+          -0.114499967
+        ],
+        "aabb_max_m": [
+          0.043481099,
+          0.010105352,
+          0.036070098
+        ]
+      }
+    ],
+    "left_arm_link5": [
+      {
+        "name": "left_arm_link5_col_0",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.026815798,
+          -0.026909574,
+          -0.005987584
+        ],
+        "aabb_max_m": [
+          0.027022277,
+          0.026559933,
+          0.031985052
+        ]
+      },
+      {
+        "name": "left_arm_link5_col_1",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.014067324,
+          -0.025999714,
+          -0.125072342
+        ],
+        "aabb_max_m": [
+          0.042506109,
+          0.025348932,
+          -0.018494638
+        ]
+      },
+      {
+        "name": "left_arm_link5_col_2",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.040785845,
+          -0.027097758,
+          -0.128755551
+        ],
+        "aabb_max_m": [
+          0.033668824,
+          -0.011815373,
+          -0.005999011
+        ]
+      },
+      {
+        "name": "left_arm_link5_col_3",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.03281822,
+          -0.043816587,
+          -0.188474603
+        ],
+        "aabb_max_m": [
+          0.032804661,
+          -0.027100463,
+          -0.018467836
+        ]
+      },
+      {
+        "name": "left_arm_link5_col_4",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.001680873,
+          0.006730959,
+          -0.029391675
+        ],
+        "aabb_max_m": [
+          0.042053878,
+          0.042597208,
+          -0.018436613
+        ]
+      },
+      {
+        "name": "left_arm_link5_col_5",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.034164724,
+          0.025349916,
+          -0.114569909
+        ],
+        "aabb_max_m": [
+          0.033958989,
+          0.042603063,
+          -0.018503866
+        ]
+      },
+      {
+        "name": "left_arm_link5_col_6",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.042615408,
+          -0.026025885,
+          -0.125100649
+        ],
+        "aabb_max_m": [
+          -0.021797863,
+          0.025348868,
+          -0.018427698
+        ]
+      },
+      {
+        "name": "left_arm_link5_col_7",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.024909284,
+          -0.011813558,
+          -0.125076109
+        ],
+        "aabb_max_m": [
+          0.024355118,
+          0.025347119,
+          -0.005985046
+        ]
+      }
+    ],
+    "left_arm_link6": [
+      {
+        "name": "collisions",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.029012365,
+          -0.008383401,
+          -0.02950015
+        ],
+        "aabb_max_m": [
+          0.029500457,
+          0.0560008,
+          0.029500179
+        ]
+      }
+    ],
+    "left_arm_link7": [
+      {
+        "name": "left_arm_link7_col_0",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.059396143,
+          -0.031132202,
+          -0.086016889
+        ],
+        "aabb_max_m": [
+          0.000245435,
+          0.031260863,
+          -0.044050908
+        ]
+      },
+      {
+        "name": "left_arm_link7_col_1",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.037486752,
+          0.007917708,
+          -0.092544273
+        ],
+        "aabb_max_m": [
+          -0.01070938,
+          0.020349337,
+          -0.086015957
+        ]
+      },
+      {
+        "name": "left_arm_link7_col_2",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.002736308,
+          -0.020006959,
+          -0.058140305
+        ],
+        "aabb_max_m": [
+          0.008049662,
+          0.020007459,
+          -0.034674216
+        ]
+      },
+      {
+        "name": "left_arm_link7_col_3",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.001049865,
+          -0.023815111,
+          -0.03468448
+        ],
+        "aabb_max_m": [
+          0.011557679,
+          0.023932211,
+          0.0236194
+        ]
+      },
+      {
+        "name": "left_arm_link7_col_4",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.02308223,
+          -0.019591265,
+          -0.092485743
+        ],
+        "aabb_max_m": [
+          -0.009346175,
+          0.007915715,
+          -0.086015857
+        ]
+      },
+      {
+        "name": "left_arm_link7_col_5",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.00105025,
+          0.008987577,
+          -0.034669622
+        ],
+        "aabb_max_m": [
+          0.008049568,
+          0.021575108,
+          -0.021969799
+        ]
+      },
+      {
+        "name": "left_arm_link7_col_6",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.050017868,
+          -0.007957768,
+          -0.092550652
+        ],
+        "aabb_max_m": [
+          -0.037487832,
+          0.018722713,
+          -0.086015762
+        ]
+      },
+      {
+        "name": "left_arm_link7_col_7",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.048189309,
+          -0.020347727,
+          -0.092544273
+        ],
+        "aabb_max_m": [
+          -0.023083612,
+          -0.007959243,
+          -0.086015958
+        ]
+      }
+    ],
+    "left_gripper_finger_link1": [
+      {
+        "name": "left_gripper_finger_link1_col_0",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.010427216,
+          -0.065643039,
+          0.037460998
+        ],
+        "aabb_max_m": [
+          0.024292764,
+          -0.030293654,
+          0.051335763
+        ]
+      },
+      {
+        "name": "left_gripper_finger_link1_col_1",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.010350802,
+          -0.030294676,
+          0.029653825
+        ],
+        "aabb_max_m": [
+          0.024063516,
+          -0.019728049,
+          0.051254209
+        ]
+      },
+      {
+        "name": "left_gripper_finger_link1_col_2",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.012402873,
+          -0.008552198,
+          -0.037977355
+        ],
+        "aabb_max_m": [
+          0.012461328,
+          0.002761437,
+          0.009698659
+        ]
+      },
+      {
+        "name": "left_gripper_finger_link1_col_3",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.009006518,
+          -0.01972769,
+          0.029341846
+        ],
+        "aabb_max_m": [
+          0.023981256,
+          -0.01446486,
+          0.05120799
+        ]
+      },
+      {
+        "name": "left_gripper_finger_link1_col_4",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.014816176,
+          -0.01437551,
+          0.00930393
+        ],
+        "aabb_max_m": [
+          0.014986769,
+          0.00542998,
+          0.032533689
+        ]
+      },
+      {
+        "name": "left_gripper_finger_link1_col_5",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.010143196,
+          -0.014318893,
+          0.031568675
+        ],
+        "aabb_max_m": [
+          0.008368977,
+          0.001984943,
+          0.037337882
+        ]
+      },
+      {
+        "name": "left_gripper_finger_link1_col_6",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.00837046,
+          -0.014465108,
+          0.028253726
+        ],
+        "aabb_max_m": [
+          0.024061212,
+          -0.004987179,
+          0.051113632
+        ]
+      },
+      {
+        "name": "left_gripper_finger_link1_col_7",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.012300009,
+          -0.014365919,
+          -0.041910274
+        ],
+        "aabb_max_m": [
+          0.012584055,
+          -0.008552196,
+          0.00930429
+        ]
+      }
+    ],
+    "left_gripper_finger_link2": [
+      {
+        "name": "left_gripper_finger_link2_col_0",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.024065863,
+          0.014565488,
+          0.029374966
+        ],
+        "aabb_max_m": [
+          -0.009410762,
+          0.030524855,
+          0.051335447
+        ]
+      },
+      {
+        "name": "left_gripper_finger_link2_col_1",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.023882697,
+          0.010259188,
+          0.038077655
+        ],
+        "aabb_max_m": [
+          -0.010489854,
+          0.014565068,
+          0.051305458
+        ]
+      },
+      {
+        "name": "left_gripper_finger_link2_col_2",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.024284081,
+          0.030524731,
+          0.037537311
+        ],
+        "aabb_max_m": [
+          -0.010431055,
+          0.065666971,
+          0.051336082
+        ]
+      },
+      {
+        "name": "left_gripper_finger_link2_col_3",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.015001676,
+          0.006317984,
+          -0.041851106
+        ],
+        "aabb_max_m": [
+          0.014836121,
+          0.014383735,
+          0.028322963
+        ]
+      },
+      {
+        "name": "left_gripper_finger_link2_col_4",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.013848186,
+          -0.004299043,
+          -0.038305897
+        ],
+        "aabb_max_m": [
+          0.01379845,
+          0.008506366,
+          0.019595884
+        ]
+      },
+      {
+        "name": "left_gripper_finger_link2_col_5",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.000718471,
+          -0.005391711,
+          0.01959729
+        ],
+        "aabb_max_m": [
+          0.014862658,
+          0.006316118,
+          0.036879894
+        ]
+      },
+      {
+        "name": "left_gripper_finger_link2_col_6",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.022556063,
+          0.005120755,
+          0.028323335
+        ],
+        "aabb_max_m": [
+          0.014810654,
+          0.01457001,
+          0.038083136
+        ]
+      },
+      {
+        "name": "left_gripper_finger_link2_col_7",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.014922356,
+          -0.005391964,
+          0.019595602
+        ],
+        "aabb_max_m": [
+          0.000197852,
+          0.006318092,
+          0.036865309
+        ]
+      }
+    ],
+    "left_gripper_link": [
+      {
+        "name": "left_gripper_link_col_0",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.030913868,
+          -0.055150602,
+          -0.000993021
+        ],
+        "aabb_max_m": [
+          0.030977719,
+          0.055134294,
+          0.016671884
+        ]
+      },
+      {
+        "name": "left_gripper_link_col_1",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.030975467,
+          -0.033857673,
+          0.016653926
+        ],
+        "aabb_max_m": [
+          0.030988114,
+          0.033851992,
+          0.072375214
+        ]
+      },
+      {
+        "name": "left_gripper_link_col_2",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.000286616,
+          0.010335479,
+          0.07070628
+        ],
+        "aabb_max_m": [
+          0.018934234,
+          0.030956566,
+          0.077642995
+        ]
+      },
+      {
+        "name": "left_gripper_link_col_3",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.018935318,
+          -0.024536757,
+          0.070703714
+        ],
+        "aabb_max_m": [
+          0.030717606,
+          0.024467707,
+          0.077642315
+        ]
+      },
+      {
+        "name": "left_gripper_link_col_4",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.028638714,
+          0.011691516,
+          0.070754323
+        ],
+        "aabb_max_m": [
+          -0.000286606,
+          0.031018822,
+          0.077642917
+        ]
+      },
+      {
+        "name": "left_gripper_link_col_5",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.02903215,
+          -0.030938071,
+          0.070753583
+        ],
+        "aabb_max_m": [
+          -0.000287923,
+          -0.010732311,
+          0.077642839
+        ]
+      },
+      {
+        "name": "left_gripper_link_col_6",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.000286607,
+          -0.030938543,
+          0.070718291
+        ],
+        "aabb_max_m": [
+          0.018969896,
+          -0.010671584,
+          0.077642437
+        ]
+      },
+      {
+        "name": "left_gripper_link_col_7",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.030910998,
+          -0.01073231,
+          0.070753651
+        ],
+        "aabb_max_m": [
+          -0.018685832,
+          0.011690247,
+          0.077642804
+        ]
+      }
+    ],
+    "left_realsense_link": [
+      {
+        "name": "left_realsense_link_col_0",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.005596485,
+          -0.077951614,
+          -0.015935765
+        ],
+        "aabb_max_m": [
+          0.01399195,
+          0.001247137,
+          0.001589987
+        ]
+      },
+      {
+        "name": "left_realsense_link_col_1",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.013640838,
+          -0.078038821,
+          -0.016495973
+        ],
+        "aabb_max_m": [
+          0.000300329,
+          0.002457557,
+          0.001594599
+        ]
+      },
+      {
+        "name": "left_realsense_link_col_2",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.01314485,
+          -0.017551745,
+          -0.019903429
+        ],
+        "aabb_max_m": [
+          0.031816126,
+          0.012179539,
+          0.007414449
+        ]
+      },
+      {
+        "name": "left_realsense_link_col_3",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.012923685,
+          0.000687186,
+          -0.016521891
+        ],
+        "aabb_max_m": [
+          0.012764903,
+          0.012844489,
+          0.001586811
+        ]
+      },
+      {
+        "name": "left_realsense_link_col_4",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.01371692,
+          -0.078351696,
+          -0.026325895
+        ],
+        "aabb_max_m": [
+          0.01327967,
+          0.013126959,
+          -0.011348744
+        ]
+      },
+      {
+        "name": "left_realsense_link_col_5",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.013184643,
+          -0.018840555,
+          -0.031068098
+        ],
+        "aabb_max_m": [
+          0.033737071,
+          0.012211597,
+          -0.019903427
+        ]
+      },
+      {
+        "name": "left_realsense_link_col_6",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.013324248,
+          -0.069103576,
+          -0.031068046
+        ],
+        "aabb_max_m": [
+          0.013940999,
+          0.012390666,
+          -0.022550423
+        ]
+      },
+      {
+        "name": "left_realsense_link_col_7",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.00666983,
+          -0.066458485,
+          -0.002685632
+        ],
+        "aabb_max_m": [
+          0.005001039,
+          -0.049334156,
+          0.001021466
+        ]
+      }
+    ],
+    "right_arm_link1": [
+      {
+        "name": "collisions",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.025139873,
+          -0.131913396,
+          -0.050361641
+        ],
+        "aabb_max_m": [
+          0.023989277,
+          0.001320549,
+          0.050389384
+        ]
+      }
+    ],
+    "right_arm_link2": [
+      {
+        "name": "right_arm_link2_col_0",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.060812844,
+          0.017237387,
+          -0.09451795
+        ],
+        "aabb_max_m": [
+          0.009375023,
+          0.058372836,
+          -0.036108124
+        ]
+      },
+      {
+        "name": "right_arm_link2_col_1",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.079529845,
+          -0.056640071,
+          -0.094477127
+        ],
+        "aabb_max_m": [
+          -0.045555613,
+          0.058376569,
+          0.055679265
+        ]
+      },
+      {
+        "name": "right_arm_link2_col_2",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.071111307,
+          -0.008880658,
+          -0.094514801
+        ],
+        "aabb_max_m": [
+          -0.03758677,
+          0.045914254,
+          -0.077333606
+        ]
+      },
+      {
+        "name": "right_arm_link2_col_3",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.000107718,
+          -0.051880479,
+          -0.094492881
+        ],
+        "aabb_max_m": [
+          0.030518049,
+          0.050216626,
+          -0.018054546
+        ]
+      },
+      {
+        "name": "right_arm_link2_col_4",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.05694268,
+          -0.058942521,
+          -0.09448663
+        ],
+        "aabb_max_m": [
+          0.009333835,
+          -0.027199317,
+          -0.001730643
+        ]
+      },
+      {
+        "name": "right_arm_link2_col_5",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.000487288,
+          0.043025998,
+          -0.0717318
+        ],
+        "aabb_max_m": [
+          0.031537882,
+          0.058375385,
+          0.049883763
+        ]
+      },
+      {
+        "name": "right_arm_link2_col_6",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.00244895,
+          -0.056883759,
+          -0.026919223
+        ],
+        "aabb_max_m": [
+          0.032022068,
+          0.058392046,
+          0.055567242
+        ]
+      },
+      {
+        "name": "right_arm_link2_col_7",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.00967217,
+          -0.010949327,
+          -0.011000474
+        ],
+        "aabb_max_m": [
+          0.02229011,
+          0.01303614,
+          0.010865999
+        ]
+      }
+    ],
+    "right_arm_link3": [
+      {
+        "name": "right_arm_link3_col_0",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.013483631,
+          -0.042638453,
+          -0.203977912
+        ],
+        "aabb_max_m": [
+          0.050309808,
+          0.030554178,
+          0.02398511
+        ]
+      },
+      {
+        "name": "right_arm_link3_col_1",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.045477624,
+          -0.042665558,
+          -0.206391704
+        ],
+        "aabb_max_m": [
+          -0.001099956,
+          -0.006834426,
+          -0.117868903
+        ]
+      },
+      {
+        "name": "right_arm_link3_col_2",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.03975408,
+          -0.039267994,
+          -0.234238417
+        ],
+        "aabb_max_m": [
+          0.038867998,
+          0.039254331,
+          -0.196144324
+        ]
+      },
+      {
+        "name": "right_arm_link3_col_3",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.03108967,
+          0.018376795,
+          -0.20537339
+        ],
+        "aabb_max_m": [
+          0.046679461,
+          0.048536704,
+          0.023966263
+        ]
+      },
+      {
+        "name": "right_arm_link3_col_4",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.00127068,
+          -0.048386969,
+          -0.167839791
+        ],
+        "aabb_max_m": [
+          0.034252075,
+          -0.016026881,
+          0.024034614
+        ]
+      },
+      {
+        "name": "right_arm_link3_col_5",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.039794073,
+          -0.048380822,
+          -0.117870511
+        ],
+        "aabb_max_m": [
+          -0.001270041,
+          -0.030000645,
+          0.023900491
+        ]
+      },
+      {
+        "name": "right_arm_link3_col_6",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.045615099,
+          -0.006830414,
+          -0.196136861
+        ],
+        "aabb_max_m": [
+          -0.018020275,
+          0.038903025,
+          -0.1210203
+        ]
+      },
+      {
+        "name": "right_arm_link3_col_7",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.049753686,
+          -0.030259516,
+          -0.121016967
+        ],
+        "aabb_max_m": [
+          -0.023396893,
+          0.038767988,
+          0.023976823
+        ]
+      }
+    ],
+    "right_arm_link4": [
+      {
+        "name": "collisions",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.042171242,
+          -0.079923142,
+          -0.11471
+        ],
+        "aabb_max_m": [
+          0.043497718,
+          0.00982903,
+          0.036093628
+        ]
+      }
+    ],
+    "right_arm_link5": [
+      {
+        "name": "right_arm_link5_col_0",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.033339307,
+          0.025998388,
+          -0.188747358
+        ],
+        "aabb_max_m": [
+          0.033356298,
+          0.043506533,
+          -0.01838527
+        ]
+      },
+      {
+        "name": "right_arm_link5_col_1",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.039817274,
+          -0.026009387,
+          -0.124784928
+        ],
+        "aabb_max_m": [
+          -0.023717017,
+          -0.014195385,
+          -0.018399485
+        ]
+      },
+      {
+        "name": "right_arm_link5_col_2",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.023717021,
+          -0.026009391,
+          -0.12590871
+        ],
+        "aabb_max_m": [
+          0.023681371,
+          0.025999992,
+          -0.023515486
+        ]
+      },
+      {
+        "name": "right_arm_link5_col_3",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.023683192,
+          -0.026009388,
+          -0.12479585
+        ],
+        "aabb_max_m": [
+          0.042315848,
+          -0.000987855,
+          0.011168711
+        ]
+      },
+      {
+        "name": "right_arm_link5_col_4",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.03334047,
+          -0.042335406,
+          -0.113321054
+        ],
+        "aabb_max_m": [
+          0.033357985,
+          -0.026009019,
+          -0.018384421
+        ]
+      },
+      {
+        "name": "right_arm_link5_col_5",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.023683086,
+          -0.004079476,
+          -0.125431773
+        ],
+        "aabb_max_m": [
+          0.042328454,
+          0.026000408,
+          -0.01834681
+        ]
+      },
+      {
+        "name": "right_arm_link5_col_6",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.042315608,
+          -0.014194235,
+          -0.125200018
+        ],
+        "aabb_max_m": [
+          -0.023718734,
+          0.026000196,
+          -0.018380221
+        ]
+      },
+      {
+        "name": "right_arm_link5_col_7",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.022518485,
+          -0.022550109,
+          -0.02376327
+        ],
+        "aabb_max_m": [
+          0.022556383,
+          0.022549143,
+          0.001707984
+        ]
+      }
+    ],
+    "right_arm_link6": [
+      {
+        "name": "collisions",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.029153398,
+          -0.05612406,
+          -0.029500227
+        ],
+        "aabb_max_m": [
+          0.02949998,
+          0.008095575,
+          0.029501511
+        ]
+      }
+    ],
+    "right_arm_link7": [
+      {
+        "name": "right_arm_link7_col_0",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.059239307,
+          -0.031289952,
+          -0.086016592
+        ],
+        "aabb_max_m": [
+          0.000183401,
+          0.030841931,
+          -0.044051788
+        ]
+      },
+      {
+        "name": "right_arm_link7_col_1",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.050013184,
+          -0.013562344,
+          -0.092550561
+        ],
+        "aabb_max_m": [
+          -0.036353879,
+          0.019488248,
+          -0.086015411
+        ]
+      },
+      {
+        "name": "right_arm_link7_col_2",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.00273522,
+          -0.019971399,
+          -0.058119946
+        ],
+        "aabb_max_m": [
+          0.008050454,
+          0.019994226,
+          -0.034772478
+        ]
+      },
+      {
+        "name": "right_arm_link7_col_3",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.001049417,
+          -0.023816909,
+          -0.034770202
+        ],
+        "aabb_max_m": [
+          0.011550404,
+          0.00872096,
+          0.023649595
+        ]
+      },
+      {
+        "name": "right_arm_link7_col_4",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.001049725,
+          0.008717565,
+          -0.034787145
+        ],
+        "aabb_max_m": [
+          0.011547897,
+          0.023861415,
+          0.022266357
+        ]
+      },
+      {
+        "name": "right_arm_link7_col_5",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.021709235,
+          -0.018771472,
+          -0.0924903
+        ],
+        "aabb_max_m": [
+          -0.009346151,
+          0.008097515,
+          -0.086015414
+        ]
+      },
+      {
+        "name": "right_arm_link7_col_6",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.044335082,
+          -0.02033019,
+          -0.092541115
+        ],
+        "aabb_max_m": [
+          -0.021710446,
+          -0.013562764,
+          -0.086015416
+        ]
+      },
+      {
+        "name": "right_arm_link7_col_7",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.03635136,
+          0.008097516,
+          -0.092546541
+        ],
+        "aabb_max_m": [
+          -0.010790736,
+          0.02036938,
+          -0.086015115
+        ]
+      }
+    ],
+    "right_gripper_finger_link1": [
+      {
+        "name": "right_gripper_finger_link1_col_0",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.010350802,
+          -0.030294676,
+          0.029653825
+        ],
+        "aabb_max_m": [
+          0.024063516,
+          -0.019728049,
+          0.051254209
+        ]
+      },
+      {
+        "name": "right_gripper_finger_link1_col_1",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.010427216,
+          -0.065643039,
+          0.037460998
+        ],
+        "aabb_max_m": [
+          0.024292764,
+          -0.030293654,
+          0.051335763
+        ]
+      },
+      {
+        "name": "right_gripper_finger_link1_col_2",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.012402873,
+          -0.008552198,
+          -0.037977355
+        ],
+        "aabb_max_m": [
+          0.012461328,
+          0.002761437,
+          0.009698659
+        ]
+      },
+      {
+        "name": "right_gripper_finger_link1_col_3",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.00837046,
+          -0.014465108,
+          0.028253726
+        ],
+        "aabb_max_m": [
+          0.024061212,
+          -0.004987179,
+          0.051113632
+        ]
+      },
+      {
+        "name": "right_gripper_finger_link1_col_4",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.009006518,
+          -0.01972769,
+          0.029341846
+        ],
+        "aabb_max_m": [
+          0.023981256,
+          -0.01446486,
+          0.05120799
+        ]
+      },
+      {
+        "name": "right_gripper_finger_link1_col_5",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.010143196,
+          -0.014318893,
+          0.031568675
+        ],
+        "aabb_max_m": [
+          0.008368977,
+          0.001984943,
+          0.037337882
+        ]
+      },
+      {
+        "name": "right_gripper_finger_link1_col_6",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.014816176,
+          -0.01437551,
+          0.00930393
+        ],
+        "aabb_max_m": [
+          0.014986769,
+          0.00542998,
+          0.032533689
+        ]
+      },
+      {
+        "name": "right_gripper_finger_link1_col_7",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.012300009,
+          -0.014365919,
+          -0.041910274
+        ],
+        "aabb_max_m": [
+          0.012584055,
+          -0.008552196,
+          0.00930429
+        ]
+      }
+    ],
+    "right_gripper_finger_link2": [
+      {
+        "name": "right_gripper_finger_link2_col_0",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.024065763,
+          0.005944589,
+          0.029405516
+        ],
+        "aabb_max_m": [
+          -0.00697298,
+          0.030544275,
+          0.051312028
+        ]
+      },
+      {
+        "name": "right_gripper_finger_link2_col_1",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.024284081,
+          0.030524731,
+          0.037537311
+        ],
+        "aabb_max_m": [
+          -0.010431055,
+          0.065666971,
+          0.051336082
+        ]
+      },
+      {
+        "name": "right_gripper_finger_link2_col_2",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.000718471,
+          -0.005425043,
+          0.019595602
+        ],
+        "aabb_max_m": [
+          0.01483699,
+          0.006317123,
+          0.032215389
+        ]
+      },
+      {
+        "name": "right_gripper_finger_link2_col_3",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.013848186,
+          -0.004299043,
+          -0.038305897
+        ],
+        "aabb_max_m": [
+          0.01379845,
+          0.008506366,
+          0.019595884
+        ]
+      },
+      {
+        "name": "right_gripper_finger_link2_col_4",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.015001676,
+          0.006317984,
+          -0.041851106
+        ],
+        "aabb_max_m": [
+          0.014836121,
+          0.014383735,
+          0.028322963
+        ]
+      },
+      {
+        "name": "right_gripper_finger_link2_col_5",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.022414696,
+          0.005120756,
+          0.028323338
+        ],
+        "aabb_max_m": [
+          0.014810648,
+          0.014564565,
+          0.0322154
+        ]
+      },
+      {
+        "name": "right_gripper_finger_link2_col_6",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.006975761,
+          -0.002224859,
+          0.032215393
+        ],
+        "aabb_max_m": [
+          0.0099009,
+          0.014311816,
+          0.037337425
+        ]
+      },
+      {
+        "name": "right_gripper_finger_link2_col_7",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.01493002,
+          -0.00547566,
+          0.019595602
+        ],
+        "aabb_max_m": [
+          5.359e-05,
+          0.006318028,
+          0.032215389
+        ]
+      }
+    ],
+    "right_gripper_link": [
+      {
+        "name": "right_gripper_link_col_0",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.030913868,
+          -0.055150602,
+          -0.000993021
+        ],
+        "aabb_max_m": [
+          0.030977719,
+          0.055134294,
+          0.016671884
+        ]
+      },
+      {
+        "name": "right_gripper_link_col_1",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.030975467,
+          -0.033857673,
+          0.016653926
+        ],
+        "aabb_max_m": [
+          0.030988114,
+          0.033851992,
+          0.072375214
+        ]
+      },
+      {
+        "name": "right_gripper_link_col_2",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.000286607,
+          -0.030938543,
+          0.070718291
+        ],
+        "aabb_max_m": [
+          0.018969896,
+          -0.010671584,
+          0.077642437
+        ]
+      },
+      {
+        "name": "right_gripper_link_col_3",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.018935318,
+          -0.024536757,
+          0.070703714
+        ],
+        "aabb_max_m": [
+          0.030717606,
+          0.024467707,
+          0.077642315
+        ]
+      },
+      {
+        "name": "right_gripper_link_col_4",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.028638714,
+          0.011691516,
+          0.070754323
+        ],
+        "aabb_max_m": [
+          -0.000286606,
+          0.031018822,
+          0.077642917
+        ]
+      },
+      {
+        "name": "right_gripper_link_col_5",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.02903215,
+          -0.030938071,
+          0.070753583
+        ],
+        "aabb_max_m": [
+          -0.000287923,
+          -0.010732311,
+          0.077642839
+        ]
+      },
+      {
+        "name": "right_gripper_link_col_6",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.000286616,
+          0.010335479,
+          0.07070628
+        ],
+        "aabb_max_m": [
+          0.018934234,
+          0.030956566,
+          0.077642995
+        ]
+      },
+      {
+        "name": "right_gripper_link_col_7",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.030910998,
+          -0.01073231,
+          0.070753651
+        ],
+        "aabb_max_m": [
+          -0.018685832,
+          0.011690247,
+          0.077642804
+        ]
+      }
+    ],
+    "right_realsense_link": [
+      {
+        "name": "right_realsense_link_col_0",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.01272021,
+          -0.077787148,
+          -0.013781001
+        ],
+        "aabb_max_m": [
+          0.012405401,
+          -0.049334156,
+          0.001589611
+        ]
+      },
+      {
+        "name": "right_realsense_link_col_1",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.013638941,
+          -0.069652758,
+          -0.016495972
+        ],
+        "aabb_max_m": [
+          0.005762469,
+          0.002457564,
+          0.001595305
+        ]
+      },
+      {
+        "name": "right_realsense_link_col_2",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.013154845,
+          -0.017550373,
+          -0.019903429
+        ],
+        "aabb_max_m": [
+          0.031816125,
+          0.012111371,
+          0.007414449
+        ]
+      },
+      {
+        "name": "right_realsense_link_col_3",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.012923685,
+          0.000687186,
+          -0.016521891
+        ],
+        "aabb_max_m": [
+          0.012764903,
+          0.012844489,
+          0.001586811
+        ]
+      },
+      {
+        "name": "right_realsense_link_col_4",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.005001561,
+          -0.066458482,
+          -0.011396011
+        ],
+        "aabb_max_m": [
+          0.013991964,
+          0.001246064,
+          0.001573323
+        ]
+      },
+      {
+        "name": "right_realsense_link_col_5",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.013324248,
+          -0.069103576,
+          -0.031068046
+        ],
+        "aabb_max_m": [
+          0.013940999,
+          0.012390666,
+          -0.022550423
+        ]
+      },
+      {
+        "name": "right_realsense_link_col_6",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.013184643,
+          -0.018840555,
+          -0.031068098
+        ],
+        "aabb_max_m": [
+          0.033737071,
+          0.012211597,
+          -0.019903427
+        ]
+      },
+      {
+        "name": "right_realsense_link_col_7",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.013620912,
+          -0.078184544,
+          -0.026325894
+        ],
+        "aabb_max_m": [
+          0.013353952,
+          0.013621662,
+          -0.011185007
+        ]
+      }
+    ],
+    "torso_link1": [
+      {
+        "name": "torso_link1_col_0",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.06685277,
+          -0.065814439,
+          0.337088565
+        ],
+        "aabb_max_m": [
+          0.066531977,
+          0.065811665,
+          0.467384543
+        ]
+      },
+      {
+        "name": "torso_link1_col_1",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.041741646,
+          -0.065508376,
+          0.155546201
+        ],
+        "aabb_max_m": [
+          0.041745132,
+          -0.021340402,
+          0.340731098
+        ]
+      },
+      {
+        "name": "torso_link1_col_2",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.067186751,
+          -0.093246686,
+          -0.067340737
+        ],
+        "aabb_max_m": [
+          0.067186348,
+          0.093310876,
+          0.061292893
+        ]
+      },
+      {
+        "name": "torso_link1_col_3",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.040804918,
+          -0.02184519,
+          0.294812247
+        ],
+        "aabb_max_m": [
+          0.040804789,
+          0.021849156,
+          0.340731122
+        ]
+      },
+      {
+        "name": "torso_link1_col_4",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.01191974,
+          -0.086355701,
+          0.060359461
+        ],
+        "aabb_max_m": [
+          0.041466348,
+          0.086148141,
+          0.155546207
+        ]
+      },
+      {
+        "name": "torso_link1_col_5",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.040625303,
+          -0.021331875,
+          0.155546221
+        ],
+        "aabb_max_m": [
+          -0.012392653,
+          0.056811236,
+          0.162081661
+        ]
+      },
+      {
+        "name": "torso_link1_col_6",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.041477897,
+          -0.08635565,
+          0.060368735
+        ],
+        "aabb_max_m": [
+          -0.011833608,
+          0.028873421,
+          0.155550594
+        ]
+      },
+      {
+        "name": "torso_link1_col_7",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.041741613,
+          -0.021331876,
+          0.060359465
+        ],
+        "aabb_max_m": [
+          0.041745134,
+          0.086414935,
+          0.340737799
+        ]
+      }
+    ],
+    "torso_link2": [
+      {
+        "name": "collisions",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.062501116,
+          -0.091524591,
+          -0.06280854
+        ],
+        "aabb_max_m": [
+          0.062500316,
+          0.091640021,
+          0.36291561
+        ]
+      }
+    ],
+    "torso_link3": [
+      {
+        "name": "collisions",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.062812555,
+          -0.071573883,
+          -0.062871965
+        ],
+        "aabb_max_m": [
+          0.062809465,
+          0.062973594,
+          0.124740641
+        ]
+      }
+    ],
+    "torso_link4": [
+      {
+        "name": "torso_link4_col_0",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.09950397,
+          -0.17824657,
+          0.308235489
+        ],
+        "aabb_max_m": [
+          0.09389264,
+          0.083482915,
+          0.420673975
+        ]
+      },
+      {
+        "name": "torso_link4_col_1",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.022623284,
+          -0.178298118,
+          -0.036430117
+        ],
+        "aabb_max_m": [
+          0.123385637,
+          0.178530549,
+          0.390256333
+        ]
+      },
+      {
+        "name": "torso_link4_col_2",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.071586299,
+          -0.17833763,
+          -0.022539065
+        ],
+        "aabb_max_m": [
+          0.118002048,
+          -0.020267281,
+          0.399564184
+        ]
+      },
+      {
+        "name": "torso_link4_col_3",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.066315493,
+          -0.025981538,
+          0.208624879
+        ],
+        "aabb_max_m": [
+          0.076464965,
+          0.023026254,
+          0.209875288
+        ]
+      },
+      {
+        "name": "torso_link4_col_4",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.09990034,
+          -0.178315697,
+          -0.017242548
+        ],
+        "aabb_max_m": [
+          0.002772069,
+          0.178324955,
+          0.38168565
+        ]
+      },
+      {
+        "name": "torso_link4_col_5",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.083699334,
+          0.075382014,
+          0.223558821
+        ],
+        "aabb_max_m": [
+          0.086353638,
+          0.17845965,
+          0.398720258
+        ]
+      },
+      {
+        "name": "torso_link4_col_6",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          0.062913156,
+          0.032734554,
+          0.225259695
+        ],
+        "aabb_max_m": [
+          0.085729121,
+          0.047525194,
+          0.284448527
+        ]
+      },
+      {
+        "name": "torso_link4_col_7",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.045867941,
+          0.025551438,
+          -0.018861228
+        ],
+        "aabb_max_m": [
+          0.051599908,
+          0.17828593,
+          0.274008609
+        ]
+      }
+    ],
+    "wheel_motor_link1": [
+      {
+        "name": "collisions",
+        "approximation": "boundingSphere",
+        "aabb_min_m": [
+          -0.12125832,
+          -0.121257719,
+          -0.121257708
+        ],
+        "aabb_max_m": [
+          0.121257109,
+          0.12125771,
+          0.121257721
+        ]
+      }
+    ],
+    "wheel_motor_link2": [
+      {
+        "name": "collisions",
+        "approximation": "boundingSphere",
+        "aabb_min_m": [
+          -0.12199088,
+          -0.122390198,
+          -0.121964879
+        ],
+        "aabb_max_m": [
+          0.121989056,
+          0.121589739,
+          0.122015058
+        ]
+      }
+    ],
+    "wheel_motor_link3": [
+      {
+        "name": "collisions",
+        "approximation": "boundingSphere",
+        "aabb_min_m": [
+          -0.122158673,
+          -0.121624366,
+          -0.121860448
+        ],
+        "aabb_max_m": [
+          0.12109006,
+          0.121624366,
+          0.121388285
+        ]
+      }
+    ],
+    "zed_link": [
+      {
+        "name": "collisions",
+        "approximation": "convexHull",
+        "aabb_min_m": [
+          -0.04059211,
+          -0.05836601,
+          -0.159819101
+        ],
+        "aabb_max_m": [
+          0.16037473,
+          0.113597358,
+          0.01597701
+        ]
+      }
+    ]
+  }
+}

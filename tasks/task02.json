@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "task": "task02",
+  "task_index": 2,
+  "task_name": "putting_away_Halloween_decorations",
+  "scene": "house_double_floor_lower",
+  "protocol": "archived-v391-x2",
+  "evaluator_commit": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+  "max_steps": 27664,
+  "sample_seed": 20260911,
+  "evaluator_seed": 0,
+  "model": "Qwen3.8-Flash-Next-FP8",
+  "harness": "claude_code",
+  "robot_profile": "r1pro_8dof_hf250",
+  "annotator": "cpu",
+  "idle_gate": true,
+  "spatial_map": false,
+  "cases": [
+    {
+      "instance_id": 301,
+      "slot": 0,
+      "prompt": "prompt/task02/v16_2fd781639dc9.txt",
+      "prompt_sha256": "2fd781639dc95e78a37721612031fb815703ef70a52417aeb79d467f21a85f2f",
+      "prompt_source": "test_results/task02/instance_301/session.json",
+      "prompt_source_sha256": "52c51b34bf58b47473f63f15949cbca44085b08e1e9ec26eddd1f90125215669",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v16.txt"
+      ],
+      "reference_result": "reference_results/task02/putting_away_Halloween_decorations_301_0.json",
+      "reference_sha256": "61cc1c376d87fc8156ff70a8be78e9258c38029364f08afa3c67beac028a628f",
+      "reference_source": "test_results/task02/instance_301/evaluator_result.json",
+      "reference_q": 0.5714285714285714,
+      "reference_steps": 27665,
+      "notes": [],
+      "source_session_id": "t02p15062i0-09171214"
+    },
+    {
+      "instance_id": 304,
+      "slot": 3,
+      "prompt": "prompt/task02/v17_56816b84b5e4.txt",
+      "prompt_sha256": "56816b84b5e44599fd38539cabd09c7170ee823138f33127f848def47e56b9fd",
+      "prompt_source": "test_results/task02/instance_304/session.json",
+      "prompt_source_sha256": "a7831175ba158a003e4c0e6f3c1a7dba2db93cb753f553a5646d3cc3639fe7e2",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v17.txt"
+      ],
+      "reference_result": "reference_results/task02/putting_away_Halloween_decorations_304_0.json",
+      "reference_sha256": "88b30dc7b1f9fdb519a4441bcaaec63614bbd5d2f539c5c7dc8eed1e39fcdd80",
+      "reference_source": "test_results/task02/instance_304/evaluator_result.json",
+      "reference_q": 0.7142857142857143,
+      "reference_steps": 27778,
+      "notes": [
+        "Historical evaluator reported 27778 steps, exceeding the planned 27664-step budget. New runs keep the declared budget; this overrun is not reproduced by silently increasing it."
+      ],
+      "source_session_id": "t02p15062i0-09181018"
+    },
+    {
+      "instance_id": 306,
+      "slot": 5,
+      "prompt": "prompt/task02/v18_c38d274c9d78.txt",
+      "prompt_sha256": "c38d274c9d7873021d4e7fb347be37835e139c59916bb4183fcdddb98d183782",
+      "prompt_source": "test_results/task02/instance_306/session.json",
+      "prompt_source_sha256": "b0c935db5ff19ea12332605881682a5648db4e18edc2fb3f2523d7a0910700af",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v18.txt"
+      ],
+      "reference_result": "reference_results/task02/putting_away_Halloween_decorations_306_0.json",
+      "reference_sha256": "cefc7f37e4af65050a2d0745831c9b0a9bc12e9e462be502f959e27a9b4283b8",
+      "reference_source": "test_results/task02/instance_306/evaluator_result.json",
+      "reference_q": 0.42857142857142855,
+      "reference_steps": 27665,
+      "notes": [],
+      "source_session_id": "t02p15062i5-09191118"
+    },
+    {
+      "instance_id": 308,
+      "slot": 7,
+      "prompt": "prompt/task02/v18_c38d274c9d78.txt",
+      "prompt_sha256": "c38d274c9d7873021d4e7fb347be37835e139c59916bb4183fcdddb98d183782",
+      "prompt_source": "test_results/task02/instance_308/session.json",
+      "prompt_source_sha256": "a6d8ad6ca0d12ba690ae261f14b403dfba2e3e70abd7c464f15e61f3eaff00a7",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v18.txt"
+      ],
+      "reference_result": "reference_results/task02/putting_away_Halloween_decorations_308_0.json",
+      "reference_sha256": "5fdf4a0ce9b56b9aaa03349b27c007e40e4d4f770a22de42977f166c30f4e43b",
+      "reference_source": "test_results/task02/instance_308/evaluator_result.json",
+      "reference_q": 0.7142857142857143,
+      "reference_steps": 27665,
+      "notes": [],
+      "source_session_id": "t02p15062i7-09191845"
+    },
+    {
+      "instance_id": 310,
+      "slot": 9,
+      "prompt": "prompt/task02/v18_85ab4a115842.txt",
+      "prompt_sha256": "85ab4a115842339c6620744ef5e8bb9d84a4bcc771af4397f19dffe3c66db0d6",
+      "prompt_source": "test_results/task02/instance_310/prompt.txt",
+      "prompt_source_sha256": "85ab4a115842339c6620744ef5e8bb9d84a4bcc771af4397f19dffe3c66db0d6",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v18.txt"
+      ],
+      "reference_result": "reference_results/task02/putting_away_Halloween_decorations_310_0.json",
+      "reference_sha256": "6a221de22e79eac615d6fa89b5485f5cef0ebfeb19a5a00d56d8fd1c17b416d2",
+      "reference_source": "test_results/task02/instance_310/evaluator_result.json",
+      "reference_q": 1.0,
+      "reference_steps": 22612,
+      "notes": [
+        "The top-level SUMMARY is stale; the selected case is the completed v18 rerun (q=1), not the v17 backup (q=0)."
+      ]
+    }
+  ],
+  "reference_mean_q": 0.6857142857142857,
+  "archive_reported_mean_q": 0.6857142857142857
+}

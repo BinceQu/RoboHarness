@@ -1,0 +1,4 @@
+interface:
+  display_name: "Stand Trash Can Upright"
+  short_description: "Stand a fallen trash can back up"
+  default_prompt: "Use $stand-trash-can-upright. The trash can has fallen over."

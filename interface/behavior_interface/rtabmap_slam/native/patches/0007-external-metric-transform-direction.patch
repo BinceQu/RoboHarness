@@ -1,0 +1,216 @@
+diff --git a/corelib/include/rtabmap/core/Rtabmap.h b/corelib/include/rtabmap/core/Rtabmap.h
+--- a/corelib/include/rtabmap/core/Rtabmap.h
++++ b/corelib/include/rtabmap/core/Rtabmap.h
+@@ -232,14 +232,14 @@
+ 	 * This bypasses only Bayesian appearance-candidate selection. The normal
+ 	 * RGB-D registration, covariance and graph-consistency checks still run. The
+ 	 * resulting metric transform must also pass a normalized-innovation test
+-	 * against @p expectedCurrentToCandidate and @p odometryCovariance before
++	 * against @p measuredCandidateToCurrent and @p measurementCovariance before
+ 	 * RTAB-Map may add a link. The candidate is consumed once even when it is
+ 	 * invalid or rejected. Passing a non-positive id clears a pending candidate.
+ 	 */
+ 	void setExternalLoopClosureHypothesis(
+ 			int id,
+-			const Transform & expectedCurrentToCandidate,
+-			const cv::Mat & odometryCovariance,
++			const Transform & measuredCandidateToCurrent,
++			const cv::Mat & measurementCovariance,
+ 			double innovationChiSquareThreshold);
+ 	/**
+ 	 * @brief Convenience overload: builds a diagonal covariance from scalar variances.
+@@ -1027,8 +1027,8 @@
+ 	std::pair<int, float> _loopClosureHypothesis;
+ 	std::pair<int, float> _highestHypothesis;
+ 	int _externalLoopClosureHypothesis;
+-	Transform _externalLoopClosureOdomTransform;
+-	cv::Mat _externalLoopClosureOdomCovariance;
++	Transform _externalLoopClosureMetricTransform;
++	cv::Mat _externalLoopClosureMetricCovariance;
+ 	double _externalLoopClosureInnovationChiSquareThreshold;
+ 	double _lastProcessTime;
+ 	bool _someNodesHaveBeenTransferred;
+diff --git a/corelib/src/Rtabmap.cpp b/corelib/src/Rtabmap.cpp
+--- a/corelib/src/Rtabmap.cpp
++++ b/corelib/src/Rtabmap.cpp
+@@ -477,8 +477,8 @@
+ 	_highestHypothesis = std::make_pair(0,0.0f);
+ 	_loopClosureHypothesis = std::make_pair(0,0.0f);
+ 	_externalLoopClosureHypothesis = 0;
+-	_externalLoopClosureOdomTransform.setNull();
+-	_externalLoopClosureOdomCovariance.release();
++	_externalLoopClosureMetricTransform.setNull();
++	_externalLoopClosureMetricCovariance.release();
+ 	_externalLoopClosureInnovationChiSquareThreshold = 0.0;
+ 	_lastProcessTime = 0.0;
+ 	_someNodesHaveBeenTransferred = false;
+@@ -894,24 +894,24 @@
+ 
+ void Rtabmap::setExternalLoopClosureHypothesis(
+ 		int id,
+-		const Transform & expectedCurrentToCandidate,
+-		const cv::Mat & odometryCovariance,
++		const Transform & measuredCandidateToCurrent,
++		const cv::Mat & measurementCovariance,
+ 		double innovationChiSquareThreshold)
+ {
+ 	const bool valid = id > 0 &&
+-		!expectedCurrentToCandidate.isNull() &&
+-		odometryCovariance.rows == 3 &&
+-		odometryCovariance.cols == 3 &&
+-		odometryCovariance.type() == CV_64FC1 &&
+-		cv::checkRange(odometryCovariance, true, 0) &&
+-		odometryCovariance.at<double>(0,0) >= 0.0 &&
+-		odometryCovariance.at<double>(1,1) >= 0.0 &&
+-		odometryCovariance.at<double>(2,2) >= 0.0 &&
++		!measuredCandidateToCurrent.isNull() &&
++		measurementCovariance.rows == 3 &&
++		measurementCovariance.cols == 3 &&
++		measurementCovariance.type() == CV_64FC1 &&
++		cv::checkRange(measurementCovariance, true, 0) &&
++		measurementCovariance.at<double>(0,0) >= 0.0 &&
++		measurementCovariance.at<double>(1,1) >= 0.0 &&
++		measurementCovariance.at<double>(2,2) >= 0.0 &&
+ 		innovationChiSquareThreshold > 0.0 &&
+ 		std::isfinite(innovationChiSquareThreshold);
+ 	_externalLoopClosureHypothesis = valid ? id : 0;
+-	_externalLoopClosureOdomTransform = valid ? expectedCurrentToCandidate : Transform();
+-	_externalLoopClosureOdomCovariance = valid ? odometryCovariance.clone() : cv::Mat();
++	_externalLoopClosureMetricTransform = valid ? measuredCandidateToCurrent : Transform();
++	_externalLoopClosureMetricCovariance = valid ? measurementCovariance.clone() : cv::Mat();
+ 	_externalLoopClosureInnovationChiSquareThreshold =
+ 		valid ? innovationChiSquareThreshold : 0.0;
+ }
+@@ -1132,8 +1132,8 @@
+ 	_highestHypothesis = std::make_pair(0,0.0f);
+ 	_loopClosureHypothesis = std::make_pair(0,0.0f);
+ 	_externalLoopClosureHypothesis = 0;
+-	_externalLoopClosureOdomTransform.setNull();
+-	_externalLoopClosureOdomCovariance.release();
++	_externalLoopClosureMetricTransform.setNull();
++	_externalLoopClosureMetricCovariance.release();
+ 	_externalLoopClosureInnovationChiSquareThreshold = 0.0;
+ 	_lastProcessTime = 0.0;
+ 	_someNodesHaveBeenTransferred = false;
+@@ -1305,14 +1305,14 @@
+ 	std::pair<int, float> lastHighestHypothesis = _highestHypothesis;
+ 	_highestHypothesis = std::make_pair(0,0.0f);
+ 	const int externalLoopClosureHypothesis = _externalLoopClosureHypothesis;
+-	const Transform externalLoopClosureOdomTransform = _externalLoopClosureOdomTransform;
+-	const cv::Mat externalLoopClosureOdomCovariance =
+-		_externalLoopClosureOdomCovariance.clone();
++	const Transform externalLoopClosureMetricTransform = _externalLoopClosureMetricTransform;
++	const cv::Mat externalLoopClosureMetricCovariance =
++		_externalLoopClosureMetricCovariance.clone();
+ 	const double externalLoopClosureInnovationChiSquareThreshold =
+ 		_externalLoopClosureInnovationChiSquareThreshold;
+ 	_externalLoopClosureHypothesis = 0;
+-	_externalLoopClosureOdomTransform.setNull();
+-	_externalLoopClosureOdomCovariance.release();
++	_externalLoopClosureMetricTransform.setNull();
++	_externalLoopClosureMetricCovariance.release();
+ 	_externalLoopClosureInnovationChiSquareThreshold = 0.0;
+ 
+ 	std::set<int> immunizedLocations;
+@@ -2301,9 +2301,9 @@
+ 		   externalLoopClosureHypothesis != signature->id() &&
+ 		   uContains(_optimizedPoses, externalLoopClosureHypothesis) &&
+ 		   _memory->getSignature(externalLoopClosureHypothesis) != 0 &&
+-		   !externalLoopClosureOdomTransform.isNull() &&
+-		   externalLoopClosureOdomCovariance.rows == 3 &&
+-		   externalLoopClosureOdomCovariance.cols == 3 &&
++		   !externalLoopClosureMetricTransform.isNull() &&
++		   externalLoopClosureMetricCovariance.rows == 3 &&
++		   externalLoopClosureMetricCovariance.cols == 3 &&
+ 		   externalLoopClosureInnovationChiSquareThreshold > 0.0)
+ 		{
+ 			_highestHypothesis = std::make_pair(externalLoopClosureHypothesis, 1.0f);
+@@ -3222,14 +3222,14 @@
+ 			info.covariance = cv::Mat::eye(6,6,CV_64FC1);
+ 			if(_rgbdSlamMode)
+ 			{
+-				// A depth-registered external candidate carries a metric
+-				// current->candidate observation. Invert it for the
+-				// candidate->current registration initial guess. RTAB-Map still
+-				// recomputes the transform from its stored RGB-D/scan data and
+-				// rejects disagreement with the observation below.
++				// A depth-registered external candidate carries the current base
++				// pose expressed in the candidate base frame. This is already the
++				// candidate->current registration guess expected by computeTransform().
++				// RTAB-Map still recomputes the transform from stored RGB-D/scan
++				// data and rejects disagreement with the observation below.
+ 				const Transform externalMetricGuess =
+ 					externalLoopClosureHypothesis == _loopClosureHypothesis.first
+-					? externalLoopClosureOdomTransform.inverse() : Transform();
++					? externalLoopClosureMetricTransform : Transform();
+ 				transform = _memory->computeTransform(
+ 						_loopClosureHypothesis.first,
+ 						signature->id(),
+@@ -3259,20 +3259,19 @@
+ 				else
+ 				{
+ 					const Transform candidateToCurrent = transform;
+-					transform = candidateToCurrent.inverse();
+ 					if(externalLoopClosureHypothesis == _loopClosureHypothesis.first)
+ 					{
+ 						cv::Mat innovation = cv::Mat::zeros(3, 1, CV_64FC1);
+ 						innovation.at<double>(0,0) =
+-							transform.x() - externalLoopClosureOdomTransform.x();
++							candidateToCurrent.x() - externalLoopClosureMetricTransform.x();
+ 						innovation.at<double>(1,0) =
+-							transform.y() - externalLoopClosureOdomTransform.y();
++							candidateToCurrent.y() - externalLoopClosureMetricTransform.y();
+ 						const double yawDifference =
+-							transform.theta() - externalLoopClosureOdomTransform.theta();
++							candidateToCurrent.theta() - externalLoopClosureMetricTransform.theta();
+ 						innovation.at<double>(2,0) =
+ 							std::atan2(std::sin(yawDifference), std::cos(yawDifference));
+ 						cv::Mat innovationCovariance =
+-							externalLoopClosureOdomCovariance.clone();
++							externalLoopClosureMetricCovariance.clone();
+ 						if(info.covariance.rows == 6 &&
+ 						   info.covariance.cols == 6 &&
+ 						   info.covariance.type() == CV_64FC1 &&
+@@ -3289,17 +3288,6 @@
+ 									info.covariance.at<double>(planarAxes[row], planarAxes[col]);
+ 								}
+ 							}
+-							const double yaw = candidateToCurrent.theta();
+-							const double cosine = std::cos(yaw);
+-							const double sine = std::sin(yaw);
+-							const double x = candidateToCurrent.x();
+-							const double y = candidateToCurrent.y();
+-							cv::Mat inverseJacobian = (cv::Mat_<double>(3,3) <<
+-								-cosine, -sine, sine*x-cosine*y,
+-								 sine, -cosine, cosine*x+sine*y,
+-								 0.0, 0.0, -1.0);
+-							measurementCovariance = inverseJacobian *
+-								measurementCovariance * inverseJacobian.t();
+ 							innovationCovariance += measurementCovariance;
+ 						}
+ 						innovationCovariance =
+@@ -3320,7 +3308,7 @@
+ 						   normalizedInnovation > externalLoopClosureInnovationChiSquareThreshold)
+ 						{
+ 							rejectedLoopClosure = true;
+-							UWARN("Rejected external loop closure %d -> %d: odometry innovation NIS=%f exceeds threshold=%f (dx=%f, dy=%f, dyaw=%f rad).",
++							UWARN("Rejected external loop closure %d -> %d: metric innovation NIS=%f exceeds threshold=%f (dx=%f, dy=%f, dyaw=%f rad).",
+ 								_loopClosureHypothesis.first,
+ 								signature->id(),
+ 								normalizedInnovation,
+@@ -3331,13 +3319,14 @@
+ 						}
+ 						else
+ 						{
+-							UINFO("Accepted external loop candidate %d -> %d by odometry innovation gate: NIS=%f threshold=%f.",
++							UINFO("Accepted external loop candidate %d -> %d by metric innovation gate: NIS=%f threshold=%f.",
+ 								_loopClosureHypothesis.first,
+ 								signature->id(),
+ 								normalizedInnovation,
+ 								externalLoopClosureInnovationChiSquareThreshold);
+ 						}
+ 					}
++					transform = candidateToCurrent.inverse();
+ 				}
+ 			}
+ 			if(!rejectedLoopClosure)

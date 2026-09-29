@@ -1,0 +1,1093 @@
+--- a/corelib/include/rtabmap/core/Memory.h
++++ b/corelib/include/rtabmap/core/Memory.h
+@@ -152,13 +152,22 @@
+ 	 * @param covariance 6x6 odometry covariance (or empty if null odometry is provided).
+ 	 * @param velocity Optional 6-vector (vx, vy, vz, vroll, vpitch, vyaw).
+ 	 * @param stats Optional output statistics receiver.
++	 * @param allowRehearsal If false, skips rehearsal and STM transfer for this
++	 *        insertion. This is used by a pre-validated aggregate transaction.
++	 * @param exactNeighborId Optional existing node that must be the sole graph
++	 *        neighbor of the new signature.
++	 * @param exactNeighborTransform Transform from exactNeighborId to the new
++	 *        signature, required when exactNeighborId is positive.
+ 	 * @return True on success, false if signature creation failed.
+ 	 */
+ 	bool update(const SensorData & data,
+ 			const Transform & pose,
+ 			const cv::Mat & covariance,
+ 			const std::vector<float> & velocity = std::vector<float>(), // vx,vy,vz,vroll,vpitch,vyaw
+-			Statistics * stats = 0);
++			Statistics * stats = 0,
++			bool allowRehearsal = true,
++			int exactNeighborId = 0,
++			const Transform & exactNeighborTransform = Transform());
+ 	/**
+ 	 * @brief Opens or creates a database and loads existing state into WM.
+ 	 *
+@@ -294,6 +303,10 @@
+ 	void emptyTrash();
+ 	/** @brief Blocks until the asynchronous database write thread has finished pending work. */
+ 	void joinTrashThread();
++	/** Durably checkpoint the committed resident graph before a query transaction. */
++	void checkpointResidentSignatures();
++	/** @brief Flushes every queued database save synchronously in the caller. */
++	void flushTrashSynchronously();
+ 	/**
+ 	 * @brief Adds a graph link between two signatures.
+ 	 * @param link Link to add (type, transform, covariance).
+@@ -301,6 +314,10 @@
+ 	 * @return True if the link was added, false on conflict or missing nodes.
+ 	 */
+ 	bool addLink(const Link & link, bool addInDatabase = false);
++	/** Add a query C-Q closure without transferring signature weights. */
++	bool addQueryLink(const Link & link);
++	/** Persist an already accepted in-memory link synchronously. */
++	void persistLink(const Link & link);
+ 	/** @brief Replaces an existing link with @p link (same endpoints and type). */
+ 	void updateLink(const Link & link, bool updateInDatabase = false);
+ 	/** @brief Removes every virtual link in WM. */
+@@ -367,6 +384,8 @@
+ 	void saveLocationData(int locationId);
+ 	/** @brief Removes any link between @p idA and @p idB (both directions). */
+ 	void removeLink(int idA, int idB);
++	/** Remove a provisional query link without applying ordinary weight rollback. */
++	void removeQueryLink(int idA, int idB);
+ 	/** @brief Strips raw images, scan, user data and/or occupancy grid from @p id to save memory (RAM). This doesn't clear any compressed data.*/
+ 	void removeRawData(int id, bool image = true, bool scan = true, bool userData = true, bool occupancyGrid = true);
+ 	/**
+@@ -475,6 +494,15 @@
+ 	 * @return True if the data was attached, false if @p id was not found.
+ 	 */
+ 	bool setUserData(int id, const cv::Mat & data);
++	/** Replaces only the local occupancy payload and user data of an unsaved query node. */
++	bool updateQuerySignaturePayload(
++			int id,
++			const cv::Mat & ground,
++			const cv::Mat & obstacles,
++			const cv::Mat & empty,
++			float cellSize,
++			const cv::Point3f & viewPoint,
++			const cv::Mat & userData);
+ 	/** @return On-disk database size in bytes. */
+ 	int getDatabaseMemoryUsed() const;
+ 	/** @return Schema version of the open database (e.g. "0.20.0"). */
+@@ -784,7 +812,9 @@
+ 
+ private:
+ 	void preUpdate();
+-	void addSignatureToStm(Signature * signature, const cv::Mat & covariance);
++	void addSignatureToStm(Signature * signature, const cv::Mat & covariance,
++			int queryNeighborId = 0,
++			const Transform & queryNeighborTransform = Transform());
+ 	void clear();
+ 	void loadDataFromDb(bool postInitClosingEvents);
+ 	void saveFlannIndex(bool postInitClosingEvents);
+@@ -806,7 +836,8 @@
+ 	Signature * createSignature(
+ 			const SensorData & data,
+ 			const Transform & pose,
+-			Statistics * stats = 0);
++			Statistics * stats = 0,
++			bool allowLandmarks = true);
+ 
+ 	//keypoint stuff
+ 	void disableWordsRef(int signatureId);
+--- a/corelib/include/rtabmap/core/Rtabmap.h
++++ b/corelib/include/rtabmap/core/Rtabmap.h
+@@ -227,6 +227,40 @@
+ 			const std::vector<float> & odomVelocity = std::vector<float>(),
+ 			const std::map<std::string, float> & externalStats = std::map<std::string, float>());
+ 	/**
++	 * @brief Inserts exactly one mapping signature without automatic closures.
++	 *
++	 * This narrow path is for a caller that has already validated and aggregated
++	 * a provisional local grid. It keeps the ordinary odometry neighbor link and
++	 * payload persistence, but suppresses Bayesian/global, temporal and spatial
++	 * loop closure discovery, neighbor-link refinement, small-displacement
++	 * deletion and bad-signature cleanup for this call only.
++	 */
++	void checkpointCommittedGraph();
++	int processQuerySignature(
++			const SensorData & data,
++			Transform odomPose,
++			const cv::Mat & odomCovariance,
++			int neighborId,
++			const Transform & neighborTransform,
++				const Transform & optimizedPose);
++	/** Replace the provisional grid of the one pending query without touching its raw sensors. */
++	bool updateQuerySignaturePayload(
++				int id,
++				const cv::Mat & ground,
++				const cv::Mat & obstacles,
++				const cv::Mat & empty,
++				float cellSize,
++				const cv::Point3f & viewPoint,
++				const cv::Mat & holdingUserData);
++	/**
++	 * @brief Durably finalize a query signature after caller-side invariants pass.
++	 *
++	 * processQuerySignature() deliberately leaves the inserted signature unsaved.
++	 * This call atomically changes its in-memory user data to the terminal marker,
++	 * then flushes that signature to the database. It may be called exactly once.
++	 */
++	bool finalizeQuerySignature(int id, const cv::Mat & terminalUserData);
++	/**
+ 	 * @brief Submit one historical node as a loop-closure candidate for the next process().
+ 	 *
+ 	 * This bypasses only Bayesian appearance-candidate selection. The normal
+@@ -742,6 +776,18 @@
+ 	 * @return True if the link was added.
+ 	 */
+ 	bool addLink(const Link & link);
++	/** Add a provisional old-old query bridge without weight transfer or DB writes. */
++	bool addQueryBridgeLink(const Link & link);
++	/** Add a provisional query C-Q closure without ordinary loop-weight transfer. */
++	bool addQueryLink(const Link & link);
++	/**
++	 * @brief Synchronously persist an already accepted verified query bridge.
++	 *
++	 * The caller must first add the link with addLink() and complete all
++	 * posterior graph checks. This final step makes its transaction marker
++	 * durable without flushing unrelated in-memory state.
++	 */
++	void persistQueryLink(const Link & link);
+ 	/**
+ 	 * @brief Converts an odometry covariance into an information matrix, clipping by
+ 	 *        @ref Memory::getOdomMaxInf() when @ref Parameters::kRGBDLoopCovLimited()
+@@ -925,6 +971,7 @@
+ 	void adjustLikelihood(std::map<int, float> & likelihood) const;
+ 
+ private:
++	bool addLinkImpl(const Link & link, bool queryLink);
+ 	void optimizeCurrentMap(int id,
+ 			bool lookInDatabase,
+ 			std::map<int, Transform> & optimizedPoses,
+@@ -1083,6 +1130,12 @@
+ 	float _pathStuckDistance;
+ 
+ 	bool _dummyDictionary;
++	bool _querySignatureProcessing;
++	int _querySignatureAnchorId;
++	Transform _querySignatureNeighborTransform;
++	Transform _querySignatureOptimizedPose;
++	int _querySignatureInsertedId;
++	int _pendingQuerySignatureId;
+ };
+ 
+ } // namespace rtabmap
+--- a/corelib/include/rtabmap/core/global_map/OccupancyGrid.h
++++ b/corelib/include/rtabmap/core/global_map/OccupancyGrid.h
+@@ -35,6 +35,8 @@
+ #include <pcl/point_cloud.h>
+ #include <pcl/point_types.h>
+ 
++#include <set>
++
+ namespace rtabmap {
+ 
+ class RTABMAP_CORE_EXPORT OccupancyGrid : public GlobalMap
+@@ -42,6 +44,8 @@
+ public:
+ 	OccupancyGrid(const LocalGridCache * cache, const ParametersMap & parameters = ParametersMap());
+ 	void setMap(const cv::Mat & map, float xMin, float yMin, float cellSize, const std::map<int, Transform> & poses);
++	/** Nodes whose pre-validated local grids must not receive synthetic robot-footprint clearing. */
++	void setFootprintIgnoredIds(const std::set<int> & ids) {footprintIgnoredIds_ = ids;}
+ 	float getMinMapSize() const {return minMapSize_;}
+ 
+ 	virtual void clear();
+@@ -61,6 +65,7 @@
+ 	float minMapSize_;
+ 	bool erode_;
+ 	float footprintRadius_;
++	std::set<int> footprintIgnoredIds_;
+ };
+ 
+ }
+--- a/corelib/src/Memory.cpp
++++ b/corelib/src/Memory.cpp
+@@ -1107,12 +1107,27 @@
+ }
+ 
+ bool Memory::update(
+-		const SensorData & data,
+-		const Transform & pose,
+-		const cv::Mat & covariance,
+-		const std::vector<float> & velocity,
+-		Statistics * stats)
+-{
++			const SensorData & data,
++			const Transform & pose,
++			const cv::Mat & covariance,
++			const std::vector<float> & velocity,
++			Statistics * stats,
++			bool allowRehearsal,
++			int exactNeighborId,
++			const Transform & exactNeighborTransform)
++{
++	UASSERT(exactNeighborId == 0 ||
++		(exactNeighborId > 0 &&
++		 !exactNeighborTransform.isNull() &&
++		 exactNeighborTransform.isInvertible()));
++	if(exactNeighborId > 0)
++	{
++		// Validate the exact graph endpoint before preUpdate(), feature
++		// extraction or dictionary mutation. A query transaction must never
++		// discover a stale/cross-map anchor after creating its new signature.
++		const Signature * exactNeighbor = _getSignature(exactNeighborId);
++		UASSERT(exactNeighbor != 0 && exactNeighbor->mapId() == _idMapCount);
++	}
+ 	UDEBUG("");
+ 	UTimer timer;
+ 	UTimer totalTimer;
+@@ -1131,7 +1146,8 @@
+ 	//============================================================
+ 	// Create a signature with the image received.
+ 	//============================================================
+-	Signature * signature = this->createSignature(data, pose, stats);
++	Signature * signature = this->createSignature(
++			data, pose, stats, exactNeighborId == 0);
+ 	if (signature == 0)
+ 	{
+ 		UERROR("Failed to create a signature...");
+@@ -1141,13 +1157,26 @@
+ 	{
+ 		signature->setVelocity(velocity[0], velocity[1], velocity[2], velocity[3], velocity[4], velocity[5]);
+ 	}
++	if(exactNeighborId > 0)
++	{
++		// A pre-validated aggregate must not inherit priors, gravity links or
++		// landmark observations synthesized while creating its representative
++		// signature. Its sole graph edge is supplied by the caller below.
++		signature->removeLinks();
++		signature->removeLandmarks();
++	}
+ 
+ 	t=timer.ticks()*1000;
+ 	if(stats) stats->addStatistic(Statistics::kTimingMemSignature_creation(), t);
+ 	UDEBUG("time creating signature=%f ms", t);
+ 
+ 	// It will be added to the short-term memory, no need to delete it...
+-	this->addSignatureToStm(signature, covariance);
++	this->addSignatureToStm(
++			signature, covariance, exactNeighborId, exactNeighborTransform);
++	if(exactNeighborId > 0)
++	{
++		_linksChanged = true;
++	}
+ 
+ 	_lastSignature = signature;
+ 
+@@ -1157,7 +1186,7 @@
+ 	// signature like a parent to the memory tree, otherwise add
+ 	// it as a child to the similar signature.
+ 	//============================================================
+-	if(_incrementalMemory)
++	if(_incrementalMemory && allowRehearsal)
+ 	{
+ 		if(_similarityThreshold < 1.0f)
+ 		{
+@@ -1167,7 +1196,7 @@
+ 		if(stats) stats->addStatistic(Statistics::kTimingMemRehearsal(), t);
+ 		UDEBUG("time rehearsal=%f ms", t);
+ 	}
+-	else
++	else if(!_incrementalMemory)
+ 	{
+ 		if(this->getWorkingMemSize(true) == 0)
+ 		{
+@@ -1193,7 +1222,7 @@
+ 		}
+ 	}
+ 	std::map<int, int> reducedIds;
+-	while(_stMem.size() && _maxStMemSize>0 && notIntermediateNodesCount > _maxStMemSize)
++	while(allowRehearsal && _stMem.size() && _maxStMemSize>0 && notIntermediateNodesCount > _maxStMemSize)
+ 	{
+ 		int id = *_stMem.begin();
+ 		Signature * s = this->_getSignature(id);
+@@ -1223,7 +1252,8 @@
+ 	return true;
+ }
+ 
+-void Memory::addSignatureToStm(Signature * signature, const cv::Mat & covariance)
++void Memory::addSignatureToStm(Signature * signature, const cv::Mat & covariance,
++		int queryNeighborId, const Transform & queryNeighborTransform)
+ {
+ 	UTimer timer;
+ 	// add signature on top of the short-term memory
+@@ -1231,7 +1261,23 @@
+ 	{
+ 		UDEBUG("adding %d (pose=%s)", signature->id(), signature->getPose().prettyPrint().c_str());
+ 		// Update neighbors
+-		if(_stMem.size())
++		if(queryNeighborId > 0)
++		{
++			Signature * neighbor = _getSignature(queryNeighborId);
++			UASSERT(neighbor != 0);
++			UASSERT(neighbor->mapId() == signature->mapId());
++			UASSERT(!queryNeighborTransform.isNull() && queryNeighborTransform.isInvertible());
++			// The caller has propagated a full A->Q covariance through the
++			// provisional odometry chain. Keep its correlations for this exact
++			// edge without changing the policy of ordinary RTAB-Map insertions.
++			cv::Mat infMatrix = covariance.inv();
++			UASSERT(cv::checkRange(infMatrix, true, 0));
++			neighbor->addLink(Link(queryNeighborId, signature->id(), Link::kNeighbor,
++					queryNeighborTransform, infMatrix));
++			signature->addLink(Link(signature->id(), queryNeighborId, Link::kNeighbor,
++					queryNeighborTransform.inverse(), infMatrix));
++		}
++		else if(_stMem.size())
+ 		{
+ 			if(_signatures.at(*_stMem.rbegin())->mapId() == signature->mapId())
+ 			{
+@@ -2702,6 +2748,63 @@
+ 	}
+ }
+ 
++void Memory::checkpointResidentSignatures()
++{
++	UASSERT(_dbDriver != 0 && !_dbDriver->isInMemory());
++	// Do not let an older async writer split this checkpoint into multiple
++	// transactions. The caller guarantees that no provisional link exists yet.
++	joinTrashThread();
++	std::set<int> durableIds;
++	_dbDriver->getAllNodeIds(durableIds, false, false, false);
++	std::vector<int> unsavedIds;
++	for(std::map<int, Signature *>::const_iterator iter=_signatures.begin();
++			iter!=_signatures.end(); ++iter)
++	{
++		const Signature * signature = iter->second;
++		if(!signature || signature->id() <= 0)
++		{
++			continue;
++		}
++		for(std::multimap<int, Link>::const_iterator linkIter=signature->getLinks().begin();
++				linkIter!=signature->getLinks().end(); ++linkIter)
++		{
++			const int peerId = linkIter->second.to();
++			UASSERT(peerId <= 0 || peerId == signature->id() ||
++					_signatures.find(peerId) != _signatures.end() ||
++					durableIds.find(peerId) != durableIds.end());
++		}
++		if(!signature->isSaved())
++		{
++			unsavedIds.push_back(signature->id());
++		}
++	}
++	for(std::vector<int>::const_iterator iter=unsavedIds.begin();
++			iter!=unsavedIds.end(); ++iter)
++	{
++		saveLocationData(*iter);
++	}
++	flushTrashSynchronously();
++	if(!unsavedIds.empty())
++	{
++		durableIds.clear();
++		_dbDriver->getAllNodeIds(durableIds, false, false, false);
++		for(std::vector<int>::const_iterator iter=unsavedIds.begin();
++				iter!=unsavedIds.end(); ++iter)
++		{
++			UASSERT(durableIds.find(*iter) != durableIds.end());
++		}
++	}
++}
++
++void Memory::flushTrashSynchronously()
++{
++	if(_dbDriver)
++	{
++		_dbDriver->join();
++		_dbDriver->emptyTrashes(false);
++	}
++}
++
+ class WeightAgeIdKey
+ {
+ public:
+@@ -3210,6 +3313,31 @@
+ 	return false;
+ }
+ 
++bool Memory::updateQuerySignaturePayload(
++		int id,
++		const cv::Mat & ground,
++		const cv::Mat & obstacles,
++		const cv::Mat & empty,
++		float cellSize,
++		const cv::Point3f & viewPoint,
++		const cv::Mat & userData)
++{
++	Signature * s = this->_getSignature(id);
++	if(!s || s->isSaved() || cellSize <= 0.0f || userData.empty())
++	{
++		return false;
++	}
++	// setOccupancyGrid() intentionally refuses to overwrite a non-empty layer.
++	// Clear only the grid fields; RGB, depth, raw scan, words and calibration
++	// remain the representative keyframe captured by processQuerySignature().
++	s->sensorData().setOccupancyGrid(
++			cv::Mat(), cv::Mat(), cv::Mat(), 0.0f, cv::Point3f());
++	s->sensorData().setOccupancyGrid(
++			ground, obstacles, empty, cellSize, viewPoint);
++	s->sensorData().setUserData(userData);
++	return s->sensorData().gridCellSize() == cellSize;
++}
++
+ void Memory::convertToIntermediate(int locationId)
+ {
+ 	UDEBUG("Converting location %d to intermediate node", locationId);
+@@ -3356,6 +3484,21 @@
+ 	}
+ }
+ 
++void Memory::removeQueryLink(int idA, int idB)
++{
++	Signature * signatureA = _getSignature(idA);
++	Signature * signatureB = _getSignature(idB);
++	UASSERT(signatureA != 0 && signatureB != 0);
++	UASSERT(signatureA->hasLink(idB) && signatureB->hasLink(idA));
++	const Link::Type type = signatureA->getLinks().find(idB)->second.type();
++	signatureA->removeLink(idB);
++	signatureB->removeLink(idA);
++	if(type != Link::kVirtualClosure)
++	{
++		_linksChanged = true;
++	}
++}
++
+ void Memory::removeRawData(int id, bool image, bool scan, bool userData, bool occupancyGrid)
+ {
+ 	UDEBUG("id=%d image=%d scan=%d userData=%d", id, image?1:0, scan?1:0, userData?1:0);
+@@ -4099,6 +4242,58 @@
+ 	return true;
+ }
+ 
++bool Memory::addQueryLink(const Link & link)
++{
++	UASSERT(link.type() > Link::kNeighbor && link.type() != Link::kUndef);
++	Signature * toS = _getSignature(link.to());
++	Signature * fromS = _getSignature(link.from());
++	if(!toS || !fromS || toS->hasLink(link.from()) ||
++	   fromS->hasLink(link.to()))
++	{
++		return false;
++	}
++	toS->addLink(link.inverse());
++	fromS->addLink(link);
++	if(_incrementalMemory && link.type() != Link::kVirtualClosure)
++	{
++		// Query topology is finalized as one transaction. In particular, do not
++		// transfer C's accumulated weight to the provisional Q node: only Q is
++		// persisted at commit, so ordinary addLink() weight transfer would make a
++		// crash/reopen count the same observations in both C and Q.
++		_linksChanged = true;
++	}
++	return true;
++}
++
++void Memory::persistLink(const Link & link)
++{
++	UASSERT(_dbDriver != 0);
++	UASSERT(_dbDriver->isConnected());
++	const Signature * from = _getSignature(link.from());
++	const Signature * to = _getSignature(link.to());
++	UASSERT(from != 0 && to != 0 && from->isSaved() && to->isSaved());
++	std::multimap<int, Link> persisted;
++	_dbDriver->loadLinks(link.from(), persisted);
++	bool found = false;
++	for(std::multimap<int, Link>::const_iterator iter=persisted.begin();
++			iter!=persisted.end(); ++iter)
++	{
++		if(iter->second.to() == link.to())
++		{
++			found = true;
++			break;
++		}
++	}
++	if(found)
++	{
++		_dbDriver->updateLink(link);
++	}
++	else
++	{
++		_dbDriver->addLink(link);
++	}
++}
++
+ void Memory::updateLink(const Link & link, bool updateInDatabase)
+ {
+ 	Signature * fromS = this->_getSignature(link.from());
+@@ -5162,7 +5357,7 @@
+ 	VWDictionary * _vwp;
+ };
+ 
+-Signature * Memory::createSignature(const SensorData & inputData, const Transform & pose, Statistics * stats)
++Signature * Memory::createSignature(const SensorData & inputData, const Transform & pose, Statistics * stats, bool allowLandmarks)
+ {
+ 	UDEBUG("");
+ 	SensorData data = inputData;
+@@ -6250,8 +6445,8 @@
+ 		}
+ 	}
+ 
+-	Landmarks landmarks = data.landmarks();
+-	if(_detectMarkers && !isIntermediateNode && !data.imageRaw().empty())
++	Landmarks landmarks = allowLandmarks?data.landmarks():Landmarks();
++	if(allowLandmarks && _detectMarkers && !isIntermediateNode && !data.imageRaw().empty())
+ 	{
+ 		UDEBUG("Detecting markers...");
+ 		if(landmarks.empty())
+--- a/corelib/src/Rtabmap.cpp
++++ b/corelib/src/Rtabmap.cpp
+@@ -183,7 +183,11 @@
+ 	_pathTransformToGoal(Transform::getIdentity()),
+ 	_pathStuckCount(0),
+ 	_pathStuckDistance(0.0f),
+-	_dummyDictionary(false)
++	_dummyDictionary(false),
++	_querySignatureProcessing(false),
++	_querySignatureAnchorId(0),
++	_querySignatureInsertedId(0),
++	_pendingQuerySignatureId(0)
+ {
+ #ifdef RTABMAP_PYTHON
+ 	// Ensure the embedded Python interpreter is up. The first call here will
+@@ -1220,6 +1224,13 @@
+ //============================================================
+ // MAIN LOOP
+ //============================================================
++void Rtabmap::checkpointCommittedGraph()
++{
++	UASSERT(!_querySignatureProcessing && _pendingQuerySignatureId == 0);
++	UASSERT(_memory != 0 && _memory->isIncremental());
++	_memory->checkpointResidentSignatures();
++}
++
+ bool Rtabmap::process(
+ 		const cv::Mat & image,
+ 		int id,
+@@ -1249,6 +1260,116 @@
+ 	covariance.at<double>(5,5) = odomAngularVariance;
+ 	return process(data, odomPose, covariance, odomVelocity, externalStats);
+ }
++
++int Rtabmap::processQuerySignature(
++		const SensorData & data,
++		Transform odomPose,
++		const cv::Mat & odomCovariance,
++		int neighborId,
++		const Transform & neighborTransform,
++		const Transform & optimizedPose)
++{
++	UASSERT(!_querySignatureProcessing);
++	UASSERT_MSG(_pendingQuerySignatureId == 0,
++			"A previous transactional query has not been finalized");
++	UASSERT(_memory != 0 && _memory->isIncremental());
++	UASSERT(data.gridCellSize() > 0.0f);
++	UASSERT(neighborId > 0 && _memory->getSignature(neighborId) != 0);
++	UASSERT(uContains(_optimizedPoses, neighborId));
++	UASSERT(!neighborTransform.isNull() && neighborTransform.isInvertible());
++	UASSERT(!odomPose.isNull() && odomPose.isInvertible());
++	UASSERT(!optimizedPose.isNull() && optimizedPose.isInvertible());
++	UASSERT(odomCovariance.rows == 6 && odomCovariance.cols == 6 && odomCovariance.type() == CV_64FC1);
++	_querySignatureProcessing = true;
++	_querySignatureAnchorId = neighborId;
++	_querySignatureOptimizedPose = optimizedPose;
++	_querySignatureNeighborTransform = neighborTransform;
++	_querySignatureInsertedId = 0;
++	try
++	{
++		const bool processed = process(data, odomPose, odomCovariance);
++		const int insertedId = _querySignatureInsertedId;
++		// All recoverable validation is performed above. Once process() enters
++		// Memory::update(), a false result cannot be proven side-effect free
++		// (feature dictionary/preUpdate state may already have changed), so it is
++		// a fail-stop condition rather than a retryable zero-id outcome.
++		UASSERT_MSG(processed && insertedId > 0 &&
++					_memory->getSignature(insertedId) != 0,
++					"Transactional query insertion did not retain exactly one signature");
++		_pendingQuerySignatureId = insertedId;
++		_querySignatureProcessing = false;
++		_querySignatureAnchorId = 0;
++		_querySignatureNeighborTransform.setNull();
++		_querySignatureOptimizedPose.setNull();
++		_querySignatureInsertedId = 0;
++		return insertedId;
++	}
++	catch(...)
++	{
++		_querySignatureProcessing = false;
++		_querySignatureAnchorId = 0;
++		_querySignatureNeighborTransform.setNull();
++		_querySignatureOptimizedPose.setNull();
++		_querySignatureInsertedId = 0;
++		throw;
++	}
++}
++
++bool Rtabmap::updateQuerySignaturePayload(
++		int id,
++		const cv::Mat & ground,
++		const cv::Mat & obstacles,
++		const cv::Mat & empty,
++		float cellSize,
++		const cv::Point3f & viewPoint,
++		const cv::Mat & holdingUserData)
++{
++	UASSERT(_memory != 0 && _memory->isIncremental());
++	UASSERT(id > 0 && id == _pendingQuerySignatureId);
++	UASSERT(!holdingUserData.empty());
++	return _memory->updateQuerySignaturePayload(
++			id, ground, obstacles, empty, cellSize, viewPoint, holdingUserData);
++}
++
++bool Rtabmap::finalizeQuerySignature(int id, const cv::Mat & terminalUserData)
++{
++	UASSERT(_memory != 0 && _memory->isIncremental());
++	UASSERT(id > 0 && id == _pendingQuerySignatureId);
++	const Signature * signature = _memory->getSignature(id);
++	UASSERT(signature != 0);
++	UASSERT(!signature->isSaved());
++	UASSERT(!terminalUserData.empty());
++	std::vector<int> endpointIds;
++	endpointIds.reserve(signature->getLinks().size());
++	for(std::multimap<int, Link>::const_iterator iter=signature->getLinks().begin();
++			iter!=signature->getLinks().end(); ++iter)
++	{
++		UASSERT(iter->second.from() == id);
++		UASSERT(iter->second.to() > 0 && iter->second.to() != id);
++		UASSERT(iter->second.type() == Link::kNeighbor ||
++				iter->second.type() == Link::kGlobalClosure);
++		const Signature * endpoint = _memory->getSignature(iter->second.to());
++		UASSERT(endpoint != 0 && endpoint->isSaved());
++		endpointIds.push_back(iter->second.to());
++	}
++	UASSERT(!endpointIds.empty());
++	// Complete every recoverable topology check before mutating user data or
++	// queueing an asynchronous save. A failed preflight therefore leaves both
++	// RAM and the durable database untouched.
++	_memory->joinTrashThread();
++	UASSERT(_memory->setUserData(id, terminalUserData));
++	_memory->save2DMap(cv::Mat(), 0, 0, 0);
++	_memory->saveLocationData(id);
++	_memory->flushTrashSynchronously();
++	const bool finalized = _memory->getSignature(id) != 0 &&
++				_memory->getSignature(id)->isSaved();
++	if(finalized)
++	{
++		_pendingQuerySignatureId = 0;
++	}
++	return finalized;
++}
++
+ bool Rtabmap::process(
+ 		const SensorData & data,
+ 		Transform odomPose,
+@@ -1301,19 +1422,23 @@
+ 	const Signature * signature = 0;
+ 	const Signature * sLoop = 0;
+ 
+-	_loopClosureHypothesis = std::make_pair(0,0.0f);
+ 	std::pair<int, float> lastHighestHypothesis = _highestHypothesis;
+-	_highestHypothesis = std::make_pair(0,0.0f);
+-	const int externalLoopClosureHypothesis = _externalLoopClosureHypothesis;
++	const int externalLoopClosureHypothesis =
++			_querySignatureProcessing?0:_externalLoopClosureHypothesis;
+ 	const Transform externalLoopClosureMetricTransform = _externalLoopClosureMetricTransform;
+ 	const cv::Mat externalLoopClosureMetricCovariance =
+ 		_externalLoopClosureMetricCovariance.clone();
+ 	const double externalLoopClosureInnovationChiSquareThreshold =
+ 		_externalLoopClosureInnovationChiSquareThreshold;
+-	_externalLoopClosureHypothesis = 0;
+-	_externalLoopClosureMetricTransform.setNull();
+-	_externalLoopClosureMetricCovariance.release();
+-	_externalLoopClosureInnovationChiSquareThreshold = 0.0;
++	if(!_querySignatureProcessing)
++	{
++		_loopClosureHypothesis = std::make_pair(0,0.0f);
++		_highestHypothesis = std::make_pair(0,0.0f);
++		_externalLoopClosureHypothesis = 0;
++		_externalLoopClosureMetricTransform.setNull();
++		_externalLoopClosureMetricCovariance.release();
++		_externalLoopClosureInnovationChiSquareThreshold = 0.0;
++	}
+ 
+ 	std::set<int> immunizedLocations;
+ 
+@@ -1479,7 +1604,7 @@
+ 				UDEBUG("Fake odom: %s", odomPose.prettyPrint().c_str());
+ 			}
+ 		}
+-		else if(_memory->isIncremental()) // only in mapping mode
++		else if(!_querySignatureProcessing && _memory->isIncremental()) // only in ordinary mapping mode
+ 		{
+ 			// Detect if the odometry is reset. If yes, trigger a new map.
+ 			if(_memory->getLastWorkingSignature(false))
+@@ -1516,7 +1641,23 @@
+ 	// Memory Update : Location creation + Add to STM + Weight Update (Rehearsal)
+ 	//============================================================
+ 	ULOGGER_INFO("Updating memory...");
+-	if(_rgbdSlamMode)
++	if(_querySignatureProcessing)
++	{
++		if(!_memory->update(
++				data, odomPose, odomCovariance, std::vector<float>(),
++				&statistics_, false, _querySignatureAnchorId,
++				_querySignatureNeighborTransform))
++		{
++			return false;
++		}
++		signature = _memory->getLastWorkingSignature(false);
++		_querySignatureInsertedId = signature?signature->id():0;
++		if(_querySignatureInsertedId <= 0)
++		{
++			return false;
++		}
++	}
++	else if(_rgbdSlamMode)
+ 	{
+ 		if(!_memory->update(data, odomPose, odomCovariance, odomVelocity, &statistics_))
+ 		{
+@@ -1531,7 +1672,10 @@
+ 		}
+ 	}
+ 
+-	signature = _memory->getLastWorkingSignature(false);
++	if(!_querySignatureProcessing)
++	{
++		signature = _memory->getLastWorkingSignature(false);
++	}
+ 	_currentSessionHasGPS = _currentSessionHasGPS || signature->sensorData().gps().stamp() > 0.0;
+ 	if(!signature)
+ 	{
+@@ -1604,7 +1748,8 @@
+ 				t = _odomCachePoses.rbegin()->second.inverse() * signature->getPose();
+ 			}
+ 			
+-			if(_rgbdLinearUpdate > 0.0f || _rgbdAngularUpdate > 0.0f)
++			if(!_querySignatureProcessing &&
++				   (_rgbdLinearUpdate > 0.0f || _rgbdAngularUpdate > 0.0f))
+ 			{
+ 				//============================================================
+ 				// Minimum displacement required to add to Memory
+@@ -1647,7 +1792,8 @@
+ 		// Update optimizedPoses with the newly added node
+ 		Transform newPose;
+ 		bool intermediateNodeRefining = false;
+-		if(_neighborLinkRefining &&
++		if(!_querySignatureProcessing &&
++			   _neighborLinkRefining &&
+ 			signature->getLinks().size() &&
+ 			signature->getLinks().begin()->second.type() == Link::kNeighbor &&
+ 		   _memory->isIncremental() && // ignore pose matching in localization mode
+@@ -1756,6 +1902,11 @@
+ 		{
+ 			newPose = _mapCorrection * signature->getPose();
+ 		}
++		if(_querySignatureProcessing)
++		{
++			newPose = _querySignatureOptimizedPose;
++			_mapCorrection = newPose * signature->getPose().inverse();
++		}
+ 
+ 		// Get statistics about the closest node in the graph
+ 		if(!_memory->isIncremental())
+@@ -1782,7 +1933,8 @@
+ 		UDEBUG("Added pose %s (odom=%s)", newPose.prettyPrint().c_str(), signature->getPose().prettyPrint().c_str());
+ 		// Update Poses and Constraints
+ 		_optimizedPoses.insert(std::make_pair(signature->id(), newPose));
+-		if(_memory->isIncremental() && signature->getWeight() >= 0)
++		if(!_querySignatureProcessing &&
++			   _memory->isIncremental() && signature->getWeight() >= 0)
+ 		{
+ 			for(std::map<int, Link>::const_iterator iter = signature->getLandmarks().begin(); iter!=signature->getLandmarks().end(); ++iter)
+ 			{
+@@ -1865,7 +2017,25 @@
+ 		if(signature->getWeight() >= 0)
+ 		{
+ 			UDEBUG("Update odometry localization cache (size=%d/%d)", (int)_odomCachePoses.size(), _maxOdomCacheSize);
+-			if(!_odomCachePoses.empty())
++			if(_querySignatureProcessing)
++			{
++				// A query insertion is not a new temporal observation at the
++				// tail of the ordinary mapping stream. Connecting the previous
++				// cache tail to Q would synthesize an unvalidated C/L->Q edge.
++				// Retain Q for the next ordinary frame, and add at most the same
++				// explicit A->Q relation used by the canonical graph when A is
++				// still represented in this bounded cache.
++				std::map<int, Transform>::const_iterator anchor =
++						_odomCachePoses.find(_querySignatureAnchorId);
++				if(anchor != _odomCachePoses.end())
++				{
++					const Link odomLink =
++							signature->getLinks().find(_querySignatureAnchorId)->second.inverse();
++					_odomCacheConstraints.insert(
++							std::make_pair(_querySignatureAnchorId, odomLink));
++				}
++			}
++			else if(!_odomCachePoses.empty())
+ 			{
+ 				float odomDistance = (_odomCachePoses.rbegin()->second.inverse() * signature->getPose()).getNorm();
+ 				if(!smallDisplacement)
+@@ -1894,6 +2064,66 @@
+ 		}
+ 		_distanceTravelledSinceLastLocalization += _distanceTravelled - distanceTravelledOld;
+ 
++		if(_querySignatureProcessing)
++		{
++			UASSERT(signature->id() == _querySignatureInsertedId);
++			UASSERT(uContains(_optimizedPoses, signature->id()));
++			UASSERT(signature->getLinks().size() == 1 &&
++					signature->hasLink(_querySignatureAnchorId));
++			const Link queryLink =
++					signature->getLinks().find(_querySignatureAnchorId)->second.inverse();
++			UASSERT(queryLink.type() == Link::kNeighbor &&
++					queryLink.from() == _querySignatureAnchorId &&
++					queryLink.to() == signature->id());
++			std::size_t queryConstraintCount = 0;
++			for(std::multimap<int, Link>::const_iterator iter=_constraints.begin();
++					iter!=_constraints.end(); ++iter)
++			{
++				if(iter->second.from() == signature->id() ||
++				   iter->second.to() == signature->id())
++				{
++					++queryConstraintCount;
++					UASSERT(iter->second.type() == Link::kNeighbor &&
++							iter->second.from() == _querySignatureAnchorId &&
++							iter->second.to() == signature->id());
++				}
++			}
++			UASSERT(queryConstraintCount == 1);
++			std::size_t queryOdomConstraintCount = 0;
++			for(std::multimap<int, Link>::const_iterator iter=
++					_odomCacheConstraints.begin();
++				iter!=_odomCacheConstraints.end(); ++iter)
++			{
++				if(iter->second.from() == signature->id() ||
++				   iter->second.to() == signature->id())
++				{
++					++queryOdomConstraintCount;
++					UASSERT(iter->second.type() == Link::kNeighbor &&
++							iter->second.from() == _querySignatureAnchorId &&
++							iter->second.to() == signature->id());
++				}
++			}
++			UASSERT(queryOdomConstraintCount <= 1);
++
++			// This is the transactional boundary. Everything below begins retrieval,
++			// closure discovery, graph optimization, cleanup or memory transfer and is
++			// intentionally unreachable for a pre-validated query aggregate.
++			statistics_.setRefImageId(signature->id());
++			statistics_.setRefImageMapId(signature->mapId());
++			statistics_.setStamp(data.stamp());
++			statistics_.setExtended(1);
++			statistics_.setPoses(_optimizedPoses);
++			statistics_.setConstraints(_constraints);
++			statistics_.setMapCorrection(_mapCorrection);
++			statistics_.setLocalizationCovariance(_localizationCovariance);
++			statistics_.setOdomCachePoses(_odomCachePoses);
++			statistics_.setOdomCacheConstraints(_odomCacheConstraints);
++			statistics_.addSignatureData(getSignatureCopy(
++					signature->id(), true, true, true, true, true, true));
++			_lastProcessTime = timerTotal.ticks();
++			return true;
++		}
++
+ 		//============================================================
+ 		// Reduced graph
+ 		//============================================================
+@@ -1935,7 +2165,8 @@
+ 		//============================================================
+ 		// Local loop closure in TIME
+ 		//============================================================
+-		if((_proximityByTime || intermediateNodeRefining) &&
++		if(!_querySignatureProcessing &&
++			   (_proximityByTime || intermediateNodeRefining) &&
+ 		   rehearsedId == 0 && // don't do it if rehearsal happened
+ 		   _memory->isIncremental() && // don't do it in localization mode
+ 		   signature->getWeight()>=0)
+@@ -2042,7 +2273,8 @@
+ 	}
+ 
+ 	// Not a bad signature, not an intermediate node, not a small displacement unless the previous signature didn't have a loop closure, not too fast movement
+-	if(!signature->isBadSignature() && signature->getWeight()>=0 && (!smallDisplacement || !localizationOnPreviousUpdate) && !tooFastMovement)
++	if(!_querySignatureProcessing &&
++	   !signature->isBadSignature() && signature->getWeight()>=0 && (!smallDisplacement || !localizationOnPreviousUpdate) && !tooFastMovement)
+ 	{
+ 		// If the working memory is empty, don't do the detection. It happens when it
+ 		// is the first time the detector is started (there needs some images to
+@@ -2777,7 +3009,8 @@
+ 	int localScanPathsChecked = 0;
+ 	int loopIdSuppressedByProximity = 0;
+ 
+-	if(_proximityBySpace &&
++	if(!_querySignatureProcessing &&
++	   _proximityBySpace &&
+ 	   _localRadius > 0 &&
+ 	   _rgbdSlamMode &&
+ 	   signature->getWeight() >= 0) // not an intermediate node
+@@ -4648,7 +4881,7 @@
+ 	bool lastSignatureWasIntermediateNode = signature->getWeight() == -1;
+ 
+ 	// remove last signature if the memory is not incremental or is a bad signature (if bad signatures are ignored)
+-	int signatureRemoved = _memory->cleanup();
++	int signatureRemoved = _querySignatureProcessing?0:_memory->cleanup();
+ 	if(signatureRemoved)
+ 	{
+ 		signaturesRemoved.push_back(signatureRemoved);
+@@ -4660,7 +4893,8 @@
+ 	// otherwise it deletes the current node.
+ 	if(signatureRemoved != lastSignatureData.id())
+ 	{
+-		if(_startNewMapOnLoopClosure &&
++		if(!_querySignatureProcessing &&
++			_startNewMapOnLoopClosure &&
+ 			_memory->isIncremental() &&              // only in mapping mode
+ 			graph::filterLinks(signature->getLinks(), Link::kSelfRefLink).size() == 0 &&      // alone in the current map
+ 			(landmarksDetected.empty() || rejectedLoopClosure) &&      // if we re not seeing a landmark from a previous map
+@@ -4671,7 +4905,8 @@
+ 			signaturesRemoved.push_back(signature->id());
+ 			_memory->deleteLocation(signature->id());
+ 		}
+-		else if(_startNewMapOnGoodSignature &&
++		else if(!_querySignatureProcessing &&
++				_startNewMapOnGoodSignature &&
+ 				(signature->getLandmarks().empty() && signature->isBadSignature()) &&
+ 				graph::filterLinks(signature->getLinks(), Link::kSelfRefLink).size() == 0)     // alone in the current map
+ 		{
+@@ -4708,7 +4943,7 @@
+ 				}
+ 			}
+ 		}
+-		else
++		else if(!_querySignatureProcessing)
+ 		{
+ 			_memory->saveLocationData(signature->id());
+ 		}
+@@ -6739,6 +6974,36 @@
+ 
+ bool Rtabmap::addLink(const Link & link)
+ {
++	return addLinkImpl(link, false);
++}
++
++bool Rtabmap::addQueryBridgeLink(const Link & link)
++{
++	UASSERT(_pendingQuerySignatureId == 0 && !_querySignatureProcessing);
++	UASSERT(link.from() > 0 && link.to() > 0 && link.from() != link.to());
++	UASSERT(link.type() == Link::kGlobalClosure);
++	const Signature * from = _memory->getSignature(link.from());
++	const Signature * to = _memory->getSignature(link.to());
++	UASSERT(from != 0 && to != 0 && from->isSaved() && to->isSaved());
++	return addLinkImpl(link, true);
++}
++
++bool Rtabmap::addQueryLink(const Link & link)
++{
++	UASSERT(_pendingQuerySignatureId > 0);
++	UASSERT(link.from() != link.to());
++	UASSERT(link.type() == Link::kGlobalClosure);
++	UASSERT(link.from() == _pendingQuerySignatureId ||
++			link.to() == _pendingQuerySignatureId);
++	const int peerId = link.from() == _pendingQuerySignatureId ?
++			link.to() : link.from();
++	const Signature * peer = _memory->getSignature(peerId);
++	UASSERT(peer != 0 && peer->isSaved());
++	return addLinkImpl(link, true);
++}
++
++bool Rtabmap::addLinkImpl(const Link & link, bool queryLink)
++{
+ 	const Transform & t = link.transform();
+ 	if(!_rgbdSlamMode)
+ 	{
+@@ -6776,7 +7041,8 @@
+ 		}
+ 
+ 		// add temporary the link
+-		if(!_memory->addLink(link))
++		if(!(queryLink ? _memory->addQueryLink(link) :
++				_memory->addLink(link)))
+ 		{
+ 			UERROR("Cannot add new link %d->%d to memory", link.from(), link.to());
+ 			return false;
+@@ -6791,13 +7057,15 @@
+ 		if(poses.find(link.from()) == poses.end())
+ 		{
+ 			UERROR("Link's \"from id\" %d is not in the graph (size=%d)", link.from(), (int)poses.size());
+-			_memory->removeLink(link.from(), link.to());
++			queryLink ? _memory->removeQueryLink(link.from(), link.to()) :
++					_memory->removeLink(link.from(), link.to());
+ 			return false;
+ 		}
+ 		if(poses.find(link.to()) == poses.end())
+ 		{
+ 			UERROR("Link's \"to id\" %d is not in the graph (size=%d)", link.to(), (int)poses.size());
+-			_memory->removeLink(link.from(), link.to());
++			queryLink ? _memory->removeQueryLink(link.from(), link.to()) :
++					_memory->removeLink(link.from(), link.to());
+ 			return false;
+ 		}
+ 
+@@ -6881,7 +7149,8 @@
+ 		if(!msg.empty())
+ 		{
+ 			UERROR("%s", msg.c_str());
+-			_memory->removeLink(link.from(), link.to());
++			queryLink ? _memory->removeQueryLink(link.from(), link.to()) :
++					_memory->removeLink(link.from(), link.to());
+ 			return false;
+ 		}
+ 
+@@ -6902,8 +7171,13 @@
+ 		std::map<int, Transform> tmp;
+ 		// Update also the links if some have been added in WM
+ 		_memory->getMetricConstraints(uKeysSet(_optimizedPoses), tmp, _constraints, false);
+-		// This will force rtabmap_ros to regenerate the global occupancy grid if there was one
+-		_memory->save2DMap(cv::Mat(), 0, 0, 0);
++		// A provisional Q link must not write the cached global grid before the
++		// caller has checked and finalized the whole query transaction.
++		if(!queryLink)
++		{
++			// This will force rtabmap_ros to regenerate the global occupancy grid if there was one
++			_memory->save2DMap(cv::Mat(), 0, 0, 0);
++		}
+ 
+ 		return true;
+ 	}
+@@ -7098,6 +7372,20 @@
+ 	return false;
+ }
+ 
++void Rtabmap::persistQueryLink(const Link & link)
++{
++	UASSERT(_memory != 0);
++	const Signature * from = _memory->getSignature(link.from());
++	const Signature * to = _memory->getSignature(link.to());
++	UASSERT(from != 0 && to != 0 && from->hasLink(link.to()) &&
++			to->hasLink(link.from()));
++	// addQueryBridgeLink() deliberately leaves the durable grid cache alone
++	// while the bridge is provisional. Invalidate it only at the terminal
++	// persistence boundary, after every recoverable graph check has passed.
++	_memory->save2DMap(cv::Mat(), 0, 0, 0);
++	_memory->persistLink(link);
++}
++
+ cv::Mat Rtabmap::getInformation(const cv::Mat & covariance) const
+ {
+ 	cv::Mat information = covariance.inv();
+--- a/corelib/src/global_map/OccupancyGrid.cpp
++++ b/corelib/src/global_map/OccupancyGrid.cpp
+@@ -479,7 +479,12 @@
+ 						}
+ 					}
+ 
+-					if(footprintRadius_ >= cellSize_*1.5f)
++					// A query aggregate has already been filtered against every old
++					// known cell. Its explicit free rays are authoritative; applying a
++					// synthetic footprint here would bypass that immutable-old-map gate.
++					const bool footprintEnabled =
++						footprintIgnoredIds_.find(kter->first) == footprintIgnoredIds_.end();
++					if(footprintEnabled && footprintRadius_ >= cellSize_*1.5f)
+ 					{
+ 						// place free space under the footprint of the robot
+ 						cv::Point2i ptBegin((kter->second.x()-footprintRadius_-xMin)/cellSize_, (kter->second.y()-footprintRadius_-yMin)/cellSize_);

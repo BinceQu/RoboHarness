@@ -1,0 +1,58 @@
+diff --git a/corelib/include/rtabmap/core/Registration.h b/corelib/include/rtabmap/core/Registration.h
+index 34a5eaa3..6424fdc0 100644
+--- a/corelib/include/rtabmap/core/Registration.h
++++ b/corelib/include/rtabmap/core/Registration.h
+@@ -101,6 +101,8 @@ public:
+ 	bool repeatOnce() const {return repeatOnce_;}
+ 	/** @return Value of **Reg/Force3DoF**. */
+ 	bool force3DoF() const {return force3DoF_;}
++	/** @return Whether a child may run from the input guess after its parent fails. */
++	bool childFallbackOnFailure() const {return childFallbackOnFailure_;}
+ 
+ 	/** @brief Replaces the current child registration; takes ownership of @p child. */
+ 	void setChildRegistration(Registration * child);
+@@ -151,6 +153,7 @@ protected:
+ private:
+ 	bool repeatOnce_;
+ 	bool force3DoF_;
++	bool childFallbackOnFailure_;
+ 	Registration * child_;
+ 
+ };
+diff --git a/corelib/src/Registration.cpp b/corelib/src/Registration.cpp
+index 8273b230..a24df1ab 100644
+--- a/corelib/src/Registration.cpp
++++ b/corelib/src/Registration.cpp
+@@ -67,6 +67,7 @@ Registration * Registration::create(Registration::Type & type, const ParametersM
+ Registration::Registration(const ParametersMap & parameters, Registration * child) :
+ 	repeatOnce_(Parameters::defaultRegRepeatOnce()),
+ 	force3DoF_(Parameters::defaultRegForce3DoF()),
++	childFallbackOnFailure_(true),
+ 	child_(child)
+ {
+ 	this->parseParameters(parameters);
+@@ -80,6 +81,7 @@ void Registration::parseParameters(const ParametersMap & parameters)
+ {
+ 	Parameters::parse(parameters, Parameters::kRegRepeatOnce(), repeatOnce_);
+ 	Parameters::parse(parameters, Parameters::kRegForce3DoF(), force3DoF_);
++	Parameters::parse(parameters, "Reg/ChildFallbackOnFailure", childFallbackOnFailure_);
+ 
+ 	if(child_)
+ 	{
+@@ -212,11 +214,15 @@ Transform Registration::computeTransformationMod(
+ 		{
+ 			t = child_->computeTransformationMod(from, to, force3DoF_?t.to3DoF():t, &info);
+ 		}
+-		else if(!guess.isNull())
++		else if(childFallbackOnFailure_ && !guess.isNull())
+ 		{
+ 			UDEBUG("This registration approach failed, continue with the guess for the next registration");
+ 			t = child_->computeTransformationMod(from, to, guess, &info);
+ 		}
++		else if(!guess.isNull())
++		{
++			UDEBUG("This registration approach failed, child fallback from the input guess is disabled");
++		}
+ 	}
+ 	else if(repeatOnce_ && guess.isNull() && !t.isNull() && this->canUseGuess())
+ 	{

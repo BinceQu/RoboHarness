@@ -1,0 +1,84 @@
+"""Challenge / interface 用的 R1Pro YAML。
+
+原文件同样是 admin 600。按 server.py 的调用合同从 OmniGibson eval YAML 加载。
+"""
+
+from __future__ import annotations
+
+from pathlib import Path
+from typing import Any, Optional
+
+import yaml
+
+from .robot_variant import (
+    normalize_robot_dof,
+    robot_config_path_for_dof,
+    robot_type_for_dof,
+)
+
+DEFAULT_CHALLENGE_ROBOT_CONFIG = robot_config_path_for_dof(8)
+
+
+def resolve_challenge_robot_config_path(
+    path: Any = None,
+    robot_dof: Optional[int] = None,
+) -> Path:
+    if path:
+        resolved = Path(str(path)).expanduser()
+        if resolved.is_file():
+            return resolved
+    return Path(robot_config_path_for_dof(robot_dof))
+
+
+def load_challenge_robot_config(
+    path: Any,
+    robot_dof: Optional[int] = None,
+) -> dict[str, Any]:
+    cfg_path = resolve_challenge_robot_config_path(path, robot_dof=robot_dof)
+    payload = yaml.safe_load(cfg_path.read_text(encoding="utf-8")) or {}
+    if not isinstance(payload, dict):
+        raise ValueError(f"robot config 不是对象: {cfg_path}")
+    dof = normalize_robot_dof(payload.get("arm_dof", robot_dof))
+    payload["arm_dof"] = dof
+    payload.setdefault("robot_type", robot_type_for_dof(dof))
+    payload["_config_path"] = str(cfg_path)
+    return payload
+
+
+def build_interface_robot_config(
+    path: Any = None,
+    robot_type: Any = None,
+    robot_dof: Optional[int] = None,
+    image_width: Optional[int] = None,
+    image_height: Optional[int] = None,
+) -> dict[str, Any]:
+    loaded = load_challenge_robot_config(path, robot_dof=robot_dof)
+    dof = normalize_robot_dof(loaded.get("arm_dof", robot_dof))
+    name = str(robot_type or loaded.get("robot_type") or robot_type_for_dof(dof))
+    sensor = loaded.get("sensor_config") or {}
+    vision = sensor.get("VisionSensor") or {}
+    kwargs = dict(vision.get("sensor_kwargs") or {})
+    if image_width is not None:
+        kwargs["image_width"] = int(image_width)
+    if image_height is not None:
+        kwargs["image_height"] = int(image_height)
+    if kwargs:
+        vision = {**vision, "sensor_kwargs": kwargs}
+        sensor = {**sensor, "VisionSensor": vision}
+    robot_cfg = {
+        "type": name if name in {"R1Pro", "R1Pro8DOF"} else "R1Pro",
+        "name": loaded.get("name") or "robot_r1",
+        "obs_modalities": list(loaded.get("obs_modalities") or ["rgb"]),
+        "scale": loaded.get("scale", 1.0),
+        "self_collisions": loaded.get("self_collisions", True),
+        "action_normalize": loaded.get("action_normalize", False),
+        "action_type": loaded.get("action_type", "continuous"),
+        "grasping_mode": loaded.get("grasping_mode", "assisted"),
+        "default_reset_mode": loaded.get("default_reset_mode", "tuck"),
+        "controller_config": loaded.get("controller_config") or {},
+    }
+    if loaded.get("load_config"):
+        robot_cfg["load_config"] = loaded["load_config"]
+    if sensor:
+        robot_cfg["sensor_config"] = sensor
+    return robot_cfg

@@ -1,0 +1,5 @@
+repository=https://github.com/introlab/rtabmap.git
+commit=94c93ac9b1474e4070c744a5a5845a893c37df9e
+archive=https://github.com/introlab/rtabmap/archive/94c93ac9b1474e4070c744a5a5845a893c37df9e.tar.gz
+sha256=687d14ba2a86370daaba0c8e4e6b6f5aac4e9787d70c4ed5892f119439490cd9
+license=BSD-3-Clause
