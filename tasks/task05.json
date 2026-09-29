@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "task": "task05",
+  "task_index": 5,
+  "task_name": "setting_mousetraps",
+  "scene": "house_double_floor_lower",
+  "protocol": "archived-v391-x2",
+  "evaluator_commit": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+  "max_steps": 20343,
+  "sample_seed": 20260911,
+  "evaluator_seed": 0,
+  "model": "Qwen3.8-Flash-Next-FP8",
+  "harness": "claude_code",
+  "robot_profile": "r1pro_8dof_hf250",
+  "annotator": "cpu",
+  "idle_gate": true,
+  "spatial_map": false,
+  "cases": [
+    {
+      "instance_id": 301,
+      "slot": 0,
+      "prompt": "prompt/task05/v7_80523f9584fa.txt",
+      "prompt_sha256": "80523f9584fa4d7a76b5c28358b3f3f0dcc59641808ce2eb39c79dc15959be99",
+      "prompt_source": "test_results/task05/session_cards/i301_t05p15065i0-09152148/session.json",
+      "prompt_source_sha256": "345e84cb95bd7059fa382c0c861853c95725f39b7dfb1b5a90907128ec15d124",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v7.txt"
+      ],
+      "reference_result": "reference_results/task05/setting_mousetraps_301_0.json",
+      "reference_sha256": "8e75076b03c27910c2f7d29a34433a999f612a8ff3410afbee8627e6b0c0d4f4",
+      "reference_source": "test_results/task05/output_json/setting_mousetraps_301_0.json",
+      "reference_q": 0.8333333333333334,
+      "reference_steps": 20344,
+      "notes": [],
+      "source_session_id": "t05p15065i0-09152148",
+      "archive_reported_q": 1.0
+    },
+    {
+      "instance_id": 304,
+      "slot": 3,
+      "prompt": "prompt/task05/v7_80523f9584fa.txt",
+      "prompt_sha256": "80523f9584fa4d7a76b5c28358b3f3f0dcc59641808ce2eb39c79dc15959be99",
+      "prompt_source": "test_results/task05/session_cards/i304_t05p15065i3-09160125/session.json",
+      "prompt_source_sha256": "78dafee0516e8aec4b9828445a32f62c425b6d99701826c52a095e714c2fa06e",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v7.txt"
+      ],
+      "reference_result": "reference_results/task05/setting_mousetraps_304_0.json",
+      "reference_sha256": "cfffc0afc96c0088eacf472b7cd14310ab30a76832e5f59bcd45e8985761e693",
+      "reference_source": "test_results/task05/output_json/setting_mousetraps_304_0.json",
+      "reference_q": 1.0,
+      "reference_steps": 17420,
+      "notes": [],
+      "source_session_id": "t05p15065i3-09160125",
+      "archive_reported_q": 1.0
+    },
+    {
+      "instance_id": 306,
+      "slot": 5,
+      "prompt": "prompt/task05/v7_80523f9584fa.txt",
+      "prompt_sha256": "80523f9584fa4d7a76b5c28358b3f3f0dcc59641808ce2eb39c79dc15959be99",
+      "prompt_source": "test_results/task05/session_cards/i306_t05p15065i5-09161131/session.json",
+      "prompt_source_sha256": "755782e2a88b37452968f9c09a6536cf9e7ba4161b46d4132d4dfe68d6db3348",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v7.txt"
+      ],
+      "reference_result": "reference_results/task05/setting_mousetraps_306_0.json",
+      "reference_sha256": "a0248fb142231f88da7f8270af70540ab84a6e8376d4f9941b2f94cf0cb4956a",
+      "reference_source": "test_results/task05/output_json/setting_mousetraps_306_0.json",
+      "reference_q": 0.5,
+      "reference_steps": 9471,
+      "notes": [],
+      "source_session_id": "t05p15065i5-09161131",
+      "archive_reported_q": 0.5
+    },
+    {
+      "instance_id": 308,
+      "slot": 7,
+      "prompt": "prompt/task05/v8_3ba8cadd120e.txt",
+      "prompt_sha256": "3ba8cadd120e28daa7bf550f95e279508d7674fbf3ec5abb49734c9b47544ac2",
+      "prompt_source": "test_results/task05/session_cards/i308_t05p15065i7-09171210/session.json",
+      "prompt_source_sha256": "b4308ff2f18689bbfa6480568b6a2132a2bc70f1f274a3bc496773dc6d0972a7",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v8.txt"
+      ],
+      "reference_result": "reference_results/task05/setting_mousetraps_308_0.json",
+      "reference_sha256": "cba002a45ee35beb67e6d28ac28a746d7135ad2d145bc4ce5701a798cca11d4b",
+      "reference_source": "test_results/task05/output_json/setting_mousetraps_308_0.json",
+      "reference_q": 1.0,
+      "reference_steps": 14997,
+      "notes": [
+        "Session prompt matches v8; summary.json incorrectly calls this case v7."
+      ],
+      "source_session_id": "t05p15065i7-09171210",
+      "archive_reported_q": 1.0
+    },
+    {
+      "instance_id": 310,
+      "slot": 9,
+      "prompt": "prompt/task05/v8_3ba8cadd120e.txt",
+      "prompt_sha256": "3ba8cadd120e28daa7bf550f95e279508d7674fbf3ec5abb49734c9b47544ac2",
+      "prompt_source": "test_results/task05/session_cards/i310_t05p15065i9-09181018/session.json",
+      "prompt_source_sha256": "5d27034750604a6d5428c2de3c9fad662d702dea8355fb41ca353146694a5d41",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v8.txt"
+      ],
+      "reference_result": "reference_results/task05/setting_mousetraps_310_0.json",
+      "reference_sha256": "3da8b57f81357620f63e292ce93e30060dbacf4ee38d984eac857acf21573ee4",
+      "reference_source": "test_results/task05/output_json/setting_mousetraps_310_0.json",
+      "reference_q": 0.16666666666666666,
+      "reference_steps": 20344,
+      "notes": [],
+      "source_session_id": "t05p15065i9-09181018",
+      "archive_reported_q": 0.6666666666666666
+    }
+  ],
+  "reference_mean_q": 0.7,
+  "archive_reported_mean_q": 0.8333333333333334,
+  "archive_report_source": "test_results/task05/summary.json",
+  "archive_report_sha256": "53f2ad3b2760c2d82bc1bacfe4eee4e7d269f0e593283753099fd99be115d4db"
+}

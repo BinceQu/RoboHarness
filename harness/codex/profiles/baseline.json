@@ -1,0 +1,14 @@
+{
+  "schema_version": "embodied_codex.profile.v1",
+  "name": "baseline",
+  "description": "Allow advertised BEHAVIOR v2 tools except tools intentionally excluded from MCP.",
+  "allow_tools": ["*"],
+  "deny_tools": [
+    "plan_grasp_point_filter",
+    "plan_grasp_point_filter_rgbd",
+    "plan_eef_translation_to_uvd_point",
+    "read_depth",
+    "move_point_to_point"
+  ],
+  "fixed_arguments": {}
+}

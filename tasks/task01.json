@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "task": "task01",
+  "task_index": 1,
+  "task_name": "picking_up_trash",
+  "scene": "house_double_floor_lower",
+  "protocol": "archived-v391-x2",
+  "evaluator_commit": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+  "max_steps": 10535,
+  "sample_seed": 20260911,
+  "evaluator_seed": 0,
+  "model": "Qwen3.8-Flash-Next-FP8",
+  "harness": "claude_code",
+  "robot_profile": "r1pro_8dof_hf250",
+  "annotator": "cpu",
+  "idle_gate": true,
+  "spatial_map": false,
+  "cases": [
+    {
+      "instance_id": 301,
+      "slot": 0,
+      "prompt": "prompt/task01/v4_b841716562b9.txt",
+      "prompt_sha256": "b841716562b979b7963828f977acc62466e3e9be7b94db1ecc890bda18cbd24f",
+      "prompt_source": "test_results/task01/monitor/301/2_t01p15061i0-09152145/session.json",
+      "prompt_source_sha256": "a7f4e3f603b8fb5a421e320449162cac778764a51ef1fb628b6deb68e8462ae9",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v4.txt"
+      ],
+      "reference_result": "reference_results/task01/picking_up_trash_301_0.json",
+      "reference_sha256": "126cb39ea0ff8fc85a8c11322315ab4cc9d1fd0bf06b7d5ac220af2ed891f779",
+      "reference_source": "test_results/task01/scoreboard/301_v4.json",
+      "reference_q": 1.0,
+      "reference_steps": 10025,
+      "notes": [],
+      "source_session_id": "t01p15061i0-09152145"
+    },
+    {
+      "instance_id": 304,
+      "slot": 3,
+      "prompt": "prompt/task01/v4_b841716562b9.txt",
+      "prompt_sha256": "b841716562b979b7963828f977acc62466e3e9be7b94db1ecc890bda18cbd24f",
+      "prompt_source": "test_results/task01/monitor/304/2_t01p15061i3-09160054/session.json",
+      "prompt_source_sha256": "2a442501db63ae957b7a8eb1fc7f799438b428c0a5753d787268de6164772bc1",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v4.txt"
+      ],
+      "reference_result": "reference_results/task01/picking_up_trash_304_0.json",
+      "reference_sha256": "7a5690036cccd5a323a92be577717c7a844cf3d0d91651b6c47933d315e5e49f",
+      "reference_source": "test_results/task01/scoreboard/304_v4.json",
+      "reference_q": 0.3333333333333333,
+      "reference_steps": 10536,
+      "notes": [],
+      "source_session_id": "t01p15061i3-09160054"
+    },
+    {
+      "instance_id": 306,
+      "slot": 5,
+      "prompt": "prompt/task01/v4_b841716562b9.txt",
+      "prompt_sha256": "b841716562b979b7963828f977acc62466e3e9be7b94db1ecc890bda18cbd24f",
+      "prompt_source": "test_results/task01/monitor/306/2_t01p15061i5-09160613/session.json",
+      "prompt_source_sha256": "a1c2b45dcf933d9d256f1b816cfdcc30839933a352b79b57281f0c119a8d5495",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v4.txt"
+      ],
+      "reference_result": "reference_results/task01/picking_up_trash_306_0.json",
+      "reference_sha256": "fe3cd04fd3a3bf7a6c155249a79fe0d34d455d7766fc29d92b4eb4f88c618c39",
+      "reference_source": "test_results/task01/scoreboard/306_v4.json",
+      "reference_q": 1.0,
+      "reference_steps": 8318,
+      "notes": [],
+      "source_session_id": "t01p15061i5-09160613"
+    },
+    {
+      "instance_id": 308,
+      "slot": 7,
+      "prompt": "prompt/task01/v4_b841716562b9.txt",
+      "prompt_sha256": "b841716562b979b7963828f977acc62466e3e9be7b94db1ecc890bda18cbd24f",
+      "prompt_source": "test_results/task01/monitor/308/2_t01p15061i7-09160916/session.json",
+      "prompt_source_sha256": "024c65a4934f390814a5a1d0c7aa70dff3f7ff5275948aeaa7f4f4b02059fc0c",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v4.txt"
+      ],
+      "reference_result": "reference_results/task01/picking_up_trash_308_0.json",
+      "reference_sha256": "b197a220e3d55e5c057cbffd8441eed6a16f60be5c49d8f390b9c11da39cf7b6",
+      "reference_source": "test_results/task01/scoreboard/308_v4.json",
+      "reference_q": 1.0,
+      "reference_steps": 7040,
+      "notes": [],
+      "source_session_id": "t01p15061i7-09160916"
+    },
+    {
+      "instance_id": 310,
+      "slot": 9,
+      "prompt": "prompt/task01/v4_b841716562b9.txt",
+      "prompt_sha256": "b841716562b979b7963828f977acc62466e3e9be7b94db1ecc890bda18cbd24f",
+      "prompt_source": "test_results/task01/monitor/310/2_t01p15061i9-09161235/session.json",
+      "prompt_source_sha256": "3a0cf47efa1f892a8a5ab8e2490a7886fce47d9183b789232d125b8792908507",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v4.txt"
+      ],
+      "reference_result": "reference_results/task01/picking_up_trash_310_0.json",
+      "reference_sha256": "ea4cb663f35d9f88d79b312af0cc83ee58c818ece9c19f26822127634f6a551c",
+      "reference_source": "test_results/task01/scoreboard/310_v4.json",
+      "reference_q": 1.0,
+      "reference_steps": 6898,
+      "notes": [],
+      "source_session_id": "t01p15061i9-09161235"
+    }
+  ],
+  "reference_mean_q": 0.8666666666666666,
+  "archive_reported_mean_q": 0.8666666666666666
+}

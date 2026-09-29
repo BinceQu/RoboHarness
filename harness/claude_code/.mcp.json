@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "behavior-v2": {
+      "command": "/bin/sh",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/scripts/embodied-claude-code-mcp"],
+      "alwaysLoad": true,
+      "env": {
+        "EMBODIED_PLUGIN_ROOT": "${CLAUDE_PLUGIN_ROOT}"
+      }
+    }
+  }
+}

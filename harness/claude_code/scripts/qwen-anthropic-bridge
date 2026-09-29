@@ -1,0 +1,12 @@
+#!/bin/sh
+set -eu
+launcher_dir=$(CDPATH= cd "$(dirname "$0")" && pwd)
+plugin_root=$(CDPATH= cd "$launcher_dir/.." && pwd)
+export PYTHONPATH="$plugin_root/src${PYTHONPATH:+:$PYTHONPATH}"
+if [ -n "${EMBODIED_CLAUDE_PYTHON:-}" ]; then
+  exec "$EMBODIED_CLAUDE_PYTHON" -m embodied_claude_code.qwen_bridge "$@"
+fi
+if [ -x "$plugin_root/.venv/bin/python" ]; then
+  exec "$plugin_root/.venv/bin/python" -m embodied_claude_code.qwen_bridge "$@"
+fi
+exec python3 -m embodied_claude_code.qwen_bridge "$@"

@@ -1,0 +1,25 @@
+diff --git a/corelib/src/Rtabmap.cpp b/corelib/src/Rtabmap.cpp
+--- a/corelib/src/Rtabmap.cpp
++++ b/corelib/src/Rtabmap.cpp
+@@ -3216,11 +3216,20 @@ bool Rtabmap::process(
+ 			RegistrationInfo info;
+ 			info.covariance = cv::Mat::eye(6,6,CV_64FC1);
+ 			if(_rgbdSlamMode)
+ 			{
++				// A depth-registered external candidate carries a metric
++				// current->candidate observation. Invert it for the
++				// candidate->current registration initial guess. RTAB-Map still
++				// recomputes the transform from its stored RGB-D/scan data and
++				// rejects disagreement with the observation below.
++				const Transform externalMetricGuess =
++					externalLoopClosureHypothesis == _loopClosureHypothesis.first
++					? externalLoopClosureOdomTransform.inverse() : Transform();
+ 				transform = _memory->computeTransform(
+ 						_loopClosureHypothesis.first,
+ 						signature->id(),
+-						_loopClosureIdentityGuess?Transform::getIdentity():Transform(),
++						!externalMetricGuess.isNull() ? externalMetricGuess :
++							(_loopClosureIdentityGuess?Transform::getIdentity():Transform()),
+ 						&info);
+ 
+ 				loopClosureVisualInliersMeanDist = info.inliersMeanDistance;

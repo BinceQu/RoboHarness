@@ -1,0 +1,148 @@
+from __future__ import annotations
+
+from dataclasses import dataclass
+import ipaddress
+import os
+from pathlib import Path
+from urllib.parse import urlparse
+
+from .errors import ConfigurationError
+
+
+TRUE_VALUES = {"1", "true", "yes", "on"}
+MAX_MEMORY_TIMEOUT_S = 5.0
+DEFAULT_MODEL_IMAGE_MAX_BYTES = 256 * 1024
+DEFAULT_MODEL_IMAGE_MAX_EDGE = 720
+DEFAULT_MODEL_IMAGE_JPEG_QUALITY = 95
+DEFAULT_IMAGE_CONVERTER = "/usr/bin/convert"
+
+
+def _env_int(name: str, default: int) -> int:
+    try:
+        return int(os.environ.get(name, str(default)))
+    except ValueError as exc:
+        raise ConfigurationError(f"{name} must be an integer.") from exc
+
+
+def _is_loopback(hostname: str | None) -> bool:
+    if not hostname:
+        return False
+    if hostname.lower() == "localhost":
+        return True
+    try:
+        return ipaddress.ip_address(hostname).is_loopback
+    except ValueError:
+        return False
+
+
+def _default_record_root() -> Path:
+    if value := os.environ.get("PLUGIN_DATA"):
+        return Path(value).expanduser() / "trajectories"
+    data_home = Path(
+        os.environ.get("XDG_DATA_HOME", Path.home() / ".local" / "share")
+    )
+    return data_home / "embodied-codex" / "trajectories"
+
+
+@dataclass(frozen=True)
+class Settings:
+    base_url: str = "http://127.0.0.1:5011"
+    http_timeout_s: float = 1900.0
+    memory_timeout_s: float = 1.0
+    allow_remote: bool = False
+    profile_path: Path | None = None
+    record_root: Path = Path("trajectories")
+    record: bool = True
+    session_id: str = ""
+    record_label: str = ""
+    max_image_bytes: int = 20 * 1024 * 1024
+    max_images_per_call: int = 1
+    model_image_max_bytes: int = DEFAULT_MODEL_IMAGE_MAX_BYTES
+    model_image_max_edge: int = DEFAULT_MODEL_IMAGE_MAX_EDGE
+    model_image_jpeg_quality: int = DEFAULT_MODEL_IMAGE_JPEG_QUALITY
+    image_converter: str = DEFAULT_IMAGE_CONVERTER
+
+    def __post_init__(self) -> None:
+        parsed = urlparse(self.base_url)
+        if parsed.scheme not in {"http", "https"} or not parsed.hostname:
+            raise ConfigurationError(
+                "BEHAVIOR_BASE_URL must be an absolute http(s) origin."
+            )
+        if parsed.path not in {"", "/"} or parsed.params or parsed.query or parsed.fragment:
+            raise ConfigurationError(
+                "BEHAVIOR_BASE_URL must not contain a path, query, or fragment."
+            )
+        if not self.allow_remote and not _is_loopback(parsed.hostname):
+            raise ConfigurationError(
+                "Non-loopback BEHAVIOR_BASE_URL requires BEHAVIOR_ALLOW_REMOTE=1."
+            )
+        if self.http_timeout_s <= 0:
+            raise ConfigurationError("BEHAVIOR_HTTP_TIMEOUT_S must be positive.")
+        if not 0 < self.memory_timeout_s <= MAX_MEMORY_TIMEOUT_S:
+            raise ConfigurationError(
+                "BEHAVIOR_MEMORY_TIMEOUT_S must be greater than 0 and at most "
+                f"{MAX_MEMORY_TIMEOUT_S:g}."
+            )
+        if self.max_image_bytes <= 0 or self.max_images_per_call <= 0:
+            raise ConfigurationError("Image limits must be positive.")
+        if self.model_image_max_bytes <= 0 or self.model_image_max_edge <= 0:
+            raise ConfigurationError("Model image limits must be positive.")
+        if not 1 <= self.model_image_jpeg_quality <= 95:
+            raise ConfigurationError(
+                "BEHAVIOR_MODEL_IMAGE_JPEG_QUALITY must be between 1 and 95."
+            )
+        if not self.image_converter.strip():
+            raise ConfigurationError("BEHAVIOR_IMAGE_CONVERTER must not be empty.")
+
+    @classmethod
+    def from_env(cls) -> "Settings":
+        profile = os.environ.get("BEHAVIOR_PROFILE", "").strip()
+        record_root = os.environ.get("BEHAVIOR_RECORD_ROOT", "").strip()
+        try:
+            timeout = float(os.environ.get("BEHAVIOR_HTTP_TIMEOUT_S", "1900"))
+        except ValueError as exc:
+            raise ConfigurationError(
+                "BEHAVIOR_HTTP_TIMEOUT_S must be numeric."
+            ) from exc
+        try:
+            memory_timeout = float(
+                os.environ.get("BEHAVIOR_MEMORY_TIMEOUT_S", "1")
+            )
+        except ValueError as exc:
+            raise ConfigurationError(
+                "BEHAVIOR_MEMORY_TIMEOUT_S must be numeric."
+            ) from exc
+        return cls(
+            base_url=os.environ.get(
+                "BEHAVIOR_BASE_URL", "http://127.0.0.1:5011"
+            ).rstrip("/"),
+            http_timeout_s=timeout,
+            memory_timeout_s=memory_timeout,
+            allow_remote=os.environ.get("BEHAVIOR_ALLOW_REMOTE", "0").lower()
+            in TRUE_VALUES,
+            profile_path=Path(profile).expanduser() if profile else None,
+            record_root=(
+                Path(record_root).expanduser()
+                if record_root
+                else _default_record_root()
+            ),
+            record=os.environ.get("BEHAVIOR_RECORD", "1").lower()
+            in TRUE_VALUES,
+            session_id=os.environ.get("BEHAVIOR_SESSION_ID", "").strip(),
+            record_label=os.environ.get("BEHAVIOR_RECORD_LABEL", "").strip(),
+            model_image_max_bytes=_env_int(
+                "BEHAVIOR_MODEL_IMAGE_MAX_BYTES",
+                DEFAULT_MODEL_IMAGE_MAX_BYTES,
+            ),
+            model_image_max_edge=_env_int(
+                "BEHAVIOR_MODEL_IMAGE_MAX_EDGE",
+                DEFAULT_MODEL_IMAGE_MAX_EDGE,
+            ),
+            model_image_jpeg_quality=_env_int(
+                "BEHAVIOR_MODEL_IMAGE_JPEG_QUALITY",
+                DEFAULT_MODEL_IMAGE_JPEG_QUALITY,
+            ),
+            image_converter=os.environ.get(
+                "BEHAVIOR_IMAGE_CONVERTER", DEFAULT_IMAGE_CONVERTER
+            ).strip(),
+        )

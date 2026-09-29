@@ -1,0 +1,3065 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<title>BEHAVIOR Interface</title>
+<style>
+  :root {
+    --bg: #0e1117; --panel: #161b22; --border: #30363d;
+    --fg: #c9d1d9; --muted: #8b949e; --accent: #58a6ff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg); color: var(--fg);
+  }
+  header {
+    padding: 8px 12px 7px; background: var(--panel);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 20;
+  }
+  .header-main {
+    display: flex; align-items: center; gap: 12px; min-height: 28px;
+    flex-wrap: wrap;
+  }
+  header h1 {
+    font-size: 15px; margin: 0; color: var(--accent);
+    white-space: nowrap; flex: 0 0 auto;
+  }
+  header .meta { font-size: 12px; color: var(--muted); white-space: nowrap; }
+  header .goal-summary {
+    font-size: 12px; color: var(--muted); white-space: nowrap;
+    font-family: ui-monospace, monospace;
+  }
+  .task-picker {
+    display: flex; align-items: center; gap: 6px; min-width: 0;
+    color: var(--muted); font-size: 12px;
+  }
+  .task-picker select {
+    max-width: min(36vw, 360px); min-width: 220px;
+    background: #0d1117; color: var(--fg); border: 1px solid var(--border);
+    border-radius: 4px; padding: 4px 6px; font-size: 12px;
+  }
+  .task-picker button {
+    background: #21262d; border: 1px solid var(--border); color: var(--fg);
+    padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 12px;
+  }
+  .task-picker button:hover { border-color: var(--accent); }
+  .goal-strip {
+    margin-top: 6px; display: flex; gap: 6px; align-items: center;
+    overflow-x: auto; overflow-y: hidden; max-width: 100%;
+    padding-bottom: 2px; scrollbar-width: thin;
+  }
+  .goal-chip {
+    flex: 0 0 auto; max-width: 240px; height: 26px;
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 0 8px; border-radius: 6px; border: 1px solid var(--border);
+    font-size: 11px; line-height: 1; white-space: nowrap;
+    background: #0d1117; color: var(--fg);
+  }
+  .goal-chip .goal-dot {
+    width: 7px; height: 7px; border-radius: 50%; flex: 0 0 auto;
+    background: #6e7681;
+  }
+  .goal-chip .goal-index {
+    color: var(--muted); font-family: ui-monospace, monospace; flex: 0 0 auto;
+  }
+  .goal-chip .goal-text {
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .goal-chip.good {
+    border-color: #238636; background: rgba(46, 160, 67, 0.16);
+    color: #b7f7c1;
+  }
+  .goal-chip.good .goal-dot { background: #3fb950; }
+  .goal-chip.bad {
+    border-color: #da3633; background: rgba(248, 81, 73, 0.14);
+    color: #ffd1d1;
+  }
+  .goal-chip.bad .goal-dot { background: #f85149; }
+  .goal-chip.empty {
+    border-style: dashed; color: var(--muted);
+  }
+
+  .root {
+    display: grid;
+    grid-template-columns: minmax(560px, 1.6fr) minmax(380px, 1fr);
+    gap: 10px;
+    padding: 10px;
+    align-items: start;
+    min-width: 0;
+  }
+  .left { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+  .right {
+    display: flex; flex-direction: column; gap: 10px;
+    min-width: 0; max-width: 100%; overflow-x: hidden;
+  }
+
+  .view-toggles {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+    padding: 6px 8px; margin-bottom: 6px;
+    background: var(--panel); border: 1px solid var(--border); border-radius: 4px;
+    font-size: 12px;
+  }
+  .view-toggles .vt-label { font-weight: 600; color: var(--muted); }
+  .view-toggles label { display: inline-flex; align-items: center; gap: 4px; cursor: pointer; }
+  .view-toggles .vt-hint { color: var(--muted); font-size: 11px; margin-left: auto; }
+
+  .main-cam {
+    position: relative;
+    background: #000; border: 1px solid var(--border);
+    overflow: hidden; aspect-ratio: 16 / 9;
+  }
+  .main-cam img { width: 100%; height: 100%; display: block; object-fit: contain; background: #000; }
+  .sub-row .cam { position: relative; }
+  .view-off {
+    position: absolute; inset: 0; display: none;
+    align-items: center; justify-content: center; text-align: center;
+    padding: 6px; color: var(--muted); font-size: 12px; background: #0b0d12;
+  }
+  .cam-off .view-off, .main-cam.cam-off .view-off { display: flex; }
+  .cam-off img { display: none; }
+  /* 主视图刚开启时覆盖，跳过 MJPEG 客户端缓冲里的旧位姿帧 */
+  .view-warming {
+    position: absolute; inset: 0; display: none;
+    align-items: center; justify-content: center; text-align: center;
+    padding: 6px; color: var(--muted); font-size: 12px; background: #0b0d12;
+    z-index: 2;
+  }
+  .main-cam.cam-warming .view-warming { display: flex; }
+  .main-cam.cam-off .view-warming { display: none; }
+
+  .sub-row {
+    display: grid; gap: 8px; grid-template-columns: 1fr 1fr 1fr;
+  }
+  .sub-row .cam.head-cam {
+    aspect-ratio: 1 / 1;
+  }
+  /* 大图固定是 head：首帧到达前显示占位，之后一直显示画面 */
+  .main-cam.waiting #stage-head-off { display: flex; }
+  .main-cam.waiting #stage-head-img { display: none; }
+  .minimap-cam img { object-fit: contain; background: #0b0d12; }
+  .minimap-cam.cam-off .view-off { display: flex; }
+  .view-toggles label input:disabled { cursor: default; }
+  .view-toggles label:has(input:disabled) { color: var(--muted); }
+  .sub-row .cam {
+    background: #000; border: 1px solid var(--border); overflow: hidden;
+    aspect-ratio: 4 / 3;
+  }
+  .sub-row .cam img { width: 100%; height: 100%; display: block; object-fit: contain; background: #111; }
+
+  .panel {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 6px; padding: 10px;
+    min-width: 0; max-width: 100%;
+  }
+  .panel h2 {
+    margin: 0 0 6px 0; font-size: 13px; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+
+  /* 上面信息区：左右两列，状态 + TRO 并排 */
+  .info-row {
+    display: grid; gap: 8px; grid-template-columns: 1fr 1fr;
+  }
+
+  pre {
+    margin: 0; font-size: 12px; line-height: 1.4;
+    white-space: pre-wrap; word-break: break-all;
+    max-height: 260px; overflow: auto; color: #e6edf3;
+  }
+  pre#memory {
+    max-height: 28vh; font-size: 11px; font-family: ui-monospace, monospace;
+    line-height: 1.35;
+  }
+  .panel-memory { grid-column: span 2; }
+  #memory-summary { font-family: ui-monospace, monospace; }
+  .right-switcher {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px; margin-bottom: 8px;
+  }
+  .right-switcher h2 { margin: 0; }
+  .switch-buttons { display: flex; gap: 6px; }
+  .switch-buttons button {
+    background: #0d1117; color: var(--fg); border: 1px solid var(--border);
+    width: 28px; height: 24px; border-radius: 4px; cursor: pointer;
+  }
+  .switch-buttons button:hover { border-color: var(--accent); }
+  .right-view { display: flex; flex-direction: column; gap: 10px; min-width: 0; max-width: 100%; }
+  .right-view.hidden { display: none; }
+  #monitor-view.right-view { flex: 1; min-height: 0; }
+  .agent-monitor {
+    height: 100%;
+    min-height: 0;
+    display: grid;
+    grid-template-rows: minmax(88px, 160px) minmax(0, 1fr);
+    gap: 8px;
+    min-width: 0; max-width: 100%; overflow: hidden;
+  }
+  .monitor-pane {
+    min-height: 0;
+    background: #0d1117; border: 1px solid var(--border);
+    border-radius: 6px; padding: 8px;
+    display: flex; flex-direction: column; gap: 6px;
+    min-width: 0; max-width: 100%; overflow: hidden;
+  }
+  .monitor-pane h3 {
+    margin: 0; font-size: 11px; color: var(--accent);
+    text-transform: uppercase; letter-spacing: .8px;
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  }
+  .monitor-pre {
+    flex: 1; min-height: 0; min-width: 0; max-width: 100%; overflow: auto;
+    font-size: 11px; line-height: 1.38;
+    white-space: pre-wrap; word-break: break-word;
+    font-family: ui-monospace, monospace;
+  }
+  .monitor-image-wrap {
+    position: relative; flex: 1; min-height: 0; min-width: 0;
+    width: 100%; max-width: 100%;
+    border: 1px solid var(--border); border-radius: 4px;
+    background: #000; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .monitor-image-wrap img {
+    max-width: 100%; max-height: 100%; object-fit: contain; display: block;
+  }
+  .monitor-point {
+    position: absolute; width: 16px; height: 16px;
+    border: 2px solid #f85149; border-radius: 50%;
+    transform: translate(-50%, -50%); pointer-events: none; display: none;
+    box-shadow: 0 0 0 2px rgba(0,0,0,.8); z-index: 2;
+  }
+  .monitor-point::before, .monitor-point::after {
+    content: ""; position: absolute; background: #f85149;
+  }
+  .monitor-point::before { left: 6px; top: -7px; width: 2px; height: 26px; }
+  .monitor-point::after { left: -7px; top: 6px; width: 26px; height: 2px; }
+  .monitor-caption {
+    font-size: 11px; color: var(--muted);
+    font-family: ui-monospace, monospace;
+    min-width: 0; max-width: 100%;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .monitor-session-select {
+    flex: 1 1 220px;
+    min-width: 0;
+    max-width: 58%;
+    height: 22px;
+    background: #010409;
+    color: var(--fg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 11px;
+    font-family: ui-monospace, monospace;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .monitor-cards-pane { min-height: 0; }
+  .monitor-cards {
+    --monitor-card-h: 198px;
+    --monitor-card-meta-h: 36px;
+    --monitor-card-skill-h: 16px;
+    flex: 1; min-height: 0; overflow-x: hidden; overflow-y: auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-rows: var(--monitor-card-h);
+    gap: 8px;
+    align-content: start;
+    align-items: start;
+    padding-right: 2px;
+  }
+  .monitor-cards-empty {
+    grid-column: 1 / -1;
+    color: var(--muted);
+    font-family: ui-monospace, monospace;
+    font-size: 12px;
+    padding: 18px 8px;
+    text-align: center;
+  }
+  .monitor-card {
+    min-width: 0;
+    min-height: 0;
+    width: 100%;
+    height: var(--monitor-card-h);
+    max-height: var(--monitor-card-h);
+    background: #010409;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: var(--monitor-card-meta-h) minmax(0, 1fr) var(--monitor-card-skill-h);
+  }
+  .monitor-card-images {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+    min-width: 0;
+    min-height: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+  }
+  .monitor-card-images.is-pair {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .monitor-card-thumb {
+    min-width: 0;
+    min-height: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .monitor-card-thumb img {
+    width: 100%; height: 100%;
+    max-width: 100%; max-height: 100%;
+    object-fit: contain; display: block;
+  }
+  .monitor-card-placeholder {
+    color: #484f58; font-size: 11px;
+    font-family: ui-monospace, monospace;
+  }
+  .monitor-card-meta {
+    padding: 2px 7px;
+    min-width: 0;
+    min-height: 0;
+    height: var(--monitor-card-meta-h);
+    max-height: var(--monitor-card-meta-h);
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: 16px 16px;
+    align-content: center;
+    gap: 2px;
+  }
+  .monitor-card-tool-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 6px;
+    min-width: 0;
+    height: 16px;
+    align-items: center;
+  }
+  .monitor-card-tool {
+    color: var(--accent); font-size: 11px; font-weight: 600;
+    font-family: ui-monospace, monospace;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    height: 16px; line-height: 16px;
+  }
+  .monitor-card-time {
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 500;
+    font-family: ui-monospace, monospace;
+    height: 16px;
+    line-height: 16px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .monitor-card .monitor-card-args,
+  .monitor-card-args {
+    margin: 0;
+    height: 16px;
+    max-height: 16px;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    color: var(--fg); font-size: 10px; line-height: 16px;
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow-wrap: normal;
+    font-family: ui-monospace, monospace;
+    cursor: ew-resize;
+    scrollbar-width: none;
+  }
+  .monitor-card-args::-webkit-scrollbar { display: none; height: 0; }
+  .monitor-card-skill {
+    min-width: 0;
+    min-height: 0;
+    height: var(--monitor-card-skill-h);
+    max-height: var(--monitor-card-skill-h);
+    padding: 0 7px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 16px;
+    font-family: ui-monospace, monospace;
+  }
+  .monitor-card-skill-name {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .monitor-card-session-ticks {
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 600;
+    font-family: ui-monospace, monospace;
+    height: 16px;
+    line-height: 16px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 980px) {
+    .root { grid-template-columns: minmax(0, 1fr); }
+  }
+
+  .controls {
+    display: flex; gap: 8px; align-items: center; margin-top: 6px;
+  }
+  .record-bar {
+    display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(120px, 0.8fr);
+    gap: 7px; align-items: center; margin: 4px 0 7px;
+  }
+  .record-toggle {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    min-width: 74px; height: 29px; padding: 0 9px;
+    border: 1px solid #6e7681; border-radius: 4px;
+    background: #21262d; color: var(--fg); cursor: pointer;
+    font-size: 11px; font-weight: 700;
+  }
+  .record-toggle:hover { border-color: #f85149; }
+  .record-toggle.active {
+    background: #da3633; border-color: #f85149; color: #fff;
+  }
+  .record-toggle:disabled { opacity: .55; cursor: not-allowed; }
+  .record-dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: #f85149; flex: 0 0 auto;
+  }
+  .record-toggle.active .record-dot {
+    border-radius: 1px; background: #fff;
+  }
+  .record-status {
+    min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    color: var(--muted); font-size: 11px; font-family: ui-monospace, monospace;
+  }
+  .record-note {
+    width: 100%; min-width: 0; height: 29px;
+    background: #0d1117; color: var(--fg); border: 1px solid var(--border);
+    border-radius: 4px; padding: 4px 7px; font-size: 11px;
+  }
+  button.danger {
+    background: #da3633; border: 1px solid #da3633; color: white;
+    padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;
+  }
+  button.warn {
+    background: #d29922; border: 1px solid #d29922; color: #0e1117;
+    padding: 6px 12px; border-radius: 4px; cursor: pointer;
+    font-size: 12px; font-weight: 600;
+  }
+  button.warn:hover { background: #f0b429; }
+  header .spacer { flex: 1; }
+  .header-ops {
+    display: flex; align-items: center; gap: 6px; flex: 0 0 auto;
+    margin-left: auto;
+  }
+  .header-ops .header-ops-label {
+    color: var(--muted); font-size: 11px; white-space: nowrap;
+  }
+  .header-ops select {
+    background: #0d1117; color: var(--fg); border: 1px solid var(--border);
+    border-radius: 4px; padding: 5px 6px; font-size: 12px;
+    font-family: ui-monospace, monospace; min-width: 128px; max-width: 180px;
+  }
+  header button.danger { padding: 6px 10px; }
+  header button.danger:disabled { opacity: .45; cursor: not-allowed; }
+  .log { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; }
+
+  .cam-ctl {
+    display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 6px; padding: 6px 10px; font-size: 12px;
+  }
+  .cam-ctl .grp { display: flex; align-items: center; gap: 4px; }
+  .cam-ctl .grp .lbl { color: var(--muted); margin-right: 2px; }
+  .cam-ctl button {
+    background: #0d1117; color: var(--fg); border: 1px solid var(--border);
+    padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 12px;
+    min-width: 28px;
+  }
+  .cam-ctl button:hover { background: #21262d; border-color: var(--accent); }
+  .cam-ctl button.reset { background: #6e7681; color: white; border-color: #6e7681; }
+  .cam-ctl .vals { color: var(--muted); font-size: 11px; margin-left: 8px;
+                   font-family: ui-monospace, monospace; }
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-main">
+    <h1>BEHAVIOR-1K Interface</h1>
+    <span class="meta" id="meta">connecting...</span>
+    <div class="task-picker">
+      <span>Task</span>
+      <select id="task-select" onchange="onTaskSelectChange()">
+        <option value="">loading tasks…</option>
+      </select>
+      <button onclick="switchTask()" title="切换到所选 BEHAVIOR Challenge task">Switch</button>
+    </div>
+    <span class="goal-summary" id="goal-summary">Goals --/--</span>
+    <span class="spacer"></span>
+    <div class="header-ops">
+      <span class="header-ops-label">instance</span>
+      <select id="instance-select" title="选择 instance 再 RESET。官方口只列本 evaluator 已加载的 instance">
+        <option value="301">301 · slot 0</option>
+        <option value="304">304 · slot 3</option>
+        <option value="306">306 · slot 5</option>
+        <option value="308">308 · slot 7</option>
+        <option value="310">310 · slot 9</option>
+      </select>
+      <button class="warn" onclick="restartWorld()" title="把仿真重置到所选 instance 的任务初始状态">
+        ⟳ RESTART WORLD
+      </button>
+      <button class="danger" id="stop-agent-btn" onclick="stopAgentSession()"
+              title="停掉本口正在跑的 Claude/agent session，不拆 interface / evaluator">
+        ■ STOP AGENT
+      </button>
+    </div>
+  </div>
+  <div class="goal-strip" id="goal-strip">
+    <span class="goal-chip empty">loading goal conditions...</span>
+  </div>
+</header>
+
+<div class="root">
+
+  <!-- 左：相机 -->
+  <div class="left">
+    <div class="view-toggles" id="view-toggles">
+      <span class="vt-label">视图</span>
+      <label title="Head 是主视图，常开"><input type="checkbox" checked disabled> Head</label>
+      <label title="实时俯视地图，常开"><input type="checkbox" checked disabled> Minimap</label>
+      <label><input type="checkbox" data-view="left_wrist" onchange="toggleView('left_wrist', this.checked)"> 左腕</label>
+      <label><input type="checkbox" data-view="right_wrist" onchange="toggleView('right_wrist', this.checked)"> 右腕</label>
+      <span class="vt-hint">腕部相机关闭后不占用渲染/编码资源</span>
+    </div>
+    <div class="main-cam" id="main-cam-wrap">
+      <img id="stage-head-img" data-feed="head" alt="head" />
+      <div class="view-off" id="stage-head-off">等待 head 画面…</div>
+    </div>
+    <div class="sub-row">
+      <!-- 副视图用单帧轮询，不占常驻 MJPEG 连接（HTTP/1.1 每 host 仅 ~6 槽） -->
+      <div class="cam head-cam minimap-cam" id="minimap-wrap">
+        <img id="minimap-img" alt="minimap" />
+        <div class="view-off" id="minimap-off">地图为空：做一次底盘动作后出现</div>
+      </div>
+      <div class="cam" data-feed-wrap="left_wrist"><img data-feed="left_wrist" alt="left_wrist" /><div class="view-off">左腕已关闭</div></div>
+      <div class="cam" data-feed-wrap="right_wrist"><img data-feed="right_wrist" alt="right_wrist" /><div class="view-off">右腕已关闭</div></div>
+    </div>
+  </div>
+
+  <!-- 右：信息 + skill -->
+  <div class="right">
+
+    <div class="panel">
+      <div class="right-switcher">
+        <h2 id="right-panel-title">Human Involve</h2>
+        <div class="switch-buttons">
+          <button onclick="switchRightPanel(-1)" title="切到上一栏">‹</button>
+          <button onclick="switchRightPanel(1)" title="切到下一栏">›</button>
+        </div>
+      </div>
+
+      <!-- 隐藏元素，保留 JS 引用，避免 JS 报错 -->
+      <pre id="state" style="display:none"></pre>
+
+      <div id="human-view" class="right-view">
+        <div class="panel panel-memory" style="padding:8px">
+          <h2>Memory <span id="memory-summary" style="float:right;color:var(--muted);font-size:11px;text-transform:none">…</span></h2>
+          <pre id="memory">loading memory...</pre>
+        </div>
+
+        <div class="panel" style="padding:8px">
+          <h2>Agent 工具
+            <span style="float:right; color:var(--muted); font-size:11px; text-transform:none">
+              人机一致 · session=<b id="v2-session">initializing</b></span>
+          </h2>
+      <div class="record-bar">
+        <button class="record-toggle" id="record-toggle" onclick="toggleHumanRecording()" title="开始或停止记录 Human tool calls">
+          <span class="record-dot"></span><span id="record-action">REC</span>
+        </button>
+        <span class="record-status" id="record-status">idle</span>
+        <input class="record-note" id="record-note" type="text" maxlength="2000" placeholder="record note" />
+      </div>
+      <div class="desc" style="font-size:11px;color:var(--muted);margin-bottom:6px">
+        下拉选工具 → 自动列出参数 → RUN。带 (u,v) 的工具：先 capture，再在下方 head 图上点选取点。
+      </div>
+      <div class="row" style="gap:8px;align-items:center">
+        <select id="v2-tool" style="min-width:170px" onchange="onV2ToolChange()">
+          <option value="">loading tools…</option>
+        </select>
+        <button class="primary" id="v2-run-btn" onclick="runV2Tool()">RUN</button>
+        <span id="v2-busy" style="font-size:12px;color:var(--muted)"></span>
+      </div>
+      <div class="desc" id="v2-tool-desc" style="font-size:11px;color:var(--muted);margin:4px 0"></div>
+      <div class="arg-row" id="v2-args" style="display:flex;flex-wrap:wrap;gap:8px;margin:6px 0"></div>
+
+      <!-- 可点选的 head 图（取 u,v）；显示 capture / plan 标注 / exec 结果 -->
+      <div class="v2-img-wrap" id="v2-img-wrap"
+           style="position:relative;display:inline-block;max-width:100%;border:1px solid #30363d;border-radius:6px;overflow:hidden;cursor:crosshair">
+        <img id="v2-img" alt="head" draggable="false" style="display:block;max-width:100%;image-rendering:pixelated" />
+        <div id="v2-multi-markers" style="position:absolute;inset:0;pointer-events:none"></div>
+        <div id="v2-cross" style="position:absolute;width:12px;height:12px;border:2px solid #3fb950;border-radius:50%;transform:translate(-50%,-50%);display:none;pointer-events:none"></div>
+      </div>
+      <div class="desc" id="v2-pick" style="font-size:11px;color:var(--muted);margin:4px 0">（运行 capture 后点击图像取 (u,v)）</div>
+
+      <pre id="v2-result" style="font-size:12px;max-height:220px;overflow:auto;background:#0d1117;border:1px solid #30363d;border-radius:6px;padding:8px;white-space:pre-wrap;color:#e6edf3;line-height:1.45">（点击 RUN 后，工具返回摘要显示在此）</pre>
+
+      <div class="controls" style="margin-top:6px">
+        <button class="danger" onclick="cancelSkill()">CANCEL ACTIVE</button>
+        <button class="warn" onclick="restartWorld()">⟳ RESTART WORLD</button>
+        <span id="active" style="font-size:12px;color:var(--muted)"></span>
+      </div>
+        </div>
+
+        <div class="panel" style="padding:8px">
+          <h2>Log</h2>
+          <pre id="log" class="log">...</pre>
+        </div>
+      </div>
+
+      <div id="monitor-view" class="right-view hidden">
+        <div class="agent-monitor">
+          <div class="monitor-pane">
+            <h3>Prompt</h3>
+            <pre id="monitor-prompt" class="monitor-pre">(no prompt yet)</pre>
+          </div>
+          <div class="monitor-pane monitor-cards-pane">
+            <h3>
+              <span>Keyframes</span>
+              <select id="monitor-session-select" class="monitor-session-select" title="本任务历史 session" onchange="onMonitorSessionSelectChange(event)">
+                <option value="">waiting for an embodied agent</option>
+              </select>
+              <span id="monitor-cards-meta" class="monitor-caption"></span>
+            </h3>
+            <div id="monitor-cards" class="monitor-cards">
+              <div class="monitor-cards-empty">waiting for embodied agent keyframes...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// 副视图单帧轮询（短连接）；主视图仍用 1 路 MJPEG
+const SUB_FEEDS = ["head", "left_wrist", "right_wrist"];
+let _subCamIdx = 0;
+let _uiPollBusy = false;
+let _goalRenderKey = "";
+const SubCam = {};
+for (const feed of SUB_FEEDS) {
+  SubCam[feed] = { busy: false, lastFrameId: "", lastUrl: "", fail: 0 };
+}
+
+// 四路视图开关：默认只开 head（与 server 端默认一致）；server 是权威，applyFeedsUI 会同步。
+const Feeds = { main: false, head: true, left_wrist: false, right_wrist: false };
+// 记录每路最近一次用户手动切换的时刻：在途的旧状态轮询会带着过期的 feeds
+// 晚到，若无条件回填就会把刚点的开关又弹回去（关不掉/自己弹开）。这里让
+// applyStateFromServer 在窗口期内忽略 server 对该 feed 的回填，交给 /api/views
+// 的直接响应作为权威。
+const FeedToggleTs = { main: 0, head: 0, left_wrist: 0, right_wrist: 0 };
+const FEED_TOGGLE_GUARD_MS = 2000;
+
+function applyFeedsUI(feeds) {
+  if (!feeds || typeof feeds !== "object") return;
+  for (const k of ["main", "head", "left_wrist", "right_wrist"]) {
+    if (typeof feeds[k] === "boolean") Feeds[k] = feeds[k];
+  }
+  // 勾选框
+  document.querySelectorAll('#view-toggles input[data-view]').forEach(cb => {
+    const v = cb.getAttribute("data-view");
+    cb.checked = !!Feeds[v];
+  });
+  // 副视图：隐藏关闭的（head 是大图、常开，不参与这里的 wrap 开关）
+  for (const feed of SUB_FEEDS) {
+    const wrap = document.querySelector(`[data-feed-wrap="${feed}"]`);
+    if (wrap) wrap.classList.toggle("cam-off", !Feeds[feed]);
+  }
+}
+
+// head 是大图、常开；第三人称 MJPEG 不再使用，保持关闭省渲染资源。
+function enforceFixedFeeds() {
+  if (!Feeds.head) toggleView("head", true);
+  if (Feeds.main) toggleView("main", false);
+}
+
+async function toggleView(feed, active) {
+  FeedToggleTs[feed] = Date.now();   // 开守卫窗口，屏蔽在途旧轮询的回填
+  Feeds[feed] = !!active;            // 乐观更新，立即反映到 UI
+  applyFeedsUI(Feeds);
+  try {
+    const r = await fetch("/api/views", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ feed, active: !!active }),
+    });
+    const j = await r.json();
+    // POST 的响应是 server 权威态：刷新守卫时间戳后应用，避免紧接着的旧轮询回弹
+    if (j && j.feeds) { FeedToggleTs[feed] = Date.now(); applyFeedsUI(j.feeds); }
+  } catch (e) {
+    // 失败则下一次 ui_poll 会用 server 权威态纠正
+  }
+}
+
+// 用 server feeds 回填前，剔除仍在守卫窗口内的 feed（保留本地即时态），
+// 消除"关闭又弹开"的竞态。
+let _lastFixedFeedFix = 0;
+function applyServerFeeds(serverFeeds) {
+  if (!serverFeeds || typeof serverFeeds !== "object") return;
+  const now = Date.now();
+  const merged = {};
+  for (const k of ["main", "head", "left_wrist", "right_wrist"]) {
+    if ((now - (FeedToggleTs[k] || 0)) < FEED_TOGGLE_GUARD_MS) {
+      merged[k] = Feeds[k];               // 守卫期内：以本地操作为准
+    } else if (typeof serverFeeds[k] === "boolean") {
+      merged[k] = serverFeeds[k];
+    }
+  }
+  applyFeedsUI(merged);
+  // head 必须常开、main 必须常关；server 说反了就纠正（节流，避免每秒发请求）
+  const wrong = (serverFeeds.head === false) || (serverFeeds.main === true);
+  if (wrong && (now - _lastFixedFeedFix) > 5000) {
+    _lastFixedFeedFix = now;
+    enforceFixedFeeds();
+  }
+}
+const TaskPicker = { tasks: [], current: "", userChoice: "", switchTarget: "" };
+const RightPanel = { views: ["human", "monitor"], index: 0 };
+
+function escapeHtml(s) {
+  return String(s ?? "").replace(/[&<>"']/g, ch => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+  }[ch]));
+}
+
+function switchRightPanel(delta) {
+  RightPanel.index = (RightPanel.index + delta + RightPanel.views.length) % RightPanel.views.length;
+  const view = RightPanel.views[RightPanel.index];
+  document.getElementById("human-view").classList.toggle("hidden", view !== "human");
+  document.getElementById("monitor-view").classList.toggle("hidden", view !== "monitor");
+  document.getElementById("right-panel-title").textContent =
+    view === "human" ? "Human Involve" : "Agent Monitor";
+  if (view === "monitor") requestAnimationFrame(syncMonitorToHeadCam);
+}
+
+function bindArgsPan(el) {
+  if (!el) return;
+  const maxScroll = () => el.scrollWidth - el.clientWidth;
+  const panToClientX = (clientX) => {
+    const overflow = maxScroll();
+    if (overflow <= 0) return;
+    const rect = el.getBoundingClientRect();
+    const t = (clientX - rect.left) / Math.max(1, rect.width);
+    el.scrollLeft = Math.max(0, Math.min(overflow, t * overflow));
+  };
+  el.addEventListener("wheel", (event) => {
+    if (maxScroll() <= 0) return;
+    event.preventDefault();
+    el.scrollLeft += event.deltaY + event.deltaX;
+  }, {passive: false});
+  el.addEventListener("pointerenter", (event) => panToClientX(event.clientX));
+  el.addEventListener("pointermove", (event) => panToClientX(event.clientX));
+}
+
+function inferLoadedSkillsFromPrompt(prompt) {
+  // 任务 skill 只信 hook 上报的原生 invoke；prompt 点名不再当成已加载。
+  void prompt;
+  return ["behavior-v2-baseline"];
+}
+
+function formatLoadedSkills(card, prompt) {
+  const raw = card && card.loaded_skills;
+  let names = Array.isArray(raw)
+    ? raw.map((item) => String(item || "").trim()).filter(Boolean)
+    : [];
+  if (!names.length) names = inferLoadedSkillsFromPrompt(prompt);
+  const task = names.filter((name) => name !== "behavior-v2-baseline");
+  const shown = task.length ? task : names;
+  return shown.length ? `skill: ${shown.join(" · ")}` : "skill: (none)";
+}
+
+function formatCardArgs(args) {
+  if (!args || typeof args !== "object" || Array.isArray(args)) return "(no args)";
+  const keys = Object.keys(args);
+  if (!keys.length) return "(no args)";
+  try {
+    return JSON.stringify(args);
+  } catch (e) {
+    return String(args);
+  }
+}
+
+const MONITOR_ATTEMPT_SUFFIX = /-\d{8}T\d{6,9}Z(?:-\d+)?$/;
+
+function monitorImageSessionToken(session) {
+  const text = String(session || "").trim();
+  const stripped = text.replace(MONITOR_ATTEMPT_SUFFIX, "");
+  return stripped || text;
+}
+
+function monitorImageUrl(session, cardId, kind, version) {
+  let url = (
+    `/api/agent_monitor/image?session=${encodeURIComponent(monitorImageSessionToken(session))}` +
+    `&card_id=${encodeURIComponent(cardId)}` +
+    `&kind=${encodeURIComponent(kind || "output")}`
+  );
+  if (version) url += `&v=${encodeURIComponent(version)}`;
+  return url;
+}
+
+function formatMonitorSessionOption(item, sessions) {
+  const name = String((item && (item.session_id || item.attempt_id)) || "(session)");
+  let cards = Number((item && item.card_count) || 0);
+  if (item && item.live && item.session_id) {
+    const total = sameSessionAttempts(sessions, item.session_id).reduce(
+      (count, row) => count + Number((row && (row.card_count || (row.cards || []).length)) || 0),
+      0,
+    );
+    if (total) cards = total;
+  }
+  const when = formatMonitorWhen((item && item.started_at) || "");
+  const prefix = item && item.live ? "LIVE · " : "";
+  return `${prefix}${name} · ${cards} cards${when ? " · " + when : ""}`;
+}
+
+function sameSessionAttempts(sessions, sessionId) {
+  const sid = String(sessionId || "");
+  if (!sid || !Array.isArray(sessions)) return [];
+  return sessions
+    .filter((item) => String((item && item.session_id) || "") === sid)
+    .slice()
+    .sort((a, b) => String((a && a.started_at) || "").localeCompare(String((b && b.started_at) || "")));
+}
+
+function collectSameSessionCards(m) {
+  // 直播把同一 session_id 被 compact 切出去的 attempt 按时间拼回来，不设张数上限。
+  // 历史下拉仍只看选中的那一段。
+  const sid = String((m && m.session_id) || "");
+  const viewingHistory = !!(m && m.viewing_history);
+  const fallback = Array.isArray(m && m.cards) ? m.cards : [];
+  const imageSession = String((m && (m.session_id || m.attempt_id)) || "");
+  const stamp = (card, imageSid, keySid) => ({
+    ...card,
+    _imageSession: imageSid || imageSession,
+    _cardKey: `${keySid || imageSid || imageSession}:${card && card.card_id}`,
+  });
+  if (viewingHistory || !sid) return fallback.map((card) => stamp(card, imageSession));
+  const related = sameSessionAttempts(m.sessions, sid);
+  const out = [];
+  const seen = new Set();
+  related.forEach((item) => {
+    const attempt = String((item && item.attempt_id) || "");
+    const imageSid = String((item && item.session_id) || attempt);
+    (Array.isArray(item && item.cards) ? item.cards : []).forEach((card) => {
+      const keyed = stamp(card, imageSid, attempt);
+      if (seen.has(keyed._cardKey)) return;
+      seen.add(keyed._cardKey);
+      out.push(keyed);
+    });
+  });
+  const liveAttempt = String((m && (m.live_attempt_id || m.attempt_id)) || "");
+  fallback.forEach((card) => {
+    const keyed = stamp(card, sid || liveAttempt, liveAttempt);
+    if (seen.has(keyed._cardKey)) return;
+    seen.add(keyed._cardKey);
+    out.push(keyed);
+  });
+  return out;
+}
+
+function formatMonitorWhen(iso) {
+  const text = String(iso || "").trim();
+  if (!text) return "";
+  const date = new Date(text);
+  if (Number.isNaN(date.getTime())) return text.slice(0, 16);
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}`;
+}
+
+// Challenge 2026 fallback: int(original human mean length * 1.5).
+// The live evaluator budget takes precedence; never rescale the 2025 table.
+let _monitorEvaluatorMaxTicks = null;
+let _monitorBudgetRefreshAt = 0;
+const CHALLENGE_2026_MAX_TICKS = [
+  3224, 7901, 20682, 20544, 17770, 15294, 11429, 28335, 13414, 20578,
+  9399, 16430, 12367, 28839, 21412, 20303, 21894, 14157, 16556, 15956,
+  17855, 28779, 11589, 36341, 29803, 19602, 39090, 23711, 23506, 32126,
+  13677, 12353, 12524, 16834, 3581, 5867, 18106, 7960, 9719, 12518,
+  4856, 21217, 9599, 22267, 16127, 13717, 11519, 18682, 34463, 28780,
+];
+const CHALLENGE_2026_TASK_INDEX = {
+  turning_on_radio: 0,
+  picking_up_trash: 1,
+  putting_away_halloween_decorations: 2,
+  cleaning_up_plates_and_food: 3,
+  can_meat: 4,
+  setting_mousetraps: 5,
+  hiding_easter_eggs: 6,
+  picking_up_toys: 7,
+  rearranging_kitchen_furniture: 8,
+  putting_up_christmas_decorations_inside: 9,
+  set_up_a_coffee_station_in_your_kitchen: 10,
+  putting_dishes_away_after_cleaning: 11,
+  preparing_lunch_box: 12,
+  loading_the_car: 13,
+  carrying_in_groceries: 14,
+  bringing_in_wood: 15,
+  moving_boxes_to_storage: 16,
+  bringing_water: 17,
+  tidying_bedroom: 18,
+  outfit_a_basic_toolbox: 19,
+  sorting_vegetables: 20,
+  collecting_childrens_toys: 21,
+  putting_shoes_on_rack: 22,
+  boxing_books_up_for_storage: 23,
+  storing_food: 24,
+  clearing_food_from_table_into_fridge: 25,
+  assembling_gift_baskets: 26,
+  sorting_household_items: 27,
+  getting_organized_for_work: 28,
+  clean_up_your_desk: 29,
+  setting_the_fire: 30,
+  clean_boxing_gloves: 31,
+  wash_a_baseball_cap: 32,
+  wash_dog_toys: 33,
+  hanging_pictures: 34,
+  attach_a_camera_to_a_tripod: 35,
+  clean_a_patio: 36,
+  clean_a_trumpet: 37,
+  spraying_for_bugs: 38,
+  spraying_fruit_trees: 39,
+  make_microwave_popcorn: 40,
+  cook_cabbage: 41,
+  chop_an_onion: 42,
+  slicing_vegetables: 43,
+  chopping_wood: 44,
+  cook_hot_dogs: 45,
+  cook_bacon: 46,
+  freeze_pies: 47,
+  canning_food: 48,
+  make_pizza: 49,
+};
+
+function officialTaskIndexFromPort(port) {
+  const number = Number(port);
+  if (number >= 15010 && number <= 15045) return number - 15000;
+  if (number >= 15060 && number <= 15069) return number - 15060;
+  return null;
+}
+
+function resolveChallengeMaxTicks(taskId, taskName, port) {
+  const byId = taskId == null || String(taskId).trim() === "" ? NaN : Number(taskId);
+  if (Number.isInteger(byId) && byId >= 0 && CHALLENGE_2026_MAX_TICKS[byId] > 0) {
+    return CHALLENGE_2026_MAX_TICKS[byId];
+  }
+  const key = String(taskName || "").replace(/-/g, "_").trim().toLowerCase();
+  if (key && CHALLENGE_2026_TASK_INDEX[key] != null) {
+    return CHALLENGE_2026_MAX_TICKS[CHALLENGE_2026_TASK_INDEX[key]];
+  }
+  const fromPort = officialTaskIndexFromPort(port);
+  if (fromPort != null && CHALLENGE_2026_MAX_TICKS[fromPort] > 0) {
+    return CHALLENGE_2026_MAX_TICKS[fromPort];
+  }
+  return null;
+}
+
+function formatSessionTicks(value, maxTicks) {
+  // 卡片右下角：本 instance 已用 / 该任务 Challenge 2026 上限。
+  if (value == null || value === "") return "";
+  const number = Number(value);
+  if (!Number.isFinite(number) || number < 0) return "";
+  const max = Number(maxTicks);
+  if (!Number.isFinite(max) || max <= 0) return String(Math.floor(number));
+  return `${Math.floor(number)}/${Math.floor(max)}`;
+}
+
+function formatCardClock(iso) {
+  // 卡片右上角只要本地时分，方便扫一眼 agent 是否还在动。
+  const text = String(iso || "").trim();
+  if (!text) return "";
+  const date = new Date(text);
+  if (Number.isNaN(date.getTime())) return "";
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${pad(date.getHours())}:${pad(date.getMinutes())}`;
+}
+
+let _monitorThumbObs = null;
+
+function monitorThumbObserver() {
+  if (_monitorThumbObs) return _monitorThumbObs;
+  const root = document.getElementById("monitor-cards");
+  _monitorThumbObs = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const img = entry.target;
+      const url = img.dataset.src;
+      if (!url || img.dataset.loaded === "1") return;
+      img.dataset.loaded = "1";
+      img.src = url;
+      _monitorThumbObs.unobserve(img);
+    });
+  }, {root: root || null, rootMargin: "240px 0px", threshold: 0.01});
+  return _monitorThumbObs;
+}
+
+function bindMonitorThumb(img, url) {
+  // 可见再请求。142 张卡一起打 /image 会占满浏览器每 host ~6 条连接，
+  // 再叠加 MJPEG / ui_poll，缩略图就会一直 pending 最后裂开。
+  img.loading = "lazy";
+  img.decoding = "async";
+  img.dataset.src = url;
+  img.dataset.retries = "0";
+  img.onerror = () => {
+    const n = Number(img.dataset.retries || 0);
+    if (n >= 4) return;
+    img.dataset.retries = String(n + 1);
+    const src = img.dataset.src;
+    if (!src) return;
+    setTimeout(() => {
+      img.dataset.loaded = "1";
+      img.src = src + (src.includes("?") ? "&" : "?") + "retry=" + n;
+    }, 350 * (n + 1));
+  };
+  if (typeof IntersectionObserver === "function") {
+    img.dataset.loaded = "";
+    monitorThumbObserver().observe(img);
+  } else {
+    img.dataset.loaded = "1";
+    img.src = url;
+  }
+}
+
+function renderMonitorThumb(card, session, kind, label) {
+  const thumb = document.createElement("div");
+  thumb.className = "monitor-card-thumb";
+  const img = document.createElement("img");
+  img.alt = label || kind || "keyframe";
+  img.dataset.kind = kind || "output";
+  const version = (card && card.model_image_v) || "";
+  img.dataset.v = version;
+  bindMonitorThumb(img, monitorImageUrl(
+    card && card._imageSession ? card._imageSession : session,
+    card.card_id,
+    kind,
+    version,
+  ));
+  thumb.appendChild(img);
+  return thumb;
+}
+
+function renderMonitorCard(card, session, prompt, maxTicks) {
+  const el = document.createElement("div");
+  el.className = "monitor-card";
+  el.dataset.cardId = String((card && card._cardKey) || card.card_id);
+  const meta = document.createElement("div");
+  meta.className = "monitor-card-meta";
+  const toolRow = document.createElement("div");
+  toolRow.className = "monitor-card-tool-row";
+  const tool = document.createElement("div");
+  tool.className = "monitor-card-tool";
+  tool.textContent = card.tool || "(unknown tool)";
+  toolRow.appendChild(tool);
+  const clock = formatCardClock(card.ts);
+  if (clock) {
+    const time = document.createElement("div");
+    time.className = "monitor-card-time";
+    time.textContent = clock;
+    time.title = String(card.ts || "");
+    toolRow.appendChild(time);
+  }
+  const args = document.createElement("div");
+  args.className = "monitor-card-args";
+  args.textContent = formatCardArgs(card.args);
+  bindArgsPan(args);
+  meta.append(toolRow, args);
+  const images = document.createElement("div");
+  images.className = "monitor-card-images";
+  // 和 15060 同一套：只认后端的 has_input / has_output。
+  // 旧口（15063）没有这两个字段时，有图就只显示一张输出图，不要猜成并排。
+  const hasInput = card.has_input === true;
+  const hasOutput = card.has_output === true;
+  const legacyImage = card.has_input == null && card.has_output == null
+    && !!(card.has_image || card.image_id);
+  if (hasInput && hasOutput) {
+    images.classList.add("is-pair");
+    images.append(
+      renderMonitorThumb(card, session, "input", card.input_image_id || "input"),
+      renderMonitorThumb(card, session, "output", card.output_image_id || "output"),
+    );
+  } else if (hasInput) {
+    images.append(renderMonitorThumb(card, session, "input", card.input_image_id || "input"));
+  } else if (hasOutput || legacyImage) {
+    images.append(renderMonitorThumb(card, session, "output", card.output_image_id || card.image_id || "output"));
+  } else {
+    const ph = document.createElement("div");
+    ph.className = "monitor-card-thumb";
+    const text = document.createElement("div");
+    text.className = "monitor-card-placeholder";
+    text.textContent = "no image yet";
+    ph.appendChild(text);
+    images.appendChild(ph);
+  }
+  const skill = document.createElement("div");
+  skill.className = "monitor-card-skill";
+  const skillName = document.createElement("div");
+  skillName.className = "monitor-card-skill-name";
+  skillName.textContent = formatLoadedSkills(card, prompt);
+  skill.appendChild(skillName);
+  const ticks = formatSessionTicks(card && card.session_ticks, maxTicks);
+  if (ticks) {
+    const tickEl = document.createElement("div");
+    tickEl.className = "monitor-card-session-ticks";
+    tickEl.textContent = ticks;
+    tickEl.title = "本 instance 已用 ticks / Challenge 2026 上限（第一次 tool call 起算；场景重置后从 0 再计）";
+    skill.appendChild(tickEl);
+  }
+  el.append(meta, images, skill);
+  return el;
+}
+
+let _monitorSession = "";
+let _monitorStartedAt = "";
+let _monitorAttemptId = "";
+let _monitorViewKey = "";
+let _monitorLiveAttemptId = "";
+let _monitorLiveSessionId = "";
+let _monitorMaxTicks = 0;
+let _monitorSessionTicks = null;
+let _headerState = null;
+let _monitorViewingHistory = false;
+let _monitorCardCount = 0;
+const _cardFirstSeen = {};
+let _monitorSessions = [];
+let _monitorTaskKey = "";
+
+function usedTicksLabel() {
+  return formatSessionTicks(_monitorSessionTicks, _monitorMaxTicks);
+}
+
+function rememberSessionTicks(m) {
+  if (!m || m.session_ticks == null || m.session_ticks === "") return;
+  const used = Number(m.session_ticks);
+  if (Number.isFinite(used) && used >= 0) _monitorSessionTicks = used;
+}
+
+function renderHeaderMeta() {
+  const s = _headerState;
+  const el = document.getElementById("meta");
+  if (!el || !s) return;
+  const instanceId = s.instance_id != null
+    ? s.instance_id
+    : (typeof EvalControl !== "undefined" && EvalControl && EvalControl.current_instance_id);
+  const instStr = instanceId != null && instanceId !== "" ? `  instance=${instanceId}` : "";
+  const rstStr = s.reset_pending
+    ? " | reset PENDING..."
+    : (s.reset_count > 0 ? ` | resets=${s.reset_count}` : "");
+  const switchStr = s.task_switch_pending
+    ? " | task switch PENDING..."
+    : (s.task_switch_count > 0 ? ` | switches=${s.task_switch_count}` : "");
+  const switchErr = s.task_switch_error ? ` | task switch error=${s.task_switch_error}` : "";
+  const used = usedTicksLabel();
+  const usedStr = used ? `  used=${used}` : "";
+  el.textContent =
+    `tick=${s.tick}${usedStr}  fps=${(s.fps || 0).toFixed(1)}  mode=${s.mode}${instStr}  task=${Number.isInteger(s.task_id) ? `${String(s.task_id).padStart(2, "0")} · ` : ""}${s.task}${rstStr}${switchStr}${switchErr}`;
+}
+
+function monitorStorageKey() {
+  return _monitorTaskKey
+    ? `behavior.agent_monitor.v1:task:${_monitorTaskKey}`
+    : `behavior.agent_monitor.v1:${location.port}`;
+}
+
+function persistMonitorSnapshot(m) {
+  if (!m || !(m.session_id || m.attempt_id)) return;
+  const prompt = String(m.user_prompt || m.prompt || "");
+  if (!prompt.trim() && !_monitorAttemptId && !_monitorSession) return;
+  if (m.task_name) _monitorTaskKey = String(m.task_name);
+  try {
+    // 只记指针。整份 sessions/cards 会把旧 LIVE（a22）冻在浏览器里，
+    // 刷新后下拉再也切不到服务端已经在播的 a23。
+    sessionStorage.setItem(monitorStorageKey(), JSON.stringify({
+      session_id: m.session_id || _monitorSession,
+      started_at: m.started_at || _monitorStartedAt,
+      attempt_id: m.attempt_id || _monitorAttemptId,
+      live_attempt_id: m.live_attempt_id || _monitorLiveAttemptId,
+      live_session_id: m.live_session_id || _monitorLiveSessionId,
+      max_ticks: m.max_ticks || _monitorMaxTicks,
+      viewing_history: !!_monitorViewingHistory,
+      user_prompt: prompt,
+      loaded_skills: m.loaded_skills || [],
+    }));
+  } catch (_) {}
+}
+
+function readPersistedMonitorSnapshot() {
+  try {
+    const raw = sessionStorage.getItem(monitorStorageKey());
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed || !(parsed.session_id || parsed.attempt_id)) return null;
+    if (!Array.isArray(parsed.cards)) parsed.cards = [];
+    if (!Array.isArray(parsed.sessions)) parsed.sessions = [];
+    return parsed;
+  } catch (_) {
+    return null;
+  }
+}
+
+function syncMonitorSessionSelect(sessions, selectedAttempt) {
+  const select = document.getElementById("monitor-session-select");
+  if (!select) return;
+  const items = Array.isArray(sessions) ? sessions : [];
+  _monitorSessions = items;
+  const signature = items.map((item) => [
+    item.attempt_id, item.session_id, item.card_count, item.live, item.started_at,
+  ].join("\t")).join("\n");
+  if (select.dataset.signature === signature && select.value === selectedAttempt) return;
+  const focused = document.activeElement === select;
+  select.innerHTML = "";
+  if (!items.length) {
+    const empty = document.createElement("option");
+    empty.value = "";
+    empty.textContent = "waiting for an embodied agent";
+    select.appendChild(empty);
+  } else {
+    items.forEach((item) => {
+      const option = document.createElement("option");
+      option.value = item.attempt_id || item.session_id || "";
+      option.textContent = formatMonitorSessionOption(item, items);
+      select.appendChild(option);
+    });
+  }
+  const wanted = selectedAttempt || (items.find((item) => item.live) || {}).attempt_id || "";
+  if (wanted && Array.from(select.options).some((opt) => opt.value === wanted)) {
+    select.value = wanted;
+  }
+  select.dataset.signature = signature;
+  if (focused) select.focus();
+}
+
+function syncMonitorToHeadCam() {
+  const head = document.querySelector(".sub-row .cam.head-cam");
+  const monitor = document.querySelector(".agent-monitor");
+  const view = document.getElementById("monitor-view");
+  if (!head || !monitor || !view || view.classList.contains("hidden")) return;
+  const headBottom = head.getBoundingClientRect().bottom;
+  const top = monitor.getBoundingClientRect().top;
+  const height = Math.max(320, Math.round(headBottom - top));
+  monitor.style.height = height + "px";
+}
+
+function applyAgentMonitor(m, opts) {
+  const promptEl = document.getElementById("monitor-prompt");
+  const grid = document.getElementById("monitor-cards");
+  const metaEl = document.getElementById("monitor-cards-meta");
+  if (!promptEl || !grid) return;
+  const fromSelect = !!(opts && opts.fromSelect);
+  const sessions = (m && Array.isArray(m.sessions)) ? m.sessions : _monitorSessions;
+  const liveAttempt = (m && m.live_attempt_id) || "";
+  const liveSession = (m && m.live_session_id) || "";
+  const incomingAttempt = (m && m.attempt_id) || "";
+  const incomingHistory = !!(m && m.viewing_history);
+  const maxTicks = _monitorEvaluatorMaxTicks || resolveChallengeMaxTicks(
+    m && m.task_id,
+    (m && (m.task_name || m.task)) || _monitorTaskKey,
+    (typeof location !== "undefined" && location.port) || "",
+  ) || Number(m && m.max_ticks) || _monitorMaxTicks;
+  if (Number.isFinite(maxTicks) && maxTicks > 0) _monitorMaxTicks = Math.floor(maxTicks);
+  rememberSessionTicks(m);
+  renderHeaderMeta();
+  // 只有 BEHAVIOR_SESSION_ID 变了才算新 session。compact / 场景重置不算。
+  const newLiveSession = !!(
+    liveSession && _monitorLiveSessionId && liveSession !== _monitorLiveSessionId
+  );
+  if (sessions.length) {
+    syncMonitorSessionSelect(
+      sessions,
+      newLiveSession ? liveAttempt : (incomingAttempt || _monitorAttemptId || liveAttempt),
+    );
+  }
+
+  if (newLiveSession) {
+    _monitorViewingHistory = false;
+  } else if (!fromSelect && _monitorViewingHistory && !incomingHistory) {
+    if (!liveSession || liveSession === _monitorLiveSessionId) {
+      if (liveAttempt) _monitorLiveAttemptId = liveAttempt;
+      if (liveSession) _monitorLiveSessionId = liveSession;
+      syncMonitorSessionSelect(sessions, _monitorAttemptId);
+      return;
+    }
+  }
+  if (liveAttempt) _monitorLiveAttemptId = liveAttempt;
+  if (liveSession) _monitorLiveSessionId = liveSession;
+
+  const userPrompt = String((m && (m.user_prompt || m.prompt)) || "");
+  const session = (m && m.session_id) || "";
+  const startedAt = (m && m.started_at) || "";
+  const attempt = incomingAttempt || (session && startedAt ? `${session}-${startedAt}` : session);
+  const flattenLive = !_monitorViewingHistory && !incomingHistory && !!session;
+  const cards = collectSameSessionCards({
+    ...(m || {}),
+    sessions,
+    viewing_history: incomingHistory || _monitorViewingHistory,
+  });
+  const viewKey = flattenLive ? `${session}#all` : attempt;
+  const sameAttempt = viewKey && viewKey === _monitorViewKey;
+  if (!session && !attempt && _monitorSession) return;
+  if (sameAttempt && !cards.length && _monitorCardCount) return;
+  _monitorViewingHistory = incomingHistory || (_monitorViewingHistory && fromSelect);
+  promptEl.textContent = userPrompt.trim() ? userPrompt : "(no prompt yet)";
+  if (metaEl) {
+    const used = _monitorViewingHistory
+      ? formatSessionTicks(
+        cards.length ? cards[cards.length - 1].session_ticks : null,
+        _monitorMaxTicks,
+      )
+      : usedTicksLabel();
+    metaEl.textContent = attempt
+      ? `${_monitorViewingHistory ? "history" : "live"}  ${cards.length} cards${used ? `  ${used}` : ""}`
+      : "waiting for an embodied agent";
+  }
+  syncMonitorSessionSelect(sessions, incomingAttempt || liveAttempt);
+  if (!sameAttempt && cards.length) {
+    grid.innerHTML = "";
+    _monitorCardCount = 0;
+    _monitorSession = session;
+    _monitorStartedAt = startedAt;
+    _monitorAttemptId = attempt;
+    _monitorViewKey = viewKey;
+  } else if (!sameAttempt) {
+    _monitorCardCount = 0;
+    _monitorSession = session || _monitorSession;
+    _monitorStartedAt = startedAt || _monitorStartedAt;
+    _monitorAttemptId = attempt || _monitorAttemptId;
+    _monitorViewKey = viewKey;
+  }
+  if (!cards.length) {
+    if (!_monitorCardCount) {
+      grid.innerHTML = `<div class="monitor-cards-empty">waiting for embodied agent keyframes...</div>`;
+    }
+    persistMonitorSnapshot({
+      session_id: session,
+      started_at: startedAt,
+      attempt_id: attempt,
+      live_attempt_id: liveAttempt,
+      live_session_id: liveSession,
+      max_ticks: _monitorMaxTicks,
+      user_prompt: userPrompt,
+      loaded_skills: (m && m.loaded_skills) || [],
+    });
+    return;
+  }
+  const empty = grid.querySelector(".monitor-cards-empty");
+  if (empty) empty.remove();
+  const imageKey = attempt || session;
+  const nearBottom = grid.scrollHeight - grid.scrollTop - grid.clientHeight < 48;
+  if (cards.length < _monitorCardCount) {
+    grid.innerHTML = "";
+    _monitorCardCount = 0;
+  }
+  for (let i = _monitorCardCount; i < cards.length; i++) {
+    grid.appendChild(renderMonitorCard(cards[i], imageKey, userPrompt, _monitorMaxTicks));
+  }
+  grid.querySelectorAll(".monitor-card").forEach((el) => {
+    const skill = el.querySelector(".monitor-card-skill");
+    const card = cards.find((item) => String(item._cardKey || item.card_id) === el.dataset.cardId);
+    const skillName = el.querySelector(".monitor-card-skill-name");
+    if (skillName) skillName.textContent = formatLoadedSkills(card, userPrompt);
+    else if (skill) skill.textContent = formatLoadedSkills(card, userPrompt);
+    const ticks = formatSessionTicks(card && card.session_ticks, _monitorMaxTicks);
+    let tickEl = el.querySelector(".monitor-card-session-ticks");
+    if (ticks) {
+      if (!tickEl && skill) {
+        tickEl = document.createElement("div");
+        tickEl.className = "monitor-card-session-ticks";
+        skill.appendChild(tickEl);
+      }
+      if (tickEl) {
+        tickEl.textContent = ticks;
+        tickEl.title = "本 instance 已用 ticks / Challenge 2026 上限（第一次 tool call 起算；场景重置后从 0 再计）";
+      }
+    } else if (tickEl) {
+      tickEl.textContent = "";
+    }
+    if (!card) return;
+    const key = String(el.dataset.cardId || "");
+    if (key && _cardFirstSeen[key] == null) _cardFirstSeen[key] = Date.now();
+    // 只在模型回写了新图时换地址。以前 12 秒内每 1.5s 改 ?v= 会掐掉正在下的缩略图。
+    const version = card.model_image_v || "";
+    el.querySelectorAll("img[data-kind]").forEach((img) => {
+      if (String(img.dataset.v || "") === String(version || "")) return;
+      img.dataset.v = version;
+      bindMonitorThumb(img, monitorImageUrl(
+        card._imageSession || imageKey,
+        card.card_id,
+        img.dataset.kind,
+        version,
+      ));
+    });
+  });
+  if (nearBottom && cards.length !== _monitorCardCount) {
+    grid.scrollTop = grid.scrollHeight;
+  }
+  _monitorCardCount = cards.length;
+  persistMonitorSnapshot({
+    session_id: session,
+    started_at: startedAt,
+    attempt_id: attempt,
+    live_attempt_id: liveAttempt,
+    live_session_id: liveSession,
+    max_ticks: _monitorMaxTicks,
+    user_prompt: userPrompt,
+    loaded_skills: (m && m.loaded_skills) || [],
+  });
+  syncMonitorToHeadCam();
+}
+
+function onMonitorSessionSelectChange(event) {
+  const attempt = String((event && event.target && event.target.value) || "");
+  const found = _monitorSessions.find((item) => item.attempt_id === attempt);
+  if (!found) return;
+  _monitorViewingHistory = !found.live;
+  applyAgentMonitor({
+    session_id: found.session_id,
+    started_at: found.started_at,
+    attempt_id: found.attempt_id,
+    live_attempt_id: _monitorLiveAttemptId,
+    live_session_id: _monitorLiveSessionId,
+    viewing_history: !found.live,
+    user_prompt: found.user_prompt,
+    loaded_skills: found.loaded_skills,
+    cards: found.cards || [],
+    sessions: _monitorSessions,
+  }, {fromSelect: true});
+}
+
+function renderGoalChips(goals) {
+  const summaryEl = document.getElementById("goal-summary");
+  const strip = document.getElementById("goal-strip");
+  if (!summaryEl || !strip) return;
+  const items = (goals && goals.items) || [];
+  const total = Number((goals && goals.total) || items.length || 0);
+  const sat = Number((goals && goals.satisfied) || items.filter(g => g.satisfied).length || 0);
+  const complete = total > 0 && sat === total;
+  summaryEl.textContent = total ? `Goals ${sat}/${total}${complete ? " COMPLETE" : ""}` : "Goals --/--";
+  summaryEl.style.color = complete ? "#3fb950" : "var(--muted)";
+
+  const key = JSON.stringify(items.map(g => [g.index, g.label, g.full, !!g.satisfied]));
+  if (key === _goalRenderKey) return;
+  _goalRenderKey = key;
+
+  if (!items.length) {
+    strip.innerHTML = `<span class="goal-chip empty">${escapeHtml((goals && goals.error) || "no goal conditions")}</span>`;
+    return;
+  }
+  strip.innerHTML = items.map((g, i) => {
+    const ok = !!g.satisfied;
+    const label = escapeHtml(g.label || g.full || `goal ${i + 1}`);
+    const full = escapeHtml(g.full || g.label || `goal ${i + 1}`);
+    return `<span class="goal-chip ${ok ? "good" : "bad"}" title="${full}">
+      <span class="goal-dot"></span>
+      <span class="goal-index">${i + 1}</span>
+      <span class="goal-text">${label}</span>
+    </span>`;
+  }).join("");
+}
+
+function applyStateFromServer(s) {
+  if (!s) return;
+  if (s.feeds) applyServerFeeds(s.feeds);
+  syncTaskPicker(s.task, s);
+  if (s.task) _monitorTaskKey = String(s.task);
+  const stateMax = _monitorEvaluatorMaxTicks || resolveChallengeMaxTicks(
+    s.task_id,
+    s.task,
+    (typeof location !== "undefined" && location.port) || "",
+  );
+  if (stateMax) _monitorMaxTicks = stateMax;
+  _headerState = s;
+  renderHeaderMeta();
+  renderGoalChips(s.goals);
+  const goalItems = (s.goals && s.goals.items) || [];
+  HumanRecording.goalsComplete =
+    goalItems.length > 0 && goalItems.every(item => !!item.satisfied);
+  const stateBox = {
+    robot: s.robot,
+    scene: s.scene,
+    base_pose: s.base_pose,
+    active_skill: s.active_skill,
+  };
+  document.getElementById("state").textContent = JSON.stringify(stateBox, null, 2);
+  const mem = s.memory || {};
+  if (Object.keys(mem).length > 0) {
+    document.getElementById("memory-summary").textContent =
+      `visible=${mem.visible||0}/${mem.objects||0}  hidden=${mem.hidden||0}  depth=${mem.depth_source||"?"}`;
+  }
+  const ak = s.active_skill;
+  const actEl = document.getElementById("active");
+  if (V2.inFlight) {
+    actEl.textContent = `v2 同步等待: ${V2.inFlight}（HTTP 阻塞，下方「执行中」）`;
+  } else if (ak) {
+    const st = ak.state || "running";
+    actEl.textContent = `${st}: ${ak.name}  ${ak.status || ""}  ${ak.request_id || ""}`;
+  } else {
+    actEl.textContent = "no active skill";
+  }
+  if (s.camera && s.camera.params) renderCamVals(s.camera.params);
+}
+
+function _taskOptionExists(sel, taskName) {
+  return !!sel && Array.from(sel.options).some(o => o.value === taskName);
+}
+
+function syncTaskPicker(taskName, state) {
+  if (!taskName) return;
+  TaskPicker.current = taskName;
+  const sel = document.getElementById("task-select");
+  if (!sel || !TaskPicker.tasks.length) return;
+
+  if (TaskPicker.switchTarget) {
+    if (taskName === TaskPicker.switchTarget) {
+      TaskPicker.switchTarget = "";
+      TaskPicker.userChoice = "";
+    } else if (state && !state.task_switch_pending && state.task_switch_error) {
+      TaskPicker.switchTarget = "";
+    } else if (_taskOptionExists(sel, TaskPicker.switchTarget)) {
+      if (sel.value !== TaskPicker.switchTarget) sel.value = TaskPicker.switchTarget;
+      return;
+    }
+  }
+
+  if (TaskPicker.userChoice && TaskPicker.userChoice !== taskName) {
+    if (_taskOptionExists(sel, TaskPicker.userChoice)) {
+      if (sel.value !== TaskPicker.userChoice) sel.value = TaskPicker.userChoice;
+      return;
+    }
+    TaskPicker.userChoice = "";
+  }
+
+  if (sel.value !== taskName && _taskOptionExists(sel, taskName)) {
+    sel.value = taskName;
+  }
+}
+
+async function loadTaskPicker() {
+  const sel = document.getElementById("task-select");
+  if (!sel) return;
+  try {
+    const r = await fetch("/api/tasks");
+    const j = await r.json();
+    if (!j.ok) throw new Error(j.error || "load tasks failed");
+    TaskPicker.tasks = j.tasks || [];
+    TaskPicker.current = j.current || "";
+    sel.innerHTML = TaskPicker.tasks.map(t => {
+      const name = String(t.name || "");
+      const id = String(t.id ?? "");
+      const scene = String(t.scene || "");
+      const selected = name === TaskPicker.current ? " selected" : "";
+      return (
+        `<option value="${escapeHtml(name)}" data-scene="${escapeHtml(scene)}"${selected}>` +
+        `${id.padStart(2, "0")} · ${escapeHtml(name)}` +
+        `</option>`
+      );
+    }).join("");
+    syncTaskPicker(TaskPicker.current);
+  } catch (e) {
+    sel.innerHTML = `<option value="">tasks unavailable</option>`;
+    console.warn("loadTaskPicker failed", e);
+  }
+}
+
+function onTaskSelectChange() {
+  const sel = document.getElementById("task-select");
+  const result = document.getElementById("v2-result");
+  if (!sel || !result) return;
+  const picked = sel.value;
+  if (!picked) return;
+  const pickedScene = sel.selectedOptions && sel.selectedOptions[0]
+    ? String(sel.selectedOptions[0].dataset.scene || "")
+    : "";
+  if (picked === TaskPicker.current) {
+    TaskPicker.userChoice = "";
+    TaskPicker.switchTarget = "";
+    return;
+  }
+  TaskPicker.userChoice = picked;
+  result.textContent =
+    `已选择 task: ${picked} (${pickedScene || "scene?"})\n当前运行中的 task 仍是 ${TaskPicker.current || "?"}；点击 Switch 后会重启环境、Goals 和 Memory。`;
+}
+
+async function switchTask() {
+  const sel = document.getElementById("task-select");
+  const result = document.getElementById("v2-result");
+  if (!sel || !result) return;
+  const picked = sel.value;
+  if (!picked) return;
+  const pickedScene = sel.selectedOptions && sel.selectedOptions[0]
+    ? String(sel.selectedOptions[0].dataset.scene || "")
+    : "";
+  if (picked === TaskPicker.current) {
+    TaskPicker.userChoice = "";
+    TaskPicker.switchTarget = "";
+    result.textContent = `当前已经是 task: ${picked}`;
+    return;
+  }
+  TaskPicker.userChoice = picked;
+  TaskPicker.switchTarget = picked;
+  result.textContent = `正在请求切换 task: ${TaskPicker.current || "?"} -> ${picked} (${pickedScene || "scene?"})\n环境重启期间请不要运行工具。`;
+  try {
+    const r = await fetch("/api/task/switch", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({task: picked, scene: pickedScene}),
+    });
+    const j = await r.json();
+    if (!r.ok || !j.ok) throw new Error(j.error || `HTTP ${r.status}`);
+    if (j.already_current) {
+      TaskPicker.userChoice = "";
+      TaskPicker.switchTarget = "";
+      result.textContent = `当前已经是 task: ${picked}`;
+    } else {
+      result.textContent =
+        `task switch 已入队: ${TaskPicker.current || "?"} -> ${picked}\n` +
+        `等待顶部 task、Goals 和 Memory 刷新完成。`;
+    }
+  } catch (e) {
+    TaskPicker.switchTarget = "";
+    result.textContent = `task switch 请求失败: ${e}`;
+  }
+}
+
+function applyMemoryPayload(j) {
+  const full = (j && j.text) || "(empty)";
+  document.getElementById("memory").textContent = full;
+  const memSum = (j && j.summary) || {};
+  if (Object.keys(memSum).length > 0) {
+    document.getElementById("memory-summary").textContent =
+      `visible=${memSum.visible||0}/${memSum.objects||0}  hidden=${memSum.hidden||0}  depth=${memSum.depth_source||"?"}`;
+  }
+}
+
+async function refreshSubCamOnce() {
+  const feed = SUB_FEEDS[_subCamIdx % SUB_FEEDS.length];
+  _subCamIdx += 1;
+  // 关闭的视图不轮询，省浏览器请求 + 服务端编码
+  if (!Feeds[feed]) return;
+  const st = SubCam[feed];
+  if (!st || st.busy || st.fail >= 3) return;
+  const img = document.querySelector(`img[data-feed="${feed}"]`);
+  if (!img) return;
+  st.busy = true;
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 3000);
+  try {
+    const r = await fetch(`/api/frame/${feed}.jpg?_=${Date.now()}`, {
+      cache: "no-store",
+      signal: ctrl.signal,
+    });
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const fid = r.headers.get("X-Frame-Id") || "";
+    const blob = await r.blob();
+    const url = URL.createObjectURL(blob);
+    if (fid !== st.lastFrameId || !st.lastUrl) {
+      const oldUrl = st.lastUrl;
+      img.src = url;
+      if (feed === "head") {
+        const wrap = document.getElementById("main-cam-wrap");
+        if (wrap) wrap.classList.remove("waiting");
+      }
+      st.lastUrl = url;
+      st.lastFrameId = fid;
+      if (oldUrl) setTimeout(() => URL.revokeObjectURL(oldUrl), 1000);
+    } else {
+      URL.revokeObjectURL(url);
+    }
+    st.fail = 0;
+  } catch (e) {
+    st.fail += 1;
+    setTimeout(() => { st.fail = 0; }, 2000);
+  } finally {
+    clearTimeout(timer);
+    st.busy = false;
+  }
+}
+
+// 实时小地图：只在版本号变化时换图，地图只在底盘动作后才更新
+const Minimap = { busy: false, version: "", url: "", fail: 0, disabled: false };
+// 15062 这局关掉网页小地图槽，不再轮询 /api/spatial_map.png。
+if (location.port === "15062") {
+  Minimap.disabled = true;
+  const wrap = document.getElementById("minimap-wrap");
+  if (wrap) {
+    wrap.classList.add("cam-off");
+    wrap.style.display = "none";
+  }
+}
+
+async function refreshMinimapOnce() {
+  if (Minimap.busy || Minimap.disabled) return;
+  const img = document.getElementById("minimap-img");
+  const wrap = document.getElementById("minimap-wrap");
+  if (!img || !wrap) return;
+  Minimap.busy = true;
+  try {
+    const r = await fetch(
+      `/api/spatial_map.png?session_id=${encodeURIComponent(V2.session)}&_=${Date.now()}`,
+      { cache: "no-store", signal: AbortSignal.timeout(6000) },
+    );
+    if (r.status === 404) {   // 后端没开地图，别再轮询
+      Minimap.disabled = true;
+      wrap.classList.add("cam-off");
+      return;
+    }
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const version = r.headers.get("X-Map-Version") || "";
+    const blob = await r.blob();
+    if (version && version === Minimap.version && Minimap.url) {
+      return;   // 地图没变，丢弃这一帧
+    }
+    const url = URL.createObjectURL(blob);
+    const oldUrl = Minimap.url;
+    img.src = url;
+    Minimap.url = url;
+    Minimap.version = version;
+    wrap.classList.remove("cam-off");
+    if (oldUrl) setTimeout(() => URL.revokeObjectURL(oldUrl), 1000);
+    Minimap.fail = 0;
+  } catch (e) {
+    Minimap.fail += 1;
+  } finally {
+    Minimap.busy = false;
+  }
+}
+
+async function refreshMonitorBudget() {
+  // A tiny read-only endpoint; one request per five seconds per page.
+  if (Date.now() - _monitorBudgetRefreshAt < 5000) return;
+  _monitorBudgetRefreshAt = Date.now();
+  try {
+    const response = await fetch("/api/rollout_budget", {
+      cache: "no-store",
+      signal: AbortSignal.timeout(2000),
+    });
+    if (!response.ok) throw new Error("HTTP " + response.status);
+    const budget = await response.json();
+    const total = Number(budget && budget.total_ticks);
+    _monitorEvaluatorMaxTicks = budget && budget.available === true
+      && Number.isInteger(total) && total > 0 ? total : null;
+  } catch (_) {
+    _monitorEvaluatorMaxTicks = null;
+  }
+}
+
+async function refreshAgentMonitor() {
+  await refreshMonitorBudget();
+  const r = await fetch(`/api/agent_monitor?_=${Date.now()}`, {
+    cache: "no-store",
+    signal: AbortSignal.timeout(8000),
+  });
+  applyAgentMonitor(await r.json());
+}
+
+async function refreshUiPoll() {
+  if (_uiPollBusy) return;
+  _uiPollBusy = true;
+  try {
+    await refreshMonitorBudget();
+    const r = await fetch(`/api/ui_poll?_=${Date.now()}`, {
+      cache: "no-store",
+      signal: AbortSignal.timeout(8000),
+    });
+    const j = await r.json();
+    const tv = j.tool_version || "";
+    if (tv && V2.toolVersion && tv !== V2.toolVersion) {
+      await loadV2Tools();
+    } else if (tv && !V2.toolVersion) {
+      V2.toolVersion = tv;
+    }
+    ensureEvalControl(j.eval_control);
+    try { applyStateFromServer(j.state); } catch (_) {}
+    document.getElementById("log").textContent = (j.log || []).join("\n");
+    if (j.memory) applyMemoryPayload(j.memory);
+    if (j.human_recording) applyHumanRecordingStatus(j.human_recording);
+    if (j.agent_monitor) applyAgentMonitor(j.agent_monitor);
+    else await refreshAgentMonitor().catch(() => null);
+  } catch (e) {
+    document.getElementById("meta").textContent = "disconnected: " + e;
+    await refreshAgentMonitor().catch(() => null);
+  } finally {
+    _uiPollBusy = false;
+  }
+}
+
+// 第三人称相机控制条已移除；元素可能不存在
+function renderCamVals(p) {
+  const el = document.getElementById("camvals");
+  if (!el || !p) return;
+  el.textContent =
+    `dist=${p.distance.toFixed(2)}m  h=${p.height.toFixed(2)}m  ` +
+    `tilt(look_z)=${p.look_z_offset.toFixed(2)}m  yaw_off=${p.yaw_offset_deg.toFixed(1)}°`;
+}
+
+async function adjCam(deltas) {
+  const r = await fetch("/api/camera", {
+    method: "POST", headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({deltas}),
+    cache: "no-store",
+  });
+  const j = await r.json();
+  if (j.params) renderCamVals(j.params);
+}
+async function resetCam() {
+  const r = await fetch("/api/camera", {
+    method: "POST", headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({reset: true}),
+    cache: "no-store",
+  });
+  const j = await r.json();
+  if (j.params) renderCamVals(j.params);
+}
+
+async function cancelSkill() {
+  await fetch("/api/skill/cancel", {method: "POST"});
+}
+
+let EvalControl = { instance_ids: [], current_instance_id: null, official: false };
+
+function officialPortFallbackControl() {
+  // 官方口旧进程没有 /api/eval_instances。先用本轮预热的 5 个 public instance，
+  // 避免下拉空白；新 interface 起来后会被 /api/eval_instances 覆盖。
+  const port = Number(window.location.port);
+  if (!(port >= 15060 && port <= 15069)) return null;
+  return {
+    official: true,
+    instance_ids: [301, 304, 306, 308, 310],
+    slots: [0, 3, 5, 7, 9],
+    current_instance_id: 301,
+    agent_session: {running: false},
+  };
+}
+
+function ensureEvalControl(c) {
+  if (c && Array.isArray(c.instance_ids) && c.instance_ids.length) {
+    applyEvalControl(c);
+    return;
+  }
+  if (EvalControl.instance_ids && EvalControl.instance_ids.length) return;
+  const fallback = officialPortFallbackControl();
+  if (fallback) applyEvalControl(fallback);
+}
+
+function applyEvalControl(c) {
+  if (!c) return;
+  EvalControl = c;
+  const sel = document.getElementById("instance-select");
+  if (sel) {
+    const ids = Array.isArray(c.instance_ids) ? c.instance_ids : [];
+    const current = c.current_instance_id;
+    const keepUser = document.activeElement === sel ? sel.value : "";
+    const want = keepUser || (current != null ? String(current) : "");
+    sel.innerHTML = "";
+    if (!ids.length) {
+      const opt = document.createElement("option");
+      opt.value = current != null ? String(current) : "";
+      opt.textContent = current != null ? String(current) : "instance…";
+      sel.appendChild(opt);
+    } else {
+      ids.forEach((id, idx) => {
+        const opt = document.createElement("option");
+        opt.value = String(id);
+        const slot = Array.isArray(c.slots) ? c.slots[idx] : null;
+        opt.textContent = slot == null ? String(id) : `${id} · slot ${slot}`;
+        sel.appendChild(opt);
+      });
+      if (want && ids.map(String).includes(want)) sel.value = want;
+      else if (current != null) sel.value = String(current);
+    }
+  }
+  const stopBtn = document.getElementById("stop-agent-btn");
+  if (stopBtn) {
+    const agent = c.agent_session || {};
+    const running = !!agent.running;
+    stopBtn.disabled = false;
+    stopBtn.title = running
+      ? `停止 ${agent.session_id || "agent session"}（不拆仿真）`
+      : "停止本口 Claude/agent（没有活 session 也允许点，避免按钮被灰掉）";
+  }
+}
+
+function selectedInstanceId() {
+  const sel = document.getElementById("instance-select");
+  const raw = sel && sel.value;
+  if (raw === "" || raw == null) return null;
+  const n = Number(raw);
+  return Number.isInteger(n) ? n : null;
+}
+
+async function readJsonResponse(r, label) {
+  const text = await r.text();
+  const trimmed = (text || "").trim();
+  if (!trimmed) throw new Error(`${label} 空响应 HTTP ${r.status}`);
+  if (trimmed[0] === "<") {
+    throw new Error(`${label} 这是旧官方进程（HTTP ${r.status} 回了网页）。需要重启本口 interface / evaluator。`);
+  }
+  try {
+    return JSON.parse(trimmed);
+  } catch (e) {
+    throw new Error(`${label} 非 JSON HTTP ${r.status}: ${trimmed.slice(0, 80)}`);
+  }
+}
+
+async function restartWorld() {
+  const instanceId = selectedInstanceId();
+  const instHint = instanceId == null ? "当前 instance" : `instance ${instanceId}`;
+  if (!confirm(`把仿真重置到 ${instHint} 的任务初始状态？\n（会清掉 pending skill；官方口由 evaluator 执行 reset）`)) return;
+  try {
+    const body = instanceId == null ? {} : {instance_id: instanceId};
+    const r = await fetch("/api/reset", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(body),
+    });
+    const j = await readJsonResponse(r, "RESET");
+    if (!j.ok) {
+      alert("RESET 请求失败: " + (j.error || r.status));
+      return;
+    }
+    if (j.mode === "evaluator_operator") {
+      const req = j.request_id;
+      const started = Date.now();
+      while (Date.now() - started < 180000) {
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        const stR = await fetch("/api/eval_instances", {cache: "no-store"});
+        const st = await readJsonResponse(stR, "RESET 状态");
+        applyEvalControl(st);
+        const op = st.operator_reset || {};
+        if (op.last_request_id === req && op.state === "ready") return;
+        if (op.last_request_id === req && op.state === "error") {
+          alert("RESET 失败: " + (op.error || ""));
+          return;
+        }
+      }
+      alert("RESET 已交给 evaluator，但 180s 内没完成。若这是旧进程，需要重启本口官方栈。");
+      return;
+    }
+    const before = Number(j.pending || 0);
+    const started = Date.now();
+    while (Date.now() - started < 120000) {
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      const stR = await fetch("/api/state", {cache: "no-store"});
+      const st = await readJsonResponse(stR, "RESET 状态");
+      if (!st.reset_pending && Number(st.reset_count || 0) >= before) break;
+    }
+  } catch (e) {
+    alert("RESET 请求失败: " + e);
+  }
+}
+
+async function stopAgentSession() {
+  const agent = (EvalControl && EvalControl.agent_session) || {};
+  const label = agent.session_id || "当前 agent session";
+  if (!confirm(`停止 ${label}？\n只杀 Claude/agent，不拆 interface / evaluator。`)) return;
+  try {
+    const r = await fetch("/api/agent_session/stop", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({}),
+    });
+    const j = await readJsonResponse(r, "STOP");
+    if (j.agent_session) applyEvalControl({...EvalControl, agent_session: j.agent_session});
+    if (!j.ok) {
+      alert("停止失败: " + (j.error || r.status));
+      return;
+    }
+    if (j.still_running) {
+      alert("已发停止信号，但仍有 agent 在跑。可再点一次。");
+    }
+  } catch (e) {
+    alert("停止失败: " + e);
+  }
+}
+
+// ── Agent 工具（人机一致）：下拉选工具 + 动态 args + 点图取 (u,v) ────────────
+const WEB_SESSION_STORAGE_KEY = "behavior.web.session.v1";
+
+function _newDefaultWebSession() {
+  const defaultPort = window.location.protocol === "https:" ? "443" : "80";
+  const port = String(window.location.port || defaultPort).replace(/[^A-Za-z0-9_-]/g, "_");
+  let tabId = "";
+  try {
+    if (window.crypto && typeof window.crypto.randomUUID === "function") {
+      tabId = window.crypto.randomUUID();
+    }
+  } catch (_) {}
+  if (!tabId) {
+    tabId = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
+  }
+  return `web-${port}-${tabId}`;
+}
+
+function _defaultWebSession() {
+  try {
+    const stored = sessionStorage.getItem(WEB_SESSION_STORAGE_KEY);
+    if (stored) return stored;
+    const created = _newDefaultWebSession();
+    sessionStorage.setItem(WEB_SESSION_STORAGE_KEY, created);
+    return created;
+  } catch (_) {
+    return _newDefaultWebSession();
+  }
+}
+
+// sessionStorage 属于当前 browser tab，刷新保留；端口用于隔离不同 server。
+const DEFAULT_WEB_SESSION = _defaultWebSession();
+
+const V2 = {
+  session: DEFAULT_WEB_SESSION,
+  tools: [],
+  tool: null,        // 当前选中工具 spec
+  lastImageId: "",   // 最近一次 capture 的 image_id
+  lastPlanId: "",    // 最近一次 plan_* 的 plan_id
+  imgW: 1280, imgH: 720,
+  pick: null,        // {u, v} Qwen3-VL 0..1000 相对坐标
+  inFlight: null,    // 当前 v2 HTTP 同步等待中的工具名
+  toolVersion: "",   // 后端 tool profile；变化时自动重拉工具列表
+  currentMedia: {},  // 当前操作员实际看到的图像/plan 引用
+  multiPicks: [],    // RGBD batch: [{u,v,plan_arm}]
+};
+
+const HUMAN_RECORD_STORAGE_KEY = "behavior.human_recording.v1";
+const HumanRecording = {
+  active: false,
+  serverActive: false,
+  foreignActive: false,
+  syncing: false,
+  recordId: "",
+  sessionId: "",
+  turnCount: 0,
+  failedTurnCount: 0,
+  startedAt: "",
+  runDir: "",
+  goalsComplete: false,
+  lastMessage: "",
+  serverStatus: {},
+};
+
+function _storedHumanRecordingId() {
+  try {
+    const raw = sessionStorage.getItem(HUMAN_RECORD_STORAGE_KEY);
+    const value = raw ? JSON.parse(raw) : {};
+    return String(value.recordId || "");
+  } catch (_) {
+    return "";
+  }
+}
+
+function _storeHumanRecording() {
+  try {
+    if (HumanRecording.active && HumanRecording.recordId) {
+      sessionStorage.setItem(HUMAN_RECORD_STORAGE_KEY, JSON.stringify({
+        recordId: HumanRecording.recordId,
+        sessionId: HumanRecording.sessionId,
+      }));
+    } else {
+      sessionStorage.removeItem(HUMAN_RECORD_STORAGE_KEY);
+    }
+  } catch (_) {}
+}
+
+function _setV2Session(sessionId) {
+  V2.session = sessionId || DEFAULT_WEB_SESSION;
+  const el = document.getElementById("v2-session");
+  if (el) el.textContent = V2.session;
+}
+
+function _clearV2SessionRefs() {
+  V2.lastImageId = "";
+  V2.lastPlanId = "";
+  V2.pick = null;
+  V2.multiPicks = [];
+  V2.currentMedia = {};
+  document.querySelectorAll("#v2-args .argv").forEach(inp => {
+    if (inp.dataset.widget === "image" || inp.dataset.widget === "plan") {
+      inp.value = "";
+    }
+  });
+  const cross = document.getElementById("v2-cross");
+  if (cross) cross.style.display = "none";
+  const pick = document.getElementById("v2-pick");
+  if (pick) pick.textContent = "（运行 capture 后点击图像取 (u,v)）";
+  renderV2MultiPicks();
+}
+
+function renderHumanRecording() {
+  const button = document.getElementById("record-toggle");
+  const action = document.getElementById("record-action");
+  const status = document.getElementById("record-status");
+  const note = document.getElementById("record-note");
+  if (!button || !action || !status || !note) return;
+
+  button.classList.toggle("active", HumanRecording.active);
+  action.textContent = HumanRecording.active
+    ? "STOP"
+    : (HumanRecording.foreignActive ? "RESUME" : "REC");
+  button.disabled = HumanRecording.syncing || !!V2.inFlight;
+  note.disabled = HumanRecording.serverActive || HumanRecording.syncing;
+
+  if (HumanRecording.active) {
+    const cap = HumanRecording.serverStatus.continuous_capture || {};
+    const capText = cap.error
+      ? ` · capture ERR ${cap.error}`
+      : (cap.active
+        ? ` · capture ${Number(cap.frames || 0)}f/${Number(cap.ticks || 0)}t`
+        : " · capture pending");
+    status.textContent =
+      `${HumanRecording.recordId} · turns=${HumanRecording.turnCount}` +
+      (HumanRecording.failedTurnCount ? ` · failed=${HumanRecording.failedTurnCount}` : "") +
+      capText;
+    status.title = cap.path || HumanRecording.runDir || HumanRecording.recordId;
+  } else if (HumanRecording.foreignActive) {
+    status.textContent = "recording active in another tab";
+    status.title = HumanRecording.recordId;
+  } else {
+    status.textContent = HumanRecording.lastMessage || "idle";
+    status.title = "";
+  }
+}
+
+function applyHumanRecordingStatus(recording, forceOwn = false) {
+  const r = recording || {};
+  HumanRecording.serverStatus = {...r};
+  const storedId = _storedHumanRecordingId();
+  const ownsRecord = !!r.record_id && (
+    forceOwn ||
+    r.record_id === HumanRecording.recordId ||
+    r.record_id === storedId
+  );
+  HumanRecording.serverActive = !!r.active;
+  HumanRecording.foreignActive = !!r.active && !ownsRecord;
+
+  if (r.active && ownsRecord) {
+    HumanRecording.active = true;
+    HumanRecording.recordId = String(r.record_id || "");
+    HumanRecording.sessionId = String(r.session_id || "");
+    HumanRecording.turnCount = Number(r.turn_count || 0);
+    HumanRecording.failedTurnCount = Number(r.failed_turn_count || 0);
+    HumanRecording.startedAt = String(r.started_at || "");
+    HumanRecording.runDir = String(r.run_dir || "");
+    HumanRecording.lastMessage = "";
+    _setV2Session(HumanRecording.sessionId);
+    _storeHumanRecording();
+  } else if (!r.active && HumanRecording.active) {
+    HumanRecording.active = false;
+    HumanRecording.serverActive = false;
+    HumanRecording.foreignActive = false;
+    HumanRecording.lastMessage =
+      r.stop_reason ? `stopped: ${r.stop_reason}` : "recording stopped";
+    HumanRecording.recordId = "";
+    HumanRecording.sessionId = "";
+    _setV2Session(DEFAULT_WEB_SESSION);
+    _clearV2SessionRefs();
+    _storeHumanRecording();
+  } else if (!r.active && storedId) {
+    HumanRecording.lastMessage =
+      r.stop_reason ? `stopped: ${r.stop_reason}` : "previous recording is not active";
+    try { sessionStorage.removeItem(HUMAN_RECORD_STORAGE_KEY); } catch (_) {}
+  } else if (r.active && !ownsRecord) {
+    HumanRecording.recordId = String(r.record_id || "");
+    HumanRecording.sessionId = String(r.session_id || "");
+    HumanRecording.turnCount = Number(r.turn_count || 0);
+    HumanRecording.failedTurnCount = Number(r.failed_turn_count || 0);
+    HumanRecording.startedAt = String(r.started_at || "");
+    HumanRecording.runDir = String(r.run_dir || "");
+  }
+  renderHumanRecording();
+}
+
+function _v2RequestHeaders(toolName, bootstrap = false) {
+  const headers = {"Content-Type": "application/json"};
+  if (!HumanRecording.active) return headers;
+  headers["X-Behavior-Source"] = "human-ui";
+  headers["X-Behavior-Record-Id"] = HumanRecording.recordId;
+  headers["X-Behavior-Tool-Name"] = toolName || "";
+  if (bootstrap) headers["X-Behavior-Record-Bootstrap"] = "1";
+  const media = V2.currentMedia || {};
+  const imageId = media.imageId || V2.lastImageId || "";
+  const planId = media.planId || "";
+  if (media.kind) headers["X-Behavior-Input-Media-Kind"] = String(media.kind);
+  if (imageId) headers["X-Behavior-Input-Image-Id"] = String(imageId);
+  if (planId) headers["X-Behavior-Input-Plan-Id"] = String(planId);
+  if (media.path) headers["X-Behavior-Input-Media-Path"] = String(media.path);
+  return headers;
+}
+
+function _applyV2ResponseArtifacts(j) {
+  const obs = j.observation || j;
+  if (obs.image_id) V2.lastImageId = obs.image_id;
+  if (obs.camera) {
+    V2.imgW = obs.camera.image_width || V2.imgW;
+    V2.imgH = obs.camera.image_height || V2.imgH;
+  }
+  if (obs.rgb_main) {
+    _v2SetImage(obs.rgb_main, {
+      kind: obs.feed || "observation",
+      imageId: obs.image_id || j.image_id || "",
+      path: obs.rgb_main_path || obs.rgb_path || j.rgb_main_path || j.rgb_path || "",
+    });
+  }
+  if (j.plan_id) V2.lastPlanId = j.plan_id;
+  if (j.render_image) {
+    _v2SetImage(j.render_image, {
+      kind: "plan",
+      imageId: j.image_id || obs.image_id || V2.lastImageId || "",
+      planId: j.plan_id || "",
+      path: j.render_image_path || "",
+    });
+  }
+}
+
+async function _bootstrapHumanRecording() {
+  const tool = _v2ToolByName("capture_head_camera") || _v2ToolByName("capture");
+  if (!tool) {
+    HumanRecording.lastMessage = "recording active; capture tool unavailable";
+    renderHumanRecording();
+    return;
+  }
+  const result = document.getElementById("v2-result");
+  try {
+    const response = await fetch(tool.endpoint, {
+      method: "POST",
+      headers: _v2RequestHeaders(tool.name, true),
+      body: JSON.stringify({session_id: HumanRecording.sessionId}),
+    });
+    const payload = await response.json();
+    _applyV2ResponseArtifacts(payload);
+    result.textContent = payload.ok
+      ? `REC started: ${HumanRecording.recordId}\ninitial observation: ${payload.image_id || "captured"}`
+      : `REC started, but initial capture failed:\n${formatV2Summary(tool.name, payload)}`;
+  } catch (error) {
+    result.textContent = `REC started, but initial capture request failed: ${error}`;
+  }
+}
+
+async function startHumanRecording() {
+  if (HumanRecording.syncing || HumanRecording.serverActive || V2.inFlight) return;
+  HumanRecording.syncing = true;
+  renderHumanRecording();
+  try {
+    const note = document.getElementById("record-note")?.value || "";
+    const response = await fetch("/api/human_recording/start", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({note}),
+    });
+    const payload = await response.json();
+    if (!response.ok || !payload.ok) {
+      if (payload.recording) applyHumanRecordingStatus(payload.recording);
+      throw new Error(payload.error || `HTTP ${response.status}`);
+    }
+    HumanRecording.recordId = String(payload.recording.record_id || "");
+    HumanRecording.sessionId = String(payload.recording.session_id || "");
+    applyHumanRecordingStatus(payload.recording, true);
+    const cap = payload.recording.continuous_capture || {};
+    if (cap.error) {
+      HumanRecording.lastMessage = `capture failed: ${cap.error}`;
+    }
+    _clearV2SessionRefs();
+    _setV2Session(HumanRecording.sessionId);
+    await _bootstrapHumanRecording();
+  } catch (error) {
+    HumanRecording.lastMessage = `start failed: ${error}`;
+    document.getElementById("v2-result").textContent = `REC start failed: ${error}`;
+  } finally {
+    HumanRecording.syncing = false;
+    renderHumanRecording();
+  }
+}
+
+async function stopHumanRecording() {
+  if (!HumanRecording.active || HumanRecording.syncing || V2.inFlight) return;
+  HumanRecording.syncing = true;
+  renderHumanRecording();
+  const recordId = HumanRecording.recordId;
+  try {
+    const response = await fetch("/api/human_recording/stop", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        record_id: recordId,
+        outcome: HumanRecording.goalsComplete ? "success" : "partial",
+        reason: "user_stop",
+      }),
+    });
+    const payload = await response.json();
+    if (!response.ok || !payload.ok) {
+      throw new Error(payload.error || `HTTP ${response.status}`);
+    }
+    const runDir = String(payload.recording.run_dir || "");
+    applyHumanRecordingStatus(payload.recording, true);
+    const cap = payload.recording.continuous_capture || {};
+    const offline = cap.offline || {};
+    HumanRecording.lastMessage = offline.ok
+      ? `saved: ${runDir} · capture ${cap.frames || 0}f offline-ok`
+      : `saved: ${runDir} · capture incomplete ${offline.error || cap.error || ""}`;
+    document.getElementById("v2-result").textContent =
+      `REC stopped: ${recordId}\nturns=${payload.recording.turn_count}\n` +
+      `saved=${runDir}\n` +
+      `capture=${cap.path || ""}\n` +
+      `frames=${cap.frames || 0} ticks=${cap.ticks || 0} closed=${!!cap.closed}\n` +
+      `offline=${offline.ok ? "ok" : (offline.error || "not ready")}`;
+  } catch (error) {
+    HumanRecording.lastMessage = `stop failed: ${error}`;
+  } finally {
+    HumanRecording.syncing = false;
+    renderHumanRecording();
+  }
+}
+
+function toggleHumanRecording() {
+  if (HumanRecording.active) stopHumanRecording();
+  else if (HumanRecording.foreignActive) {
+    applyHumanRecordingStatus(HumanRecording.serverStatus, true);
+  }
+  else startHumanRecording();
+}
+
+async function restoreHumanRecording() {
+  const recordId = _storedHumanRecordingId();
+  if (!recordId) {
+    renderHumanRecording();
+    return;
+  }
+  try {
+    const response = await fetch(
+      `/api/human_recording/status?record_id=${encodeURIComponent(recordId)}&_=${Date.now()}`,
+      {cache: "no-store"},
+    );
+    const payload = await response.json();
+    applyHumanRecordingStatus(payload.recording || {});
+  } catch (_) {
+    HumanRecording.lastMessage = "recording status unavailable";
+    renderHumanRecording();
+  }
+}
+
+// interface 重启后工具清单可能变了；页面不重载就会一直用旧的下拉，
+// 新加的工具永远找不到。轮询里比对一下清单，变了才重建 select。
+async function refreshV2ToolsIfChanged() {
+  try {
+    const r = await fetch("/api/v2/tools?_=" + Date.now());
+    const j = await r.json();
+    const names = (j.tools || []).map(t => t.name).join(",");
+    if (names && names !== (V2.tools || []).map(t => t.name).join(",")) {
+      await loadV2Tools();
+    }
+  } catch (e) { /* 接口没起来就下一轮再说 */ }
+}
+
+async function loadV2Tools() {
+  const prevName = document.getElementById("v2-tool")?.value || "";
+  try {
+    const r = await fetch("/api/v2/tools?_=" + Date.now());
+    const j = await r.json();
+    V2.toolVersion = j.tool_version || "";
+    V2.tools = j.tools || [];
+    const mto = V2.tools.find(t => t.name === "move_to_object");
+    if (mto && mto.args && mto.args.length === 1 && mto.args[0].name === "object_name" && mto.args[0].required) {
+      console.warn("[v2] move_to_object 元数据过旧，请 POST /api/skills/reload 或重启 interface");
+    }
+  } catch (e) { V2.tools = []; }
+  const sel = document.getElementById("v2-tool");
+  sel.innerHTML = V2.tools.map(t => `<option value="${t.name}">${t.name}</option>`).join("");
+  if (V2.tools.length) {
+    sel.value = V2.tools.some(t => t.name === prevName) ? prevName : V2.tools[0].name;
+    onV2ToolChange();
+  }
+}
+
+function _v2ToolByName(name) { return V2.tools.find(t => t.name === name) || null; }
+
+function onV2ToolChange() {
+  const name = document.getElementById("v2-tool").value;
+  V2.tool = _v2ToolByName(name);
+  const descEl = document.getElementById("v2-tool-desc");
+  let desc = V2.tool ? V2.tool.desc : "";
+  if (V2.tool && V2.tool.one_of) {
+    desc += "\n参数二选一：" + V2.tool.one_of.map(g => g.label).join(" / ");
+  }
+  descEl.textContent = desc;
+  renderV2Args();
+}
+
+function renderV2Args() {
+  const box = document.getElementById("v2-args");
+  if (!V2.tool || !V2.tool.args.length) {
+    box.innerHTML = "<span style='font-size:11px;color:var(--muted)'>（无参数）</span>";
+    return;
+  }
+  const oneOf = !!(V2.tool && V2.tool.one_of && V2.tool.one_of.length);
+  box.innerHTML = V2.tool.args.map(a => {
+    const req = (!oneOf && a.required) ? "*" : "";
+    const tag = oneOf ? " (二选一)" : "";
+    const w = a.widget || "number";
+    let field;
+    if (w === "select" || w === "segmented") {
+      const def = (a.default !== undefined && a.default !== null) ? String(a.default) : "";
+      field = `<select class="argv" data-arg="${a.name}" data-widget="select">` +
+        (a.options || []).map(o => {
+          const sel = (String(o) === def) ? " selected" : "";
+          const label = (o === "" ? "(自动)" : o);
+          return `<option value="${o}"${sel}>${label}</option>`;
+        }).join("") + `</select>`;
+    } else if (w === "uv") {
+      const val = (a.name === "u" && V2.pick) ? V2.pick.u : (a.name === "v" && V2.pick) ? V2.pick.v : "";
+      field = `<input class="argv" type="number" min="0" max="1000" step="1"
+                 data-arg="${a.name}" data-widget="uv" style="width:70px"
+                 placeholder="点图选" value="${val}" />`;
+    } else if (w === "image") {
+      field = `<input class="argv" data-arg="${a.name}" data-widget="image" style="width:110px"
+                 placeholder="img_xxxx" value="${V2.lastImageId}" />`;
+    } else if (w === "plan") {
+      field = `<input class="argv" data-arg="${a.name}" data-widget="plan" style="width:110px"
+                 placeholder="plan_xxxx" value="${V2.lastPlanId}" />`;
+    } else if (w === "text") {
+      field = `<input class="argv" data-arg="${a.name}" data-widget="text" style="width:160px" placeholder="${a.name}" />`;
+    } else if (w === "multi_uv_arm") {
+      const armOptions = Array.isArray(a.arm_options) && a.arm_options.length
+        ? a.arm_options
+        : ["any", "left", "right"];
+      const armPicker = armOptions.length > 1
+        ? `<label style="font-size:10px;color:var(--muted)">新点 plan_arm</label>
+          <select id="v2-multi-default-arm">
+            ${armOptions.map(o => `<option value="${o}">${o}</option>`).join("")}
+          </select>`
+        : "";
+      field = `<div data-arg="${a.name}" data-widget="multi_uv_arm" style="width:min(430px,90vw);max-width:100%">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">
+          ${armPicker}
+          <button type="button" onclick="clearV2MultiPicks()" title="清空所有选点">清空</button>
+          <span id="v2-multi-count" style="font-size:11px;color:var(--muted)"></span>
+        </div>
+        <div id="v2-multi-list" style="display:flex;flex-direction:column;gap:4px"></div>
+      </div>`;
+    } else {
+      const ph = (a.default !== undefined && a.default !== null) ? String(a.default) : a.name;
+      field = `<input class="argv" data-arg="${a.name}" data-widget="number" style="width:80px" placeholder="${ph}" />`;
+    }
+    const unit = a.unit ? ` [${a.unit}]` : "";
+    return `<div class="arg-cell" style="display:flex;flex-direction:column;align-items:flex-start">
+      <label style="font-size:10px;color:var(--muted)">${a.name}${unit}${req}${tag}</label>${field}</div>`;
+  }).join("");
+  renderV2MultiPicks();
+}
+
+const V2_MULTI_COLORS = [
+  "#e63030", "#23aaeb", "#f5b423", "#be4bdc",
+  "#2dbe69", "#f57323", "#4169e1", "#e15091",
+  "#00bebe", "#a0782d", "#734bdc", "#50a550",
+  "#eb5a41", "#2d7dbe", "#cd9114", "#7d7d7d",
+];
+
+function _v2IsRgbdBatchTool() {
+  return !!(V2.tool
+    && (V2.tool.args || []).some(a => a.widget === "multi_uv_arm"));
+}
+
+function _v2MultiPointSpec() {
+  return (V2.tool && (V2.tool.args || []).find(a => a.widget === "multi_uv_arm")) || {};
+}
+
+function _v2MultiArmOptions() {
+  const options = _v2MultiPointSpec().arm_options;
+  return Array.isArray(options) && options.length
+    ? options
+    : ["any", "left", "right"];
+}
+
+function setV2MultiPickArm(index, value) {
+  const point = V2.multiPicks[index];
+  if (!point) return;
+  const options = _v2MultiArmOptions();
+  point.plan_arm = options.includes(value) ? value : (options[0] || "any");
+  renderV2MultiPicks();
+}
+
+function removeV2MultiPick(index) {
+  V2.multiPicks.splice(index, 1);
+  renderV2MultiPicks();
+}
+
+function clearV2MultiPicks() {
+  V2.multiPicks = [];
+  renderV2MultiPicks();
+}
+
+function renderV2MultiPicks() {
+  const list = document.getElementById("v2-multi-list");
+  const count = document.getElementById("v2-multi-count");
+  const markerBox = document.getElementById("v2-multi-markers");
+  const armOptions = _v2MultiArmOptions();
+  const canChooseArm = armOptions.length > 1;
+  if (count) count.textContent = `${V2.multiPicks.length} 个点`;
+  if (list) {
+    list.innerHTML = V2.multiPicks.length
+      ? V2.multiPicks.map((point, index) => {
+          const color = V2_MULTI_COLORS[index % V2_MULTI_COLORS.length];
+          const armField = canChooseArm
+            ? `<select onchange="setV2MultiPickArm(${index}, this.value)">
+                ${armOptions.map(arm =>
+                  `<option value="${arm}"${point.plan_arm === arm ? " selected" : ""}>${arm}</option>`
+                ).join("")}
+              </select>`
+            : "";
+          const columns = canChooseArm
+            ? "28px minmax(110px,1fr) 86px 32px"
+            : "28px minmax(110px,1fr) 32px";
+          return `<div style="display:grid;grid-template-columns:${columns};align-items:center;gap:5px">
+            <span style="font-weight:700;color:${color}">#${index + 1}</span>
+            <span style="font-family:monospace">(${point.u}, ${point.v})</span>
+            ${armField}
+            <button type="button" onclick="removeV2MultiPick(${index})" title="删除这个点">×</button>
+          </div>`;
+        }).join("")
+      : `<span style="font-size:11px;color:var(--muted)">点击下方图像添加选点</span>`;
+  }
+  if (markerBox) {
+    const show = _v2IsRgbdBatchTool() && V2.currentMedia.kind !== "plan";
+    markerBox.innerHTML = show
+      ? V2.multiPicks.map((point, index) => {
+          const color = V2_MULTI_COLORS[index % V2_MULTI_COLORS.length];
+          return `<div style="position:absolute;left:${point.u / 10}%;top:${point.v / 10}%;
+                    width:22px;height:22px;border:2px solid ${color};border-radius:50%;
+                    transform:translate(-50%,-50%);color:#fff;background:#0009;
+                    display:flex;align-items:center;justify-content:center;
+                    font-size:11px;font-weight:700">${index + 1}</div>`;
+        }).join("")
+      : "";
+  }
+  const pickText = document.getElementById("v2-pick");
+  if (pickText && _v2IsRgbdBatchTool()) {
+    pickText.textContent = V2.multiPicks.length
+      ? (
+          canChooseArm
+            ? `已选 ${V2.multiPicks.length} 点；每点可单独修改 plan_arm`
+            : `已选 ${V2.multiPicks.length} 点`
+        )
+      : "点击图像连续添加选点";
+  }
+}
+
+function initV2ImageClick() {
+  const wrap = document.getElementById("v2-img-wrap");
+  wrap.onclick = (ev) => {
+    const img = document.getElementById("v2-img");
+    if (!img.src) return;
+    const rect = img.getBoundingClientRect();
+    const x = ev.clientX - rect.left, y = ev.clientY - rect.top;
+    if (x < 0 || y < 0 || x > rect.width || y > rect.height) return;
+    const picked = {
+      u: Math.round(x / rect.width * 1000),
+      v: Math.round(y / rect.height * 1000),
+    };
+    if (_v2IsRgbdBatchTool()) {
+      const spec = _v2MultiPointSpec();
+      const maximum = Number(spec.max_points || 16);
+      if (V2.multiPicks.length >= maximum) {
+        document.getElementById("v2-pick").textContent = `最多选择 ${maximum} 个点`;
+        return;
+      }
+      const armOptions = _v2MultiArmOptions();
+      const arm = document.getElementById("v2-multi-default-arm")?.value
+        || armOptions[0]
+        || "any";
+      const duplicate = V2.multiPicks.some(
+        point => point.u === picked.u && point.v === picked.v && point.plan_arm === arm
+      );
+      if (!duplicate) {
+        V2.multiPicks.push({...picked, plan_arm: arm});
+      }
+      document.getElementById("v2-cross").style.display = "none";
+      renderV2MultiPicks();
+      return;
+    }
+    V2.pick = picked;
+    const cross = document.getElementById("v2-cross");
+    cross.style.display = "block";
+    cross.style.left = (x / rect.width * 100) + "%";
+    cross.style.top = (y / rect.height * 100) + "%";
+    document.getElementById("v2-pick").textContent =
+      `已选 (u,v)=(${V2.pick.u}, ${V2.pick.v})  [Qwen3-VL 0..1000]`;
+    // 回填当前工具的 u/v 输入框
+    document.querySelectorAll('#v2-args input[data-widget="uv"]').forEach(inp => {
+      inp.value = inp.dataset.arg === "u" ? V2.pick.u : V2.pick.v;
+    });
+  };
+}
+
+function _v2SetImage(dataUrl, media = {}) {
+  if (!dataUrl) return;
+  const previousImageId = V2.currentMedia.imageId || "";
+  const nextImageId = media.imageId || "";
+  if (media.kind !== "plan" && previousImageId && nextImageId
+      && previousImageId !== nextImageId) {
+    V2.multiPicks = [];
+  }
+  V2.currentMedia = {...media};
+  const img = document.getElementById("v2-img");
+  img.onload = () => {
+    if (img.naturalWidth > 0) {
+      V2.imgW = img.naturalWidth;
+      V2.imgH = img.naturalHeight;
+    }
+  };
+  img.src = dataUrl;
+  document.getElementById("v2-cross").style.display = "none";
+  renderV2MultiPicks();
+}
+
+function _v2RefreshAutoArgs(previousImageId, previousPlanId) {
+  document.querySelectorAll("#v2-args .argv").forEach(inp => {
+    const widget = inp.dataset.widget;
+    const value = (inp.value || "").trim();
+    if (widget === "image" && (!value || value === previousImageId)) {
+      inp.value = V2.lastImageId;
+    } else if (widget === "plan" && (!value || value === previousPlanId)) {
+      inp.value = V2.lastPlanId;
+    }
+  });
+}
+
+function _v2CollectArgs() {
+  const body = { session_id: V2.session };
+  const t = V2.tool;
+  // mode：plan_* 工具用固定 mode 或 push_<direction>
+  let direction = null;
+  document.querySelectorAll("#v2-args .argv").forEach(inp => {
+    const arg = inp.dataset.arg, w = inp.dataset.widget;
+    let raw = (inp.value || "").trim();
+    if (raw === "") return;
+    if (w === "uv") body[arg] = parseInt(raw, 10);
+    else if (w === "number") body[arg] = parseFloat(raw);
+    else if (arg === "direction") direction = raw;
+    else if (w === "select" && arg === "open_gripper") body[arg] = (raw === "true");
+    else if (w === "select" && arg === "arm" && raw === "") { /* 自动选臂，不传 */ }
+    else body[arg] = raw;
+  });
+  if (_v2IsRgbdBatchTool()) {
+    const includePlanArm = _v2MultiArmOptions().length > 1;
+    body.points = V2.multiPicks.map(point => {
+      const item = {
+        u: Number(point.u),
+        v: Number(point.v),
+      };
+      if (includePlanArm) item.plan_arm = point.plan_arm || "any";
+      return item;
+    });
+  }
+  if (t.mode) body.mode = t.mode;
+  if (t.mode_prefix && direction) body.mode = t.mode_prefix + direction;
+  // 重型 grasp pipeline（1600+ pose 初筛 + 双臂 GPU IK）实测 4~5 分钟，
+  // 与后端 plan_default_timeout 口径一致给 1800s，避免 300s 撞线被取消
+  if (t.name && t.name.startsWith("plan_")) {
+    const heavy = (t.name === "plan_grasp_object"
+      || t.name === "plan_grasp_point_filter"
+      || t.name === "plan_grasp_point_filter_rgbd"
+      || t.name === "plan_grasp_point_filter_rgbd_lite"
+      || t.name === "plan_press_point"
+      || t.name === "plan_grasp_obj_filter"
+      || ["grasp_obj", "grasp_obj_filter", "grasp_point_filter",
+          "grasp_point_filter_rgbd", "grasp_point_filter_rgbd_lite",
+          "press_point"].includes(body.mode));
+    const batchMultiplier = _v2IsRgbdBatchTool()
+      ? Math.max(1, V2.multiPicks.length)
+      : 1;
+    body.timeout_s = heavy ? 1800.0 * batchMultiplier : 300.0;
+  }
+  return body;
+}
+
+function _v2JsonForResultPane(value, depth = 0, seen = new WeakSet()) {
+  if (value == null || typeof value === "number" || typeof value === "boolean") return value;
+  if (typeof value === "string") {
+    const isData = value.startsWith("data:image/") || value.startsWith("data:video/");
+    if (isData || value.length > 4000) {
+      return `${value.slice(0, 160)}... <${value.length} chars>`;
+    }
+    return value;
+  }
+  if (typeof value !== "object") return String(value);
+  if (seen.has(value)) return "<circular>";
+  seen.add(value);
+  if (Array.isArray(value)) {
+    if (value.length > 200) {
+      return {
+        _type: "array",
+        length: value.length,
+        preview: value.slice(0, 20).map(v => _v2JsonForResultPane(v, depth + 1, seen)),
+      };
+    }
+    return value.map(v => _v2JsonForResultPane(v, depth + 1, seen));
+  }
+  const out = {};
+  for (const [k, v] of Object.entries(value)) {
+    out[k] = _v2JsonForResultPane(v, depth + 1, seen);
+  }
+  return out;
+}
+
+function formatV2FullResult(j) {
+  try {
+    return JSON.stringify(_v2JsonForResultPane(j), null, 2);
+  } catch (e) {
+    return `(完整 JSON 展开失败: ${e})`;
+  }
+}
+
+function _v2FmtM(v) {
+  if (v == null || isNaN(Number(v))) return "?";
+  return `${(Number(v) * 1000).toFixed(1)}mm`;
+}
+
+function _v2FmtDeg(v) {
+  if (v == null || isNaN(Number(v))) return "?";
+  return `${Number(v).toFixed(2)}°`;
+}
+
+function _v2AppendMoveToShoulderSummary(lines, j) {
+  const sd = j.shoulder_distance || {};
+  const lsd = j.left_shoulder_to_object_m ?? j.left_shoulder_to_target_m ?? sd.left?.distance_m;
+  const rsd = j.right_shoulder_to_object_m ?? j.right_shoulder_to_target_m ?? sd.right?.distance_m;
+  if (lsd == null && rsd == null) return;
+  const r = j.reach_sphere_R_m ?? sd.reach_R_m;
+  const le = j.left_shoulder_reach_error_m ?? sd.left?.error_to_reach_R_m;
+  const re = j.right_shoulder_reach_error_m ?? sd.right?.error_to_reach_R_m;
+  lines.push(
+    `肩距: left=${lsd ?? "?"}m right=${rsd ?? "?"}m`
+    + (r != null ? `  R=${r}m` : "")
+    + (le != null || re != null ? `  err(L/R)=${le ?? "?"}/${re ?? "?"}m` : "")
+  );
+}
+
+function _v2AppendExecEefPoseSummary(lines, j) {
+  const r = (j.result && typeof j.result === "object") ? j.result : {};
+  const pos = j.final_pos_err_m ?? r.final_pos_err_m ?? r.cnt_err;
+  const ori = j.final_ori_err_deg ?? r.final_ori_err_deg;
+  const app = j.final_approach_err_deg ?? r.final_approach_err_deg;
+  const pre = j.pre_err ?? j.pre_pos_err_m ?? r.pre_err ?? r.pre_pos_err_m;
+  const cnt = j.cnt_err ?? r.cnt_err;
+  const moved = j.object_moved_dist ?? r.object_moved_dist;
+  if (pos == null && ori == null && app == null && pre == null && cnt == null && moved == null) return;
+  lines.push(
+    `EEF误差: pos=${_v2FmtM(pos)}  ori=${_v2FmtDeg(ori)}  approach=${_v2FmtDeg(app)}`
+    + (pre != null || cnt != null ? `  pre/contact=${_v2FmtM(pre)}/${_v2FmtM(cnt)}` : "")
+    + (moved != null ? `  object_move=${_v2FmtM(moved)}` : "")
+  );
+}
+
+function formatV2Summary(toolName, j) {
+  const t = j.tool || toolName || "?";
+  let lines;
+  if (!j.ok) {
+    lines = [`✗ ${t} 失败`, j.error || "(无 error 信息)"];
+    if (Array.isArray(j.plans)) {
+      lines.push(
+        `batch_id: ${j.batch_id || "?"}  success=${j.success_count || 0}/${j.point_count || j.plans.length}`
+      );
+      for (const plan of j.plans) {
+        const prefix = `#${Number(plan.index ?? 0) + 1} (${plan.u},${plan.v}) arm=${plan.plan_arm}`;
+        lines.push(
+          plan.ok
+            ? `${prefix}  plan_id=${plan.plan_id} selected=${plan.arm}`
+            : `${prefix}  FAIL: ${plan.error || "planning failed"}`
+        );
+      }
+    }
+    if (j.job) lines.push(`job: ${j.job}`);
+    _v2AppendMoveToShoulderSummary(lines, j);
+    if (String(t).includes("exec_eef_pose") || toolName === "exec_eef_pose") {
+      _v2AppendExecEefPoseSummary(lines, j);
+    }
+    const obsFail = j.observation || {};
+    const imgIdFail = obsFail.image_id || j.image_id;
+    if (imgIdFail) lines.push(`退出视图 image_id: ${imgIdFail}`);
+    if (j.capture_error) lines.push(`capture: ${j.capture_error}`);
+    lines.push("", "完整返回 JSON:", formatV2FullResult(j));
+    return lines.join("\n");
+  }
+  lines = [`✓ ${t} 成功`];
+  const obs = j.observation || {};
+  const imgId = obs.image_id || j.image_id;
+  if (imgId) lines.push(`image_id: ${imgId}`);
+  const cam = obs.camera || j.camera;
+  const iw = j.image_width || cam?.image_width || obs.image_width;
+  const ih = j.image_height || cam?.image_height || obs.image_height;
+  if (iw && ih) {
+    lines.push(`分辨率: ${iw}×${ih}（head 原图，未裁剪）`);
+  }
+  if (Array.isArray(j.plans)) {
+    lines.push(
+      `batch_id: ${j.batch_id || "?"}  success=${j.success_count || 0}/${j.point_count || j.plans.length}`
+    );
+    for (const plan of j.plans) {
+      const prefix = `#${Number(plan.index ?? 0) + 1} (${plan.u},${plan.v}) arm=${plan.plan_arm}`;
+      if (!plan.ok) {
+        lines.push(`${prefix}  FAIL: ${plan.error || "planning failed"}`);
+        continue;
+      }
+      lines.push(
+        `${prefix}  plan_id=${plan.plan_id} selected=${plan.arm}`
+        + ` grasp=${Number(plan.grasp_vol_cm3 || 0).toFixed(2)}cm3`
+        + ` overlap=${Number(plan.overlap_vol_cm3 || 0).toFixed(2)}cm3`
+        + ` inflated=${Number(plan.inflated_overlap_vol_cm3 || 0).toFixed(2)}cm3`
+      );
+    }
+    const strategy = j.execution_strategy || {};
+    if (strategy.shared_rgbd_reconstruction) {
+      lines.push(
+        `execution: shared RGBD mesh; observation=${strategy.point_observation_preparation}`
+        + `(${strategy.point_observation_workers || 1}); IK/FK=${strategy.ik_fk_planning}`
+      );
+    }
+    lines.push("", "完整返回 JSON:", formatV2FullResult(j));
+    return lines.join("\n");
+  }
+  if (j.measured_fill != null) {
+    lines.push(`画面占比: ${(j.measured_fill * 100).toFixed(1)}%  framing_ok=${j.framing_ok}`);
+  }
+  _v2AppendMoveToShoulderSummary(lines, j);
+  if (j.plan_id) lines.push(`plan_id: ${j.plan_id}`);
+  const cand0 = Array.isArray(j.candidates) && j.candidates.length ? j.candidates[0] : {};
+  const candMeta = cand0.meta || {};
+  const ikPick = j.selected_pose_ik
+    || (j.result && j.result.selected_pose_ik)
+    || (cand0 && cand0.selected_pose_ik)
+    || (candMeta && candMeta.selected_pose_ik)
+    || (j.plan_audit && j.plan_audit.selected_pose_ik)
+    || (j.plan_audit && j.plan_audit.pick && j.plan_audit.pick.selected_pose_ik)
+    || {};
+  const ikSummary = j.ik_constraint_summary
+    || (j.result && j.result.ik_constraint_summary)
+    || (cand0 && cand0.ik_constraint_summary)
+    || (candMeta && candMeta.ik_constraint_summary);
+  if (ikSummary) {
+    lines.push(`ik_constraint: ${ikSummary}`);
+  }
+  if ((j.mode === "grasp_obj_filter" || j.mode === "grasp_point_filter"
+      || j.mode === "press_point" || String(t).includes("filter")) && ikPick.solution) {
+    const lOk = ikPick.left_ok ? "OK" : "NO";
+    const rOk = ikPick.right_ok ? "OK" : "NO";
+    const tol = `pos<=${ikPick.pos_tol_mm ?? 10}mm && ori<=${ikPick.ori_tol_deg ?? 3}deg`;
+    lines.push(`ik_solution: ${ikPick.solution}; both=${ikPick.both_ok ? "OK" : "NO"} (${tol})`);
+    lines.push(
+      `ik_error: L=${lOk} ${ikPick.left_pos_mm ?? "?"}mm/${ikPick.left_ori_deg ?? "?"}deg `
+      + `R=${rOk} ${ikPick.right_pos_mm ?? "?"}mm/${ikPick.right_ori_deg ?? "?"}deg`
+    );
+  }
+  if (String(t).includes("exec_eef_pose") || toolName === "exec_eef_pose") {
+    _v2AppendExecEefPoseSummary(lines, j);
+  }
+  if (j.bddl_name) lines.push(`bddl_name: ${j.bddl_name}`);
+  if (j.eef_pose) lines.push(`eef_pose: ${JSON.stringify(j.eef_pose)}`);
+  if (j.next_move_world) lines.push(`next_move_world: ${JSON.stringify(j.next_move_world)}`);
+  if (j.exec_sequence) lines.push(`exec_sequence: ${j.exec_sequence}`);
+  if (j.memory_md) lines.push(`memory: ${j.memory_md}`);
+  if (j.visibility) {
+    const v = j.visibility;
+    lines.push(`head 可见: ${v.visible}  uv=${JSON.stringify(v.uv)}  dist=${v.cam_to_obj_dist}`);
+  }
+  if (j.standoff != null) {
+    lines.push(`standoff: ${j.standoff}  reachable: ${j.reachable}  theta_z: ${j.theta_z_deg}`);
+  }
+  if (j.object_name && !j.bddl_name) lines.push(`object_name: ${j.object_name}`);
+  if (j.hit_world) lines.push(`hit_world: ${JSON.stringify(j.hit_world)}`);
+  // grasp_obj：始终打印 v7 体积（API 顶层或 grip_fit 内）
+  if (j.mode === "grasp_obj" || j.mode === "grasp_obj_filter"
+      || j.mode === "grasp_point" || j.mode === "grasp_point_filter"
+      || j.mode === "grasp_point_filter_rgbd"
+      || j.mode === "grasp_point_filter_rgbd_lite"
+      || toolName === "plan_grasp_object" || toolName === "plan_grasp_point"
+      || toolName === "plan_grasp_point_filter"
+      || toolName === "plan_grasp_point_filter_rgbd"
+      || toolName === "plan_grasp_point_filter_rgbd_lite"
+      || String(t).includes("grasp_object") || String(t).includes("grasp_point")) {
+    const gf = j.grip_fit || {};
+    const gv = Number(j.grasp_vol_cm3 ?? gf.grasp_vol_cm3 ?? 0);
+    const ov = Number(j.overlap_vol_cm3 ?? gf.overlap_vol_cm3 ?? 0);
+    const gfv = Number(j.gripper_vol_cm3 ?? gf.gripper_vol_cm3 ?? 0);
+    const fr = Number(j.overlap_frac ?? gf.overlap_frac ?? 0);
+    lines.push(`grasp_vol_cm3: ${gv.toFixed(2)} (obj between fingers)`);
+    lines.push(
+      `overlap_vol_cm3: ${ov.toFixed(2)} (${(fr * 100).toFixed(0)}% of gripper ${gfv.toFixed(1)} cm3)`
+    );
+    if (j.inflated_overlap_vol_cm3 != null
+        || gf.inflated_overlap_vol_cm3 != null) {
+      const iov = Number(
+        j.inflated_overlap_vol_cm3 ?? gf.inflated_overlap_vol_cm3 ?? 0
+      );
+      lines.push(`inflated_overlap_vol_cm3: ${iov.toFixed(2)}`);
+    }
+    const ad = gf.anchor_dist_mm;
+    if (ad != null && !isNaN(Number(ad))) {
+      lines.push(`center->surf: ${Number(ad).toFixed(2)} mm`);
+    }
+  }
+  const holding = obs.holding || (j.robot && j.robot.holding);
+  if (holding) lines.push(`holding: ${JSON.stringify(holding)}`);
+  const bp = obs.base_pose || (j.robot && j.robot.base_pose);
+  if (bp) lines.push(`base_pose: ${JSON.stringify(bp)}`);
+  if (j.object && j.object.category) {
+    lines.push(`物体: ${j.object.category}/${j.object.model}  scene=${j.object.scene_name}`);
+    if (j.object.usd_path) lines.push(`usd: ${j.object.usd_path}`);
+  }
+  if (j.mode && t.startsWith("plan_")) lines.push(`mode: ${j.mode}`);
+  lines.push("", "完整返回 JSON:", formatV2FullResult(j));
+  return lines.join("\n");
+}
+
+function _v2ValidateBody(tool, body) {
+  if (tool.one_of && tool.one_of.length) {
+    for (const g of tool.one_of) {
+      const fields = g.fields || [];
+      if (fields.includes("image_id") && V2.pick) {
+        if (!body.image_id) body.image_id = V2.lastImageId;
+        if (body.u == null) body.u = V2.pick.u;
+        if (body.v == null) body.v = V2.pick.v;
+      }
+      if (fields.includes("object_name") && !fields.includes("image_id")) {
+        if (!body.image_id) body.image_id = V2.lastImageId;
+      }
+      let ok = true;
+      for (const f of fields) {
+        if (f === "object_name") {
+          if (!(String(body.object_name || "").trim())) ok = false;
+          continue;
+        }
+        if (f === "image_id" && !(String(body.image_id || "").trim())) ok = false;
+        if ((f === "u" || f === "v") && (body[f] == null || isNaN(body[f]))) ok = false;
+        if ((f === "u" || f === "v") && (body[f] < 0 || body[f] > 1000)) ok = false;
+      }
+      if (ok) return { ok: true, body };
+    }
+    const hint = (tool.name === "plan_grasp_object")
+      ? "请先 capture，再填 object_name，或在 head 图上点选 (u,v)"
+      : "请填 object_name，或在 head 图点选 (u,v)";
+    return { ok: false, msg: hint };
+  }
+  const multiArg = (tool.args || []).find(a => a.widget === "multi_uv_arm");
+  if (multiArg) {
+    const minimum = Number(multiArg.min_points || 1);
+    if (!Array.isArray(body.points) || body.points.length < minimum) {
+      return { ok: false, msg: `请先在 head 图上选择至少 ${minimum} 个点` };
+    }
+    const maximum = Number(multiArg.max_points || 16);
+    if (body.points.length > maximum) {
+      return { ok: false, msg: `最多选择 ${maximum} 个点` };
+    }
+  }
+  for (const a of tool.args) {
+    if (!a.required) continue;
+    if (a.widget === "multi_uv_arm") continue;
+    if (a.widget === "uv") { if (!V2.pick) return { ok: false, msg: "请先在 head 图上点选 (u,v)" }; continue; }
+    const el = document.querySelector(`#v2-args .argv[data-arg="${a.name}"]`);
+    if (el && (el.value || "").trim() === "") return { ok: false, msg: `参数 ${a.name} 必填` };
+  }
+  for (const a of tool.args) {
+    if (a.widget !== "uv" || body[a.name] == null) continue;
+    if (!Number.isFinite(body[a.name]) || body[a.name] < 0 || body[a.name] > 1000) {
+      return { ok: false, msg: `参数 ${a.name} 必须在 0..1000` };
+    }
+  }
+  return { ok: true, body };
+}
+
+async function runV2Tool() {
+  const t = V2.tool;
+  if (!t) return;
+  const res = document.getElementById("v2-result");
+  const busy = document.getElementById("v2-busy");
+  const previousImageId = V2.lastImageId;
+  const previousPlanId = V2.lastPlanId;
+  let body = _v2CollectArgs();
+  const v = _v2ValidateBody(t, body);
+  if (!v.ok) { res.textContent = v.msg; return; }
+  body = v.body;
+  busy.textContent = "运行中…";
+  res.textContent = `⏳ ${t.name} 执行中…（同步等待仿真，可能数十秒；看 Log 有无 stage/中止）`;
+  V2.inFlight = t.name;
+  document.getElementById("v2-run-btn").disabled = true;
+  renderHumanRecording();
+  try {
+    const r = await fetch(t.endpoint, {
+      method: "POST", headers: _v2RequestHeaders(t.name), body: JSON.stringify(body),
+    });
+    const j = await r.json();
+    res.textContent = formatV2Summary(t.name, j);
+    _applyV2ResponseArtifacts(j);
+    if (!j.ok) { busy.textContent = "失败"; return; }
+    busy.textContent = "完成";
+    _v2RefreshAutoArgs(previousImageId, previousPlanId);
+  } catch (e) {
+    const hint = (e && String(e).includes("Failed to fetch"))
+      ? "（连接中断：服务崩溃/超时/重启？看 Log 与终端）"
+      : "";
+    res.textContent = `✗ ${t.name} 请求失败: ${e}${hint}`;
+    busy.textContent = "失败";
+  } finally {
+    V2.inFlight = null;
+    document.getElementById("v2-run-btn").disabled = false;
+    renderHumanRecording();
+  }
+}
+
+_setV2Session(DEFAULT_WEB_SESSION);
+loadTaskPicker();
+loadV2Tools().then(restoreHumanRecording);
+initV2ImageClick();
+document.getElementById("main-cam-wrap").classList.add("waiting");
+applyFeedsUI(Feeds);   // 先用默认态渲染，避免闪烁
+fetch("/api/views")
+  .then(r => r.json())
+  .then(j => { if (j && j.feeds) applyFeedsUI(j.feeds); })
+  .catch(() => {})
+  .finally(enforceFixedFeeds);
+const _cachedMonitor = readPersistedMonitorSnapshot();
+if (_cachedMonitor) {
+  // 只恢复指针。缓存里没有卡片，apply 会先画出 waiting，再被
+  // viewing_history 挡住后续 live 更新，看起来永远在等。
+  _monitorViewingHistory = false;
+  _monitorLiveAttemptId = _cachedMonitor.live_attempt_id || "";
+  _monitorLiveSessionId = _cachedMonitor.live_session_id || _cachedMonitor.session_id || "";
+  _monitorAttemptId = _cachedMonitor.attempt_id || "";
+  if (_cachedMonitor.max_ticks != null) {
+    const max = Number(_cachedMonitor.max_ticks);
+    if (Number.isFinite(max) && max > 0) _monitorMaxTicks = Math.floor(max);
+  }
+}
+refreshUiPoll();
+refreshSubCamOnce();
+refreshMinimapOnce();
+ensureEvalControl(null);
+// 1 路 MJPEG + 合并 ui_poll + 副视图单帧轮询，避免占满浏览器 ~6 连接槽
+setInterval(refreshUiPoll, 1000);
+setInterval(refreshSubCamOnce, 450);
+// 地图只在底盘动作后变，1.5s 够了；渲染有缓存，没变的话服务端不重画
+setInterval(refreshMinimapOnce, 1500);
+setInterval(refreshV2ToolsIfChanged, 5000);
+window.addEventListener("resize", syncMonitorToHeadCam);
+</script>
+</body>
+</html>

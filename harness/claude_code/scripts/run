@@ -1,0 +1,6 @@
+#!/bin/sh
+set -eu
+repo=$(CDPATH= cd "$(dirname "$0")/.." && pwd)
+export EMBODIED_PLUGIN_ROOT="$repo"
+export CLAUDE_CONFIG_DIR="${CLAUDE_CONFIG_DIR:-$repo/.claude-home}"
+exec "$repo/scripts/embodied-claude-code" "$@"

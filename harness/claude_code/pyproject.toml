@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "embodied-claude-code-mcp"
+version = "0.4.0"
+description = "A Claude Code plugin and recordable MCP adapter for BEHAVIOR v2"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "jsonschema>=4.20,<5",
+  "mcp>=2.0,<3"
+]
+
+[project.scripts]
+embodied-claude-code-mcp = "embodied_claude_code.server:main"
+qwen-anthropic-bridge = "embodied_claude_code.qwen_bridge:main"
+embodied-claude-code = "embodied_claude_code.launcher:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+embodied_claude_code = ["py.typed"]

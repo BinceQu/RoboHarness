@@ -1,0 +1,133 @@
+Turn on the radio on port 15060. Task is turning_on_radio.
+Stay on the live episode. Do not reset the episode. Do not
+switch tasks.
+
+The first attached image is identity only: the red box is the
+handle's red padded top bar. Do not copy u/v from that image.
+The button is the small red dot on the radio face with a
+black ring around it. It is not the handle, not a knob, and
+not any other red patch.
+If that button is visible, grasp only the handle.
+plan_grasp_point_filter_rgbd_lite clicks go on that handle
+bar only — not the body, white panel, speaker, knobs, or
+button.
+If the back faces the camera (wide red plane, no button),
+grasp any solid point on the radio, then flip with
+wrist-frame pitch +50 on the hold arm, then press.
+
+Pass plan_arm=any. The arm the planner selects is the hold
+arm; the other empty arm is the poke arm. After the radio
+is held, close the poke gripper and press the button with
+it. Do not hard-code left or right.
+
+Facing is one move_chassis_to_directly_facing_surface call
+on the wide red face, and only after the approach and
+three-point track check in step 1. Do not prove facing with
+the blue path overlay, a handle-to-blue-line parallel
+check, the speaker-circle heuristic, or spin_to_facing_point.
+
+Do these steps in order:
+1. Find, approach, then face the wide red face.
+   1.1 First tool: capture_head_camera. If the radio is
+       missing, spin in place with adjust_chassis spin=90
+       until it is in view. Do not drive forward yet.
+   1.2 Click the radio body once and track_object_distance.
+       Read depth. This track is for range only, not facing.
+   1.3 Move the chassis until radio depth is < 1.0 m.
+       Do not hit the table. Read the forward-path
+       obstacle warning. Keep the nearest obstacle > 0.2 m.
+       If it is approaching 0.2 m, do not go straight at
+       the table; spin or translate from another direction.
+       Tweaks are forward, spin, or a short sideways step.
+       Stop when depth is < 1.0 m and obstacle is still
+       > 0.2 m.
+   1.4 From the first three-point track after the radio
+       is in range until the check passes and
+       move_chassis_to_directly_facing_surface starts, do
+       not call any movement function.
+       Track three points on the wide red face — not the
+       white side, white rear, white panel, handle bar,
+       table, glass, floor, sofa, air, or tabletop shine.
+       If a click is not on that red face, pick again.
+       Read the three xyz. max_dx = max(x)-min(x),
+       max_dy = max(y)-min(y). If either is > 0.3 m, the
+       clicks missed. Discard them. Re-track three new
+       red-face points and check again.
+   1.5 After that check passes, call
+       move_chassis_to_directly_facing_surface with those
+       three u/v. Do not pick a new triple.
+       If it fails or the path is blocked: capture, track
+       three new red-face points, run the max_dx / max_dy
+       check, then facing with those u/v.
+       After facing returns, capture_head_camera once.
+       Do not activate pick-up-object and do not call
+       move_to_reach_point until that capture has returned.
+2. Call move_to_reach_point once on the radio body, not the
+   handle. That facing-plus-reach pair makes the radio both
+   faced and reachable.
+   Far-table lean: if plan_grasp_point_filter_rgbd_lite
+   still fails or the shoulder-distance gate fails after
+   that reach, and the table blocks another
+   move_to_reach_point, first call reset_body. Then lean
+   in small steps. Each step: adjust_pitch degree=-10 once,
+   recapture, click the radio body, measure_shoulder_distance.
+   If that distance is < 0.7 m, stop leaning. If it is
+   still >= 0.7 m, pitch -10 again and measure again. Do
+   not pitch -30. Do not fire several pitches without
+   measuring. After it is < 0.7 m, retry the grasp plan
+   from that leaned posture. Do not stand back up first.
+   Do not lean during facing.
+3. Only after that move_to_reach_point has finished from
+   the faced pose, activate pick-up-object with plan_arm=any.
+   If the button is visible, pick the handle. If only the
+   red plane is visible, pick any solid point on the radio.
+   After pick is active, spin_to_facing_point may only
+   center a grasp click; it must not undo the chassis
+   facing. After the grasp, stow with reset_body
+   keep_ori_arm set to the hold arm. Do not
+   set_arm_to_grasp_position after the grasp except to
+   bring an unseen empty poke hand back into view. Do not
+   open the hold gripper. After exec_plan_pose, look at
+   the returned wrist image only, not ok/error/timeout/
+   stall. If the red grasp volume already covers the
+   chosen grasp point, close_gripper on the hold arm
+   immediately. Do not exec the same plan again.
+4. On the hold arm only, lift the radio straight up
+   (adjust EEF upward). Then move it left/right until the
+   poke hand can work.
+   If the back still faces the camera (red plane, no
+   button), flip: on the hold arm call
+   adjust_left_eef_pose_in_wrist_frame or
+   adjust_right_eef_pose_in_wrist_frame with pitch=50, then
+   capture_head_camera. Do not open the hold gripper. If
+   the button is still missing, pitch=50 once more and
+   recapture. After the button is visible and reachable,
+   continue.
+5. Close the poke gripper. Do not open it again.
+6. track_object_distance once: red_button = the small red
+   dot inside the black ring (not the handle, not the
+   black ring alone, not a knob); poke_tip = the closed
+   poke-hand fingertip.
+7. Move only the poke arm with
+   adjust_left_eef_pose_in_head_frame or
+   adjust_right_eef_pose_in_head_frame, matching the poke
+   arm, using red_button - poke_tip as x,y,z. Keep
+   pressing. A near miss is not a press.
+   If a hand is not visible, call
+   set_arm_to_grasp_position on that arm. After the radio
+   is held, do this only on the empty poke arm, never the
+   hold arm.
+
+Do not stop on a distance bound, a tracked 3D gap, tracker
+coincidence, or a picture that only looks like contact.
+
+Stop only after the button is actually pressed. After each
+press attempt, call capture_head_camera. If the head view
+has jumped back to the spawn / birth pose — the episode
+start room, not the table you were working at — the scene
+reset and the button was pressed. Then you may stop. If
+it is still the same workplace (same table, radio still
+there or still in hand, same room as the last press), the
+scene did not reset. Do not end the session. Press again.
+
+Do not put the radio down before that scene reset.

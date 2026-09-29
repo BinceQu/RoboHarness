@@ -1,0 +1,11 @@
+{
+  "interface_python": ".venv-interface/bin/python",
+  "evaluator_python": ".venv-evaluator/bin/python",
+  "agent_python": "harness/claude_code/.venv/bin/python",
+  "data_path": "data",
+  "model_url": "http://127.0.0.1:31000",
+  "model": "Qwen3.8-Flash-Next-FP8",
+  "startup_timeout_s": 2400,
+  "session_timeout_s": 86400,
+  "unmask_evaluator_cuda": false
+}

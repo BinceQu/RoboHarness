@@ -1,0 +1,481 @@
+#!/bin/sh
+set -eu
+
+usage() {
+    cat <<'EOF'
+Usage: embodied-codex [--port PORT] [--prompt-image FILE]... [--] [CODEX_ARGS...]
+
+Start an isolated Codex session with the embodied profile and bind its
+behavior-v2 MCP server to http://127.0.0.1:PORT.
+
+Options:
+  --port PORT            BEHAVIOR API port for this session (default: 15060)
+  --port=PORT            Equivalent form
+  --prompt-image FILE    Attach a reference image to the first Codex prompt.
+                         Repeat for multiple files. Wrapper option: put it
+                         before `--`. Same effect as `codex exec --image=FILE`.
+  --prompt-image=FILE    Equivalent form
+  -h, --help             Show this help
+
+Environment:
+  BEHAVIOR_PROMPT_IMAGES  Colon-separated extra image paths. Empty = no images.
+
+Without `--prompt-image` and with an empty `BEHAVIOR_PROMPT_IMAGES`, the
+launch is unchanged: text prompt only.
+
+Examples:
+  embodied-codex --port 15060
+  embodied-codex --port 15063 --prompt-image /tmp/wrist-bad.png -- exec - <prompt.txt
+EOF
+}
+
+usage_error() {
+    printf 'embodied-codex: %s\n' "$1" >&2
+    printf 'Try `embodied-codex --help` for usage.\n' >&2
+    exit 2
+}
+
+port=15060
+# 启动器侧收集的附图原文，一行一条；校验在 stamp_dir 就绪后做。
+raw_prompt_images=""
+
+append_raw_prompt_image() {
+    raw=$1
+    [ -n "$raw" ] || usage_error '--prompt-image requires a file path'
+    case $raw in
+        -)
+            usage_error 'prompt image path must not be "-"'
+            ;;
+        *'
+'*)
+            usage_error 'prompt image path must not contain a newline'
+            ;;
+    esac
+    if [ -n "$raw_prompt_images" ]; then
+        raw_prompt_images="$raw_prompt_images
+$raw"
+    else
+        raw_prompt_images=$raw
+    fi
+}
+
+while [ "$#" -gt 0 ]; do
+    case "$1" in
+        --port)
+            [ "$#" -ge 2 ] || usage_error '--port requires a value'
+            port=$2
+            shift 2
+            ;;
+        --port=*)
+            port=${1#--port=}
+            shift
+            ;;
+        --prompt-image)
+            [ "$#" -ge 2 ] || usage_error '--prompt-image requires a file path'
+            append_raw_prompt_image "$2"
+            shift 2
+            ;;
+        --prompt-image=*)
+            append_raw_prompt_image "${1#--prompt-image=}"
+            shift
+            ;;
+        -h|--help)
+            usage
+            exit 0
+            ;;
+        --)
+            shift
+            break
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
+
+case "$port" in
+    ''|*[!0-9]*)
+        usage_error "invalid port: $port"
+        ;;
+esac
+
+if ! [ "$port" -ge 1 ] 2>/dev/null || ! [ "$port" -le 65535 ] 2>/dev/null; then
+    usage_error "port must be between 1 and 65535: $port"
+fi
+
+# official_v2 track/read_depth/move_point_to_point 的 session_id 最长 64。
+# 超长 id 以前能开 session，但一 bind track 就 400，机器人已经在动了。
+sid=${BEHAVIOR_SESSION_ID:-}
+if [ -n "$sid" ]; then
+    sid_len=${#sid}
+    if [ "$sid_len" -gt 64 ]; then
+        printf 'embodied-codex: BEHAVIOR_SESSION_ID is %s chars; official max is 64.\n' \
+            "$sid_len" >&2
+        printf 'Shorten it (e.g. spp15060-sol-a13-20260820). No Codex session was started.\n' >&2
+        exit 2
+    fi
+    case $sid in
+        *[!A-Za-z0-9._-]*)
+            printf 'embodied-codex: BEHAVIOR_SESSION_ID has unsupported characters.\n' >&2
+            printf 'Use only letters, digits, ".", "_" or "-". No Codex session was started.\n' >&2
+            exit 2
+            ;;
+    esac
+    first=$(printf '%s' "$sid" | cut -c1)
+    case $first in
+        [A-Za-z0-9]) ;;
+        *)
+            printf 'embodied-codex: BEHAVIOR_SESSION_ID must start with a letter or digit.\n' >&2
+            exit 2
+            ;;
+    esac
+fi
+
+launcher_dir=$(CDPATH= cd "$(dirname "$0")" && pwd)
+plugin_root=$(CDPATH= cd "$launcher_dir/.." && pwd)
+base_url="http://127.0.0.1:$port"
+export BEHAVIOR_BASE_URL="$base_url"
+export EMBODIED_PLUGIN_ROOT="$plugin_root"
+# hook 子进程有时拿不到 env / XDG，XDG 与 /tmp 各写一份。
+stamp_dir="${XDG_RUNTIME_DIR:-/tmp}/embodied-codex"
+mkdir -p "$stamp_dir" /tmp/embodied-codex
+# 新 exec 只注入 baseline。compact/resume 不走 launcher，任务 skill stamp 会留下。
+if [ -n "${BEHAVIOR_SESSION_ID:-}" ]; then
+    rm -f "$stamp_dir/active_task_skill.$BEHAVIOR_SESSION_ID"
+    rm -f "/tmp/embodied-codex/active_task_skill.$BEHAVIOR_SESSION_ID"
+fi
+printf '%s\n' "$base_url" >"$stamp_dir/behavior_base_url"
+if [ "$stamp_dir" != /tmp/embodied-codex ]; then
+    printf '%s\n' "$base_url" >/tmp/embodied-codex/behavior_base_url
+fi
+
+# 附图：显式列表，不扫目录。默认零张，argv 与旧行为一致。
+MAX_PROMPT_IMAGES=8
+MAX_PROMPT_IMAGE_BYTES=8388608
+prompt_image_list="$stamp_dir/prompt_images.list"
+injected_codex_argv="$stamp_dir/codex.argv"
+: >"$prompt_image_list"
+rm -f "$injected_codex_argv"
+
+validate_prompt_image() {
+    raw=$1
+    [ -n "$raw" ] || usage_error 'prompt image path is empty'
+    case $raw in
+        -)
+            usage_error 'prompt image path must not be "-"'
+            ;;
+        *'
+'*)
+            usage_error 'prompt image path must not contain a newline'
+            ;;
+    esac
+    if [ ! -f "$raw" ]; then
+        usage_error "prompt image not found: $raw"
+    fi
+    if [ ! -r "$raw" ]; then
+        usage_error "prompt image not readable: $raw"
+    fi
+    abs=$(readlink -f "$raw" 2>/dev/null) || abs=""
+    [ -n "$abs" ] || usage_error "prompt image path could not be resolved: $raw"
+    ext=$(printf '%s' "$abs" | awk -F. '{print tolower($NF)}')
+    case $ext in
+        png|jpg|jpeg|gif|webp) ;;
+        *)
+            usage_error "unsupported prompt image type (use png/jpg/jpeg/gif/webp): $abs"
+            ;;
+    esac
+    bytes=$(wc -c <"$abs")
+    if [ "$bytes" -gt "$MAX_PROMPT_IMAGE_BYTES" ]; then
+        usage_error "prompt image too large (>8MiB): $abs"
+    fi
+    if ! python3 - "$abs" <<'PY'
+import sys
+from pathlib import Path
+
+data = Path(sys.argv[1]).read_bytes()[:16]
+ok = (
+    data.startswith(b"\x89PNG\r\n\x1a\n")
+    or data.startswith(b"\xff\xd8\xff")
+    or data.startswith(b"GIF87a")
+    or data.startswith(b"GIF89a")
+    or (data.startswith(b"RIFF") and data[8:12] == b"WEBP")
+)
+raise SystemExit(0 if ok else 1)
+PY
+    then
+        usage_error "prompt image is not a PNG/JPEG/GIF/WEBP file: $abs"
+    fi
+    printf '%s\n' "$abs"
+}
+
+add_validated_prompt_image() {
+    raw=$1
+    [ -n "$raw" ] || return 0
+    abs=$(validate_prompt_image "$raw") || exit 2
+    if grep -Fxq -- "$abs" "$prompt_image_list"; then
+        return 0
+    fi
+    n=$(wc -l <"$prompt_image_list" | tr -d ' ')
+    if [ "$n" -ge "$MAX_PROMPT_IMAGES" ]; then
+        usage_error "too many prompt images (max $MAX_PROMPT_IMAGES)"
+    fi
+    printf '%s\n' "$abs" >>"$prompt_image_list"
+}
+
+if [ -n "$raw_prompt_images" ]; then
+    old_ifs=$IFS
+    IFS='
+'
+    set -f
+    for raw in $raw_prompt_images; do
+        set +f
+        IFS=$old_ifs
+        add_validated_prompt_image "$raw"
+        IFS='
+'
+        set -f
+    done
+    set +f
+    IFS=$old_ifs
+fi
+
+if [ -n "${BEHAVIOR_PROMPT_IMAGES:-}" ]; then
+    rest=$BEHAVIOR_PROMPT_IMAGES
+    while [ -n "$rest" ]; do
+        case $rest in
+            *:*)
+                raw=${rest%%:*}
+                rest=${rest#*:}
+                ;;
+            *)
+                raw=$rest
+                rest=""
+                ;;
+        esac
+        add_validated_prompt_image "$raw"
+    done
+fi
+
+if [ -s "$prompt_image_list" ]; then
+    image_n=$(wc -l <"$prompt_image_list" | tr -d ' ')
+    printf 'embodied-codex: attaching %s prompt image(s)\n' "$image_n" >&2
+    sid=${BEHAVIOR_SESSION_ID:-}
+    cp "$prompt_image_list" "$stamp_dir/prompt_images"
+    if [ "$stamp_dir" != /tmp/embodied-codex ]; then
+        cp "$prompt_image_list" /tmp/embodied-codex/prompt_images
+    fi
+    if [ -n "$sid" ]; then
+        cp "$prompt_image_list" "$stamp_dir/prompt_images.$sid"
+        if [ "$stamp_dir" != /tmp/embodied-codex ]; then
+            cp "$prompt_image_list" /tmp/embodied-codex/prompt_images.$sid
+        fi
+    fi
+fi
+
+if ! command -v curl >/dev/null 2>&1; then
+    printf 'embodied-codex: curl is required for the BEHAVIOR health check\n' >&2
+    exit 1
+fi
+
+check_endpoint() {
+    if ! curl --noproxy '*' --silent --show-error --fail \
+        --connect-timeout 2 --max-time 5 "$1" >/dev/null; then
+        printf 'embodied-codex: BEHAVIOR endpoint is not healthy: %s\n' "$1" >&2
+        printf 'No Codex session was started. Start the target service and retry.\n' >&2
+        exit 1
+    fi
+}
+
+check_endpoint "$base_url/api/state"
+check_endpoint "$base_url/api/v2/tools"
+
+# codex exec 的 SessionStart 没有 prompt 字段；UserPromptSubmit 也经常是空的。
+# 启动前把 stdin / 命令行原文直接打到 Agent Monitor，不依赖 hook。
+stamp_prompt_file() {
+    src=$1
+    sid=${BEHAVIOR_SESSION_ID:-}
+    [ -s "$src" ] || return 0
+    cp "$src" "$stamp_dir/user_prompt"
+    if [ "$stamp_dir" != /tmp/embodied-codex ]; then
+        cp "$src" /tmp/embodied-codex/user_prompt
+    fi
+    if [ -n "$sid" ]; then
+        cp "$src" "$stamp_dir/user_prompt.$sid"
+        if [ "$stamp_dir" != /tmp/embodied-codex ]; then
+            cp "$src" /tmp/embodied-codex/user_prompt.$sid
+        fi
+        export BEHAVIOR_USER_PROMPT_FILE="$stamp_dir/user_prompt.$sid"
+    else
+        export BEHAVIOR_USER_PROMPT_FILE="$stamp_dir/user_prompt"
+    fi
+}
+
+publish_monitor_prompt() {
+    src=$1
+    [ -s "$src" ] || return 0
+    stamp_prompt_file "$src"
+    body_file="$stamp_dir/prompt.body.json"
+    if ! python3 - "$src" "${BEHAVIOR_SESSION_ID:-}" "$body_file" "$plugin_root" "$prompt_image_list" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(sys.argv[4]) / "hooks"))
+import skill_router
+
+text = open(sys.argv[1], encoding="utf-8").read().strip()
+if not text:
+    raise SystemExit(0)
+image_list = Path(sys.argv[5])
+images = []
+if image_list.is_file():
+    images = [
+        line.strip()
+        for line in image_list.read_text(encoding="utf-8").splitlines()
+        if line.strip()
+    ]
+if images:
+    text = (
+        text
+        + "\n\n[attached prompt images]\n"
+        + "\n".join(f"- {path}" for path in images)
+    )
+body = {
+    "prompt": text,
+    "user_prompt": text,
+    "loaded_skills": skill_router.loaded_skill_names(text, Path(sys.argv[4])),
+    "new_attempt": True,
+}
+if images:
+    body["prompt_images"] = images
+sid = sys.argv[2].strip()
+if sid:
+    body["session_id"] = sid
+open(sys.argv[3], "w", encoding="utf-8").write(json.dumps(body, ensure_ascii=False))
+PY
+    then
+        printf 'embodied-codex: failed to encode user prompt for Agent Monitor\n' >&2
+        return 0
+    fi
+    [ -s "$body_file" ] || return 0
+    if ! curl --noproxy '*' --silent --show-error --fail \
+        --connect-timeout 2 --max-time 5 \
+        -X POST -H 'Content-Type: application/json' \
+        --data-binary @"$body_file" \
+        "$base_url/api/agent_monitor/prompt" >/dev/null; then
+        printf 'embodied-codex: prompt publish failed: %s\n' \
+            "$base_url/api/agent_monitor/prompt" >&2
+        return 0
+    fi
+    printf 'Published user prompt to %s/api/agent_monitor/prompt\n' "$base_url" >&2
+}
+
+capture_exec_prompt() {
+    is_exec=0
+    uses_stdin=0
+    skip_next=0
+    prompt_arg=""
+    for arg in "$@"; do
+        if [ "$skip_next" -eq 1 ]; then
+            skip_next=0
+            continue
+        fi
+        if [ "$is_exec" -eq 0 ]; then
+            if [ "$arg" = "exec" ]; then
+                is_exec=1
+            fi
+            continue
+        fi
+        case "$arg" in
+            -)
+                uses_stdin=1
+                ;;
+            --output-last-message|--color|--cd|-C|--model|-m|--sandbox|--ask-for-approval|-c|--profile|--config|--output-schema|--image|-i|--add-dir|--enable|--disable|--local-provider)
+                skip_next=1
+                ;;
+            --output-last-message=*|--color=*|--cd=*|--model=*|--sandbox=*|--ask-for-approval=*|-c=*|--profile=*|--config=*|--output-schema=*|--image=*|-i=*|--add-dir=*|--enable=*|--disable=*|--local-provider=*)
+                ;;
+            --json|--skip-git-repo-check|--full-auto|--dangerously-bypass-approvals-and-sandbox|--dangerously-bypass-hook-trust|--ignore-user-config)
+                ;;
+            --*|-*)
+                ;;
+            *)
+                prompt_arg=$arg
+                ;;
+        esac
+    done
+    [ "$is_exec" -eq 1 ] || return 0
+
+    incoming="$stamp_dir/user_prompt.incoming"
+    if [ "$uses_stdin" -eq 1 ] && [ ! -t 0 ]; then
+        real=""
+        if real=$(readlink -f /proc/self/fd/0 2>/dev/null) && [ -n "$real" ] && [ -f "$real" ]; then
+            cp "$real" "$incoming"
+        else
+            cat >"$incoming"
+            exec <"$incoming"
+        fi
+        publish_monitor_prompt "$incoming"
+        return 0
+    fi
+    if [ -n "$prompt_arg" ]; then
+        printf '%s\n' "$prompt_arg" >"$incoming"
+        publish_monitor_prompt "$incoming"
+    fi
+}
+
+# 有附图时，在 exec 后插入 --image=绝对路径，避免 clap 把后面的 `-` 当成图片。
+# 无 exec（TUI）则插到 argv 最前。无附图则不写 argv 文件，外层不改 "$@"。
+inject_prompt_images() {
+    [ -s "$prompt_image_list" ] || return 0
+    rebuilt="$stamp_dir/codex.argv.with_images"
+    : >"$rebuilt"
+    saw_exec=0
+    for arg in "$@"; do
+        printf '%s\n' "$arg" >>"$rebuilt"
+        if [ "$saw_exec" -eq 0 ] && [ "$arg" = "exec" ]; then
+            saw_exec=1
+            while IFS= read -r img || [ -n "$img" ]; do
+                [ -n "$img" ] || continue
+                printf '%s\n' "--image=$img" >>"$rebuilt"
+            done <"$prompt_image_list"
+        fi
+    done
+    if [ "$saw_exec" -eq 0 ]; then
+        prefixed="$stamp_dir/codex.argv.tui_images"
+        : >"$prefixed"
+        while IFS= read -r img || [ -n "$img" ]; do
+            [ -n "$img" ] || continue
+            printf '%s\n' "--image=$img" >>"$prefixed"
+        done <"$prompt_image_list"
+        cat "$rebuilt" >>"$prefixed"
+        rebuilt=$prefixed
+    fi
+    cp "$rebuilt" "$injected_codex_argv"
+}
+
+capture_exec_prompt "$@"
+inject_prompt_images "$@"
+
+if [ -n "${CODEX_BIN:-}" ]; then
+    codex_bin="$CODEX_BIN"
+elif [ -x "$launcher_dir/codex" ]; then
+    codex_bin="$launcher_dir/codex"
+elif codex_bin=$(command -v codex 2>/dev/null); then
+    :
+else
+    printf 'embodied-codex: codex is not available on PATH\n' >&2
+    exit 1
+fi
+
+config_override="mcp_servers.behavior-v2.env.BEHAVIOR_BASE_URL=$base_url"
+printf 'Starting embodied Codex on %s\n' "$base_url" >&2
+
+if [ -s "$injected_codex_argv" ]; then
+    set --
+    while IFS= read -r arg || [ -n "$arg" ]; do
+        set -- "$@" "$arg"
+    done <"$injected_codex_argv"
+fi
+
+exec "$codex_bin" --profile embodied -c "$config_override" "$@"

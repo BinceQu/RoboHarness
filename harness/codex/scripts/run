@@ -1,0 +1,7 @@
+#!/bin/sh
+set -eu
+repo=$(CDPATH= cd "$(dirname "$0")/.." && pwd)
+export EMBODIED_PLUGIN_ROOT="$repo"
+export CODEX_HOME="${CODEX_HOME:-$repo/.codex-home}"
+"$repo/scripts/bootstrap-codex-home"
+exec "$repo/scripts/embodied-codex" "$@"

@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "task": "task07",
+  "task_index": 7,
+  "task_name": "picking_up_toys",
+  "scene": "house_single_floor",
+  "protocol": "archived-v391-x2",
+  "evaluator_commit": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+  "max_steps": 37781,
+  "sample_seed": 20260911,
+  "evaluator_seed": 0,
+  "model": "Qwen3.8-Flash-Next-FP8",
+  "harness": "claude_code",
+  "robot_profile": "r1pro_8dof_hf250",
+  "annotator": "cpu",
+  "idle_gate": true,
+  "spatial_map": false,
+  "cases": [
+    {
+      "instance_id": 301,
+      "slot": 0,
+      "prompt": "prompt/task07/v18_6ab9a3152f1a.txt",
+      "prompt_sha256": "6ab9a3152f1a3c7bfc970d460ead949e8c740ca2e2e6b771806a59320cae0f55",
+      "prompt_source": "test_results/task07/agent_sessions/t07p15067i0-0920230454-cda49370334a/session.json",
+      "prompt_source_sha256": "eaa6bae7a5f4375577d65e74fc756d33e9ae2accd857595ee591112715b4d9ed",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v18.txt"
+      ],
+      "reference_result": "reference_results/task07/picking_up_toys_301_0.json",
+      "reference_sha256": "d5b68bb91e1af86667733c50ad60c62f1e3a52bd796589177f5905f8673efa01",
+      "reference_source": "test_results/task07/eval_runs/t07-15067-0920225625-49ffc84ef87e/p15067/output/json/picking_up_toys_301_0.json",
+      "reference_q": 0.0,
+      "reference_steps": 23816,
+      "notes": [],
+      "source_session_id": "t07p15067i0-0920230454-cda49370334a"
+    },
+    {
+      "instance_id": 304,
+      "slot": 3,
+      "prompt": "prompt/task07/v18_6ab9a3152f1a.txt",
+      "prompt_sha256": "6ab9a3152f1a3c7bfc970d460ead949e8c740ca2e2e6b771806a59320cae0f55",
+      "prompt_source": "test_results/task07/agent_sessions/t07p15067i3-0921031841-14bb0e8c9acf/session.json",
+      "prompt_source_sha256": "1dfcb1166585b436549fba2e4f9107070a4606fe07c92453eeb7546764160778",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v18.txt"
+      ],
+      "reference_result": "reference_results/task07/picking_up_toys_304_0.json",
+      "reference_sha256": "14dff42b70e2c167d46ce4db87089606791895bd537a4699b0ef988435d65a52",
+      "reference_source": "test_results/task07/eval_runs/t07-15067-0920225625-49ffc84ef87e/p15067/output/json/picking_up_toys_304_0.json",
+      "reference_q": 0.6666666666666666,
+      "reference_steps": 16609,
+      "notes": [],
+      "source_session_id": "t07p15067i3-0921031841-14bb0e8c9acf"
+    },
+    {
+      "instance_id": 306,
+      "slot": 5,
+      "prompt": "prompt/task07/v18_6ab9a3152f1a.txt",
+      "prompt_sha256": "6ab9a3152f1a3c7bfc970d460ead949e8c740ca2e2e6b771806a59320cae0f55",
+      "prompt_source": "test_results/task07/agent_sessions/t07p15067i5-0921061445-5212922c582b/session.json",
+      "prompt_source_sha256": "407d1142aaf00ac7559b22e3ca423a1d95027161647b4fb5eff9583ee22093c7",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v18.txt"
+      ],
+      "reference_result": "reference_results/task07/picking_up_toys_306_0.json",
+      "reference_sha256": "046dc0bb9e4353fd6972e1cfd4d5f667c0dea2f8cd9d41ae941675c697b4206e",
+      "reference_source": "test_results/task07/eval_runs/t07-15067-0920225625-49ffc84ef87e/p15067/output/json/picking_up_toys_306_0.json",
+      "reference_q": 0.5,
+      "reference_steps": 32032,
+      "notes": [],
+      "source_session_id": "t07p15067i5-0921061445-5212922c582b"
+    },
+    {
+      "instance_id": 308,
+      "slot": 7,
+      "prompt": "prompt/task07/v18_6ab9a3152f1a.txt",
+      "prompt_sha256": "6ab9a3152f1a3c7bfc970d460ead949e8c740ca2e2e6b771806a59320cae0f55",
+      "prompt_source": "test_results/task07/agent_sessions/t07p15067i7-0921113556-5276fa5537f4/session.json",
+      "prompt_source_sha256": "0f31729c26527fc1521340223affbcce604ef26d4a8428b0899c4d4d8fb5362f",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v18.txt"
+      ],
+      "reference_result": "reference_results/task07/picking_up_toys_308_0.json",
+      "reference_sha256": "92d2b04fc39475c19407d6386c59ce694d0ec6df8b91301a376554b2af97858d",
+      "reference_source": "test_results/task07/eval_runs/t07-15067-0920225625-49ffc84ef87e/p15067/output/json/picking_up_toys_308_0.json",
+      "reference_q": 0.6666666666666666,
+      "reference_steps": 26697,
+      "notes": [],
+      "source_session_id": "t07p15067i7-0921113556-5276fa5537f4"
+    },
+    {
+      "instance_id": 310,
+      "slot": 9,
+      "prompt": "prompt/task07/v18_6ab9a3152f1a.txt",
+      "prompt_sha256": "6ab9a3152f1a3c7bfc970d460ead949e8c740ca2e2e6b771806a59320cae0f55",
+      "prompt_source": "test_results/task07/agent_sessions/t07p15067i9-0921165909-f915cd1b87c5/session.json",
+      "prompt_source_sha256": "0e88e1e19f56e6c7528d967f936fca7bf9cbf3199e598a5eca2ff72398643d44",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v18.txt"
+      ],
+      "reference_result": "reference_results/task07/picking_up_toys_310_0.json",
+      "reference_sha256": "090944ce437919d26e4b53d49d5be9ee7ea35c661547a45e1c6c1836e8c9631b",
+      "reference_source": "test_results/task07/eval_runs/t07-15067-0920225625-49ffc84ef87e/p15067/output/json/picking_up_toys_310_0.json",
+      "reference_q": 0.0,
+      "reference_steps": 37782,
+      "notes": [],
+      "source_session_id": "t07p15067i9-0921165909-f915cd1b87c5"
+    }
+  ],
+  "reference_mean_q": 0.3666666666666666,
+  "archive_reported_mean_q": 0.3666666666666666
+}

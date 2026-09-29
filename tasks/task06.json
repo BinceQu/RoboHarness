@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "task": "task06",
+  "task_index": 6,
+  "task_name": "hiding_Easter_eggs",
+  "scene": "house_double_floor_lower",
+  "protocol": "archived-v391-x2",
+  "evaluator_commit": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+  "max_steps": 15239,
+  "sample_seed": 20260911,
+  "evaluator_seed": 0,
+  "model": "Qwen3.8-Flash-Next-FP8",
+  "harness": "claude_code",
+  "robot_profile": "r1pro_8dof_hf250",
+  "annotator": "cpu",
+  "idle_gate": true,
+  "spatial_map": false,
+  "cases": [
+    {
+      "instance_id": 301,
+      "slot": 0,
+      "prompt": "prompt/task06/v7_625983041765.txt",
+      "prompt_sha256": "625983041765177cfb0fe7427c1cba23b2c4503df171d4d768fbc4a34aea3eab",
+      "prompt_source": "test_results/task06/06_claude_transcripts/claude_t06p15066i0-09162346_301.jsonl",
+      "prompt_source_sha256": "9cadbd5e6d29da7aa0db8c5f5c395407af7a0d4e7fe6ac6366cec97fc674a653",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v7.txt"
+      ],
+      "reference_result": "reference_results/task06/hiding_Easter_eggs_301_0.json",
+      "reference_sha256": "355c2c61b5bf84fac7585aedd8634687ee303dea0e51209845464b507d2311a5",
+      "reference_source": "test_results/task06/01_official_json/hiding_Easter_eggs_301_0.json",
+      "reference_q": 1.0,
+      "reference_steps": 14557,
+      "notes": [
+        "The actual transcript prompt differs from the archived v8 filename snapshot; the transcript text is preserved verbatim."
+      ]
+    },
+    {
+      "instance_id": 304,
+      "slot": 3,
+      "prompt": "prompt/task06/v8_b5ec2bb4b4ef.txt",
+      "prompt_sha256": "b5ec2bb4b4ef49da86058d5475504a6882a117b6b8633b44802bee56cdf84520",
+      "prompt_source": "test_results/task06/06_claude_transcripts/claude_t06p15066i3-09171214_304.jsonl",
+      "prompt_source_sha256": "608103692658a2c39efd25682dfe2f4f8baea81a91923861f581e2655b4d4e72",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v8.txt"
+      ],
+      "reference_result": "reference_results/task06/hiding_Easter_eggs_304_0.json",
+      "reference_sha256": "1af7593b262b10d03b273ab5ded61e8f33e2e32f4a7dce7ae0418150cc8fc73a",
+      "reference_source": "test_results/task06/01_official_json/hiding_Easter_eggs_304_0.json",
+      "reference_q": 0.0,
+      "reference_steps": 15240,
+      "notes": []
+    },
+    {
+      "instance_id": 306,
+      "slot": 5,
+      "prompt": "prompt/task06/v8_b5ec2bb4b4ef.txt",
+      "prompt_sha256": "b5ec2bb4b4ef49da86058d5475504a6882a117b6b8633b44802bee56cdf84520",
+      "prompt_source": "test_results/task06/06_claude_transcripts/claude_t06p15066i5-09171413_306.jsonl",
+      "prompt_source_sha256": "5771becf40a8e53c3699521067770f54303a4a4c5af2f92d8d8fbc57922f874e",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v8.txt"
+      ],
+      "reference_result": "reference_results/task06/hiding_Easter_eggs_306_0.json",
+      "reference_sha256": "995c2ade5232bfe1ff5bed93537c9130b1d3b899bb38de74d8e3eead1a2ffaf3",
+      "reference_source": "test_results/task06/01_official_json/hiding_Easter_eggs_306_0.json",
+      "reference_q": 0.7777777777777778,
+      "reference_steps": 15240,
+      "notes": []
+    },
+    {
+      "instance_id": 308,
+      "slot": 7,
+      "prompt": "prompt/task06/v9_6df0ac887d1e.txt",
+      "prompt_sha256": "6df0ac887d1edf93c4d01b910089abf55849aa9e8bf1320b53fd6e08a50e1867",
+      "prompt_source": "test_results/task06/06_claude_transcripts/claude_t06p15066i7-09172338_308_v9.jsonl",
+      "prompt_source_sha256": "3c43d44db56af6213f6f02f3f30865ef2b485d0eab8c3ed6b5ab873b8f42ff8a",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v9.txt"
+      ],
+      "reference_result": "reference_results/task06/hiding_Easter_eggs_308_0.json",
+      "reference_sha256": "8d9a8d16e8a3a877cb4d4c143ef73d98d8c13e93fc19f57c74b22581b84e164a",
+      "reference_source": "test_results/task06/01_official_json/hiding_Easter_eggs_308_0.json",
+      "reference_q": 0.3333333333333333,
+      "reference_steps": 15240,
+      "notes": []
+    },
+    {
+      "instance_id": 310,
+      "slot": 9,
+      "prompt": "prompt/task06/v9_6df0ac887d1e.txt",
+      "prompt_sha256": "6df0ac887d1edf93c4d01b910089abf55849aa9e8bf1320b53fd6e08a50e1867",
+      "prompt_source": "test_results/task06/06_claude_transcripts/claude_t06p15066i9-09180340_310_v9.jsonl",
+      "prompt_source_sha256": "65dc20c785e220469a79ec5a4a8b9ab4c3396eebea44470bb25532da7a83325a",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v9.txt"
+      ],
+      "reference_result": "reference_results/task06/hiding_Easter_eggs_310_0.json",
+      "reference_sha256": "47a3a04dad246d3a2d3a329b0c9397b7fbe655c958e2c6633c0bec44465688b8",
+      "reference_source": "test_results/task06/01_official_json/hiding_Easter_eggs_310_0.json",
+      "reference_q": 0.0,
+      "reference_steps": 15240,
+      "notes": []
+    }
+  ],
+  "reference_mean_q": 0.4222222222222222,
+  "archive_reported_mean_q": 0.4222222222222222
+}

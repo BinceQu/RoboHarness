@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "task": "task09",
+  "task_index": 9,
+  "task_name": "putting_up_Christmas_decorations_inside",
+  "scene": "house_single_floor",
+  "protocol": "archived-v391-x2",
+  "evaluator_commit": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+  "max_steps": 27437,
+  "sample_seed": 20260911,
+  "evaluator_seed": 0,
+  "model": "Qwen3.8-Flash-Next-FP8",
+  "harness": "claude_code",
+  "robot_profile": "r1pro_8dof_hf250",
+  "annotator": "cpu",
+  "idle_gate": true,
+  "spatial_map": false,
+  "cases": [
+    {
+      "instance_id": 301,
+      "slot": 0,
+      "prompt": "prompt/task09/v3_7f566b4822c4.txt",
+      "prompt_sha256": "7f566b4822c4aba160e170311be389a3a44ac3c47d94c2b16d4b18c34cfa58ad",
+      "prompt_source": "test_results/task09/instance_301/t09p15069i0-09152352/session.json",
+      "prompt_source_sha256": "61150bc0af56e79125869f3f999c1b9f66183c060f021ccb8a447ca6207d1663",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v3.txt"
+      ],
+      "reference_result": "reference_results/task09/putting_up_Christmas_decorations_inside_301_0.json",
+      "reference_sha256": "3faa00e1cb8b264eb8f1b9aaa7fee9b1d6c8a401ab5338aebffffcf34b58ad75",
+      "reference_source": "test_results/task09/_meta/official_score_json/putting_up_Christmas_decorations_inside_301_0.json",
+      "reference_q": 0.3333333333333333,
+      "reference_steps": 27438,
+      "notes": [
+        "Actual session prompt matches v3; INDEX.md calls this batch v2. Session text takes precedence."
+      ],
+      "source_session_id": "t09p15069i0-09152352"
+    },
+    {
+      "instance_id": 304,
+      "slot": 3,
+      "prompt": "prompt/task09/v3_7f566b4822c4.txt",
+      "prompt_sha256": "7f566b4822c4aba160e170311be389a3a44ac3c47d94c2b16d4b18c34cfa58ad",
+      "prompt_source": "test_results/task09/instance_304/t09p15069i3-09160931/session.json",
+      "prompt_source_sha256": "4f0791b5c38370c53fb478a8a78ebce9a1576c81cbbf9bb193349aa7d30a35a8",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v3.txt"
+      ],
+      "reference_result": "reference_results/task09/putting_up_Christmas_decorations_inside_304_0.json",
+      "reference_sha256": "8cff3385cac285fa95f5100d366b5b4d82a58ecaf35a2f2cadb607dbf82b2a7a",
+      "reference_source": "test_results/task09/_meta/official_score_json/putting_up_Christmas_decorations_inside_304_0.json",
+      "reference_q": 0.2222222222222222,
+      "reference_steps": 16238,
+      "notes": [
+        "Actual session prompt matches v3; INDEX.md calls this batch v2. Session text takes precedence."
+      ],
+      "source_session_id": "t09p15069i3-09160931"
+    },
+    {
+      "instance_id": 306,
+      "slot": 5,
+      "prompt": "prompt/task09/v3_7f566b4822c4.txt",
+      "prompt_sha256": "7f566b4822c4aba160e170311be389a3a44ac3c47d94c2b16d4b18c34cfa58ad",
+      "prompt_source": "test_results/task09/instance_306/t09p15069i5-09161316/session.json",
+      "prompt_source_sha256": "657bd2a5a5e3d11bcac5e0c43c432352420f359379844aff5f83cc6457f7a2d7",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v3.txt"
+      ],
+      "reference_result": "reference_results/task09/putting_up_Christmas_decorations_inside_306_0.json",
+      "reference_sha256": "77a51a477365201604d6faf09978a1f7d547369a4b6ad6684b411f04cd009d40",
+      "reference_source": "test_results/task09/_meta/official_score_json/putting_up_Christmas_decorations_inside_306_0.json",
+      "reference_q": 0.3333333333333333,
+      "reference_steps": 21165,
+      "notes": [
+        "Actual session prompt matches v3; INDEX.md calls this batch v2. Session text takes precedence."
+      ],
+      "source_session_id": "t09p15069i5-09161316"
+    },
+    {
+      "instance_id": 308,
+      "slot": 7,
+      "prompt": "prompt/task09/v3_7f566b4822c4.txt",
+      "prompt_sha256": "7f566b4822c4aba160e170311be389a3a44ac3c47d94c2b16d4b18c34cfa58ad",
+      "prompt_source": "test_results/task09/instance_308/t09p15069i7-09171216/session.json",
+      "prompt_source_sha256": "3fbd72dbf951dde6de7959e953b8175c6fbd1d03b5543193815ea0edc7c609c5",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v3.txt"
+      ],
+      "reference_result": "reference_results/task09/putting_up_Christmas_decorations_inside_308_0.json",
+      "reference_sha256": "7d4c44cfeb042b6ef647ca1b985dccf238ae96407cfb0aec251cbc8da4e45b96",
+      "reference_source": "test_results/task09/_meta/official_score_json/putting_up_Christmas_decorations_inside_308_0.json",
+      "reference_q": 0.1111111111111111,
+      "reference_steps": 11898,
+      "notes": [],
+      "source_session_id": "t09p15069i7-09171216"
+    },
+    {
+      "instance_id": 310,
+      "slot": 9,
+      "prompt": "prompt/task09/v3_7f566b4822c4.txt",
+      "prompt_sha256": "7f566b4822c4aba160e170311be389a3a44ac3c47d94c2b16d4b18c34cfa58ad",
+      "prompt_source": "test_results/task09/instance_310/t09p15069i9-09171809/session.json",
+      "prompt_source_sha256": "9d7001c8f48e617164f6e3670545da0c4193e93a3e4242774ccf86e10cedced6",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v3.txt"
+      ],
+      "reference_result": "reference_results/task09/putting_up_Christmas_decorations_inside_310_0.json",
+      "reference_sha256": "dbdebc46d9282ec52880d4b39b2b876a0197648ff3b31520bf44f844f01922e7",
+      "reference_source": "test_results/task09/_meta/official_score_json/putting_up_Christmas_decorations_inside_310_0.json",
+      "reference_q": 0.1111111111111111,
+      "reference_steps": 15326,
+      "notes": [],
+      "source_session_id": "t09p15069i9-09171809"
+    }
+  ],
+  "reference_mean_q": 0.22222222222222224,
+  "archive_reported_mean_q": 0.22222222222222224
+}

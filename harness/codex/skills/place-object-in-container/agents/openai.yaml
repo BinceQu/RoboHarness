@@ -1,0 +1,4 @@
+interface:
+  display_name: "Place Object in Container"
+  short_description: "Place a held object accurately into a target container"
+  default_prompt: "Use $place-object-in-container to place the object I am holding into the specified container."

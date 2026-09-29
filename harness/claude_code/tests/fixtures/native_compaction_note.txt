@@ -1,0 +1,3 @@
+Diagnostic marker: COMPACTION_NOTE_720.
+This synthetic note is used only for testing Claude Code's native compaction.
+No robot, simulator, or external application should be operated in this test.

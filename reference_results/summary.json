@@ -1,0 +1,56 @@
+[
+  {
+    "task": "task00",
+    "task_name": "turning_on_radio",
+    "archive_reported_mean_q": 0.4,
+    "reference_mean_q": 0.6
+  },
+  {
+    "task": "task01",
+    "task_name": "picking_up_trash",
+    "archive_reported_mean_q": 0.8666666666666666,
+    "reference_mean_q": 0.8666666666666666
+  },
+  {
+    "task": "task02",
+    "task_name": "putting_away_Halloween_decorations",
+    "archive_reported_mean_q": 0.6857142857142857,
+    "reference_mean_q": 0.6857142857142857
+  },
+  {
+    "task": "task03",
+    "task_name": "cleaning_up_plates_and_food",
+    "archive_reported_mean_q": 0.2571428571428571,
+    "reference_mean_q": 0.2571428571428571
+  },
+  {
+    "task": "task05",
+    "task_name": "setting_mousetraps",
+    "archive_reported_mean_q": 0.8333333333333334,
+    "reference_mean_q": 0.7
+  },
+  {
+    "task": "task06",
+    "task_name": "hiding_Easter_eggs",
+    "archive_reported_mean_q": 0.4222222222222222,
+    "reference_mean_q": 0.4222222222222222
+  },
+  {
+    "task": "task07",
+    "task_name": "picking_up_toys",
+    "archive_reported_mean_q": 0.3666666666666666,
+    "reference_mean_q": 0.3666666666666666
+  },
+  {
+    "task": "task08",
+    "task_name": "rearranging_kitchen_furniture",
+    "archive_reported_mean_q": 0.4,
+    "reference_mean_q": 0.4
+  },
+  {
+    "task": "task09",
+    "task_name": "putting_up_Christmas_decorations_inside",
+    "archive_reported_mean_q": 0.22222222222222224,
+    "reference_mean_q": 0.22222222222222224
+  }
+]

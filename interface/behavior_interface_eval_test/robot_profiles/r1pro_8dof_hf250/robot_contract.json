@@ -1,0 +1,33 @@
+{
+  "profile": "r1pro_8dof_hf250",
+  "model": "r1pro",
+  "arm_dof": 8,
+  "action_dim": 27,
+  "proprio_dim": 65,
+  "base_footprint_radius_m": 0.42,
+  "action_slices": {
+    "base": [0, 3],
+    "trunk": [3, 7],
+    "arm_left": [7, 15],
+    "gripper_left": [15, 17],
+    "arm_right": [17, 25],
+    "gripper_right": [25, 27]
+  },
+  "proprio_slices": {
+    "base_qvel": [0, 3],
+    "arm_left_qpos": [3, 11],
+    "arm_left_qvel": [11, 19],
+    "eef_left_pos": [19, 22],
+    "eef_left_quat": [22, 26],
+    "gripper_left_qpos": [26, 28],
+    "gripper_left_qvel": [28, 30],
+    "arm_right_qpos": [30, 38],
+    "arm_right_qvel": [38, 46],
+    "eef_right_pos": [46, 49],
+    "eef_right_quat": [49, 53],
+    "gripper_right_qpos": [53, 55],
+    "gripper_right_qvel": [55, 57],
+    "trunk_qpos": [57, 61],
+    "trunk_qvel": [61, 65]
+  }
+}

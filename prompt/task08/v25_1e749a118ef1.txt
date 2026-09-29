@@ -1,0 +1,309 @@
+This is a new session. Do the full official job on
+port 15068. The live task is rearranging_kitchen_furniture.
+Stay on this episode and this task.
+
+Put three appliances onto the lower shelf of the leftmost
+high wall cabinet over the sink, then close that same
+door: the toaster, the food processor (the juicer), and
+the french press. Use the same pick-and-place method for
+each one. Among those still outside the cabinet, always
+take the nearest to you first. Stop only when all three
+sit on that lower shelf and that leftmost door is a
+closed front slab.
+
+This episode starts at the house spawn, not in the
+kitchen. The first head image will not show the cabinets.
+Look around until you find the kitchen, then do the work.
+Start state you must establish yourself unless a later
+head image already shows otherwise:
+- the high wall-cabinet doors above the sink are closed
+- the toaster, the food processor, and the french press
+  sit on kitchen counters
+- you are not yet square-on to an open carcass
+If a later current head image already shows one of those
+appliances on the target lower shelf, leave it there and
+continue with the ones still outside.
+
+The first attached image is identity only, after that
+leftmost door is open. The red box is the cabinet_lip: the
+front edge of the lower shelf inside that high wall cabinet
+(the cabinet's horizontal bottom board). When you are later
+square-on, that same edge reads as one level horizontal
+line. Click cabinet_lip on a current head image of that
+edge.
+
+The working door is the leftmost dark glossy slab of the
+pair mounted above the kitchen sink. Each slab has a thin
+horizontal silver handle on its lower edge. A closed door
+is a dark glossy front slab with its silver handle on the
+face and no open carcass. An open door shows the lower
+shelf and the boxed lip. A half-open door covers part of
+the opening; the panel is neither a side wall nor a full
+front slab. Place an appliance only after that opening and
+the lower shelf are visible. After the door is at 90
+degrees, leave it open until every appliance is on the
+shelf, then close it.
+
+A door is at 90 degrees when a current head image shows
+its panel nearly perpendicular to the cabinet carcass. The
+door face reads as a side wall. Recapture the head camera
+from farther back when the angle is hard to read, then
+judge again.
+
+Hinge side is visual, from the current closed or moving
+panel. After the handle is held:
+- left-side hinge open: adjust_chassis forward=-0.1 and
+  translation=+0.1
+- right-side hinge open: adjust_chassis forward=-0.1 and
+  translation=-0.1
+- left-side hinge close: adjust_chassis forward=+0.1 and
+  translation=-0.1
+This leftmost door is usually left-hinged.
+
+The three appliances:
+- toaster: short white body with a red knob, usually on
+  the counter near the sink
+- food processor: the juicer; a taller gray drum with a
+  bowl and a feed tube, usually on the counter by the
+  stove, sometimes on the floor
+- french press: small black carafe, usually on the
+  counter by the stove
+Pick-up order is nearest first, not toaster then juicer
+then press. Recapture. Among appliances still outside,
+take the one closest to you on the current head image.
+Do not reach past a near appliance to grasp a far one;
+that knocks the near one onto the floor. After one sits
+on the shelf, recapture and take the nearest among those
+still outside.
+
+Facing has two moments.
+
+Before the door is open: on a current head image of the
+leftmost closed door, pick exactly three spread-out,
+non-collinear points on that closed door panel. Call
+move_chassis_to_directly_facing_surface with that image_id
+and those three points. That call drives in a straight
+line to about 0.8 m in front of the panel, then turns in
+place to face it. Watch the straight path so the chassis
+does not knock over furniture or objects. If the blue
+corridor or the straight approach is blocked, first
+translate or back up until it is empty, recapture, then
+pick three new points on the current image and call the
+same tool.
+
+After an appliance is in the right gripper and that
+leftmost door is open: square-on means the lower-shelf
+front edge is one level horizontal line across the current
+head image, parallel to the image x-axis. Recapture after
+every chassis move and judge that line again. Start
+tracking only when that line is level.
+
+Near the kitchen keep the chassis at least 0.3 m off the
+counter, so the dishwasher or oven is not tipped open into
+the path.
+
+The right arm picks and places every appliance. Keep the
+right gripper closed after each pick. If the leftmost door
+is half-open or closed while something is in the right
+gripper, use the left arm on its silver handle and pull
+until the opening and the lower shelf are visible again.
+Then reset_body with keep_ori_arm="right" and go on
+placing.
+
+Place method, used for each appliance still outside the
+cabinet. Finish this method for one appliance before the
+next. Each time, the appliance is the nearest one still
+outside.
+
+P. Recapture the head camera. If that appliance is already
+   on the target lower shelf, skip this method. If it is
+   not in view, look around with adjust_pitch and spin /
+   adjust_chassis until it is clearly visible.
+   activate_skill with name="pick-up-object" and follow
+   that Skill. Where this prompt and that Skill
+   disagree, follow this prompt. Use the right arm.
+   Click the solid middle of that appliance:
+   - toaster: solid middle of the white body
+   - food processor: solid middle of the gray drum
+   - french press: solid middle of the black carafe
+   After exec_plan_pose, look at the returned wrist image.
+   If the grasp volume already covers the body,
+   close_gripper immediately on the right arm. After
+   close_gripper, a hold is likely already made. A gap
+   still visible on the wrist view between the fingers
+   and the body does not mean the grasp missed. Do not
+   judge the hold from the close_gripper return. The
+   reliable check is adjust_right_eef_pose_in_head_frame
+   z=+0.2 and see whether that appliance rises with the
+   hand. After it is confirmed in the right gripper,
+   stow with reset_body keep_ori_arm="right". Then
+   deactivate_skill name="pick-up-object".
+   Carry it to a square-on stance in front of the cabinet
+   opened in step 3. Keep the right gripper closed. If
+   that leftmost door is closed or half-open, keep the
+   right gripper closed and use the left arm on its silver
+   handle until the opening and the lower shelf are
+   visible, then reset_body keep_ori_arm="right" and
+   return here. Drive to a floor point in front of that
+   open carcass. Stay off the counter lip. Go around the
+   open door leaf. If the blue corridor crosses a door
+   leaf, the counter, or the sink, spin or translate until
+   the corridor is empty, then a shorter forward. Face the
+   cabinet until a current head image shows that
+   lower-shelf front edge as one level horizontal line.
+   Recapture after every chassis move and judge the line
+   again.
+   Bind tracks when that leftmost door is open and that
+   lip is a level horizontal line. Recapture. Both must be
+   visible on the same current image: the held body, and
+   that boxed lower-shelf front edge. Keep the right
+   gripper closed. On that same current head image, call
+   track_object_distance once with exactly two named
+   points:
+   - held body: toaster_body, food_processor_body, or
+     french_press_body, the same solid middle you clicked
+   - cabinet_lip: a point on that boxed lower-shelf front
+     edge inside the opening, the board's front line
+   After the bind, read cabinet_lip from
+   persistent_tracking. A true lip has z in 1.40-1.45 m
+   and depth_m (camera distance) at most 0.7 m. If the
+   lip click is unclear, or z is outside 1.40-1.45 m, or
+   depth_m is greater than 0.7 m, do not use that lip.
+   On the same current image, click several more points
+   near that same place on the front edge, each time
+   rebinding cabinet_lip and keeping the same held-body
+   point. Among those nearby clicks, the lip is the one
+   with the smallest depth_m that still has z in
+   1.40-1.45 m and depth_m at most 0.7 m. A deeper,
+   lower z is the backsplash or the underside, not the
+   lip. Only start the z-then-x place after a lip that
+   passes both gates. If that appliance falls, pick it
+   up again, then bind both points again on a current
+   head image before any place motion. Do not reuse the
+   old tracks or a remembered lip or body xyz.
+   Lift first, then go in. Use only the right arm with
+   adjust_right_eef_pose_in_head_frame. After every
+   action, read both current xyz_in_robot_base_coord_m
+   values from persistent_tracking. Robot-base axes are
+   +X chassis-forward, +Y chassis-left, +Z up. Farther
+   into the cabinet means larger x. Do z first, then x,
+   one axis per call. Leave roll, pitch, and yaw
+   unchanged. If the residual is large, keep each step
+   bounded; then re-read the tracks and repeat.
+   While body.z <= cabinet_lip.z + 0.25:
+   - keep body.x < cabinet_lip.x - 0.25
+   - only raise z
+   body.z > cabinet_lip.z + 0.25 is the lift-height hard 
+   gate: raise that high before going in. After
+   body.z > cabinet_lip.z + 0.25, increase body.x
+   toward cabinet_lip.x + 0.2.
+   If during that place the EEF stalls or does not
+   move, first try adjust_right_eef_pose_in_head_frame
+   z=+0.1 to free it. If that lift still leaves the
+   EEF stuck, pull the gripper back with a translation
+   on that same tool. Do not set_arm. Then re-adjust
+   and continue the z-then-x place.
+   Set it down beside anything already on that shelf.
+   If either tracked point is lost, recapture and bind the
+   same body middle and the same shelf-front line again
+   before the next adjust. Re-check the lip gates: z in
+   1.40-1.45 m and depth_m at most 0.7 m. If the lip no
+   longer reads as a level horizontal line, square up
+   again before rebinding. If the door is closed or
+   half-open, keep the right gripper closed, use the left
+   arm on the handle, then rebind and continue the
+   right-arm place.
+   During the place, body.z > cabinet_lip.z + 0.1 and
+   body.x > cabinet_lip.x + 0.2 are hard gates. Do not
+   open the right gripper if either one is false. Those
+   two numbers alone still do not allow a release. After
+   both gates pass, recapture. Open only when a current
+   head image also shows that the held body's bulk is
+   already inside the cabinet, so a release would not
+   let it fall back out. A body that still hangs in
+   front of the opening is not inside. Keep the gripper
+   closed and keep the z-then-x place, or square up
+   and rebind first.
+   After that appliance is confirmed in the right
+   gripper, the only allowed open_gripper is the
+   last confirmation that it has been placed
+   inside the cabinet. After the pick, mid-course
+   open does not exist. Do not set it down on the
+   counter, the sink, or anywhere outside that
+   shelf to re-grasp or recover. A stall, a lost
+   track, or a jammed EEF is not a release. Keep
+   the gripper closed and continue the z-then-x
+   place.
+   Confirm that appliance sits on that lower shelf inside
+   the open cabinet. Then reset_body keep_ori_arm="none"
+   and go to the next nearest appliance still outside.
+
+Do these steps in order. Finish each step before the next.
+
+1. Find the closed high doors over the sink from spawn.
+   First tool: capture_head_camera.
+   You start away from the kitchen. If those dark overhead
+   doors and their silver handles are not clearly in view,
+   look around with adjust_pitch and spin / adjust_chassis
+   until a current head image shows the pair over the sink.
+   Look up if the handles sit near the top of the frame.
+   Once the leftmost closed door is in view, go to step 2.
+   If that leftmost door is already open and the lower
+   shelf is visible, go to step 4.
+
+2. Face the leftmost closed door with one tool call.
+   When a current head image shows that leftmost closed
+   door panel and the path in front of it is clear of the
+   island, the counter lip, and the sink cabinet, pick
+   exactly three spread-out, non-collinear points on that
+   leftmost closed door panel itself. Call
+   move_chassis_to_directly_facing_surface with that
+   image_id and those three points. Keep at least 0.3 m
+   off the counter. After that call returns, call
+   reset_body with keep_ori_arm="none". reset_body is a
+   trunk/posture tool.
+
+3. Open that leftmost door to 90 degrees, starting from
+   closed. activate_skill with name="open-doors-and-drawers"
+   and follow that Skill. Where this prompt and that
+   Skill disagree, follow this prompt. You are already
+   facing.
+   Reach and grasp that leftmost handle. Click a solid
+   silver handle bar on that leftmost closed door. After
+   exec_plan_pose, look at the returned wrist image.
+   Probe with the holding arm adjust_*_eef_pose_in_head_frame
+   forward=-0.2. Then keep that grasp and repeat the
+   hinge-signed adjust_chassis arc above plus further
+   same-arm EEF pulls. Keep that grasp until that leftmost
+   door is at 90 degrees on a current head image. A first
+   probe, a latch pop, or a small swing means keep
+   pulling. If the grasp slips or an EEF pull returns
+   ok=false, re-grasp that same handle and keep pulling
+   that same door.
+   When a current head image shows that leftmost door at
+   about 90 degrees, deactivate_skill
+   name="open-doors-and-drawers".
+   If after that the opening is still short of 90 degrees
+   or the door is half-open, use the left arm on that
+   handle and pull it farther with the same hinge signs
+   until the panel reads as a side wall.
+
+4. Place the appliances still outside with the place
+   method above. Do not use a fixed toaster-then-juicer-
+   then-press order. Each time, recapture and take the
+   nearest remaining appliance first. Click the solid
+   middle as named above. Repeat until all three sit on
+   that lower shelf.
+
+5. Close that leftmost door. Grasp its silver handle on
+   the open leaf. Push the panel toward the cabinet
+   opening until a current head image shows a closed front
+   slab covering the carcass. For a left-hinged leaf,
+   after the handle is held, use adjust_chassis
+   forward=+0.1 and translation=-0.1, plus same-arm EEF
+   pushes toward the opening. Keep going until the door
+   reads closed.
+
+Stop when a current head image shows the toaster, the food
+processor, and the french press on that cabinet's lower
+shelf, and that leftmost door is a closed front slab.

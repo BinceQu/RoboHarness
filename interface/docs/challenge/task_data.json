@@ -1,0 +1,2222 @@
+{
+  "tasks": [
+    {
+      "id": "turning_on_radio",
+      "name": "Turning On Radio",
+      "instruction": "Turn on the radio receiver that's on the table in the living room.",
+      "rooms": [
+        "living_room"
+      ],
+      "duration": 72,
+      "thumbnail": "https://vumbnail.com/1109198872.jpg",
+      "video": "https://player.vimeo.com/video/1109198872",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "radio receiver 1 is turned on"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "picking_up_trash",
+      "name": "Picking Up Trash",
+      "instruction": "Put the three cans of soda from the living room inside the trash can in the kitchen.",
+      "rooms": [
+        "kitchen",
+        "living_room"
+      ],
+      "duration": 176,
+      "thumbnail": "https://vumbnail.com/1109202972.jpg",
+      "video": "https://player.vimeo.com/video/1109202972",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "Every can of soda must satisfy: can of soda is inside ashcan 1"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "putting_away_Halloween_decorations",
+      "name": "Putting Away Halloween Decorations",
+      "instruction": "Place each of the two pumpkins and all three candles from the living room inside a cabinet in the living room (use any cabinet), then make sure every cabinet is closed, and position the cauldron so it is next to a table in the living room.",
+      "rooms": [
+        "living_room"
+      ],
+      "duration": 460,
+      "thumbnail": "https://vumbnail.com/1114054409.jpg",
+      "video": "https://player.vimeo.com/video/1114054409",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "Every pumpkin must satisfy: At least one cabinet must satisfy: pumpkin is inside cabinet",
+        "Every candle must satisfy: At least one cabinet must satisfy: candle is inside cabinet",
+        "At least one table must satisfy: caldron 1 is next to table",
+        "Every cabinet must satisfy: cabinet is closed"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "cleaning_up_plates_and_food",
+      "name": "Cleaning Up Plates and Food",
+      "instruction": "From the breakfast table in the kitchen, move both pizzas - keeping each on its plate - into the same refrigerator, put both bowls into one sink, and make sure the refrigerator is closed.",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 457,
+      "thumbnail": "https://vumbnail.com/1114054554.jpg",
+      "video": "https://player.vimeo.com/video/1114054554",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "Pair the pizza objects one-to-one with the plate objects so each paired pizza satisfies: pizza is on top of plate",
+        "At least one electric refrigerator must satisfy: Every pizza must satisfy: pizza is inside electric refrigerator",
+        "At least one sink must satisfy: Every bowl must satisfy: bowl is inside sink",
+        "Every electric refrigerator must satisfy: electric refrigerator is closed"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "can_meat",
+      "name": "Can Meat",
+      "instruction": "Open the kitchen cabinet, take out the two hinged jars, open them, place exactly two cooked bratwursts from the chopping board on the countertop into each jar, then close both jars, put them back inside the cabinet, and close the cabinet.",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 395,
+      "thumbnail": "https://vumbnail.com/1114054618.jpg",
+      "video": "https://player.vimeo.com/video/1114054618",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "Every hinged jar must satisfy: hinged jar is inside cabinet 1",
+        "Every hinged jar must satisfy: hinged jar is closed",
+        "Every hinged jar must satisfy: Exactly 2 bratwurst object(s) must satisfy: bratwurst is inside hinged jar",
+        "cabinet 1 is closed"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "setting_mousetraps",
+      "name": "Setting Mousetraps",
+      "instruction": "Take the four mousetraps from the cabinet in the bathroom and place them on the bathroom floor. Make sure all four end up on the same floor surface, and ensure that at least two of them are either under or directly next to the same bathroom sink.",
+      "rooms": [
+        "bathroom"
+      ],
+      "duration": 339,
+      "thumbnail": "https://vumbnail.com/1114054686.jpg",
+      "video": "https://player.vimeo.com/video/1114054686",
+      "scene_model": "house_double_floor_upper",
+      "goal_conditions": [
+        "At least one floor must satisfy: Every mousetrap must satisfy: mousetrap is on top of floor",
+        "At least one sink must satisfy: Exactly 2 mousetrap object(s) must satisfy: mousetrap is under sink; or mousetrap is next to sink"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "hiding_Easter_eggs",
+      "name": "Hiding Easter Eggs",
+      "instruction": "Take the three Easter eggs out of the wicker basket on the lawn in the garden, then place them on the lawn next to a single tree (choose any tree) so that all three eggs are next to the same tree and none are left in the basket.",
+      "rooms": [
+        "garden"
+      ],
+      "duration": 254,
+      "thumbnail": "https://vumbnail.com/1114055436.jpg",
+      "video": "https://player.vimeo.com/video/1114055436",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "At least one tree must satisfy: Every easter egg must satisfy: easter egg is next to tree",
+        "Every easter egg must satisfy: easter egg is not inside wicker basket 1; and easter egg is on top of lawn 1"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "picking_up_toys",
+      "name": "Picking Up Toys",
+      "instruction": "Put all the toys in the child's room - the three board games (two on the bed and one on the table), the two jigsaw puzzles on the table, and the tennis ball on the table - inside the toy box on the table in the child's room.",
+      "rooms": [
+        "childs_room"
+      ],
+      "duration": 630,
+      "thumbnail": "https://vumbnail.com/1114054920.jpg",
+      "video": "https://player.vimeo.com/video/1114054920",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "At least one toy box must satisfy: Every jigsaw puzzle must satisfy: jigsaw puzzle is inside toy box",
+        "At least one toy box must satisfy: Every board game must satisfy: board game is inside toy box",
+        "At least one toy box must satisfy: Every tennis ball must satisfy: tennis ball is inside toy box"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "rearranging_kitchen_furniture",
+      "name": "Rearranging Kitchen Furniture",
+      "instruction": "Move the toaster, food processor, and French press from the kitchen countertop into the same kitchen cabinet, and make sure that cabinet is closed at the end.",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 298,
+      "thumbnail": "https://vumbnail.com/1114056046.jpg",
+      "video": "https://player.vimeo.com/video/1114056046",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "At least one cabinet must satisfy: toaster 1 is inside cabinet; and food processor 1 is inside cabinet; and french press 1 is inside cabinet; and cabinet is closed"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "putting_up_Christmas_decorations_inside",
+      "name": "Putting Up Christmas Decorations Inside",
+      "instruction": "In the living room, take the wreath, three candy canes, and two pillar candles out of the wicker basket. Place the wreath and two of the candy canes on the same living-room sofa. Put the remaining candy cane on top of a dining-room table. Put both pillar candles together on top of one dining-room table (they can share the same table). Finally, place all three gift boxes under or right next to the Christmas tree in the living room.",
+      "rooms": [
+        "kitchen",
+        "living_room"
+      ],
+      "duration": 457,
+      "thumbnail": "https://vumbnail.com/1114056731.jpg",
+      "video": "https://player.vimeo.com/video/1114056731",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "Every gift box must satisfy: gift box is next to christmas tree 1; or gift box is under christmas tree 1; or gift box is touching christmas tree 1",
+        "At least one table must satisfy: Every pillar candle must satisfy: pillar candle is on top of table",
+        "At least one table must satisfy: Exactly 1 candy cane object(s) must satisfy: candy cane is on top of table",
+        "At least one sofa must satisfy: Every wreath must satisfy: wreath is on top of sofa",
+        "At least one sofa must satisfy: Exactly 2 candy cane object(s) must satisfy: candy cane is on top of sofa"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "set_up_a_coffee_station_in_your_kitchen",
+      "name": "Set Up A Coffee Station In Your Kitchen",
+      "instruction": "Set up a coffee station on the kitchen countertop: keep the coffee maker on the countertop, move the bottle of coffee from the kitchen shelf to the counter next to the coffee maker, place a paper coffee filter on top of the coffee maker, put the saucer next to the coffee maker with the coffee cup on the saucer, and place the electric kettle next to the coffee maker.",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 209,
+      "thumbnail": "https://vumbnail.com/1114056931.jpg",
+      "video": "https://player.vimeo.com/video/1114056931",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "coffee maker 1 is on top of countertop 1",
+        "bottle of coffee 1 is next to coffee maker 1",
+        "paper coffee filter 1 is on top of coffee maker 1",
+        "saucer 1 is next to coffee maker 1",
+        "coffee cup 1 is on top of saucer 1",
+        "electric kettle 1 is next to coffee maker 1"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "putting_dishes_away_after_cleaning",
+      "name": "Putting Dishes Away After Cleaning",
+      "instruction": "In the kitchen, gather all eight plates from the two countertops, place them all inside a single cabinet (either one), and make sure all cabinets are closed when you're done.",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 365,
+      "thumbnail": "https://vumbnail.com/1114057082.jpg",
+      "video": "https://player.vimeo.com/video/1114057082",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "At least one cabinet must satisfy: Every plate must satisfy: plate is inside cabinet",
+        "Every cabinet must satisfy: cabinet is closed"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "preparing_lunch_box",
+      "name": "Preparing Lunch Box",
+      "instruction": "Put both apple halves, the club sandwich, and the chocolate chip cookie from the chopping board on the kitchen countertop into the packing box on the countertop. Then take the bottle of tea out of the refrigerator, put it into the same box, and close the refrigerator when you're done.",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 275,
+      "thumbnail": "https://vumbnail.com/1114057330.jpg",
+      "video": "https://player.vimeo.com/video/1114057330",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "Every half apple must satisfy: half apple is inside packing box 1",
+        "club sandwich 1 is inside packing box 1",
+        "chocolate chip cookie 1 is inside packing box 1",
+        "bottle of tea 1 is inside packing box 1",
+        "electric refrigerator 1 is closed"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "loading_the_car",
+      "name": "Loading The Car",
+      "instruction": "Put the digital camera from the living room table into the container on the living room floor. Then take the container and the tennis racket to the garage, place both in the car trunk, and close it.",
+      "rooms": [
+        "living_room",
+        "garage"
+      ],
+      "duration": 641,
+      "thumbnail": "https://vumbnail.com/1114057519.jpg",
+      "video": "https://player.vimeo.com/video/1114057519",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "container 1 is inside car 1",
+        "digital camera 1 is inside container 1",
+        "tennis racket 1 is inside car 1"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "carrying_in_groceries",
+      "name": "Carrying in Groceries",
+      "instruction": "Take the sack of groceries out of the car trunk in the garage, bring it to the kitchen, and put both the tomato and the carton of milk into the refrigerator in the kitchen. When you're done, close the car trunk and make sure the refrigerator in the kitchen is closed.",
+      "rooms": [
+        "kitchen",
+        "garage"
+      ],
+      "duration": 476,
+      "thumbnail": "https://vumbnail.com/1114057919.jpg",
+      "video": "https://player.vimeo.com/video/1114057919",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "At least one electric refrigerator must satisfy: beefsteak tomato 1 is inside electric refrigerator; and carton of milk 1 is inside electric refrigerator",
+        "car 1 is closed",
+        "electric refrigerator 1 is closed"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "bringing_in_wood",
+      "name": "Bringing in Wood",
+      "instruction": "Bring the three plywood sheets from the garden into the corridor and place them on the floor there.",
+      "rooms": [
+        "garden",
+        "corridor"
+      ],
+      "duration": 451,
+      "thumbnail": "https://vumbnail.com/1114058068.jpg",
+      "video": "https://player.vimeo.com/video/1114058068",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "Every plywood must satisfy: plywood is on top of floor 2"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "moving_boxes_to_storage",
+      "name": "Moving Boxes To Storage",
+      "instruction": "Move the two storage containers from the living room to the garage. In the garage, place one container on the floor and stack the other container on top of it (either order is fine).",
+      "rooms": [
+        "living_room",
+        "garage"
+      ],
+      "duration": 487,
+      "thumbnail": "https://vumbnail.com/1114058315.jpg",
+      "video": "https://player.vimeo.com/video/1114058315",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "(storage container 1 is on top of floor 2; and storage container 2 is on top of storage container 1); or (storage container 2 is on top of floor 2; and storage container 1 is on top of storage container 2)"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "bringing_water",
+      "name": "Bringing Water",
+      "instruction": "Retrieve the two bottles from the refrigerator in the kitchen, bring them to the living room, and place both on the coffee table. Make sure the refrigerator is closed when you finish.",
+      "rooms": [
+        "living_room",
+        "kitchen"
+      ],
+      "duration": 315,
+      "thumbnail": "https://vumbnail.com/1114058418.jpg",
+      "video": "https://player.vimeo.com/video/1114058418",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "Every bottle must satisfy: bottle is on top of coffee table 1",
+        "electric refrigerator 1 is closed"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "tidying_bedroom",
+      "name": "Tidying Bedroom",
+      "instruction": "In the bedroom, move the book from the bed onto either nightstand, and place the two sandals side by side next to the bed.",
+      "rooms": [
+        "bedroom"
+      ],
+      "duration": 368,
+      "thumbnail": "https://vumbnail.com/1114058519.jpg",
+      "video": "https://player.vimeo.com/video/1114058519",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "sandal 1 is next to bed 1",
+        "sandal 2 is next to sandal 1",
+        "At least one table must satisfy: book 1 is on top of table"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "outfit_a_basic_toolbox",
+      "name": "Outfit A Basic Toolbox",
+      "instruction": "In the utility room, put the drill, pliers, flashlight, Allen wrench, and screwdriver from the tabletop into the toolbox, keep the toolbox on the tabletop, and close the toolbox.",
+      "rooms": [
+        "utility_room"
+      ],
+      "duration": 355,
+      "thumbnail": "https://vumbnail.com/1114058641.jpg",
+      "video": "https://player.vimeo.com/video/1114058641",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "drill 1 is inside toolbox 1",
+        "pliers 1 is inside toolbox 1",
+        "flashlight 1 is inside toolbox 1",
+        "allen wrench 1 is inside toolbox 1",
+        "screwdriver 1 is inside toolbox 1",
+        "toolbox 1 is on top of tabletop 1",
+        "toolbox 1 is closed"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "sorting_vegetables",
+      "name": "Sorting Vegetables",
+      "instruction": "Sort the vegetables from the two wicker baskets on the kitchen floor into the mixing bowls on the kitchen countertop: put all three bok choy and all three Vidalia onions together into one mixing bowl; put both leeks and both broccoli together into a second mixing bowl; and put all three sweet corn into a third mixing bowl.",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 397,
+      "thumbnail": "https://vumbnail.com/1114058741.jpg",
+      "video": "https://player.vimeo.com/video/1114058741",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "At least one mixing bowl must satisfy: Every bok choy must satisfy: bok choy is inside mixing bowl; and Every vidalia onion must satisfy: vidalia onion is inside mixing bowl",
+        "At least one mixing bowl must satisfy: Every leek must satisfy: leek is inside mixing bowl; and Every broccoli must satisfy: broccoli is inside mixing bowl",
+        "At least one mixing bowl must satisfy: Every sweet corn must satisfy: sweet corn is inside mixing bowl"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "collecting_childrens_toys",
+      "name": "Collecting Children's Toys",
+      "instruction": "Pick up the two dice from the bed, the two teddy bears from the floor, and the two board games (one from the desk and one from the bed), and place them all inside the same bookcase in the child's room.",
+      "rooms": [
+        "childs_room"
+      ],
+      "duration": 640,
+      "thumbnail": "https://vumbnail.com/1114058872.jpg",
+      "video": "https://player.vimeo.com/video/1114058872",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "At least one bookcase must satisfy: Every die must satisfy: die is inside bookcase; and Every teddy must satisfy: teddy is inside bookcase; and Every board game must satisfy: board game is inside bookcase; and Every train set must satisfy: train set is inside bookcase"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "putting_shoes_on_rack",
+      "name": "Putting Shoes On Rack",
+      "instruction": "Pick up the two gym shoes and the two sandals from the corridor floor and place them onto the hallstand (shoe rack) in the corridor, making sure they are on the rack and not on the floor. Arrange them so the two gym shoes are next to each other and the two sandals are next to each other.",
+      "rooms": [
+        "corridor"
+      ],
+      "duration": 258,
+      "thumbnail": "https://vumbnail.com/1114058985.jpg",
+      "video": "https://player.vimeo.com/video/1114058985",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "Every sandal must satisfy: sandal is touching hallstand 1; and sandal is not touching floor 1",
+        "Every gym shoe must satisfy: gym shoe is touching hallstand 1; and gym shoe is not touching floor 1",
+        "gym shoe 1 is next to gym shoe 2",
+        "sandal 1 is next to sandal 2"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "boxing_books_up_for_storage",
+      "name": "Boxing Books Up for Storage",
+      "instruction": "Put all six books from the bookcases in the living room into the box on the living room floor.",
+      "rooms": [
+        "living_room"
+      ],
+      "duration": 808,
+      "thumbnail": "https://vumbnail.com/1114059113.jpg",
+      "video": "https://player.vimeo.com/video/1114059113",
+      "scene_model": "house_double_floor_upper",
+      "goal_conditions": [
+        "Every book must satisfy: book is inside box 1"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "storing_food",
+      "name": "Storing Food",
+      "instruction": "Put away all the food on the kitchen countertop by storing it inside the kitchen cabinets: move the two boxes of oatmeal, two bags of chips, two bottles of olive oil, and two jars of sugar from the countertop into the kitchen cabinets (each item can go into either cabinet).",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 662,
+      "thumbnail": "https://vumbnail.com/1114059272.jpg",
+      "video": "https://player.vimeo.com/video/1114059272",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "Every box of oatmeal must satisfy: At least one cabinet must satisfy: box of oatmeal is inside cabinet",
+        "Every bag of chips must satisfy: At least one cabinet must satisfy: bag of chips is inside cabinet",
+        "Every bottle of olive oil must satisfy: At least one cabinet must satisfy: bottle of olive oil is inside cabinet",
+        "Every jar of sugar must satisfy: At least one cabinet must satisfy: jar of sugar is inside cabinet"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "clearing_food_from_table_into_fridge",
+      "name": "Clearing Food from Table into Fridge",
+      "instruction": "Pack the half chicken and the half apple pie from the plates on the breakfast table into the two tupperware containers from the countertop, then put both tupperware containers inside the refrigerator in the kitchen and make sure the refrigerator is closed at the end.",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 436,
+      "thumbnail": "https://vumbnail.com/1114059394.jpg",
+      "video": "https://player.vimeo.com/video/1114059394",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "At least one tupperware must satisfy: half apple pie 1 is inside tupperware",
+        "At least one tupperware must satisfy: half chicken 1 is inside tupperware",
+        "Every tupperware must satisfy: tupperware is inside electric refrigerator 1",
+        "electric refrigerator 1 is closed"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "assembling_gift_baskets",
+      "name": "Assembling Gift Baskets",
+      "instruction": "Place one candle, one butter cookie, one piece of Swiss cheese, and one bow from the table into each of the four wicker baskets on the floor in the living room.",
+      "rooms": [
+        "living_room"
+      ],
+      "duration": 869,
+      "thumbnail": "https://vumbnail.com/1114059476.jpg",
+      "video": "https://player.vimeo.com/video/1114059476",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "Pair the wicker basket objects one-to-one with the candle objects so each paired wicker basket satisfies: candle is inside wicker basket",
+        "Pair the wicker basket objects one-to-one with the swiss cheese objects so each paired wicker basket satisfies: swiss cheese is inside wicker basket",
+        "Pair the wicker basket objects one-to-one with the butter cookie objects so each paired wicker basket satisfies: butter cookie is inside wicker basket",
+        "Pair the wicker basket objects one-to-one with the bow objects so each paired wicker basket satisfies: bow is inside wicker basket"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "sorting_household_items",
+      "name": "Sorting Household Items",
+      "instruction": "From the two baskets on the bedroom floor, take out the items and organize them in the bathroom: place both detergent bottles under the bathroom sink next to each other; put the box of sanitary napkins on the bathroom shelf; set the soap dispenser on the sink; make sure the cup remains on the sink; put both the toothpaste tube and the toothbrush inside the cup.",
+      "rooms": [
+        "bedroom",
+        "bathroom"
+      ],
+      "duration": 527,
+      "thumbnail": "https://vumbnail.com/1114059574.jpg",
+      "video": "https://player.vimeo.com/video/1114059574",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "Every bottle of detergent must satisfy: bottle of detergent is under sink 1",
+        "bottle of detergent 1 is next to bottle of detergent 2",
+        "box of sanitary napkin 1 is on top of shelf 1",
+        "soap dispenser 1 is on top of sink 1",
+        "cup 1 is on top of sink 1",
+        "tube of toothpaste 1 is next to cup 1",
+        "toothbrush 1 is inside cup 1"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "getting_organized_for_work",
+      "name": "Getting Organized For Work",
+      "instruction": "In the bedroom, organize the workspace by keeping the computer under the desk, ensuring the monitor is on the desk, placing the keyboard on the desk next to the monitor, placing the mouse on the desk next to the keyboard, moving the folder from the swivel chair onto the desk next to the mouse, stacking the notebook on top of the folder with the pen on top of the notebook, and positioning the swivel chair next to the desk.",
+      "rooms": [
+        "bedroom"
+      ],
+      "duration": 522,
+      "thumbnail": "https://vumbnail.com/1114059683.jpg",
+      "video": "https://player.vimeo.com/video/1114059683",
+      "scene_model": "house_double_floor_upper",
+      "goal_conditions": [
+        "keyboard 1 is next to monitor 1",
+        "keyboard 1 is on top of desk 1",
+        "computer 1 is under desk 1",
+        "monitor 1 is on top of desk 1",
+        "mouse 1 is next to keyboard 1",
+        "mouse 1 is on top of desk 1",
+        "folder 1 is next to mouse 1",
+        "notebook 1 is on top of folder 1",
+        "pen 1 is on top of notebook 1",
+        "swivel chair 1 is next to desk 1"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "clean_up_your_desk",
+      "name": "Clean Up Your Desk",
+      "instruction": "In the child's room, clean up the desk: put both folders and both paperback books into the bookcase; put the pencil and both pens into the pencil case and leave the case on the desk; take the stapler out of the bookcase and place it on the desk; move the laptop from the bed onto the desk and close it.",
+      "rooms": [
+        "childs_room"
+      ],
+      "duration": 714,
+      "thumbnail": "https://vumbnail.com/1114059839.jpg",
+      "video": "https://player.vimeo.com/video/1114059839",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "Every folder must satisfy: folder is inside bookcase 1",
+        "Every pen must satisfy: pen is inside pencil box 1",
+        "Every paperback book must satisfy: paperback book is inside bookcase 1",
+        "pencil 1 is inside pencil box 1",
+        "stapler 1 is on top of desk 1",
+        "pencil box 1 is on top of desk 1",
+        "laptop 1 is on top of desk 1",
+        "laptop 1 is closed"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "setting_the_fire",
+      "name": "Setting The Fire",
+      "instruction": "In the living room, place the newspaper from the table into the wood fireplace, then put both pieces of firewood from the floor on top of the newspaper. Use the cigar lighter to ignite any one of the items so that the whole pile catches fire, and then turn the lighter off.",
+      "rooms": [
+        "living_room"
+      ],
+      "duration": 304,
+      "thumbnail": "https://vumbnail.com/1114059945.jpg",
+      "video": "https://player.vimeo.com/video/1114059945",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "Every firewood must satisfy: firewood is on fire; and firewood is on top of newspaper 1; and firewood is inside wood fireplace 1",
+        "newspaper 1 is on fire",
+        "cigar lighter 1 is turned off"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "clean_boxing_gloves",
+      "name": "Clean Boxing Gloves",
+      "instruction": "Wash the two dusty boxing gloves from the countertop in the utility room in the washer until they are no longer covered with dust.",
+      "rooms": [
+        "utility_room"
+      ],
+      "duration": 275,
+      "thumbnail": "https://vumbnail.com/1114060008.jpg",
+      "video": "https://player.vimeo.com/video/1114060008",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "Every boxing glove must satisfy: boxing glove is not covered with dust 1"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "wash_a_baseball_cap",
+      "name": "Wash A Baseball Cap",
+      "instruction": "Wash the two baseball caps on the countertop in the utility room using the washer until they are no longer dirty.",
+      "rooms": [
+        "utility_room"
+      ],
+      "duration": 278,
+      "thumbnail": "https://vumbnail.com/1114060147.jpg",
+      "video": "https://player.vimeo.com/video/1114060147",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "Every baseball cap must satisfy: baseball cap is not covered with dirt 1"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "wash_dog_toys",
+      "name": "Wash Dog Toys",
+      "instruction": "In the utility room, take the two teddy toys, the tennis ball, and the softball out of the cabinet and wash them in the washer so that both teddies are free of dirt and dust, the tennis ball has no debris, and the softball has no dirt.",
+      "rooms": [
+        "utility_room"
+      ],
+      "duration": 374,
+      "thumbnail": "https://vumbnail.com/1114060219.jpg",
+      "video": "https://player.vimeo.com/video/1114060219",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "Every teddy must satisfy: teddy is not covered with dirt 1; and teddy is not covered with dust 1",
+        "tennis ball 1 is not covered with debris 1",
+        "softball 1 is not covered with dirt 1"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "hanging_pictures",
+      "name": "Hanging Pictures",
+      "instruction": "Pick up the poster from the kitchen countertop and hang it on one of the wall nails in the kitchen.",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 80,
+      "thumbnail": "https://vumbnail.com/1114060330.jpg",
+      "video": "https://player.vimeo.com/video/1114060330",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "At least one wall nail must satisfy: poster 1 is attached to wall nail"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "attach_a_camera_to_a_tripod",
+      "name": "Attach a Camera to a Tripod",
+      "instruction": "Attach the digital camera to the camera tripod in the bedroom.",
+      "rooms": [
+        "bedroom"
+      ],
+      "duration": 130,
+      "thumbnail": "https://vumbnail.com/1114060393.jpg",
+      "video": "https://player.vimeo.com/video/1114060393",
+      "scene_model": "house_double_floor_upper",
+      "goal_conditions": [
+        "digital camera 1 is attached to camera tripod 1"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "clean_a_patio",
+      "name": "Clean a Patio",
+      "instruction": "Pick up the broom in the garden and sweep the mud off the patio floor until the floor is no longer covered in mud.",
+      "rooms": [
+        "garden"
+      ],
+      "duration": 402,
+      "thumbnail": "https://vumbnail.com/1114060492.jpg",
+      "video": "https://player.vimeo.com/video/1114060492",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "floor 1 is not covered with mud 1"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "clean_a_trumpet",
+      "name": "Clean a Trumpet",
+      "instruction": "In the bedroom, pick up the scrub brush from the desk and scrub the cornet (trumpet) on the desk until it's no longer covered in dust.",
+      "rooms": [
+        "bedroom"
+      ],
+      "duration": 177,
+      "thumbnail": "https://vumbnail.com/1114060606.jpg",
+      "video": "https://player.vimeo.com/video/1114060606",
+      "scene_model": "house_double_floor_upper",
+      "goal_conditions": [
+        "cornet 1 is not covered with dust 1"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "spraying_for_bugs",
+      "name": "Spraying For Bugs",
+      "instruction": "Pick up the pesticide atomizer in the garden and spray insectifuge to fully cover both potted plants in the garden.",
+      "rooms": [
+        "garden"
+      ],
+      "duration": 216,
+      "thumbnail": "https://vumbnail.com/1114060681.jpg",
+      "video": "https://player.vimeo.com/video/1114060681",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "Every pot plant must satisfy: pot plant is covered with insectifuge 1"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "spraying_fruit_trees",
+      "name": "Spraying Fruit Trees",
+      "instruction": "In the garden, pick up the pesticide atomizer on the floor and spray pesticide onto both trees until each tree trunk is fully covered.",
+      "rooms": [
+        "garden"
+      ],
+      "duration": 278,
+      "thumbnail": "https://vumbnail.com/1114060748.jpg",
+      "video": "https://player.vimeo.com/video/1114060748",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "tree 1 is covered with pesticide 1",
+        "tree 2 is covered with pesticide 1"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "make_microwave_popcorn",
+      "name": "Make Microwave Popcorn",
+      "instruction": "In the kitchen, take the popcorn bag from the countertop, put it into the microwave, and heat it until the popcorn is cooked so the cooked popcorn ends up inside the bag.",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 108,
+      "thumbnail": "https://vumbnail.com/1114060842.jpg",
+      "video": "https://player.vimeo.com/video/1114060842",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "cooked popcorn 1 exists",
+        "popcorn bag 1 contains cooked popcorn 1"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "cook_cabbage",
+      "name": "Cook Cabbage",
+      "instruction": "From the kitchen refrigerator, take the cabbage and the chili, dice them on the chopping board with the knife, cook the diced cabbage and diced chili in the frying pan on the stove, and leave the cooked, diced cabbage and cooked, diced chili in the frying pan.",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 471,
+      "thumbnail": "https://vumbnail.com/1114060935.jpg",
+      "video": "https://player.vimeo.com/video/1114060935",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "cooked diced head cabbage 1 exists",
+        "cooked diced chili 1 exists",
+        "frying pan 1 contains cooked diced head cabbage 1",
+        "frying pan 1 contains cooked diced chili 1"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "chop_an_onion",
+      "name": "Chop an Onion",
+      "instruction": "In the kitchen, take the Vidalia onion out of the sink, dice it on the chopping board with the paring knife, put the diced onion into the bowl on the countertop, then place both the paring knife and the chopping board into the sink.",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 213,
+      "thumbnail": "https://vumbnail.com/1114061062.jpg",
+      "video": "https://player.vimeo.com/video/1114061062",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "diced vidalia onion 1 exists",
+        "parer 1 is inside sink 1",
+        "chopping board 1 is inside sink 1",
+        "bowl 1 contains diced vidalia onion 1"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "slicing_vegetables",
+      "name": "Slicing Vegetables",
+      "instruction": "From the refrigerator in the kitchen, take out the two bell peppers, the two beets, and the zucchini. Then, on either chopping board on the countertop, use the parer to dice all of them so that only diced bell pepper, diced beet, and diced zucchini remain. Make sure the refrigerator is closed when you finish.",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 495,
+      "thumbnail": "https://vumbnail.com/1114061183.jpg",
+      "video": "https://player.vimeo.com/video/1114061183",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "diced zucchini 1 exists",
+        "diced bell pepper 1 exists",
+        "diced beet 1 exists",
+        "electric refrigerator 1 is closed",
+        "Every bell pepper must satisfy: bell pepper does not exist",
+        "Every beet must satisfy: beet does not exist",
+        "Every zucchini must satisfy: zucchini does not exist"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "chopping_wood",
+      "name": "Chopping Wood",
+      "instruction": "Chop the four logs on the driveway in the garden into eight half logs using the axe and the chopping block.",
+      "rooms": [
+        "garden"
+      ],
+      "duration": 358,
+      "thumbnail": "https://vumbnail.com/1114061262.jpg",
+      "video": "https://player.vimeo.com/video/1114061262",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "half log 1 exists",
+        "half log 2 exists",
+        "half log 3 exists",
+        "half log 4 exists",
+        "half log 5 exists",
+        "half log 6 exists",
+        "half log 7 exists",
+        "half log 8 exists"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "cook_hot_dogs",
+      "name": "Cook Hot Dogs",
+      "instruction": "Take the two hot dogs out of the refrigerator in the kitchen and cook them in the microwave until both are cooked.",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 305,
+      "thumbnail": "https://vumbnail.com/1114061371.jpg",
+      "video": "https://player.vimeo.com/video/1114061371",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "Every hotdog must satisfy: hotdog is cooked"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "cook_bacon",
+      "name": "Cook Bacon",
+      "instruction": "Take the tray with six slices of bacon out of the refrigerator in the kitchen, cook all six slices in the frying pan on the stove until they're cooked, and make sure the refrigerator is closed when you're done.",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 256,
+      "thumbnail": "https://vumbnail.com/1114061497.jpg",
+      "video": "https://player.vimeo.com/video/1114061497",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "Every bacon must satisfy: bacon is cooked",
+        "electric refrigerator 1 is closed"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "freeze_pies",
+      "name": "Freeze Pies",
+      "instruction": "In the kitchen, take the two apple pies from the plates on the countertop, put each pie into a separate tupperware container taken from the cabinet, place both tupperwares inside the refrigerator, close the refrigerator, and leave them until the pies are frozen.",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 415,
+      "thumbnail": "https://vumbnail.com/1114061625.jpg",
+      "video": "https://player.vimeo.com/video/1114061625",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "Pair the apple pie objects one-to-one with the tupperware objects so each paired apple pie satisfies: apple pie is inside tupperware",
+        "Every tupperware must satisfy: tupperware is inside electric refrigerator 1",
+        "Every apple pie must satisfy: apple pie is frozen",
+        "electric refrigerator 1 is closed"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "canning_food",
+      "name": "Canning Food",
+      "instruction": "In the kitchen, open the refrigerator and the cabinet. Take the steak and the pineapple out of the refrigerator and take two bowls from the cabinet. On the chopping board on the countertop, use the carving knife to dice the steak and to dice the pineapple. Put only the diced steak into one bowl and only the diced pineapple into the other bowl - do not mix them. Place both bowls back inside the cabinet, then close the refrigerator and close the cabinet.",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 766,
+      "thumbnail": "https://vumbnail.com/1114061821.jpg",
+      "video": "https://player.vimeo.com/video/1114061821",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "diced steak 1 exists",
+        "diced pineapple 1 exists",
+        "At least one bowl must satisfy: bowl is filled with diced steak 1; and bowl does not contain diced pineapple 1",
+        "At least one bowl must satisfy: bowl is filled with diced pineapple 1; and bowl does not contain diced steak 1",
+        "Every bowl must satisfy: bowl is inside cabinet 1",
+        "electric refrigerator 1 is closed",
+        "cabinet 1 is closed"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "make_pizza",
+      "name": "Make Pizza",
+      "instruction": "Make a pizza on the cookie sheet in the kitchen: take the grated cheese, the four pieces of pepperoni, and the two mushrooms from their tupperware containers in the refrigerator; chop the Vidalia onion on the chopping board with the knife, and also chop the two whole mushrooms in half; top the pizza dough that's already on the cookie sheet with the cheese, pepperoni, halved mushrooms, and chopped onion; bake it in the oven until it becomes a pizza, and leave the finished pizza on the cookie sheet.",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 640,
+      "thumbnail": "https://vumbnail.com/1114061917.jpg",
+      "video": "https://player.vimeo.com/video/1114061917",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "pizza 1 exists",
+        "pizza 1 is on top of cookie sheet 1"
+      ],
+      "execution_guidance": [],
+      "instruction_source": "curated"
+    },
+    {
+      "id": "freeze_fruit",
+      "name": "Freeze Fruit",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 339,
+      "thumbnail": "https://img.youtube.com/vi/6nM9_B5OoRY/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/6nM9_B5OoRY",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "Pair the apple objects one-to-one with the tupperware objects so each paired apple satisfies: apple is inside tupperware",
+        "Pair the strawberry objects one-to-one with the tupperware objects so each paired strawberry satisfies: strawberry is inside tupperware",
+        "Every tupperware must satisfy: tupperware is inside electric refrigerator 1",
+        "electric refrigerator 1 is closed"
+      ],
+      "execution_guidance": [
+        "Be careful when grasping the apple - don't tip over the bowl",
+        "Each bowl should contain one apple and one strawberry"
+      ],
+      "instruction": "Satisfy all of these final conditions: Pair the apple objects one-to-one with the tupperware objects so each paired apple satisfies: apple is inside tupperware; Pair the strawberry objects one-to-one with the tupperware objects so each paired strawberry satisfies: strawberry is inside tupperware; Every tupperware must satisfy: tupperware is inside electric refrigerator 1; electric refrigerator 1 is closed.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "cook_a_brisket",
+      "name": "Cook A Brisket",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 251,
+      "thumbnail": "https://img.youtube.com/vi/RCSy8B0_s5Y/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/RCSy8B0_s5Y",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "brisket 1 is cooked",
+        "brisket 1 is on top of chopping board 1",
+        "frying pan 1 is on top of countertop 1"
+      ],
+      "execution_guidance": [
+        "Remember to turn off the stove before moving the brisket after it's cooked.",
+        "If the brisket is hard to grasp, rotate it with the gripper to a pose where grasping would be easier."
+      ],
+      "instruction": "Satisfy all of these final conditions: brisket 1 is cooked; brisket 1 is on top of chopping board 1; frying pan 1 is on top of countertop 1.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "sorting_bottles_cans_and_paper",
+      "name": "Sorting Bottles Cans And Paper",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 312,
+      "thumbnail": "https://img.youtube.com/vi/h8-XZ85UxSU/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/h8-XZ85UxSU",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "At least one bucket must satisfy: Every wine bottle must satisfy: wine bottle is inside bucket; and can of soda 1 is not inside bucket; and newspaper 1 is not inside bucket; and magazine 1 is not inside bucket",
+        "At least one bucket must satisfy: Every can of soda must satisfy: can of soda is inside bucket; and wine bottle 1 is not inside bucket; and newspaper 1 is not inside bucket; and magazine 1 is not inside bucket",
+        "At least one bucket must satisfy: Every can of soda must satisfy: can of soda is not inside bucket; and Every wine bottle must satisfy: wine bottle is not inside bucket; and newspaper 1 is inside bucket; and magazine 1 is inside bucket"
+      ],
+      "execution_guidance": [
+        "The newspaper is the largest item and needs to go in the black bucket with the magazine.",
+        "Thin paper items can be slid to the edge of the table to pick them up. Try to do it slowly and smoothly, like how the magazine is picked up in the demo. (The newspaper is moved too fast.)",
+        "Do not knock the bucket over at the end."
+      ],
+      "instruction": "Satisfy all of these final conditions: At least one bucket must satisfy: Every wine bottle must satisfy: wine bottle is inside bucket; and can of soda 1 is not inside bucket; and newspaper 1 is not inside bucket; and magazine 1 is not inside bucket; At least one bucket must satisfy: Every can of soda must satisfy: can of soda is inside bucket; and wine bottle 1 is not inside bucket; and newspaper 1 is not inside bucket; and magazine 1 is not inside bucket; At least one bucket must satisfy: Every can of soda must satisfy: can of soda is not inside bucket; and Every wine bottle must satisfy: wine bottle is not inside bucket; and newspaper 1 is inside bucket; and magazine 1 is inside bucket.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "tidying_living_room",
+      "name": "Tidying Living Room",
+      "rooms": [
+        "living_room"
+      ],
+      "duration": 316,
+      "thumbnail": "https://img.youtube.com/vi/aTCNKnjR03c/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/aTCNKnjR03c",
+      "scene_model": "house_double_floor_upper",
+      "goal_conditions": [
+        "pot plant 1 is on top of coffee table 1",
+        "At least one bookcase must satisfy: hardback 1 is inside bookcase",
+        "newspaper 1 is on top of coffee table 1",
+        "notebook 1 is on top of desk 1"
+      ],
+      "execution_guidance": [
+        "We've changed the goal conditions of this task since the first version. The newspaper and plant should be placed on the coffee table, hardcover book in the bookcase, and notebook on the desk.",
+        "Make sure to reposition the robot so that the grippers are in the head camera field-of-view when placing objects in the bookcase.",
+        "When picking up thin items, you can either use a bimanual strategy to push them into the grippers or push the paper against a corner.",
+        "Try to grip the plant by the pot rather than the leaves.",
+        "Try to place all items nicely on the target surfaces in a desired orientation."
+      ],
+      "instruction": "Satisfy all of these final conditions: pot plant 1 is on top of coffee table 1; At least one bookcase must satisfy: hardback 1 is inside bookcase; newspaper 1 is on top of coffee table 1; notebook 1 is on top of desk 1.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "putting_away_toys",
+      "name": "Putting Away Toys",
+      "rooms": [
+        "dining_room",
+        "living_room"
+      ],
+      "duration": 438,
+      "thumbnail": "https://img.youtube.com/vi/StbSZCTn7D4/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/StbSZCTn7D4",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "Every toy figure must satisfy: At least one toy box must satisfy: toy figure is inside toy box"
+      ],
+      "execution_guidance": [
+        "When placing the toys inside the box, avoid letting them collide with each other, as this can cause unstable or exaggerated bouncing behavior."
+      ],
+      "instruction": "Satisfy all of these final conditions: Every toy figure must satisfy: At least one toy box must satisfy: toy figure is inside toy box.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "re_shelving_library_books",
+      "name": "Re Shelving Library Books",
+      "rooms": [
+        "living_room"
+      ],
+      "duration": 281,
+      "thumbnail": "https://img.youtube.com/vi/AQdhTrye7NQ/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/AQdhTrye7NQ",
+      "scene_model": "house_double_floor_upper",
+      "goal_conditions": [
+        "Every book must satisfy: At least one bookcase must satisfy: book is inside bookcase"
+      ],
+      "execution_guidance": [
+        "Be careful not to bump into the chair or table lamp while pushing the books toward the corner of the desk.",
+        "Place the books upright in the bookcase. You may need to re-grasp them before moving them there.",
+        "Although the demo places all the books in a single compartment of one bookcase, the books may be placed in different compartments across any of the bookcases."
+      ],
+      "instruction": "Satisfy all of these final conditions: Every book must satisfy: At least one bookcase must satisfy: book is inside bookcase.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "make_rose_centerpieces",
+      "name": "Make Rose Centerpieces",
+      "rooms": [
+        "living_room"
+      ],
+      "duration": 111,
+      "thumbnail": "https://img.youtube.com/vi/Nb8kdrf7c_M/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/Nb8kdrf7c_M",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "rose 1 is inside vase 1",
+        "rose 2 is inside vase 1",
+        "rose 3 is inside vase 1",
+        "vase 1 is on top of coffee table 1"
+      ],
+      "execution_guidance": [
+        "Put all three roses inside the vase before moving the vase to the coffee table.",
+        "For the checking system to recognize that the rose is inside the vase, each rose should be upright and their stem should fully be inside the vase",
+        "If after putting the roses, it still doesn't show inside, take the vase to the robot's hand. This movement should stabilize and straighten them in the vase, which will make the system recognize the rose being inside the vase."
+      ],
+      "instruction": "Satisfy all of these final conditions: rose 1 is inside vase 1; rose 2 is inside vase 1; rose 3 is inside vase 1; vase 1 is on top of coffee table 1.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "sweeping_garage",
+      "name": "Sweeping Garage",
+      "rooms": [
+        "garage"
+      ],
+      "duration": 126,
+      "thumbnail": "https://img.youtube.com/vi/0bdsrbEeFEc/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/0bdsrbEeFEc",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "floor 1 is not covered with sand 1",
+        "floor 1 is not covered with dust 1"
+      ],
+      "execution_guidance": [
+        "Seems to be easiest to grab the broom somewhere in the middle of the handle. Too close to the broom side makes it hard to reach all the way down to the floor, while too close to the other end creates too much free movement.",
+        "Be careful not to drag the broom on the floor when navigating.",
+        "The broom can be hovered slightly over the floor instead of touching when sweeping particles to achieve the smoothest motion."
+      ],
+      "instruction": "Satisfy all of these final conditions: floor 1 is not covered with sand 1; floor 1 is not covered with dust 1.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "stacking_wood",
+      "name": "Stacking Wood",
+      "rooms": [
+        "garden"
+      ],
+      "duration": 447,
+      "thumbnail": "https://img.youtube.com/vi/8MDz0GuPlto/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/8MDz0GuPlto",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "Every log must satisfy: log is touching log 1; or log is touching log 2; or log is touching log 3; or log is touching log 4; or log is touching log 5; or log is touching log 6"
+      ],
+      "execution_guidance": [
+        "The demo requires a lot of nudging at the end because there was previously an \"on top\" requirement, but now the success condition should just be that all logs are touching another log.",
+        "Be careful with setting down the logs gently, otherwise they will roll.",
+        "Task should be completed with at least one log stacked on top of the other logs."
+      ],
+      "instruction": "Satisfy all of these final conditions: Every log must satisfy: log is touching log 1; or log is touching log 2; or log is touching log 3; or log is touching log 4; or log is touching log 5; or log is touching log 6.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "organizing_art_supplies",
+      "name": "Organizing Art Supplies",
+      "rooms": [
+        "bedroom"
+      ],
+      "duration": 228,
+      "thumbnail": "https://img.youtube.com/vi/M1D9oCKBJZg/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/M1D9oCKBJZg",
+      "scene_model": "house_double_floor_upper",
+      "goal_conditions": [
+        "glue stick 1 is inside carryall 1",
+        "rubber eraser 1 is inside carryall 1",
+        "paintbrush 1 is inside carryall 1",
+        "marker 1 is inside carryall 1",
+        "carryall 1 is on top of desk 1"
+      ],
+      "execution_guidance": [
+        "Put all four art supplies (glue stick, eraser, paintbrush, and marker) inside the basket.",
+        "Be careful when picking up the small supplies from the desk, avoid pushing them off the surface.",
+        "While releasing items, make sure to lower the heigh and drop them from a lower position."
+      ],
+      "instruction": "Satisfy all of these final conditions: glue stick 1 is inside carryall 1; rubber eraser 1 is inside carryall 1; paintbrush 1 is inside carryall 1; marker 1 is inside carryall 1; carryall 1 is on top of desk 1.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "scrubbing_bathroom_floor",
+      "name": "Scrubbing Bathroom Floor",
+      "rooms": [
+        "bathroom"
+      ],
+      "duration": 123,
+      "thumbnail": "https://img.youtube.com/vi/u9wtUgoB8o8/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/u9wtUgoB8o8",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "floor 1 is not covered with dirt 1"
+      ],
+      "execution_guidance": [
+        "Be careful when navigating between the bathtub and the sink, the space is very narrow and difficult to fit the robot and arms between the two.",
+        "Also be careful to not hit the bathtub when moving the robot body downwards.",
+        "Face the brush down when touching the floor."
+      ],
+      "instruction": "Satisfy all of these final conditions: floor 1 is not covered with dirt 1.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "bringing_paper_to_recycling",
+      "name": "Bringing Paper To Recycling",
+      "rooms": [
+        "kitchen",
+        "garden"
+      ],
+      "duration": 318,
+      "thumbnail": "https://img.youtube.com/vi/5OU6Zq9bGG4/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/5OU6Zq9bGG4",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "sack 1 is inside recycling bin 1",
+        "newspaper 1 is inside recycling bin 1",
+        "recycling bin 1 is closed"
+      ],
+      "execution_guidance": [
+        "Note that the cup was removed in the latest iteration of this task, so the rest of the instructions are the same but ignoring any instructions about the cup.",
+        "Use the robot arm joints to open and close the door, not the items that you're carrying. Make sure to close the door after passing through it.",
+        "Be careful to keep the recycling bin on the floor as you open it."
+      ],
+      "instruction": "Satisfy all of these final conditions: sack 1 is inside recycling bin 1; newspaper 1 is inside recycling bin 1; recycling bin 1 is closed.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "halve_an_egg",
+      "name": "Halve An Egg",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 212,
+      "thumbnail": "https://img.youtube.com/vi/c1YJezdD7oM/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/c1YJezdD7oM",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "half hard boiled egg 1 exists",
+        "half hard boiled egg 2 exists",
+        "half hard boiled egg 1 is on top of plate 1",
+        "half hard boiled egg 2 is on top of plate 1",
+        "carving knife 1 is inside sink 1"
+      ],
+      "execution_guidance": [
+        "Put the egg on the chopping board before cutting it, and hold the knife upright with a top-to-bottom chopping motion.",
+        "After cutting, you need to drop the knife into the sink and grasp each egg half. Since egg halves are small, it is easy to fail a grasp, therefore first make sure the gripper is completely around the egg half and then attempt the grasp.",
+        "No failed grasp is allowed for this task."
+      ],
+      "instruction": "Satisfy all of these final conditions: half hard boiled egg 1 exists; half hard boiled egg 2 exists; half hard boiled egg 1 is on top of plate 1; half hard boiled egg 2 is on top of plate 1; carving knife 1 is inside sink 1.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "installing_smoke_detectors",
+      "name": "Installing Smoke Detectors",
+      "rooms": [
+        "living_room",
+        "kitchen",
+        "garden"
+      ],
+      "duration": 68,
+      "thumbnail": "https://img.youtube.com/vi/gRtLcTllXqQ/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/gRtLcTllXqQ",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "fire alarm 1 is attached to wall nail 1"
+      ],
+      "execution_guidance": [
+        "Please see how the orientations of parts should be from the [visualizations on this link](https://drive.google.com/drive/u/1/folders/1NUvmnwBtM4zz6tN17PEUBG1eTIFGlYGU).",
+        "Use the attachment visualization to locate the wall nail target. For grasping first you should rotate the smoke detector such that the blue line should be orthogonal to the gripper (pointing verticaly to the grippers) and then bring the smoke detector close to that marker before trying to attach it.",
+        "Align the detector with the visualized attachment lines (blue,red,green) on the nail. Avoid pressing hard into the wall or scraping the detector along the surface.",
+        "Detector will snap onto the nail when the error between the lines are lower then some threshold. After it snaps, release the gripper carefully and confirm it stays fixed to the wall nail before ending the demo."
+      ],
+      "instruction": "Satisfy all of these final conditions: fire alarm 1 is attached to wall nail 1.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "setting_the_table",
+      "name": "Setting The Table",
+      "rooms": [
+        "dining_room",
+        "kitchen"
+      ],
+      "duration": 727,
+      "thumbnail": "https://img.youtube.com/vi/Tkf34ap-z8U/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/Tkf34ap-z8U",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "Every plate must satisfy: plate is on top of breakfast table 1",
+        "Pair the plate objects one-to-one with the cupcake objects so each paired plate satisfies: cupcake is on top of plate",
+        "Pair the tablefork objects one-to-one with the plate objects so each paired tablefork satisfies: tablefork is next to plate",
+        "Pair the table knife objects one-to-one with the plate objects so each paired table knife satisfies: table knife is next to plate"
+      ],
+      "execution_guidance": [
+        "Try not to use the cupcake to close the fridge door. Use elbow or put cupcakes on the tabletop before using gripper to close the fridge.",
+        "The end condition the fork and knife should pointing the same way."
+      ],
+      "instruction": "Satisfy all of these final conditions: Every plate must satisfy: plate is on top of breakfast table 1; Pair the plate objects one-to-one with the cupcake objects so each paired plate satisfies: cupcake is on top of plate; Pair the tablefork objects one-to-one with the plate objects so each paired tablefork satisfies: tablefork is next to plate; Pair the table knife objects one-to-one with the plate objects so each paired table knife satisfies: table knife is next to plate.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "unloading_the_car",
+      "name": "Unloading The Car",
+      "rooms": [
+        "garage",
+        "living_room"
+      ],
+      "duration": 378,
+      "thumbnail": "https://img.youtube.com/vi/IBV8nn39hTM/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/IBV8nn39hTM",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "Every briefcase must satisfy: briefcase is next to sofa 1",
+        "Every satchel must satisfy: satchel is next to sofa 1"
+      ],
+      "execution_guidance": [
+        "Open the door before opening the trunk.",
+        "Close the trunk after taking bags out",
+        "Remember to close the door"
+      ],
+      "instruction": "Satisfy all of these final conditions: Every briefcase must satisfy: briefcase is next to sofa 1; Every satchel must satisfy: satchel is next to sofa 1.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "turning_out_all_lights_before_sleep",
+      "name": "Turning Out All Lights Before Sleep",
+      "rooms": [
+        "corridor",
+        "utility_room",
+        "childs_room",
+        "dining_room",
+        "bedroom",
+        "kitchen",
+        "living_room",
+        "bathroom"
+      ],
+      "duration": 337,
+      "thumbnail": "https://img.youtube.com/vi/AN8l_cduvqU/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/AN8l_cduvqU",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "Every switch must satisfy: switch is turned off",
+        "Every table lamp must satisfy: table lamp is turned off"
+      ],
+      "execution_guidance": [
+        "Table lamp is not stable, be careful when toggling it. Avoid making it shakey"
+      ],
+      "instruction": "Satisfy all of these final conditions: Every switch must satisfy: switch is turned off; Every table lamp must satisfy: table lamp is turned off.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "boxing_food_after_dinner",
+      "name": "Boxing Food After Dinner",
+      "rooms": [
+        "dining_room",
+        "kitchen"
+      ],
+      "duration": 240,
+      "thumbnail": "https://img.youtube.com/vi/OmpbFiXPwMo/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/OmpbFiXPwMo",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "Every taco must satisfy: taco is inside tupperware 1",
+        "plate 1 is on top of sink 1",
+        "plate 2 is on top of sink 1",
+        "tupperware 1 is inside electric refrigerator 1",
+        "electric refrigerator 1 is closed"
+      ],
+      "execution_guidance": [
+        "Be careful and drop the tacos into the tupperware as gently as possible."
+      ],
+      "instruction": "Satisfy all of these final conditions: Every taco must satisfy: taco is inside tupperware 1; plate 1 is on top of sink 1; plate 2 is on top of sink 1; tupperware 1 is inside electric refrigerator 1; electric refrigerator 1 is closed.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "cleaning_up_branches_and_twigs",
+      "name": "Cleaning Up Branches And Twigs",
+      "rooms": [
+        "garden"
+      ],
+      "duration": 434,
+      "thumbnail": "https://img.youtube.com/vi/iztsNYYMpv0/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/iztsNYYMpv0",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "Every branch must satisfy: branch is inside recycling bin 1",
+        "recycling bin 1 is on top of floor 1"
+      ],
+      "execution_guidance": [
+        "Be careful not to lift the trash can up when opening it. (Bimanual manipulation is suggested)",
+        "Prefer to grip the thickest part of the branch if possible."
+      ],
+      "instruction": "Satisfy all of these final conditions: Every branch must satisfy: branch is inside recycling bin 1; recycling bin 1 is on top of floor 1.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "vacuuming_floors",
+      "name": "Vacuuming Floors",
+      "rooms": [
+        "bedroom"
+      ],
+      "duration": 65,
+      "thumbnail": "https://img.youtube.com/vi/RqYuT-aj21A/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/RqYuT-aj21A",
+      "scene_model": "house_double_floor_upper",
+      "goal_conditions": [
+        "floor 1 is not covered with dust 1"
+      ],
+      "execution_guidance": [
+        "OK to navigate in this scene with the head camera tilted towards the floor after picking up the vacuum."
+      ],
+      "instruction": "Satisfy all of these final conditions: floor 1 is not covered with dust 1.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "thawing_frozen_food",
+      "name": "Thawing Frozen Food",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 348,
+      "thumbnail": "https://img.youtube.com/vi/FF3HiYSHGdc/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/FF3HiYSHGdc",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "chicken breast 1 is not frozen",
+        "At least one plate must satisfy: chicken breast 1 is on top of plate; and plate is inside microwave 1",
+        "microwave 1 is turned on",
+        "microwave 1 is closed",
+        "electric refrigerator 1 is closed",
+        "bread slice 1 is not frozen",
+        "At least one plate must satisfy: bread slice 1 is on top of plate; and plate is on top of countertop 1"
+      ],
+      "execution_guidance": [
+        "Task should not have failed grasps.",
+        "Do not collide with the refrigerator when grabbing the plates of food."
+      ],
+      "instruction": "Satisfy all of these final conditions: chicken breast 1 is not frozen; At least one plate must satisfy: chicken breast 1 is on top of plate; and plate is inside microwave 1; microwave 1 is turned on; microwave 1 is closed; electric refrigerator 1 is closed; bread slice 1 is not frozen; At least one plate must satisfy: bread slice 1 is on top of plate; and plate is on top of countertop 1.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "clean_your_rusty_garden_tools",
+      "name": "Clean Your Rusty Garden Tools",
+      "rooms": [
+        "garden"
+      ],
+      "duration": 484,
+      "thumbnail": "https://img.youtube.com/vi/tHiesuHDgkc/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/tHiesuHDgkc",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "trowel 1 is not covered with rust 1",
+        "scraper 1 is not covered with rust 1",
+        "trowel 1 is inside toolbox 1",
+        "scraper 1 is inside toolbox 1",
+        "toolbox 1 is closed"
+      ],
+      "execution_guidance": [
+        "Make sure to stand back up between picking up tools.",
+        "Open the toolbox then grab the emery paper. Then grab the trowel and touch it to the emery paper and then navigate to the toolbox and put it inside. Do the same with the shears. Then close the toolbox."
+      ],
+      "instruction": "Satisfy all of these final conditions: trowel 1 is not covered with rust 1; scraper 1 is not covered with rust 1; trowel 1 is inside toolbox 1; scraper 1 is inside toolbox 1; toolbox 1 is closed.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "cook_a_frozen_pie",
+      "name": "Cook A Frozen Pie",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 323,
+      "thumbnail": "https://img.youtube.com/vi/H4z3xTJn058/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/H4z3xTJn058",
+      "scene_model": "restaurant_diner",
+      "goal_conditions": [
+        "apple pie 1 is on top of tray 1",
+        "apple pie 1 is cooked"
+      ],
+      "execution_guidance": [
+        "Open fridge with right hand, then pick up pie with right hand",
+        "Transfer the pie to the other hand before closing the door with right hand.",
+        "Open/close Stove with left hand, turn on the oven with the right hand."
+      ],
+      "instruction": "Satisfy all of these final conditions: apple pie 1 is on top of tray 1; apple pie 1 is cooked.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "organizing_school_stuff",
+      "name": "Organizing School Stuff",
+      "rooms": [
+        "bedroom"
+      ],
+      "duration": 426,
+      "thumbnail": "https://img.youtube.com/vi/GO2Bw-0OY7M/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/GO2Bw-0OY7M",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "folder 1 is inside carryall 1",
+        "book 1 is inside carryall 1",
+        "pencil 1 is inside carryall 1",
+        "pen 1 is inside carryall 1",
+        "calculator 1 is inside carryall 1",
+        "carryall 1 is on top of bed 1"
+      ],
+      "execution_guidance": [
+        "The order for collection is: folder, book, calculator, two pens.",
+        "Collect pens with the right gripper."
+      ],
+      "instruction": "Satisfy all of these final conditions: folder 1 is inside carryall 1; book 1 is inside carryall 1; pencil 1 is inside carryall 1; pen 1 is inside carryall 1; calculator 1 is inside carryall 1; carryall 1 is on top of bed 1.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "carrying_out_garden_furniture",
+      "name": "Carrying Out Garden Furniture",
+      "rooms": [
+        "corridor",
+        "dining_room",
+        "entryway",
+        "garden",
+        "kitchen",
+        "living_room"
+      ],
+      "duration": 358,
+      "thumbnail": "https://img.youtube.com/vi/NCQc0IIRmos/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/NCQc0IIRmos",
+      "scene_model": "house_single_floor",
+      "goal_conditions": [
+        "lawn chair 1 is on top of floor 2",
+        "At least one lawn must satisfy: barrow 1 is on top of lawn"
+      ],
+      "execution_guidance": [
+        "Note that the long lawn chair was resampled into a small chair which is different from the demo video. Both chairs are now the same so they can be carried in either order.",
+        "Also different from the demo video, open the door slightly first and then push it from the other side to avoid wobble, instead of opening it all the way while grasping it.",
+        "Carry the wheelbarrow out by grasping the handles close to the barrow, then moving the robot up so the wheel is in contact with the ground.",
+        "You can carry the chair and barrow out in either order, it is preferred to carry out whatever is closest to the door at start.",
+        "Lift up the chair when carrying so it does not touch the ground during robot movement, which might cause the robot to wobble.",
+        "The chair should be facing the pool.",
+        "In this task, it is fine and expected to have some ghost (red) arms while carrying the chairs or wheelbarrow because it is heavy. Just try to minimize the ghost arm discrepancy when setting the furniture down, right before letting go, to minimize jerky behavior.",
+        "It is fine to use fast movement mode, but do not use it when crossing the door, as that would cause robot to wobble a lot.",
+        "Pushing the lawn chair or barrow before grasping is allowed (e.g. to make way for opening the door, for easier grasp, etc.)",
+        "In general, small robot wobbling is allowed in this task."
+      ],
+      "instruction": "Satisfy all of these final conditions: lawn chair 1 is on top of floor 2; At least one lawn must satisfy: barrow 1 is on top of lawn.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "put_together_a_basic_pruning_kit",
+      "name": "Put Together A Basic Pruning Kit",
+      "rooms": [
+        "garage"
+      ],
+      "duration": 448,
+      "thumbnail": "https://img.youtube.com/vi/UmGRVx-OCac/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/UmGRVx-OCac",
+      "scene_model": "house_double_floor_lower",
+      "goal_conditions": [
+        "toolbox 1 is on top of floor 1",
+        "pruner 1 is inside toolbox 1",
+        "shears 1 is inside toolbox 1",
+        "toolbox 1 is closed"
+      ],
+      "execution_guidance": [
+        "If the toolkit is initialized in a position where opening it would cause collisions with nearby objects (e.g., walls), first shove it away from the obstacles, as shown in the demo video, before opening it. It is acceptable for the head upright constraint to be violated during this adjustment.",
+        "When grasping the pruner, always grasp the handle rather than the blades. It is acceptable for the head upright constraint to be violated while adjusting the grasp position to reach the handle."
+      ],
+      "instruction": "Satisfy all of these final conditions: toolbox 1 is on top of floor 1; pruner 1 is inside toolbox 1; shears 1 is inside toolbox 1; toolbox 1 is closed.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "dispose_of_glass",
+      "name": "Dispose Of Glass",
+      "rooms": [
+        "bathroom",
+        "bedroom"
+      ],
+      "duration": 240,
+      "thumbnail": "https://img.youtube.com/vi/dzVB9aAmnNU/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/dzVB9aAmnNU",
+      "scene_model": "hotel_suite_large",
+      "goal_conditions": [
+        "Every water glass must satisfy: water glass is inside ashcan 1"
+      ],
+      "execution_guidance": [
+        "Take the trash can with both hands. Lower the trunk before grasping it.",
+        "First place the trash can near the sink, on the left end side near the bathroom door / shower door.",
+        "Take two glasses per trip using both end effectors. Grasp with the left end effector first, then the right.",
+        "Place the glasses into the trash can. Do not throw them from above; lower the trunk and arm, then release them from a low height."
+      ],
+      "instruction": "Satisfy all of these final conditions: Every water glass must satisfy: water glass is inside ashcan 1.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "installing_a_modem",
+      "name": "Installing A Modem",
+      "rooms": [
+        "bedroom",
+        "entryway",
+        "kitchen",
+        "living_room"
+      ],
+      "duration": 63,
+      "thumbnail": "https://img.youtube.com/vi/zHEfUkrCWfc/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/zHEfUkrCWfc",
+      "scene_model": "Rs_int",
+      "goal_conditions": [
+        "modem 1 is turned on",
+        "modem 1 is next to television receiver 1",
+        "At least one cabinet must satisfy: television receiver 1 is on top of cabinet; and modem 1 is on top of cabinet"
+      ],
+      "execution_guidance": [
+        "Take the modem with the left hand.",
+        "Place it on the left end side of the television, between the television and the radio.",
+        "After placing it, slowly release the modem and make sure it remains upright.",
+        "Close the left gripper and touch the toggle button slightly."
+      ],
+      "instruction": "Satisfy all of these final conditions: modem 1 is turned on; modem 1 is next to television receiver 1; At least one cabinet must satisfy: television receiver 1 is on top of cabinet; and modem 1 is on top of cabinet.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "make_cabinet_doors",
+      "name": "Make Cabinet Doors",
+      "rooms": [
+        "bedroom",
+        "entryway",
+        "kitchen",
+        "living_room"
+      ],
+      "duration": 120,
+      "thumbnail": "https://img.youtube.com/vi/rqqgwEPTLwk/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/rqqgwEPTLwk",
+      "scene_model": "Rs_int",
+      "goal_conditions": [
+        "cabinet door 1 is attached to cabinet base 1"
+      ],
+      "execution_guidance": [
+        "First take the cabinet door with the left arm. Lower the body before grasping.",
+        "Use the right hand to adjust the cabinet base position, then slowly roll the cabinet base to its side so the inner part faces upward.",
+        "Follow the attachment guide coordinate frames to match the cabinet door and the base.",
+        "Slowly place the cabinet door with the left hand on top of the cabinet base. When the attachment frames are close enough, slowly release the door so it can snap.",
+        "If the door does not snap, use the left arm to adjust it as needed.",
+        "Make sure to raise the trunk after the snap happens."
+      ],
+      "instruction": "Satisfy all of these final conditions: cabinet door 1 is attached to cabinet base 1.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "polishing_shoes",
+      "name": "Polishing Shoes",
+      "rooms": [
+        "bedroom"
+      ],
+      "duration": 363,
+      "thumbnail": "https://img.youtube.com/vi/bSCbEvVJykI/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/bSCbEvVJykI",
+      "scene_model": "hotel_suite_large",
+      "goal_conditions": [
+        "scrub brush 1 is on top of stand 1",
+        "shoe 1 is not covered with dust 1",
+        "shoe 2 is not covered with dust 1",
+        "shoe 1 is next to shoe 2",
+        "At least one footstool must satisfy: shoe 1 is next to footstool; and shoe 2 is next to footstool"
+      ],
+      "execution_guidance": [
+        "Pick up the brush and then switch grip so that the bristles are facing outwards.",
+        "Pick up the shoe with the other hand and clean the dust off of the shoe.",
+        "Place the shoe neatly next to the ottoman at the foot of the bed.",
+        "Repeat with the other shoe, and place it properly next to the corresponding shoe.",
+        "Different from the demo video, do not switch grip on the brush and instead set it down on the table directly."
+      ],
+      "instruction": "Satisfy all of these final conditions: scrub brush 1 is on top of stand 1; shoe 1 is not covered with dust 1; shoe 2 is not covered with dust 1; shoe 1 is next to shoe 2; At least one footstool must satisfy: shoe 1 is next to footstool; and shoe 2 is next to footstool.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "clean_up_broken_glass",
+      "name": "Clean Up Broken Glass",
+      "rooms": [
+        "corridor",
+        "dining_room"
+      ],
+      "duration": 286,
+      "thumbnail": "https://img.youtube.com/vi/qXliGIYzh2w/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/qXliGIYzh2w",
+      "scene_model": "restaurant_diner",
+      "goal_conditions": [
+        "Every broken glass must satisfy: broken glass is inside ashcan 1"
+      ],
+      "execution_guidance": [
+        "Pick up two pieces of broken glass, then place them into the trash can.",
+        "Pick up the final piece of glass and put it in the trash can.",
+        "Grip the glass around the whole piece at the thickest point rather than trying to grasp only one side.",
+        "Try to move other furniture minimally, or move it and replace it only if necessary."
+      ],
+      "instruction": "Satisfy all of these final conditions: Every broken glass must satisfy: broken glass is inside ashcan 1.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "packing_meal_for_delivery",
+      "name": "Packing Meal For Delivery",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 300,
+      "thumbnail": "https://img.youtube.com/vi/DirqFshrOAA/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/DirqFshrOAA",
+      "scene_model": "restaurant_diner",
+      "goal_conditions": [
+        "Pair the wrapped hamburger objects one-to-one with the sack objects so each paired wrapped hamburger satisfies: wrapped hamburger is inside sack",
+        "Every sack must satisfy: sack is on top of storage container 1"
+      ],
+      "execution_guidance": [
+        "For each pair of bag and burger, grab a bag in the left hand and a burger in the right hand. Slide the burger into the bag. We recommend a sideways grip on the burger to make it easy to slot into the bag. Then place the bag into the box."
+      ],
+      "instruction": "Satisfy all of these final conditions: Pair the wrapped hamburger objects one-to-one with the sack objects so each paired wrapped hamburger satisfies: wrapped hamburger is inside sack; Every sack must satisfy: sack is on top of storage container 1.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "store_batteries",
+      "name": "Store Batteries",
+      "rooms": [
+        "bedroom",
+        "entryway",
+        "kitchen",
+        "living_room"
+      ],
+      "duration": 328,
+      "thumbnail": "https://img.youtube.com/vi/jMSkFQy95FY/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/jMSkFQy95FY",
+      "scene_model": "Rs_int",
+      "goal_conditions": [
+        "At least one cabinet must satisfy: Every battery must satisfy: battery is inside cabinet"
+      ],
+      "execution_guidance": [
+        "If you need to move the chair to open the area to the countertop, use the left hand to move the chair aside and use the right hand to grasp the battery.",
+        "Use the left hand again to put the chair back in place. Make the chair placement as stable as possible and make sure it is not very wobbly.",
+        "Go to the cabinet, use the left hand to open it, and place the battery held by the right arm into the cabinet.",
+        "Rotate toward the coffee table carefully and avoid colliding with the table.",
+        "For the coffee table batteries, grasp first with the left hand, then with the right hand.",
+        "If something is far away, do not approach too closely if that would cause a collision. Lean the body forward to reach instead."
+      ],
+      "instruction": "Satisfy all of these final conditions: At least one cabinet must satisfy: Every battery must satisfy: battery is inside cabinet.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "store_honey",
+      "name": "Store Honey",
+      "rooms": [
+        "bedroom",
+        "entryway",
+        "kitchen",
+        "living_room"
+      ],
+      "duration": 193,
+      "thumbnail": "https://img.youtube.com/vi/oFu38YPgVEU/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/oFu38YPgVEU",
+      "scene_model": "Rs_int",
+      "goal_conditions": [
+        "jar of honey 1 is inside cabinet 1"
+      ],
+      "execution_guidance": [
+        "If you need to move the chair to open the area to the countertop, use the left hand to move the chair aside and use the right hand to grasp the honey pot.",
+        "Important: use the left hand again to put the chair back in place. Make the chair placement as stable as possible and make sure it is not very wobbly. This is not shown in the video, but this step should still be executed.",
+        "Carefully navigate to the kitchen side. This area is tight and requires precision.",
+        "Use the left hand to open the cabinet, place the honey from the right arm into the cabinet on its side, and close the cabinet."
+      ],
+      "instruction": "Satisfy all of these final conditions: jar of honey 1 is inside cabinet 1.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "tidying_bathroom",
+      "name": "Tidying Bathroom",
+      "rooms": [
+        "bathroom"
+      ],
+      "duration": 541,
+      "thumbnail": "https://img.youtube.com/vi/EdKc0cKLITw/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/EdKc0cKLITw",
+      "scene_model": "hotel_suite_large",
+      "goal_conditions": [
+        "bar soap 1 is on top of soap dish 1",
+        "tissue dispenser 1 is on top of sink 1",
+        "toilet tissue 1 is on top of toilet 1",
+        "cork 1 is inside ashcan 1"
+      ],
+      "execution_guidance": [
+        "Grab the toilet paper with the right hand and the tissue box with the left hand (on the box, not the tissue) and then stand up.",
+        "Place the tissue box next to the sink on the left. Place the toilet paper on top of the toilet in the bathroom.",
+        "Grab the soap dish with one hand and the soap with the other. Place the soap dish on the right of the sink, then the soap on top of the dish.",
+        "Grab the cork and drop it into the trash can."
+      ],
+      "instruction": "Satisfy all of these final conditions: bar soap 1 is on top of soap dish 1; tissue dispenser 1 is on top of sink 1; toilet tissue 1 is on top of toilet 1; cork 1 is inside ashcan 1.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "putting_dirty_dishes_in_sink",
+      "name": "Putting Dirty Dishes In Sink",
+      "rooms": [
+        "kitchen",
+        "dining_room"
+      ],
+      "duration": 337,
+      "thumbnail": "https://img.youtube.com/vi/SCX0NPFlMhI/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/SCX0NPFlMhI",
+      "scene_model": "restaurant_diner",
+      "goal_conditions": [
+        "Every bowl must satisfy: bowl is inside sink 1",
+        "Every plate must satisfy: plate is inside sink 1"
+      ],
+      "execution_guidance": [
+        "Navigate to the table with dishes and grab both bowls.",
+        "Open the gate to the counter with the arm (not the dish) and then walk behind the bar. Open the door to the kitchen again with the arm or the body. (Leave both open for now).",
+        "Drop both bowls into the sink gently.",
+        "Go back and grab both plates.",
+        "This time, close the gate and the kitchen door on the way back to the sink. Try to keep it visible from the head camera."
+      ],
+      "instruction": "Satisfy all of these final conditions: Every bowl must satisfy: bowl is inside sink 1; Every plate must satisfy: plate is inside sink 1.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "make_gift_bags_for_baby_showers",
+      "name": "Make Gift Bags For Baby Showers",
+      "rooms": [
+        "living_room"
+      ],
+      "duration": 242,
+      "thumbnail": "https://img.youtube.com/vi/EY42jyNoEh8/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/EY42jyNoEh8",
+      "scene_model": "Rs_int",
+      "goal_conditions": [
+        "Every sack must satisfy: sack is on top of coffee table 1",
+        "Pair the toy dice objects one-to-one with the sack objects so each paired toy dice satisfies: toy dice is inside sack",
+        "Pair the wafer objects one-to-one with the sack objects so each paired wafer satisfies: wafer is inside sack"
+      ],
+      "execution_guidance": [
+        "The wafers will always spawn inside one of the two upper cabinet drawers due to reachability constraints.",
+        "Open the cabinet drawer with the right gripper. When opening the drawer, move the base backward rather than pulling primarily with the arm.",
+        "To grasp a wafer:",
+        "Align the robot with the wafer’s vertical orientation.",
+        "Raise the torso as high as possible.",
+        "Approach the wafer from above with a top-down gripper orientation.",
+        "Lower the torso until the wafer is reachable, then grasp it.",
+        "After grasping the wafer, close the cabinet drawer with the left gripper.",
+        "Grasp a toy dice with the left gripper.",
+        "Navigate to a paper bag and place both the wafer and toy dice inside.",
+        "Repeat the process for the second wafer, toy dice, and paper bag.",
+        "Even if both wafers spawn in the same drawer, maintain the following sequence:",
+        "Grasp the first wafer.",
+        "Grasp the first toy dice.",
+        "Create the first gift bag.",
+        "Grasp the second wafer.",
+        "Grasp the second toy dice.",
+        "Create the second gift bag.",
+        "After both gift bags have been created, grasp one gift bag with each gripper.",
+        "When grasping a paper bag, make sure to grasp only the bag itself. In the demo, the gripper touches the wafer when grasping the bag; do not do this, as it will be reported as a failed grasp.",
+        "Navigate to the coffee table and place both gift bags on it."
+      ],
+      "instruction": "Satisfy all of these final conditions: Every sack must satisfy: sack is on top of coffee table 1; Pair the toy dice objects one-to-one with the sack objects so each paired toy dice satisfies: toy dice is inside sack; Pair the wafer objects one-to-one with the sack objects so each paired wafer satisfies: wafer is inside sack.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "collecting_aluminum_cans",
+      "name": "Collecting Aluminum Cans",
+      "rooms": [
+        "bedroom"
+      ],
+      "duration": 325,
+      "thumbnail": "https://img.youtube.com/vi/QRgCjhEdNzA/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/QRgCjhEdNzA",
+      "scene_model": "hotel_suite_large",
+      "goal_conditions": [
+        "Every can of soda must satisfy: can of soda is inside bucket 1"
+      ],
+      "execution_guidance": [
+        "Repeat the following sequence:",
+        "Grasp a can with the right gripper.",
+        "Grasp a second can with the left gripper.",
+        "Toss both cans into the bucket."
+      ],
+      "instruction": "Satisfy all of these final conditions: Every can of soda must satisfy: can of soda is inside bucket 1.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "rearrange_your_room",
+      "name": "Rearrange Your Room",
+      "rooms": [
+        "bedroom",
+        "bathroom"
+      ],
+      "duration": 515,
+      "thumbnail": "https://img.youtube.com/vi/PuP9DeUF4K4/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/PuP9DeUF4K4",
+      "scene_model": "hotel_suite_large",
+      "goal_conditions": [
+        "At least one stand must satisfy: tissue dispenser 1 is on top of stand",
+        "Pair the pillow objects one-to-one with the bed objects so each paired pillow satisfies: pillow is on top of bed"
+      ],
+      "execution_guidance": [
+        "Grab the napkin box not the napkin.",
+        "Put the pillow at the top of the bed.",
+        "To avoid collision, pushing in the chair under the desk before passing it. Lowering the robot's height will make it easier to push."
+      ],
+      "instruction": "Satisfy all of these final conditions: At least one stand must satisfy: tissue dispenser 1 is on top of stand; Pair the pillow objects one-to-one with the bed objects so each paired pillow satisfies: pillow is on top of bed.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "installing_a_fax_machine",
+      "name": "Installing A Fax Machine",
+      "rooms": [
+        "corridor",
+        "shared_office"
+      ],
+      "duration": 148,
+      "thumbnail": "https://img.youtube.com/vi/v1CrUuIN0lY/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/v1CrUuIN0lY",
+      "scene_model": "office_cubicles_right",
+      "goal_conditions": [
+        "facsimile 1 is turned on",
+        "At least one carrel must satisfy: facsimile 1 is on top of carrel"
+      ],
+      "execution_guidance": [
+        "Pick up the fax machine by right gripper and poke the button with the left gripper closed, open the left gripper afterwards.",
+        "With fax machien in right hand, go to the nearest desk at the back (Don't go to the front one because the opening is not big enough for the robot to enter)",
+        "Then push the chair with the left hand."
+      ],
+      "instruction": "Satisfy all of these final conditions: facsimile 1 is turned on; At least one carrel must satisfy: facsimile 1 is on top of carrel.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "composting_waste",
+      "name": "Composting Waste",
+      "rooms": [
+        "entryway",
+        "kitchen",
+        "living_room"
+      ],
+      "duration": 115,
+      "thumbnail": "https://img.youtube.com/vi/RR3PLEFcdYg/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/RR3PLEFcdYg",
+      "scene_model": "Rs_int",
+      "goal_conditions": [
+        "half banana 1 is inside ashcan 1",
+        "half pomegranate 1 is inside ashcan 1"
+      ],
+      "execution_guidance": [
+        "The kitchen is narrow, so set the trash bin close to the corner otherwise the robot will collide with it."
+      ],
+      "instruction": "Satisfy all of these final conditions: half banana 1 is inside ashcan 1; half pomegranate 1 is inside ashcan 1.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "store_produce",
+      "name": "Store Produce",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 316,
+      "thumbnail": "https://img.youtube.com/vi/jppOziwq7xI/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/jppOziwq7xI",
+      "scene_model": "restaurant_diner",
+      "goal_conditions": [
+        "At least one electric refrigerator must satisfy: Every pomegranate must satisfy: pomegranate is inside electric refrigerator; and Every mango must satisfy: mango is inside electric refrigerator"
+      ],
+      "execution_guidance": [
+        "Grasp the basket with both hands, first with the left gripper and then with the right gripper.",
+        "Navigate to the countertop next to the refrigerator.",
+        "Open the right gripper so the basket is supported only by the left hand. Lift the basket and slowly pour/drop the fruit onto the countertop.",
+        "Navigate to the first refrigerator and use the right hand to open the door.",
+        "Return to the countertop, grasp one fruit with the right hand first and then one fruit with the left hand. Navigate back to the refrigerator and place both fruits inside.",
+        "Repeat the fruit transfer twice so all fruit ends up in the refrigerator.",
+        "At the end, use the right hand to close the refrigerator door."
+      ],
+      "instruction": "Satisfy all of these final conditions: At least one electric refrigerator must satisfy: Every pomegranate must satisfy: pomegranate is inside electric refrigerator; and Every mango must satisfy: mango is inside electric refrigerator.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "installing_a_scanner",
+      "name": "Installing A Scanner",
+      "rooms": [
+        "private_office"
+      ],
+      "duration": 122,
+      "thumbnail": "https://img.youtube.com/vi/fVy3dPNOBYk/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/fVy3dPNOBYk",
+      "scene_model": "office_cubicles_right",
+      "goal_conditions": [
+        "scanner 1 is turned on",
+        "scanner 1 is next to laptop 1"
+      ],
+      "execution_guidance": [
+        "Use both arms to grasp the scanner. Grasp the scanner with the left gripper while using the right gripper for support (to prevent it from being pushed away).",
+        "Toggle the scanner on using the right gripper.",
+        "Place the scanner immediately to the right of the notebook, with the toggle button facing upward. Try to keep the scanner neatly aligned with the notebook and maintain a tidy orientation."
+      ],
+      "instruction": "Satisfy all of these final conditions: scanner 1 is turned on; scanner 1 is next to laptop 1.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "clean_a_keyboard",
+      "name": "Clean A Keyboard",
+      "rooms": [
+        "private_office"
+      ],
+      "duration": 142,
+      "thumbnail": "https://img.youtube.com/vi/yEV3cFqyu-4/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/yEV3cFqyu-4",
+      "scene_model": "office_cubicles_right",
+      "goal_conditions": [
+        "keyboard 1 is not covered with dust 1"
+      ],
+      "execution_guidance": [
+        "Grab the pipe cleaner brush (scaled up slightly from the demo video). If necessary for navigation, the office chair can be pushed into the desk.",
+        "Go over the keyboard with the brush."
+      ],
+      "instruction": "Satisfy all of these final conditions: keyboard 1 is not covered with dust 1.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "dispose_of_batteries",
+      "name": "Dispose Of Batteries",
+      "rooms": [
+        "copy_room",
+        "corridor",
+        "private_office",
+        "shared_office"
+      ],
+      "duration": 441,
+      "thumbnail": "https://img.youtube.com/vi/TmJ7dNwDyws/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/TmJ7dNwDyws",
+      "scene_model": "office_cubicles_right",
+      "goal_conditions": [
+        "Every battery must satisfy: battery is inside ashcan 1",
+        "ashcan 1 is on top of floor 1"
+      ],
+      "execution_guidance": [
+        "(different from the demo video) Grab the trash can with the right hand first.",
+        "Grab the battery from the cabinet with the left hand and place it into the trash can.",
+        "Navigate to the private office room down the hall to the left.",
+        "Open the door.",
+        "For each of the batteries on the desk, grab it with the left hand and place it into the trash can.",
+        "Be careful when navigating through the office door and the table, as it is easy to collide with the edges. If necessary to reach the battery, the chairs may be moved or pushed around."
+      ],
+      "instruction": "Satisfy all of these final conditions: Every battery must satisfy: battery is inside ashcan 1; ashcan 1 is on top of floor 1.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "cook_brussels_sprouts",
+      "name": "Cook Brussels Sprouts",
+      "rooms": [
+        "bar",
+        "corridor",
+        "kitchen"
+      ],
+      "duration": 687,
+      "thumbnail": "https://img.youtube.com/vi/9XPaPQmWAgI/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/9XPaPQmWAgI",
+      "scene_model": "restaurant_diner",
+      "goal_conditions": [
+        "Every half brussels sprouts must satisfy: half brussels sprouts exists; and half brussels sprouts is cooked; and half brussels sprouts is inside oven 1",
+        "electric refrigerator 1 is closed",
+        "oven 1 is closed"
+      ],
+      "execution_guidance": [
+        "Navigate to the refrigerator.",
+        "Open the door of the refrigerator.",
+        "Grab the tupperware with the brussel sprouts.",
+        "Place it next to the cutting board.",
+        "Grab the knife.",
+        "Reposition the cutting board if necessary.",
+        "Reposition the tray if necessary.",
+        "Pour the brussel sprouts onto the cutting board.",
+        "For each brussel sprout, grab it with one hand and slice it with the knife with the other. If one half is still in the gripper, place it onto the tray. Otherwise grip each half and place it onto the tray.",
+        "Navigate to the oven and open the door.",
+        "Navigate back to the tray and pick it up.",
+        "Place the tray into the oven. Close the oven door and then turn on the oven."
+      ],
+      "instruction": "Satisfy all of these final conditions: Every half brussels sprouts must satisfy: half brussels sprouts exists; and half brussels sprouts is cooked; and half brussels sprouts is inside oven 1; electric refrigerator 1 is closed; oven 1 is closed.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "cook_broccolini",
+      "name": "Cook Broccolini",
+      "rooms": [
+        "kitchen"
+      ],
+      "duration": 137,
+      "thumbnail": "https://img.youtube.com/vi/NXoYiAs_KCs/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/NXoYiAs_KCs",
+      "scene_model": "restaurant_diner",
+      "goal_conditions": [
+        "Every clove must satisfy: clove is on top of frying pan 1; and clove is cooked",
+        "Every broccolini must satisfy: broccolini is on top of frying pan 1; and broccolini is cooked",
+        "frying pan 1 is on top of stove 1"
+      ],
+      "execution_guidance": [
+        "Navigate to the countertop near the plate.",
+        "Grasp the plate with the left arm.",
+        "Carefully navigate to the pan while keeping the plate level, since the vegetables can fall off.",
+        "Roll/tip the plate over the pan so that all broccolini and cloves end up in the pan.",
+        "Use the right hand to grasp the pan.",
+        "Place the pan on the left-end back slot of the stove.",
+        "After setting the pan down, close the right gripper before using it to touch the control.",
+        "Turn on the stove/oven by touching the red button."
+      ],
+      "instruction": "Satisfy all of these final conditions: Every clove must satisfy: clove is on top of frying pan 1; and clove is cooked; Every broccolini must satisfy: broccolini is on top of frying pan 1; and broccolini is cooked; frying pan 1 is on top of stove 1.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "setup_a_bar_for_a_cocktail_party",
+      "name": "Setup A Bar For A Cocktail Party",
+      "rooms": [
+        "bar"
+      ],
+      "duration": 350,
+      "thumbnail": "https://img.youtube.com/vi/3V0ySKyGKRw/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/3V0ySKyGKRw",
+      "scene_model": "restaurant_diner",
+      "goal_conditions": [
+        "wine bottle 1 is on top of countertop 1",
+        "Every can of soda must satisfy: (can of soda is next to can of soda 1; or can of soda is next to can of soda 2; or can of soda is next to can of soda 3); and can of soda is on top of countertop 1",
+        "Every ice cube must satisfy: ice cube is inside bucket 1",
+        "bucket 1 is on top of countertop 1",
+        "Every wineglass must satisfy: wineglass is on top of countertop 1",
+        "At least one wineglass must satisfy: wineglass is next to wine bottle 1",
+        "wineglass 1 is next to wineglass 2",
+        "corkscrew 1 is on top of countertop 1",
+        "corkscrew 1 is next to wine bottle 1"
+      ],
+      "execution_guidance": [
+        "Pick up the two wineglasses from the cabinet, one in each hand. Place them onto the countertop next to each other.",
+        "Pick up the wine bottle and the corkscrew. Place the wine bottle next to one of the wineglasses and the corkscrew next to the wine bottle. If necessary the gripper can be used to nudge the items closer after setting it down to satisfy the \"nextto\" condition.",
+        "Open the fridge. Using the right hand, move each of the three cans onto the countertop. Set them next to each other.",
+        "Carefully grab the tray with ice from the fridge. (Centering the tray edge in the middle of the gripper frame can help minimize jerky movements at grip time).",
+        "Navigate to the bucket on the cabinet and pour the ice into the bucket.",
+        "Set the tray down on the cabinet.",
+        "(different from demo video) Close the fridge door.",
+        "Pick up the bucket and set it down on the countertop."
+      ],
+      "instruction": "Satisfy all of these final conditions: wine bottle 1 is on top of countertop 1; Every can of soda must satisfy: (can of soda is next to can of soda 1; or can of soda is next to can of soda 2; or can of soda is next to can of soda 3); and can of soda is on top of countertop 1; Every ice cube must satisfy: ice cube is inside bucket 1; bucket 1 is on top of countertop 1; Every wineglass must satisfy: wineglass is on top of countertop 1; At least one wineglass must satisfy: wineglass is next to wine bottle 1; wineglass 1 is next to wineglass 2; corkscrew 1 is on top of countertop 1; corkscrew 1 is next to wine bottle 1.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "laying_tile_floors",
+      "name": "Laying Tile Floors",
+      "rooms": [
+        "bathroom",
+        "corridor"
+      ],
+      "duration": 520,
+      "thumbnail": "https://img.youtube.com/vi/a3OjMFaaSs8/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/a3OjMFaaSs8",
+      "scene_model": "office_cubicles_right",
+      "goal_conditions": [
+        "Every tile must satisfy: tile is on top of floor 2",
+        "Every tile must satisfy: tile is next to tile 1; or tile is next to tile 2; or tile is next to tile 3; or tile is next to tile 4"
+      ],
+      "execution_guidance": [
+        "Grasp the tiles that are closest to the bathroom first.",
+        "When grasping a tile, it is helpful to place both fingers of the gripper to make contact with the tile before making the grasp.",
+        "When grasping a second tile while already holding the first one, lift the first tile sufficiently high before attempting the second grasp. Otherwise, it is easy for the held tile to collide with the floor.",
+        "Be extremely careful when passing through the doorway. The clearance is very tight, so keep the arms tucked in and avoid extending them unnecessarily.Pay attention not only to the shoulders but also to the base, as base collisions are common.",
+        "Place the tiles on the floor in front of the window, as shown in the demo.",
+        "Start by placing the first two tiles in the center. Then place the remaining two tiles on either side to form a straight line.",
+        "Try to align the tiles as neatly as possible and maintain a clean, straight arrangement."
+      ],
+      "instruction": "Satisfy all of these final conditions: Every tile must satisfy: tile is on top of floor 2; Every tile must satisfy: tile is next to tile 1; or tile is next to tile 2; or tile is next to tile 3; or tile is next to tile 4.",
+      "instruction_source": "bddl_generated"
+    },
+    {
+      "id": "sorting_books_on_shelf",
+      "name": "Sorting Books On Shelf",
+      "rooms": [
+        "living_room"
+      ],
+      "duration": 200,
+      "thumbnail": "https://img.youtube.com/vi/wXUyDWyvpRA/hqdefault.jpg",
+      "video": "https://www.youtube.com/embed/wXUyDWyvpRA",
+      "scene_model": "house_double_floor_upper",
+      "goal_conditions": [
+        "Every comic book must satisfy: comic book is inside bookcase 1",
+        "Exactly 2 comic book object(s) must satisfy: comic book is on top of comic book 1; or comic book is on top of comic book 2; or comic book is on top of comic book 3",
+        "Every notebook must satisfy: notebook is inside bookcase 1",
+        "At least one notebook must satisfy: notebook is on top of notebook 1; or notebook is on top of notebook 2",
+        "Every hardback must satisfy: hardback is inside bookcase 1",
+        "At least one hardback must satisfy: hardback is on top of hardback 1; or hardback is on top of hardback 2"
+      ],
+      "execution_guidance": [
+        "Hardback books are the thick mint and blue books with simple graphics on the cover.",
+        "Notebooks are the blue and gray spiral-bound items.",
+        "Comic books are the ones with illustrations and Japanese text.",
+        "The books are initially arranged across four shelf compartments as follows:",
+        "`hardback_1`",
+        "`notebook_2` stacked on top of `comic_book_1`",
+        "`comic_book_2` stacked on top of `notebook_1`",
+        "`hardback_2` stacked on top of `comic_book_3`",
+        "Navigate to the shelf and position the robot so that `hardback_2` (the thick mint-colored book) can be reached comfortably.",
+        "Grasp `hardback_2` with the right gripper and place it on top of `hardback_1` (the thick blue-colored book).",
+        "Pick up `notebook_2` (blue notebook with spring) and `comic_book_2`, using either gripper for each object as convenient.",
+        "Place `notebook_2` on top of `notebook_1` (grey notebook with spring).",
+        "Place `comic_book_2` on top of `comic_book_3`.",
+        "Grasp `comic_book_1` with the right gripper and place it on top of `comic_book_2`."
+      ],
+      "instruction": "Satisfy all of these final conditions: Every comic book must satisfy: comic book is inside bookcase 1; Exactly 2 comic book object(s) must satisfy: comic book is on top of comic book 1; or comic book is on top of comic book 2; or comic book is on top of comic book 3; Every notebook must satisfy: notebook is inside bookcase 1; At least one notebook must satisfy: notebook is on top of notebook 1; or notebook is on top of notebook 2; Every hardback must satisfy: hardback is inside bookcase 1; At least one hardback must satisfy: hardback is on top of hardback 1; or hardback is on top of hardback 2.",
+      "instruction_source": "bddl_generated"
+    }
+  ]
+}

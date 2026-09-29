@@ -1,0 +1,17 @@
+diff --git a/corelib/src/rtflann/algorithms/kdtree_index.h b/corelib/src/rtflann/algorithms/kdtree_index.h
+index 06b1ec1b..9785ac01 100644
+--- a/corelib/src/rtflann/algorithms/kdtree_index.h
++++ b/corelib/src/rtflann/algorithms/kdtree_index.h
+@@ -678,8 +678,10 @@ protected:
+         /* Construct the randomized trees. */
+         for (int i = 0; i < trees_; i++) {
+             /* Randomize the order of vectors to allow for unbiased sampling. */
+-            std::random_device rd;
+-            std::mt19937 g(rd());
++            // Reproducible SLAM requires identical descriptors to build the
++            // same approximate index in each process. Tree diversity is kept
++            // by assigning every tree a distinct deterministic seed.
++            std::mt19937 g(0x52544142U + static_cast<unsigned int>(i));
+             std::shuffle(ind.begin(), ind.end(), g);
+             tree_roots_[i] = divideTree(&ind[0], int(size_) );
+         }

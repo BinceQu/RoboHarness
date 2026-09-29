@@ -1,0 +1,25 @@
+{
+  "task": "picking_up_toys",
+  "instance_id": 304,
+  "rollout_id": 0,
+  "steps": 16609,
+  "success": false,
+  "agent_distance": {
+    "base": 23.187826291880583,
+    "left": 75.32793575058759,
+    "right": 83.87937808461061
+  },
+  "normalized_agent_distance": {
+    "base": 2.0290388330394995,
+    "left": 0.2708835679177739,
+    "right": 0.2569558870388715
+  },
+  "q_score": {
+    "final": 0.6666666666666666
+  },
+  "time": {
+    "simulator_steps": 16608,
+    "simulator_time": 553.6,
+    "normalized_time": 1.1374367774566474
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "task": "task00",
+  "task_index": 0,
+  "task_name": "turning_on_radio",
+  "scene": "house_double_floor_lower",
+  "protocol": "archived-v391-x2",
+  "evaluator_commit": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+  "max_steps": 4299,
+  "sample_seed": 20260911,
+  "evaluator_seed": 0,
+  "model": "Qwen3.8-Flash-Next-FP8",
+  "harness": "claude_code",
+  "robot_profile": "r1pro_8dof_hf250",
+  "annotator": "cpu",
+  "idle_gate": true,
+  "spatial_map": false,
+  "cases": [
+    {
+      "instance_id": 301,
+      "slot": 0,
+      "prompt": "prompt/task00/recovered_f8da4e6ee555.txt",
+      "prompt_sha256": "f8da4e6ee555d10f15652248e3f62d7bc0b02bf3fd27115f5af0392ce0ec058b",
+      "prompt_source": "test_results/task00/agent_sessions/t00p15060i0-09161944/session.json",
+      "prompt_source_sha256": "c7feafb348008cc1841b4169d7a110c20783f925d969923b5bc4253e88245336",
+      "matching_prompt_filenames": [],
+      "reference_result": "reference_results/task00/turning_on_radio_301_0.json",
+      "reference_sha256": "b556990bb3148c89ec68f2ef7ef82c16a6fc4518390c019bb29ec495977b7529",
+      "reference_source": "test_results/task00/eval_runs/t00-15060-09152118/p15060/output/json.quarantine-5test-09172314/turning_on_radio_301_0.json",
+      "reference_q": 1.0,
+      "reference_steps": 4731,
+      "notes": [
+        "Archive manifest reports mean 0.4; the coherent 5test result set reports 0.6. See docs/provenance.md.",
+        "Historical evaluator reported 4731 steps, exceeding the planned 4299-step budget. New runs keep the declared budget; this overrun is not reproduced by silently increasing it."
+      ],
+      "source_session_id": "t00p15060i0-09161944",
+      "archive_reported_q": 0.0
+    },
+    {
+      "instance_id": 304,
+      "slot": 3,
+      "prompt": "prompt/task00/v24_3c86ccc27027.txt",
+      "prompt_sha256": "3c86ccc27027deb565a2075c6e313580ad7c65635cb6c9f0738a77c35f6d12d8",
+      "prompt_source": "test_results/task00/agent_sessions/t00p15060i3-09162209/session.json",
+      "prompt_source_sha256": "aa4828133427e8c5c7313919d5c0d70291a95e7ac681fed5cdcb1de74807aa19",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v24.txt"
+      ],
+      "reference_result": "reference_results/task00/turning_on_radio_304_0.json",
+      "reference_sha256": "d41306fe8182e34d082058e6426df1f6372fdec28c14a261a9e89b2eb2443b4c",
+      "reference_source": "test_results/task00/eval_runs/t00-15060-09152118/p15060/output/json.quarantine-5test-09172314/turning_on_radio_304_0.json",
+      "reference_q": 0.0,
+      "reference_steps": 4300,
+      "notes": [
+        "Archive manifest reports mean 0.4; the coherent 5test result set reports 0.6. See docs/provenance.md."
+      ],
+      "source_session_id": "t00p15060i3-09162209",
+      "archive_reported_q": 0.0
+    },
+    {
+      "instance_id": 306,
+      "slot": 5,
+      "prompt": "prompt/task00/v24_3c86ccc27027.txt",
+      "prompt_sha256": "3c86ccc27027deb565a2075c6e313580ad7c65635cb6c9f0738a77c35f6d12d8",
+      "prompt_source": "test_results/task00/agent_sessions/t00p15060i5-09171213/session.json",
+      "prompt_source_sha256": "0ed3933a684e933131e6beb6f989d449591603a24951b2e64ecc8e828ad3fbdd",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v24.txt"
+      ],
+      "reference_result": "reference_results/task00/turning_on_radio_306_0.json",
+      "reference_sha256": "ed4f05dbc792937667b5e312252e653899af7bdd5c462bd0f91ce4c34ad9be23",
+      "reference_source": "test_results/task00/eval_runs/t00-15060-09171200/p15060/output/json.quarantine-5test-09172314/turning_on_radio_306_0.json",
+      "reference_q": 0.0,
+      "reference_steps": 4300,
+      "notes": [
+        "Archive manifest reports mean 0.4; the coherent 5test result set reports 0.6. See docs/provenance.md."
+      ],
+      "source_session_id": "t00p15060i5-09171213",
+      "archive_reported_q": 0.0
+    },
+    {
+      "instance_id": 308,
+      "slot": 7,
+      "prompt": "prompt/task00/v24_3c86ccc27027.txt",
+      "prompt_sha256": "3c86ccc27027deb565a2075c6e313580ad7c65635cb6c9f0738a77c35f6d12d8",
+      "prompt_source": "test_results/task00/agent_sessions/t00p15060i7-09171540/session.json",
+      "prompt_source_sha256": "9da96826967fc9c3bed2bbd84ccd7ad1ab94ee90ef3a7e65a1bba0130d9ed389",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v24.txt"
+      ],
+      "reference_result": "reference_results/task00/turning_on_radio_308_0.json",
+      "reference_sha256": "b539cbfe7a718b9780086ddcf68d61eaf590c6e56d031d5e97b097070ff2145b",
+      "reference_source": "test_results/task00/eval_runs/t00-15060-09171200/p15060/output/json.quarantine-5test-09172314/turning_on_radio_308_0.json",
+      "reference_q": 1.0,
+      "reference_steps": 2154,
+      "notes": [
+        "Archive manifest reports mean 0.4; the coherent 5test result set reports 0.6. See docs/provenance.md."
+      ],
+      "source_session_id": "t00p15060i7-09171540",
+      "archive_reported_q": 1.0
+    },
+    {
+      "instance_id": 310,
+      "slot": 9,
+      "prompt": "prompt/task00/v24_3c86ccc27027.txt",
+      "prompt_sha256": "3c86ccc27027deb565a2075c6e313580ad7c65635cb6c9f0738a77c35f6d12d8",
+      "prompt_source": "test_results/task00/agent_sessions/t00p15060i9-09171640/session.json",
+      "prompt_source_sha256": "64bd8eaa67c6a1c5502fb0e26e7a1bc462d42615b4d6f3074b99638b43290e8d",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v24.txt"
+      ],
+      "reference_result": "reference_results/task00/turning_on_radio_310_0.json",
+      "reference_sha256": "97d08f7de77002ec092dc3c17edb14ebf26268104011e04a8f372c7ca4acd61e",
+      "reference_source": "test_results/task00/eval_runs/t00-15060-09171200/p15060/output/json.quarantine-5test-09172314/turning_on_radio_310_0.json",
+      "reference_q": 1.0,
+      "reference_steps": 5400,
+      "notes": [
+        "Archive manifest reports mean 0.4; the coherent 5test result set reports 0.6. See docs/provenance.md.",
+        "Historical evaluator reported 5400 steps, exceeding the planned 4299-step budget. New runs keep the declared budget; this overrun is not reproduced by silently increasing it."
+      ],
+      "source_session_id": "t00p15060i9-09171640",
+      "archive_reported_q": 1.0
+    }
+  ],
+  "reference_mean_q": 0.6,
+  "archive_reported_mean_q": 0.4,
+  "archive_report_source": "test_results/task00/manifest.json",
+  "archive_report_sha256": "9773fad5f8b0bdd2d18cedd7b5c652b69fd080488e0e11a95eb56cb6a331681c"
+}

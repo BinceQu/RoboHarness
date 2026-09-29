@@ -1,0 +1,25 @@
+{
+  "task": "cleaning_up_plates_and_food",
+  "instance_id": 304,
+  "rollout_id": 0,
+  "steps": 16801,
+  "success": false,
+  "agent_distance": {
+    "base": 26.399149649649452,
+    "left": 64.18199786879664,
+    "right": 72.74811153121071
+  },
+  "normalized_agent_distance": {
+    "base": 1.3627105599016027,
+    "left": 0.22732386782078137,
+    "right": 0.2741610686545896
+  },
+  "q_score": {
+    "final": 0.2857142857142857
+  },
+  "time": {
+    "simulator_steps": 16801,
+    "simulator_time": 560.0333333333333,
+    "normalized_time": 0.8152008808999465
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "task": "task08",
+  "task_index": 8,
+  "task_name": "rearranging_kitchen_furniture",
+  "scene": "house_double_floor_lower",
+  "protocol": "archived-v391-x2",
+  "evaluator_commit": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+  "max_steps": 17886,
+  "sample_seed": 20260911,
+  "evaluator_seed": 0,
+  "model": "Qwen3.8-Flash-Next-FP8",
+  "harness": "claude_code",
+  "robot_profile": "r1pro_8dof_hf250",
+  "annotator": "cpu",
+  "idle_gate": true,
+  "spatial_map": false,
+  "cases": [
+    {
+      "instance_id": 301,
+      "slot": 0,
+      "prompt": "prompt/task08/v25_1e749a118ef1.txt",
+      "prompt_sha256": "1e749a118ef1108dc0deddb70481dba2e8d438972649c69221e2602413901422",
+      "prompt_source": "work/agent_monitor/t08_rearranging_kitchen_furniture/t08p15068i0-09181510/session.json",
+      "prompt_source_sha256": "b0b1c900553c11165289be7a10f603a41a8c4f652d0b65bde096607328da1262",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v25.txt"
+      ],
+      "reference_result": "reference_results/task08/rearranging_kitchen_furniture_301_0.json",
+      "reference_sha256": "08fa4ccdf9f624bc91f8c0737ad8ff2e3bd3cf025c82206813308c5005bbf24e",
+      "reference_source": "test_results/task08/instance_301/rearranging_kitchen_furniture_301_0.json",
+      "reference_q": 0.25,
+      "reference_steps": 17887,
+      "notes": [
+        "Prompt recovered from the matching monitor session outside test_results; session ID is recorded in the archived session_end JSON."
+      ],
+      "source_session_id": "t08p15068i0-09181510"
+    },
+    {
+      "instance_id": 304,
+      "slot": 3,
+      "prompt": "prompt/task08/v25_1e749a118ef1.txt",
+      "prompt_sha256": "1e749a118ef1108dc0deddb70481dba2e8d438972649c69221e2602413901422",
+      "prompt_source": "work/agent_monitor/t08_rearranging_kitchen_furniture/t08p15068i3-0919202825-193b84074c8c/session.json",
+      "prompt_source_sha256": "0949e26da41535c293f2914261258c1deab93035bf98b669e250b8ba86a718f3",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v25.txt"
+      ],
+      "reference_result": "reference_results/task08/rearranging_kitchen_furniture_304_0.json",
+      "reference_sha256": "d6bba4b40b9dd9c04a0cce25ad9886e443881af0ad7559410498257f0272302f",
+      "reference_source": "test_results/task08/instance_304/rearranging_kitchen_furniture_304_0.json",
+      "reference_q": 0.5,
+      "reference_steps": 17887,
+      "notes": [
+        "Prompt recovered from the matching monitor session outside test_results; session ID is recorded in the archived session_end JSON."
+      ],
+      "source_session_id": "t08p15068i3-0919202825-193b84074c8c"
+    },
+    {
+      "instance_id": 306,
+      "slot": 5,
+      "prompt": "prompt/task08/v25_1e749a118ef1.txt",
+      "prompt_sha256": "1e749a118ef1108dc0deddb70481dba2e8d438972649c69221e2602413901422",
+      "prompt_source": "work/agent_monitor/t08_rearranging_kitchen_furniture/t08p15068i5-09182346/session.json",
+      "prompt_source_sha256": "b74a82c7cb5d7c7ae6b91810eff6fa4f8d7e77ef606f3ed224a1079711581fa8",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v25.txt"
+      ],
+      "reference_result": "reference_results/task08/rearranging_kitchen_furniture_306_0.json",
+      "reference_sha256": "667ba2cdec867aecaf12ba6a1ba745ba59d152cb13c2707d11485f0a2573956a",
+      "reference_source": "test_results/task08/instance_306/rearranging_kitchen_furniture_306_0.json",
+      "reference_q": 0.25,
+      "reference_steps": 17887,
+      "notes": [
+        "Prompt recovered from the matching monitor session outside test_results; session ID is recorded in the archived session_end JSON."
+      ],
+      "source_session_id": "t08p15068i5-09182346"
+    },
+    {
+      "instance_id": 308,
+      "slot": 7,
+      "prompt": "prompt/task08/v25_1e749a118ef1.txt",
+      "prompt_sha256": "1e749a118ef1108dc0deddb70481dba2e8d438972649c69221e2602413901422",
+      "prompt_source": "work/agent_monitor/t08_rearranging_kitchen_furniture/t08p15068i7-09190728/session.json",
+      "prompt_source_sha256": "47958a19e45744e25a721e9ac863373b8924f1cb687d13506e0de7dab854ea27",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v25.txt"
+      ],
+      "reference_result": "reference_results/task08/rearranging_kitchen_furniture_308_0.json",
+      "reference_sha256": "b7de2f8b4af17f6a7a6d4572f193fcfee56370d0c6a2491879f2c46f0e4e3350",
+      "reference_source": "test_results/task08/instance_308/rearranging_kitchen_furniture_308_0.json",
+      "reference_q": 0.5,
+      "reference_steps": 17887,
+      "notes": [
+        "Prompt recovered from the matching monitor session outside test_results; session ID is recorded in the archived session_end JSON."
+      ],
+      "source_session_id": "t08p15068i7-09190728"
+    },
+    {
+      "instance_id": 310,
+      "slot": 9,
+      "prompt": "prompt/task08/v25_1e749a118ef1.txt",
+      "prompt_sha256": "1e749a118ef1108dc0deddb70481dba2e8d438972649c69221e2602413901422",
+      "prompt_source": "work/agent_monitor/t08_rearranging_kitchen_furniture/t08p15068i9-09191341/session.json",
+      "prompt_source_sha256": "ac4bd6edb300b50563c97fba90538fa1f958f2307c57b7a9056fc071bf737686",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v25.txt"
+      ],
+      "reference_result": "reference_results/task08/rearranging_kitchen_furniture_310_0.json",
+      "reference_sha256": "aebcbd0ef49403164f66fe6bae23e8e82a54449402b1b4379cb92d8ee02da2de",
+      "reference_source": "test_results/task08/instance_310/rearranging_kitchen_furniture_310_0.json",
+      "reference_q": 0.5,
+      "reference_steps": 17887,
+      "notes": [
+        "Prompt recovered from the matching monitor session outside test_results; session ID is recorded in the archived session_end JSON."
+      ],
+      "source_session_id": "t08p15068i9-09191341"
+    }
+  ],
+  "reference_mean_q": 0.4,
+  "archive_reported_mean_q": 0.4
+}

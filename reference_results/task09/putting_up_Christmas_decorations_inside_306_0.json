@@ -1,0 +1,25 @@
+{
+  "task": "putting_up_Christmas_decorations_inside",
+  "instance_id": 306,
+  "rollout_id": 0,
+  "steps": 21165,
+  "success": false,
+  "agent_distance": {
+    "base": 36.23878085665221,
+    "left": 126.50981143620243,
+    "right": 120.78194099873656
+  },
+  "normalized_agent_distance": {
+    "base": 1.1403694887934956,
+    "left": 0.13238340813151667,
+    "right": 0.1865808730481963
+  },
+  "q_score": {
+    "final": 0.3333333333333333
+  },
+  "time": {
+    "simulator_steps": 21165,
+    "simulator_time": 705.5,
+    "normalized_time": 0.648181431608788
+  }
+}

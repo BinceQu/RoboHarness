@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "task": "task03",
+  "task_index": 3,
+  "task_name": "cleaning_up_plates_and_food",
+  "scene": "house_double_floor_lower",
+  "protocol": "archived-v391-x2",
+  "evaluator_commit": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+  "max_steps": 27392,
+  "sample_seed": 20260911,
+  "evaluator_seed": 0,
+  "model": "Qwen3.8-Flash-Next-FP8",
+  "harness": "claude_code",
+  "robot_profile": "r1pro_8dof_hf250",
+  "annotator": "cpu",
+  "idle_gate": true,
+  "spatial_map": false,
+  "cases": [
+    {
+      "instance_id": 301,
+      "slot": 0,
+      "prompt": "prompt/task03/v4_11b5ae18163a.txt",
+      "prompt_sha256": "11b5ae18163af2168ba6603649782a2c4ab6fd1ca41eff4b9bb7ed001671b4b6",
+      "prompt_source": "test_results/task03/06_claude_transcripts/claude_t03p15063i0-09152328_301.jsonl",
+      "prompt_source_sha256": "f05ef5d7e525533f87e8313fff26b9c44f7f827e10887451352639f1e98d0ce1",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v4.txt"
+      ],
+      "reference_result": "reference_results/task03/cleaning_up_plates_and_food_301_0.json",
+      "reference_sha256": "9e8c999af6c3763413d78780d8d17e85623841a25a7ec8ead31e709d05d577f9",
+      "reference_source": "test_results/task03/01_official_json/cleaning_up_plates_and_food_301_0.json",
+      "reference_q": 0.2857142857142857,
+      "reference_steps": 19969,
+      "notes": []
+    },
+    {
+      "instance_id": 304,
+      "slot": 3,
+      "prompt": "prompt/task03/v4_11b5ae18163a.txt",
+      "prompt_sha256": "11b5ae18163af2168ba6603649782a2c4ab6fd1ca41eff4b9bb7ed001671b4b6",
+      "prompt_source": "test_results/task03/06_claude_transcripts/claude_t03p15063i3-09171808_304.jsonl",
+      "prompt_source_sha256": "c66fb5b28c37320ed5c6e3b586e45b740d47f190255cb9876578d32f130ebbf5",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v4.txt"
+      ],
+      "reference_result": "reference_results/task03/cleaning_up_plates_and_food_304_0.json",
+      "reference_sha256": "1ef895af29761649e92422fa63ebf190ac0a354abf16043ce053911837f20a6b",
+      "reference_source": "test_results/task03/01_official_json/cleaning_up_plates_and_food_304_0.json",
+      "reference_q": 0.2857142857142857,
+      "reference_steps": 16801,
+      "notes": []
+    },
+    {
+      "instance_id": 306,
+      "slot": 5,
+      "prompt": "prompt/task03/v4_11b5ae18163a.txt",
+      "prompt_sha256": "11b5ae18163af2168ba6603649782a2c4ab6fd1ca41eff4b9bb7ed001671b4b6",
+      "prompt_source": "test_results/task03/06_claude_transcripts/claude_t03p15063i5-09180547_306.jsonl",
+      "prompt_source_sha256": "abf46514cabced8b430ad49a4918f67d32b0bba372b77338c3a8376527980137",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v4.txt"
+      ],
+      "reference_result": "reference_results/task03/cleaning_up_plates_and_food_306_0.json",
+      "reference_sha256": "6ebf346769226fbe13d0a051d699bbd0fe9c2b39219b96496667e18e1643dfaf",
+      "reference_source": "test_results/task03/01_official_json/cleaning_up_plates_and_food_306_0.json",
+      "reference_q": 0.2857142857142857,
+      "reference_steps": 13336,
+      "notes": []
+    },
+    {
+      "instance_id": 308,
+      "slot": 7,
+      "prompt": "prompt/task03/v4_11b5ae18163a.txt",
+      "prompt_sha256": "11b5ae18163af2168ba6603649782a2c4ab6fd1ca41eff4b9bb7ed001671b4b6",
+      "prompt_source": "test_results/task03/06_claude_transcripts/claude_t03p15063i7-09181140_308.jsonl",
+      "prompt_source_sha256": "c075a03da39ad1f891734059de03e2de395734062c2849aefbf59e7c34f49676",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v4.txt"
+      ],
+      "reference_result": "reference_results/task03/cleaning_up_plates_and_food_308_0.json",
+      "reference_sha256": "f39e7c767004e312d6855fdf024953817a20bff41958b2c715d4c36940555c0c",
+      "reference_source": "test_results/task03/01_official_json/cleaning_up_plates_and_food_308_0.json",
+      "reference_q": 0.14285714285714285,
+      "reference_steps": 27393,
+      "notes": []
+    },
+    {
+      "instance_id": 310,
+      "slot": 9,
+      "prompt": "prompt/task03/v4_11b5ae18163a.txt",
+      "prompt_sha256": "11b5ae18163af2168ba6603649782a2c4ab6fd1ca41eff4b9bb7ed001671b4b6",
+      "prompt_source": "test_results/task03/06_claude_transcripts/claude_t03p15063i9-09182135_310.jsonl",
+      "prompt_source_sha256": "d930d7065a7c1985026587998f3a6ddc2a7737d12017db1b272128f945e5d2bc",
+      "matching_prompt_filenames": [
+        "embodied_claude_code_qwen38-flash-next-fp8_v4.txt"
+      ],
+      "reference_result": "reference_results/task03/cleaning_up_plates_and_food_310_0.json",
+      "reference_sha256": "96841802b3624eb0668dd945104b886a0678e616c00b5cbd0c7a7ff42f6cf1f5",
+      "reference_source": "test_results/task03/01_official_json/cleaning_up_plates_and_food_310_0.json",
+      "reference_q": 0.2857142857142857,
+      "reference_steps": 6645,
+      "notes": []
+    }
+  ],
+  "reference_mean_q": 0.2571428571428571,
+  "archive_reported_mean_q": 0.2571428571428571
+}

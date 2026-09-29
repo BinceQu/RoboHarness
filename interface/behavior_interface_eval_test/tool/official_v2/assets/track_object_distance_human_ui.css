@@ -1,0 +1,129 @@
+.v2-named-picker {
+  width: min(520px, 90vw);
+  max-width: 100%;
+}
+
+.v2-named-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 5px;
+}
+
+.v2-named-toolbar button,
+.v2-named-remove {
+  height: 28px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: #21262d;
+  color: var(--fg);
+  cursor: pointer;
+}
+
+.v2-named-toolbar button:hover,
+.v2-named-remove:hover {
+  border-color: var(--accent);
+  background: #30363d;
+}
+
+.v2-named-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.v2-named-row {
+  display: grid;
+  grid-template-columns: 28px minmax(120px, 1fr) minmax(112px, auto) 32px;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+}
+
+.v2-named-row input {
+  width: 100%;
+  min-width: 0;
+  height: 29px;
+  padding: 4px 7px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: #0d1117;
+  color: var(--fg);
+  font-size: 12px;
+}
+
+.v2-named-row input:focus {
+  border-color: var(--accent);
+  outline: 1px solid var(--accent);
+}
+
+.v2-named-index {
+  font-weight: 700;
+  text-align: center;
+}
+
+.v2-named-coordinate {
+  color: var(--muted);
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.v2-named-remove {
+  width: 28px;
+  padding: 0;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.v2-named-marker {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transform: translate(-11px, -11px);
+  white-space: nowrap;
+}
+
+.v2-named-marker-index {
+  width: 22px;
+  height: 22px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  color: #fff;
+  background: #000b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  flex: 0 0 auto;
+}
+
+.v2-named-marker-label {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 2px 5px;
+  border-radius: 3px;
+  background: #000c;
+  color: #fff;
+  font-size: 11px;
+  line-height: 16px;
+}
+
+@media (max-width: 560px) {
+  .v2-named-row {
+    grid-template-columns: 24px minmax(100px, 1fr) 32px;
+  }
+
+  .v2-named-coordinate {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .v2-named-remove {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+  }
+}

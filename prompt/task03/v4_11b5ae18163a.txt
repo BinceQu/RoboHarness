@@ -1,0 +1,105 @@
+This is a new cleaning_up_plates_and_food episode on
+port 15063. The live task is cleaning_up_plates_and_food.
+Stay on this episode and this task. Do not reset.
+Do not start a new spawn. Do not switch tasks.
+
+This session's only job: put both empty bowls from the
+breakfast table into the kitchen sink. Do not touch the
+pizzas, the plates, or the refrigerator. Do not open or
+close the fridge. Do not pick up pizza.
+
+There are exactly two empty bowls on the breakfast table.
+Work one unused bowl at a time. Unused means still on the
+table, not already inside the sink.
+
+The only allowed task Skills are pick-up-object and
+place-object-in-container. Do not activate any other Skill.
+Do not activate navigate-to-target. Do not use mark_on_map
+or query_map. Ignore any map overlay.
+
+Keep at most one task Skill active. After a task Skill's
+success and required post-actions, call deactivate_skill
+with that Skill's name and return to the baseline and this
+parent task. You may also deactivate to cancel or hand
+control back. Deactivation does not move the robot.
+
+Every click uses the current head image. u and v are
+integers in 0..1000. If u or v is 1001 or larger, do not
+call the tool. Recapture and click again on that new image.
+Do not reuse u/v from an older image_id.
+
+The breakfast table, chairs, and any open fridge door are
+obstacles. Do not drive into, under, or through them.
+After any spin, read the new blue chassis corridor and
+chassis_forward_2m. If that corridor crosses a table, chair,
+or door, or the nearest object is closer than the forward
+you would send plus 0.25 m, do not call that forward.
+Side-step or spin on clear floor instead.
+
+When you take a bowl off this table, do not reach across
+the tabletop. First decide which table edge that bowl is
+nearest, drive to that edge, turn to face the table, then
+call move_to_reach_point on that bowl. Finish this approach
+before you activate pick-up-object.
+
+First tool: capture_head_camera.
+
+1. Find the breakfast table and the two empty bowls.
+   Look around with adjust_pitch and spin / adjust_chassis
+   until a current head image shows both bowls, or at least
+   one unused bowl. Do not start picking until a current
+   image shows a bowl body.
+
+2. For each unused bowl:
+   a. Recapture. If that bowl is not in view, look around
+      until it is. Stay near this table until the grasp.
+   b. On that current image, look at the four outer edges
+      of the breakfast table and that unused bowl. Decide
+      which one table edge is nearest to that bowl. That
+      is the working edge. It is a table rim, not a chair
+      and not the tabletop center.
+   c. Drive with adjust_chassis on clear floor to a stand
+      beside that same working edge. Stop short of the
+      table lip. Do not go under the table. Do not clip a
+      table leg or a chair. If the blue corridor crosses
+      the table or a chair, back up or side-step first,
+      then a shorter move. Recapture after each chassis
+      move and keep that working edge in front of you.
+   d. Recapture. Rotate in place to face the table. Call
+      spin_to_facing_point on the tabletop near that bowl,
+      or on the bowl itself. That call only yaws. Do not
+      send forward or translation on the same call.
+   e. Recapture. Call move_to_reach_point on that bowl
+      body or rim, not the tabletop, not a plate, and not
+      pizza. Call it only when the blue corridor does not
+      cross the table or a chair. If it does, you are
+      still on the wrong side: go back to (b) and use the
+      nearer edge.
+   f. Then activate_skill with name="pick-up-object" and
+      follow only that Skill. Click the solid bowl rim or
+      bowl body, not the hollow interior, not the table,
+      not a plate, and not pizza. After the Skill's
+      success and required post-actions, deactivate_skill
+      with name="pick-up-object".
+   g. Carry the held bowl to the kitchen sink. Go around
+      the table and chairs on clear floor. If the sink is
+      not in view, look around until a current image shows
+      the open sink basin.
+   h. activate_skill with name="place-object-in-container"
+      and put the held bowl into that sink. Click the open
+      sink basin interior, not the faucet, not the counter,
+      and not a bowl already inside. Then deactivate_skill
+      with name="place-object-in-container".
+   i. Recapture. Confirm that bowl is inside the sink.
+      Then do the remaining unused bowl the same way,
+      including the nearest-edge approach.
+
+A bowl on the table, the floor, or the counter is not
+inside the sink. If a bowl is dropped outside the sink,
+pick it again and place it into the basin.
+
+Stop only after a current head image shows both empty
+bowls inside the same kitchen sink. Then end the session
+immediately so the evaluator can score this episode.
+Do not pick anything else. Do not go to the fridge.
+Do not keep driving after both bowls are in.

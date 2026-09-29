@@ -1,0 +1,171 @@
+Port 15066. The live task is
+putting_up_Christmas_decorations_inside.
+Do not reset. Do not start a new spawn. Do not switch tasks.
+
+Do these two jobs only, then stop so the episode can be
+scored. Do not put candles or candy canes on a table.
+Do not pick spilled wreath, canes, or candles one by one.
+
+A. Put every gift box under or right next to the Christmas
+   tree, one box at a time.
+B. Find the wicker basket, carry it to a living-room sofa,
+   and dump everything still inside it onto that sofa.
+
+There are exactly three gift boxes: red-wrapped cubes with
+a yellow ribbon on the light wood floor. The Christmas tree
+is the green indoor tree in the living room, not a dining
+chair, not a stool, and not a plant on the deck. The basket
+is the brown wicker basket on the living-room floor. It
+holds a wreath, three candy canes, and two pillar candles.
+The sofa is a dark living-room sofa, not a dining chair and
+not a kitchen stool.
+
+Do not use mark_on_map or query_map. Ignore any map overlay.
+Do not activate navigate-to-target.
+Do not activate place-object-in-container. Do not use plan_place.
+
+Keep at most one task Skill active. After a task Skill's success
+and required post-actions, call deactivate_skill with that
+Skill's name and return to the baseline and this parent task.
+You may also deactivate to cancel or hand control back.
+Deactivation does not move the robot.
+
+Every click uses the current 720 x 720 head image. u and v are
+integers in 0..719. If u or v is 720 or larger, do not call the
+tool. Recapture and click again on that new image. Do not
+reuse u/v from an older image_id.
+
+Never drive the chassis onto a gift box, the basket, or the
+tree. Never spin or reverse over a box. If a gift box, the
+basket, or the tree is on the blue path, stop, then spin or
+translate onto clear floor and go around it. A nearby_object
+warning about a gift box is a crush risk, not a reason to
+push through.
+
+If failed moves have left the arms tangled, off-screen, or
+blocking the view so you cannot judge or move cleanly, stop
+nudging. Call set_arm_to_grasp_position to reset the messy
+arm or both arms, recapture, then continue. Do not do that
+while a gripper still holds a box or the basket.
+
+Do these steps in order. First tool: capture_head_camera.
+
+1. Put each unused gift box under or right next to the tree,
+   one by one. Unused means still on the open floor away
+   from the tree, not already under, next to, or touching
+   that tree.
+
+   If a gripper already holds a gift box, keep that gripper
+   closed. Skip the pick for that box. Carry and drop it
+   at the tree, then go to the next unused box.
+
+   If the tree is not in view, look around with adjust_pitch
+   and spin / adjust_chassis until a current head image
+   shows it. Stay on clear wood floor.
+
+   For each unused box still on the floor:
+   a. Recapture. If that box is not in view, look around
+      until it is. Drive on clear floor only. Go around
+      furniture, chairs, the tree, the basket, and other
+      boxes. Do not use navigate-to-target.
+   b. activate_skill with name="pick-up-object" and follow
+      only that Skill until that one box is visually
+      confirmed in one gripper and the Skill's required
+      stow is done. Click the gift-box body or ribbon, not
+      the floor, not another box, not the tree, not the
+      basket, and not a box already at the tree. After
+      exec_plan_pose, look at the returned wrist image
+      only, not ok/error/timeout/stall. If the grasp
+      volume already covers that box, close_gripper
+      immediately. Do not exec the same plan again.
+      A gift box is large: after the grasp, stow with
+      reset_body keep_ori_arm=the holding arm. Do not
+      set_arm_to_grasp_position. Do not open the holding
+      gripper. When the stow returns, exit pick-up-object.
+      Carry and drop are parent-task work.
+   c. Carry that held box to the Christmas tree. Keep the
+      holding gripper closed. Recapture. If the tree is
+      not in view, look around until it is.
+   d. On a current head image, click a wood-floor point at
+      the base of that tree — closer to the robot than the
+      trunk, on floor, not on the tree, not on a sofa, and
+      not on another box. u,v in 0..719. Call
+      move_to_reach_point with that current image_id, u,
+      and v only. The blue path must be clear of the trunk.
+      If the tree is off to one side, first spin so the
+      trunk is ahead, recapture, re-click, then
+      move_to_reach_point.
+   e. As soon as the chassis is next to that tree, call
+      open_gripper on the holding arm only. Drop the box
+      on that floor. Do not lower it. Do not track a
+      bottom point. Do not wait for a z gate. Confirm the
+      box sits under, next to, or touching the tree, then
+      go to the next unused box.
+
+   After a box is under or next to the tree, do not pick it
+   again. Do not spin or drive over a box you already
+   dropped.
+
+2. Dump the basket onto a living-room sofa.
+   Recapture. Find the brown wicker basket. If it is not
+   in view, look around until it is. Do not pick a gift
+   box in this step.
+
+   If a gripper already holds that basket, keep it closed.
+   Skip the pick. Go to the carry.
+
+   Otherwise activate_skill with name="pick-up-object" and
+   follow only that Skill until the basket is visually
+   confirmed in one gripper and the Skill's required stow
+   is done. Click solid basket material: rim, wall, or
+   handle. Not a wreath, not a candy cane, not a candle,
+   not the empty interior, and not the floor. After
+   exec_plan_pose, look at the returned wrist image only.
+   If the grasp volume already covers that basket,
+   close_gripper immediately. Do not exec the same plan
+   again.
+
+   The basket is large. After the grasp, stow with
+   reset_body keep_ori_arm=the holding arm. Do not open
+   the holding gripper. When the stow returns, exit
+   pick-up-object. Carry and dump are parent-task work.
+
+   Carry the held basket to a dark living-room sofa. Keep
+   the holding gripper closed. Recapture. Choose one sofa
+   and keep it. If none is in view, look around until one
+   is. Prefer a sofa you can stand next to on clear floor
+   without driving over gift boxes.
+
+   On a current head image, click a point on that sofa's
+   seat cushion — fabric seat, not the backrest top, not
+   the floor, not a gift box, and not the tree. u,v in
+   0..719. Call move_to_reach_point with that current
+   image_id, u, and v only. The blue path must be clear.
+   If the sofa is off to one side, first spin so the seat
+   is ahead, recapture, re-click, then move_to_reach_point.
+
+   As soon as the chassis is next to that sofa, call
+   open_gripper on the holding arm only. Drop the basket
+   onto or over that seat. Do not lower it. Do not track a
+   bottom point. Do not wait for a z gate. Wreath, candy
+   canes, and candles may spill onto the sofa. That is
+   intended.
+
+   Recapture. If the basket sits on the sofa and those
+   decorations are on the seat, you are done with this
+   step. If the basket has tipped onto its side and
+   decorations are still inside, do not keep grasping the
+   rim or reaching into the opening. Grasp the basket
+   BOTTOM, lift, and flip it so the contents fall onto
+   that same sofa seat. If the spill landed on the floor
+   next to the sofa, pick the basket again the same way
+   and dump it over the seat once more. Do not start
+   picking wreath, canes, or candles as separate objects.
+
+Stop when a look-around shows all three gift boxes on the
+floor under or right next to the Christmas tree, and the
+wreath, candy canes, and pillar candles are on that sofa
+seat (the empty or tipped basket may sit on the sofa or
+the floor beside it). Then end the session immediately so
+the evaluator can score this episode. Do not pick anything
+else. Do not keep driving after that check.

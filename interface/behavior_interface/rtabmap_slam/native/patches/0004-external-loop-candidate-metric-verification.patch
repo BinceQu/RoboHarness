@@ -1,0 +1,106 @@
+diff --git a/corelib/include/rtabmap/core/Rtabmap.h b/corelib/include/rtabmap/core/Rtabmap.h
+--- a/corelib/include/rtabmap/core/Rtabmap.h
++++ b/corelib/include/rtabmap/core/Rtabmap.h
+@@ -226,6 +226,15 @@ public:
+ 			const cv::Mat & odomCovariance = cv::Mat::eye(6,6,CV_64FC1),
+ 			const std::vector<float> & odomVelocity = std::vector<float>(),
+ 			const std::map<std::string, float> & externalStats = std::map<std::string, float>());
++	/**
++	 * @brief Submit one historical node as a loop-closure candidate for the next process().
++	 *
++	 * This bypasses only Bayesian appearance-candidate selection. The normal
++	 * RGB-D registration, ICP, covariance and graph-consistency checks still run
++	 * before RTAB-Map may add a link. The candidate is consumed once even when it
++	 * is invalid or rejected. Passing a non-positive id clears a pending candidate.
++	 */
++	void setExternalLoopClosureHypothesis(int id);
+ 	/**
+ 	 * @brief Convenience overload: builds a diagonal covariance from scalar variances.
+ 	 *
+@@ -1011,6 +1020,7 @@ private:
+ 
+ 	std::pair<int, float> _loopClosureHypothesis;
+ 	std::pair<int, float> _highestHypothesis;
++	int _externalLoopClosureHypothesis;
+ 	double _lastProcessTime;
+ 	bool _someNodesHaveBeenTransferred;
+ 	float _distanceTravelled;
+diff --git a/corelib/src/Rtabmap.cpp b/corelib/src/Rtabmap.cpp
+--- a/corelib/src/Rtabmap.cpp
++++ b/corelib/src/Rtabmap.cpp
+@@ -159,6 +159,7 @@ Rtabmap::Rtabmap() :
+ 	_markerPriorsAngularVariance(Parameters::defaultMarkerPriorsVarianceAngular()),
+ 	_loopClosureHypothesis(0,0.0f),
+ 	_highestHypothesis(0,0.0f),
++	_externalLoopClosureHypothesis(0),
+ 	_lastProcessTime(0.0),
+ 	_someNodesHaveBeenTransferred(false),
+ 	_distanceTravelled(0.0f),
+@@ -475,6 +476,7 @@ void Rtabmap::close(bool databaseSaved, const std::string & ouputDatabasePath)
+ 	UINFO("databaseSaved=%d", databaseSaved?1:0);
+ 	_highestHypothesis = std::make_pair(0,0.0f);
+ 	_loopClosureHypothesis = std::make_pair(0,0.0f);
++	_externalLoopClosureHypothesis = 0;
+ 	_lastProcessTime = 0.0;
+ 	_someNodesHaveBeenTransferred = false;
+ 	_constraints.clear();
+@@ -886,6 +888,11 @@ const Statistics & Rtabmap::getStatistics() const
+ 	return statistics_;
+ }
+ 
++void Rtabmap::setExternalLoopClosureHypothesis(int id)
++{
++	_externalLoopClosureHypothesis = id > 0 ? id : 0;
++}
++
+ Transform Rtabmap::getPose(int locationId) const
+ {
+ 	return uValue(_optimizedPoses, locationId, Transform());
+@@ -1107,6 +1114,7 @@ void Rtabmap::resetMemory()
+ 	UDEBUG("");
+ 	_highestHypothesis = std::make_pair(0,0.0f);
+ 	_loopClosureHypothesis = std::make_pair(0,0.0f);
++	_externalLoopClosureHypothesis = 0;
+ 	_lastProcessTime = 0.0;
+ 	_someNodesHaveBeenTransferred = false;
+ 	_optimizedPoses.clear();
+@@ -1270,6 +1278,8 @@ bool Rtabmap::process(
+ 	_loopClosureHypothesis = std::make_pair(0,0.0f);
+ 	std::pair<int, float> lastHighestHypothesis = _highestHypothesis;
+ 	_highestHypothesis = std::make_pair(0,0.0f);
++	const int externalLoopClosureHypothesis = _externalLoopClosureHypothesis;
++	_externalLoopClosureHypothesis = 0;
+ 
+ 	std::set<int> immunizedLocations;
+ 
+@@ -2246,6 +2256,30 @@ bool Rtabmap::process(
+ 		UDEBUG("Ignoring likelihood and loop closure hypotheses as current signature doesn't have enough visual features.");
+ 	}
+ 
++	// External retrieval is deliberately candidate-only. It replaces the
++	// appearance hypothesis, then follows the unmodified retrieval and metric
++	// verification path below. In particular, it never calls Memory::addLink().
++	if(externalLoopClosureHypothesis > 0)
++	{
++		if(signature != 0 &&
++		   !signature->isBadSignature() &&
++		   signature->getWeight() >= 0 &&
++		   externalLoopClosureHypothesis != signature->id() &&
++		   uContains(_optimizedPoses, externalLoopClosureHypothesis) &&
++		   _memory->getSignature(externalLoopClosureHypothesis) != 0)
++		{
++			_highestHypothesis = std::make_pair(externalLoopClosureHypothesis, 1.0f);
++			_loopClosureHypothesis = _highestHypothesis;
++			rejectedLoopClosure = false;
++			hypothesisRatio = 1.0f;
++			UDEBUG("Using external loop-closure candidate id=%d", externalLoopClosureHypothesis);
++		}
++		else
++		{
++			UWARN("Ignoring invalid external loop-closure candidate id=%d", externalLoopClosureHypothesis);
++		}
++	}
++
+ 	//============================================================
+ 	// Before retrieval, make sure the trash has finished
+ 	//============================================================

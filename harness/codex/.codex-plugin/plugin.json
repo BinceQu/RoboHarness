@@ -1,0 +1,30 @@
+{
+  "name": "embodied-codex-plugin",
+  "version": "0.1.0+codex.20260929100448",
+  "description": "A baseline Codex plugin for visual robot control through a BEHAVIOR v2 MCP adapter.",
+  "author": {
+    "name": "Embodied Codex contributors"
+  },
+  "keywords": [
+    "embodied-agent",
+    "mcp",
+    "robotics"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Embodied Codex",
+    "shortDescription": "Control BEHAVIOR v2 through a recordable MCP bridge.",
+    "longDescription": "Provides a minimal robot-tool bridge, visual observations, trajectory recording, and an extension point for task-specific skills.",
+    "developerName": "Embodied Codex contributors",
+    "category": "Productivity",
+    "capabilities": [
+      "Robot tools",
+      "Visual observations",
+      "Trajectory recording"
+    ],
+    "defaultPrompt": [
+      "Use Embodied Codex to inspect the active BEHAVIOR task and follow my task instructions."
+    ]
+  }
+}

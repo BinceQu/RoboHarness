@@ -1,0 +1,61 @@
+"""R1Pro 7DoF / 8DoF（J8 tool-roll）变体。
+
+原文件被标成 admin 600，新进程读不了。这里按现有调用合同重写，
+默认 8DoF，配置文件落到 OmniGibson eval 目录里的 high_force YAML。
+"""
+
+from __future__ import annotations
+
+from pathlib import Path
+from typing import Any, Optional
+
+_REPO = Path(__file__).resolve().parents[1]
+_OG_EVAL = _REPO / "OmniGibson" / "omnigibson" / "eval"
+_DEFAULT_DOF = 8
+_CONFIG_BY_DOF = {
+    7: "r1pro_high_force.yaml",
+    8: "r1pro_8dof_high_force.yaml",
+}
+_TYPE_BY_DOF = {
+    7: "R1Pro",
+    8: "R1Pro8DOF",
+}
+
+
+def normalize_robot_dof(robot_dof: Optional[int] = None) -> int:
+    if robot_dof is None:
+        return _DEFAULT_DOF
+    value = int(robot_dof)
+    if value not in _CONFIG_BY_DOF:
+        raise ValueError(f"unsupported robot_dof={robot_dof!r}; expected 7 or 8")
+    return value
+
+
+def robot_has_tool_roll(robot: Any = None, arm: Optional[str] = None) -> bool:
+    if robot is None:
+        return False
+    controllers = getattr(robot, "controllers", None) or {}
+    if arm:
+        key = str(arm).lower().strip()
+        if key.startswith("arm_"):
+            key = key[4:]
+        return f"tool_roll_{key}" in controllers
+    return any(str(name).startswith("tool_roll_") for name in controllers)
+
+
+def robot_type_for_dof(robot_dof: Optional[int] = None) -> str:
+    return _TYPE_BY_DOF[normalize_robot_dof(robot_dof)]
+
+
+def robot_config_path_for_dof(robot_dof: Optional[int] = None) -> Path:
+    dof = normalize_robot_dof(robot_dof)
+    name = _CONFIG_BY_DOF[dof]
+    for folder in (
+        Path(__file__).resolve().parent,
+        Path(__file__).resolve().parent / "robot_configs",
+        _OG_EVAL,
+    ):
+        path = folder / name
+        if path.is_file():
+            return path
+    return _OG_EVAL / name
