@@ -42,7 +42,11 @@ edited to reconcile conflicting records.
   source path, session ID and hash are recorded in the task manifest.
 
 Every `tasks/taskXX.json` records the source paths and SHA-256 of the prompt,
-source session and official result. `reference_results` contains byte-for-byte
+source Claude transcript, original archive prompt record and official result.
+All 45 selected cases have a matching original transcript, including records
+recovered from the supplied harness's private session directories. These
+retain the final newline that the monitor's `user_prompt` field had stripped.
+`reference_results` contains byte-for-byte
 copies of evaluator scores. `prompt` contains only texts referenced by cases;
 version names are matched against archived/source prompt files, with a digest
 suffix so different texts are never conflated. A `recovered` name means no
@@ -78,13 +82,22 @@ and omits that later telemetry. The evaluator and UI still enforce/display
 the explicit 2025 ×2 budget. Standalone harness use retains its supplied
 default behavior.
 
-The initial context matches all 11 inspected archived Claude transcripts
+The initial context matches all 45 selected archived Claude transcripts
 byte for byte (SHA-256
 `a1ef3ea478487ad0e8d5dc8a162b0042365e874908f22169b785df75b0f838ff`).
-The activated pick-up-object, place-object-in-container and
-open-doors-and-drawers bodies also match the saved tool responses.
+The activated pick-up-object, place-object-in-container,
+traverse-narrow-passages and open-doors-and-drawers bodies also match every
+saved activation in those transcripts.
 [The regression fixture](../harness/claude_code/tests/fixtures/archive_context.json)
 records source transcript hashes and recovered context/skill hashes.
+Claude truncates the saved MCP instruction attachment after 2,048 characters;
+the fixture verifies that recorded prefix, not the unrecorded suffix.
+Each case also selects its recorded MCP namespace: task02/310, all task07
+cases and task08/304 use `plugin:embodied-claude-code:behavior-v2`; the other
+38 cases use `behavior-v2`. The launcher preserves Claude's native Skill tool
+and listing, and requires the archived Claude Code version 2.1.259.
+An isolated real-CLI test exercises both namespaces, Skill activation,
+deactivation and compaction without contacting a simulator or external model.
 This verifies the recovered model context; it does not establish that every
 simulator or interface implementation file is identical to its historical version.
 

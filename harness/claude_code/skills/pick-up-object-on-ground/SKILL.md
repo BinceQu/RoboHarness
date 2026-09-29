@@ -1,5 +1,6 @@
 ---
 name: pick-up-object-on-ground
+disable-model-invocation: true
 description: 捡起地上物体。用户说捡起地上的物体、把地上的东西拿起来、或做地面抓取时使用。按锁定的头顶相机、像素点、RGB-D 规划和 z=0.25 抬起顺序执行。
 ---
 

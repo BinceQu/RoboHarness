@@ -37,7 +37,13 @@ class NativeSkillLifecycleTests(unittest.TestCase):
     def test_native_slash_skill_requires_explicit_activation(self):
         self.run_transport(bridge=False, slash=True)
 
-    def run_transport(self, *, bridge: bool, slash: bool = False):
+    def test_archived_launcher_keeps_native_skills_and_unqualified_mcp_names(self):
+        for name in ('behavior-v2', 'plugin:embodied-claude-code:behavior-v2'):
+            with self.subTest(mcp_server=name):
+                self.run_transport(bridge=False, archived=True, mcp_name=name)
+
+    def run_transport(self, *, bridge: bool, slash: bool = False, archived: bool = False,
+                      mcp_name: str = 'behavior-v2'):
         claude = os.environ.get("CLAUDE_BIN") or shutil.which("claude")
         self.assertTrue(claude)
         fake = FakeBehaviorClient()
@@ -60,7 +66,9 @@ class NativeSkillLifecycleTests(unittest.TestCase):
                     self.wfile.write(encoded)
 
                 def do_GET(self):
-                    if self.path in ("/api/state", "/api/v2/tools"):
+                    if archived and self.path == "/__official__/idle_probe":
+                        self.send_json({"diagnostic_ok": True})
+                    elif self.path in ("/api/state", "/api/v2/tools"):
                         self.send_json(fake.get_json(self.path))
                     else:
                         unexpected.append(self.path)
@@ -185,6 +193,11 @@ class NativeSkillLifecycleTests(unittest.TestCase):
                 "PYTHONPATH": str(ROOT / "src"),
                 "NO_PROXY": "127.0.0.1,localhost", "no_proxy": "127.0.0.1,localhost",
             })
+            if archived:
+                env.update({"ROBOHARNESS_PROTOCOL": "archived-v391-x2",
+                            "ROBOHARNESS_MCP_NAME": mcp_name,
+                            "EMBODIED_ANTHROPIC_BASE_URL": origin,
+                            "CLAUDE_BIN": claude})
             bridge_process = None
             try:
                 if bridge:
@@ -204,13 +217,19 @@ class NativeSkillLifecycleTests(unittest.TestCase):
                     "This is a local lifecycle diagnostic. Activate then cancel pick-up-object and "
                     "close-box, list Skills, then say NATIVE_LIFECYCLE_OK. Do not call robot tools."
                 )
-                completed = subprocess.run([
+                command = [
                     claude, "--print", "--verbose", "--output-format", "stream-json", "--max-turns", "8",
                     "--plugin-dir", str(ROOT), "--settings", str(ROOT / "profiles/claude-settings.json"),
                     "--permission-mode", "dontAsk", "--allowedTools", "Skill", *EMBODIED_TOOL_GLOBS,
                     "--tools", "Skill", "--model", MODEL,
                     prompt,
-                ], cwd=runtime, env=env, text=True, capture_output=True, timeout=60)
+                ]
+                if archived:
+                    command = [str(ROOT / "scripts/run"), "--port", str(endpoint.server_port),
+                               "--qwen-model", MODEL, "--", "--print", "--verbose",
+                               "--output-format", "stream-json", "--max-turns", "8", prompt]
+                completed = subprocess.run(command, cwd=runtime, env=env, text=True,
+                                           capture_output=True, timeout=60)
             finally:
                 if bridge_process is not None:
                     bridge_process.terminate()
@@ -229,6 +248,21 @@ class NativeSkillLifecycleTests(unittest.TestCase):
                                                         for request in requests]}, default=str)
             self.assertEqual(completed.returncode, 0, completed.stderr + completed.stdout[:3000] + completed.stdout[-4000:] + diagnostics)
             self.assertEqual(unexpected, [])
+            if archived:
+                names = [tool["name"] for tool in requests[0]["tools"]]
+                self.assertIn("Skill", names)
+                prefix = "mcp__" + mcp_name.replace(":", "_") + "__"
+                self.assertIn(prefix + "activate_skill", names)
+                self.assertTrue(all(name.startswith(prefix) for name in names if name != "Skill"))
+                transcript = next((runtime / "claude/projects").glob("*/*.jsonl"))
+                records = [json.loads(line) for line in transcript.read_text().splitlines()]
+                listing = next(row["attachment"] for row in records
+                               if row.get("attachment", {}).get("type") == "skill_listing")
+                from embodied_claude_code.skills import ARCHIVED_TASK_SKILLS
+                self.assertEqual(sorted(name for name in listing["names"]
+                                        if name.startswith("embodied-claude-code:")),
+                                 sorted("embodied-claude-code:" + name for name in
+                                        ("behavior-v2-baseline", *ARCHIVED_TASK_SKILLS)))
             events = [json.loads(line) for line in completed.stdout.splitlines() if line.startswith("{")]
             statuses = [event for event in events if event.get("subtype") == "status"]
             self.assertTrue(any(event.get("compact_result") == "success" for event in statuses), statuses)

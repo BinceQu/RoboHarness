@@ -21,10 +21,13 @@
     {
       "instance_id": 301,
       "slot": 0,
-      "prompt": "prompt/task08/v25_1e749a118ef1.txt",
-      "prompt_sha256": "1e749a118ef1108dc0deddb70481dba2e8d438972649c69221e2602413901422",
-      "prompt_source": "work/agent_monitor/t08_rearranging_kitchen_furniture/t08p15068i0-09181510/session.json",
-      "prompt_source_sha256": "b0b1c900553c11165289be7a10f603a41a8c4f652d0b65bde096607328da1262",
+      "prompt": "prompt/task08/v25_62c12d99b1ce.txt",
+      "prompt_sha256": "62c12d99b1ce52e6a3e2c9b62c61068d8c10be93cbe3d342c884f6046fd6bd77",
+      "prompt_source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/8d684dd8-d87c-4bb5-9543-80e6f8beae63.jsonl",
+      "prompt_source_sha256": "c8f7ab1c55c06bf7f8f4fa4e9f4fc3e55eacd31bf6adb471f3a47e863013ae3f",
+      "archive_prompt_record": "work/agent_monitor/t08_rearranging_kitchen_furniture/t08p15068i0-09181510/session.json",
+      "archive_prompt_record_sha256": "b0b1c900553c11165289be7a10f603a41a8c4f652d0b65bde096607328da1262",
+      "claude_mcp_name": "behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v25.txt"
       ],
@@ -34,17 +37,20 @@
       "reference_q": 0.25,
       "reference_steps": 17887,
       "notes": [
-        "Prompt recovered from the matching monitor session outside test_results; session ID is recorded in the archived session_end JSON."
+        "The archived session_end JSON identifies the monitor session; the matching Claude transcript preserves the exact prompt bytes."
       ],
       "source_session_id": "t08p15068i0-09181510"
     },
     {
       "instance_id": 304,
       "slot": 3,
-      "prompt": "prompt/task08/v25_1e749a118ef1.txt",
-      "prompt_sha256": "1e749a118ef1108dc0deddb70481dba2e8d438972649c69221e2602413901422",
-      "prompt_source": "work/agent_monitor/t08_rearranging_kitchen_furniture/t08p15068i3-0919202825-193b84074c8c/session.json",
-      "prompt_source_sha256": "0949e26da41535c293f2914261258c1deab93035bf98b669e250b8ba86a718f3",
+      "prompt": "prompt/task08/v25_62c12d99b1ce.txt",
+      "prompt_sha256": "62c12d99b1ce52e6a3e2c9b62c61068d8c10be93cbe3d342c884f6046fd6bd77",
+      "prompt_source": "test_results/task08/instance_304/claude-home/claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/3234697d-b93f-4a8b-87b8-7b72c98034e1.jsonl",
+      "prompt_source_sha256": "8736d63d5def9e4814c839ab159289c206f31d9fc49af334e5e372799b7b09f2",
+      "archive_prompt_record": "work/agent_monitor/t08_rearranging_kitchen_furniture/t08p15068i3-0919202825-193b84074c8c/session.json",
+      "archive_prompt_record_sha256": "0949e26da41535c293f2914261258c1deab93035bf98b669e250b8ba86a718f3",
+      "claude_mcp_name": "plugin:embodied-claude-code:behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v25.txt"
       ],
@@ -54,17 +60,20 @@
       "reference_q": 0.5,
       "reference_steps": 17887,
       "notes": [
-        "Prompt recovered from the matching monitor session outside test_results; session ID is recorded in the archived session_end JSON."
+        "The archived session_end JSON identifies the monitor session; the matching Claude transcript preserves the exact prompt bytes."
       ],
       "source_session_id": "t08p15068i3-0919202825-193b84074c8c"
     },
     {
       "instance_id": 306,
       "slot": 5,
-      "prompt": "prompt/task08/v25_1e749a118ef1.txt",
-      "prompt_sha256": "1e749a118ef1108dc0deddb70481dba2e8d438972649c69221e2602413901422",
-      "prompt_source": "work/agent_monitor/t08_rearranging_kitchen_furniture/t08p15068i5-09182346/session.json",
-      "prompt_source_sha256": "b74a82c7cb5d7c7ae6b91810eff6fa4f8d7e77ef606f3ed224a1079711581fa8",
+      "prompt": "prompt/task08/v25_62c12d99b1ce.txt",
+      "prompt_sha256": "62c12d99b1ce52e6a3e2c9b62c61068d8c10be93cbe3d342c884f6046fd6bd77",
+      "prompt_source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/b73151ea-7a52-44d9-b1f1-bc9cd1c6a1de.jsonl",
+      "prompt_source_sha256": "51005a135a83f174092233ef829ef5173e899addce9e439aaa90d1046ad2dfb9",
+      "archive_prompt_record": "work/agent_monitor/t08_rearranging_kitchen_furniture/t08p15068i5-09182346/session.json",
+      "archive_prompt_record_sha256": "b74a82c7cb5d7c7ae6b91810eff6fa4f8d7e77ef606f3ed224a1079711581fa8",
+      "claude_mcp_name": "behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v25.txt"
       ],
@@ -74,17 +83,20 @@
       "reference_q": 0.25,
       "reference_steps": 17887,
       "notes": [
-        "Prompt recovered from the matching monitor session outside test_results; session ID is recorded in the archived session_end JSON."
+        "The archived session_end JSON identifies the monitor session; the matching Claude transcript preserves the exact prompt bytes."
       ],
       "source_session_id": "t08p15068i5-09182346"
     },
     {
       "instance_id": 308,
       "slot": 7,
-      "prompt": "prompt/task08/v25_1e749a118ef1.txt",
-      "prompt_sha256": "1e749a118ef1108dc0deddb70481dba2e8d438972649c69221e2602413901422",
-      "prompt_source": "work/agent_monitor/t08_rearranging_kitchen_furniture/t08p15068i7-09190728/session.json",
-      "prompt_source_sha256": "47958a19e45744e25a721e9ac863373b8924f1cb687d13506e0de7dab854ea27",
+      "prompt": "prompt/task08/v25_62c12d99b1ce.txt",
+      "prompt_sha256": "62c12d99b1ce52e6a3e2c9b62c61068d8c10be93cbe3d342c884f6046fd6bd77",
+      "prompt_source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/50d96073-c3f1-4839-8f8b-6fbd0f4bcc38.jsonl",
+      "prompt_source_sha256": "2844192f36b7bcb7098f38cca885bb09616f77b706752c8651fb73653f871e90",
+      "archive_prompt_record": "work/agent_monitor/t08_rearranging_kitchen_furniture/t08p15068i7-09190728/session.json",
+      "archive_prompt_record_sha256": "47958a19e45744e25a721e9ac863373b8924f1cb687d13506e0de7dab854ea27",
+      "claude_mcp_name": "behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v25.txt"
       ],
@@ -94,17 +106,20 @@
       "reference_q": 0.5,
       "reference_steps": 17887,
       "notes": [
-        "Prompt recovered from the matching monitor session outside test_results; session ID is recorded in the archived session_end JSON."
+        "The archived session_end JSON identifies the monitor session; the matching Claude transcript preserves the exact prompt bytes."
       ],
       "source_session_id": "t08p15068i7-09190728"
     },
     {
       "instance_id": 310,
       "slot": 9,
-      "prompt": "prompt/task08/v25_1e749a118ef1.txt",
-      "prompt_sha256": "1e749a118ef1108dc0deddb70481dba2e8d438972649c69221e2602413901422",
-      "prompt_source": "work/agent_monitor/t08_rearranging_kitchen_furniture/t08p15068i9-09191341/session.json",
-      "prompt_source_sha256": "ac4bd6edb300b50563c97fba90538fa1f958f2307c57b7a9056fc071bf737686",
+      "prompt": "prompt/task08/v25_62c12d99b1ce.txt",
+      "prompt_sha256": "62c12d99b1ce52e6a3e2c9b62c61068d8c10be93cbe3d342c884f6046fd6bd77",
+      "prompt_source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/45107895-0575-43e9-9260-06715f8268bd.jsonl",
+      "prompt_source_sha256": "5f617686b41fcb9a16b74b59304c61406f728ac946f3b5a2976f9cbfd47b22cd",
+      "archive_prompt_record": "work/agent_monitor/t08_rearranging_kitchen_furniture/t08p15068i9-09191341/session.json",
+      "archive_prompt_record_sha256": "ac4bd6edb300b50563c97fba90538fa1f958f2307c57b7a9056fc071bf737686",
+      "claude_mcp_name": "behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v25.txt"
       ],
@@ -114,7 +129,7 @@
       "reference_q": 0.5,
       "reference_steps": 17887,
       "notes": [
-        "Prompt recovered from the matching monitor session outside test_results; session ID is recorded in the archived session_end JSON."
+        "The archived session_end JSON identifies the monitor session; the matching Claude transcript preserves the exact prompt bytes."
       ],
       "source_session_id": "t08p15068i9-09191341"
     }

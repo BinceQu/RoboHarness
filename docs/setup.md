@@ -47,7 +47,8 @@ include its Python dependencies. You can override
 `EEF_NEAR_SAM2_DEVICE` in the environment. Without the checkpoint the interface
 uses its existing 3D growth fallback; this is a different perception configuration.
 
-Install Claude Code separately and make `claude` available on PATH. The
+Install Claude Code **2.1.259** separately and make `claude` available on PATH.
+The reproduction launcher checks this version before starting the simulator. The
 archived runs use the Claude Code harness with `Qwen3.8-Flash-Next-FP8` through
 an Anthropic-compatible `/v1/messages` server. The `model_url` is the origin,
 without `/v1`. Authentication is supplied through `ANTHROPIC_API_KEY` or

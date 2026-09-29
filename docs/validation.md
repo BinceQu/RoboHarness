@@ -13,10 +13,14 @@ Two budget regression tests also pass: all nine tasks use the archived 2025
 ×2 limits in the launcher, catalog and monitor, and altered budget/protocol
 manifests are rejected before launch.
 Two additional archived-context regressions verify the SessionStart text
-against all 11 inspected archived transcripts, all three activated skill
+against all 45 selected archived transcripts, all four activated skill
 bodies found there, the seven-skill catalog, and MCP replies without later
-`rollout_budget` additions. The full Claude suite was repeated after this fix:
-170 passed and 14 were skipped (184 total).
+`rollout_budget` additions. Claude's saved MCP instruction preview is truncated;
+the recorded 2,048-character prefix is verified separately.
+The full updated Claude suite passes: 170 passed, 15 optional checks skipped
+(185 total). All 14 runner/report/budget checks also pass with the new manifests.
+The real Claude CLI also passes both recorded MCP namespace variants, with
+native Skill activation, deactivation and compaction against a local test model.
 This covers the task/result manifests, owned-process cleanup, cross-session
 request rejection, the official observation protocol, RGBD wrapper, custom
 robot, both MCP adapters, image coordinates, skill lifecycle and launchers.
@@ -24,7 +28,7 @@ The skips concern optional simulator/native CLI tests and the old harness
 parity suite whose sibling source layout is not present in this release.
 The GPU evaluations below exercise the actual simulator and Claude CLI.
 
-All 45 archived case prompt/result hashes pass validation. The 16 retained
+All 45 archived case prompt/result hashes pass validation. The 15 retained
 prompt texts and original scoring JSON are distinct from new run output.
 Python syntax checks passed for the curated source files. Shell syntax checks
 passed for all 13 release launch/build scripts. The external SAM 2 source
@@ -75,9 +79,9 @@ the matching archived prompts, and all five instances per task:
 
 | Task | Run directory | Archived mean Q | Status |
 | --- | --- | ---: | --- |
-| task01 | `runs/validation-20260930-task01` | 0.866667 | Starting |
-| task06 | `runs/validation-20260930-task06` | 0.422222 | Starting |
-| task08 | `runs/validation-20260930-task08` | 0.400000 | Starting |
+| task01 | `runs/validation-20260930-task01-r2` | 0.866667 | Pending restart |
+| task06 | `runs/validation-20260930-task06-r2` | 0.422222 | Pending restart |
+| task08 | `runs/validation-20260930-task08-r2` | 0.400000 | Pending restart |
 
 The [first-attempt budget audit](../validation_results/gpu5-20260929/budget_audit.json)
 matches all nine limits to their original archive JSON fields and hashes.
@@ -95,15 +99,21 @@ Those three attempts were stopped after finding model-visible context drift:
 the later source harness advertised three skills instead of the archived seven,
 and added `rollout_budget` fields absent from the archived tool replies. They
 are retained as superseded diagnostic attempts. Commit `a3d0e3f` restores the
-archived context when the launcher selects `archived-v391-x2`; the corrected
-attempts in the table started on September 30. The observed score difference
+archived context when the launcher selects `archived-v391-x2`. An initial
+September 30 restart confirmed those text bodies, then was stopped after
+finding another launcher difference: native Skill listing was suppressed,
+and some cases used a different MCP namespace. All 45 source transcripts
+were subsequently matched to restore each case's recorded namespace and exact
+prompt bytes, including final newlines stripped by monitor records.
+Those [intermediate attempts](../validation_results/gpu5-20260930/README.md)
+are retained separately. The observed score difference
 does not establish that this context drift caused the failure.
 
 **Full task scores are not available yet; this is not a claim that the archived
 means have been reproduced.** Each run writes its official results and
 per-case differences to its own `summary.json` when cases finish.
 
-A local watcher updates the [combined result report](../validation_results/gpu5-20260930/README.md)
+A local watcher updates the [combined result report](../validation_results/gpu5-20260930-r2/README.md)
 as cases finish and copies their original official scoring JSON. It does not
 substitute archived scores for missing new results.
 

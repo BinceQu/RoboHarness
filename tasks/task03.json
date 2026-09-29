@@ -25,6 +25,9 @@
       "prompt_sha256": "11b5ae18163af2168ba6603649782a2c4ab6fd1ca41eff4b9bb7ed001671b4b6",
       "prompt_source": "test_results/task03/06_claude_transcripts/claude_t03p15063i0-09152328_301.jsonl",
       "prompt_source_sha256": "f05ef5d7e525533f87e8313fff26b9c44f7f827e10887451352639f1e98d0ce1",
+      "archive_prompt_record": "test_results/task03/06_claude_transcripts/claude_t03p15063i0-09152328_301.jsonl",
+      "archive_prompt_record_sha256": "f05ef5d7e525533f87e8313fff26b9c44f7f827e10887451352639f1e98d0ce1",
+      "claude_mcp_name": "behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v4.txt"
       ],
@@ -42,6 +45,9 @@
       "prompt_sha256": "11b5ae18163af2168ba6603649782a2c4ab6fd1ca41eff4b9bb7ed001671b4b6",
       "prompt_source": "test_results/task03/06_claude_transcripts/claude_t03p15063i3-09171808_304.jsonl",
       "prompt_source_sha256": "c66fb5b28c37320ed5c6e3b586e45b740d47f190255cb9876578d32f130ebbf5",
+      "archive_prompt_record": "test_results/task03/06_claude_transcripts/claude_t03p15063i3-09171808_304.jsonl",
+      "archive_prompt_record_sha256": "c66fb5b28c37320ed5c6e3b586e45b740d47f190255cb9876578d32f130ebbf5",
+      "claude_mcp_name": "behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v4.txt"
       ],
@@ -59,6 +65,9 @@
       "prompt_sha256": "11b5ae18163af2168ba6603649782a2c4ab6fd1ca41eff4b9bb7ed001671b4b6",
       "prompt_source": "test_results/task03/06_claude_transcripts/claude_t03p15063i5-09180547_306.jsonl",
       "prompt_source_sha256": "abf46514cabced8b430ad49a4918f67d32b0bba372b77338c3a8376527980137",
+      "archive_prompt_record": "test_results/task03/06_claude_transcripts/claude_t03p15063i5-09180547_306.jsonl",
+      "archive_prompt_record_sha256": "abf46514cabced8b430ad49a4918f67d32b0bba372b77338c3a8376527980137",
+      "claude_mcp_name": "behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v4.txt"
       ],
@@ -76,6 +85,9 @@
       "prompt_sha256": "11b5ae18163af2168ba6603649782a2c4ab6fd1ca41eff4b9bb7ed001671b4b6",
       "prompt_source": "test_results/task03/06_claude_transcripts/claude_t03p15063i7-09181140_308.jsonl",
       "prompt_source_sha256": "c075a03da39ad1f891734059de03e2de395734062c2849aefbf59e7c34f49676",
+      "archive_prompt_record": "test_results/task03/06_claude_transcripts/claude_t03p15063i7-09181140_308.jsonl",
+      "archive_prompt_record_sha256": "c075a03da39ad1f891734059de03e2de395734062c2849aefbf59e7c34f49676",
+      "claude_mcp_name": "behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v4.txt"
       ],
@@ -93,6 +105,9 @@
       "prompt_sha256": "11b5ae18163af2168ba6603649782a2c4ab6fd1ca41eff4b9bb7ed001671b4b6",
       "prompt_source": "test_results/task03/06_claude_transcripts/claude_t03p15063i9-09182135_310.jsonl",
       "prompt_source_sha256": "d930d7065a7c1985026587998f3a6ddc2a7737d12017db1b272128f945e5d2bc",
+      "archive_prompt_record": "test_results/task03/06_claude_transcripts/claude_t03p15063i9-09182135_310.jsonl",
+      "archive_prompt_record_sha256": "d930d7065a7c1985026587998f3a6ddc2a7737d12017db1b272128f945e5d2bc",
+      "claude_mcp_name": "behavior-v2",
       "matching_prompt_filenames": [
         "embodied_claude_code_qwen38-flash-next-fp8_v4.txt"
       ],
