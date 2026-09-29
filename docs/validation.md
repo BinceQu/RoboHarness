@@ -41,8 +41,11 @@ Tests for unshipped development benchmarks, live benchmark launchers and
 submission utilities were also excluded. Remaining runtime tests are retained;
 the optional interface suite collects 1,280 tests without missing-module errors.
 Collection alone does not assert that this larger suite passes.
-The two retained test modules edited during this cleanup passed 13 tests;
-three Node.js-dependent UI checks were skipped because Node.js is unavailable.
+The two retained test modules edited during this cleanup passed 13 tests in
+the default stock profile. Two Node.js-dependent UI checks and an 8-DOF-only
+fixture were skipped in that configuration.
+With the released 8-DOF profile selected, the same modules passed 14 tests;
+only the two Node.js checks were skipped.
 
 ## GPU evaluation
 
