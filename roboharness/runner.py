@@ -389,6 +389,8 @@ class Run:
 
     def start_agent(self, case):
         iid, slot = case['instance_id'], case['slot']
+        for caveat in case.get('reproduction_caveats', []):
+            self.log(f'instance {iid} reproduction limitation: {caveat}')
         sid = f't{self.task["task_index"]:02d}p{self.port}i{slot}-{uuid.uuid4().hex[:16]}'
         case_dir = self.path / f'instance_{iid}'
         case_dir.mkdir()
@@ -506,8 +508,12 @@ class Run:
                   'reference_mean_q': sum(x['reference_q'] for x in self.plan['cases']) / len(self.plan['cases'])}
         result['archive_reported_mean_q'] = sum(
             x.get('archive_reported_q', x['reference_q']) for x in self.plan['cases']) / len(self.plan['cases'])
+        result['reproduction_caveats'] = [
+            {'instance_id': case['instance_id'], 'reason': reason}
+            for case in self.plan['cases'] for reason in case.get('reproduction_caveats', [])]
         result['delta_archive_mean_q'] = (result['mean_q'] - result['archive_reported_mean_q']
-                                         if len(self.results) == len(self.plan['cases']) else None)
+                                         if len(self.results) == len(self.plan['cases'])
+                                         and not result['reproduction_caveats'] else None)
         if error:
             result['error'] = str(error)
         atomic_json(self.path / 'summary.json', result)
@@ -552,6 +558,13 @@ def preflight(config, harness):
         version = subprocess.check_output([binary, '--version'], text=True, timeout=20).strip()
         if not version.startswith(CLAUDE_VERSION + ' '):
             raise ValueError(f'Archived runs require Claude Code {CLAUDE_VERSION}; found {version}')
+    cache = Path(config['cache_dir'])
+    cache.mkdir(parents=True, exist_ok=True)
+    free_gib = shutil.disk_usage(cache).free / (1024 ** 3)
+    if free_gib < 10:
+        raise ValueError(f'Only {free_gib:.1f} GiB free at cache_dir {cache}; '
+                         'at least 10 GiB is required before each simulator launch. '
+                         'Remove caches of stopped runs or configure a larger cache_dir.')
 
 
 def main(argv=None):

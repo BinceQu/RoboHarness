@@ -169,6 +169,14 @@ def main():
                 'reference_steps': raw_score['steps'],
                 'notes': notes,
             }
+            if index == 6 and iid == 301:
+                case['reproduction_caveats'] = [
+                    'The archived Claude session starts after earlier navigation and arm '
+                    'operations in an already running scene. Their request parameters and '
+                    'a complete scene snapshot were not found in the supplied archive. '
+                    'A fresh reset does not reproduce that starting state; see '
+                    'reference_results/initial_states.json and docs/provenance.md.'
+                ]
             if context.get('source_session_id'):
                 case['source_session_id'] = context['source_session_id']
             elif archived_prompt_record.name == 'session.json':

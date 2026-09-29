@@ -53,7 +53,9 @@ def collect(path: Path) -> dict:
     completed_archive_mean = sum(c['archive_q'] for c in completed) / len(completed) if completed else None
     superseded_path = path / 'superseded_context.json'
     superseded = read_json(superseded_path) if superseded_path.is_file() else None
-    complete = status == 'complete' and superseded is None
+    caveats = [{'instance_id': case['instance_id'], 'reason': reason}
+               for case in expected.values() for reason in case.get('reproduction_caveats', [])]
+    complete = status == 'complete' and superseded is None and not caveats
     return {'task': task['task'], 'task_name': task['task_name'], 'run_directory': path.name,
             'status': status, 'model': plan['model'], 'harness': plan['harness'],
             'n_finished': len(completed), 'n_expected': len(expected), 'cases': completed,
@@ -61,7 +63,8 @@ def collect(path: Path) -> dict:
             'completed_archive_mean_q': completed_archive_mean,
             'delta_archive_mean_q': mean - archive_mean if complete else None,
             'matches_archive_mean': abs(mean - archive_mean) < 1e-6 if complete else None,
-            'error': summary.get('error'), 'superseded': superseded}
+            'error': summary.get('error'), 'superseded': superseded,
+            'reproduction_caveats': caveats}
 
 
 def write_report(output: Path, rows: list[dict], run_paths: list[Path]):
@@ -88,6 +91,9 @@ def write_report(output: Path, rows: list[dict], run_paths: list[Path]):
             target.parent.mkdir(exist_ok=True)
             shutil.copyfile(source, target)
     for row in rows:
+        for caveat in row['reproduction_caveats']:
+            lines += ['', f'**{row["task"]}/{caveat["instance_id"]}: reproduction limitation.** '
+                      f'{caveat["reason"]}']
         if row['superseded']:
             note = row['superseded']
             lines += ['', f'**{row["task"]}: superseded diagnostic attempt.** {note["reason"]}',

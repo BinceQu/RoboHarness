@@ -54,7 +54,8 @@ is recorded as a failure; it is not fabricated into a scored episode.
 
 The archive's stated scores are retained alongside the original scoring
 files. Read [provenance and known archive discrepancies](docs/provenance.md)
-for task00, task02 and task05. Use new evaluator JSON to assess reproduction;
+for task00, task02, task05 and the continued scene in task06/301.
+Use new evaluator JSON to assess reproduction;
 reference JSON files are never used as outputs of a new run. GPU validation
 results are documented in [validation](docs/validation.md).
 
