@@ -8,7 +8,7 @@ unchanged texture's mtime event triggers the same carb.assets mutex abort.
 The process-local native subscription workaround passed 20 texture mtime
 events, a 90-second observation window and an explicit scene reset on GPU 5.
 At runtime commit 23fefd0, the full CPU suite ran 392 checks: 375 passed and
-17 optional checks skipped, including native ABI rejection tests. Subsequent
+17 optional checks skipped. Passing checks include native ABI rejection. Subsequent
 targeted reporter regressions require strict per-case score comparison;
 matching task means alone no longer satisfy reproduction verification.
 An additional regression rejects a matching score when the wall-clock safety
@@ -129,6 +129,12 @@ are recorded. This is not a pixel-identical or complete state comparison.
 The independent clone was updated to runtime commit 23fefd0. All 40 current
 runner/report/budget/entrypoint/native-watch checks pass there, and the pinned
 native ABI check succeeds in the actual evaluator environment.
+It was then advanced to reporter commit fcaed41; all 28 current
+runner/report/budget/session-ownership checks pass in that clone. The
+[reporter regression audit](../validation_results/gpu5-20260930-r5/reporter_regression.json)
+records the command, source commit and test-log hash. The three evaluation
+controllers retain their original process identities and runtime source; only
+the independent reporting service was reloaded with local process checking.
 
 ### Earlier attempts
 
