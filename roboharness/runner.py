@@ -19,6 +19,8 @@ import time
 import urllib.request
 import uuid
 
+from roboharness.http_transport import LoopbackHTTPHandler
+
 ROOT = Path(__file__).resolve().parents[1]
 INTERFACE = ROOT / 'interface'
 COMMIT = '26f2c7ef7b9cf96bd0414f81e1e751e493762779'
@@ -153,7 +155,7 @@ def request_json(port: int, endpoint: str, payload=None, timeout=8):
         data=json.dumps(payload).encode() if payload is not None else None,
         headers={'Content-Type': 'application/json', 'Accept': 'application/json'},
     )
-    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}), LoopbackHTTPHandler())
     with opener.open(request, timeout=timeout) as response:
         return json.load(response)
 
