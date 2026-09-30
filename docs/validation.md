@@ -78,18 +78,30 @@ only the two Node.js checks were skipped.
 
 ## GPU evaluation
 
+On September 30 at 10:21 CST, a fresh process check found all three prior
+controllers and their recorded children absent. Their final interface log entries
+are around 05:29 CST, with no official scoring JSON and no terminal summary.
+The cause is unknown; it is not established as a budget limit or a model timeout.
+The stale running statuses were corrected to failed/interrupted, while the
+original summaries, trajectories and logs were retained. The
+[interruption audit](../validation_results/gpu5-20260930-r2/interruption_audit.json)
+records the process identities and log hashes. At approximately 10:24 CST, all
+three tasks were relaunched from their initial scenes as independent one-shot
+user services, using the same archived configurations and all five instances.
+These are new attempts; the interrupted cases are not scored as zero.
+
 GPU 5 was cleared of the selected previous evaluation processes. Unrelated
 GPU jobs remain running. Three new independent runs use the released source,
 the matching archived prompts, and all five instances per task:
 
 | Task | Run directory | Archived mean Q | Status |
 | --- | --- | ---: | --- |
-| task01 | `runs/validation-20260930-task01-r3` | 0.866667 | Running |
-| task03 | `runs/validation-20260930-task03` | 0.257143 | Running |
-| task08 | `runs/validation-20260930-task08-r3` | 0.400000 | Running |
+| task01 | `runs/validation-20260930-task01-r4` | 0.866667 | Initializing after interruption |
+| task03 | `runs/validation-20260930-task03-r4` | 0.257143 | Initializing after interruption |
+| task08 | `runs/validation-20260930-task08-r4` | 0.400000 | Initializing after interruption |
 
-The [current live audit](../validation_results/gpu5-20260930-r2/budget_audit.json)
-confirms 10535, 27392 and 17886 steps for these three runs through evaluator
+The [pre-interruption audit](../validation_results/gpu5-20260930-r2/budget_audit.json)
+confirmed 10535, 27392 and 17886 steps for the preceding three attempts through evaluator
 arguments, environment, monitor and evaluator logs. Their first Claude sessions
 match the archived SessionStart text, recorded MCP instruction preview, native
 plugin skill listing, tool namespace and source prompt bytes. Initial camera
@@ -144,7 +156,7 @@ task06 mean remain unchanged. See [provenance](provenance.md) for the limitation
 means have been reproduced.** Each run writes its official results and
 per-case differences to its own `summary.json` when cases finish.
 
-A local watcher updates the [combined result report](../validation_results/gpu5-20260930-r2/README.md)
+A local watcher updates the [combined result report](../validation_results/gpu5-20260930-r4/README.md)
 as cases finish and copies their original official scoring JSON. It does not
 substitute archived scores for missing new results.
 

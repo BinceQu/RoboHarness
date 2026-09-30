@@ -1,0 +1,204 @@
+{
+  "checked_at": "2026-09-30T10:23:54+08:00",
+  "cause": "Unknown: all recorded controller and child process identities are absent. Logs ended without an official result or terminal summary.",
+  "runs": [
+    {
+      "run_directory": "validation-20260930-task01-r3",
+      "run_id": "task01-20260930-011640-e87c1baa",
+      "task": "task01",
+      "max_steps": 10535,
+      "recorded_processes": {
+        "guardian": {
+          "pid": 1440896,
+          "start": "122561216",
+          "observed_start": null
+        },
+        "interface": {
+          "pid": 1440907,
+          "start": "122561217",
+          "observed_start": null
+        },
+        "gate": {
+          "pid": 1442068,
+          "start": "122561418",
+          "observed_start": null
+        },
+        "evaluator": {
+          "pid": 1442640,
+          "start": "122561519",
+          "observed_start": null
+        },
+        "agent": {
+          "pid": 1690113,
+          "start": "122607126",
+          "observed_start": null
+        },
+        "controller": {
+          "pid": 1440044,
+          "start": "122561154",
+          "observed_start": null
+        }
+      },
+      "n_official_results": 0,
+      "logs": {
+        "run.log": {
+          "sha256": "eb04d4d7e4b8a85ea84eabc901d3cc0390520836961e8a880d56d5367cb2ceec",
+          "last_lines": [
+            "2026-09-30 05:26:36 instance 301: agent=running ticks=2202",
+            "2026-09-30 05:27:36 instance 301: agent=running ticks=2202",
+            "2026-09-30 05:28:36 instance 301: agent=running ticks=2202"
+          ]
+        },
+        "logs/interface.log": {
+          "sha256": "c14882b7e8383f4e609be295ddddcff43c27244069f4e675bcf67c92dfbb59d1",
+          "last_lines": [
+            "\u001b[0m[04:12:36.037] [INFO] [werkzeug] 127.0.0.1 - - [30/Sep/2026 05:29:16] \"GET /__official__/idle_probe HTTP/1.1\" 200 -\u001b[0m",
+            "/home/bince/.conda/envs/behavior/lib/python3.10/multiprocessing/resource_tracker.py:224: UserWarning: resource_tracker: There appear to be 5 leaked semaphore objects to clean up at shutdown",
+            "  warnings.warn('resource_tracker: There appear to be %d '"
+          ]
+        },
+        "logs/evaluator.log": {
+          "sha256": "08af6e79aa41ea05851194af295400ab331c32378be39541ecc8068fb7ac2166",
+          "last_lines": [
+            "2026-09-29T20:46:44Z [12,577,548ms] [Warning] [omni.hydra] Camera '/World/scene_0/controllable__r1pro__robot_r1/zed_link/Camera': Unknown projection type, defaulting to pinhole",
+            "2026-09-29T20:46:44Z [12,577,548ms] [Warning] [omni.hydra] Camera '/World/scene_0/controllable__r1pro__robot_r1/right_realsense_link/Camera': Unknown projection type, defaulting to pinhole",
+            "2026-09-29T20:46:44Z [12,577,569ms] [Warning] [omni.physx.plugin] PhysicsUSD: CreateJoint - found a joint with disjointed body transforms, the simulation will most likely snap objects together: /World/scene_0/controllable__r1pro__robot_r1/left_eef_link/ag_constraint"
+          ]
+        }
+      },
+      "removed_stopped_cache": "/var/tmp/roboharness-cache/gpu5/r/e87c1baa"
+    },
+    {
+      "run_directory": "validation-20260930-task03",
+      "run_id": "task03-20260930-013138-fb1ebdfe",
+      "task": "task03",
+      "max_steps": 27392,
+      "recorded_processes": {
+        "guardian": {
+          "pid": 1921584,
+          "start": "122651030",
+          "observed_start": null
+        },
+        "interface": {
+          "pid": 1921589,
+          "start": "122651031",
+          "observed_start": null
+        },
+        "gate": {
+          "pid": 1923838,
+          "start": "122651233",
+          "observed_start": null
+        },
+        "evaluator": {
+          "pid": 1924401,
+          "start": "122651333",
+          "observed_start": null
+        },
+        "agent": {
+          "pid": 2144355,
+          "start": "122694339",
+          "observed_start": null
+        },
+        "controller": {
+          "pid": 1920273,
+          "start": "122650958",
+          "observed_start": null
+        }
+      },
+      "n_official_results": 0,
+      "logs": {
+        "run.log": {
+          "sha256": "4f0d5ad1cbdee17f85a1ae699095fcad587c2eaf1c93a9f33f5b632acef75371",
+          "last_lines": [
+            "2026-09-30 05:27:07 instance 301: agent=running ticks=1407",
+            "2026-09-30 05:28:07 instance 301: agent=running ticks=1453",
+            "2026-09-30 05:29:07 instance 301: agent=running ticks=1453"
+          ]
+        },
+        "logs/interface.log": {
+          "sha256": "51b4fb9c675acfa4de87e7bf4ced5222dc206e40503dbdc074f780ef99e304dd",
+          "last_lines": [
+            "\u001b[0m[03:57:37.585] [INFO] [werkzeug] 127.0.0.1 - - [30/Sep/2026 05:29:16] \"GET /__official__/idle_probe HTTP/1.1\" 200 -\u001b[0m",
+            "/home/bince/.conda/envs/behavior/lib/python3.10/multiprocessing/resource_tracker.py:224: UserWarning: resource_tracker: There appear to be 5 leaked semaphore objects to clean up at shutdown",
+            "  warnings.warn('resource_tracker: There appear to be %d '"
+          ]
+        },
+        "logs/evaluator.log": {
+          "sha256": "c9693f1bee543e91e0a98cb3819470989db679c86319d2b9f6ed7a4d688d572b",
+          "last_lines": [
+            "2026-09-29T21:12:22Z [13,218,083ms] [Warning] [omni.hydra] Camera '/World/scene_0/controllable__r1pro__robot_r1/zed_link/Camera': Unknown projection type, defaulting to pinhole",
+            "2026-09-29T21:12:22Z [13,218,083ms] [Warning] [omni.hydra] Camera '/World/scene_0/controllable__r1pro__robot_r1/right_realsense_link/Camera': Unknown projection type, defaulting to pinhole",
+            "2026-09-29T21:12:22Z [13,218,101ms] [Warning] [omni.physx.plugin] PhysicsUSD: CreateJoint - found a joint with disjointed body transforms, the simulation will most likely snap objects together: /World/scene_0/controllable__r1pro__robot_r1/right_eef_link/ag_constraint"
+          ]
+        }
+      },
+      "removed_stopped_cache": "/var/tmp/roboharness-cache/gpu5/r/fb1ebdfe"
+    },
+    {
+      "run_directory": "validation-20260930-task08-r3",
+      "run_id": "task08-20260930-011707-d3fa7b7e",
+      "task": "task08",
+      "max_steps": 17886,
+      "recorded_processes": {
+        "guardian": {
+          "pid": 1464563,
+          "start": "122563911",
+          "observed_start": null
+        },
+        "interface": {
+          "pid": 1464564,
+          "start": "122563912",
+          "observed_start": null
+        },
+        "gate": {
+          "pid": 1465487,
+          "start": "122564113",
+          "observed_start": null
+        },
+        "evaluator": {
+          "pid": 1465659,
+          "start": "122564214",
+          "observed_start": null
+        },
+        "agent": {
+          "pid": 1712054,
+          "start": "122609622",
+          "observed_start": null
+        },
+        "controller": {
+          "pid": 1463833,
+          "start": "122563851",
+          "observed_start": null
+        }
+      },
+      "n_official_results": 0,
+      "logs": {
+        "run.log": {
+          "sha256": "8c31537e064e12b81e8b6252c2f27f1c05b223f422a2a8b5fd3e3220dcff6189",
+          "last_lines": [
+            "2026-09-30 05:27:01 instance 301: agent=running ticks=1841",
+            "2026-09-30 05:28:01 instance 301: agent=running ticks=1841",
+            "2026-09-30 05:29:01 instance 301: agent=running ticks=1847"
+          ]
+        },
+        "logs/interface.log": {
+          "sha256": "fb572c4ba02bb2e8ec5a2f681b96fd9f171e4eccf20ccaa16eb32a1137beae53",
+          "last_lines": [
+            "\u001b[0m[04:12:09.549] [INFO] [werkzeug] 127.0.0.1 - - [30/Sep/2026 05:29:17] \"GET /__official__/idle_probe HTTP/1.1\" 200 -\u001b[0m",
+            "/home/bince/.conda/envs/behavior/lib/python3.10/multiprocessing/resource_tracker.py:224: UserWarning: resource_tracker: There appear to be 5 leaked semaphore objects to clean up at shutdown",
+            "  warnings.warn('resource_tracker: There appear to be %d '"
+          ]
+        },
+        "logs/evaluator.log": {
+          "sha256": "ae4f6c2ee723b19ed44229c3003727c00a92a541c64ee5ef9738f6ca1331d543",
+          "last_lines": [
+            "2026-09-29T18:55:02Z [5,849,324ms] [Warning] [omni.hydra] Camera '/World/scene_0/controllable__r1pro__robot_r1/right_realsense_link/Camera': Unknown projection type, defaulting to pinhole",
+            "2026-09-29T18:55:02Z [5,849,325ms] [Warning] [omni.hydra] Camera '/World/scene_0/controllable__r1pro__robot_r1/left_realsense_link/Camera': Unknown projection type, defaulting to pinhole",
+            "2026-09-29T18:55:02Z [5,849,348ms] [Warning] [omni.physx.plugin] PhysicsUSD: CreateJoint - found a joint with disjointed body transforms, the simulation will most likely snap objects together: /World/scene_0/controllable__r1pro__robot_r1/right_eef_link/ag_constraint"
+          ]
+        }
+      },
+      "removed_stopped_cache": "/var/tmp/roboharness-cache/gpu5/r/d3fa7b7e"
+    }
+  ]
+}
