@@ -432,6 +432,8 @@ class Run:
         })
         harness = ROOT / 'harness' / self.plan['harness']
         if self.plan['harness'] == 'claude_code':
+            from .native_context import seed as seed_native_context
+            env.update(seed_native_context(case_dir / 'claude-home', self.task['task'], iid))
             command = [str(harness / 'scripts/run'), '--port', str(self.port), '--qwen-model', self.config['model'],
                        '--', 'exec', '--output-format', 'json', '-']
         else:

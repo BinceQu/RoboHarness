@@ -6,6 +6,7 @@ EMBODIED_NATIVE_CLAUDE_TESTS=1. Exercise direct Anthropic and bridge transports.
 from __future__ import annotations
 
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -43,7 +44,8 @@ class NativeSkillLifecycleTests(unittest.TestCase):
                 self.run_transport(bridge=False, archived=True, mcp_name=name)
 
     def run_transport(self, *, bridge: bool, slash: bool = False, archived: bool = False,
-                      mcp_name: str = 'behavior-v2'):
+                      mcp_name: str = 'behavior-v2', context_setup=None,
+                      expected_listing_sha256: str | None = None, endpoint_port: int = 0):
         claude = os.environ.get("CLAUDE_BIN") or shutil.which("claude")
         self.assertTrue(claude)
         fake = FakeBehaviorClient()
@@ -170,7 +172,7 @@ class NativeSkillLifecycleTests(unittest.TestCase):
                     self.end_headers()
                     self.wfile.write(encoded)
 
-            endpoint = ThreadingHTTPServer(("127.0.0.1", 0), Endpoint)
+            endpoint = ThreadingHTTPServer(("127.0.0.1", endpoint_port), Endpoint)
             worker = threading.Thread(target=endpoint.serve_forever, daemon=True)
             worker.start()
             origin = f"http://127.0.0.1:{endpoint.server_port}"
@@ -198,6 +200,8 @@ class NativeSkillLifecycleTests(unittest.TestCase):
                             "ROBOHARNESS_MCP_NAME": mcp_name,
                             "EMBODIED_ANTHROPIC_BASE_URL": origin,
                             "CLAUDE_BIN": claude})
+            if context_setup is not None:
+                context_setup(runtime, env)
             bridge_process = None
             try:
                 if bridge:
@@ -258,6 +262,9 @@ class NativeSkillLifecycleTests(unittest.TestCase):
                 records = [json.loads(line) for line in transcript.read_text().splitlines()]
                 listing = next(row["attachment"] for row in records
                                if row.get("attachment", {}).get("type") == "skill_listing")
+                if expected_listing_sha256 is not None:
+                    self.assertEqual(hashlib.sha256(listing['content'].encode()).hexdigest(),
+                                     expected_listing_sha256, listing['content'])
                 from embodied_claude_code.skills import ARCHIVED_TASK_SKILLS
                 self.assertEqual(sorted(name for name in listing["names"]
                                         if name.startswith("embodied-claude-code:")),
