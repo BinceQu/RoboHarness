@@ -94,5 +94,15 @@
   "tests": {
     "real-cli-regressions.txt": "7b62e9ec80fb922d614fb61d23ccfabc45a291a841533646aa32da22ef5cb565",
     "root-regressions.txt": "98d1b66b75ec7ba45770cf3587124f02a84b8dec1352ad54af1e00d56ac93502"
+  },
+  "independent_clone": {
+    "revision": "f75396b4db040fc80e64e2887fab561be33d758b",
+    "python": "clone-local .venv-interface/bin/python",
+    "result": "39 passed; one opt-in real-CLI test skipped in this environment and passed separately",
+    "log_sha256": "85a173a9cde75246e2589397a4e6ebd8d64891f5de58f7a0ea7b0b1c5c3509b9"
+  },
+  "archive_profile_regeneration": {
+    "source_hashes_checked": 45,
+    "generated_profile_matches_committed_bytes": true
   }
 }
