@@ -13,6 +13,13 @@ matching task means alone no longer satisfy reproduction verification.
 An additional regression rejects a matching score when the wall-clock safety
 timeout forced episode submission. All 19 current runner/report/budget tests
 pass with this guard; it changes result validation, not the running agents.
+The launcher now defaults to no additional wall-clock cap (session_timeout_s=0);
+operators can opt into a finite safety timeout. Three more runner regressions
+cover configuration validation, large clock advances with the cap disabled,
+and explicit timeout labeling. All 22 runner/report/budget tests pass.
+The already running r5 controllers retain their original 24-hour per-case cap;
+they are not restarted for this change. A cap-triggered result cannot pass
+strict verification, and subsequent launches use the uncapped default.
 See [native asset reload analysis](native-asset-reload.md). This does not yet
 establish the three requested task scores.
 
