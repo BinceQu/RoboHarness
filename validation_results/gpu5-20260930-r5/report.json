@@ -1,5 +1,5 @@
 {
-  "updated_at_utc": "2026-09-30T11:30:39+00:00",
+  "updated_at_utc": "2026-09-30T11:57:01+00:00",
   "runs": [
     {
       "task": "task01",
@@ -21,6 +21,38 @@
       "diagnostic_only": false,
       "error": null,
       "superseded": null,
+      "reported_status": "running",
+      "local_liveness": {
+        "state": "alive",
+        "failed_roles": [],
+        "processes": {
+          "guardian": {
+            "pid": 2834056,
+            "expected_start": "129070981",
+            "state": "alive"
+          },
+          "interface": {
+            "pid": 2834060,
+            "expected_start": "129070981",
+            "state": "alive"
+          },
+          "gate": {
+            "pid": 2835467,
+            "expected_start": "129071183",
+            "state": "alive"
+          },
+          "evaluator": {
+            "pid": 2836167,
+            "expected_start": "129071284",
+            "state": "alive"
+          },
+          "controller": {
+            "pid": 2833423,
+            "expected_start": "129070891",
+            "state": "alive"
+          }
+        }
+      },
       "reproduction_caveats": []
     },
     {
@@ -43,6 +75,38 @@
       "diagnostic_only": false,
       "error": null,
       "superseded": null,
+      "reported_status": "running",
+      "local_liveness": {
+        "state": "alive",
+        "failed_roles": [],
+        "processes": {
+          "guardian": {
+            "pid": 2834154,
+            "expected_start": "129070994",
+            "state": "alive"
+          },
+          "interface": {
+            "pid": 2834157,
+            "expected_start": "129070994",
+            "state": "alive"
+          },
+          "gate": {
+            "pid": 2835562,
+            "expected_start": "129071196",
+            "state": "alive"
+          },
+          "evaluator": {
+            "pid": 2836260,
+            "expected_start": "129071297",
+            "state": "alive"
+          },
+          "controller": {
+            "pid": 2833447,
+            "expected_start": "129070895",
+            "state": "alive"
+          }
+        }
+      },
       "reproduction_caveats": []
     },
     {
@@ -65,6 +129,38 @@
       "diagnostic_only": false,
       "error": null,
       "superseded": null,
+      "reported_status": "running",
+      "local_liveness": {
+        "state": "alive",
+        "failed_roles": [],
+        "processes": {
+          "guardian": {
+            "pid": 2845406,
+            "expected_start": "129074014",
+            "state": "alive"
+          },
+          "interface": {
+            "pid": 2845407,
+            "expected_start": "129074015",
+            "state": "alive"
+          },
+          "gate": {
+            "pid": 2845896,
+            "expected_start": "129074216",
+            "state": "alive"
+          },
+          "evaluator": {
+            "pid": 2846092,
+            "expected_start": "129074317",
+            "state": "alive"
+          },
+          "controller": {
+            "pid": 2833459,
+            "expected_start": "129070896",
+            "state": "alive"
+          }
+        }
+      },
       "reproduction_caveats": []
     }
   ]

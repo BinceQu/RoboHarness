@@ -1,0 +1,54 @@
+{
+  "checked_at": "2026-09-30T19:57:47+08:00",
+  "source_commit": "fcaed4129d60746fe2ca635ebe6a357fb5b23c48",
+  "clone_path": "/var/tmp/roboharness-release-clone-20260929",
+  "command": [
+    "/var/tmp/roboharness-release-clone-20260929/.venv-interface/bin/python",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "python_version": "Python 3.11.16",
+  "checks": 28,
+  "passed": 28,
+  "skipped": 0,
+  "failed": 0,
+  "exit_code": 0,
+  "log_sha256": "5bb42ba1171acdfb11bb4065a2f9c10f5ed669bc6588a4bfcb83844e3a78a67a",
+  "scope": "Independent-clone runner, archive-budget, session-ownership and result-report checks; not a GPU score reproduction claim.",
+  "new_coverage": [
+    "Externally killed controller preserves completed scores and source summary while the watcher exits nonzero.",
+    "PID reuse cannot count as a live required service.",
+    "An exited agent does not invalidate normal official scoring or handoff.",
+    "Terminal summary race is distinguished from interrupted execution.",
+    "Finished scores remain verifiable after process cleanup.",
+    "Copied runs can be inspected without unrelated local process checks."
+  ],
+  "production_report_checked_at_utc": "2026-09-30T11:57:01+00:00",
+  "production_runs": [
+    {
+      "task": "task01",
+      "status": "running",
+      "local_liveness": "alive",
+      "n_finished": 0,
+      "reproduction_verified": false
+    },
+    {
+      "task": "task03",
+      "status": "running",
+      "local_liveness": "alive",
+      "n_finished": 0,
+      "reproduction_verified": false
+    },
+    {
+      "task": "task08",
+      "status": "running",
+      "local_liveness": "alive",
+      "n_finished": 0,
+      "reproduction_verified": false
+    }
+  ]
+}
