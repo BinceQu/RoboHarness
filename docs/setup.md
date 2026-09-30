@@ -95,3 +95,10 @@ and version. See the
 
 Run CPU checks with `./scripts/check.sh`. Existing interpreters can be selected
 using `ROBOHARNESS_INTERFACE_PYTHON` and `ROBOHARNESS_AGENT_PYTHON`.
+
+The runner has a 24-hour per-case wall-clock safety timeout (`session_timeout_s`
+in the local configuration). This is separate from the archived simulation-step
+budget. If the safety timeout forces submission, the official result is retained
+but the strict reporter excludes that run from reproduction verification, even
+when its score matches. Slow model service alone must not be mistaken for a
+successful budget-faithful evaluation.

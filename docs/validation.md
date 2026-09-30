@@ -10,6 +10,9 @@ events, a 90-second observation window and an explicit scene reset on GPU 5.
 The updated CPU suite has 395 checks: 378 pass and 17 optional checks skip.
 This includes native ABI rejection and strict per-case score comparison;
 matching task means alone no longer satisfy reproduction verification.
+An additional regression rejects a matching score when the wall-clock safety
+timeout forced episode submission. All 19 current runner/report/budget tests
+pass with this guard; it changes result validation, not the running agents.
 See [native asset reload analysis](native-asset-reload.md). This does not yet
 establish the three requested task scores.
 
