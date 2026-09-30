@@ -116,6 +116,12 @@ priority entries needed to reproduce that listing in a fresh `CLAUDE_CONFIG_DIR`
 The seed is written with exclusive creation under the case directory and is
 never merged with a user's global Claude home. Every live transcript must still
 pass the full initial-listing hash check; names alone are insufficient.
+An independent native-CLI A/B run confirmed the causal path: with the single
+recorded `embodied-claude-code:navigate-to-target` seed, task01/301 emitted
+the archived 5,987-character listing (SHA-256 `73e84a17…`); with the same
+launcher and no seed, it emitted the 5,959-character listing (SHA-256
+`0423f1a6…`). The seed survives Claude's startup migration and is therefore
+the session-local fix used by the release runner.
 An isolated real-CLI test exercises both namespaces, Skill activation,
 deactivation and compaction without contacting a simulator or external model.
 This verifies the recovered context components. Complete historical model request
