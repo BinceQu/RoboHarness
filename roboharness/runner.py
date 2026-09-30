@@ -586,7 +586,7 @@ def main(argv=None):
     ap.add_argument('--task', default='task00', help='task00, 0, or task name')
     ap.add_argument('--instances', help='Actual IDs, e.g. 301,304 (default: all five archived cases)')
     ap.add_argument('--gpu', type=int, default=0)
-    ap.add_argument('--port', type=int, help='HTTP port (default: 16060 + task index); reserves port+1000 and port+2000')
+    ap.add_argument('--port', type=int, help='HTTP port (default: 15070 + task index); reserves port+1000 and port+2000')
     ap.add_argument('--harness', choices=['claude_code', 'codex'], default='claude_code')
     ap.add_argument('--config', type=Path)
     ap.add_argument('--model-url')
@@ -608,7 +608,7 @@ def main(argv=None):
         for key in ('model_url', 'model'):
             if getattr(args, key):
                 config[key] = getattr(args, key)
-        port = args.port or 16060 + task['task_index']
+        port = args.port or 15070 + task['task_index']
         if not 1024 <= port <= 63535 or args.gpu < 0:
             raise ValueError('Use GPU >= 0 and an unprivileged port <= 63535.')
         run_id = task['task'] + '-' + time.strftime('%Y%m%d-%H%M%S') + '-' + uuid.uuid4().hex[:8]
