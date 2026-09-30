@@ -16,7 +16,42 @@ sys.path.insert(0, str(ROOT))
 from roboharness.runner import atomic_json, official_result, read_json
 
 
-def collect(path: Path) -> dict:
+def local_process_state(identity: dict) -> dict:
+    pid, birth = identity.get('pid'), identity.get('start')
+    result = {'pid': pid, 'expected_start': birth}
+    if not isinstance(pid, int) or isinstance(pid, bool) or pid <= 0 or not birth:
+        return {**result, 'state': 'unknown_identity'}
+    try:
+        fields = (Path('/proc') / str(pid) / 'stat').read_text().rsplit(')', 1)[1].split()
+        actual_birth, state = fields[19], fields[0]
+    except FileNotFoundError:
+        return {**result, 'state': 'missing'}
+    except (OSError, IndexError):
+        return {**result, 'state': 'unreadable'}
+    if actual_birth != str(birth):
+        return {**result, 'state': 'pid_reused', 'observed_start': actual_birth}
+    return {**result, 'state': 'exited' if state in ('Z', 'X') else 'alive'}
+
+
+def local_liveness(path: Path) -> dict:
+    processes_path = path / 'processes.json'
+    processes = read_json(processes_path) if processes_path.is_file() else {}
+    session_path = path / 'active_session.json'
+    session = read_json(session_path) if session_path.is_file() else {}
+    identities = {role: identity for role, identity in processes.items()
+                  if role in ('guardian', 'interface', 'gate', 'evaluator')}
+    if session.get('owner_pid'):
+        identities['controller'] = {'pid': session['owner_pid'], 'start': session.get('owner_start')}
+    # An agent may exit normally while its official scoring JSON is being saved.
+    states = {role: local_process_state(identity) for role, identity in identities.items()}
+    dead = [role for role, record in states.items() if record['state'] in ('missing', 'pid_reused', 'exited')]
+    required = {'controller', 'interface', 'gate', 'evaluator'}
+    verified = required.issubset(states) and all(record['state'] == 'alive' for record in states.values())
+    return {'state': 'dead' if dead else 'alive' if verified else 'unverified',
+            'failed_roles': dead, 'processes': states}
+
+
+def collect(path: Path, *, check_live: bool = False) -> dict:
     plan = read_json(path / 'plan.json')
     summary = read_json(path / 'summary.json')
     task = plan['task_config']
@@ -46,6 +81,17 @@ def collect(path: Path) -> dict:
     status = summary['status']
     if status == 'starting' and any(path.glob('instance_*/case.json')):
         status = 'running'
+    liveness = None
+    error = summary.get('error')
+    if check_live and status in ('starting', 'running'):
+        liveness = local_liveness(path)
+        if liveness['state'] == 'dead':
+            # Normal completion writes its terminal summary before process cleanup.
+            # Re-read it to avoid reporting that cleanup as an interruption.
+            if read_json(path / 'summary.json').get('status') in ('complete', 'failed'):
+                return collect(path, check_live=check_live)
+            status = 'interrupted'
+            error = 'Recorded local processes are no longer alive: ' + ', '.join(liveness['failed_roles'])
     if status == 'complete' and len(completed) != len(expected):
         raise ValueError(f'Run claims completion without all official scores: {path}')
     archive_mean = sum(c.get('archive_reported_q', c['reference_q']) for c in expected.values()) / len(expected)
@@ -76,7 +122,8 @@ def collect(path: Path) -> dict:
             'reproduction_verified': (matches_cases and abs(mean - archive_mean) < 1e-6)
                                      if complete else False,
             'diagnostic_only': plan.get('diagnostic_only', False),
-            'error': summary.get('error'), 'superseded': superseded,
+            'error': error, 'superseded': superseded,
+            'reported_status': summary['status'], 'local_liveness': liveness,
             'reproduction_caveats': caveats}
 
 
@@ -89,15 +136,16 @@ def write_report(output: Path, rows: list[dict], run_paths: list[Path]):
              'run has no final mean comparison and is not a successful reproduction claim.', '',
              'Comparisons cover only the selected instances. Run all five archived instances',
              'to compare a complete task mean.', '',
-             '| Task | Status | Completed | New Q (completed cases) | Archived Q (same completed cases) | Final difference | Every case matches |',
-             '| --- | --- | ---: | ---: | ---: | ---: | --- |']
+             '| Task | Status | Local processes | Completed | New Q (completed cases) | Archived Q (same completed cases) | Final difference | Every case matches |',
+             '| --- | --- | --- | ---: | ---: | ---: | ---: | --- |']
     for row, run in zip(rows, run_paths):
         mean = '—' if row['mean_q'] is None else f'{row["mean_q"]:.6f}'
         archive = ('—' if row['completed_archive_mean_q'] is None
                    else f'{row["completed_archive_mean_q"]:.6f}')
         delta = '—' if row['delta_archive_mean_q'] is None else f'{row["delta_archive_mean_q"]:+.6f}'
         matches = '—' if row['matches_archive_cases'] is None else ('yes' if row['matches_archive_cases'] else 'no')
-        lines.append(f'| {row["task"]} | {row["status"]} | {row["n_finished"]}/{row["n_expected"]} | '
+        local = row['local_liveness']['state'] if row['local_liveness'] else 'not checked'
+        lines.append(f'| {row["task"]} | {row["status"]} | {local} | {row["n_finished"]}/{row["n_expected"]} | '
                      f'{mean} | {archive} | {delta} | {matches} |')
         for case in row['cases']:
             source = run / case['source_result']
@@ -105,6 +153,8 @@ def write_report(output: Path, rows: list[dict], run_paths: list[Path]):
             target.parent.mkdir(exist_ok=True)
             shutil.copyfile(source, target)
     for row in rows:
+        if row['error']:
+            lines += ['', f'**{row["task"]}: {row["status"]}.** {row["error"]}']
         for caveat in row['reproduction_caveats']:
             lines += ['', f'**{row["task"]}/{caveat["instance_id"]}: reproduction limitation.** '
                       f'{caveat["reason"]}']
@@ -123,12 +173,14 @@ def main():
     parser.add_argument('runs', nargs='+', type=Path)
     parser.add_argument('--output', type=Path, default=ROOT / 'validation_results/latest')
     parser.add_argument('--watch', action='store_true', help='Update until every selected run completes or fails')
+    parser.add_argument('--check-live', action='store_true',
+                        help='Verify recorded process identities on this Linux host; do not use for copied runs')
     parser.add_argument('--require-match', action='store_true',
                         help='Exit 2 unless all selected cases have verified matching archived scores')
     args = parser.parse_args()
     previous = None
     while True:
-        rows = [collect(path.resolve()) for path in args.runs]
+        rows = [collect(path.resolve(), check_live=args.check_live) for path in args.runs]
         if len({r['task'] for r in rows}) != len(rows):
             raise ValueError('Choose one run per task; separate attempts must be reported separately.')
         signature = json.dumps(rows, sort_keys=True)
@@ -136,8 +188,8 @@ def main():
             write_report(args.output.resolve(), rows, [p.resolve() for p in args.runs])
             print(' | '.join(f'{r["task"]}: {r["status"]}, {r["n_finished"]}/{r["n_expected"]}' for r in rows), flush=True)
             previous = signature
-        if not args.watch or all(r['status'] in ('complete', 'failed') for r in rows):
-            if any(r['status'] == 'failed' for r in rows):
+        if not args.watch or all(r['status'] in ('complete', 'failed', 'interrupted') for r in rows):
+            if any(r['status'] in ('failed', 'interrupted') for r in rows):
                 return 1
             if args.require_match and not all(r['reproduction_verified'] for r in rows):
                 return 2

@@ -1,11 +1,15 @@
 import hashlib
 import json
+import os
 from pathlib import Path
+import subprocess
+import sys
 import tempfile
 import unittest
 from unittest import mock
 
 from scripts.report_validation import collect, main
+from roboharness.runner import process_start
 
 
 class ValidationReport(unittest.TestCase):
@@ -30,6 +34,14 @@ class ValidationReport(unittest.TestCase):
 
     def save(self):
         (self.root / 'summary.json').write_text(json.dumps(self.summary))
+
+    def record_local_processes(self, owner_pid=None):
+        owner_pid = os.getpid() if owner_pid is None else owner_pid
+        identity = {'pid': os.getpid(), 'start': process_start(os.getpid())}
+        (self.root / 'processes.json').write_text(json.dumps({
+            role: identity for role in ('guardian', 'interface', 'gate', 'evaluator')}))
+        (self.root / 'active_session.json').write_text(json.dumps({
+            'owner_pid': owner_pid, 'owner_start': process_start(owner_pid)}))
 
     def require_match_exit_code(self):
         with mock.patch('sys.argv', ['report_validation', str(self.root),
@@ -73,6 +85,85 @@ class ValidationReport(unittest.TestCase):
         path.write_text(json.dumps(body))
         with self.assertRaises(ValueError):
             collect(self.root)
+
+    def test_local_check_tracks_controller_death_without_altering_saved_results(self):
+        child = subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(60)'])
+        try:
+            self.record_local_processes(child.pid)
+            self.add_case(301, 1.0)
+            self.save()
+            original = (self.root / 'summary.json').read_bytes()
+            row = collect(self.root, check_live=True)
+            self.assertEqual(row['local_liveness']['state'], 'alive')
+            self.assertEqual(row['status'], 'running')
+            child.kill()
+            child.wait(timeout=5)
+            row = collect(self.root, check_live=True)
+            self.assertEqual(row['status'], 'interrupted')
+            self.assertEqual(row['reported_status'], 'running')
+            self.assertEqual(row['local_liveness']['failed_roles'], ['controller'])
+            self.assertEqual(row['n_finished'], 1)
+            self.assertEqual(row['mean_q'], 1.0)
+            self.assertFalse(row['reproduction_verified'])
+            self.assertEqual((self.root / 'summary.json').read_bytes(), original)
+            with mock.patch('sys.argv', ['report_validation', str(self.root),
+                            '--output', str(self.root / 'report'), '--watch', '--check-live', '--require-match']):
+                self.assertEqual(main(), 1)
+        finally:
+            if child.poll() is None:
+                child.kill()
+                child.wait(timeout=5)
+
+    def test_local_check_rejects_reused_pid_for_a_required_service(self):
+        self.record_local_processes()
+        path = self.root / 'processes.json'
+        data = json.loads(path.read_text())
+        data['evaluator'] = {'pid': os.getpid(), 'start': '0'}
+        path.write_text(json.dumps(data))
+        self.save()
+        row = collect(self.root, check_live=True)
+        self.assertEqual(row['status'], 'interrupted')
+        self.assertEqual(row['local_liveness']['processes']['evaluator']['state'], 'pid_reused')
+        self.assertEqual(row['local_liveness']['failed_roles'], ['evaluator'])
+
+    def test_liveness_is_optional_for_copied_runs_and_unverified_without_metadata(self):
+        self.save()
+        self.assertIsNone(collect(self.root)['local_liveness'])
+        row = collect(self.root, check_live=True)
+        self.assertEqual(row['local_liveness']['state'], 'unverified')
+        self.assertEqual(row['status'], 'running')
+
+    def test_local_check_does_not_require_agent_after_normal_exit(self):
+        self.record_local_processes()
+        path = self.root / 'processes.json'
+        data = json.loads(path.read_text())
+        data['agent'] = {'pid': os.getpid(), 'start': '0'}
+        path.write_text(json.dumps(data))
+        self.save()
+        row = collect(self.root, check_live=True)
+        self.assertEqual(row['status'], 'running')
+        self.assertEqual(row['local_liveness']['state'], 'alive')
+
+    def test_finished_runs_do_not_require_live_processes(self):
+        self.add_case(301, 1.0)
+        self.add_case(304, 1.0)
+        self.summary['status'] = 'complete'
+        self.save()
+        with mock.patch('scripts.report_validation.local_liveness', side_effect=AssertionError):
+            self.assertTrue(collect(self.root, check_live=True)['reproduction_verified'])
+
+    def test_completion_race_is_not_reported_as_process_interruption(self):
+        self.add_case(301, 1.0)
+        self.add_case(304, 1.0)
+        self.save()
+        def completed_during_check(path):
+            self.summary['status'] = 'complete'
+            self.save()
+            return {'state': 'dead', 'failed_roles': ['evaluator'], 'processes': {}}
+        with mock.patch('scripts.report_validation.local_liveness', side_effect=completed_during_check):
+            row = collect(self.root, check_live=True)
+        self.assertEqual(row['status'], 'complete')
+        self.assertTrue(row['reproduction_verified'])
 
     def test_equal_means_do_not_hide_swapped_case_scores(self):
         plan_path = self.root / 'plan.json'

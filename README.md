@@ -62,12 +62,17 @@ results are documented in [validation](docs/validation.md).
 To collect several completed or ongoing runs into one report:
 
 ```bash
-python3 scripts/report_validation.py runs/YOUR_RUN_A runs/YOUR_RUN_B --watch --require-match
+python3 scripts/report_validation.py runs/YOUR_RUN_A runs/YOUR_RUN_B --watch --check-live --require-match
 ```
 
 The report is written to `validation_results/latest/`. An incomplete run
 never receives a final score comparison. Completed official JSON files are
 copied into the report alongside their hashes and per-case differences.
+Use `--check-live` only on the Linux host running these evaluations. It checks
+the controller and recorded service PIDs together with their start times,
+detects external termination or PID reuse, and reports `interrupted` even if
+the saved summary still says `running`. It preserves the original summaries
+and scores. Omit this option when inspecting runs copied from another host.
 `--require-match` exits nonzero for a failed, incomplete or mismatched run.
 Verification requires every selected case to match the directory-reported
 score; equal means with different case scores do not pass.
