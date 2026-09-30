@@ -66,6 +66,11 @@ cp configs/example.json configs/local.json
 ./run.sh --task task01 --gpu 0
 ```
 
+For a session-scoped launch that automatically selects the 1507* HTTP range,
+use `scripts/reproduce_task.sh task01 --gpu 0`. It creates or reuses only
+`.local/session-config.json`; it does not modify `configs/local.json`, the
+global Claude home, or the global Codex home.
+
 Relative configuration paths are resolved from the repository root. Reusing
 existing environments is supported by `interface_python`, `evaluator_python`,
 and `agent_python`; the runner always imports the interface and evaluator

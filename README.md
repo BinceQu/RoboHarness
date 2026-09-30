@@ -26,6 +26,8 @@ Follow [installation and model setup](docs/setup.md), then:
 ./run.sh --task task01 --gpu 0
 ./run.sh --task task08 --instances 301,304 --gpu 0
 ./run.sh --task task06 --gpu 0 --dry-run
+# session-safe 1507* wrapper:
+./scripts/reproduce_task.sh task01 --gpu 0
 ```
 
 A task defaults to all five archived instance IDs: 301, 304, 306, 308, 310.
