@@ -23,6 +23,26 @@ class ValidationReport(unittest.TestCase):
         (self.root / 'plan.json').write_text(json.dumps(plan))
         self.summary = {'status': 'running', 'cases': []}
         (self.root / 'output/json').mkdir(parents=True)
+        # These tests isolate score/liveness reporting. Native context parsing
+        # and real-CLI fidelity have their own tests below and in test_native_context.
+        context_patch = mock.patch('scripts.report_validation.native_contexts', return_value=[
+            {'instance_id': iid, 'state': 'match'} for iid in (301, 304)])
+        self.context_mock = context_patch.start()
+        self.addCleanup(context_patch.stop)
+
+    def test_matching_scores_cannot_hide_native_listing_mismatch(self):
+        self.add_case(301, 1.0)
+        self.add_case(304, 1.0)
+        self.summary['status'] = 'complete'
+        self.save()
+        for state in ('mismatch', 'missing', 'ambiguous', 'unreadable'):
+            with self.subTest(state=state):
+                self.context_mock.return_value = [{'instance_id': 301, 'state': state}]
+                row = collect(self.root)
+                self.assertEqual(row['mean_q'], 1.0)
+                self.assertFalse(row['reproduction_verified'])
+                self.assertIn(state, row['reproduction_caveats'][0]['reason'])
+                self.assertEqual(self.require_match_exit_code(), 2)
 
     def add_case(self, iid, q):
         path = self.root / f'output/json/picking_up_trash_{iid}_0.json'

@@ -1,0 +1,98 @@
+{
+  "captured_at": "2026-10-01T05:23:24.474761+08:00",
+  "scope": "Read-only initial native context audit. No simulator action, model request, restart, or score modification.",
+  "archived_cases": 45,
+  "recorded_listing_patterns": 2,
+  "runs": [
+    {
+      "task": "task01",
+      "instance_id": 301,
+      "run_directory": "validation-20260930-task01-r5",
+      "source_revision": {
+        "recorded_at": "2026-09-30T19:21:38+08:00",
+        "runtime_source_commit": "23fefd0736ad45c7e91631bce2a12abba3e57937",
+        "evaluator_commit": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+        "plan_sha256": "731e1839109b31c839f3a1d3d6f48a7d728deca3004065370e40b6b36fa4d4f9",
+        "archive_context_fixture_sha256": "d91a6c3eeca7cf82a1fe9744ceee2c589df20fd3b0ed1395da26a5c9b68471f8",
+        "service_unit": "roboharness-validation-task01-20260930-r5.service",
+        "native_asset_watch_regression": "validation_results/native-asset-reload-20260930/fixed-regression.json"
+      },
+      "transcript": "runs/validation-20260930-task01-r5/instance_301/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/9a0aef16-9af5-4db4-b384-20323b8d4502.jsonl",
+      "prefix_bytes": 45790,
+      "prefix_sha256": "f714b7105f17927ce144e63048a5d2240356db64b2248029003c9c43e883b7cb",
+      "native_listing": {
+        "state": "mismatch",
+        "expected_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+        "actual_sha256": "0423f1a6152f4b1a598c2be525f25fb294c18cc94690fdcefd38f0ffebd69ea0",
+        "actual_chars": 5959
+      },
+      "first_reported_input_tokens": {
+        "archive": 20647,
+        "r5": 18982,
+        "difference": -1665
+      }
+    },
+    {
+      "task": "task03",
+      "instance_id": 301,
+      "run_directory": "validation-20260930-task03-r5",
+      "source_revision": {
+        "recorded_at": "2026-09-30T19:21:38+08:00",
+        "runtime_source_commit": "23fefd0736ad45c7e91631bce2a12abba3e57937",
+        "evaluator_commit": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+        "plan_sha256": "9ad6c7cb010614f2200ba49071881afea8f43a9dd24168baaaa937204eec4def",
+        "archive_context_fixture_sha256": "d91a6c3eeca7cf82a1fe9744ceee2c589df20fd3b0ed1395da26a5c9b68471f8",
+        "service_unit": "roboharness-validation-task03-20260930-r5.service",
+        "native_asset_watch_regression": "validation_results/native-asset-reload-20260930/fixed-regression.json"
+      },
+      "transcript": "runs/validation-20260930-task03-r5/instance_301/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/8d66162b-a1f2-4bc0-b43f-0519b6a44869.jsonl",
+      "prefix_bytes": 38818,
+      "prefix_sha256": "3e70517426918dbe0fd335bf407d73772c508d9421c3e42db43cb43c2557cae6",
+      "native_listing": {
+        "state": "mismatch",
+        "expected_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+        "actual_sha256": "0423f1a6152f4b1a598c2be525f25fb294c18cc94690fdcefd38f0ffebd69ea0",
+        "actual_chars": 5959
+      },
+      "first_reported_input_tokens": {
+        "archive": 19631,
+        "r5": 18007,
+        "difference": -1624
+      }
+    },
+    {
+      "task": "task08",
+      "instance_id": 301,
+      "run_directory": "validation-20260930-task08-r5",
+      "source_revision": {
+        "recorded_at": "2026-09-30T19:22:08+08:00",
+        "runtime_source_commit": "23fefd0736ad45c7e91631bce2a12abba3e57937",
+        "evaluator_commit": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+        "plan_sha256": "764902c0ee339a27bd40d6ad629ba426f72935a0ef0ed0757c3a1910d63c76c9",
+        "archive_context_fixture_sha256": "d91a6c3eeca7cf82a1fe9744ceee2c589df20fd3b0ed1395da26a5c9b68471f8",
+        "service_unit": "roboharness-validation-task08-20260930-r5.service",
+        "native_asset_watch_regression": "validation_results/native-asset-reload-20260930/fixed-regression.json"
+      },
+      "transcript": "runs/validation-20260930-task08-r5/instance_301/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/dcd5866f-a1c7-4a79-aac8-c67a4f31f328.jsonl",
+      "prefix_bytes": 59167,
+      "prefix_sha256": "8071f3cdb48977eaec8f543b982180be4e59e21f702a8c3852cbcff81ca9ca09",
+      "native_listing": {
+        "state": "mismatch",
+        "expected_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+        "actual_sha256": "0423f1a6152f4b1a598c2be525f25fb294c18cc94690fdcefd38f0ffebd69ea0",
+        "actual_chars": 5959
+      },
+      "first_reported_input_tokens": {
+        "archive": 22087,
+        "r5": 20454,
+        "difference": -1633
+      }
+    }
+  ],
+  "repair": "Derived case-local skillUsage priorities and exact recorded listing character budget; true historical counters were not recovered.",
+  "unresolved": "The approximately 1600-token initial request difference is much larger than the 28-character listing difference. Complete original wire requests were not archived, so whole-request equivalence is not established.",
+  "tests": {
+    "real-cli-regressions.txt": "7b62e9ec80fb922d614fb61d23ccfabc45a291a841533646aa32da22ef5cb565",
+    "root-regressions.txt": "98d1b66b75ec7ba45770cf3587124f02a84b8dec1352ad54af1e00d56ac93502"
+  }
+}

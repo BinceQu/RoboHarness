@@ -95,7 +95,7 @@ and omits that later telemetry. The evaluator and UI still enforce/display
 the explicit 2025 ×2 budget. Standalone harness use retains its supplied
 default behavior.
 
-The initial context matches all 45 selected archived Claude transcripts
+The SessionStart hook context matches all 45 selected archived Claude transcripts
 byte for byte (SHA-256
 `a1ef3ea478487ad0e8d5dc8a162b0042365e874908f22169b785df75b0f838ff`).
 The activated pick-up-object, place-object-in-container,
@@ -109,10 +109,21 @@ Each case also selects its recorded MCP namespace: task02/310, all task07
 cases and task08/304 use `plugin:embodied-claude-code:behavior-v2`; the other
 38 cases use `behavior-v2`. The launcher preserves Claude's native Skill tool
 and listing, and requires the archived Claude Code version 2.1.259.
+Claude Code ranks Skill descriptions using a case-local persisted `skillUsage`
+store. The original counters were not part of the archived transcript, so the
+release records each case's observed initial listing and seeds only the minimal
+priority entries needed to reproduce that listing in a fresh `CLAUDE_CONFIG_DIR`.
+The seed is written with exclusive creation under the case directory and is
+never merged with a user's global Claude home. Every live transcript must still
+pass the full initial-listing hash check; names alone are insufficient.
 An isolated real-CLI test exercises both namespaces, Skill activation,
 deactivation and compaction without contacting a simulator or external model.
-This verifies the recovered model context; it does not establish that every
-simulator or interface implementation file is identical to its historical version.
+This verifies the recovered context components. Complete historical model request
+bodies were not recorded, so it does not prove whole-request byte identity or
+that every simulator/interface file equals its historical version. The r5 initial
+requests also report approximately 1,600 fewer input tokens than the corresponding
+archives. The small Skill listing text difference does not explain that entire
+difference; it remains a separate unresolved fidelity observation.
 
 ## Evaluation budgets
 

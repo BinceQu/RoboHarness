@@ -1,0 +1,540 @@
+{
+  "schema_version": 1,
+  "claude_version": "2.1.259",
+  "scope": "Recorded initial native Skill listing metadata. Original skillUsage counters and complete model request bodies were not archived. Bundled CLI description text is represented only by hashes.",
+  "patterns": {
+    "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3": {
+      "sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "chars": 5987,
+      "names": [
+        "embodied-claude-code:behavior-v2-baseline",
+        "embodied-claude-code:close-box",
+        "embodied-claude-code:cut-object",
+        "embodied-claude-code:navigate-to-target",
+        "embodied-claude-code:open-doors-and-drawers",
+        "embodied-claude-code:pick-up-object",
+        "embodied-claude-code:place-object-in-container",
+        "embodied-claude-code:traverse-narrow-passages",
+        "dataviz",
+        "update-config",
+        "keybindings-help",
+        "code-review",
+        "simplify",
+        "fewer-permission-prompts",
+        "loop",
+        "claude-api",
+        "workflow-authoring",
+        "run",
+        "init",
+        "security-review"
+      ],
+      "plugin_listing_lines": [
+        "- embodied-claude-code:behavior-v2-baseline",
+        "- embodied-claude-code:close-box",
+        "- embodied-claude-code:cut-object",
+        "- embodied-claude-code:navigate-to-target: Drive toward a goal that is either already marked on the live minimap or not yet seen. The minimap is the overlay on the top-right of the head-camera image; look there when you need the map. If that overlay has no clear structure, look around with consecutive spin=90 first. Do not use this Skill to open doors or cross a tight doorway.",
+        "- embodied-claude-code:open-doors-and-drawers",
+        "- embodied-claude-code:pick-up-object",
+        "- embodied-claude-code:place-object-in-container",
+        "- embodied-claude-code:traverse-narrow-passages"
+      ],
+      "native_listing_sha256": "c1c1d399f3e6e5b52f966d2fb11777c0ef21892406273e8ce2751e11ca97e75d",
+      "plugin_descriptions": [
+        "embodied-claude-code:navigate-to-target"
+      ]
+    },
+    "0423f1a6152f4b1a598c2be525f25fb294c18cc94690fdcefd38f0ffebd69ea0": {
+      "sha256": "0423f1a6152f4b1a598c2be525f25fb294c18cc94690fdcefd38f0ffebd69ea0",
+      "chars": 5959,
+      "names": [
+        "embodied-claude-code:behavior-v2-baseline",
+        "embodied-claude-code:close-box",
+        "embodied-claude-code:cut-object",
+        "embodied-claude-code:navigate-to-target",
+        "embodied-claude-code:open-doors-and-drawers",
+        "embodied-claude-code:pick-up-object",
+        "embodied-claude-code:place-object-in-container",
+        "embodied-claude-code:traverse-narrow-passages",
+        "dataviz",
+        "update-config",
+        "keybindings-help",
+        "code-review",
+        "simplify",
+        "fewer-permission-prompts",
+        "loop",
+        "claude-api",
+        "workflow-authoring",
+        "run",
+        "init",
+        "security-review"
+      ],
+      "plugin_listing_lines": [
+        "- embodied-claude-code:behavior-v2-baseline: Use when observing or operating a robot through the Embodied Claude Code BEHAVIOR v2 MCP tools, interpreting returned camera images, collecting a direct tool trajectory, or building and testing a task-specific embodied Skill on this baseline.",
+        "- embodied-claude-code:close-box: Close a box that has a lid. Do not use on objects without a lid.",
+        "- embodied-claude-code:cut-object",
+        "- embodied-claude-code:navigate-to-target",
+        "- embodied-claude-code:open-doors-and-drawers",
+        "- embodied-claude-code:pick-up-object",
+        "- embodied-claude-code:place-object-in-container",
+        "- embodied-claude-code:traverse-narrow-passages"
+      ],
+      "native_listing_sha256": "c1c1d399f3e6e5b52f966d2fb11777c0ef21892406273e8ce2751e11ca97e75d",
+      "plugin_descriptions": [
+        "embodied-claude-code:behavior-v2-baseline",
+        "embodied-claude-code:close-box"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "task": "task00",
+      "instance_id": 301,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/40dafba2-4756-4f87-8142-29596e01cf48.jsonl",
+      "source_sha256": "cbfd2c28cd9ef44a3d4309a42bfb74d1ebbf170465af4aa6769b48d1649fbfb5",
+      "prefix_bytes": 42194,
+      "prefix_sha256": "b79714d16d2192762dcb2d12b1708f0a9e057ca8d1e774965c2936e897d13101",
+      "first_reported_input_tokens": 20478
+    },
+    {
+      "task": "task00",
+      "instance_id": 304,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/63bc81fe-f611-4647-993d-e2f957251356.jsonl",
+      "source_sha256": "100c9760ad41a1da150b768114c372232ebcc5f66b487d79a79ea1f8996db07b",
+      "prefix_bytes": 42417,
+      "prefix_sha256": "f5dc63f9eaef94ccf1d92e65d3ad861ee8994471e48c09d41b8229c74d162e4e",
+      "first_reported_input_tokens": 20485
+    },
+    {
+      "task": "task00",
+      "instance_id": 306,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/54d0dd0e-d8f4-4595-8b96-86543f432552.jsonl",
+      "source_sha256": "84060c6a642b8c9d92587c456f9afdbcb49fa317184030f85e210ac53eb62465",
+      "prefix_bytes": 42279,
+      "prefix_sha256": "d45c02c9a4aa48c362d848bf19b69028ee4248a7affce3d7e56bf92cd04d60ef",
+      "first_reported_input_tokens": 20125
+    },
+    {
+      "task": "task00",
+      "instance_id": 308,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/ade09be5-501d-47c8-aaca-fe047cf6e6c5.jsonl",
+      "source_sha256": "9923cad447a36b444e220efc2fb77fd568bacde0eb8135f25c37e40cebe67e16",
+      "prefix_bytes": 42745,
+      "prefix_sha256": "676a3c8c2cf3e38bb3d22b8e13b30a7bdb7dae3305c1bb4d633600fb7ba5696d",
+      "first_reported_input_tokens": 20120
+    },
+    {
+      "task": "task00",
+      "instance_id": 310,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/f3f3a6ad-ad82-4165-b158-da6f3f9f3341.jsonl",
+      "source_sha256": "cedc0b00f8478b8e208f828e93688629c148f50bf21c69aee3f54a840b48c929",
+      "prefix_bytes": 42545,
+      "prefix_sha256": "4c2dafae6105c1234d1f5b9e58b3144a361d0926c98b162b0381f059355360f7",
+      "first_reported_input_tokens": 20124
+    },
+    {
+      "task": "task01",
+      "instance_id": 301,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/282de2ac-1724-4003-b69e-0060656cbebb.jsonl",
+      "source_sha256": "9bde08ae54db3055b6b72ce5997312d40e0e07ad3777ebd4c53f60196ffbfe31",
+      "prefix_bytes": 46431,
+      "prefix_sha256": "02ebc2f3b2a7fea6590fd34fef8231d237c0bda3bccd565d7ce22963d4303a9d",
+      "first_reported_input_tokens": 20647
+    },
+    {
+      "task": "task01",
+      "instance_id": 304,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/6a82d31a-8045-4462-8c4c-2acc323dc127.jsonl",
+      "source_sha256": "5281377e5a46c0bf7b436bd66aa8a81f1f3d4d498689c7288b63ca2f0545e84f",
+      "prefix_bytes": 45795,
+      "prefix_sha256": "b2fb98b1121e024508688093a5746b3df463627e9b30ee73318f71aacd024c86",
+      "first_reported_input_tokens": 20651
+    },
+    {
+      "task": "task01",
+      "instance_id": 306,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/4edbee83-f50d-4b8b-9e88-eb0752086c47.jsonl",
+      "source_sha256": "b108a58eb5dbe51fd33a57a7614a70798e513a183f9d185d110a59f6b67ab182",
+      "prefix_bytes": 45804,
+      "prefix_sha256": "870084cb37465bea500dd3dd416e0843750531456b10ec05f03f71b83bb22630",
+      "first_reported_input_tokens": 20645
+    },
+    {
+      "task": "task01",
+      "instance_id": 308,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/9c151129-9bc7-41f3-99ed-01691c862f23.jsonl",
+      "source_sha256": "341b91498e73b5a349cf5839279c0d2b12061d70a578c08ea037ad8c4e660886",
+      "prefix_bytes": 45789,
+      "prefix_sha256": "dce6c49ef587482fe3d549ccad56e142e43434eb8f067938c6160362aa8b12ca",
+      "first_reported_input_tokens": 20649
+    },
+    {
+      "task": "task01",
+      "instance_id": 310,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/48c73b78-c55b-4a92-a844-5a8040ff34fa.jsonl",
+      "source_sha256": "b3f595cf1778a3f0c4d28470e66d5ff7417289354e5159dffa33e62c35003a91",
+      "prefix_bytes": 46465,
+      "prefix_sha256": "e7b4bcda4aca2040715a731aee870009a5b269d178821207bebb0160cdd1bb63",
+      "first_reported_input_tokens": 20644
+    },
+    {
+      "task": "task02",
+      "instance_id": 301,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/1ba35d25-0c07-4456-9fb4-916eabebbff9.jsonl",
+      "source_sha256": "d212716369c538c4d5caf63af6902d656ee0f2b470d6fe6114bf7400796428fc",
+      "prefix_bytes": 59848,
+      "prefix_sha256": "7cd28513bfb68aa3088a3f14757b8519463a2581e8953d493c09a2c35b35a03e",
+      "first_reported_input_tokens": 22413
+    },
+    {
+      "task": "task02",
+      "instance_id": 304,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/3df4ef3d-ccc0-4118-bf80-410c5f92f21d.jsonl",
+      "source_sha256": "ac264b4d3ba7004dfa9bdcba54da2ebd741199c711571b77a9208b6fbde73ee8",
+      "prefix_bytes": 61968,
+      "prefix_sha256": "99983473c7f1b50d01ad0604f1b859f5489ac6ea6311bc69779977736cc9fa45",
+      "first_reported_input_tokens": 22710
+    },
+    {
+      "task": "task02",
+      "instance_id": 306,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/8a55a347-e9ad-432a-8d7e-f95e703f96d3.jsonl",
+      "source_sha256": "e955d8de2390e0a36fc10647442df07480910de7a8842f7e847fec8da2f47d9f",
+      "prefix_bytes": 64260,
+      "prefix_sha256": "b90a2f81e8c5988df2234710414c1f8f326b4bb7602f331831d6be9a7871ecd8",
+      "first_reported_input_tokens": 23019
+    },
+    {
+      "task": "task02",
+      "instance_id": 308,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/845ae2c6-aac9-4112-ac64-b1312ad59777.jsonl",
+      "source_sha256": "704be938458da48e848a3c080391392fa0362abccc58a2b2f58a19cb01aa08d5",
+      "prefix_bytes": 64404,
+      "prefix_sha256": "5c06faf126091eb55fd2db7db002ba05b4179131929470b9ff9aeb175e558c68",
+      "first_reported_input_tokens": 23013
+    },
+    {
+      "task": "task02",
+      "instance_id": 310,
+      "listing_sha256": "0423f1a6152f4b1a598c2be525f25fb294c18cc94690fdcefd38f0ffebd69ea0",
+      "source": "experimental_gpu3_interface/eval_runs/t02-15062-0920114651-db5318bac7e0/p15062/runtime/t02p15062i9-0920115421-dceabceee1ae/claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/39b18317-b9f0-4c41-a6b0-83df5713d89a.jsonl",
+      "source_sha256": "0dc0210a2f9e9ffce4cd3d32a2ba4a121acd30d73b9247eba9a5b9d85b5c2c86",
+      "prefix_bytes": 64843,
+      "prefix_sha256": "9a39389e0ee9ab451a7e0770cd292d483f0b01fee10ab8f503068f6432d3c4a3",
+      "first_reported_input_tokens": 23357
+    },
+    {
+      "task": "task03",
+      "instance_id": 301,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "test_results/task03/06_claude_transcripts/claude_t03p15063i0-09152328_301.jsonl",
+      "source_sha256": "f05ef5d7e525533f87e8313fff26b9c44f7f827e10887451352639f1e98d0ce1",
+      "prefix_bytes": 38857,
+      "prefix_sha256": "339e380c2354c917c2797bc9b37fca6c5b4e527b49eb42d5d173363b059bfb84",
+      "first_reported_input_tokens": 19631
+    },
+    {
+      "task": "task03",
+      "instance_id": 304,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "test_results/task03/06_claude_transcripts/claude_t03p15063i3-09171808_304.jsonl",
+      "source_sha256": "c66fb5b28c37320ed5c6e3b586e45b740d47f190255cb9876578d32f130ebbf5",
+      "prefix_bytes": 38873,
+      "prefix_sha256": "48340696f932e59c511ecdfbf6db9a715a6bdf7656265e9d940570fb3aa23cae",
+      "first_reported_input_tokens": 19636
+    },
+    {
+      "task": "task03",
+      "instance_id": 306,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "test_results/task03/06_claude_transcripts/claude_t03p15063i5-09180547_306.jsonl",
+      "source_sha256": "abf46514cabced8b430ad49a4918f67d32b0bba372b77338c3a8376527980137",
+      "prefix_bytes": 38862,
+      "prefix_sha256": "f83ccc54e3f2354090f5c03d3a5706b21e31c7c5dce993fff58c4e14a0ff96d9",
+      "first_reported_input_tokens": 19635
+    },
+    {
+      "task": "task03",
+      "instance_id": 308,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "test_results/task03/06_claude_transcripts/claude_t03p15063i7-09181140_308.jsonl",
+      "source_sha256": "c075a03da39ad1f891734059de03e2de395734062c2849aefbf59e7c34f49676",
+      "prefix_bytes": 38861,
+      "prefix_sha256": "a07a37cb13927611c96099e7b1e298328a805856de30018a746d5b5083236d18",
+      "first_reported_input_tokens": 19638
+    },
+    {
+      "task": "task03",
+      "instance_id": 310,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "test_results/task03/06_claude_transcripts/claude_t03p15063i9-09182135_310.jsonl",
+      "source_sha256": "d930d7065a7c1985026587998f3a6ddc2a7737d12017db1b272128f945e5d2bc",
+      "prefix_bytes": 38872,
+      "prefix_sha256": "d555e429a6a3e3b9480ddab7c31b3259bacc2ed913eb5d4e2a19203fb99b06d3",
+      "first_reported_input_tokens": 19632
+    },
+    {
+      "task": "task05",
+      "instance_id": 301,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/ad7ab8a4-7037-4308-8e5f-3f0f923e24a3.jsonl",
+      "source_sha256": "a06f204b46c20a0e3726fdc5a92b28e6d7bea00c3e29de96c43bb16f4a7b63ef",
+      "prefix_bytes": 47102,
+      "prefix_sha256": "fc0069d828fc9b31dda7bfaad6afd1ef5a4f1516f6c98b2f1ba7e85bdfde166b",
+      "first_reported_input_tokens": 20683
+    },
+    {
+      "task": "task05",
+      "instance_id": 304,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/91213fa6-ec37-40d4-8f53-574063741536.jsonl",
+      "source_sha256": "79fde6016b4f698c2a689d99270a40e46a1010b5dfe816c6af6be59d1ed3b89e",
+      "prefix_bytes": 47479,
+      "prefix_sha256": "58f5b8716f65e95ac6347323caee24a2da27952a0947843e5272c475b63ff33c",
+      "first_reported_input_tokens": 20682
+    },
+    {
+      "task": "task05",
+      "instance_id": 306,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/f448ac33-8c36-4309-8e11-309219026782.jsonl",
+      "source_sha256": "6975cb0899c21aa09d26d8c7b67cf9a08cdfc30a5be5365a8e27c8470decba1b",
+      "prefix_bytes": 47140,
+      "prefix_sha256": "f6a6cad7fadb82f97d55660035e25bf728b1c13816a8f4fad0389a821932f79e",
+      "first_reported_input_tokens": 20682
+    },
+    {
+      "task": "task05",
+      "instance_id": 308,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/dd4ad37e-aed8-4074-92e6-9a9e129719b2.jsonl",
+      "source_sha256": "2d9f7e23e4c1e664b8ae8131e2f8112cf888255c063cbd4231210874981d06ec",
+      "prefix_bytes": 48202,
+      "prefix_sha256": "98f655ea2ea61e7b66a04c3d61741ccc129e15d5eb7d1e8a86e9324b771ae63d",
+      "first_reported_input_tokens": 20795
+    },
+    {
+      "task": "task05",
+      "instance_id": 310,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/41965ee2-cf50-4baa-a7f6-db673e558959.jsonl",
+      "source_sha256": "96a4500e2b358bd82f6a0281bd0d2068480bf442850f4d4a3fbc978a0bbd9a5b",
+      "prefix_bytes": 48458,
+      "prefix_sha256": "0aba0f70e772e419f2bb36727f1689a495794878dfdc60953eccb0ce76e6c8cb",
+      "first_reported_input_tokens": 20791
+    },
+    {
+      "task": "task06",
+      "instance_id": 301,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "test_results/task06/06_claude_transcripts/claude_t06p15066i0-09162346_301.jsonl",
+      "source_sha256": "9cadbd5e6d29da7aa0db8c5f5c395407af7a0d4e7fe6ac6366cec97fc674a653",
+      "prefix_bytes": 39456,
+      "prefix_sha256": "a02ebf1d20df97b5f5eff475d934ca747986dbc786cf23233fd18b1ae34e01eb",
+      "first_reported_input_tokens": 19844
+    },
+    {
+      "task": "task06",
+      "instance_id": 304,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "test_results/task06/06_claude_transcripts/claude_t06p15066i3-09171214_304.jsonl",
+      "source_sha256": "608103692658a2c39efd25682dfe2f4f8baea81a91923861f581e2655b4d4e72",
+      "prefix_bytes": 43865,
+      "prefix_sha256": "14fc28fcc52e7beaf12a211b3f7e927f2720768c47385e5511ee190f7a0b14c4",
+      "first_reported_input_tokens": 20443
+    },
+    {
+      "task": "task06",
+      "instance_id": 306,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "test_results/task06/06_claude_transcripts/claude_t06p15066i5-09171413_306.jsonl",
+      "source_sha256": "5771becf40a8e53c3699521067770f54303a4a4c5af2f92d8d8fbc57922f874e",
+      "prefix_bytes": 44484,
+      "prefix_sha256": "fd0da7c99ba576740c7e7e8b1f723448808ab3375ab10225689b8a58c273062f",
+      "first_reported_input_tokens": 20445
+    },
+    {
+      "task": "task06",
+      "instance_id": 308,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "test_results/task06/06_claude_transcripts/claude_t06p15066i7-09172338_308_v9.jsonl",
+      "source_sha256": "3c43d44db56af6213f6f02f3f30865ef2b485d0eab8c3ed6b5ab873b8f42ff8a",
+      "prefix_bytes": 40702,
+      "prefix_sha256": "6c35c94fb5cdf9fedf30beb8954eed6aa2b5a3dbe91d5fbceba3b8c0e02f4adf",
+      "first_reported_input_tokens": 19972
+    },
+    {
+      "task": "task06",
+      "instance_id": 310,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "test_results/task06/06_claude_transcripts/claude_t06p15066i9-09180340_310_v9.jsonl",
+      "source_sha256": "65dc20c785e220469a79ec5a4a8b9ab4c3396eebea44470bb25532da7a83325a",
+      "prefix_bytes": 40719,
+      "prefix_sha256": "b82d56fafc1fadfc9960dce47a013b8421ac8ab2a0e029eb4c2ec8184b424a54",
+      "first_reported_input_tokens": 19974
+    },
+    {
+      "task": "task07",
+      "instance_id": 301,
+      "listing_sha256": "0423f1a6152f4b1a598c2be525f25fb294c18cc94690fdcefd38f0ffebd69ea0",
+      "source": "test_results/task07/eval_runs/t07-15067-0920225625-49ffc84ef87e/p15067/runtime/t07p15067i0-0920230454-cda49370334a/claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/bf48f706-e310-45e3-8d28-6a4ccfda8e53.jsonl",
+      "source_sha256": "e6f6e0e8333c6f92917104a1b5d200e62b14cc6634928d90d1d64c85d5c0c157",
+      "prefix_bytes": 51444,
+      "prefix_sha256": "22bf0a94e69ce6cdc3c5d2aba4038df02067c95c70019310bf0375ab50fc76da",
+      "first_reported_input_tokens": 21578
+    },
+    {
+      "task": "task07",
+      "instance_id": 304,
+      "listing_sha256": "0423f1a6152f4b1a598c2be525f25fb294c18cc94690fdcefd38f0ffebd69ea0",
+      "source": "test_results/task07/eval_runs/t07-15067-0920225625-49ffc84ef87e/p15067/runtime/t07p15067i3-0921031841-14bb0e8c9acf/claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/23888660-662f-4da7-85fa-386f5cc1f83b.jsonl",
+      "source_sha256": "7b4ed0a4153855328f69f4db1e0060a744dc8ef49d4f05a3cf89f26278fd7f16",
+      "prefix_bytes": 51878,
+      "prefix_sha256": "b56f4ebee503d5bfb2b7de7dbdec2f116a8e3e9ff55e4ba45102759246f32a8d",
+      "first_reported_input_tokens": 21577
+    },
+    {
+      "task": "task07",
+      "instance_id": 306,
+      "listing_sha256": "0423f1a6152f4b1a598c2be525f25fb294c18cc94690fdcefd38f0ffebd69ea0",
+      "source": "test_results/task07/eval_runs/t07-15067-0920225625-49ffc84ef87e/p15067/runtime/t07p15067i5-0921061445-5212922c582b/claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/f784c58a-c806-4577-b4ae-0664e9bd5e89.jsonl",
+      "source_sha256": "ff2089a5981e9397fb487512c319b5e60309c78475d9eec178ce5fda15c2123b",
+      "prefix_bytes": 51962,
+      "prefix_sha256": "52ee50f9815f5850a19fc8edafe57eeaca4bdefde8ba8715fcba4016a2057aec",
+      "first_reported_input_tokens": 21585
+    },
+    {
+      "task": "task07",
+      "instance_id": 308,
+      "listing_sha256": "0423f1a6152f4b1a598c2be525f25fb294c18cc94690fdcefd38f0ffebd69ea0",
+      "source": "test_results/task07/eval_runs/t07-15067-0920225625-49ffc84ef87e/p15067/runtime/t07p15067i7-0921113556-5276fa5537f4/claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/c4028dee-a7d7-472a-8d54-0e634d072b75.jsonl",
+      "source_sha256": "0b6fadac9d2b957b929f75e2a790488584cb84d050fc19355504685ebe62e412",
+      "prefix_bytes": 51620,
+      "prefix_sha256": "b186def978ba5f91bfafed9bc8fc6a422165b206991cf617a400e5aab6cc86f7",
+      "first_reported_input_tokens": 21582
+    },
+    {
+      "task": "task07",
+      "instance_id": 310,
+      "listing_sha256": "0423f1a6152f4b1a598c2be525f25fb294c18cc94690fdcefd38f0ffebd69ea0",
+      "source": "test_results/task07/eval_runs/t07-15067-0920225625-49ffc84ef87e/p15067/runtime/t07p15067i9-0921165909-f915cd1b87c5/claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/9367879e-b16d-4f11-9a32-2dbcaa246d3e.jsonl",
+      "source_sha256": "dc046e49057629e84f6fc97ac28dfc4bb86ccc63f11a74907d76f24d76de88f8",
+      "prefix_bytes": 51522,
+      "prefix_sha256": "b76c4176e5217d5b6146e6b525d8598e3447511200a73ec94f45c7561c781df9",
+      "first_reported_input_tokens": 21579
+    },
+    {
+      "task": "task08",
+      "instance_id": 301,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/8d684dd8-d87c-4bb5-9543-80e6f8beae63.jsonl",
+      "source_sha256": "c8f7ab1c55c06bf7f8f4fa4e9f4fc3e55eacd31bf6adb471f3a47e863013ae3f",
+      "prefix_bytes": 59560,
+      "prefix_sha256": "42334de53d736b1f6b3530e727c82a5f5c3e93eaf475beeb7b54f7cdfa4f7e75",
+      "first_reported_input_tokens": 22087
+    },
+    {
+      "task": "task08",
+      "instance_id": 304,
+      "listing_sha256": "0423f1a6152f4b1a598c2be525f25fb294c18cc94690fdcefd38f0ffebd69ea0",
+      "source": "test_results/task08/instance_304/claude-home/claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/3234697d-b93f-4a8b-87b8-7b72c98034e1.jsonl",
+      "source_sha256": "8736d63d5def9e4814c839ab159289c206f31d9fc49af334e5e372799b7b09f2",
+      "prefix_bytes": 59139,
+      "prefix_sha256": "1dd2d04066c657842b767eec2281917c21feb00b04649d3d20b1622d50e8f583",
+      "first_reported_input_tokens": 22446
+    },
+    {
+      "task": "task08",
+      "instance_id": 306,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/b73151ea-7a52-44d9-b1f1-bc9cd1c6a1de.jsonl",
+      "source_sha256": "51005a135a83f174092233ef829ef5173e899addce9e439aaa90d1046ad2dfb9",
+      "prefix_bytes": 58921,
+      "prefix_sha256": "bbcef3628878f439b25e37b4031a304a3c50a2108db4f630c909d3a394bdbc8a",
+      "first_reported_input_tokens": 22086
+    },
+    {
+      "task": "task08",
+      "instance_id": 308,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/50d96073-c3f1-4839-8f8b-6fbd0f4bcc38.jsonl",
+      "source_sha256": "2844192f36b7bcb7098f38cca885bb09616f77b706752c8651fb73653f871e90",
+      "prefix_bytes": 59945,
+      "prefix_sha256": "9131ff00747d7f79405c0a4d337c30e477f48ac5c5749b4745f037311e463ea4",
+      "first_reported_input_tokens": 22086
+    },
+    {
+      "task": "task08",
+      "instance_id": 310,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/45107895-0575-43e9-9260-06715f8268bd.jsonl",
+      "source_sha256": "5f617686b41fcb9a16b74b59304c61406f728ac946f3b5a2976f9cbfd47b22cd",
+      "prefix_bytes": 59591,
+      "prefix_sha256": "2e4c6081c2e4024cb1a6ac522d9f66261f7803ff0291eb85700c7df0a6978f11",
+      "first_reported_input_tokens": 22091
+    },
+    {
+      "task": "task09",
+      "instance_id": 301,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/16688701-d7b7-4561-8181-73b4eb654eec.jsonl",
+      "source_sha256": "26b801e2f225c7e911e559c914075c76180aa933863ca3db8f658091073b7500",
+      "prefix_bytes": 44850,
+      "prefix_sha256": "a98bf00a789423c55b7a625d27da4c8956512ea389ff881e39715f0b149206fa",
+      "first_reported_input_tokens": 20459
+    },
+    {
+      "task": "task09",
+      "instance_id": 304,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/baf7fe5a-e28d-423c-8b35-aeb911fa00aa.jsonl",
+      "source_sha256": "51de8e8588469e62ecc76dd052f758d593436bb3746ad78f373c3db1775fc406",
+      "prefix_bytes": 44840,
+      "prefix_sha256": "1592d105f3ba34be83444dbb1b83a9bb81cb3bb4dc1aef251d78097f3e6b3bbd",
+      "first_reported_input_tokens": 20455
+    },
+    {
+      "task": "task09",
+      "instance_id": 306,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/87c33b29-838a-42b7-8db0-b5ced0bf7f28.jsonl",
+      "source_sha256": "bb7d51d6b4ef8976ac2bc0b331206ec7747195aa20645f677d8c6e626a11c161",
+      "prefix_bytes": 45601,
+      "prefix_sha256": "c6155e2cdc0d155b2fac28eb44342705130e30bdacbb8357e2515fd50ec7fbcd",
+      "first_reported_input_tokens": 20458
+    },
+    {
+      "task": "task09",
+      "instance_id": 308,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/6e78c33d-b12d-4ee3-a8bf-d37e08cd1339.jsonl",
+      "source_sha256": "3d0aa4419ecd17f2fa253e2e7b121993206fbc85637ff321eac4ea4eaec2601c",
+      "prefix_bytes": 45536,
+      "prefix_sha256": "e63e3e59f35b014c29f71d248cce259d262a379fd0c1bb07c2d8ccc370130f41",
+      "first_reported_input_tokens": 20461
+    },
+    {
+      "task": "task09",
+      "instance_id": 310,
+      "listing_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/c1783e34-33a3-40a9-8b41-4dd57554427e.jsonl",
+      "source_sha256": "77f419e310d6c0e375d99dd8d1f2a1a33b722a0eb7ae438f4a70846f4696748c",
+      "prefix_bytes": 45818,
+      "prefix_sha256": "68bc3464f3ec63f06679b3c1b917a9d85b8ee136bf148ccef2958c8016d079ee",
+      "first_reported_input_tokens": 20457
+    }
+  ]
+}

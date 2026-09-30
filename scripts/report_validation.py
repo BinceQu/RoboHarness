@@ -14,6 +14,7 @@ import time
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from roboharness.runner import atomic_json, official_result, read_json
+from roboharness.native_context import contract as native_contract, inspect_listing
 
 
 def local_process_state(identity: dict) -> dict:
@@ -49,6 +50,27 @@ def local_liveness(path: Path) -> dict:
     verified = required.issubset(states) and all(record['state'] == 'alive' for record in states.values())
     return {'state': 'dead' if dead else 'alive' if verified else 'unverified',
             'failed_roles': dead, 'processes': states}
+
+
+def native_contexts(path: Path, task: str, expected: dict, finished: set[int]) -> list[dict]:
+    rows = []
+    for iid in expected:
+        folder = path / f'instance_{iid}' / 'claude-home'
+        transcripts = list(folder.glob('projects/*/*.jsonl'))
+        if len(transcripts) > 1:
+            result = {'state': 'ambiguous', 'reason': 'Multiple native transcripts for one case'}
+        elif not transcripts:
+            result = {'state': 'missing' if iid in finished else 'pending' if folder.exists() else 'not_started'}
+        else:
+            try:
+                result = inspect_listing(transcripts[0], native_contract(task, iid))
+                result['transcript'] = str(transcripts[0].relative_to(path))
+            except (OSError, ValueError) as error:
+                result = {'state': 'unreadable', 'reason': str(error)}
+            if iid in finished and result['state'] == 'pending':
+                result['state'] = 'missing'
+        rows.append({'instance_id': iid, **result})
+    return rows
 
 
 def collect(path: Path, *, check_live: bool = False) -> dict:
@@ -107,6 +129,14 @@ def collect(path: Path, *, check_live: bool = False) -> dict:
                    'this is not termination under the archived step budget or model completion.'}
         for case in completed if case.get('finish_reason') == 'wall_timeout'
     )
+    contexts = (native_contexts(path, task['task'], expected, seen)
+                if plan['harness'] == 'claude_code' else [])
+    caveats.extend(
+        {'instance_id': context['instance_id'],
+         'reason': 'Initial native Skill listing is ' + context['state'] +
+                   '; a complete recorded listing match is required, including descriptions.'}
+        for context in contexts if context['state'] not in ('match', 'pending', 'not_started')
+    )
     complete = (status == 'complete' and superseded is None and not caveats
                 and not plan.get('diagnostic_only', False))
     matches_cases = (all(abs(c['delta_archive_q']) < 1e-6 for c in completed)
@@ -124,7 +154,7 @@ def collect(path: Path, *, check_live: bool = False) -> dict:
             'diagnostic_only': plan.get('diagnostic_only', False),
             'error': error, 'superseded': superseded,
             'reported_status': summary['status'], 'local_liveness': liveness,
-            'reproduction_caveats': caveats}
+            'reproduction_caveats': caveats, 'native_skill_contexts': contexts}
 
 
 def write_report(output: Path, rows: list[dict], run_paths: list[Path]):
