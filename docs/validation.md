@@ -102,9 +102,20 @@ the matching archived prompts, and all five instances per task:
 
 | Task | Run directory | Archived mean Q | Status |
 | --- | --- | ---: | --- |
-| task01 | `runs/validation-20260930-task01-r4` | 0.866667 | Running after interruption |
-| task03 | `runs/validation-20260930-task03-r4` | 0.257143 | Running after interruption |
-| task08 | `runs/validation-20260930-task08-r4` | 0.400000 | Running after interruption |
+| task01 | `runs/validation-20260930-task01-r4` | 0.866667 | Failed: native mutex assertion |
+| task03 | `runs/validation-20260930-task03-r4` | 0.257143 | Failed: native mutex assertion |
+| task08 | `runs/validation-20260930-task08-r4` | 0.400000 | Failed: native mutex assertion |
+
+At 17:16:47 CST on September 30, all three replacement evaluators aborted
+with the same Carbonite BaseMutex::unlock ownership assertion:
+"unlock() called by non-owning thread". The evaluator exit codes are -6
+(SIGABRT). The runners detected the exits, recorded failed summaries and
+cleaned up their remaining owned processes; systemd recorded service failures
+at 17:17:02–04 CST. None of the 15 selected cases produced an official score.
+The common initiating trigger remains unresolved. The
+[native crash audit](../validation_results/gpu5-20260930-r4/simulator_crash_audit.json)
+preserves the assertion excerpts, log hashes, last step counts and service
+exit records. These failures do not establish an archived score mismatch.
 
 The [pre-interruption audit](../validation_results/gpu5-20260930-r2/budget_audit.json)
 confirmed 10535, 27392 and 17886 steps for the preceding three attempts through evaluator
@@ -162,8 +173,8 @@ task06 mean remain unchanged. See [provenance](provenance.md) for the limitation
 means have been reproduced.** Each run writes its official results and
 per-case differences to its own `summary.json` when cases finish.
 
-A local watcher updates the [combined result report](../validation_results/gpu5-20260930-r4/README.md)
-as cases finish and copies their original official scoring JSON. It does not
+The local watcher updated the [combined result report](../validation_results/gpu5-20260930-r4/README.md)
+and exited after all three runs failed. No fresh scoring JSON was available. It does not
 substitute archived scores for missing new results.
 
 The host uses the existing interface and evaluator environments described in
