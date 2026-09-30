@@ -62,12 +62,15 @@ results are documented in [validation](docs/validation.md).
 To collect several completed or ongoing runs into one report:
 
 ```bash
-python3 scripts/report_validation.py runs/YOUR_RUN_A runs/YOUR_RUN_B --watch
+python3 scripts/report_validation.py runs/YOUR_RUN_A runs/YOUR_RUN_B --watch --require-match
 ```
 
 The report is written to `validation_results/latest/`. An incomplete run
 never receives a final score comparison. Completed official JSON files are
 copied into the report alongside their hashes and per-case differences.
+`--require-match` exits nonzero for a failed, incomplete or mismatched run.
+Verification requires every selected case to match the directory-reported
+score; equal means with different case scores do not pass.
 
 Code is MIT licensed; see [LICENSE](LICENSE) and
 [third-party notices](THIRD_PARTY_NOTICES.md). External datasets, keys and

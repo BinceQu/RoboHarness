@@ -55,7 +55,10 @@ def collect(path: Path) -> dict:
     superseded = read_json(superseded_path) if superseded_path.is_file() else None
     caveats = [{'instance_id': case['instance_id'], 'reason': reason}
                for case in expected.values() for reason in case.get('reproduction_caveats', [])]
-    complete = status == 'complete' and superseded is None and not caveats
+    complete = (status == 'complete' and superseded is None and not caveats
+                and not plan.get('diagnostic_only', False))
+    matches_cases = (all(abs(c['delta_archive_q']) < 1e-6 for c in completed)
+                     if complete else None)
     return {'task': task['task'], 'task_name': task['task_name'], 'run_directory': path.name,
             'status': status, 'model': plan['model'], 'harness': plan['harness'],
             'n_finished': len(completed), 'n_expected': len(expected), 'cases': completed,
@@ -63,6 +66,10 @@ def collect(path: Path) -> dict:
             'completed_archive_mean_q': completed_archive_mean,
             'delta_archive_mean_q': mean - archive_mean if complete else None,
             'matches_archive_mean': abs(mean - archive_mean) < 1e-6 if complete else None,
+            'matches_archive_cases': matches_cases,
+            'reproduction_verified': (matches_cases and abs(mean - archive_mean) < 1e-6)
+                                     if complete else False,
+            'diagnostic_only': plan.get('diagnostic_only', False),
             'error': summary.get('error'), 'superseded': superseded,
             'reproduction_caveats': caveats}
 
@@ -76,15 +83,16 @@ def write_report(output: Path, rows: list[dict], run_paths: list[Path]):
              'run has no final mean comparison and is not a successful reproduction claim.', '',
              'Comparisons cover only the selected instances. Run all five archived instances',
              'to compare a complete task mean.', '',
-             '| Task | Status | Completed | New Q (completed cases) | Archived Q (same completed cases) | Final difference |',
-             '| --- | --- | ---: | ---: | ---: | ---: |']
+             '| Task | Status | Completed | New Q (completed cases) | Archived Q (same completed cases) | Final difference | Every case matches |',
+             '| --- | --- | ---: | ---: | ---: | ---: | --- |']
     for row, run in zip(rows, run_paths):
         mean = '—' if row['mean_q'] is None else f'{row["mean_q"]:.6f}'
         archive = ('—' if row['completed_archive_mean_q'] is None
                    else f'{row["completed_archive_mean_q"]:.6f}')
         delta = '—' if row['delta_archive_mean_q'] is None else f'{row["delta_archive_mean_q"]:+.6f}'
+        matches = '—' if row['matches_archive_cases'] is None else ('yes' if row['matches_archive_cases'] else 'no')
         lines.append(f'| {row["task"]} | {row["status"]} | {row["n_finished"]}/{row["n_expected"]} | '
-                     f'{mean} | {archive} | {delta} |')
+                     f'{mean} | {archive} | {delta} | {matches} |')
         for case in row['cases']:
             source = run / case['source_result']
             target = output / row['task'] / source.name
@@ -109,6 +117,8 @@ def main():
     parser.add_argument('runs', nargs='+', type=Path)
     parser.add_argument('--output', type=Path, default=ROOT / 'validation_results/latest')
     parser.add_argument('--watch', action='store_true', help='Update until every selected run completes or fails')
+    parser.add_argument('--require-match', action='store_true',
+                        help='Exit 2 unless all selected cases have verified matching archived scores')
     args = parser.parse_args()
     previous = None
     while True:
@@ -121,7 +131,11 @@ def main():
             print(' | '.join(f'{r["task"]}: {r["status"]}, {r["n_finished"]}/{r["n_expected"]}' for r in rows), flush=True)
             previous = signature
         if not args.watch or all(r['status'] in ('complete', 'failed') for r in rows):
-            return 1 if any(r['status'] == 'failed' for r in rows) else 0
+            if any(r['status'] == 'failed' for r in rows):
+                return 1
+            if args.require_match and not all(r['reproduction_verified'] for r in rows):
+                return 2
+            return 0
         time.sleep(30)
 
 

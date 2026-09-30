@@ -315,9 +315,8 @@ class OfficialEvaluatorEntrypointTest(unittest.TestCase):
             "--/plugins/carb.tasking.plugin/useOmniJob=false",
             args,
         )
-        # Asset hot-reload watchers fired in every live evaluator when a
-        # sibling launcher rewrote the shared data root (2026-09-14 mass
-        # abort). Evaluators must not watch the filesystem at all.
+        # These only cover extension/MDL reload. Native texture subscriptions
+        # require the separately tested native_asset_watches workaround.
         self.assertIn("--/app/extensions/fsWatcherEnabled=false", args)
         self.assertIn("--/app/material/disableMdlReload=true", args)
         # SimulationApp synthesizes threadCount/maxThreadCount from

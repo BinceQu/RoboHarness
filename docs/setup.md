@@ -72,6 +72,10 @@ and `agent_python`; the runner always imports the interface and evaluator
 source from this checkout. The reference runtime is Python 3.10 / Torch
 2.6.0+cu124 / Warp 1.12.1 for the interface, Python 3.11 / Torch 2.7.0+cu128 /
 Isaac Sim 5.1.0 / Warp 1.12.0 for the evaluator, and MCP 2.1.1 for the agent.
+The evaluator also verifies the exact OmniClient binary before applying a
+process-local asset-watch workaround. An unknown binary fails startup. See
+[native asset reload failure](native-asset-reload.md) for the required hash,
+the internal-API limitation and native regression evidence.
 
 `unmask_evaluator_cuda: true` is a host compatibility option for multi-GPU
 Vulkan installations that cannot initialize Kit with a CUDA mask. Rendering

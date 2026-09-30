@@ -3,8 +3,9 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest import mock
 
-from scripts.report_validation import collect
+from scripts.report_validation import collect, main
 
 
 class ValidationReport(unittest.TestCase):
@@ -30,6 +31,11 @@ class ValidationReport(unittest.TestCase):
     def save(self):
         (self.root / 'summary.json').write_text(json.dumps(self.summary))
 
+    def require_match_exit_code(self):
+        with mock.patch('sys.argv', ['report_validation', str(self.root),
+                        '--output', str(self.root / 'report'), '--require-match']):
+            return main()
+
     def test_partial_score_is_not_a_reproduction_claim(self):
         plan_path = self.root / 'plan.json'
         plan = json.loads(plan_path.read_text())
@@ -44,6 +50,7 @@ class ValidationReport(unittest.TestCase):
         self.assertEqual(row['completed_archive_mean_q'], 1.0)
         self.assertIsNone(row['matches_archive_mean'])
         self.assertIsNone(row['delta_archive_mean_q'])
+        self.assertEqual(self.require_match_exit_code(), 2)
 
     def test_complete_requires_every_selected_case(self):
         self.add_case(301, 1.0)
@@ -66,6 +73,50 @@ class ValidationReport(unittest.TestCase):
         path.write_text(json.dumps(body))
         with self.assertRaises(ValueError):
             collect(self.root)
+
+    def test_equal_means_do_not_hide_swapped_case_scores(self):
+        plan_path = self.root / 'plan.json'
+        plan = json.loads(plan_path.read_text())
+        plan['cases'][1]['reference_q'] = 0.0
+        plan_path.write_text(json.dumps(plan))
+        self.add_case(301, 0.0)
+        self.add_case(304, 1.0)
+        self.summary['status'] = 'complete'
+        self.save()
+        row = collect(self.root)
+        self.assertTrue(row['matches_archive_mean'])
+        self.assertFalse(row['matches_archive_cases'])
+        self.assertFalse(row['reproduction_verified'])
+        self.assertEqual(self.require_match_exit_code(), 2)
+
+    def test_exact_directory_scores_override_conflicting_raw_references(self):
+        plan_path = self.root / 'plan.json'
+        plan = json.loads(plan_path.read_text())
+        plan['cases'][0]['archive_reported_q'] = 0.0
+        plan_path.write_text(json.dumps(plan))
+        self.add_case(301, 0.0)
+        self.add_case(304, 1.0)
+        self.summary['status'] = 'complete'
+        self.save()
+        row = collect(self.root)
+        self.assertTrue(row['matches_archive_cases'])
+        self.assertTrue(row['reproduction_verified'])
+        self.assertEqual(row['cases'][0]['raw_reference_q'], 1.0)
+        self.assertEqual(self.require_match_exit_code(), 0)
+
+    def test_diagnostic_plan_never_becomes_verified_reproduction(self):
+        plan_path = self.root / 'plan.json'
+        plan = json.loads(plan_path.read_text())
+        plan['diagnostic_only'] = True
+        plan_path.write_text(json.dumps(plan))
+        self.add_case(301, 1.0)
+        self.add_case(304, 1.0)
+        self.summary['status'] = 'complete'
+        self.save()
+        row = collect(self.root)
+        self.assertIsNone(row['matches_archive_cases'])
+        self.assertIsNone(row['matches_archive_mean'])
+        self.assertFalse(row['reproduction_verified'])
 
     def test_superseded_scores_remain_visible_without_reproduction_claim(self):
         self.add_case(301, 1.0)
