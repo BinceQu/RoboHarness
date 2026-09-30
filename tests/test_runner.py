@@ -1,11 +1,12 @@
 import json
+import itertools
 import os
 from pathlib import Path
 import subprocess
 import sys
 import tempfile
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 import uuid
 
 from roboharness import runner
@@ -57,6 +58,57 @@ class ArchivedCases(unittest.TestCase):
             path.write_text(json.dumps(body))
             with self.assertRaises(ValueError):
                 runner.official_result(path, task, 301)
+
+
+class WallClockBudget(unittest.TestCase):
+    def test_cap_requires_explicit_finite_non_negative_configuration(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'config.json'
+            path.write_text('{}')
+            self.assertEqual(runner.read_config(path)['session_timeout_s'], 0)
+            for value in (0, 86400):
+                path.write_text(json.dumps({'session_timeout_s': value}))
+                self.assertEqual(runner.read_config(path)['session_timeout_s'], value)
+            for value in (-1, True, None, '86400', float('nan'), float('inf')):
+                with self.subTest(value=value):
+                    path.write_text(json.dumps({'session_timeout_s': value}))
+                    with self.assertRaisesRegex(ValueError, 'session_timeout_s'):
+                        runner.read_config(path)
+
+    def exercise_wait(self, timeout, clock_step):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            result = {'q_score': {'final': 1.0}, 'steps': 7, 'success': True}
+            output = root / 'output/json/sample_301_0.json'
+            output.parent.mkdir(parents=True)
+            output.write_text(json.dumps(result))
+            case_dir = root / 'instance_301'
+            case_dir.mkdir()
+            run = runner.Run({'run_dir': directory, 'run_id': 'test-wall-clock',
+                              'task_config': {'task_name': 'sample'}, 'port': 15071,
+                              'harness': 'codex'}, {'session_timeout_s': timeout})
+            run.assert_alive = Mock()
+            run.finish_episode = Mock()
+            run.log = Mock()
+            run.write_summary = Mock()
+            agent = Mock()
+            agent.poll.side_effect = [None, None, 0]
+            with patch.object(runner, 'official_result', side_effect=[None, None, result]), \
+                 patch.object(runner.time, 'monotonic', side_effect=itertools.count(0, clock_step)), \
+                 patch.object(runner.time, 'sleep'), \
+                 patch.object(runner, 'request_json', return_value={'session_ticks': 7}):
+                run.wait_score({'instance_id': 301, 'reference_q': 1.0}, agent, case_dir)
+            return run
+
+    def test_disabled_wall_cap_does_not_submit_after_large_clock_advances(self):
+        run = self.exercise_wait(0, 100000)
+        run.finish_episode.assert_not_called()
+        self.assertEqual(run.results[0]['finish_reason'], 'evaluator_end')
+
+    def test_opted_in_wall_cap_retains_forced_submission_reason(self):
+        run = self.exercise_wait(1, 1)
+        run.finish_episode.assert_called_once_with('wall_timeout')
+        self.assertEqual(run.results[0]['finish_reason'], 'wall_timeout')
 
 
 class Ownership(unittest.TestCase):

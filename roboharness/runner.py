@@ -106,7 +106,9 @@ def read_config(path: Path | None) -> dict:
         'claude_bin': shutil.which('claude') or 'claude',
         'codex_bin': shutil.which('codex') or 'codex',
         'startup_timeout_s': 2400,
-        'session_timeout_s': 86400,
+        # Wall time is not part of the archived rollout budget. Operators may
+        # opt into a safety cap; 0 leaves the official step budget authoritative.
+        'session_timeout_s': 0,
         'cache_dir': str(Path(os.environ.get('XDG_CACHE_HOME', Path.home() / '.cache')) / 'roboharness'),
         'evaluator_dependencies': '',
         'interface_dependencies': '',
@@ -117,6 +119,10 @@ def read_config(path: Path | None) -> dict:
         defaults.update(read_json(selected))
     elif path:
         raise FileNotFoundError(selected)
+    timeout = defaults['session_timeout_s']
+    if (isinstance(timeout, bool) or not isinstance(timeout, (int, float))
+            or not math.isfinite(timeout) or timeout < 0):
+        raise ValueError('session_timeout_s must be a finite non-negative number; 0 disables the wall-clock cap.')
     for key in ('interface_python', 'evaluator_python', 'agent_python', 'data_path', 'cache_dir',
                 'interface_dependencies', 'evaluator_dependencies'):
         if defaults[key]:
@@ -243,7 +249,8 @@ class Run:
         atomic_json(self.path / 'plan.json', self.plan)
         atomic_json(self.path / 'runtime_config.json', {
             key: self.config[key] for key in ('interface_python', 'evaluator_python', 'agent_python',
-                'data_path', 'unmask_evaluator_cuda', 'interface_dependencies', 'evaluator_dependencies')})
+                'data_path', 'unmask_evaluator_cuda', 'interface_dependencies', 'evaluator_dependencies',
+                'session_timeout_s')})
         # No inherited source checkout, plugin cache, simulator root or stale session.
         env = {k: v for k, v in os.environ.items() if not k.startswith(
             ('BEHAVIOR_', 'OMNIGIBSON_', 'EMBODIED_', 'CLAUDE_', 'QWEN_', 'ROBOHARNESS_'))
@@ -452,7 +459,8 @@ class Run:
     def wait_score(self, case, agent, case_dir):
         iid = case['instance_id']
         path = self.path / 'output/json' / f'{self.task["task_name"]}_{iid}_0.json'
-        deadline = time.monotonic() + self.config['session_timeout_s']
+        timeout = self.config['session_timeout_s']
+        deadline = time.monotonic() + timeout if timeout > 0 else None
         finished_at, reason, last_log = None, None, 0
         while True:
             result = official_result(path, self.task, iid)
@@ -460,7 +468,8 @@ class Run:
                 break
             self.assert_alive('interface', 'gate', 'evaluator')
             code = agent.poll()
-            if finished_at is None and (code is not None or time.monotonic() >= deadline):
+            timed_out = deadline is not None and time.monotonic() >= deadline
+            if finished_at is None and (code is not None or timed_out):
                 if code not in (None, 0):
                     raise RuntimeError(f'Agent failed ({code}); see {case_dir / "agent.stderr.log"}')
                 if self.plan['harness'] == 'claude_code' and code == 0:

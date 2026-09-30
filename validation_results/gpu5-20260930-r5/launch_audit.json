@@ -83,5 +83,12 @@
       },
       "status": "starting"
     }
-  ]
+  ],
+  "wall_clock_safety_cap": {
+    "session_timeout_s_at_launch": 86400,
+    "source": "Default in runtime commit 23fefd0; local configuration has no override and its modification time predates launch.",
+    "active_runs_restarted": false,
+    "validation_rule": "Any wall_timeout submission is excluded from reproduction verification.",
+    "future_launch_default_s": 0
+  }
 }
