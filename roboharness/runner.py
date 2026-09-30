@@ -486,8 +486,9 @@ class Run:
                 try:
                     monitor = request_json(self.port, '/api/agent_monitor')
                     self.log(f'instance {iid}: agent={"running" if code is None else code} ticks={monitor.get("session_ticks")}')
-                except (OSError, ValueError):
-                    self.log(f'instance {iid}: waiting for official score')
+                except (OSError, ValueError) as exc:
+                    self.log(f'instance {iid}: agent={"running" if code is None else code}; '
+                             f'monitor poll failed ({type(exc).__name__}: {exc}); no official result yet')
                 last_log = time.monotonic()
             time.sleep(2)
         atomic_json(self.path / 'active_session.json', {})
