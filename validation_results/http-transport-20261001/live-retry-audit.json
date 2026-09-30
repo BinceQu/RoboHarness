@@ -1,0 +1,219 @@
+{
+  "recorded_at": "2026-10-01T02:25:55.459986+08:00",
+  "scope": "Controlled read-only recovery from a naturally observed TCP source-port collision; not task score validation.",
+  "tested_source_commit": "a57d1963c2d9083b46713782542728c9d027d625",
+  "source_sha256": {
+    "roboharness/http_transport.py": "dd5ea637caef91f61c6a3e899d4efe37704d6301ece9cfc1f691f2763b96f581",
+    "roboharness/runner.py": "5bca70eb83e2d413759ffc13069775a1510b4d6608383624badc32dd19d72046",
+    "tests/test_controller_http_transport.py": "a81b9a61a0a8429204b4450a48e140711efba858f57cd1eb7dccea434aa8c350"
+  },
+  "natural_failure": {
+    "checked_at": "2026-10-01T02:23:01+08:00",
+    "port": 15071,
+    "run": "runs/validation-20260930-task01-r5",
+    "status": "running",
+    "local_liveness": {
+      "state": "alive",
+      "failed_roles": [],
+      "processes": {
+        "guardian": {
+          "pid": 2834056,
+          "expected_start": "129070981",
+          "state": "alive"
+        },
+        "interface": {
+          "pid": 2834060,
+          "expected_start": "129070981",
+          "state": "alive"
+        },
+        "gate": {
+          "pid": 2835467,
+          "expected_start": "129071183",
+          "state": "alive"
+        },
+        "evaluator": {
+          "pid": 2836167,
+          "expected_start": "129071284",
+          "state": "alive"
+        },
+        "controller": {
+          "pid": 2833423,
+          "expected_start": "129070891",
+          "state": "alive"
+        }
+      }
+    },
+    "agent": {
+      "pid": 2990959,
+      "expected_start": "129118753",
+      "state": "alive"
+    },
+    "listener": [
+      "LISTEN 0      128    127.0.0.1:15071 0.0.0.0:*"
+    ],
+    "own_client_sockets": [
+      "SYN-SENT 0      1      127.0.0.1:49504 127.0.0.1:15071 users:((\"python3\",pid=1461906,fd=3)) timer:(on,602ms,1)"
+    ],
+    "server_peers": [
+      {
+        "client_port": 49504,
+        "rows": [
+          "LAST-ACK 0      1      127.0.0.1:15071 127.0.0.1:49504 timer:(on,29sec,8)"
+        ]
+      }
+    ],
+    "elapsed_s": 10.012,
+    "exception_chain": [
+      {
+        "type": "URLError",
+        "message": "<urlopen error timed out>",
+        "frames": [
+          {
+            "file": "watch_http_transport_r5.py",
+            "function": "request",
+            "line": 44
+          },
+          {
+            "file": "request.py",
+            "function": "urlopen",
+            "line": 216
+          },
+          {
+            "file": "request.py",
+            "function": "open",
+            "line": 519
+          },
+          {
+            "file": "request.py",
+            "function": "_open",
+            "line": 536
+          },
+          {
+            "file": "request.py",
+            "function": "_call_chain",
+            "line": 496
+          },
+          {
+            "file": "request.py",
+            "function": "http_open",
+            "line": 1377
+          },
+          {
+            "file": "request.py",
+            "function": "do_open",
+            "line": 1351
+          }
+        ]
+      },
+      {
+        "type": "TimeoutError",
+        "message": "timed out",
+        "frames": [
+          {
+            "file": "client.py",
+            "function": "request",
+            "line": 1312
+          },
+          {
+            "file": "client.py",
+            "function": "_send_request",
+            "line": 1358
+          },
+          {
+            "file": "client.py",
+            "function": "endheaders",
+            "line": 1307
+          },
+          {
+            "file": "client.py",
+            "function": "_send_output",
+            "line": 1067
+          },
+          {
+            "file": "client.py",
+            "function": "send",
+            "line": 1005
+          },
+          {
+            "file": "client.py",
+            "function": "connect",
+            "line": 971
+          },
+          {
+            "file": "socket.py",
+            "function": "create_connection",
+            "line": 845
+          },
+          {
+            "file": "socket.py",
+            "function": "create_connection",
+            "line": 833
+          }
+        ]
+      }
+    ]
+  },
+  "controlled_verification": {
+    "started_at": "2026-10-01T02:18:05.764350+08:00",
+    "status": "verified",
+    "attempts": [
+      {
+        "server_port": 15071,
+        "owned_probe_source_port": 49504,
+        "probe_failure_at": "2026-10-01T02:23:01+08:00",
+        "server_before": [
+          "LAST-ACK   0      1                        127.0.0.1:15071          127.0.0.1:49504                                             "
+        ],
+        "client_before": [],
+        "connections": [
+          {
+            "forced_owned_source": true,
+            "result": "failed",
+            "error_type": "TimeoutError",
+            "errno": null,
+            "message": "timed out",
+            "elapsed_s": 3.005
+          },
+          {
+            "forced_owned_source": false,
+            "result": "connected",
+            "source_port": 38676,
+            "elapsed_s": 0.0
+          }
+        ],
+        "response": {
+          "ok": true,
+          "active": true,
+          "session_id": "t01p15071i0-24f935b814ec417c",
+          "max_ticks": 10535
+        },
+        "session_matches": true,
+        "elapsed_s": 3.115,
+        "verified": true
+      }
+    ],
+    "probe_method": "GET",
+    "probe_path": "/api/agent_monitor",
+    "evaluation_processes_modified": false,
+    "is_official_score_validation": false,
+    "source_sha256": "eecdde8dd01c6c1dc92124739f96d87b714bf43d2f18d06145c12f602095c8a2",
+    "updated_at": "2026-10-01T02:23:15.423098+08:00"
+  },
+  "procedure": [
+    "Wait for a new failure from the session-local raw GET observer.",
+    "Confirm the recorded server tuple remains LAST-ACK and no local client socket occupies the recorded source tuple.",
+    "Confirm the matching r5 run and its required process identities remain alive.",
+    "In a separate verifier process, use the new request_json handler for one GET /api/agent_monitor. Bind only its first connection attempt to the recorded probe source port; subsequent attempts use normal ephemeral allocation.",
+    "Use real socket.create_connection calls throughout, with no simulated timeout exception.",
+    "Verify the first attempt times out, a subsequent connection succeeds, and the response matches the existing session ID."
+  ],
+  "limits": [
+    "This is one captured and controlled live connection-recovery check, not a frequency or reliability estimate.",
+    "The reason the older server FIN remained unacknowledged is still not established.",
+    "The running r5 controllers retain their launch-time implementation; the patched handler was exercised by the separate verifier process.",
+    "This GET check does not by itself prove non-replay of POST requests; that property is covered by the committed HTTP-server regression tests."
+  ],
+  "running_evaluations_restarted": false,
+  "global_tcp_settings_changed": false,
+  "new_official_scores_claimed": false
+}

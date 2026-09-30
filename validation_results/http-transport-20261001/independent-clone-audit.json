@@ -1,0 +1,21 @@
+{
+  "checked_at": "2026-10-01T02:02:11.145259+08:00",
+  "clone": "/var/tmp/roboharness-release-clone-20260929",
+  "commit": "a57d1963c2d9083b46713782542728c9d027d625",
+  "python": "/var/tmp/roboharness-release-clone-20260929/.venv-interface/bin/python",
+  "command": [
+    "/var/tmp/roboharness-release-clone-20260929/.venv-interface/bin/python",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "exit_code": 0,
+  "worktree_clean": true,
+  "log": "independent-clone-tests.txt",
+  "log_sha256": "94cad3e3f00eeddb713b74b452b2e0465ebc816bb5ab02955c15726a70eab461",
+  "evaluation_runs_restarted": false,
+  "is_official_score_validation": false
+}
