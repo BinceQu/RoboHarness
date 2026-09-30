@@ -58,5 +58,64 @@
       "agent_context_checks_present": true,
       "tool_calls_at_capture": 0
     }
+  ],
+  "followup_checks": [
+    {
+      "checked_at": "2026-09-30T20:28:04+08:00",
+      "scope": "Read-only follow-up after more than one hour in the same repaired evaluator processes; no asset files or running configurations were changed. This is not a score reproduction claim.",
+      "runs": [
+        {
+          "task": "task01",
+          "run_directory": "validation-20260930-task01-r5",
+          "evaluator": {
+            "pid": 2836167,
+            "start": "129071284"
+          },
+          "elapsed_evaluator_s": 3982.9,
+          "native_inotify_watch_count": 1,
+          "watched_path": "/dev/snd",
+          "watch_entries": [
+            "inotify wd:1 ino:2d4 sdev:5 mask:300 ignored_mask:0 fhandle-bytes:c fhandle-type:1 f_handle:513dee79d402000000000000"
+          ],
+          "fatal_markers": [],
+          "n_finished": 0,
+          "runtime_source_commit": "23fefd0736ad45c7e91631bce2a12abba3e57937"
+        },
+        {
+          "task": "task03",
+          "run_directory": "validation-20260930-task03-r5",
+          "evaluator": {
+            "pid": 2836260,
+            "start": "129071297"
+          },
+          "elapsed_evaluator_s": 3982.8,
+          "native_inotify_watch_count": 1,
+          "watched_path": "/dev/snd",
+          "watch_entries": [
+            "inotify wd:1 ino:2d4 sdev:5 mask:300 ignored_mask:0 fhandle-bytes:c fhandle-type:1 f_handle:513dee79d402000000000000"
+          ],
+          "fatal_markers": [],
+          "n_finished": 0,
+          "runtime_source_commit": "23fefd0736ad45c7e91631bce2a12abba3e57937"
+        },
+        {
+          "task": "task08",
+          "run_directory": "validation-20260930-task08-r5",
+          "evaluator": {
+            "pid": 2846092,
+            "start": "129074317"
+          },
+          "elapsed_evaluator_s": 3952.6,
+          "native_inotify_watch_count": 1,
+          "watched_path": "/dev/snd",
+          "watch_entries": [
+            "inotify wd:1 ino:2d4 sdev:5 mask:300 ignored_mask:0 fhandle-bytes:c fhandle-type:1 f_handle:513dee79d402000000000000"
+          ],
+          "fatal_markers": [],
+          "n_finished": 0,
+          "runtime_source_commit": "23fefd0736ad45c7e91631bce2a12abba3e57937"
+        }
+      ]
+    }
   ]
 }
