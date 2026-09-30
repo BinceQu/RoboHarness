@@ -7,8 +7,9 @@ The native crash has now been reproduced independently of the model: an
 unchanged texture's mtime event triggers the same carb.assets mutex abort.
 The process-local native subscription workaround passed 20 texture mtime
 events, a 90-second observation window and an explicit scene reset on GPU 5.
-The updated CPU suite has 395 checks: 378 pass and 17 optional checks skip.
-This includes native ABI rejection and strict per-case score comparison;
+At runtime commit 23fefd0, the full CPU suite ran 392 checks: 375 passed and
+17 optional checks skipped, including native ABI rejection tests. Subsequent
+targeted reporter regressions require strict per-case score comparison;
 matching task means alone no longer satisfy reproduction verification.
 An additional regression rejects a matching score when the wall-clock safety
 timeout forced episode submission. All 19 current runner/report/budget tests
@@ -20,6 +21,15 @@ and explicit timeout labeling. All 22 runner/report/budget tests pass.
 The already running r5 controllers retain their original 24-hour per-case cap;
 they are not restarted for this change. A cap-triggered result cannot pass
 strict verification, and subsequent launches use the uncapped default.
+The reporter's local liveness check additionally detects externally terminated
+controllers/services, PID reuse and unreaped exited processes. It re-reads
+terminal summaries to distinguish normal cleanup from interruption, and does
+not require an agent to remain alive after normal completion. Six added
+regressions include killing a real child controller and verifying that the
+watcher exits nonzero while retaining completed scores and the original summary.
+All 28 current runner/report/budget tests pass. This report-only check is
+enabled with `--check-live` on the evaluation host; copied runs can be inspected
+without consulting unrelated local PIDs.
 See [native asset reload analysis](native-asset-reload.md). This does not yet
 establish the three requested task scores.
 
