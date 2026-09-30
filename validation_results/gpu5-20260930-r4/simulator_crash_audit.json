@@ -1,0 +1,224 @@
+{
+  "checked_at": "2026-09-30T18:39:42+08:00",
+  "failure_at": "2026-09-30T17:16:47+08:00",
+  "confirmed_failure": "All three evaluator logs report the same Carbonite BaseMutex::unlock ownership assertion, followed by Fatal Python error: Aborted. The runner records evaluator exit -6 (SIGABRT), marks each run failed and cleans up its remaining owned processes.",
+  "trigger_status": "The shared initiating trigger for the native assertion is not yet identified; no claim of GPU OOM, a driver reset, budget exhaustion, or command-session cleanup is made.",
+  "service_exit_log": [
+    "2026-09-30T17:17:02+0800 user systemd[3581]: roboharness-validation-task08-20260930-r4.service: Main process exited, code=exited, status=1/FAILURE",
+    "2026-09-30T17:17:02+0800 user systemd[3581]: roboharness-validation-task08-20260930-r4.service: Failed with result 'exit-code'.",
+    "2026-09-30T17:17:02+0800 user systemd[3581]: roboharness-validation-task08-20260930-r4.service: Consumed 1h 49min 27.015s CPU time.",
+    "2026-09-30T17:17:03+0800 user systemd[3581]: roboharness-validation-task01-20260930-r4.service: Main process exited, code=exited, status=1/FAILURE",
+    "2026-09-30T17:17:03+0800 user systemd[3581]: roboharness-validation-task01-20260930-r4.service: Failed with result 'exit-code'.",
+    "2026-09-30T17:17:03+0800 user systemd[3581]: roboharness-validation-task01-20260930-r4.service: Consumed 1h 51min 7.754s CPU time.",
+    "2026-09-30T17:17:04+0800 user systemd[3581]: roboharness-validation-task03-20260930-r4.service: Main process exited, code=exited, status=1/FAILURE",
+    "2026-09-30T17:17:04+0800 user systemd[3581]: roboharness-validation-task03-20260930-r4.service: Failed with result 'exit-code'.",
+    "2026-09-30T17:17:04+0800 user systemd[3581]: roboharness-validation-task03-20260930-r4.service: Consumed 1h 53min 22.387s CPU time."
+  ],
+  "runs": [
+    {
+      "task": "task01",
+      "run_id": "task01-20260930-102429-924d6b59",
+      "run_directory": "validation-20260930-task01-r4",
+      "http_port": 16061,
+      "status": "failed",
+      "n_finished": 0,
+      "n_expected": 5,
+      "official_scores_present": false,
+      "evaluator_exit_code": -6,
+      "signal": "SIGABRT",
+      "last_recorded_progress": "2026-09-30 17:16:09 instance 301: agent=running ticks=2006",
+      "step_budget": 10535,
+      "challenge_year": 2025,
+      "budget_multiplier": 2,
+      "assertion_first_line": 706,
+      "assertion_excerpt": [
+        "2026-09-30T09:16:47Z [24,679,503ms] [Error] [carb] ",
+        "",
+        "../../../include/carb/delegate/../thread/Mutex.h(158): void carb::thread::detail::BaseMutex<false>::unlock()(): Assertion (m_owner == pthread_self()) failed: unlock() called by non-owning thread",
+        "",
+        "Assertion Failed!",
+        "The following assertion condition failed in the process 3426057:",
+        "\t'm_owner == pthread_self()'",
+        "",
+        "at the location:",
+        "\t'../../../include/carb/delegate/../thread/Mutex.h'",
+        "\ton line 158",
+        "\t in void carb::thread::detail::BaseMutex<false>::unlock()()",
+        "",
+        "with the message:",
+        "\t\"unlock() called by non-owning thread\"",
+        "",
+        "Press ABORT to exit.",
+        "Press RETRY to debug (attach a debugger first).",
+        "Press IGNORE to attempt to continue.",
+        "Fatal Python error: Aborted"
+      ],
+      "evaluator_log_sha256": "10c8b4e12c5fcfc92045bd035c0f3b11f68cf56c89d85361b4e32fb37c9f5375",
+      "summary_sha256": "718dab6227367e2b45a27ca2dee21a68c593065273dda55a241cebcfd2b98986",
+      "process_identity_check": {
+        "guardian": {
+          "pid": 3425508,
+          "start": "125851230",
+          "same_process_alive": false
+        },
+        "interface": {
+          "pid": 3425510,
+          "start": "125851231",
+          "same_process_alive": false
+        },
+        "gate": {
+          "pid": 3425931,
+          "start": "125851433",
+          "same_process_alive": false
+        },
+        "evaluator": {
+          "pid": 3426057,
+          "start": "125851534",
+          "same_process_alive": false
+        },
+        "agent": {
+          "pid": 3576636,
+          "start": "125897147",
+          "same_process_alive": false
+        }
+      }
+    },
+    {
+      "task": "task03",
+      "run_id": "task03-20260930-102429-d102b7df",
+      "run_directory": "validation-20260930-task03-r4",
+      "http_port": 16063,
+      "status": "failed",
+      "n_finished": 0,
+      "n_expected": 5,
+      "official_scores_present": false,
+      "evaluator_exit_code": -6,
+      "signal": "SIGABRT",
+      "last_recorded_progress": "2026-09-30 17:16:50 instance 301: agent=running ticks=3029",
+      "step_budget": 27392,
+      "challenge_year": 2025,
+      "budget_multiplier": 2,
+      "assertion_first_line": 702,
+      "assertion_excerpt": [
+        "2026-09-30T09:16:47Z [24,706,672ms] [Error] [carb] ",
+        "",
+        "../../../include/carb/delegate/../thread/Mutex.h(158): void carb::thread::detail::BaseMutex<false>::unlock()(): Assertion (m_owner == pthread_self()) failed: unlock() called by non-owning thread",
+        "",
+        "Assertion Failed!",
+        "The following assertion condition failed in the process 3416993:",
+        "\t'm_owner == pthread_self()'",
+        "",
+        "at the location:",
+        "\t'../../../include/carb/delegate/../thread/Mutex.h'",
+        "\ton line 158",
+        "\t in void carb::thread::detail::BaseMutex<false>::unlock()()",
+        "",
+        "with the message:",
+        "\t\"unlock() called by non-owning thread\"",
+        "",
+        "Press ABORT to exit.",
+        "Press RETRY to debug (attach a debugger first).",
+        "Press IGNORE to attempt to continue.",
+        "Fatal Python error: Aborted"
+      ],
+      "evaluator_log_sha256": "f4d6be0014e3f842edba22b36a986ffadf7b30a4394674a0fbe32b6b716b67fa",
+      "summary_sha256": "e98ebdcb07cb7accb3d54199fe9eb4f17806ca8bb222f85e4a0b567c7fcd7234",
+      "process_identity_check": {
+        "guardian": {
+          "pid": 3414829,
+          "start": "125848384",
+          "same_process_alive": false
+        },
+        "interface": {
+          "pid": 3414833,
+          "start": "125848384",
+          "same_process_alive": false
+        },
+        "gate": {
+          "pid": 3416227,
+          "start": "125848586",
+          "same_process_alive": false
+        },
+        "evaluator": {
+          "pid": 3416993,
+          "start": "125848687",
+          "same_process_alive": false
+        },
+        "agent": {
+          "pid": 3573848,
+          "start": "125895304",
+          "same_process_alive": false
+        }
+      }
+    },
+    {
+      "task": "task08",
+      "run_id": "task08-20260930-102430-622a07ba",
+      "run_directory": "validation-20260930-task08-r4",
+      "http_port": 16068,
+      "status": "failed",
+      "n_finished": 0,
+      "n_expected": 5,
+      "official_scores_present": false,
+      "evaluator_exit_code": -6,
+      "signal": "SIGABRT",
+      "last_recorded_progress": "2026-09-30 17:16:16 instance 301: agent=running ticks=2324",
+      "step_budget": 17886,
+      "challenge_year": 2025,
+      "budget_multiplier": 2,
+      "assertion_first_line": 720,
+      "assertion_excerpt": [
+        "2026-09-30T09:16:47Z [24,677,623ms] [Error] [carb] ",
+        "",
+        "../../../include/carb/delegate/../thread/Mutex.h(158): void carb::thread::detail::BaseMutex<false>::unlock()(): Assertion (m_owner == pthread_self()) failed: unlock() called by non-owning thread",
+        "",
+        "Assertion Failed!",
+        "The following assertion condition failed in the process 3426299:",
+        "\t'm_owner == pthread_self()'",
+        "",
+        "at the location:",
+        "\t'../../../include/carb/delegate/../thread/Mutex.h'",
+        "\ton line 158",
+        "\t in void carb::thread::detail::BaseMutex<false>::unlock()()",
+        "",
+        "with the message:",
+        "\t\"unlock() called by non-owning thread\"",
+        "",
+        "Press ABORT to exit.",
+        "Press RETRY to debug (attach a debugger first).",
+        "Press IGNORE to attempt to continue.",
+        "Fatal Python error: Aborted"
+      ],
+      "evaluator_log_sha256": "9e816a0bdee6310de2eabc0471876d56c8d81b6f94af57a7c19b3c2ea8c46ecf",
+      "summary_sha256": "ba3b3d8e176576be0f7c24ec348505fba1e9880fe9c12f6166a637b60949b9ac",
+      "process_identity_check": {
+        "guardian": {
+          "pid": 3425669,
+          "start": "125851332",
+          "same_process_alive": false
+        },
+        "interface": {
+          "pid": 3425670,
+          "start": "125851332",
+          "same_process_alive": false
+        },
+        "gate": {
+          "pid": 3426058,
+          "start": "125851534",
+          "same_process_alive": false
+        },
+        "evaluator": {
+          "pid": 3426299,
+          "start": "125851635",
+          "same_process_alive": false
+        },
+        "agent": {
+          "pid": 3582261,
+          "start": "125897858",
+          "same_process_alive": false
+        }
+      }
+    }
+  ],
+  "source_logs_and_runtime_caches_retained": true
+}

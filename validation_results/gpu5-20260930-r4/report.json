@@ -1,11 +1,11 @@
 {
-  "updated_at_utc": "2026-09-30T02:25:39+00:00",
+  "updated_at_utc": "2026-09-30T09:17:03+00:00",
   "runs": [
     {
       "task": "task01",
       "task_name": "picking_up_trash",
       "run_directory": "validation-20260930-task01-r4",
-      "status": "starting",
+      "status": "failed",
       "model": "Qwen3.8-Flash-Next-FP8",
       "harness": "claude_code",
       "n_finished": 0,
@@ -16,7 +16,7 @@
       "completed_archive_mean_q": null,
       "delta_archive_mean_q": null,
       "matches_archive_mean": null,
-      "error": null,
+      "error": "evaluator exited (-6); see /mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task01-r4/logs/evaluator.log",
       "superseded": null,
       "reproduction_caveats": []
     },
@@ -24,7 +24,7 @@
       "task": "task03",
       "task_name": "cleaning_up_plates_and_food",
       "run_directory": "validation-20260930-task03-r4",
-      "status": "starting",
+      "status": "failed",
       "model": "Qwen3.8-Flash-Next-FP8",
       "harness": "claude_code",
       "n_finished": 0,
@@ -35,7 +35,7 @@
       "completed_archive_mean_q": null,
       "delta_archive_mean_q": null,
       "matches_archive_mean": null,
-      "error": null,
+      "error": "evaluator exited (-6); see /mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task03-r4/logs/evaluator.log",
       "superseded": null,
       "reproduction_caveats": []
     },
@@ -43,7 +43,7 @@
       "task": "task08",
       "task_name": "rearranging_kitchen_furniture",
       "run_directory": "validation-20260930-task08-r4",
-      "status": "starting",
+      "status": "failed",
       "model": "Qwen3.8-Flash-Next-FP8",
       "harness": "claude_code",
       "n_finished": 0,
@@ -54,7 +54,7 @@
       "completed_archive_mean_q": null,
       "delta_archive_mean_q": null,
       "matches_archive_mean": null,
-      "error": null,
+      "error": "evaluator exited (-6); see /mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task08-r4/logs/evaluator.log",
       "superseded": null,
       "reproduction_caveats": []
     }
