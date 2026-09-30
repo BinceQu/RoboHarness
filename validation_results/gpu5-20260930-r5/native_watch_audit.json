@@ -1,0 +1,62 @@
+{
+  "checked_at": "2026-09-30T19:31:02+08:00",
+  "runs": [
+    {
+      "task": "task01",
+      "evaluator_pid": 2836167,
+      "native_policy": {
+        "library": "/home/bince/.conda/envs/behavior-eval-test-v391/lib/python3.11/site-packages/isaacsim/kit/extscore/omni.client.lib/bin/libomniclient.so",
+        "policy": "immutable-assets-no-native-watches",
+        "sha256": "96d901619a7ed20db00e96b8cf41c523865289d11d426cd520bdf9f7c6e60302",
+        "version": "2.67.0-release.6072+gl.6293b5e9"
+      },
+      "inotify_watches": [
+        {
+          "fd": "320",
+          "raw": "inotify wd:1 ino:2d4 sdev:5 mask:300 ignored_mask:0 fhandle-bytes:c fhandle-type:1 f_handle:513dee79d402000000000000"
+        }
+      ],
+      "official_episode_ready": true,
+      "agent_context_checks_present": true,
+      "tool_calls_at_capture": 1
+    },
+    {
+      "task": "task03",
+      "evaluator_pid": 2836260,
+      "native_policy": {
+        "library": "/home/bince/.conda/envs/behavior-eval-test-v391/lib/python3.11/site-packages/isaacsim/kit/extscore/omni.client.lib/bin/libomniclient.so",
+        "policy": "immutable-assets-no-native-watches",
+        "sha256": "96d901619a7ed20db00e96b8cf41c523865289d11d426cd520bdf9f7c6e60302",
+        "version": "2.67.0-release.6072+gl.6293b5e9"
+      },
+      "inotify_watches": [
+        {
+          "fd": "320",
+          "raw": "inotify wd:1 ino:2d4 sdev:5 mask:300 ignored_mask:0 fhandle-bytes:c fhandle-type:1 f_handle:513dee79d402000000000000"
+        }
+      ],
+      "official_episode_ready": true,
+      "agent_context_checks_present": true,
+      "tool_calls_at_capture": 1
+    },
+    {
+      "task": "task08",
+      "evaluator_pid": 2846092,
+      "native_policy": {
+        "library": "/home/bince/.conda/envs/behavior-eval-test-v391/lib/python3.11/site-packages/isaacsim/kit/extscore/omni.client.lib/bin/libomniclient.so",
+        "policy": "immutable-assets-no-native-watches",
+        "sha256": "96d901619a7ed20db00e96b8cf41c523865289d11d426cd520bdf9f7c6e60302",
+        "version": "2.67.0-release.6072+gl.6293b5e9"
+      },
+      "inotify_watches": [
+        {
+          "fd": "320",
+          "raw": "inotify wd:1 ino:2d4 sdev:5 mask:300 ignored_mask:0 fhandle-bytes:c fhandle-type:1 f_handle:513dee79d402000000000000"
+        }
+      ],
+      "official_episode_ready": true,
+      "agent_context_checks_present": true,
+      "tool_calls_at_capture": 0
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # GPU validation results
 
-Updated: 2026-09-30T11:22:08+00:00
+Updated: 2026-09-30T11:30:39+00:00
 
 Only fresh official evaluator JSON contributes to new scores. An incomplete
 run has no final mean comparison and is not a successful reproduction claim.
@@ -10,8 +10,8 @@ to compare a complete task mean.
 
 | Task | Status | Completed | New Q (completed cases) | Archived Q (same completed cases) | Final difference | Every case matches |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
-| task01 | starting | 0/5 | — | — | — | — |
-| task03 | starting | 0/5 | — | — | — | — |
-| task08 | starting | 0/5 | — | — | — | — |
+| task01 | running | 0/5 | — | — | — | — |
+| task03 | running | 0/5 | — | — | — | — |
+| task08 | running | 0/5 | — | — | — | — |
 
 Case scores, hashes and failure details are in [report.json](report.json).

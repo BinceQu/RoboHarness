@@ -1,0 +1,40 @@
+{
+  "checked_at": "2026-09-30T19:34:44+08:00",
+  "source": "First actual capture_head_camera reply recorded in each native Claude transcript; not UI snapshots.",
+  "reproduction_score_claim": false,
+  "cases": [
+    {
+      "task": "task01",
+      "instance_id": 301,
+      "archived_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/282de2ac-1724-4003-b69e-0060656cbebb.jsonl",
+      "archived_transcript_sha256": "9bde08ae54db3055b6b72ce5997312d40e0e07ad3777ebd4c53f60196ffbfe31",
+      "archive_first_frame_sha256": "18ef88b0bafa583d8bcab119ec3ad2500f80e7566edd39950342592b98c8a989",
+      "release_first_frame_sha256": "75340b1cffba6f9b61db1e2c00f27eb2f3de7532c041bc1bcbf64d5cf98723c2",
+      "visual_review": "Initial visible scene layout, camera viewpoint, objects and blue navigation overlay agree; rendering differs slightly.",
+      "pixel_identical": false,
+      "full_simulator_state_verified": false
+    },
+    {
+      "task": "task03",
+      "instance_id": 301,
+      "archived_transcript": "test_results/task03/06_claude_transcripts/claude_t03p15063i0-09152328_301.jsonl",
+      "archived_transcript_sha256": "f05ef5d7e525533f87e8313fff26b9c44f7f827e10887451352639f1e98d0ce1",
+      "archive_first_frame_sha256": "e033fae5a5dbae38a4e180026190c8886325dbb91bf24b4990a25d04693abfce",
+      "release_first_frame_sha256": "bb71ecdc2c1e9703742739ac1a84c6ed0fa7be7e62134dc4d1a287bc86abf5b3",
+      "visual_review": "Initial visible scene layout, camera viewpoint, objects and blue navigation overlay agree; rendering differs slightly.",
+      "pixel_identical": false,
+      "full_simulator_state_verified": false
+    },
+    {
+      "task": "task08",
+      "instance_id": 301,
+      "archived_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/8d684dd8-d87c-4bb5-9543-80e6f8beae63.jsonl",
+      "archived_transcript_sha256": "c8f7ab1c55c06bf7f8f4fa4e9f4fc3e55eacd31bf6adb471f3a47e863013ae3f",
+      "archive_first_frame_sha256": "df5812c13a63770c8cd01683ff4490f138e40311ddba997c455718a671aac6b3",
+      "release_first_frame_sha256": "2056773c5289a15758e760522c6a7591d048c353a82e5e262f470ca505cce7dd",
+      "visual_review": "Initial visible scene layout, camera viewpoint, objects and blue navigation overlay agree; rendering differs slightly.",
+      "pixel_identical": false,
+      "full_simulator_state_verified": false
+    }
+  ]
+}

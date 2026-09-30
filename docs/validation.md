@@ -97,6 +97,14 @@ Each task runs in its own user service, with a separate strict result reporter.
 The [current report](../validation_results/gpu5-20260930-r5/README.md) and
 [launch audit](../validation_results/gpu5-20260930-r5/launch_audit.json) record
 progress. Starting these processes is not evidence that scores match.
+The [live budget/context audit](../validation_results/gpu5-20260930-r5/budget_audit.json)
+checks the first sessions against their archived prompts, startup context,
+skill listing and namespaces, and confirms each limit in the process arguments,
+environment, monitor and evaluator log. The [native watch audit](../validation_results/gpu5-20260930-r5/native_watch_audit.json)
+confirms the workaround in all three actual evaluator processes. The first
+agent-visible head-camera frames agree visually with the archived layouts and
+viewpoints, with small rendering differences; [frame hashes and limitations](../validation_results/gpu5-20260930-r5/initial_frame_audit.json)
+are recorded. This is not a pixel-identical or complete state comparison.
 
 The independent clone was updated to runtime commit 23fefd0. All 40 current
 runner/report/budget/entrypoint/native-watch checks pass there, and the pinned

@@ -1,11 +1,11 @@
 {
-  "updated_at_utc": "2026-09-30T11:22:08+00:00",
+  "updated_at_utc": "2026-09-30T11:30:39+00:00",
   "runs": [
     {
       "task": "task01",
       "task_name": "picking_up_trash",
       "run_directory": "validation-20260930-task01-r5",
-      "status": "starting",
+      "status": "running",
       "model": "Qwen3.8-Flash-Next-FP8",
       "harness": "claude_code",
       "n_finished": 0,
@@ -27,7 +27,7 @@
       "task": "task03",
       "task_name": "cleaning_up_plates_and_food",
       "run_directory": "validation-20260930-task03-r5",
-      "status": "starting",
+      "status": "running",
       "model": "Qwen3.8-Flash-Next-FP8",
       "harness": "claude_code",
       "n_finished": 0,
@@ -49,7 +49,7 @@
       "task": "task08",
       "task_name": "rearranging_kitchen_furniture",
       "run_directory": "validation-20260930-task08-r5",
-      "status": "starting",
+      "status": "running",
       "model": "Qwen3.8-Flash-Next-FP8",
       "harness": "claude_code",
       "n_finished": 0,

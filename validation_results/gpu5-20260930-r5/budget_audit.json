@@ -1,0 +1,371 @@
+{
+  "challenge_year": 2025,
+  "budget_multiplier": 2,
+  "evaluator_commit": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+  "archived_budgets": [
+    {
+      "task": "task00",
+      "max_steps": 4299,
+      "source": "test_results/task00/eval_runs/t00-15060-09171200/plan.json",
+      "source_field": "task.timeout_steps",
+      "source_sha256": "9356ccdaa6e1176b349fba9569c95e5bd0e276796c70981e44d0b94713d38d2c"
+    },
+    {
+      "task": "task01",
+      "max_steps": 10535,
+      "source": "test_results/task01/09152118/plan.json",
+      "source_field": "task.timeout_steps",
+      "source_sha256": "08c5e14b680a1081439f6d62629bbde6e1a4b818fec3bc24efc52b3d0252b4b3"
+    },
+    {
+      "task": "task02",
+      "max_steps": 27664,
+      "source": "test_results/task02/instance_310/plan.json",
+      "source_field": "task.timeout_steps",
+      "source_sha256": "b6560bb915f1c09abcd1e0733e5e779946734b587ec59a65b0ef34ab9c31416c"
+    },
+    {
+      "task": "task03",
+      "max_steps": 27392,
+      "source": "test_results/task03/02_plans/plan_t03-15063-09171758.json",
+      "source_field": "task.timeout_steps",
+      "source_sha256": "f63fa8c7037948c62a98f3404b90a6480a0a1f064375d971dee772dd5e3b5def"
+    },
+    {
+      "task": "task05",
+      "max_steps": 20343,
+      "source": "test_results/task05/plan_jsons/t05-15065-09181018_plan.json",
+      "source_field": "task.timeout_steps",
+      "source_sha256": "104dabebf5c6525fcd0b56c4e1c0a499b59f25a8405de4b584056a3e76bb15f6"
+    },
+    {
+      "task": "task06",
+      "max_steps": 15239,
+      "source": "test_results/task06/02_plans/plan_t06-15066-09172335.json",
+      "source_field": "task.timeout_steps",
+      "source_sha256": "9131183d3bb9b462a228d4ce2108c6506af62416d9f668e8c93790f15fd77715"
+    },
+    {
+      "task": "task07",
+      "max_steps": 37781,
+      "source": "test_results/task07/manifest.json",
+      "source_field": "run.timeout_steps",
+      "source_sha256": "26b76c66c1bc7969f540bac2323b9f8540a4c91681c312784eea159c84f0e288"
+    },
+    {
+      "task": "task08",
+      "max_steps": 17886,
+      "source": "test_results/task08/summary.json",
+      "source_field": "max_ticks",
+      "source_sha256": "b5c9768e1eeb383d0c20c9b482d2ce9dfc2a6a13bac1090640f75839406d55b2"
+    },
+    {
+      "task": "task09",
+      "max_steps": 27437,
+      "source": "test_results/task09/_meta/run_09171200/plan.json",
+      "source_field": "task.timeout_steps",
+      "source_sha256": "17e25539a88b16d957f24edd5c6081f99da75edc2e52d92a7c959e7122282a72"
+    }
+  ],
+  "checked_at": "2026-09-30T19:34:44+08:00",
+  "live_runs": [
+    {
+      "task": "task01",
+      "run_dir": "runs/validation-20260930-task01-r5",
+      "evaluator_pid": 2836167,
+      "evaluator_max_steps_argument": 10535,
+      "ROBOHARNESS_MAX_STEPS": 10535,
+      "BEHAVIOR_AGENT_MAX_TICKS": 10535,
+      "monitor_max_ticks": 10535,
+      "session_id": "t01p15071i0-24f935b814ec417c",
+      "evaluator_log": "runs/validation-20260930-task01-r5/logs/evaluator.log",
+      "evaluator_log_budget_lines": [
+        "[00:00:22.746] [INFO] [omnigibson.eval.evaluator] Setting timeout to be 10535 steps through config."
+      ],
+      "contexts": [
+        {
+          "instance_id": 301,
+          "transcript": "runs/validation-20260930-task01-r5/instance_301/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/9a0aef16-9af5-4db4-b384-20323b8d4502.jsonl",
+          "archived_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/282de2ac-1724-4003-b69e-0060656cbebb.jsonl",
+          "archived_transcript_sha256": "9bde08ae54db3055b6b72ce5997312d40e0e07ad3777ebd4c53f60196ffbfe31",
+          "startup_context_sha256": "a1ef3ea478487ad0e8d5dc8a162b0042365e874908f22169b785df75b0f838ff",
+          "mcp_names": [
+            "behavior-v2"
+          ],
+          "mcp_instructions_preview_sha256": "53f6468a436c6628b85bc23fe514669aee41c777c370dbbdce9f1d6dbeb23614",
+          "mcp_instructions_archive_truncated": true,
+          "native_plugin_skills": [
+            "embodied-claude-code:behavior-v2-baseline",
+            "embodied-claude-code:close-box",
+            "embodied-claude-code:cut-object",
+            "embodied-claude-code:navigate-to-target",
+            "embodied-claude-code:open-doors-and-drawers",
+            "embodied-claude-code:pick-up-object",
+            "embodied-claude-code:place-object-in-container",
+            "embodied-claude-code:traverse-narrow-passages"
+          ],
+          "tool_calls_observed": 2,
+          "first_tool": "mcp__behavior-v2__capture_head_camera",
+          "tool_text_blocks_checked_without_rollout_budget": 10,
+          "first_observed_robot": {
+            "base_pose": {
+              "pos": [
+                0.0004350894435301293,
+                9.609921036034589e-09,
+                0.0
+              ],
+              "yaw_deg": 0.0037190959543998967
+            },
+            "base_qvel": [
+              0.0002000261447392404,
+              3.5423508961685e-05,
+              7.246568566188216e-05
+            ],
+            "eef_left": {
+              "frame": "local_command_odometry",
+              "pos": [
+                0.3822482314085813,
+                0.2520246488526891,
+                1.2553997039794922
+              ]
+            },
+            "eef_right": {
+              "frame": "local_command_odometry",
+              "pos": [
+                0.38228023102615905,
+                -0.25197529863355655,
+                1.2553997039794922
+              ]
+            },
+            "frame": "local_command_odometry",
+            "gripper_left_qpos": [
+              0.04997890815138817,
+              0.04999479651451111
+            ],
+            "gripper_right_qpos": [
+              0.04992705211043358,
+              0.0499919056892395
+            ],
+            "motion_epoch": 2,
+            "trunk_qpos": [
+              1.0251110792160034,
+              -1.4501402378082275,
+              -0.4700143337249756,
+              1.3631662909574516e-07
+            ]
+          },
+          "source_prompt_sha256": "39be138fa40ae8766fa1c6190fbd5dcbeb526a4091d46b4be3fb519172009249",
+          "rendered_prompt_sha256": "5c97ee1dbc37ed245e6004a3c64527afe16a23fe2970d91a0b974c4cb656572b"
+        }
+      ],
+      "release_source": {
+        "recorded_at": "2026-09-30T19:21:38+08:00",
+        "runtime_source_commit": "23fefd0736ad45c7e91631bce2a12abba3e57937",
+        "evaluator_commit": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+        "plan_sha256": "731e1839109b31c839f3a1d3d6f48a7d728deca3004065370e40b6b36fa4d4f9",
+        "archive_context_fixture_sha256": "d91a6c3eeca7cf82a1fe9744ceee2c589df20fd3b0ed1395da26a5c9b68471f8",
+        "service_unit": "roboharness-validation-task01-20260930-r5.service",
+        "native_asset_watch_regression": "validation_results/native-asset-reload-20260930/fixed-regression.json"
+      }
+    },
+    {
+      "task": "task03",
+      "run_dir": "runs/validation-20260930-task03-r5",
+      "evaluator_pid": 2836260,
+      "evaluator_max_steps_argument": 27392,
+      "ROBOHARNESS_MAX_STEPS": 27392,
+      "BEHAVIOR_AGENT_MAX_TICKS": 27392,
+      "monitor_max_ticks": 27392,
+      "session_id": "t03p15073i0-d172707c12d24af1",
+      "evaluator_log": "runs/validation-20260930-task03-r5/logs/evaluator.log",
+      "evaluator_log_budget_lines": [
+        "[00:00:24.167] [INFO] [omnigibson.eval.evaluator] Setting timeout to be 27392 steps through config."
+      ],
+      "contexts": [
+        {
+          "instance_id": 301,
+          "transcript": "runs/validation-20260930-task03-r5/instance_301/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/8d66162b-a1f2-4bc0-b43f-0519b6a44869.jsonl",
+          "archived_transcript": "test_results/task03/06_claude_transcripts/claude_t03p15063i0-09152328_301.jsonl",
+          "archived_transcript_sha256": "f05ef5d7e525533f87e8313fff26b9c44f7f827e10887451352639f1e98d0ce1",
+          "startup_context_sha256": "a1ef3ea478487ad0e8d5dc8a162b0042365e874908f22169b785df75b0f838ff",
+          "mcp_names": [
+            "behavior-v2"
+          ],
+          "mcp_instructions_preview_sha256": "53f6468a436c6628b85bc23fe514669aee41c777c370dbbdce9f1d6dbeb23614",
+          "mcp_instructions_archive_truncated": true,
+          "native_plugin_skills": [
+            "embodied-claude-code:behavior-v2-baseline",
+            "embodied-claude-code:close-box",
+            "embodied-claude-code:cut-object",
+            "embodied-claude-code:navigate-to-target",
+            "embodied-claude-code:open-doors-and-drawers",
+            "embodied-claude-code:pick-up-object",
+            "embodied-claude-code:place-object-in-container",
+            "embodied-claude-code:traverse-narrow-passages"
+          ],
+          "tool_calls_observed": 1,
+          "first_tool": "mcp__behavior-v2__capture_head_camera",
+          "tool_text_blocks_checked_without_rollout_budget": 6,
+          "first_observed_robot": {
+            "base_pose": {
+              "pos": [
+                0.00043057336751630554,
+                1.6622584400368435e-08,
+                0.0
+              ],
+              "yaw_deg": 0.007915308647194997
+            },
+            "base_qvel": [
+              2.2208294012671104e-06,
+              -1.2876959090135642e-06,
+              1.4521094726660522e-06
+            ],
+            "eef_left": {
+              "frame": "local_command_odometry",
+              "pos": [
+                0.38222323003882475,
+                0.2520526180363482,
+                1.2554019689559937
+              ]
+            },
+            "eef_right": {
+              "frame": "local_command_odometry",
+              "pos": [
+                0.382293214515431,
+                -0.25194851769931675,
+                1.2554017305374146
+              ]
+            },
+            "frame": "local_command_odometry",
+            "gripper_left_qpos": [
+              0.04999660700559616,
+              0.04996534436941147
+            ],
+            "gripper_right_qpos": [
+              0.04999934881925583,
+              0.04996352270245552
+            ],
+            "motion_epoch": 2,
+            "trunk_qpos": [
+              1.0251051187515259,
+              -1.4501338005065918,
+              -0.4700133204460144,
+              1.8239568078115553e-08
+            ]
+          },
+          "source_prompt_sha256": "11b5ae18163af2168ba6603649782a2c4ab6fd1ca41eff4b9bb7ed001671b4b6",
+          "rendered_prompt_sha256": "0792fa213daea7ad11784a2ff931e1fff55b35b379bc54b80a468a23049bf48d"
+        }
+      ],
+      "release_source": {
+        "recorded_at": "2026-09-30T19:21:38+08:00",
+        "runtime_source_commit": "23fefd0736ad45c7e91631bce2a12abba3e57937",
+        "evaluator_commit": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+        "plan_sha256": "9ad6c7cb010614f2200ba49071881afea8f43a9dd24168baaaa937204eec4def",
+        "archive_context_fixture_sha256": "d91a6c3eeca7cf82a1fe9744ceee2c589df20fd3b0ed1395da26a5c9b68471f8",
+        "service_unit": "roboharness-validation-task03-20260930-r5.service",
+        "native_asset_watch_regression": "validation_results/native-asset-reload-20260930/fixed-regression.json"
+      }
+    },
+    {
+      "task": "task08",
+      "run_dir": "runs/validation-20260930-task08-r5",
+      "evaluator_pid": 2846092,
+      "evaluator_max_steps_argument": 17886,
+      "ROBOHARNESS_MAX_STEPS": 17886,
+      "BEHAVIOR_AGENT_MAX_TICKS": 17886,
+      "monitor_max_ticks": 17886,
+      "session_id": "t08p15078i0-291eb3b4c5d44ea2",
+      "evaluator_log": "runs/validation-20260930-task08-r5/logs/evaluator.log",
+      "evaluator_log_budget_lines": [
+        "[00:00:23.309] [INFO] [omnigibson.eval.evaluator] Setting timeout to be 17886 steps through config."
+      ],
+      "contexts": [
+        {
+          "instance_id": 301,
+          "transcript": "runs/validation-20260930-task08-r5/instance_301/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/dcd5866f-a1c7-4a79-aac8-c67a4f31f328.jsonl",
+          "archived_transcript": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/8d684dd8-d87c-4bb5-9543-80e6f8beae63.jsonl",
+          "archived_transcript_sha256": "c8f7ab1c55c06bf7f8f4fa4e9f4fc3e55eacd31bf6adb471f3a47e863013ae3f",
+          "startup_context_sha256": "a1ef3ea478487ad0e8d5dc8a162b0042365e874908f22169b785df75b0f838ff",
+          "mcp_names": [
+            "behavior-v2"
+          ],
+          "mcp_instructions_preview_sha256": "53f6468a436c6628b85bc23fe514669aee41c777c370dbbdce9f1d6dbeb23614",
+          "mcp_instructions_archive_truncated": true,
+          "native_plugin_skills": [
+            "embodied-claude-code:behavior-v2-baseline",
+            "embodied-claude-code:close-box",
+            "embodied-claude-code:cut-object",
+            "embodied-claude-code:navigate-to-target",
+            "embodied-claude-code:open-doors-and-drawers",
+            "embodied-claude-code:pick-up-object",
+            "embodied-claude-code:place-object-in-container",
+            "embodied-claude-code:traverse-narrow-passages"
+          ],
+          "tool_calls_observed": 1,
+          "first_tool": "mcp__behavior-v2__capture_head_camera",
+          "tool_text_blocks_checked_without_rollout_budget": 5,
+          "first_observed_robot": {
+            "base_pose": {
+              "pos": [
+                0.00039306539654907055,
+                -1.0044380878041676e-08,
+                0.0
+              ],
+              "yaw_deg": -0.0022657410607603745
+            },
+            "base_qvel": [
+              0.0001176678852061741,
+              -0.00011734051804523915,
+              -0.0003754216304514557
+            ],
+            "eef_left": {
+              "frame": "local_command_odometry",
+              "pos": [
+                0.38223145761897215,
+                0.2519837918574996,
+                1.2554017305374146
+              ]
+            },
+            "eef_right": {
+              "frame": "local_command_odometry",
+              "pos": [
+                0.38221033500051477,
+                -0.25201687145861096,
+                1.2554014921188354
+              ]
+            },
+            "frame": "local_command_odometry",
+            "gripper_left_qpos": [
+              0.0497557558119297,
+              0.04996826499700546
+            ],
+            "gripper_right_qpos": [
+              0.04997007176280022,
+              0.049944791942834854
+            ],
+            "motion_epoch": 2,
+            "trunk_qpos": [
+              1.0251058340072632,
+              -1.4501347541809082,
+              -0.47001346945762634,
+              1.0573343445230421e-07
+            ]
+          },
+          "source_prompt_sha256": "62c12d99b1ce52e6a3e2c9b62c61068d8c10be93cbe3d342c884f6046fd6bd77",
+          "rendered_prompt_sha256": "160e897d030e2ae60b80080a3b28c9944e65cd16489d40cee69d63df4e44fe93"
+        }
+      ],
+      "release_source": {
+        "recorded_at": "2026-09-30T19:22:08+08:00",
+        "runtime_source_commit": "23fefd0736ad45c7e91631bce2a12abba3e57937",
+        "evaluator_commit": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+        "plan_sha256": "764902c0ee339a27bd40d6ad629ba426f72935a0ef0ed0757c3a1910d63c76c9",
+        "archive_context_fixture_sha256": "d91a6c3eeca7cf82a1fe9744ceee2c589df20fd3b0ed1395da26a5c9b68471f8",
+        "service_unit": "roboharness-validation-task08-20260930-r5.service",
+        "native_asset_watch_regression": "validation_results/native-asset-reload-20260930/fixed-regression.json"
+      }
+    }
+  ],
+  "scope": "Live budget and recorded context verification only; this is not a score or scene-state reproduction claim."
+}
