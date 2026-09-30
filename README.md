@@ -71,6 +71,9 @@ copied into the report alongside their hashes and per-case differences.
 `--require-match` exits nonzero for a failed, incomplete or mismatched run.
 Verification requires every selected case to match the directory-reported
 score; equal means with different case scores do not pass.
+An episode forced to submit by the wall-clock safety timeout is also excluded
+from verification, even if its score happens to match. Its official JSON is
+retained for diagnosis.
 
 Code is MIT licensed; see [LICENSE](LICENSE) and
 [third-party notices](THIRD_PARTY_NOTICES.md). External datasets, keys and

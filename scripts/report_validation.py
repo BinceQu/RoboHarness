@@ -55,6 +55,12 @@ def collect(path: Path) -> dict:
     superseded = read_json(superseded_path) if superseded_path.is_file() else None
     caveats = [{'instance_id': case['instance_id'], 'reason': reason}
                for case in expected.values() for reason in case.get('reproduction_caveats', [])]
+    caveats.extend(
+        {'instance_id': case['instance_id'],
+         'reason': 'The wall-clock safety timeout forced episode submission; '
+                   'this is not termination under the archived step budget or model completion.'}
+        for case in completed if case.get('finish_reason') == 'wall_timeout'
+    )
     complete = (status == 'complete' and superseded is None and not caveats
                 and not plan.get('diagnostic_only', False))
     matches_cases = (all(abs(c['delta_archive_q']) < 1e-6 for c in completed)

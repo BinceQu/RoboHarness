@@ -118,6 +118,21 @@ class ValidationReport(unittest.TestCase):
         self.assertIsNone(row['matches_archive_mean'])
         self.assertFalse(row['reproduction_verified'])
 
+    def test_wall_timeout_does_not_pass_even_when_official_scores_match(self):
+        self.add_case(301, 1.0)
+        self.add_case(304, 1.0)
+        self.summary['cases'][0]['finish_reason'] = 'wall_timeout'
+        self.summary['status'] = 'complete'
+        self.save()
+        row = collect(self.root)
+        self.assertEqual(row['mean_q'], 1.0)
+        self.assertIsNone(row['matches_archive_cases'])
+        self.assertIsNone(row['matches_archive_mean'])
+        self.assertFalse(row['reproduction_verified'])
+        self.assertEqual(row['reproduction_caveats'][0]['instance_id'], 301)
+        self.assertIn('wall-clock', row['reproduction_caveats'][0]['reason'])
+        self.assertEqual(self.require_match_exit_code(), 2)
+
     def test_superseded_scores_remain_visible_without_reproduction_claim(self):
         self.add_case(301, 1.0)
         self.add_case(304, 1.0)
