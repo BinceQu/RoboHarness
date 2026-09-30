@@ -80,3 +80,37 @@ were not restarted or modified by this check.
 The session-local diagnostic observer probes only the three verified live
 run ports once every 90 seconds and records exception stacks and socket
 states. It sends no control requests and exits when all runs are terminal.
+
+### A surfaced agent timeout
+
+A read-only audit of the live case-301 transcripts found one surfaced
+transport error in task03. The agent invoked `open_gripper` at **2026-10-01
+00:05:55.516 Asia/Shanghai** and received `transport_error` at 00:06:04.868,
+after 9.352 seconds. The agent's connection helper was already using bounded
+establishment retries. A transport error nevertheless reached the agent;
+bounded retries do not guarantee that every such failure is hidden.
+
+The inspected server log window, 00:05:00 through 00:07:59, contains no
+queued gripper job or matching POST access entry for the failed invocation.
+Controller ticks remain 1258 through 00:06:27. The agent subsequently
+invoked the tool again at 00:07:17.678. The server records one queued and
+completed gripper job for that later invocation, one successful monitor
+card, and ticks increasing to 1270. The log contains both plain and
+logger-formatted access entries; action counts therefore use queued and
+completed jobs and cards rather than access-line counts.
+
+The initial duration is consistent with three three-second connection
+attempts plus backoff. The live MCP request timeout is 1900 seconds and
+the relevant client source matches its launch commit. However, no
+per-attempt stack or socket snapshot was captured during the original
+00:06 failure, so its exact transport phase and cause remain unproven.
+
+The [agent tool audit](../validation_results/http-transport-20261001/agent-tool-audit.json)
+preserves the invocation/result timestamps, server records, step counts,
+source hashes and exact byte-prefix hashes of the live logs. It also
+distinguishes task01's stale-image rejection and task08's out-of-range
+pixel argument from this transport error. Three occurrences of `HTTP 504`
+in task01 are skill instruction text, not failed requests.
+
+The audit issues no actuator requests and does not restart or modify the
+running evaluations. It establishes no completed official score.

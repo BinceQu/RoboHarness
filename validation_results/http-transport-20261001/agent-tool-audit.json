@@ -1,0 +1,299 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-10-01T04:15:25.812824+08:00",
+  "scope": "read-only snapshot of three live r5 case-301 transcripts and the task03 incident; not completed scores",
+  "launch_commit": "23fefd0736ad45c7e91631bce2a12abba3e57937",
+  "repository_head_at_capture": "c11f27423941596af099e9742abb1db5dd08aa52",
+  "snapshot_hash_convention": "SHA-256 over exactly prefix_bytes bytes ending at a complete newline; source logs remain append-only and live. No full transcripts or images are published.",
+  "tool_result_summaries": [
+    {
+      "task": "task01",
+      "source": {
+        "path": "runs/validation-20260930-task01-r5/instance_301/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/9a0aef16-9af5-4db4-b384-20323b8d4502.jsonl",
+        "prefix_bytes": 42926423,
+        "sha256": "d8a65dd98cfc102b313a310133b99c9225651a7e5b02116f7b8fbeca60e82999"
+      },
+      "last_event_at_utc": "2026-09-30T20:14:46.544Z",
+      "unique_tool_calls": 125,
+      "unique_tool_result_ids": 125,
+      "declared_errors": [
+        {
+          "kind": "result",
+          "at_utc": "2026-09-30T11:49:17.631Z",
+          "tool": "mcp__behavior-v2__spin_to_facing_point",
+          "tool_use_id": "chatcmpl-tool-968fae88063daac5",
+          "is_error": true,
+          "error": {
+            "code": "tool_policy_error",
+            "details": {
+              "image_geometry": {
+                "clickable": true,
+                "coordinate_system": "image_pixels_720x720",
+                "height": 720,
+                "image_id": "img_0005",
+                "sha256": "33d9af09d28ea9841dad6ed0bc853f3477a5725e4740719f3e2fff0d4e30bc2a",
+                "source_height": 720,
+                "source_width": 720,
+                "view": "head",
+                "width": 720
+              },
+              "image_id": "img_0005",
+              "latest_image_id": "img_0007"
+            },
+            "message": "Pixel click rejected: image_id must name the latest emitted head view, with both original and model image dimensions exactly 720 x 720. Capture a fresh head image and re-locate the target; wrist, unknown, stale, resized, or incorrectly sized views cannot be clicked.",
+            "retryable": false,
+            "tool_name": "spin_to_facing_point"
+          },
+          "elapsed_s": 0.165
+        }
+      ],
+      "http_504_mentions": [
+        {
+          "at_utc": "2026-09-30T12:10:51.315Z",
+          "tool": "mcp__behavior-v2__activate_skill",
+          "classification": "skill instruction text; not a failed HTTP request"
+        },
+        {
+          "at_utc": "2026-09-30T14:33:50.533Z",
+          "tool": "mcp__behavior-v2__activate_skill",
+          "classification": "skill instruction text; not a failed HTTP request"
+        },
+        {
+          "at_utc": "2026-09-30T19:17:51.940Z",
+          "tool": "mcp__behavior-v2__activate_skill",
+          "classification": "skill instruction text; not a failed HTTP request"
+        }
+      ]
+    },
+    {
+      "task": "task03",
+      "source": {
+        "path": "runs/validation-20260930-task03-r5/instance_301/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/8d66162b-a1f2-4bc0-b43f-0519b6a44869.jsonl",
+        "prefix_bytes": 44087037,
+        "sha256": "1c4503d61c2402600dc215b605151dbd30e3317e3fc7adeb4456112ba3cd3e10"
+      },
+      "last_event_at_utc": "2026-09-30T20:14:41.561Z",
+      "unique_tool_calls": 107,
+      "unique_tool_result_ids": 107,
+      "declared_errors": [
+        {
+          "kind": "result",
+          "at_utc": "2026-09-30T16:06:04.868Z",
+          "tool": "mcp__behavior-v2__open_gripper",
+          "tool_use_id": "chatcmpl-tool-83be664c57325ce0",
+          "is_error": true,
+          "error": {
+            "code": "transport_error",
+            "details": {
+              "context": "timed out"
+            },
+            "message": "Unable to reach BEHAVIOR server at http://127.0.0.1:15073.",
+            "retryable": true,
+            "tool_name": "open_gripper"
+          },
+          "elapsed_s": 9.352
+        }
+      ],
+      "http_504_mentions": []
+    },
+    {
+      "task": "task08",
+      "source": {
+        "path": "runs/validation-20260930-task08-r5/instance_301/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/dcd5866f-a1c7-4a79-aac8-c67a4f31f328.jsonl",
+        "prefix_bytes": 34853514,
+        "sha256": "fd422284b88091b842bce8b3bf172de07a0245305036ce168d4a60fd1a7b5729"
+      },
+      "last_event_at_utc": "2026-09-30T20:09:35.083Z",
+      "unique_tool_calls": 123,
+      "unique_tool_result_ids": 123,
+      "declared_errors": [
+        {
+          "kind": "result",
+          "at_utc": "2026-09-30T14:30:11.288Z",
+          "tool": "mcp__behavior-v2__track_object_distance",
+          "tool_use_id": "chatcmpl-tool-92590a28dc4ea66a",
+          "is_error": true,
+          "error": {
+            "code": "tool_policy_error",
+            "details": {
+              "path": "points.0.u",
+              "schema": {
+                "additionalProperties": false,
+                "required": [
+                  "image_id",
+                  "points"
+                ],
+                "type": "object"
+              }
+            },
+            "message": "Invalid arguments for track_object_distance: 745 is greater than the maximum of 719",
+            "retryable": false,
+            "tool_name": "track_object_distance"
+          },
+          "elapsed_s": 0.131
+        }
+      ],
+      "http_504_mentions": []
+    }
+  ],
+  "task03_incident": {
+    "events": [
+      {
+        "kind": "call",
+        "at_utc": "2026-09-30T16:05:55.516Z",
+        "tool": "mcp__behavior-v2__open_gripper",
+        "tool_use_id": "chatcmpl-tool-83be664c57325ce0"
+      },
+      {
+        "kind": "result",
+        "at_utc": "2026-09-30T16:06:04.868Z",
+        "tool": "mcp__behavior-v2__open_gripper",
+        "tool_use_id": "chatcmpl-tool-83be664c57325ce0",
+        "is_error": true,
+        "error": {
+          "code": "transport_error",
+          "details": {
+            "context": "timed out"
+          },
+          "message": "Unable to reach BEHAVIOR server at http://127.0.0.1:15073.",
+          "retryable": true,
+          "tool_name": "open_gripper"
+        },
+        "elapsed_s": 9.352
+      },
+      {
+        "kind": "call",
+        "at_utc": "2026-09-30T16:07:17.678Z",
+        "tool": "mcp__behavior-v2__open_gripper",
+        "tool_use_id": "chatcmpl-tool-a8780c3d3eb21518"
+      },
+      {
+        "kind": "result",
+        "at_utc": "2026-09-30T16:07:23.229Z",
+        "tool": "mcp__behavior-v2__open_gripper",
+        "tool_use_id": "chatcmpl-tool-a8780c3d3eb21518",
+        "is_error": false
+      }
+    ],
+    "interface_source": {
+      "path": "runs/validation-20260930-task03-r5/logs/interface.log",
+      "prefix_bytes": 23344700,
+      "sha256": "353731d8d0594a41a90e1cda234917ac68823f3fe85cb5599a73ba18ba929e96"
+    },
+    "interface_window_local": "2026-10-01 00:05:00 through 00:07:59 +08:00",
+    "interface_records": [
+      {
+        "line": 117610,
+        "text": "[00:07:17] queued open_gripper({'arm': 'right', 'session_id': ''}) -> job-1790784437802"
+      },
+      {
+        "line": 117627,
+        "text": "[00:07:18] queued capture_head_camera({'session_id': 't03p15073i0-d172707c12d24af1'}) -> job-1790784438808"
+      },
+      {
+        "line": 117628,
+        "text": "[00:07:18] done open_gripper"
+      },
+      {
+        "line": 117633,
+        "text": "[00:07:19] done capture_head_camera"
+      },
+      {
+        "line": 117668,
+        "text": "127.0.0.1 - - [01/Oct/2026 00:07:23] \"POST /api/v2/open_gripper HTTP/1.1\" 200 -"
+      },
+      {
+        "line": 117669,
+        "text": "[04:45:44.579] [INFO] [werkzeug] 127.0.0.1 - - [01/Oct/2026 00:07:23] \"POST /api/v2/open_gripper HTTP/1.1\" 200 -"
+      },
+      {
+        "line": 117674,
+        "text": "127.0.0.1 - - [01/Oct/2026 00:07:23] \"POST /api/agent_monitor/model_image HTTP/1.1\" 200 -"
+      },
+      {
+        "line": 117675,
+        "text": "[04:45:44.693] [INFO] [werkzeug] 127.0.0.1 - - [01/Oct/2026 00:07:23] \"POST /api/agent_monitor/model_image HTTP/1.1\" 200 -"
+      }
+    ],
+    "queued_open_gripper_jobs": 1,
+    "completed_open_gripper_jobs": 1,
+    "cards_source": {
+      "path": "runs/validation-20260930-task03-r5/monitor/t03_cleaning_up_plates_and_food/t03p15073i0-d172707c12d24af1/cards.jsonl",
+      "prefix_bytes": 93880,
+      "sha256": "d7ce9b9a9bd8b49cfe6e8c9279f5a3c8507b5d84521bb3225335f7b9e3f2b629"
+    },
+    "cards": [
+      {
+        "card_id": 62,
+        "tool": "open_gripper",
+        "ok": true,
+        "session_ticks": 1270,
+        "at_utc": "2026-09-30T16:07:23.101000+00:00"
+      },
+      {
+        "card_id": 63,
+        "tool": "set_arm_to_grasp_position",
+        "ok": true,
+        "session_ticks": 1298,
+        "at_utc": "2026-09-30T16:09:26.340000+00:00"
+      }
+    ],
+    "controller_source": {
+      "path": "runs/validation-20260930-task03-r5/run.log",
+      "prefix_bytes": 31853,
+      "sha256": "0606f5b37ffb1aa7cfa849207b95f4dcfbb897dd9648ce682f319e0845788a19"
+    },
+    "controller_lines": [
+      {
+        "line": 290,
+        "text": "2026-10-01 00:04:27 instance 301: agent=running ticks=1258"
+      },
+      {
+        "line": 291,
+        "text": "2026-10-01 00:05:27 instance 301: agent=running ticks=1258"
+      },
+      {
+        "line": 292,
+        "text": "2026-10-01 00:06:27 instance 301: agent=running ticks=1258"
+      },
+      {
+        "line": 293,
+        "text": "2026-10-01 00:07:27 instance 301: agent=running ticks=1270"
+      },
+      {
+        "line": 294,
+        "text": "2026-10-01 00:08:27 instance 301: agent=running ticks=1270"
+      },
+      {
+        "line": 295,
+        "text": "2026-10-01 00:09:27 instance 301: agent=running ticks=1298"
+      }
+    ],
+    "request_timeout_s": 1900.0,
+    "request_timeout_source": "default in unchanged config.py; environment variable absent",
+    "mcp_identity": {
+      "pid": 2992236,
+      "expected_start": "129119197",
+      "state": "alive"
+    },
+    "source_code": [
+      {
+        "path": "harness/claude_code/src/embodied_claude_code/config.py",
+        "sha256": "e7912e832d6370e6cd8ff1410479270c3647fc730c0dbf2910a6998cd604c92b",
+        "matches_launch_commit": true
+      },
+      {
+        "path": "harness/claude_code/src/embodied_claude_code/client.py",
+        "sha256": "06278499aa9e89e4b2f4c163c03380c51891b7361de2e2cc324267941a8f9e07",
+        "matches_launch_commit": true
+      }
+    ],
+    "interpretation": "No gripper job or matching POST access entry is recorded for the first failed invocation in the inspected window, and controller ticks remain 1258. The later agent retry records one queued/completed gripper job, a successful card and ticks=1270. The 9.352-second first failure is consistent with exhausting three three-second connection attempts plus backoff, but per-attempt stack/socket evidence was not captured at that time.",
+    "limitations": [
+      "The original 00:06 failure predates the detailed socket observer; its exact transport phase and cause cannot be proved from the surfaced error alone.",
+      "Duplicate HTTP access-log lines are retained as written; action counts use queued/completed jobs and cards, not access-line counts.",
+      "A bounded retry can still exhaust its attempts; this incident is not evidence that every transport failure is hidden from the agent.",
+      "This read-only audit does not replay an action, restart an evaluator, change a prompt or establish any official score."
+    ]
+  }
+}
