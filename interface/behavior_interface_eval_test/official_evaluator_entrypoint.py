@@ -30,14 +30,10 @@ _SYNCHRONOUS_RENDER_ARGS = (
     # the BaseMutex ownership crash. The normal worker pool remains large
     # enough for Replicator's render graph to initialize.
     "--/plugins/carb.tasking.plugin/stuckCheckSeconds=0",
-    # 2026-09-14 15:56:14: nine evaluators aborted in the same second with
-    # ``unlock() called by non-owning thread``.  Trigger: another launcher
-    # rewrote models/r1pro in the shared data root, and Kit's inotify asset
-    # watchers (omni.client WatchDirectory -> extension manager / MDL reload)
-    # fired inside every live process, contending a thread-affine
-    # carb::thread::mutex from tasking fibers.  Evaluators never need hot
-    # reload, so switch the watchers off outright; install.py additionally
-    # stops mutating shared roots.
+    # These settings disable extension and MDL reload only. OmniClient still
+    # installs texture watches: a byte-identical JPEG mtime change reproduced
+    # the carb.assets mutex abort on 2026-09-30. main() additionally applies
+    # the exact-binary native subscription workaround before Kit startup.
     "--/app/extensions/fsWatcherEnabled=false",
     "--/app/material/disableMdlReload=true",
 )
@@ -837,6 +833,16 @@ def main() -> None:
     from omnigibson.objects.usd_object import USDObject
     from omnigibson.utils import transform_utils as transform_utils
     from isaacsim import SimulationApp
+    from behavior_interface_eval_test.native_asset_watches import (
+        disable_native_asset_watches,
+    )
+
+    watch_policy = disable_native_asset_watches()
+    print(
+        "[official-test] native asset watch policy: "
+        + json.dumps(watch_policy, sort_keys=True),
+        flush=True,
+    )
 
     configure_omnigibson_gpu_id()
     gpu_dynamics = configure_gpu_dynamics()

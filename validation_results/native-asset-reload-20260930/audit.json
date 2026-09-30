@@ -1,0 +1,23 @@
+{
+  "status": "controlled_native_regression_passed",
+  "diagnostic_only": true,
+  "counts_as_scored_reproduction": false,
+  "control_run": "native-diag-20260930-185329-46143057",
+  "source_commit": "5a4bea1",
+  "trigger": {
+    "sha256": "82402fe89d7f1cbc22eb66f57c0e1daf51d76a34231868da2bb9d995f33e8654",
+    "time": 1790766207.323902,
+    "event": "touch_robot_texture_preserve_bytes",
+    "diagnostic_only": true,
+    "asset": "models/r1pro/usd/materials/output_torso4.jpg"
+  },
+  "control_evaluator_log_sha256": "26492080d9c462e0bf910867efcd6d57e79f087b9ab919415260fa63d71fd657",
+  "native_watch_count_before_trigger": 235,
+  "result": "SIGABRT; BaseMutex::unlock non-owning thread; carb.assets on carb.tasking3",
+  "interpretation": "A content-preserving robot-texture mtime event reproduces the native assertion despite the extension/MDL reload settings. The exact external event responsible for the separate 17:16:47 three-process failure remains unknown.",
+  "fixed_regression": "fixed-regression.json",
+  "fixed_native_watch_count": 1,
+  "texture_mtime_events": 20,
+  "explicit_scene_reset": "passed",
+  "score_reproduction": "pending; diagnostic has no official task scores"
+}

@@ -1,0 +1,22 @@
+../../../include/carb/delegate/../thread/Mutex.h(158): void carb::thread::detail::BaseMutex<false>::unlock()(): Assertion (m_owner == pthread_self()) failed: unlock() called by non-owning thread
+
+Thread 24 (Thread 0x7ffe5cd70640 (LWP 2310428) "carb.tasking3"):
+#0  __pthread_kill_implementation (no_tid=0, signo=6, threadid=140730456016448) at ./nptl/pthread_kill.c:44
+#1  __pthread_kill_internal (signo=6, threadid=140730456016448) at ./nptl/pthread_kill.c:78
+#2  __GI___pthread_kill (threadid=140730456016448, signo=signo@entry=6) at ./nptl/pthread_kill.c:89
+#3  0x00007ffff7c42476 in __GI_raise (sig=sig@entry=6) at ../sysdeps/posix/raise.c:26
+#4  0x00007ffff7c287f3 in __GI_abort () at ./stdlib/abort.c:79
+#5  0x00007ffff46b2c8e in __gnu_cxx::__verbose_terminate_handler () at ../../../../libstdc++-v3/libsupc++/vterminate.cc:95
+#6  0x00007ffff46c673a in __cxxabiv1::__terminate (handler=<optimized out>) at ../../../../libstdc++-v3/libsupc++/eh_terminate.cc:48
+#7  0x00007ffff46b2809 in std::terminate () at ../../../../libstdc++-v3/libsupc++/eh_terminate.cc:58
+#8  0x00007ffe297d9c58 in ?? () from <isaacsim>/extscache/omni.assets.plugins-0.0.0+69cbf6ad.lx64.r/bin/libcarb.assets.plugin.so
+#9  0x00007ffe297dd4e1 in ?? () from <isaacsim>/extscache/omni.assets.plugins-0.0.0+69cbf6ad.lx64.r/bin/libcarb.assets.plugin.so
+#10 0x00007ffe297d646e in ?? () from <isaacsim>/extscache/omni.assets.plugins-0.0.0+69cbf6ad.lx64.r/bin/libcarb.assets.plugin.so
+#11 0x00007ffe297d6c25 in ?? () from <isaacsim>/extscache/omni.assets.plugins-0.0.0+69cbf6ad.lx64.r/bin/libcarb.assets.plugin.so
+#12 0x00007ffe297dc214 in ?? () from <isaacsim>/extscache/omni.assets.plugins-0.0.0+69cbf6ad.lx64.r/bin/libcarb.assets.plugin.so
+#13 0x00007ffe5e6bd4d7 in ?? () from <isaacsim>/kit/kernel/plugins/libcarb.tasking.plugin.so
+#14 0x00007ffe5e6aa74c in ?? () from <isaacsim>/kit/kernel/plugins/libcarb.tasking.plugin.so
+#15 0x00007ffe5e6aa76f in ?? () from <isaacsim>/kit/kernel/plugins/libcarb.tasking.plugin.so
+#16 0x00007ffe5e6c35e9 in make_fcontext () from <isaacsim>/kit/kernel/plugins/libcarb.tasking.plugin.so
+#17 0x0000000000000000 in ?? ()
+

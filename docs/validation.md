@@ -3,6 +3,16 @@
 Validation dates: September 29–30, 2026. The source checkout is RoboHarness,
 with BEHAVIOR v3.9.1 at `26f2c7ef7b9cf96bd0414f81e1e751e493762779`.
 
+The native crash has now been reproduced independently of the model: an
+unchanged texture's mtime event triggers the same carb.assets mutex abort.
+The process-local native subscription workaround passed 20 texture mtime
+events, a 90-second observation window and an explicit scene reset on GPU 5.
+The updated CPU suite has 395 checks: 378 pass and 17 optional checks skip.
+This includes native ABI rejection and strict per-case score comparison;
+matching task means alone no longer satisfy reproduction verification.
+See [native asset reload analysis](native-asset-reload.md). This does not yet
+establish the three requested task scores.
+
 ## Automated checks
 
 The independent Git clone passed all 360 tests in `scripts/check.sh`:
