@@ -1,6 +1,6 @@
 {
   "checked_at": "2026-09-30T10:23:54+08:00",
-  "cause": "Unknown: all recorded controller and child process identities are absent. Logs ended without an official result or terminal summary.",
+  "cause": "All four managed command executions ended at 2026-09-30 05:29:15.970-971 +08:00. The reporter exit code is 137, consistent with SIGKILL; the three task launcher exits are -1, without a recorded signal. The originating cause remains unconfirmed.",
   "runs": [
     {
       "run_directory": "validation-20260930-task01-r3",
@@ -200,5 +200,58 @@
       },
       "removed_stopped_cache": "/var/tmp/roboharness-cache/gpu5/r/d3fa7b7e"
     }
-  ]
+  ],
+  "followup_checked_at": "2026-09-30T11:08:35+08:00",
+  "execution_events": [
+    {
+      "event_timestamp_utc": "2026-09-29T21:29:15.971Z",
+      "source_event_sha256": "573babe02545dc94617decd7c5b162b33d1bf87a5051483c3936479fa3dd940b",
+      "session_id": "62347",
+      "command": "./run.sh --task task01 --gpu 5 --run-dir runs/validation-20260930-task01-r3",
+      "status": "failed",
+      "exit_code": -1,
+      "started_at_ms": 1790702200210,
+      "completed_at_ms": 1790717355970,
+      "duration_seconds": 15155
+    },
+    {
+      "event_timestamp_utc": "2026-09-29T21:29:15.974Z",
+      "source_event_sha256": "6b50c7da88994b637ec55de77b46d5239bf4c3af50015319fd8a677ec742d9bb",
+      "session_id": "85454",
+      "command": "./run.sh --task task08 --gpu 5 --run-dir runs/validation-20260930-task08-r3",
+      "status": "failed",
+      "exit_code": -1,
+      "started_at_ms": 1790702227188,
+      "completed_at_ms": 1790717355970,
+      "duration_seconds": 15128
+    },
+    {
+      "event_timestamp_utc": "2026-09-29T21:29:15.978Z",
+      "source_event_sha256": "5f73f972f80506121b1e53970e15031e41e8c996eb4f89a16b17d499b8494189",
+      "session_id": "91291",
+      "command": "python3 scripts/report_validation.py runs/validation-20260930-task01-r3 runs/validation-20260930-task03 runs/validation-20260930-task08-r3 --output validation_results/gpu5-20260930-r2 --watch > .local/validation-report-watch-20260930-r2.log 2>&1",
+      "status": "failed",
+      "exit_code": 137,
+      "started_at_ms": 1790703144394,
+      "completed_at_ms": 1790717355971,
+      "duration_seconds": 14211
+    },
+    {
+      "event_timestamp_utc": "2026-09-29T21:29:15.979Z",
+      "source_event_sha256": "6cea1f6719853f4d52280e548c66e2cfb2374062fa2d3863069310ded5dc2e76",
+      "session_id": "52640",
+      "command": "./run.sh --task task03 --gpu 5 --run-dir runs/validation-20260930-task03",
+      "status": "failed",
+      "exit_code": -1,
+      "started_at_ms": 1790703098253,
+      "completed_at_ms": 1790717355971,
+      "duration_seconds": 14257
+    }
+  ],
+  "interpretation": {
+    "confirmed": "The three task launcher commands and result watcher ended in a 1 ms completion window, before their step or 24-hour wall-time limits. The controller/child identities were subsequently absent.",
+    "hypothesis": "A shared execution-session cleanup is consistent with the simultaneous command endings, but the records do not identify who initiated termination.",
+    "limitations": "The available execution events do not identify the signal sender. System/kernel journals are not readable by the current account. The user-wide cumulative oom_kill counter is nonzero but has no timestamps and cannot attribute this event. No definite OOM or session-cleanup attribution is made.",
+    "mitigation": "Replacement runs use independent one-shot systemd user services and preserve the archived model, prompts, task settings, and 2025 x2 budgets."
+  }
 }
