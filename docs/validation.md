@@ -81,7 +81,13 @@ only the two Node.js checks were skipped.
 On September 30 at 10:21 CST, a fresh process check found all three prior
 controllers and their recorded children absent. Their final interface log entries
 are around 05:29 CST, with no official scoring JSON and no terminal summary.
-The cause is unknown; it is not established as a budget limit or a model timeout.
+Execution records subsequently confirmed that all three launcher commands and
+result watcher ended at 05:29:15.970–971 CST. The watcher exit code is 137,
+consistent with SIGKILL; the launchers report -1 without a specific signal.
+This simultaneous termination is consistent with shared command-session cleanup,
+but the initiating event remains unconfirmed. System/kernel journals are not
+readable by the current account, so an OOM or other external kill is not ruled out.
+The observed step counts and elapsed times are below the configured limits.
 The stale running statuses were corrected to failed/interrupted, while the
 original summaries, trajectories and logs were retained. The
 [interruption audit](../validation_results/gpu5-20260930-r2/interruption_audit.json)
@@ -96,9 +102,9 @@ the matching archived prompts, and all five instances per task:
 
 | Task | Run directory | Archived mean Q | Status |
 | --- | --- | ---: | --- |
-| task01 | `runs/validation-20260930-task01-r4` | 0.866667 | Initializing after interruption |
-| task03 | `runs/validation-20260930-task03-r4` | 0.257143 | Initializing after interruption |
-| task08 | `runs/validation-20260930-task08-r4` | 0.400000 | Initializing after interruption |
+| task01 | `runs/validation-20260930-task01-r4` | 0.866667 | Running after interruption |
+| task03 | `runs/validation-20260930-task03-r4` | 0.257143 | Running after interruption |
+| task08 | `runs/validation-20260930-task08-r4` | 0.400000 | Running after interruption |
 
 The [pre-interruption audit](../validation_results/gpu5-20260930-r2/budget_audit.json)
 confirmed 10535, 27392 and 17886 steps for the preceding three attempts through evaluator
