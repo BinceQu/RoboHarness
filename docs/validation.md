@@ -1,6 +1,6 @@
 # Release validation
 
-Validation dates: September 29–30, 2026. The source checkout is RoboHarness,
+Validation dates: September 29–October 1, 2026 (Asia/Shanghai). The source checkout is RoboHarness,
 with BEHAVIOR v3.9.1 at `26f2c7ef7b9cf96bd0414f81e1e751e493762779`.
 
 The native crash has now been reproduced independently of the model: an
@@ -32,6 +32,16 @@ enabled with `--check-live` on the evaluation host; copied runs can be inspected
 without consulting unrelated local PIDs.
 See [native asset reload analysis](native-asset-reload.md). This does not yet
 establish the three requested task scores.
+
+A subsequent read-only diagnostic captured a loopback TCP establishment
+timeout with a client in SYN-SENT and the reverse server tuple in LAST-ACK.
+The controller now has bounded connection-establishment retries, matching
+the policy already present in the Claude agent, without replaying transmitted
+HTTP requests. All 33 root regressions pass, including five new transport
+checks and real HTTP-server checks that count received POSTs. Read-only GETs
+through the new handler succeeded against all three running interfaces.
+Existing evaluation processes were not restarted. See the
+[transport analysis and evidence](http-transport.md); this is not score validation.
 
 ## Automated checks
 
