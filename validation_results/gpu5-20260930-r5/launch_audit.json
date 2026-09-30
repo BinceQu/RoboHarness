@@ -1,0 +1,87 @@
+{
+  "launched_at": "2026-09-30T19:21:37+08:00",
+  "checked_at": "2026-09-30T19:23:13+08:00",
+  "challenge_year": 2025,
+  "budget_multiplier": 2,
+  "port_scope": "Explicit CLI arguments from this session configuration; no global port default changed.",
+  "runs": [
+    {
+      "task": "task01",
+      "run_dir": "validation-20260930-task01-r5",
+      "port": 15071,
+      "policy_port": 16071,
+      "gate_port": 17071,
+      "evaluator_pid": 2836167,
+      "max_steps": 10535,
+      "cases": [
+        301,
+        304,
+        306,
+        308,
+        310
+      ],
+      "source": {
+        "recorded_at": "2026-09-30T19:21:38+08:00",
+        "runtime_source_commit": "23fefd0736ad45c7e91631bce2a12abba3e57937",
+        "evaluator_commit": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+        "plan_sha256": "731e1839109b31c839f3a1d3d6f48a7d728deca3004065370e40b6b36fa4d4f9",
+        "archive_context_fixture_sha256": "d91a6c3eeca7cf82a1fe9744ceee2c589df20fd3b0ed1395da26a5c9b68471f8",
+        "service_unit": "roboharness-validation-task01-20260930-r5.service",
+        "native_asset_watch_regression": "validation_results/native-asset-reload-20260930/fixed-regression.json"
+      },
+      "status": "starting"
+    },
+    {
+      "task": "task03",
+      "run_dir": "validation-20260930-task03-r5",
+      "port": 15073,
+      "policy_port": 16073,
+      "gate_port": 17073,
+      "evaluator_pid": 2836260,
+      "max_steps": 27392,
+      "cases": [
+        301,
+        304,
+        306,
+        308,
+        310
+      ],
+      "source": {
+        "recorded_at": "2026-09-30T19:21:38+08:00",
+        "runtime_source_commit": "23fefd0736ad45c7e91631bce2a12abba3e57937",
+        "evaluator_commit": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+        "plan_sha256": "9ad6c7cb010614f2200ba49071881afea8f43a9dd24168baaaa937204eec4def",
+        "archive_context_fixture_sha256": "d91a6c3eeca7cf82a1fe9744ceee2c589df20fd3b0ed1395da26a5c9b68471f8",
+        "service_unit": "roboharness-validation-task03-20260930-r5.service",
+        "native_asset_watch_regression": "validation_results/native-asset-reload-20260930/fixed-regression.json"
+      },
+      "status": "starting"
+    },
+    {
+      "task": "task08",
+      "run_dir": "validation-20260930-task08-r5",
+      "port": 15078,
+      "policy_port": 16078,
+      "gate_port": 17078,
+      "evaluator_pid": 2846092,
+      "max_steps": 17886,
+      "cases": [
+        301,
+        304,
+        306,
+        308,
+        310
+      ],
+      "source": {
+        "recorded_at": "2026-09-30T19:22:08+08:00",
+        "runtime_source_commit": "23fefd0736ad45c7e91631bce2a12abba3e57937",
+        "evaluator_commit": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+        "plan_sha256": "764902c0ee339a27bd40d6ad629ba426f72935a0ef0ed0757c3a1910d63c76c9",
+        "archive_context_fixture_sha256": "d91a6c3eeca7cf82a1fe9744ceee2c589df20fd3b0ed1395da26a5c9b68471f8",
+        "service_unit": "roboharness-validation-task08-20260930-r5.service",
+        "native_asset_watch_regression": "validation_results/native-asset-reload-20260930/fixed-regression.json"
+      },
+      "status": "starting"
+    }
+  ]
+}

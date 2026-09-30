@@ -88,6 +88,22 @@ only the two Node.js checks were skipped.
 
 ## GPU evaluation
 
+The current three-task attempt started on September 30 at 19:21 CST from
+runtime commit 23fefd0 after the native regression passed. All five cases
+per task are selected, with HTTP ports task01=15071, task03=15073 and
+task08=15078. Budgets remain 10535, 27392 and 17886 (2025 ×2). These ports
+are explicit session launch arguments; the repository default is unchanged.
+Each task runs in its own user service, with a separate strict result reporter.
+The [current report](../validation_results/gpu5-20260930-r5/README.md) and
+[launch audit](../validation_results/gpu5-20260930-r5/launch_audit.json) record
+progress. Starting these processes is not evidence that scores match.
+
+The independent clone was updated to runtime commit 23fefd0. All 40 current
+runner/report/budget/entrypoint/native-watch checks pass there, and the pinned
+native ABI check succeeds in the actual evaluator environment.
+
+### Earlier attempts
+
 On September 30 at 10:21 CST, a fresh process check found all three prior
 controllers and their recorded children absent. Their final interface log entries
 are around 05:29 CST, with no official scoring JSON and no terminal summary.
@@ -183,7 +199,7 @@ task06 mean remain unchanged. See [provenance](provenance.md) for the limitation
 means have been reproduced.** Each run writes its official results and
 per-case differences to its own `summary.json` when cases finish.
 
-The local watcher updated the [combined result report](../validation_results/gpu5-20260930-r4/README.md)
+The earlier local watcher updated the [r4 result report](../validation_results/gpu5-20260930-r4/README.md)
 and exited after all three runs failed. No fresh scoring JSON was available. It does not
 substitute archived scores for missing new results.
 
