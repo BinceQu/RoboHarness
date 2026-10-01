@@ -17,6 +17,10 @@ The runtime investigation identified these independent defects:
    “waiting for official score” path even while the interface and evaluator
    were alive. The release runner uses an explicit loopback transport and
    records the polling exception when a local endpoint is unavailable.
+   In r5 this message is an exception-handler label, not evidence of an
+   episode finishing or the evaluator computing a score. Progress must be
+   established from new trajectory events or increasing simulation ticks;
+   completion requires a fresh official evaluator JSON for that instance.
 3. The old Claude launcher did not seed the case-local native Skill usage
    state. Claude consequently emitted the default 5,959-character Skill
    listing instead of the archived 5,987-character listing for task01/301.
@@ -73,10 +77,15 @@ The release path is therefore:
 - run Challenge 2025 with multiplier 2 and the archived integer max_steps;
 - launch in the session-local .local/session-config.json and reserved 1507*
   port range;
-- require every selected case to have an official score, the directory's
-  archive_reported_q, a matching native Skill-context hash, and the verified
-  archived MCP tool profile;
-- reject a result if it is partial, timed out, superseded, or only mean-matched.
+- require all five archived cases of each selected task to have fresh official
+  scores, matching native Skill-context hashes, and verified archived MCP
+  tool profiles;
+- compare each complete task's arithmetic mean Q-score with the directory's
+  `archive_reported_mean_q` (absolute tolerance `1e-6`). Individual case
+  differences are diagnostic and may compensate within that task;
+- reject partial, wall-clock-forced, superseded, or fidelity-mismatched runs.
+  A complete task mean match with the required fidelity checks passes even
+  when individual case scores differ.
 
 The queued r6 watcher preserves the existing r5 processes and starts the
 strict release validation only after those processes exit, GPU5 has enough free
