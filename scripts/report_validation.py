@@ -15,7 +15,7 @@ import time
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from roboharness.runner import atomic_json, load_task, official_result, read_json, validate_archive_protocol
-from roboharness.native_context import contract as native_contract, inspect_listing
+from roboharness.native_context import contract as native_contract, inspect_case
 
 
 def local_process_state(identity: dict) -> dict:
@@ -57,19 +57,12 @@ def native_contexts(path: Path, task: str, expected: dict, finished: set[int]) -
     rows = []
     for iid in expected:
         folder = path / f'instance_{iid}' / 'claude-home'
-        transcripts = list(folder.glob('projects/*/*.jsonl'))
-        if len(transcripts) > 1:
-            result = {'state': 'ambiguous', 'reason': 'Multiple native transcripts for one case'}
-        elif not transcripts:
-            result = {'state': 'missing' if iid in finished else 'pending' if folder.exists() else 'not_started'}
-        else:
-            try:
-                result = inspect_listing(transcripts[0], native_contract(task, iid))
-                result['transcript'] = str(transcripts[0].relative_to(path))
-            except (OSError, ValueError) as error:
-                result = {'state': 'unreadable', 'reason': str(error)}
-            if iid in finished and result['state'] == 'pending':
-                result['state'] = 'missing'
+        try:
+            result = inspect_case(folder, native_contract(task, iid), finished=iid in finished)
+            if 'transcript' in result:
+                result['transcript'] = str(Path(result['transcript']).relative_to(path))
+        except (OSError, ValueError) as error:
+            result = {'state': 'unreadable', 'reason': str(error)}
         rows.append({'instance_id': iid, **result})
     return rows
 

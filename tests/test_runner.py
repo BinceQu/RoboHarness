@@ -1,4 +1,5 @@
 import contextlib
+import hashlib
 import io
 import json
 import itertools
@@ -134,6 +135,92 @@ class WallClockBudget(unittest.TestCase):
         run = self.exercise_wait(1, 1)
         run.finish_episode.assert_called_once_with('wall_timeout')
         self.assertEqual(run.results[0]['finish_reason'], 'wall_timeout')
+
+
+class NativeContextRuntime(unittest.TestCase):
+    def setUp(self):
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        self.root = Path(directory.name)
+        self.case_dir = self.root / 'instance_301'
+        folder = self.case_dir / 'claude-home/projects/project'
+        folder.mkdir(parents=True)
+        self.transcript = folder / 'one.jsonl'
+        self.content = '- robot-skill: archived description'
+        self.expected = {'pattern': {'sha256': hashlib.sha256(self.content.encode()).hexdigest(),
+                                     'names': ['robot-skill']}}
+        self.case = {'instance_id': 301, 'reference_q': 1.0}
+        self.result = {'q_score': {'final': 1.0}, 'steps': 7, 'success': True}
+        output = self.root / 'output/json/sample_301_0.json'
+        output.parent.mkdir(parents=True)
+        output.write_text(json.dumps(self.result))
+        self.run = runner.Run({'run_dir': directory.name, 'run_id': 'test-native-context',
+                               'task_config': {'task': 'task01', 'task_name': 'sample'},
+                               'port': 15071, 'harness': 'claude_code'}, {'session_timeout_s': 0})
+        self.run.assert_alive = Mock()
+        self.run.finish_episode = Mock()
+        self.run.log = Mock()
+        self.run.write_summary = Mock()
+        self.agent = Mock()
+        patcher = patch.object(runner, 'native_contract', return_value=self.expected)
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
+    def write_listing(self, content=None):
+        self.transcript.write_text(json.dumps({'attachment': {'type': 'skill_listing',
+            'isInitial': True, 'content': self.content if content is None else content,
+            'names': ['robot-skill']}}) + '\n')
+
+    def test_divergence_stops_before_waiting_for_an_official_score(self):
+        self.write_listing('changed description')
+        with patch.object(runner, 'official_result', return_value=None):
+            with self.assertRaisesRegex(RuntimeError, 'Skill context mismatch'):
+                self.run.wait_score(self.case, self.agent, self.case_dir)
+        self.agent.poll.assert_not_called()
+        self.run.finish_episode.assert_not_called()
+        self.assertEqual(self.run.results, [])
+        audit = json.loads((self.case_dir / 'native-context.check.json').read_text())
+        self.assertEqual(audit['state'], 'mismatch')
+        self.assertFalse((self.case_dir / 'comparison.json').exists())
+
+    def test_a_score_without_native_evidence_does_not_count_as_a_completed_case(self):
+        with patch.object(runner, 'official_result', return_value=self.result):
+            with self.assertRaisesRegex(RuntimeError, 'Skill context missing'):
+                self.run.wait_score(self.case, self.agent, self.case_dir)
+        self.assertEqual(self.run.results, [])
+
+    def test_incomplete_startup_waits_and_completion_rechecks_the_transcript(self):
+        self.transcript.write_text('{"attachment":')
+        self.agent.poll.side_effect = [None, None, 0]
+        with patch.object(runner, 'official_result', side_effect=[None, None, self.result]), \
+             patch.object(runner.time, 'sleep', side_effect=lambda _: self.write_listing()), \
+             patch.object(runner, 'request_json', return_value={'session_ticks': 7}), \
+             patch.object(runner, 'inspect_native_case', wraps=runner.inspect_native_case) as inspect:
+            self.run.wait_score(self.case, self.agent, self.case_dir)
+        self.assertEqual(inspect.call_count, 3)
+        self.assertTrue(inspect.call_args.kwargs['finished'])
+        self.run.finish_episode.assert_not_called()
+        self.assertEqual(self.run.results[0]['q'], 1.0)
+        self.assertEqual(json.loads((self.case_dir / 'native-context.check.json').read_text())['state'], 'match')
+
+    def test_a_previous_verified_audit_cannot_hide_changed_completion_evidence(self):
+        self.write_listing()
+        self.agent.poll.return_value = None
+        with patch.object(runner, 'official_result', side_effect=[None, self.result]), \
+             patch.object(runner.time, 'sleep', side_effect=lambda _: self.write_listing('changed')), \
+             patch.object(runner, 'request_json', return_value={'session_ticks': 7}):
+            with self.assertRaisesRegex(RuntimeError, 'Skill context mismatch'):
+                self.run.wait_score(self.case, self.agent, self.case_dir)
+        self.assertEqual(self.run.results, [])
+        self.assertEqual(json.loads((self.case_dir / 'native-context.check.json').read_text())['state'], 'mismatch')
+
+    def test_agent_exit_without_initial_context_does_not_force_a_submission(self):
+        (self.case_dir / 'agent.json').write_text(json.dumps({'type': 'result', 'is_error': False}))
+        self.agent.poll.return_value = 0
+        with patch.object(runner, 'official_result', return_value=None):
+            with self.assertRaisesRegex(RuntimeError, 'Skill context missing'):
+                self.run.wait_score(self.case, self.agent, self.case_dir)
+        self.run.finish_episode.assert_not_called()
 
 
 class Ownership(unittest.TestCase):
