@@ -30,3 +30,10 @@ The private installation used `--no-deps`: this verifies LeRobot packaging and
 source selection, not a complete new evaluator environment. The active
 evaluators were not changed. Complete simulator runs and the three requested
 mean Q-score comparisons remain necessary.
+
+The pending r6 queue was repinned to the independent checkout at
+`c4763eb0947adf7f0186834b476a0ec375ee1d1e` on October 1 at 20:22
+Asia/Shanghai. [Activation and preflight evidence](activation.json) verifies
+the same three task budgets, fifteen cases and nine session-local `1507*`
+ports. Only the waiting queue controller was replaced; all three active r5
+controller identities remained unchanged. The r6 tasks had not yet launched.

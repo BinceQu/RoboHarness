@@ -1,0 +1,144 @@
+{
+  "activation": {
+    "activated_at": "2026-10-01T20:22:05+08:00",
+    "source_pin_before": {
+      "source_root": "/var/tmp/roboharness-validation-r6-e711b7e",
+      "source_revision": "e711b7e584541d1a608faa08be43a4f8a558715d",
+      "behavior_revision": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+      "scope": "this session r6 validation only",
+      "prepared_at": "2026-10-01T19:06:29+08:00",
+      "acceptance_criterion": "per_task_mean_q"
+    },
+    "source_pin_after": {
+      "source_root": "/var/tmp/roboharness-validation-r6-c4763eb",
+      "source_revision": "c4763eb0947adf7f0186834b476a0ec375ee1d1e",
+      "behavior_revision": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+      "scope": "this session r6 validation only",
+      "prepared_at": "2026-10-01T20:19:37+08:00",
+      "acceptance_criterion": "per_task_mean_q"
+    },
+    "queue_before": {
+      "MainPID": "2476428",
+      "LoadState": "loaded",
+      "ActiveState": "active"
+    },
+    "queue_after": {
+      "MainPID": "4168481",
+      "LoadState": "loaded",
+      "ActiveState": "active"
+    },
+    "r5_controllers_before": {
+      "task01": {
+        "MainPID": "2833423",
+        "LoadState": "loaded",
+        "ActiveState": "active"
+      },
+      "task03": {
+        "MainPID": "2833447",
+        "LoadState": "loaded",
+        "ActiveState": "active"
+      },
+      "task08": {
+        "MainPID": "2833459",
+        "LoadState": "loaded",
+        "ActiveState": "active"
+      }
+    },
+    "r5_controllers_after": {
+      "task01": {
+        "MainPID": "2833423",
+        "LoadState": "loaded",
+        "ActiveState": "active"
+      },
+      "task03": {
+        "MainPID": "2833447",
+        "LoadState": "loaded",
+        "ActiveState": "active"
+      },
+      "task08": {
+        "MainPID": "2833459",
+        "LoadState": "loaded",
+        "ActiveState": "active"
+      }
+    },
+    "r5_unchanged": true,
+    "session_config_sha256": "6bc65dadcc9edf16052dcc070efd6a4daab445b36fd9783a129753529916e731",
+    "r6_not_launched": true
+  },
+  "preflight": {
+    "checked_at": "2026-10-01T20:21:03+08:00",
+    "source_pin": {
+      "source_root": "/var/tmp/roboharness-validation-r6-c4763eb",
+      "source_revision": "c4763eb0947adf7f0186834b476a0ec375ee1d1e",
+      "behavior_revision": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+      "scope": "this session r6 validation only",
+      "prepared_at": "2026-10-01T20:19:37+08:00",
+      "acceptance_criterion": "per_task_mean_q"
+    },
+    "previous_pin": {
+      "source_root": "/var/tmp/roboharness-validation-r6-e711b7e",
+      "source_revision": "e711b7e584541d1a608faa08be43a4f8a558715d",
+      "behavior_revision": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+      "scope": "this session r6 validation only",
+      "prepared_at": "2026-10-01T19:06:29+08:00",
+      "acceptance_criterion": "per_task_mean_q"
+    },
+    "config_sha256": "6bc65dadcc9edf16052dcc070efd6a4daab445b36fd9783a129753529916e731",
+    "plans": [
+      {
+        "task": "task01",
+        "instances": [
+          301,
+          304,
+          306,
+          308,
+          310
+        ],
+        "max_steps": 10535,
+        "ports": [
+          15071,
+          15070,
+          15072
+        ],
+        "archive_mean_q": 0.8666666666666666
+      },
+      {
+        "task": "task03",
+        "instances": [
+          301,
+          304,
+          306,
+          308,
+          310
+        ],
+        "max_steps": 27392,
+        "ports": [
+          15073,
+          15074,
+          15075
+        ],
+        "archive_mean_q": 0.2571428571428571
+      },
+      {
+        "task": "task08",
+        "instances": [
+          301,
+          304,
+          306,
+          308,
+          310
+        ],
+        "max_steps": 17886,
+        "ports": [
+          15078,
+          15076,
+          15077
+        ],
+        "archive_mean_q": 0.4
+      }
+    ],
+    "runtime_source_diff": [],
+    "installed_source_check": "lerobot 0.5.2: verified commit 436812bd8ee39b768c645c248c91f1330834e687",
+    "passed": true
+  }
+}
