@@ -1,0 +1,26 @@
+{
+  "instance_id": 301,
+  "slot": 0,
+  "prompt": "prompt/task01/v4_39be138fa40a.txt",
+  "prompt_sha256": "39be138fa40ae8766fa1c6190fbd5dcbeb526a4091d46b4be3fb519172009249",
+  "prompt_source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/282de2ac-1724-4003-b69e-0060656cbebb.jsonl",
+  "prompt_source_sha256": "9bde08ae54db3055b6b72ce5997312d40e0e07ad3777ebd4c53f60196ffbfe31",
+  "archive_prompt_record": "test_results/task01/monitor/301/2_t01p15061i0-09152145/session.json",
+  "archive_prompt_record_sha256": "a7f4e3f603b8fb5a421e320449162cac778764a51ef1fb628b6deb68e8462ae9",
+  "claude_mcp_name": "behavior-v2",
+  "matching_prompt_filenames": [
+    "embodied_claude_code_qwen38-flash-next-fp8_v4.txt"
+  ],
+  "reference_result": "reference_results/task01/picking_up_trash_301_0.json",
+  "reference_sha256": "126cb39ea0ff8fc85a8c11322315ab4cc9d1fd0bf06b7d5ac220af2ed891f779",
+  "reference_source": "test_results/task01/scoreboard/301_v4.json",
+  "reference_q": 1.0,
+  "reference_steps": 10025,
+  "notes": [],
+  "source_session_id": "t01p15061i0-09152145",
+  "archive_reported_q": 1.0,
+  "archive_score_basis": "trajectory-directory official score",
+  "session_id": "t01p15079i0-6991c4a9e19e46f3",
+  "agent_cwd": "/var/tmp/roboharness-startup-txeqdm53/task01/agent-workspaces/instance_301/embodied_claude_code",
+  "rendered_prompt_sha256": "45f6bca0803d92269557829fe2274d8055b6d821a138a59189304b4ef528b050"
+}

@@ -1,0 +1,25 @@
+{
+  "instance_id": 301,
+  "slot": 0,
+  "prompt": "prompt/task03/v4_11b5ae18163a.txt",
+  "prompt_sha256": "11b5ae18163af2168ba6603649782a2c4ab6fd1ca41eff4b9bb7ed001671b4b6",
+  "prompt_source": "test_results/task03/06_claude_transcripts/claude_t03p15063i0-09152328_301.jsonl",
+  "prompt_source_sha256": "f05ef5d7e525533f87e8313fff26b9c44f7f827e10887451352639f1e98d0ce1",
+  "archive_prompt_record": "test_results/task03/06_claude_transcripts/claude_t03p15063i0-09152328_301.jsonl",
+  "archive_prompt_record_sha256": "f05ef5d7e525533f87e8313fff26b9c44f7f827e10887451352639f1e98d0ce1",
+  "claude_mcp_name": "behavior-v2",
+  "matching_prompt_filenames": [
+    "embodied_claude_code_qwen38-flash-next-fp8_v4.txt"
+  ],
+  "reference_result": "reference_results/task03/cleaning_up_plates_and_food_301_0.json",
+  "reference_sha256": "9e8c999af6c3763413d78780d8d17e85623841a25a7ec8ead31e709d05d577f9",
+  "reference_source": "test_results/task03/01_official_json/cleaning_up_plates_and_food_301_0.json",
+  "reference_q": 0.2857142857142857,
+  "reference_steps": 19969,
+  "notes": [],
+  "archive_reported_q": 0.2857142857142857,
+  "archive_score_basis": "trajectory-directory official score",
+  "session_id": "t03p15079i0-1d0753ef92d6438b",
+  "agent_cwd": "/var/tmp/roboharness-startup-txeqdm53/task03/agent-workspaces/instance_301/embodied_claude_code",
+  "rendered_prompt_sha256": "7e092b8cebf426f89cb5dff1fb0eb4ddbbd3b254f3acfc131ed3ce02472811c6"
+}

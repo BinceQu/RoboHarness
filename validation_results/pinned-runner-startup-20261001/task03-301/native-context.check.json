@@ -1,0 +1,61 @@
+{
+  "state": "match",
+  "expected_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+  "actual_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+  "actual_chars": 5987,
+  "expected_git_branch": "HEAD",
+  "actual_git_branch": "HEAD",
+  "transcript": "/mnt/nas_nfs/home/bince/RoboHarness/.local/runner-startup-probe-20261001-105956/task03-301/instance_301/claude-home/projects/-var-tmp-roboharness-startup-txeqdm53-task03-agent-workspaces-instance-301-embodied-claude-code/e8dfbae3-01ea-4e89-bab4-e64f746cf629.jsonl",
+  "mcp_tool_profile": {
+    "state": "match",
+    "manifest": "/mnt/nas_nfs/home/bince/RoboHarness/.local/runner-startup-probe-20261001-105956/task03-301/instance_301/trajectory/claude-20261001T030001Z-39a50112/manifest.json",
+    "profile": {
+      "name": "baseline",
+      "description": "Allow advertised v2 tools except MCP exclusions.",
+      "allow_tools": [
+        "*"
+      ],
+      "deny_tools": [
+        "control_wrist_roll",
+        "move_point_to_point",
+        "plan_eef_translation_to_uvd_point",
+        "plan_grasp_point_filter",
+        "plan_grasp_point_filter_rgbd",
+        "read_depth"
+      ],
+      "fixed_arguments": {}
+    },
+    "tool_names": [
+      "adjust_chassis",
+      "adjust_height",
+      "adjust_left_eef_pose_in_head_frame",
+      "adjust_left_eef_pose_in_wrist_frame",
+      "adjust_pitch",
+      "adjust_plan_pose",
+      "adjust_right_eef_pose_in_head_frame",
+      "adjust_right_eef_pose_in_wrist_frame",
+      "capture_head_camera",
+      "capture_left_wrist_camera",
+      "capture_right_wrist_camera",
+      "close_gripper",
+      "cut_object",
+      "exec_plan_pose",
+      "mark_on_map",
+      "measure_shoulder_distance",
+      "move_chassis_to_directly_facing_surface",
+      "move_chassis_to_floor_point",
+      "move_to_reach_point",
+      "move_tracked_point",
+      "open_gripper",
+      "plan_grasp_point_filter_rgbd_lite",
+      "plan_press_point",
+      "reset_body",
+      "set_arm_to_grasp_position",
+      "spin_to_facing_point",
+      "track_object_distance"
+    ],
+    "missing_tools": [],
+    "forbidden_tools": [],
+    "differences": []
+  }
+}

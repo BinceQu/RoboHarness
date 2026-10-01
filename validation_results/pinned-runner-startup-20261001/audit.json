@@ -1,0 +1,230 @@
+{
+  "diagnostic_only": true,
+  "stage": "Run.start_agent (no simulator/evaluator)",
+  "source_root": "/var/tmp/roboharness-validation-r6-83bb6f0",
+  "source_revision": "83bb6f0461ee29c4736868299ab0ac06c7780571",
+  "records": [
+    {
+      "task": "task01",
+      "instance_id": 301,
+      "returncode": 0,
+      "request_count": 1,
+      "context_state": "match",
+      "mcp_tool_profile_state": "match",
+      "session_begin_matches": true,
+      "prompt_source_sha256": "39be138fa40ae8766fa1c6190fbd5dcbeb526a4091d46b4be3fb519172009249",
+      "expected_prompt_sha256": "39be138fa40ae8766fa1c6190fbd5dcbeb526a4091d46b4be3fb519172009249",
+      "port": 15079,
+      "unexpected_calls": [],
+      "tool_names": [
+        "Skill",
+        "mcp__behavior-v2__activate_skill",
+        "mcp__behavior-v2__adjust_chassis",
+        "mcp__behavior-v2__adjust_height",
+        "mcp__behavior-v2__adjust_left_eef_pose_in_head_frame",
+        "mcp__behavior-v2__adjust_left_eef_pose_in_wrist_frame",
+        "mcp__behavior-v2__adjust_pitch",
+        "mcp__behavior-v2__adjust_plan_pose",
+        "mcp__behavior-v2__adjust_right_eef_pose_in_head_frame",
+        "mcp__behavior-v2__adjust_right_eef_pose_in_wrist_frame",
+        "mcp__behavior-v2__capture_head_camera",
+        "mcp__behavior-v2__capture_left_wrist_camera",
+        "mcp__behavior-v2__capture_right_wrist_camera",
+        "mcp__behavior-v2__close_gripper",
+        "mcp__behavior-v2__cut_object",
+        "mcp__behavior-v2__deactivate_skill",
+        "mcp__behavior-v2__exec_plan_pose",
+        "mcp__behavior-v2__mark_on_map",
+        "mcp__behavior-v2__measure_shoulder_distance",
+        "mcp__behavior-v2__move_chassis_to_directly_facing_surface",
+        "mcp__behavior-v2__move_chassis_to_floor_point",
+        "mcp__behavior-v2__move_to_reach_point",
+        "mcp__behavior-v2__move_tracked_point",
+        "mcp__behavior-v2__open_gripper",
+        "mcp__behavior-v2__plan_grasp_point_filter_rgbd_lite",
+        "mcp__behavior-v2__plan_press_point",
+        "mcp__behavior-v2__reset_body",
+        "mcp__behavior-v2__set_arm_to_grasp_position",
+        "mcp__behavior-v2__spin_to_facing_point",
+        "mcp__behavior-v2__track_object_distance"
+      ]
+    },
+    {
+      "task": "task03",
+      "instance_id": 301,
+      "returncode": 0,
+      "request_count": 1,
+      "context_state": "match",
+      "mcp_tool_profile_state": "match",
+      "session_begin_matches": true,
+      "prompt_source_sha256": "11b5ae18163af2168ba6603649782a2c4ab6fd1ca41eff4b9bb7ed001671b4b6",
+      "expected_prompt_sha256": "11b5ae18163af2168ba6603649782a2c4ab6fd1ca41eff4b9bb7ed001671b4b6",
+      "port": 15079,
+      "unexpected_calls": [],
+      "tool_names": [
+        "Skill",
+        "mcp__behavior-v2__activate_skill",
+        "mcp__behavior-v2__adjust_chassis",
+        "mcp__behavior-v2__adjust_height",
+        "mcp__behavior-v2__adjust_left_eef_pose_in_head_frame",
+        "mcp__behavior-v2__adjust_left_eef_pose_in_wrist_frame",
+        "mcp__behavior-v2__adjust_pitch",
+        "mcp__behavior-v2__adjust_plan_pose",
+        "mcp__behavior-v2__adjust_right_eef_pose_in_head_frame",
+        "mcp__behavior-v2__adjust_right_eef_pose_in_wrist_frame",
+        "mcp__behavior-v2__capture_head_camera",
+        "mcp__behavior-v2__capture_left_wrist_camera",
+        "mcp__behavior-v2__capture_right_wrist_camera",
+        "mcp__behavior-v2__close_gripper",
+        "mcp__behavior-v2__cut_object",
+        "mcp__behavior-v2__deactivate_skill",
+        "mcp__behavior-v2__exec_plan_pose",
+        "mcp__behavior-v2__mark_on_map",
+        "mcp__behavior-v2__measure_shoulder_distance",
+        "mcp__behavior-v2__move_chassis_to_directly_facing_surface",
+        "mcp__behavior-v2__move_chassis_to_floor_point",
+        "mcp__behavior-v2__move_to_reach_point",
+        "mcp__behavior-v2__move_tracked_point",
+        "mcp__behavior-v2__open_gripper",
+        "mcp__behavior-v2__plan_grasp_point_filter_rgbd_lite",
+        "mcp__behavior-v2__plan_press_point",
+        "mcp__behavior-v2__reset_body",
+        "mcp__behavior-v2__set_arm_to_grasp_position",
+        "mcp__behavior-v2__spin_to_facing_point",
+        "mcp__behavior-v2__track_object_distance"
+      ]
+    },
+    {
+      "task": "task08",
+      "instance_id": 304,
+      "returncode": 0,
+      "request_count": 1,
+      "context_state": "match",
+      "mcp_tool_profile_state": "match",
+      "session_begin_matches": true,
+      "prompt_source_sha256": "62c12d99b1ce52e6a3e2c9b62c61068d8c10be93cbe3d342c884f6046fd6bd77",
+      "expected_prompt_sha256": "62c12d99b1ce52e6a3e2c9b62c61068d8c10be93cbe3d342c884f6046fd6bd77",
+      "port": 15079,
+      "unexpected_calls": [],
+      "tool_names": [
+        "Skill",
+        "mcp__plugin_embodied-claude-code_behavior-v2__activate_skill",
+        "mcp__plugin_embodied-claude-code_behavior-v2__adjust_chassis",
+        "mcp__plugin_embodied-claude-code_behavior-v2__adjust_height",
+        "mcp__plugin_embodied-claude-code_behavior-v2__adjust_left_eef_pose_in_head_frame",
+        "mcp__plugin_embodied-claude-code_behavior-v2__adjust_left_eef_pose_in_wrist_frame",
+        "mcp__plugin_embodied-claude-code_behavior-v2__adjust_pitch",
+        "mcp__plugin_embodied-claude-code_behavior-v2__adjust_plan_pose",
+        "mcp__plugin_embodied-claude-code_behavior-v2__adjust_right_eef_pose_in_head_frame",
+        "mcp__plugin_embodied-claude-code_behavior-v2__adjust_right_eef_pose_in_wrist_frame",
+        "mcp__plugin_embodied-claude-code_behavior-v2__capture_head_camera",
+        "mcp__plugin_embodied-claude-code_behavior-v2__capture_left_wrist_camera",
+        "mcp__plugin_embodied-claude-code_behavior-v2__capture_right_wrist_camera",
+        "mcp__plugin_embodied-claude-code_behavior-v2__close_gripper",
+        "mcp__plugin_embodied-claude-code_behavior-v2__cut_object",
+        "mcp__plugin_embodied-claude-code_behavior-v2__deactivate_skill",
+        "mcp__plugin_embodied-claude-code_behavior-v2__exec_plan_pose",
+        "mcp__plugin_embodied-claude-code_behavior-v2__mark_on_map",
+        "mcp__plugin_embodied-claude-code_behavior-v2__measure_shoulder_distance",
+        "mcp__plugin_embodied-claude-code_behavior-v2__move_chassis_to_directly_facing_surface",
+        "mcp__plugin_embodied-claude-code_behavior-v2__move_chassis_to_floor_point",
+        "mcp__plugin_embodied-claude-code_behavior-v2__move_to_reach_point",
+        "mcp__plugin_embodied-claude-code_behavior-v2__move_tracked_point",
+        "mcp__plugin_embodied-claude-code_behavior-v2__open_gripper",
+        "mcp__plugin_embodied-claude-code_behavior-v2__plan_grasp_point_filter_rgbd_lite",
+        "mcp__plugin_embodied-claude-code_behavior-v2__plan_press_point",
+        "mcp__plugin_embodied-claude-code_behavior-v2__reset_body",
+        "mcp__plugin_embodied-claude-code_behavior-v2__set_arm_to_grasp_position",
+        "mcp__plugin_embodied-claude-code_behavior-v2__spin_to_facing_point",
+        "mcp__plugin_embodied-claude-code_behavior-v2__track_object_distance"
+      ]
+    }
+  ],
+  "checked_at": "2026-10-01T03:03:22.069903+00:00",
+  "source_pin": {
+    "source_root": "/var/tmp/roboharness-validation-r6-83bb6f0",
+    "source_revision": "83bb6f0461ee29c4736868299ab0ac06c7780571",
+    "behavior_revision": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+    "scope": "this session r6 validation only",
+    "prepared_at": "2026-10-01T03:00:58.807125+00:00"
+  },
+  "queue_reload": {
+    "r5_before": {
+      "roboharness-validation-task01-20260930-r5.service": {
+        "MainPID": "2833423",
+        "ActiveState": "active"
+      },
+      "roboharness-validation-task03-20260930-r5.service": {
+        "MainPID": "2833447",
+        "ActiveState": "active"
+      },
+      "roboharness-validation-task08-20260930-r5.service": {
+        "MainPID": "2833459",
+        "ActiveState": "active"
+      }
+    },
+    "r5_after": {
+      "roboharness-validation-task01-20260930-r5.service": {
+        "MainPID": "2833423",
+        "ActiveState": "active"
+      },
+      "roboharness-validation-task03-20260930-r5.service": {
+        "MainPID": "2833447",
+        "ActiveState": "active"
+      },
+      "roboharness-validation-task08-20260930-r5.service": {
+        "MainPID": "2833459",
+        "ActiveState": "active"
+      }
+    },
+    "unchanged": true
+  },
+  "scope": "Real Run.start_agent, shell launcher, Claude 2.1.259 and MCP recorder. The model and interface HTTP endpoints are local stubs; the simulator/evaluator is not started. This is not an official score run.",
+  "root_suite": {
+    "tests": 62,
+    "passed": 61,
+    "skipped": 1,
+    "log": "pinned-r6-root-tests-20261001.log",
+    "sha256": "e5664d048ba7e646870f6ac6b774e11d1ba2c90ebc72f43e092d0dcf255bb91e"
+  },
+  "probe_script_sha256": "9746407f6b2d00980833914248b2184bd7b01eb358a2c13e51a8515de7d2afbc",
+  "case_evidence": [
+    {
+      "task": "task01",
+      "instance_id": 301,
+      "files": {
+        "task01-301/case.json": "e91fba2ccb2a4c0afa30ea614200055a351409ce3f3ee7362720dcea6e5e3b66",
+        "task01-301/mcp-manifest.json": "e0e68c8d45c05b25adf607676e37988ce4a4bc15c9c7a852fa5decebbf246c0d",
+        "task01-301/native-context.check.json": "e31029ff89c09ea90cb3d2546feb113b1812789c70650029ec0616cafe083957"
+      }
+    },
+    {
+      "task": "task03",
+      "instance_id": 301,
+      "files": {
+        "task03-301/case.json": "6f1411386d70f79b2c576eb51268f0551f024c139908c80d28b64d1df403f8b1",
+        "task03-301/mcp-manifest.json": "b69fdabdded26e499b55778ab7ef318b62ac4ba3198d0a0ce522e5264ac27837",
+        "task03-301/native-context.check.json": "d3ea650e3450b1d7ab5e71ba30093017675af7fa6806c667717e573380575626"
+      }
+    },
+    {
+      "task": "task08",
+      "instance_id": 304,
+      "files": {
+        "task08-304/case.json": "f92d369b646a61ffad7b9afec5ef4840387c78ef8e2bf584956d1c5d21c14673",
+        "task08-304/mcp-manifest.json": "a5e62e13ce5d40ae9fbc2bac86c13b9b8f576fd1fc76fc57f683bd5efaaa71c1",
+        "task08-304/native-context.check.json": "d242baa81dec4e44aba89e29723dadb9b4963f985e512ce651c51e9820a929b2"
+      }
+    }
+  ],
+  "pinned_preflight": {
+    "passed": true,
+    "source_root": "/var/tmp/roboharness-validation-r6-83bb6f0",
+    "robot_asset": "/var/tmp/roboharness-validation-r6-83bb6f0/interface/behavior_interface_eval_test/robot_profiles/r1pro_8dof_hf250/assets/models/r1pro/usd/r1pro_8dof_hf250.usda",
+    "robot_asset_sha256": "56f12570594c80a317d6fb38c230238e666438cdbe9b035ee8f6cf942ddc395b",
+    "tracked_worktree_clean": true,
+    "session_timeout_s": 0,
+    "config_sha256": "1574e874c39581adf33ea9d37b233d13814006e56966b2b6d49e991ddb0bb46e",
+    "scope": "Dependency paths, pinned CLI/evaluator revision, required dataset entries, cache headroom and packaged robot-asset extraction. No simulator/evaluator or model generation."
+  }
+}

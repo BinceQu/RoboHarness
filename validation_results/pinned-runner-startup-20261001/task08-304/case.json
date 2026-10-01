@@ -1,0 +1,28 @@
+{
+  "instance_id": 304,
+  "slot": 3,
+  "prompt": "prompt/task08/v25_62c12d99b1ce.txt",
+  "prompt_sha256": "62c12d99b1ce52e6a3e2c9b62c61068d8c10be93cbe3d342c884f6046fd6bd77",
+  "prompt_source": "test_results/task08/instance_304/claude-home/claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/3234697d-b93f-4a8b-87b8-7b72c98034e1.jsonl",
+  "prompt_source_sha256": "8736d63d5def9e4814c839ab159289c206f31d9fc49af334e5e372799b7b09f2",
+  "archive_prompt_record": "work/agent_monitor/t08_rearranging_kitchen_furniture/t08p15068i3-0919202825-193b84074c8c/session.json",
+  "archive_prompt_record_sha256": "0949e26da41535c293f2914261258c1deab93035bf98b669e250b8ba86a718f3",
+  "claude_mcp_name": "plugin:embodied-claude-code:behavior-v2",
+  "matching_prompt_filenames": [
+    "embodied_claude_code_qwen38-flash-next-fp8_v25.txt"
+  ],
+  "reference_result": "reference_results/task08/rearranging_kitchen_furniture_304_0.json",
+  "reference_sha256": "d6bba4b40b9dd9c04a0cce25ad9886e443881af0ad7559410498257f0272302f",
+  "reference_source": "test_results/task08/instance_304/rearranging_kitchen_furniture_304_0.json",
+  "reference_q": 0.5,
+  "reference_steps": 17887,
+  "notes": [
+    "The archived session_end JSON identifies the monitor session; the matching Claude transcript preserves the exact prompt bytes."
+  ],
+  "source_session_id": "t08p15068i3-0919202825-193b84074c8c",
+  "archive_reported_q": 0.5,
+  "archive_score_basis": "trajectory-directory official score",
+  "session_id": "t08p15079i3-7ef964d98a8c4630",
+  "agent_cwd": "/var/tmp/roboharness-startup-txeqdm53/task08/agent-workspaces/instance_304/embodied_claude_code",
+  "rendered_prompt_sha256": "dffa575b6906a3d80c731c9be97aeeb18675bd030e8e7a8b4514d9130c1ed55d"
+}
