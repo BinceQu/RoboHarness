@@ -1,0 +1,13 @@
+# Apply after the pinned upstream installer with --no-deps. These versions
+# match the effective reference evaluator and correct observed install drift;
+# this is not a complete lockfile for the upstream environment.
+warp-lang==1.12.0
+Pillow==11.0.0
+pyarrow==25.0.0
+websockets==17.0.1
+# Restore reference support libraries overwritten by the SDK setup. Several
+# SDK dependency declarations conflict with the evaluation packages; see
+# docs/setup.md and the recorded installation audit.
+packaging==25.0
+psutil==7.2.2
+click==8.4.2

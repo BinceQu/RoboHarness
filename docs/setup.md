@@ -43,6 +43,18 @@ global Git configuration and does not modify the BEHAVIOR submodule. Existing
 evaluator environments can be checked with their Python interpreter:
 `python scripts/with_evaluator_sources.py --check`.
 
+After upstream setup, the installer applies
+[evaluator runtime pins](../requirements/evaluator-runtime.txt) for Warp,
+Pillow, PyArrow, websockets and three support libraries. These pins correct
+version drift observed in an independent installation and match the effective
+reference evaluator. They are applied with `--no-deps` after upstream has
+installed the dependency set; they are not a complete environment lockfile.
+The SDK declares exact versions of several shared libraries that conflict
+with the evaluation dependencies, including Pillow and packaging. `pip check`
+therefore does not pass for this combined environment; the validation record
+distinguishes these declarations from the imports and protocol behavior
+actually checked. The final versions follow the working reference evaluator.
+
 The pinned upstream installer asks for its license agreements. Its flags can
 be supplied after `all`, for example `./scripts/setup.sh all --accept-nvidia-eula`.
 Dataset installation is separate: follow the pinned
