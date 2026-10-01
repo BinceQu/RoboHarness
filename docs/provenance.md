@@ -10,7 +10,10 @@ The directory's reported numbers are retained. The table also exposes means
 computed from the selected original evaluator JSON; no historical result is
 edited to reconcile conflicting records.
 
-archive_reported_q is the case-level value used by the strict report. For tasks
+archive_reported_mean_q is the authoritative task-level acceptance target.
+The report compares a complete task's fresh mean against this value; individual
+case differences do not reject a matching mean. archive_reported_q retains
+case-level values for diagnosis and provenance. For tasks
 01, 02, 03, 06, 07, 08 and 09 it is read from the final official score JSON inside
 the corresponding trajectory directory. For task00 and task05, the directory
 manifest/session summary is authoritative when it conflicts with a quarantined or

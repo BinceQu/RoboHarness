@@ -9,8 +9,9 @@ The process-local native subscription workaround passed 20 texture mtime
 events, a 90-second observation window and an explicit scene reset on GPU 5.
 At runtime commit 23fefd0, the full CPU suite ran 392 checks: 375 passed and
 17 optional checks skipped. Passing checks include native ABI rejection. Subsequent
-targeted reporter regressions require strict per-case score comparison;
-matching task means alone no longer satisfy reproduction verification.
+reporter acceptance follows the user's October 1 clarification: each complete
+task mean Q-score must match its directory-reported mean. Individual case
+differences are diagnostic; prompt, budget and runtime fidelity remain required.
 An additional regression rejects a matching score when the wall-clock safety
 timeout forced episode submission. All 19 current runner/report/budget tests
 pass with this guard; it changes result validation, not the running agents.

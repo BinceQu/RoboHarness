@@ -22,6 +22,7 @@ class ValidationReport(unittest.TestCase):
         self.root = Path(temporary.name)
         self.task = load_task('task01')
         self.task['cases'] = self.task['cases'][:2]
+        self.task['archive_reported_mean_q'] = 1.0
         for case in self.task['cases']:
             case.update(reference_q=1.0, archive_reported_q=1.0)
         plan = {'task_config': copy.deepcopy(self.task), 'model': self.task['model'],
@@ -85,6 +86,7 @@ class ValidationReport(unittest.TestCase):
         plan = json.loads(plan_path.read_text())
         plan['cases'][1]['reference_q'] = 0.0
         self.task['cases'][1].update(reference_q=0.0, archive_reported_q=0.0)
+        self.task['archive_reported_mean_q'] = 0.5
         plan_path.write_text(json.dumps(plan))
         self.add_case(301, 5 / 9)
         self.save()
@@ -198,11 +200,12 @@ class ValidationReport(unittest.TestCase):
         self.assertEqual(row['status'], 'complete')
         self.assertTrue(row['reproduction_verified'])
 
-    def test_equal_means_do_not_hide_swapped_case_scores(self):
+    def test_equal_task_means_accept_different_case_scores(self):
         plan_path = self.root / 'plan.json'
         plan = json.loads(plan_path.read_text())
         plan['cases'][1]['reference_q'] = 0.0
         self.task['cases'][1].update(reference_q=0.0, archive_reported_q=0.0)
+        self.task['archive_reported_mean_q'] = 0.5
         plan_path.write_text(json.dumps(plan))
         self.add_case(301, 0.0)
         self.add_case(304, 1.0)
@@ -211,6 +214,65 @@ class ValidationReport(unittest.TestCase):
         row = collect(self.root)
         self.assertTrue(row['matches_archive_mean'])
         self.assertFalse(row['matches_archive_cases'])
+        self.assertTrue(row['reproduction_verified'])
+        self.assertEqual(row['acceptance_criterion'], 'per_task_mean_q')
+        self.assertEqual(self.require_match_exit_code(), 0)
+        report = (self.root / 'report/README.md').read_text()
+        self.assertIn('Mean matches | Verified', report)
+        self.assertNotIn('Every case matches', report)
+
+    def test_directory_task_mean_is_authoritative_over_case_diagnostics(self):
+        self.task['archive_reported_mean_q'] = 0.75
+        self.add_case(301, 0.5)
+        self.add_case(304, 1.0)
+        self.summary['status'] = 'complete'
+        self.save()
+        row = collect(self.root)
+        self.assertEqual(row['archive_mean_q'], 0.75)
+        self.assertFalse(row['matches_archive_cases'])
+        self.assertTrue(row['reproduction_verified'])
+        self.assertEqual(self.require_match_exit_code(), 0)
+
+    def test_complete_subset_cannot_certify_the_full_task_mean(self):
+        path = self.root / 'plan.json'
+        plan = json.loads(path.read_text())
+        plan['cases'] = plan['cases'][:1]
+        path.write_text(json.dumps(plan))
+        self.add_case(301, 1.0)
+        self.summary['status'] = 'complete'
+        self.save()
+        row = collect(self.root)
+        self.assertEqual(row['mean_q'], row['archive_mean_q'])
+        self.assertFalse(row['full_task_selected'])
+        self.assertEqual(row['n_archived'], 2)
+        self.assertFalse(row['reproduction_verified'])
+        self.assertIn('complete archived instance set', row['reproduction_caveats'][0]['reason'])
+        self.assertEqual(self.require_match_exit_code(), 2)
+
+    def test_invalid_directory_mean_never_certifies_results(self):
+        self.add_case(301, 1.0)
+        self.add_case(304, 1.0)
+        self.summary['status'] = 'complete'
+        self.save()
+        for value in (None, True, '1.0', float('nan'), float('inf'), -0.1, 1.1):
+            with self.subTest(value=value):
+                self.task['archive_reported_mean_q'] = value
+                row = collect(self.root)
+                self.assertFalse(row['reproduction_verified'])
+                self.assertIsNone(row['archive_mean_q'])
+                self.assertEqual(self.require_match_exit_code(), 2)
+
+    def test_run_cannot_redefine_its_task_mean_target(self):
+        path = self.root / 'plan.json'
+        plan = json.loads(path.read_text())
+        plan['task_config']['archive_reported_mean_q'] = 0.5
+        path.write_text(json.dumps(plan))
+        self.add_case(301, 0.0)
+        self.add_case(304, 1.0)
+        self.summary['status'] = 'complete'
+        self.save()
+        row = collect(self.root)
+        self.assertEqual(row['archive_mean_q'], 1.0)
         self.assertFalse(row['reproduction_verified'])
         self.assertEqual(self.require_match_exit_code(), 2)
 
@@ -219,6 +281,7 @@ class ValidationReport(unittest.TestCase):
         plan = json.loads(plan_path.read_text())
         plan['cases'][0]['archive_reported_q'] = 0.0
         self.task['cases'][0]['archive_reported_q'] = 0.0
+        self.task['archive_reported_mean_q'] = 0.5
         plan_path.write_text(json.dumps(plan))
         self.add_case(301, 0.0)
         self.add_case(304, 1.0)

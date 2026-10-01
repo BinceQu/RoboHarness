@@ -78,8 +78,11 @@ detects external termination or PID reuse, and reports `interrupted` even if
 the saved summary still says `running`. It preserves the original summaries
 and scores. Omit this option when inspecting runs copied from another host.
 `--require-match` exits nonzero for a failed, incomplete or mismatched run.
-Verification requires every selected case to match the directory-reported
-score; equal means with different case scores do not pass.
+Verification requires every archived instance of each task to finish and that
+task's mean Q-score to match its directory-reported mean (absolute tolerance
+1e-6). Individual case scores may differ; their differences are diagnostic only.
+Each task is checked separately, so one task cannot compensate for another.
+Prompt, budget and runtime fidelity checks remain required.
 An episode forced to submit by the wall-clock safety timeout is also excluded
 from verification, even if its score happens to match. Its official JSON is
 retained for diagnosis.
