@@ -1,0 +1,224 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-10-01T10:22:24.041850+08:00",
+  "diagnostic_only": true,
+  "counts_as_scored_reproduction": false,
+  "cli_version": "2.1.259",
+  "base_revision": "2bdfe376e8574e17f0655a6ed0f42556d8f7f1f6",
+  "scope": "Real pinned native CLI, release harness, local model stub, frozen current interface tool schemas. No generation on the shared model server, GPU evaluation, or robot action. Token counts use the current server count_tokens endpoint.",
+  "archive_workspace_observations": {
+    "n_cases": 45,
+    "branch_marker": "HEAD",
+    "cwd": "/mnt/nas_nfs/home/bince/RoboUI/embodied_claude_code",
+    "complete_historical_requests_available": false
+  },
+  "controlled_captures": [
+    {
+      "label": "repo_seeded",
+      "cwd": "/mnt/nas_nfs/home/bince/RoboHarness",
+      "seeded": true,
+      "returncode": 0,
+      "request_count": 1,
+      "unexpected_calls": [],
+      "native_listing": {
+        "state": "match",
+        "expected_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+        "actual_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+        "actual_chars": 5987
+      },
+      "components": {
+        "messages": {
+          "json_chars": 19937,
+          "sha256": "c34ec753d60ad31e2c04b1df6c360687253b78dd07c58e0241100edae638390d"
+        },
+        "system": {
+          "json_chars": 7351,
+          "sha256": "2f2e1ef3a7581a895059ee04d8a3088f843cd186923defbc75ab06419bb93f75"
+        },
+        "tools": {
+          "json_chars": 49539,
+          "sha256": "d73a54a9b3e722deefe43d67f6068662f13fb4f6debda88eeac41edcdb398109"
+        },
+        "thinking": {
+          "json_chars": 42,
+          "sha256": "c78ed33c5ae166546644a62d691e745a33d4f6e9334de983793eb002c00d2a32"
+        },
+        "output_config": {
+          "json_chars": 18,
+          "sha256": "08f6d6089b0f3bb6aa8c50ccb1c5a9ad2578051c10b53db5e6874068d17c72ad"
+        }
+      },
+      "cwd_is_actual_capture_path": true,
+      "listing_check_scope": "Full Skill listing only, captured before workspace metadata was added to the contract.",
+      "system_reports_git_repository": true,
+      "system_contains_git_status": true
+    },
+    {
+      "label": "harness_isolated",
+      "cwd": "/mnt/nas_nfs/home/bince/RoboHarness/harness/claude_code",
+      "seeded": true,
+      "returncode": 0,
+      "request_count": 1,
+      "unexpected_calls": [],
+      "native_listing": {
+        "state": "match",
+        "expected_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+        "actual_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+        "actual_chars": 5987
+      },
+      "components": {
+        "messages": {
+          "json_chars": 19962,
+          "sha256": "24bde42bdb8f001abd19a20d465894c9dd8f1a0bc7631ca26ccddd819609076b"
+        },
+        "system": {
+          "json_chars": 6899,
+          "sha256": "d32723975d1b07a953563d0595c1a20dc9e0b05d97d26880cddadcb642824a32"
+        },
+        "tools": {
+          "json_chars": 49539,
+          "sha256": "d73a54a9b3e722deefe43d67f6068662f13fb4f6debda88eeac41edcdb398109"
+        },
+        "thinking": {
+          "json_chars": 42,
+          "sha256": "c78ed33c5ae166546644a62d691e745a33d4f6e9334de983793eb002c00d2a32"
+        },
+        "output_config": {
+          "json_chars": 18,
+          "sha256": "08f6d6089b0f3bb6aa8c50ccb1c5a9ad2578051c10b53db5e6874068d17c72ad"
+        }
+      },
+      "cwd_is_actual_capture_path": true,
+      "listing_check_scope": "Full Skill listing only, captured before workspace metadata was added to the contract.",
+      "system_reports_git_repository": true,
+      "system_contains_git_status": true
+    },
+    {
+      "label": "plain_seeded",
+      "cwd": "/var/tmp/roboharness-plain-cwd-phk1atyr",
+      "seeded": true,
+      "returncode": 0,
+      "request_count": 1,
+      "unexpected_calls": [],
+      "native_listing": {
+        "state": "match",
+        "expected_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+        "actual_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+        "actual_chars": 5987
+      },
+      "components": {
+        "messages": {
+          "json_chars": 19942,
+          "sha256": "4127e03db6ee1f58dc88a2704ea187c66f68d700cbcd842f0f61136ef1d9a530"
+        },
+        "system": {
+          "json_chars": 6588,
+          "sha256": "a23f9910e912d7e6d3ec28420e152ad63191cfb800217c3ad11cbd3c3a6da2b2"
+        },
+        "tools": {
+          "json_chars": 49539,
+          "sha256": "d73a54a9b3e722deefe43d67f6068662f13fb4f6debda88eeac41edcdb398109"
+        },
+        "thinking": {
+          "json_chars": 42,
+          "sha256": "c78ed33c5ae166546644a62d691e745a33d4f6e9334de983793eb002c00d2a32"
+        },
+        "output_config": {
+          "json_chars": 18,
+          "sha256": "08f6d6089b0f3bb6aa8c50ccb1c5a9ad2578051c10b53db5e6874068d17c72ad"
+        }
+      },
+      "cwd_is_actual_capture_path": true,
+      "listing_check_scope": "Full Skill listing only, captured before workspace metadata was added to the contract.",
+      "system_reports_git_repository": false,
+      "system_contains_git_status": false
+    },
+    {
+      "label": "repo_unseeded",
+      "cwd": "/mnt/nas_nfs/home/bince/RoboHarness",
+      "seeded": false,
+      "returncode": 0,
+      "request_count": 1,
+      "unexpected_calls": [],
+      "native_listing": {
+        "state": "mismatch",
+        "expected_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+        "actual_sha256": "0423f1a6152f4b1a598c2be525f25fb294c18cc94690fdcefd38f0ffebd69ea0",
+        "actual_chars": 5959
+      },
+      "components": {
+        "messages": {
+          "json_chars": 19911,
+          "sha256": "6abdc2d6fc04caa7c516057a1dc13d7fd3134fc9de1def9c4c18aaf7b1662d53"
+        },
+        "system": {
+          "json_chars": 7353,
+          "sha256": "f13f53708ac8f328d0937d05d5ee87c327231213de9aec793ff554fba55cfe85"
+        },
+        "tools": {
+          "json_chars": 49539,
+          "sha256": "d73a54a9b3e722deefe43d67f6068662f13fb4f6debda88eeac41edcdb398109"
+        },
+        "thinking": {
+          "json_chars": 42,
+          "sha256": "c78ed33c5ae166546644a62d691e745a33d4f6e9334de983793eb002c00d2a32"
+        },
+        "output_config": {
+          "json_chars": 18,
+          "sha256": "08f6d6089b0f3bb6aa8c50ccb1c5a9ad2578051c10b53db5e6874068d17c72ad"
+        }
+      },
+      "cwd_is_actual_capture_path": true,
+      "listing_check_scope": "Full Skill listing only, captured before workspace metadata was added to the contract.",
+      "system_reports_git_repository": true,
+      "system_contains_git_status": true
+    }
+  ],
+  "isolated_token_deltas": {
+    "method": "Current endpoint count_tokens; each variant changes only the named captured request component. No generation performed.",
+    "results": [
+      {
+        "variant": "baseline",
+        "input_tokens": 19053
+      },
+      {
+        "variant": "only_listing_changed",
+        "input_tokens": 19041
+      },
+      {
+        "variant": "only_git_context_removed",
+        "input_tokens": 18847
+      }
+    ]
+  },
+  "limitations": [
+    "The CLI HEAD marker is not a complete historical system-prompt snapshot.",
+    "12-token listing and 206-token release Git-context deltas do not explain the approximately 1600-token historical deficit.",
+    "Tests of context and task scores are separate gates. No task-score reproduction is asserted."
+  ],
+  "checks": [
+    {
+      "log": "root-tests-workspace-20261001.log",
+      "sha256": "76b2c34d9edcd3c78d3362a26368a0d18a4a1e6b93905b66cca4f8a5a8c7287f",
+      "total": 57,
+      "passed": 56,
+      "skipped": 1
+    },
+    {
+      "log": "native-workspace-tests-20261001.log",
+      "sha256": "1bbd3661fc1abd0405646dd2066b9b59c2afc37d43d753fb3840a5c57746370e",
+      "total": 8,
+      "passed": 8,
+      "skipped": 0
+    }
+  ],
+  "tested_source_sha256": {
+    "roboharness/native_context.py": "fe410094da0c9851a35d0807666aa7649b588195c78c553e2ba44c01ebe2aa1f",
+    "roboharness/runner.py": "c78057587c53c8d053a388dda87b4368f84c594ae358782b8b19fdad3cc9b699",
+    "scripts/report_validation.py": "c4df56e847a225cd19645fdf9bc6418d6c1842cabaf85877b659c37188c78b7f",
+    "tests/test_native_context.py": "e75aab0dda39a039e5dbddfab99c8870e96d7b157cd912717c07b5effc86140c",
+    "tests/test_runner.py": "076c9070db5ba0721ce897433aee3aa2a1f14d3b4ba9a176080a89d43b0f923e",
+    "harness/claude_code/tests/test_native_skill_lifecycle.py": "24d9d620e1b9bedbbe18660def2e8b29f513d5ed2cf4fe3638e92730b5aad0e1",
+    "harness/claude_code/profiles/archived-native-context.json": "6379b766fe2425659ca6233a579e36a232a37de2ea32b85e58aa424f4f424ecb"
+  }
+}

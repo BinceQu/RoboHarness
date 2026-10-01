@@ -7,16 +7,56 @@ import tempfile
 import unittest
 from unittest import mock
 
-from roboharness.native_context import ROOT, PROFILE, contract, inspect_listing, seed
+from roboharness.native_context import ROOT, PROFILE, contract, create_workspace, inspect_listing, seed
 
 
 class NativeContextTests(unittest.TestCase):
+    def test_workspace_is_private_and_never_inherits_git_metadata(self):
+        with tempfile.TemporaryDirectory(dir='/var/tmp') as directory:
+            root = Path(directory)
+            workspace = create_workspace(root / 'runtime', 301)
+            self.assertEqual(workspace.name, 'embodied_claude_code')
+            self.assertEqual(workspace.stat().st_mode & 0o777, 0o700)
+            with self.assertRaises(FileExistsError):
+                create_workspace(root / 'runtime', 301)
+            # A .git file marks a worktree just as a .git directory marks a checkout.
+            git_root = root / 'checkout'
+            git_root.mkdir()
+            (git_root / '.git').write_text('gitdir: /not-needed-for-this-check')
+            with self.assertRaisesRegex(ValueError, 'outside Git worktrees'):
+                create_workspace(git_root / 'cache', 301)
+            from roboharness.runner import preflight
+            with self.assertRaisesRegex(ValueError, 'outside Git worktrees'):
+                preflight({'cache_dir': str(git_root / 'cache')}, 'claude_code')
+            link = root / 'linked-cache'
+            link.symlink_to(git_root, target_is_directory=True)
+            with self.assertRaisesRegex(ValueError, 'outside Git worktrees'):
+                create_workspace(link, 304)
+            self.assertFalse((git_root / 'cache').exists())
+        with self.assertRaisesRegex(ValueError, 'absolute runtime'):
+            create_workspace(Path('relative'), 301)
+
+    def test_matching_skill_listing_does_not_hide_a_changed_native_workspace(self):
+        content = '- robot-skill: archived description'
+        expected = {'case': {'git_branch': 'HEAD'},
+                    'pattern': {'sha256': hashlib.sha256(content.encode()).hexdigest(), 'names': ['robot-skill']}}
+        with tempfile.TemporaryDirectory() as directory:
+            transcript = Path(directory) / 'one.jsonl'
+            for branch, state in [('HEAD', 'match'), ('main', 'mismatch'), (None, 'mismatch')]:
+                row = {'gitBranch': branch, 'attachment': {'type': 'skill_listing',
+                       'isInitial': True, 'content': content, 'names': ['robot-skill']}}
+                transcript.write_text(json.dumps(row) + '\n')
+                audit = inspect_listing(transcript, expected)
+                self.assertEqual(audit['state'], state)
+                self.assertEqual(audit['actual_git_branch'], branch)
+
     def test_all_selected_cases_have_one_recorded_listing(self):
         index = json.loads((ROOT / PROFILE).read_text())
         self.assertEqual(len(index['cases']), 45)
         counts = {}
         for case in index['cases']:
             item = contract(case['task'], case['instance_id'])
+            self.assertEqual(item['case']['git_branch'], 'HEAD')
             digest = item['pattern']['sha256']
             counts[digest] = counts.get(digest, 0) + 1
         self.assertEqual(sorted(counts.values()), [7, 38])
@@ -101,10 +141,12 @@ class NativeContextCLITests(unittest.TestCase):
                     expected = contract(task, iid)
                     def setup(runtime, env):
                         env.update(seed(runtime / 'claude', task, iid))
+                        return create_workspace(runtime / 'native-runtime', iid)
                     NativeSkillLifecycleTests().run_transport(
                         bridge=False, archived=True, mcp_name=namespace,
                         context_setup=setup,
                         expected_listing_sha256=expected['pattern']['sha256'],
+                        expect_non_git_workspace=True,
                         endpoint_port=int(os.environ.get('ROBOHARNESS_NATIVE_TEST_PORT', '0')))
         finally:
             sys.path.remove(harness_tests)

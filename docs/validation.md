@@ -45,6 +45,18 @@ Existing evaluation processes were not restarted. See the
 
 ## Automated checks
 
+The October 1 native-request experiment found that launching from the Git
+checkout adds branch, status and commit text to the system prompt. New agent
+launches use a private non-Git workspace; cache paths within Git worktrees are
+rejected during preflight, and inherited Git overrides are removed only from
+that child environment. All 45 native context profiles now retain the archived
+`HEAD` branch marker. Root checks ran 57 tests (56 passed, one optional skip);
+the opt-in pinned real-CLI suite ran eight tests with no skips. Both archived
+Skill-list variants passed real activation, deactivation and compaction, and
+their captured system prompts explicitly report a non-Git working directory
+without gitStatus text. The local test model received no robot actions.
+See [the controlled startup audit](../validation_results/native-startup-context-20261001/audit.json).
+
 The runtime now rejects a known initial native Skill-listing mismatch while
 the agent is still running instead of discovering it only in the final report.
 It tolerates an incomplete startup transcript, saves the actual check result,

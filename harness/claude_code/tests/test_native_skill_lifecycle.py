@@ -45,15 +45,16 @@ class NativeSkillLifecycleTests(unittest.TestCase):
 
     def run_transport(self, *, bridge: bool, slash: bool = False, archived: bool = False,
                       mcp_name: str = 'behavior-v2', context_setup=None,
-                      expected_listing_sha256: str | None = None, endpoint_port: int = 0):
+                      expected_listing_sha256: str | None = None, endpoint_port: int = 0,
+                      expect_non_git_workspace: bool = False):
         claude = os.environ.get("CLAUDE_BIN") or shutil.which("claude")
         self.assertTrue(claude)
         fake = FakeBehaviorClient()
         requests, snapshots, summaries, monitor = [], [], [], []
         unexpected = []
-        with tempfile.TemporaryDirectory(prefix="cc-native-lifecycle-") as directory:
+        with tempfile.TemporaryDirectory(prefix="cc-native-lifecycle-",
+                                         dir=os.environ.get('ROBOHARNESS_NATIVE_TEST_TMPDIR', '/var/tmp')) as directory:
             runtime = Path(directory)
-            state_path = runtime / "runtime/embodied-claude-code/task_skill_state.native-lifecycle.json"
 
             class Endpoint(BaseHTTPRequestHandler):
                 def log_message(self, *_):
@@ -176,13 +177,17 @@ class NativeSkillLifecycleTests(unittest.TestCase):
             worker = threading.Thread(target=endpoint.serve_forever, daemon=True)
             worker.start()
             origin = f"http://127.0.0.1:{endpoint.server_port}"
+            session_id = f't01p{endpoint.server_port}i0-native-lifecycle'
+            state_path = runtime / f'runtime/embodied-claude-code/task_skill_state.{session_id}.json'
             env = {key: value for key, value in os.environ.items()
                    if not key.startswith(("ANTHROPIC_", "CLAUDE_", "BEHAVIOR_", "QWEN_", "EMBODIED_"))
                    and key not in {"HTTP_PROXY", "HTTPS_PROXY", "http_proxy", "https_proxy", "ALL_PROXY",
                                    "all_proxy", "DISABLE_COMPACT", "DISABLE_AUTO_COMPACT", "CLAUDECODE"}}
             env.update({
                 "CLAUDE_CONFIG_DIR": str(runtime / "claude"), "XDG_RUNTIME_DIR": str(runtime / "runtime"),
-                "BEHAVIOR_SESSION_ID": "native-lifecycle", "BEHAVIOR_RECORD": "0",
+                "BEHAVIOR_SESSION_ID": session_id, "BEHAVIOR_RECORD": "0",
+                "BEHAVIOR_EVAL_OWNER_PORT": str(endpoint.server_port),
+                "ROBOHARNESS_HTTP_PORT": str(endpoint.server_port), "ROBOHARNESS_TASK_ID": "1",
                 "BEHAVIOR_BASE_URL": origin,
                 "BEHAVIOR_RECORD_ROOT": str(runtime / "records"),
                 "CLAUDE_CODE_AUTO_COMPACT_WINDOW": "100000", "CLAUDE_CODE_MAX_CONTEXT_TOKENS": "200000",
@@ -200,8 +205,9 @@ class NativeSkillLifecycleTests(unittest.TestCase):
                             "ROBOHARNESS_MCP_NAME": mcp_name,
                             "EMBODIED_ANTHROPIC_BASE_URL": origin,
                             "CLAUDE_BIN": claude})
+            execution_dir = runtime
             if context_setup is not None:
-                context_setup(runtime, env)
+                execution_dir = context_setup(runtime, env) or runtime
             bridge_process = None
             try:
                 if bridge:
@@ -232,7 +238,7 @@ class NativeSkillLifecycleTests(unittest.TestCase):
                     command = [str(ROOT / "scripts/run"), "--port", str(endpoint.server_port),
                                "--qwen-model", MODEL, "--", "--print", "--verbose",
                                "--output-format", "stream-json", "--max-turns", "8", prompt]
-                completed = subprocess.run(command, cwd=runtime, env=env, text=True,
+                completed = subprocess.run(command, cwd=execution_dir, env=env, text=True,
                                            capture_output=True, timeout=60)
             finally:
                 if bridge_process is not None:
@@ -252,6 +258,11 @@ class NativeSkillLifecycleTests(unittest.TestCase):
                                                         for request in requests]}, default=str)
             self.assertEqual(completed.returncode, 0, completed.stderr + completed.stdout[:3000] + completed.stdout[-4000:] + diagnostics)
             self.assertEqual(unexpected, [])
+            if expect_non_git_workspace:
+                system_context = json.dumps(requests[0].get('system'))
+                self.assertIn('Is a git repository: false', system_context)
+                self.assertNotIn('gitStatus:', system_context)
+                self.assertNotIn('Current branch:', system_context)
             if archived:
                 names = [tool["name"] for tool in requests[0]["tools"]]
                 self.assertIn("Skill", names)

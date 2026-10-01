@@ -1,0 +1,15 @@
+test_both_recorded_listings_with_real_cli_hooks_mcp_and_compaction (test_native_context.NativeContextCLITests.test_both_recorded_listings_with_real_cli_hooks_mcp_and_compaction) ... {"native_skill_lifecycle": "direct", "activation": "native_Skill", "requests": 6, "compactions": 1, "active_states": [null, "pick-up-object", null, "close-box", null, null], "robot_actions": 0, "result": "passed"}
+{"native_skill_lifecycle": "direct", "activation": "native_Skill", "requests": 6, "compactions": 1, "active_states": [null, "pick-up-object", null, "close-box", null, null], "robot_actions": 0, "result": "passed"}
+ok
+test_all_selected_cases_have_one_recorded_listing (test_native_context.NativeContextTests.test_all_selected_cases_have_one_recorded_listing) ... ok
+test_distinct_archived_pattern_and_symlink_protection (test_native_context.NativeContextTests.test_distinct_archived_pattern_and_symlink_protection) ... ok
+test_matching_skill_listing_does_not_hide_a_changed_native_workspace (test_native_context.NativeContextTests.test_matching_skill_listing_does_not_hide_a_changed_native_workspace) ... ok
+test_names_alone_do_not_satisfy_listing_fidelity (test_native_context.NativeContextTests.test_names_alone_do_not_satisfy_listing_fidelity) ... ok
+test_report_requires_actual_case_transcript_and_full_listing (test_native_context.NativeContextTests.test_report_requires_actual_case_transcript_and_full_listing) ... ok
+test_seed_is_case_local_and_never_overwrites_existing_history (test_native_context.NativeContextTests.test_seed_is_case_local_and_never_overwrites_existing_history) ... ok
+test_workspace_is_private_and_never_inherits_git_metadata (test_native_context.NativeContextTests.test_workspace_is_private_and_never_inherits_git_metadata) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 7.622s
+
+OK
