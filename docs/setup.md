@@ -27,6 +27,12 @@ The installer builds the pinned cuRobo source with the interface environment's
 build tools. Its example meshes and videos are skipped; RoboHarness supplies
 the custom robot's URDF and collision configuration.
 
+The interface pins `opencv-python-headless==4.10.0.84`. Its imported OpenCV
+binary matches the reference interface environment. Multiple OpenCV wheel
+variants share the `cv2` namespace, so installed package metadata alone does
+not identify the binary Python will load. Use a separate interface environment
+with only this variant; see the [runtime dependency audit](../validation_results/opencv-runtime-20261001/README.md).
+
 The pinned upstream installer asks for its license agreements. Its flags can
 be supplied after `all`, for example `./scripts/setup.sh all --accept-nvidia-eula`.
 Dataset installation is separate: follow the pinned

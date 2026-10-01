@@ -1,0 +1,96 @@
+{
+  "recorded_at": "2026-10-01T19:02:42+08:00",
+  "scope": "OpenCV module identity and isolated dependency installation; no simulator score claim",
+  "environments": {
+    "reference_interface": {
+      "python": "3.10.20",
+      "cv2_version": "4.10.0",
+      "numpy_version": "1.26.4",
+      "binary_sha256": "72c7fe9b389ecd9549b6e9cdca35ee11940de15d13d46722b8412865cafabc78",
+      "distributions": [
+        {
+          "distribution": "opencv-python",
+          "version": "4.11.0.86",
+          "matches_loaded_binary": []
+        },
+        {
+          "distribution": "opencv-contrib-python",
+          "version": "5.0.0.93",
+          "matches_loaded_binary": []
+        },
+        {
+          "distribution": "opencv-python-headless",
+          "version": "4.10.0.84",
+          "matches_loaded_binary": [
+            "cv2/cv2.abi3.so"
+          ]
+        }
+      ]
+    },
+    "independent_interface": {
+      "python": "3.11.16",
+      "cv2_version": "4.10.0",
+      "numpy_version": "1.26.4",
+      "binary_sha256": "72c7fe9b389ecd9549b6e9cdca35ee11940de15d13d46722b8412865cafabc78",
+      "distributions": [
+        {
+          "distribution": "opencv-python-headless",
+          "version": "4.10.0.84",
+          "matches_loaded_binary": [
+            "cv2/cv2.abi3.so"
+          ]
+        }
+      ]
+    }
+  },
+  "binary_identical": true,
+  "requirements_sha256": "133333e57d2acdea9bb202c3ae894f2cd7aa4bd216ffd0fde2d8d361d146de04",
+  "verification": {
+    "command": "ROBOHARNESS_INTERFACE_PYTHON=<independent-interface-python> ROBOHARNESS_AGENT_PYTHON=<agent-python> CUDA_VISIBLE_DEVICES= OMNIGIBSON_HEADLESS=1 bash scripts/check.sh",
+    "exit_code": 0,
+    "summary": [
+      "Ran 71 tests in 1.913s",
+      "OK (skipped=1)",
+      "Ran 62 tests in 24.752s",
+      "OK (skipped=2)",
+      "Ran 22 tests in 0.147s",
+      "OK",
+      "Ran 187 tests in 6.213s",
+      "OK (skipped=15)",
+      "Ran 108 tests in 3.169s",
+      "OK"
+    ],
+    "full_log_sha256": "5d9df4fbcd65ea40aab0bdc08a008aab6e6e8836bce033463124cfb54e9a29fd",
+    "independent_interface_pip_check": {
+      "exit_code": 0,
+      "output": "No broken requirements found."
+    }
+  },
+  "source_parent_revision": "34fffce39825bec6c60c2f949a7aab970afdbe25",
+  "active_r5_interfaces": [
+    {
+      "pid": 2834060,
+      "process_start": "129070981",
+      "process_state": "S",
+      "mapped_cv2_binary": [
+        "/home/bince/.conda/envs/behavior/lib/python3.10/site-packages/cv2/cv2.abi3.so"
+      ]
+    },
+    {
+      "pid": 2834157,
+      "process_start": "129070994",
+      "process_state": "S",
+      "mapped_cv2_binary": [
+        "/home/bince/.conda/envs/behavior/lib/python3.10/site-packages/cv2/cv2.abi3.so"
+      ]
+    },
+    {
+      "pid": 2845407,
+      "process_start": "129074015",
+      "process_state": "S",
+      "mapped_cv2_binary": [
+        "/home/bince/.conda/envs/behavior/lib/python3.10/site-packages/cv2/cv2.abi3.so"
+      ]
+    }
+  ]
+}
