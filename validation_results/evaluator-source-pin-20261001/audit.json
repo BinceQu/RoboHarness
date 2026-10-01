@@ -1,0 +1,81 @@
+{
+  "recorded_at": "2026-10-01T20:13:10.900724+08:00",
+  "scope": "LeRobot source-only installation into an empty private venv, using the upstream branch URL served from the fixed source cache. Dependencies were not installed; this is not a complete evaluator installation.",
+  "source_manifest": {
+    "lerobot": {
+      "url": "https://github.com/wensi-ai/lerobot",
+      "revision": "436812bd8ee39b768c645c248c91f1330834e687",
+      "upstream_ref": "release/b1k"
+    }
+  },
+  "package_comparison": {
+    "reference": {
+      "version": "0.5.2",
+      "direct_url": {
+        "url": "https://github.com/wensi-ai/lerobot",
+        "vcs_info": {
+          "commit_id": "436812bd8ee39b768c645c248c91f1330834e687",
+          "requested_revision": "release/b1k",
+          "vcs": "git"
+        }
+      },
+      "file_count": 402,
+      "files_manifest_sha256": "b510a2e943a8546b6db0f0875f2ba8067e1357431bc10ee390e8a4425453fe66"
+    },
+    "fresh": {
+      "version": "0.5.2",
+      "direct_url": {
+        "url": "https://github.com/wensi-ai/lerobot",
+        "vcs_info": {
+          "commit_id": "436812bd8ee39b768c645c248c91f1330834e687",
+          "requested_revision": "release/b1k",
+          "vcs": "git"
+        }
+      },
+      "file_count": 402,
+      "files_manifest_sha256": "b510a2e943a8546b6db0f0875f2ba8067e1357431bc10ee390e8a4425453fe66"
+    },
+    "comparison": {
+      "reference_count": 402,
+      "fresh_count": 402,
+      "only_reference": [],
+      "only_fresh": [],
+      "changed": []
+    },
+    "hash_method": "SHA256 of compact, sorted-key JSON mapping all installed lerobot/ non-.pyc file paths to their SHA256 hashes; distribution metadata is excluded."
+  },
+  "commit_checks": {
+    "reference": {
+      "exit_code": 0,
+      "stdout": "lerobot 0.5.2: verified commit 436812bd8ee39b768c645c248c91f1330834e687",
+      "stderr": ""
+    },
+    "fresh": {
+      "exit_code": 0,
+      "stdout": "lerobot 0.5.2: verified commit 436812bd8ee39b768c645c248c91f1330834e687",
+      "stderr": ""
+    }
+  },
+  "checks": {
+    "root_suite": {
+      "total": 72,
+      "passed": 71,
+      "skipped": 1,
+      "exit_code": 0
+    },
+    "moving_branch_and_offline_cache": "Actual Git fetch and filtered clone select the recorded commit after the upstream branch advances, including cache reuse after the upstream path becomes unavailable. Existing child Git options are retained and the parent environment remains unchanged.",
+    "shell_syntax": "bash -n scripts/setup.sh passed",
+    "git_diff_check": "passed"
+  },
+  "limitations": [
+    "Only LeRobot itself was installed in the fresh private venv (--no-deps). The complete evaluator dependency installation and simulator startup were not exercised.",
+    "The reference is the environment reused by the current evaluations; this does not independently date every dependency to the archived run.",
+    "No Q-score or complete task mean is established by this installation check."
+  ],
+  "validated_files_sha256": {
+    "scripts/with_evaluator_sources.py": "47c0431de457a0627a6cccab02e4658bdb2997367c604c3a9a439bcd0c297a8f",
+    "scripts/setup.sh": "bdcd7b43be0a426a95b87c81bfd2590d3861b98dc120903271b4a946744179d1",
+    "configs/evaluator-sources.json": "2ac392bc1d0f4f8b91137a0d3e87736033e18a6812d4b5c9e4bd07d9281a1deb",
+    "tests/test_setup_sources.py": "1a5433276a73ca2708b878c54d93b80039531ce37bd8541f8efa84990becc807"
+  }
+}
