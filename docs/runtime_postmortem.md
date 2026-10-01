@@ -81,3 +81,18 @@ The release path is therefore:
 The queued r6 watcher preserves the existing r5 processes and starts the
 strict release validation only after those processes exit, GPU5 has enough free
 memory, and the reserved ports are available.
+
+The queued r6 source is a separate checkout pinned to
+`83bb6f0461ee29c4736868299ab0ac06c7780571`, with BEHAVIOR at the archived commit.
+Both the evaluator launches and reporter run from that checkout. Before launch,
+the session-local watcher verifies its revision, submodule revision and clean
+tracked worktree. This prevents ongoing edits to the development checkout from
+entering later cases of the same long-running validation. The original r5
+controllers were left running.
+
+The [pinned-source startup audit](../validation_results/pinned-runner-startup-20261001/README.md)
+exercises the real `Run.start_agent` path, launcher, native CLI and recorder for
+three representative archived cases. It verifies both MCP namespaces, both
+native Skill-listing patterns, source prompt hashes and case session identity.
+Its HTTP model/interface endpoints are controlled local stubs, so this is
+startup integration evidence, not a simulator run or an official score result.
