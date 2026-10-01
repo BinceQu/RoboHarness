@@ -26,7 +26,7 @@ Follow [installation and model setup](docs/setup.md), then:
 ./run.sh --task task01 --gpu 0
 ./run.sh --task task08 --instances 301,304 --gpu 0
 ./run.sh --task task06 --gpu 0 --dry-run
-# session-safe 1507* wrapper:
+# session-local configuration wrapper:
 ./scripts/reproduce_task.sh task01 --gpu 0
 ```
 
@@ -39,8 +39,10 @@ replies without the later rollout-budget telemetry. The recovered startup
 context and activated skill bodies are checked against archived transcripts.
 The [case prompt index](docs/case-prompts.md) links each instance to its archived prompt.
 `--instances` takes actual IDs, not slot indices. `--port` selects the HTTP
-port (default 15070 + task index); policy and idle gate use port+1000 and
-port+2000. `--write-video` enables evaluator video output. Different tasks
+port (default 15070 + task index); policy and idle gate default to port+1000 and
+port+2000. The session config's `task_ports` mapping can specify all three
+listeners; the runner validates, records and locks the selected ports.
+`--write-video` enables evaluator video output. Different tasks
 can be launched independently when GPU and host memory permit.
 The interface UI is served at `http://127.0.0.1:<port>/`; use SSH port
 forwarding when running on a remote machine.
