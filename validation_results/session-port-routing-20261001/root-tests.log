@@ -1,0 +1,113 @@
+test_launch_rejects_changed_budget_or_protocol (test_archive_budget.ArchivedBudget) ... ok
+test_runner_catalog_and_monitor_use_archived_limits (test_archive_budget.ArchivedBudget) ... ok
+test_connect_failures_retry_before_exactly_one_session_begin (test_controller_http_transport.ControllerHTTPTransportTests) ... ok
+test_exhausted_connect_attempts_deliver_no_request (test_controller_http_transport.ControllerHTTPTransportTests) ... ok
+test_response_timeout_never_replays_delivered_request (test_controller_http_transport.ControllerHTTPTransportTests) ... ok
+test_success_restores_original_response_timeout (test_controller_http_transport.ControllerHTTPTransportTests) ... ok
+test_tunnels_and_non_loopback_hosts_are_not_retried (test_controller_http_transport.ControllerHTTPTransportTests) ... ok
+test_defaults_and_explicit_http_override_remain_compatible (test_listener_ports.ListenerPorts) ... ok
+test_incomplete_invalid_and_colliding_ports_fail_before_launch (test_listener_ports.ListenerPorts) ... ok
+test_mapped_policy_lock_prevents_starting_an_overlapping_run (test_listener_ports.ListenerPorts) ... ok
+test_real_prepare_and_stack_commands_share_the_selected_ports (test_listener_ports.ListenerPorts) ... 2026-10-01 11:19:04 Starting task01 on GPU 5, HTTP 15071, policy 15070, gate 15072
+ok
+test_session_wrapper_preserves_mapping_and_does_not_rewrite_config (test_listener_ports.ListenerPorts) ... ok
+test_later_exclusions_and_hidden_paper_actions_fail (test_native_context.MCPToolProfileTests) ... ok
+test_malformed_or_multiple_manifests_never_pass (test_native_context.MCPToolProfileTests) ... ok
+test_matching_native_listing_cannot_hide_missing_tools (test_native_context.MCPToolProfileTests) ... ok
+test_missing_manifest_waits_only_while_the_case_is_live (test_native_context.MCPToolProfileTests) ... ok
+test_unexpected_fixed_arguments_and_wrong_session_fail (test_native_context.MCPToolProfileTests) ... ok
+test_both_recorded_listings_with_real_cli_hooks_mcp_and_compaction (test_native_context.NativeContextCLITests) ... skipped 'requires the pinned real CLI and harness test dependencies'
+test_all_selected_cases_have_one_recorded_listing (test_native_context.NativeContextTests) ... ok
+test_distinct_archived_pattern_and_symlink_protection (test_native_context.NativeContextTests) ... ok
+test_matching_skill_listing_does_not_hide_a_changed_native_workspace (test_native_context.NativeContextTests) ... ok
+test_names_alone_do_not_satisfy_listing_fidelity (test_native_context.NativeContextTests) ... ok
+test_report_requires_actual_case_transcript_and_full_listing (test_native_context.NativeContextTests) ... ok
+test_seed_is_case_local_and_never_overwrites_existing_history (test_native_context.NativeContextTests) ... ok
+test_workspace_is_private_and_never_inherits_git_metadata (test_native_context.NativeContextTests) ... ok
+test_all_cases_have_exact_prompts_and_unmodified_scores (test_runner.ArchivedCases) ... ok
+test_all_cases_have_trajectory_authoritative_scores (test_runner.ArchivedCases) ... ok
+test_instance_ids_are_not_silently_interpreted_as_slots (test_runner.ArchivedCases) ... ok
+test_model_or_harness_overrides_are_diagnostic (test_runner.ArchivedCases) ... ok
+test_stale_or_nonfinite_score_is_rejected (test_runner.ArchivedCases) ... ok
+test_a_previous_verified_audit_cannot_hide_changed_completion_evidence (test_runner.NativeContextRuntime) ... ok
+test_a_score_without_native_evidence_does_not_count_as_a_completed_case (test_runner.NativeContextRuntime) ... ok
+test_agent_exit_without_initial_context_does_not_force_a_submission (test_runner.NativeContextRuntime) ... ok
+test_agent_launch_uses_private_workspace_without_inherited_git_settings (test_runner.NativeContextRuntime) ... ok
+test_divergence_stops_before_waiting_for_an_official_score (test_runner.NativeContextRuntime) ... ok
+test_incomplete_startup_waits_and_completion_rechecks_the_transcript (test_runner.NativeContextRuntime) ... ok
+test_case_handoff_waits_for_reset_and_request_acknowledgement (test_runner.Ownership) ... ok
+test_cleanup_does_not_kill_another_run_with_similar_token (test_runner.Ownership) ... ok
+test_reused_pid_is_never_signalled (test_runner.Ownership) ... ok
+test_cap_requires_explicit_finite_non_negative_configuration (test_runner.WallClockBudget) ... ok
+test_disabled_wall_cap_does_not_submit_after_large_clock_advances (test_runner.WallClockBudget) ... ok
+test_opted_in_wall_cap_retains_forced_submission_reason (test_runner.WallClockBudget) ... ok
+test_custom_port_does_not_allow_cross_origin_or_cross_task (test_session_ownership.SessionOwnership) ... ok
+test_only_active_session_can_mutate_the_assigned_port (test_session_ownership.SessionOwnership) ... ok
+test_complete_requires_every_selected_case (test_validation_report.ValidationReport) ... ok
+test_completion_race_is_not_reported_as_process_interruption (test_validation_report.ValidationReport) ... ok
+test_diagnostic_plan_never_becomes_verified_reproduction (test_validation_report.ValidationReport) ... ok
+test_empty_or_duplicate_selected_instances_are_rejected (test_validation_report.ValidationReport) ... ok
+test_equal_means_do_not_hide_swapped_case_scores (test_validation_report.ValidationReport) ... task01: complete, 2/2
+ok
+test_equal_scores_do_not_certify_a_different_experiment (test_validation_report.ValidationReport) ... task01: complete, 2/2
+task01: complete, 2/2
+task01: complete, 2/2
+task01: complete, 2/2
+task01: complete, 2/2
+task01: complete, 2/2
+task01: complete, 2/2
+task01: complete, 2/2
+task01: complete, 2/2
+task01: complete, 2/2
+task01: complete, 2/2
+task01: complete, 2/2
+task01: complete, 2/2
+ok
+test_exact_directory_scores_override_conflicting_raw_references (test_validation_report.ValidationReport) ... task01: complete, 2/2
+ok
+test_finished_runs_do_not_require_live_processes (test_validation_report.ValidationReport) ... ok
+test_liveness_is_optional_for_copied_runs_and_unverified_without_metadata (test_validation_report.ValidationReport) ... ok
+test_local_check_does_not_require_agent_after_normal_exit (test_validation_report.ValidationReport) ... ok
+test_local_check_rejects_reused_pid_for_a_required_service (test_validation_report.ValidationReport) ... ok
+test_local_check_tracks_controller_death_without_altering_saved_results (test_validation_report.ValidationReport) ... task01: interrupted, 1/2
+ok
+test_matching_scores_cannot_hide_native_listing_mismatch (test_validation_report.ValidationReport) ... task01: complete, 2/2
+task01: complete, 2/2
+task01: complete, 2/2
+task01: complete, 2/2
+ok
+test_matching_scores_do_not_hide_different_archived_starting_state (test_validation_report.ValidationReport) ... ok
+test_missing_trusted_archive_never_certifies_scores (test_validation_report.ValidationReport) ... ok
+test_modified_official_result_is_rejected (test_validation_report.ValidationReport) ... ok
+test_partial_score_is_not_a_reproduction_claim (test_validation_report.ValidationReport) ... task01: running, 1/2
+ok
+test_report_waits_for_asynchronously_published_startup_files (test_validation_report.ValidationReport) ... Waiting for run startup files: /tmp/tmpubx1pkvc/plan.json, /tmp/tmpubx1pkvc/summary.json
+task01: complete, 2/2
+ok
+test_run_cannot_redefine_its_archive_target_to_match_output (test_validation_report.ValidationReport) ... ok
+test_startup_timeout_is_nonzero_and_never_fabricates_results (test_validation_report.ValidationReport) ... Report startup failed: Run startup files were not published: /tmp/tmpux6yndxl/summary.json
+ok
+test_startup_wait_rejects_invalid_timeouts (test_validation_report.ValidationReport) ... usage: report_validation [-h] [--output OUTPUT] [--watch] [--check-live]
+                         [--require-match]
+                         [--wait-for-start-s WAIT_FOR_START_S]
+                         runs [runs ...]
+report_validation: error: --wait-for-start-s must be finite and non-negative
+usage: report_validation [-h] [--output OUTPUT] [--watch] [--check-live]
+                         [--require-match]
+                         [--wait-for-start-s WAIT_FOR_START_S]
+                         runs [runs ...]
+report_validation: error: --wait-for-start-s must be finite and non-negative
+usage: report_validation [-h] [--output OUTPUT] [--watch] [--check-live]
+                         [--require-match]
+                         [--wait-for-start-s WAIT_FOR_START_S]
+                         runs [runs ...]
+report_validation: error: --wait-for-start-s must be finite and non-negative
+ok
+test_superseded_scores_remain_visible_without_reproduction_claim (test_validation_report.ValidationReport) ... ok
+test_wall_timeout_does_not_pass_even_when_official_scores_match (test_validation_report.ValidationReport) ... task01: complete, 2/2
+ok
+
+----------------------------------------------------------------------
+Ran 67 tests in 1.798s
+
+OK (skipped=1)

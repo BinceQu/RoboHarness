@@ -1,0 +1,29 @@
+{
+  "checked_at": "2026-10-01T11:20:11.813136+08:00",
+  "source_root": "/var/tmp/roboharness-validation-r6-f547d5a",
+  "source_revision": "f547d5a0c23ba3bcf67ff038b11ff02c054fb8ee",
+  "task_ports": {
+    "task01": {
+      "http": 15071,
+      "policy": 15070,
+      "gate": 15072
+    },
+    "task03": {
+      "http": 15073,
+      "policy": 15074,
+      "gate": 15075
+    },
+    "task08": {
+      "http": 15078,
+      "policy": 15076,
+      "gate": 15077
+    }
+  },
+  "rejected": [
+    "overlap",
+    "outside_range",
+    "bool"
+  ],
+  "launch_commands_use_pinned_source": true,
+  "service_launches": 0
+}

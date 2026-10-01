@@ -106,3 +106,6 @@ The queued tasks use disjoint triples within 15070–15078, and the queue checks
 those actual ports before launch. The runner uses the same explicit values
 for its plan, interface environment, policy server, idle gate, evaluator and
 port locks. No global configuration or running r5 service is changed.
+The [session port audit](../validation_results/session-port-routing-20261001/README.md)
+records the selected listeners, updated pinned revision, regression evidence
+and unchanged r5 process identities.

@@ -1,0 +1,83 @@
+{
+  "checked_at": "2026-10-01T11:19:07.121806+08:00",
+  "source_root": "/var/tmp/roboharness-validation-r6-f547d5a",
+  "source_revision": "f547d5a0c23ba3bcf67ff038b11ff02c054fb8ee",
+  "preflight_passed": true,
+  "tracked_worktree_clean": true,
+  "plans": [
+    {
+      "task": "task00",
+      "http": 15070,
+      "policy": 15071,
+      "gate": 15072,
+      "max_steps": 4299,
+      "n_cases": 5
+    },
+    {
+      "task": "task01",
+      "http": 15071,
+      "policy": 15070,
+      "gate": 15072,
+      "max_steps": 10535,
+      "n_cases": 5
+    },
+    {
+      "task": "task02",
+      "http": 15072,
+      "policy": 15070,
+      "gate": 15071,
+      "max_steps": 27664,
+      "n_cases": 5
+    },
+    {
+      "task": "task03",
+      "http": 15073,
+      "policy": 15074,
+      "gate": 15075,
+      "max_steps": 27392,
+      "n_cases": 5
+    },
+    {
+      "task": "task05",
+      "http": 15075,
+      "policy": 15073,
+      "gate": 15074,
+      "max_steps": 20343,
+      "n_cases": 5
+    },
+    {
+      "task": "task06",
+      "http": 15076,
+      "policy": 15077,
+      "gate": 15078,
+      "max_steps": 15239,
+      "n_cases": 5
+    },
+    {
+      "task": "task07",
+      "http": 15077,
+      "policy": 15076,
+      "gate": 15078,
+      "max_steps": 37781,
+      "n_cases": 5
+    },
+    {
+      "task": "task08",
+      "http": 15078,
+      "policy": 15076,
+      "gate": 15077,
+      "max_steps": 17886,
+      "n_cases": 5
+    },
+    {
+      "task": "task09",
+      "http": 15079,
+      "policy": 15070,
+      "gate": 15072,
+      "max_steps": 27437,
+      "n_cases": 5
+    }
+  ],
+  "robot_asset_sha256": "56f12570594c80a317d6fb38c230238e666438cdbe9b035ee8f6cf942ddc395b",
+  "scope": "Pinned checkout root tests, dependency/asset preflight and nine task dry-run plans. No simulator/evaluator or model generation."
+}

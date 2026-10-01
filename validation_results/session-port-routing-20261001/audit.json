@@ -1,0 +1,83 @@
+{
+  "checked_at": "2026-10-01T11:22:13.892061+08:00",
+  "diagnostic_only": true,
+  "source_revision": "f547d5a0c23ba3bcf67ff038b11ff02c054fb8ee",
+  "source_root": "/var/tmp/roboharness-validation-r6-f547d5a",
+  "behavior_revision": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+  "root_suite": {
+    "tests": 67,
+    "passed": 66,
+    "skipped": 1,
+    "interpreter": "/home/bince/.conda/envs/behavior/bin/python",
+    "command": "PYTHONPATH=<checkout>:<checkout>/interface:<checkout>/harness/claude_code/src python -m unittest discover -s tests -v"
+  },
+  "activation": {
+    "activated_at": "2026-10-01T11:20:57.403223+08:00",
+    "previous_queue_pid": 408376,
+    "queue_pid": 784314,
+    "r5_before": {
+      "roboharness-validation-task01-20260930-r5.service": {
+        "MainPID": "2833423",
+        "ActiveState": "active"
+      },
+      "roboharness-validation-task03-20260930-r5.service": {
+        "MainPID": "2833447",
+        "ActiveState": "active"
+      },
+      "roboharness-validation-task08-20260930-r5.service": {
+        "MainPID": "2833459",
+        "ActiveState": "active"
+      }
+    },
+    "r5_after": {
+      "roboharness-validation-task01-20260930-r5.service": {
+        "MainPID": "2833423",
+        "ActiveState": "active"
+      },
+      "roboharness-validation-task03-20260930-r5.service": {
+        "MainPID": "2833447",
+        "ActiveState": "active"
+      },
+      "roboharness-validation-task08-20260930-r5.service": {
+        "MainPID": "2833459",
+        "ActiveState": "active"
+      }
+    },
+    "r5_unchanged": true,
+    "global_configuration_hashes_unchanged": true,
+    "source_and_ports": {
+      "source_root": "/var/tmp/roboharness-validation-r6-f547d5a",
+      "source_revision": "f547d5a0c23ba3bcf67ff038b11ff02c054fb8ee",
+      "task_ports": {
+        "task01": {
+          "http": 15071,
+          "policy": 15070,
+          "gate": 15072
+        },
+        "task03": {
+          "http": 15073,
+          "policy": 15074,
+          "gate": 15075
+        },
+        "task08": {
+          "http": 15078,
+          "policy": 15076,
+          "gate": 15077
+        }
+      },
+      "verified": true
+    },
+    "session_config_sha256": "6bc65dadcc9edf16052dcc070efd6a4daab445b36fd9783a129753529916e731",
+    "queue_script_sha256": "1690f2886df8723ff4b493aeb496c8cfae319a33b7817c581b203476b1caeef2",
+    "r6_launched": false
+  },
+  "native_probe_script_sha256": "022a8f6ec4017a13feb4541c64bc8d17b7d1aabe3c8b0177e215cda617563441",
+  "native_probe_private_evidence": "/mnt/nas_nfs/home/bince/RoboHarness/.local/runner-startup-probe-20261001-111943",
+  "scope": "Session configuration, listener routing/locking, pinned-source preflight and actual CLI startup against non-actuating HTTP stubs. Not a GPU score run.",
+  "files": {
+    "native-startup.json": "115ea5c14877a13fe78221464b595a2a253f9e0c1a6e582cef6acf76025482be",
+    "plans.json": "71596ce69e281b42f545b24fd7e03f8e0bbb3d806896d3c328826ff0a44ea0da",
+    "queue-check.json": "eb97948dde49116f215908738b962502da96d7ce4859f3d6ddcf78e2d0fe9e5e",
+    "root-tests.log": "a44b51afdba446e5b34849bc66a22fe5428c5706f762287a7b8e27789aad9a43"
+  }
+}
