@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-10-01T19:26:14.037064+00:00",
+  "task": "task03",
+  "instance": 304,
+  "run_directory": "runs/validation-20260930-task03-r5",
+  "scope": "One automatic compaction in an ongoing diagnostic r5 case; no official score or strict reproduction claim. No benchmark process was restarted or reconfigured for this observation.",
+  "native_compaction": {
+    "source": "runs/validation-20260930-task03-r5/instance_304/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/a7b30c0b-f0a3-45b8-a47a-12e986a491c7.jsonl",
+    "line": 677,
+    "raw_line_sha256": "270b1a6c9cb7a534441da521fb9d3a58548b9e6d2b955339e0ebd4ddbacd4f0b",
+    "type": "system",
+    "subtype": "compact_boundary",
+    "timestamp": "2026-10-01T19:13:42.105Z",
+    "compactMetadata": {
+      "trigger": "auto",
+      "preTokens": 166722,
+      "postTokens": 9646,
+      "durationMs": 1600712
+    }
+  },
+  "tool_records": [
+    {
+      "source": "runs/validation-20260930-task03-r5/instance_304/trajectory/claude-20261001T112957Z-b8f0fb8c/turns.jsonl",
+      "line": 93,
+      "raw_line_sha256": "a9b6cbce59f51adc37d40d39a2ffdeeff53a19488b74c5bdd8ed0d894d2f1609",
+      "turn_index": 93,
+      "completed_at": "2026-10-01T18:47:00.989+00:00",
+      "duration_ms": 9450,
+      "tool_name": "adjust_chassis",
+      "is_error": false,
+      "response_ok": true,
+      "action_steps": 60
+    },
+    {
+      "source": "runs/validation-20260930-task03-r5/instance_304/trajectory/claude-20261001T112957Z-b8f0fb8c/turns.jsonl",
+      "line": 94,
+      "raw_line_sha256": "ef2ef3d6868752efc284a5a89c0dd9beeb5727402cbd39a55edadfcb38e7b9f2",
+      "turn_index": 94,
+      "completed_at": "2026-10-01T19:16:30.363+00:00",
+      "duration_ms": 5087,
+      "tool_name": "plan_grasp_point_filter_rgbd_lite",
+      "is_error": true,
+      "response_ok": false,
+      "action_steps": null
+    },
+    {
+      "source": "runs/validation-20260930-task03-r5/instance_304/trajectory/claude-20261001T112957Z-b8f0fb8c/turns.jsonl",
+      "line": 95,
+      "raw_line_sha256": "e64497d7b02f9c9914805d5df689241150cb34f5212886a440bd90f8c7236948",
+      "turn_index": 95,
+      "completed_at": "2026-10-01T19:18:26.580+00:00",
+      "duration_ms": 5593,
+      "tool_name": "adjust_height",
+      "is_error": false,
+      "response_ok": true,
+      "action_steps": 21
+    }
+  ],
+  "monitor_cards": [
+    {
+      "card_id": 93,
+      "tool": "adjust_chassis",
+      "ts": "2026-10-01T18:47:00.849+00:00",
+      "ok": true,
+      "session_ticks": 4939
+    },
+    {
+      "card_id": 94,
+      "tool": "plan_grasp_point_filter_rgbd_lite",
+      "ts": "2026-10-01T19:16:30.241+00:00",
+      "ok": false,
+      "session_ticks": 4945
+    },
+    {
+      "card_id": 95,
+      "tool": "adjust_height",
+      "ts": "2026-10-01T19:18:26.467+00:00",
+      "ok": true,
+      "session_ticks": 4972
+    }
+  ],
+  "derived": {
+    "compaction_duration_seconds": 1600.712,
+    "compaction_start_inferred_from_end_and_duration": "2026-10-01T18:47:01.393000+00:00",
+    "tool_completion_gap_seconds": 1769.374,
+    "inference_note": "The inferred start assumes the native event timestamp denotes compaction completion. Duration is the CLI-reported elapsed duration, not an isolated model-server timing."
+  },
+  "hash_method": "SHA-256 of each original JSONL record including its trailing newline. The source files remain append-only during the ongoing case; whole-file hashes are intentionally not used. Tool records are selected metadata excerpts, not full tool responses.",
+  "limitations": [
+    "The resumed grasp planner returned an error; the following height adjustment returned successfully. Tool progress does not establish task completion.",
+    "This observation identifies one long pause and does not prove that all step plateaus are compaction, or that shared-server queueing alone caused its duration.",
+    "No change to archived prompts, simulation budgets, native context-compaction policy, running jobs, or queued release configuration."
+  ],
+  "processes_after_resume": {
+    "checked_at": "2026-10-01T19:29:07.356533+00:00",
+    "identity_manifest": "runs/validation-20260930-task03-r5/processes.json",
+    "identity_method": "Recorded PID and Linux /proc start ticks both match a live, non-zombie process. Approximate wall-clock start uses /proc/stat btime and SC_CLK_TCK. Both processes started before this compaction and remained alive afterward.",
+    "roles": [
+      {
+        "role": "agent",
+        "pid": 2973025,
+        "recorded_start_ticks": "137760690",
+        "observed_start_ticks": "137760690",
+        "state": "S",
+        "start_time_utc_approx": "2026-10-01T11:29:54.900000+00:00",
+        "started_before_compaction": true
+      },
+      {
+        "role": "evaluator",
+        "pid": 2836260,
+        "recorded_start_ticks": "129071297",
+        "observed_start_ticks": "129071297",
+        "state": "S",
+        "start_time_utc_approx": "2026-09-30T11:21:40.970000+00:00",
+        "started_before_compaction": true
+      }
+    ]
+  }
+}

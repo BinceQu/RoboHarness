@@ -34,3 +34,10 @@ change evaluation exposure even when the simulator step limit is correct.
 The queued release run already disables this extra deadline and runs tasks
 sequentially. These timing measurements neither establish the cause of a
 Q-score difference nor certify any complete task mean.
+
+A separate [task03/304 event audit](task03-304-compaction-20261002.json) records
+an automatic native context compaction on October 2 that took 1,600.712 seconds
+while simulation ticks remained at 4,939. Tool calls resumed afterward and
+ticks reached 4,972 without restarting the episode. This ongoing case is not
+included in the case-301 statistics above; the CLI-reported compaction duration
+does not isolate model-server timing or establish a successful task outcome.
