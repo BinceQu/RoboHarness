@@ -268,6 +268,10 @@ class NativeSkillLifecycleTests(unittest.TestCase):
                 self.assertIn("Skill", names)
                 prefix = "mcp__" + mcp_name.replace(":", "_") + "__"
                 self.assertIn(prefix + "activate_skill", names)
+                for name in ("plan_press_point", "adjust_plan_pose", "cut_object"):
+                    self.assertIn(prefix + name, names)
+                for name in ("read_depth", "move_point_to_point", "plan_grasp_point_filter"):
+                    self.assertNotIn(prefix + name, names)
                 self.assertTrue(all(name.startswith(prefix) for name in names if name != "Skill"))
                 transcript = next((runtime / "claude/projects").glob("*/*.jsonl"))
                 records = [json.loads(line) for line in transcript.read_text().splitlines()]

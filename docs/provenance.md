@@ -101,6 +101,20 @@ and omits that later telemetry. The evaluator and UI still enforce/display
 the explicit 2025 ×2 budget. Standalone harness use retains its supplied
 default behavior.
 
+The later working tree also excludes `adjust_plan_pose`, `plan_press_point`
+and `cut_object` from MCP. Archive mode now uses the six exclusions recovered
+from the surviving paper-period `embodied_claude_code_norm/profiles/baseline.json`.
+The 45 hash-verified source transcripts contain 25 `plan_press_point` and six
+`adjust_plan_pose` calls. All 31 returned adapter errors: 27 remote HTTP 400
+responses, three pixel-policy rejections and one transport timeout. These
+records establish that the adapter exposed and dispatched those tools; they
+do not establish successful robot actions. `cut_object` is recovered from the
+surviving profile, with no archived call observed. The
+[tool-profile audit](../validation_results/archive-tool-profile-20261001/audit.json)
+records the exact source profile, hashes and call evidence. Runtime validation
+also checks the MCP recorder's actual profile and catalog, because a matching
+native Skill listing cannot detect missing direct tools.
+
 The SessionStart hook context matches all 45 selected archived Claude transcripts
 byte for byte (SHA-256
 `a1ef3ea478487ad0e8d5dc8a162b0042365e874908f22169b785df75b0f838ff`).

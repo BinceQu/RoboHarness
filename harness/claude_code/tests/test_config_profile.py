@@ -9,7 +9,9 @@ from unittest.mock import patch
 
 from embodied_claude_code.config import Settings
 from embodied_claude_code.errors import ConfigurationError, ToolPolicyError
-from embodied_claude_code.profile import MCP_EXCLUDED_TOOLS, ToolProfile
+from embodied_claude_code.profile import (
+    ARCHIVED_MCP_EXCLUDED_TOOLS, MCP_EXCLUDED_TOOLS, ToolProfile,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -91,6 +93,33 @@ class SettingsTests(unittest.TestCase):
 
 
 class ProfileTests(unittest.TestCase):
+    def test_archived_profile_restores_paper_actions_and_freezes_protocol(self):
+        with patch.dict(os.environ, {"ROBOHARNESS_PROTOCOL": "archived-v391-x2"}):
+            profile = ToolProfile.load(None)
+        for name in ("plan_press_point", "adjust_plan_pose", "cut_object"):
+            self.assertTrue(profile.allows(name), name)
+        for name in ARCHIVED_MCP_EXCLUDED_TOOLS:
+            self.assertFalse(profile.allows(name), name)
+        self.assertEqual(set(profile.public()["deny_tools"]),
+                         ARCHIVED_MCP_EXCLUDED_TOOLS)
+        recorded = json.loads((ROOT / "profiles/archived-native-context.json").read_text())["mcp_tool_profile"]
+        for key in ("allow_tools", "deny_tools", "fixed_arguments"):
+            self.assertEqual(profile.public()[key], recorded[key])
+
+    def test_archived_custom_profile_preserves_explicit_restrictions(self):
+        with tempfile.TemporaryDirectory() as directory, patch.dict(
+            os.environ, {"ROBOHARNESS_PROTOCOL": "archived-v391-x2"}
+        ):
+            path = Path(directory) / "profile.json"
+            path.write_text(json.dumps({
+                "schema_version": "embodied_claude_code.profile.v1",
+                "allow_tools": ["*"], "deny_tools": ["plan_press_point"],
+            }))
+            profile = ToolProfile.load(path)
+        self.assertFalse(profile.allows("plan_press_point"))
+        self.assertTrue(profile.allows("adjust_plan_pose"))
+        self.assertTrue(ARCHIVED_MCP_EXCLUDED_TOOLS.issubset(profile.deny_tools))
+
     def test_mcp_exclusions_cannot_be_reenabled_by_profile(self) -> None:
         excluded = set(MCP_EXCLUDED_TOOLS)
         with tempfile.TemporaryDirectory() as directory:

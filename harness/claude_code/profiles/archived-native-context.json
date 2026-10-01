@@ -581,5 +581,25 @@
       "first_reported_input_tokens": 20457,
       "git_branch": "HEAD"
     }
-  ]
+  ],
+  "mcp_tool_profile": {
+    "allow_tools": [
+      "*"
+    ],
+    "deny_tools": [
+      "control_wrist_roll",
+      "move_point_to_point",
+      "plan_eef_translation_to_uvd_point",
+      "plan_grasp_point_filter",
+      "plan_grasp_point_filter_rgbd",
+      "read_depth"
+    ],
+    "fixed_arguments": {},
+    "required_tools": [
+      "adjust_plan_pose",
+      "cut_object",
+      "plan_press_point"
+    ],
+    "source": "validation_results/archive-tool-profile-20261001/audit.json"
+  }
 }
