@@ -1,7 +1,7 @@
 # Release validation
 
 **The three requested task means have not yet been verified.** This status
-snapshot was checked on October 1, 2026 at 12:46 Asia/Shanghai. The
+snapshot was checked on October 1, 2026 at 15:58 Asia/Shanghai. The
 [live r5 report](../validation_results/gpu5-20260930-r5/README.md) records
 completed official scores; a running process or a passing software test is
 not evidence that a task mean matches.
@@ -43,7 +43,9 @@ The selected tasks and immutable archive budgets are:
 | task08 | 301, 304, 306, 308, 310 | 17886 | 0.4 |
 
 At the snapshot time, all three r5 controllers and evaluators were alive.
-Their completed-case counts were 1/5, 0/5 and 0/5 respectively. The existing
+Their completed-case counts were 1/5, 0/5 and 1/5 respectively. The
+intermediate task08/301 diagnostic score is Q=0.5; it is not a final task mean
+and cannot establish reproduction. The existing
 runs retain their launch-time runtime and 24-hour per-case safety cap. They
 continue under the instruction to leave running tests in progress. Known
 native-context differences make r5 diagnostic evidence rather than a verified
