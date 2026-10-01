@@ -1,0 +1,318 @@
+{
+  "recorded_at": "2026-10-01T21:12:25.503900+08:00",
+  "scope": "Evaluator installation stages into an initially empty private Python 3.11 venv, followed by CPU imports and the process-local native asset-watch ABI check. No SimulationApp construction, GPU rollout or dataset download. Downloads required recovery; this was not a successful unattended first attempt.",
+  "source_revision": "c4763eb0947adf7f0186834b476a0ec375ee1d1e",
+  "behavior_revision": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+  "python": "3.11.16 (main, Sep  1 2026, 14:18:37) [Clang 22.1.3 ]",
+  "installation": {
+    "status": "installed",
+    "completed_at": "2026-10-01T21:06:09.632951+08:00",
+    "upstream_arguments": [
+      "--bddl",
+      "--omnigibson",
+      "--joylo",
+      "--eval",
+      "--confirm-no-conda",
+      "--accept-nvidia-eula"
+    ],
+    "build_tools_requirement": [
+      "setuptools>=71,<81",
+      "wheel"
+    ],
+    "final_warp_requirement": "warp-lang==1.12.0",
+    "lerobot_provenance": {
+      "url": "https://github.com/wensi-ai/lerobot",
+      "vcs_info": {
+        "commit_id": "436812bd8ee39b768c645c248c91f1330834e687",
+        "requested_revision": "release/b1k",
+        "vcs": "git"
+      }
+    },
+    "network_recovery": {
+      "git": "The GitHub fetch failed with curl 52. The fixed LeRobot commit was fetched from a previously verified, complete private Git cache at the same recorded source revision.",
+      "torch_cluster": "The PyG wheel download timed out in pip. The same official URL completed with curl HTTP/2; its byte count and upstream ETag matched. The verified wheel completed the remaining pip step.",
+      "wheel": {
+        "downloaded_at": "2026-10-01T21:04:10.305395+08:00",
+        "url": "https://data.pyg.org/whl/torch-2.7.0%2Bcu128/torch_cluster-1.6.3%2Bpt27cu128-cp311-cp311-linux_x86_64.whl",
+        "bytes": 3345861,
+        "sha256": "d39f094625809297a9e35fb2ca1eb99e3dd4cd72f46b9bb9b75f2ebf65b869fe",
+        "md5_matches_upstream_etag": true,
+        "protocol": "HTTPS HTTP/2"
+      }
+    },
+    "pip_check": {
+      "exit_code": 1,
+      "stdout": "ipython 9.17.1 has requirement psutil>=7; sys_platform != \"emscripten\" and sys_platform != \"cygwin\", but you have psutil 5.9.8.\nisaacsim-kernel 5.1.0.0 has requirement typing_extensions==4.12.2, but you have typing-extensions 4.16.0.\nisaacsim-kernel 5.1.0.0 has requirement websockets==12.0, but you have websockets 17.1.\nomnigibson 3.9.1 has requirement pillow~=11.0.0, but you have pillow 11.3.0.\nhuggingface-hub 1.33.0 has requirement click<9.0.0,>=8.4.2, but you have click 8.1.7.\nlerobot 0.5.2 has requirement packaging<26.0,>=24.2, but you have packaging 23.0.\nwheel 0.48.0 has requirement packaging>=24.0, but you have packaging 23.0.\n",
+      "stderr": ""
+    }
+  },
+  "reference": {
+    "versions": {
+      "torch": "2.7.0+cu128",
+      "torchvision": "0.22.0+cu128",
+      "torchaudio": "2.7.0+cu128",
+      "torchcodec": "0.5+cu128",
+      "isaacsim": "5.1.0.0",
+      "isaacsim-kernel": "5.1.0.0",
+      "omniverse-kit": "107.3.1.206797",
+      "warp-lang": "1.12.0",
+      "numpy": "1.26.0",
+      "scipy": "1.15.3",
+      "h5py": "3.16.0",
+      "Pillow": "11.0.0",
+      "trimesh": "4.5.1",
+      "networkx": "3.3",
+      "lerobot": "0.5.2",
+      "datasets": "4.8.5",
+      "pyarrow": "25.0.0",
+      "opencv-python": "4.11.0.86",
+      "opencv-python-headless": "4.11.0.86",
+      "numpy-quaternion": "2024.0.13",
+      "websockets": "17.0.1",
+      "gymnasium": "1.3.0"
+    },
+    "opencv_binary_sha256": "188d38ace4716a74534ddf4dd4f7d77a06641bd0908bf12eb218a3c2fef35f38",
+    "opencv_binary_matches_wheel_record": {
+      "opencv-python": true,
+      "opencv-python-headless": false
+    },
+    "captured_at": "2026-10-01T20:42:00.699374+08:00",
+    "effective_dependency_overlay": "<reference-warp-overlay>"
+  },
+  "checks": {
+    "observed_at": "2026-10-01T21:08:58.264197+08:00",
+    "scope": "Fresh evaluator dependency imports and native ABI only; no SimulationApp or rollout.",
+    "python": "<fresh-evaluator>/bin/python",
+    "source_root": "<release-checkout>",
+    "versions": {
+      "torch": "2.7.0+cu128",
+      "torchvision": "0.22.0+cu128",
+      "torchaudio": "2.7.0+cu128",
+      "torchcodec": "0.5+cu128",
+      "isaacsim": "5.1.0.0",
+      "isaacsim-kernel": "5.1.0.0",
+      "omniverse-kit": "107.3.1.206797",
+      "warp-lang": "1.12.0",
+      "numpy": "1.26.0",
+      "scipy": "1.15.3",
+      "h5py": "3.16.0",
+      "Pillow": "11.3.0",
+      "trimesh": "4.5.1",
+      "networkx": "3.3",
+      "lerobot": "0.5.2",
+      "datasets": "4.8.5",
+      "pyarrow": "25.0.1",
+      "opencv-python": "4.11.0.86",
+      "opencv-python-headless": "4.11.0.86",
+      "numpy-quaternion": "2024.0.13",
+      "websockets": "17.1",
+      "gymnasium": "1.3.0"
+    },
+    "imports": {
+      "numpy": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/numpy/__init__.py",
+        "version": "1.26.0"
+      },
+      "scipy": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/scipy/__init__.py",
+        "version": "1.15.3"
+      },
+      "torch": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/torch/__init__.py",
+        "version": "2.7.0+cu128"
+      },
+      "torchvision": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/torchvision/__init__.py",
+        "version": "0.22.0+cu128"
+      },
+      "torchaudio": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/torchaudio/__init__.py",
+        "version": "2.7.0+cu128"
+      },
+      "cv2": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/cv2/__init__.py",
+        "version": "4.11.0"
+      },
+      "h5py": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/h5py/__init__.py",
+        "version": "3.16.0"
+      },
+      "trimesh": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/trimesh/__init__.py",
+        "version": "4.5.1"
+      },
+      "networkx": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/networkx/__init__.py",
+        "version": "3.3"
+      },
+      "warp": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/warp/__init__.py",
+        "version": "1.12.0"
+      },
+      "torchcodec": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/torchcodec/__init__.py",
+        "version": "0.5+cu128"
+      },
+      "torch_cluster": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/torch_cluster/__init__.py",
+        "version": "1.6.3+pt27cu128"
+      },
+      "lerobot.configs": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/lerobot/configs/__init__.py",
+        "version": ""
+      },
+      "lerobot.datasets": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/lerobot/datasets/__init__.py",
+        "version": ""
+      },
+      "bddl": {
+        "loaded": true,
+        "file": "<release-checkout>/BEHAVIOR/bddl3/bddl/__init__.py",
+        "version": ""
+      },
+      "omnigibson": {
+        "loaded": true,
+        "file": "<release-checkout>/BEHAVIOR/OmniGibson/omnigibson/__init__.py",
+        "version": "3.9.1"
+      }
+    },
+    "version_differences": {
+      "Pillow": {
+        "reference": "11.0.0",
+        "fresh": "11.3.0"
+      },
+      "pyarrow": {
+        "reference": "25.0.0",
+        "fresh": "25.0.1"
+      },
+      "websockets": {
+        "reference": "17.0.1",
+        "fresh": "17.1"
+      }
+    },
+    "opencv_binary_sha256": "188d38ace4716a74534ddf4dd4f7d77a06641bd0908bf12eb218a3c2fef35f38",
+    "opencv_matches_reference_binary": true,
+    "isaacsim_bootstrap": {
+      "file": "<fresh-evaluator>/lib/python3.11/site-packages/isaacsim/__init__.py",
+      "simulation_app_api_available": true
+    },
+    "native_asset_watch_abi": {
+      "policy": "immutable-assets-no-native-watches",
+      "library": "<fresh-evaluator>/lib/python3.11/site-packages/isaacsim/kit/extscore/omni.client.lib/bin/libomniclient.so",
+      "sha256": "96d901619a7ed20db00e96b8cf41c523865289d11d426cd520bdf9f7c6e60302",
+      "version": "2.67.0-release.6072+gl.6293b5e9"
+    },
+    "cuda_initialized": false,
+    "simulator_started": false,
+    "imports_passed": true,
+    "native_abi_passed": true
+  },
+  "probe_method": "With CUDA_VISIBLE_DEVICES empty and old PYTHONPATH, loader paths and simulator environment removed, import each listed module, import isaacsim.SimulationApp to bootstrap Kit without constructing it, then call the release disable_native_asset_watches() helper. Compare the actual cv2 shared-object SHA256, read distribution versions and verify torch CUDA initialization and OmniGibson app/sim remain unset.",
+  "probe_corrections": [
+    "The first private native probe loaded libomniclient.so before importing isaacsim and reported missing libcarb.so. Following the existing official entrypoint bootstrap order passed; release runtime code was not changed.",
+    "An attempted upstream --eval-only resume was rejected because upstream requires --omnigibson. The remaining pip command was resumed directly instead."
+  ],
+  "r5_preservation": {
+    "task01": {
+      "controller": {
+        "MainPID": "2833423",
+        "ActiveState": "active"
+      },
+      "role_identities_verified": [
+        "guardian",
+        "interface",
+        "gate",
+        "evaluator",
+        "agent"
+      ],
+      "n_finished": 1,
+      "last_progress": "2026-10-01 21:11:28 instance 304: agent=running ticks=4493"
+    },
+    "task03": {
+      "controller": {
+        "MainPID": "2833447",
+        "ActiveState": "active"
+      },
+      "role_identities_verified": [
+        "guardian",
+        "interface",
+        "gate",
+        "evaluator",
+        "agent"
+      ],
+      "n_finished": 1,
+      "last_progress": "2026-10-01 21:12:19 instance 304: agent=running ticks=2157"
+    },
+    "task08": {
+      "controller": {
+        "MainPID": "2833459",
+        "ActiveState": "active"
+      },
+      "role_identities_verified": [
+        "guardian",
+        "interface",
+        "gate",
+        "evaluator",
+        "agent"
+      ],
+      "n_finished": 1,
+      "last_progress": "2026-10-01 21:11:26 instance 304: agent=running ticks=3862"
+    }
+  },
+  "r6": {
+    "source_revision": "c4763eb0947adf7f0186834b476a0ec375ee1d1e",
+    "status": "waiting_for_r5",
+    "tasks": [
+      {
+        "task": "task01",
+        "port": 15071,
+        "policy_port": 15070,
+        "gate_port": 15072,
+        "status": "pending"
+      },
+      {
+        "task": "task03",
+        "port": 15073,
+        "policy_port": 15074,
+        "gate_port": 15075,
+        "status": "pending"
+      },
+      {
+        "task": "task08",
+        "port": 15078,
+        "policy_port": 15076,
+        "gate_port": 15077,
+        "status": "pending"
+      }
+    ],
+    "session_config_sha256": "6bc65dadcc9edf16052dcc070efd6a4daab445b36fd9783a129753529916e731",
+    "environment_changed": false
+  },
+  "validated_files_sha256": {
+    "scripts/setup.sh": "bdcd7b43be0a426a95b87c81bfd2590d3861b98dc120903271b4a946744179d1",
+    "scripts/with_evaluator_sources.py": "47c0431de457a0627a6cccab02e4658bdb2997367c604c3a9a439bcd0c297a8f",
+    "configs/evaluator-sources.json": "2ac392bc1d0f4f8b91137a0d3e87736033e18a6812d4b5c9e4bd07d9281a1deb",
+    "interface/behavior_interface_eval_test/native_asset_watches.py": "c542996914162523535a93f9554568a48620ee085c0803148151edbbfb4257f6"
+  },
+  "limitations": [
+    "pip check reports seven dependency declaration conflicts; successful imports do not prove those conflicts harmless in every code path.",
+    "Pillow, pyarrow and websockets differ from the effective reference environment as recorded under checks.version_differences.",
+    "The newly installed environment has not started a simulator or generated an official Q-score and is not selected by the pending r6 queue.",
+    "Existing host libraries and externally installed datasets were available; this is not a clean-host or dataset installation validation.",
+    "All fifteen corrected cases and the three task-level mean Q-score comparisons remain outstanding."
+  ]
+}

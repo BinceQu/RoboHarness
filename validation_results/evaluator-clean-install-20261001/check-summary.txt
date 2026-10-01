@@ -1,0 +1,21 @@
+No CUDA runtime is found, using CUDA_HOME='/usr/local/cuda-12.4'
+{
+  "imports_passed": true,
+  "native_abi_passed": true,
+  "cuda_initialized": false,
+  "simulator_started": false,
+  "version_differences": {
+    "Pillow": {
+      "reference": "11.0.0",
+      "fresh": "11.3.0"
+    },
+    "pyarrow": {
+      "reference": "25.0.0",
+      "fresh": "25.0.1"
+    },
+    "websockets": {
+      "reference": "17.0.1",
+      "fresh": "17.1"
+    }
+  }
+}
