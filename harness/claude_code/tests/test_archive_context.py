@@ -54,7 +54,13 @@ class ArchiveMCP(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(hashlib.sha256(prefix.encode()).hexdigest(),
                              REFERENCE['mcp_instructions_prefix_sha256'])
             async with Client(server, mode='legacy') as client:
-                for tool in (await client.list_tools()).tools:
+                tools = (await client.list_tools()).tools
+                names = {tool.name for tool in tools}
+                self.assertTrue({"plan_press_point", "adjust_plan_pose", "cut_object"}
+                                .issubset(names))
+                self.assertTrue({"read_depth", "move_point_to_point",
+                                 "plan_grasp_point_filter"}.isdisjoint(names))
+                for tool in tools:
                     self.assertNotIn('rollout_budget', tool.description)
                 operations = [('capture_head_camera', {}), ('measure_shoulder_distance', {}),
                               ('activate_skill', {}), ('activate_skill', {'name': 'pick-up-object'}),

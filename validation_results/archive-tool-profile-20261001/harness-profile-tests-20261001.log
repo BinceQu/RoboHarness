@@ -1,0 +1,67 @@
+test_embodied_profile_is_fail_closed (test_config_profile.ClaudeCodeSessionProfileTests.test_embodied_profile_is_fail_closed) ... ok
+test_hooks_use_claude_plugin_root_and_pretool_boundary (test_config_profile.ClaudeCodeSessionProfileTests.test_hooks_use_claude_plugin_root_and_pretool_boundary) ... ok
+test_archived_custom_profile_preserves_explicit_restrictions (test_config_profile.ProfileTests.test_archived_custom_profile_preserves_explicit_restrictions) ... ok
+test_archived_profile_restores_paper_actions_and_freezes_protocol (test_config_profile.ProfileTests.test_archived_profile_restores_paper_actions_and_freezes_protocol) ... ok
+test_mcp_exclusions_cannot_be_reenabled_by_profile (test_config_profile.ProfileTests.test_mcp_exclusions_cannot_be_reenabled_by_profile) ... ok
+test_profile_filters_and_fixes_arguments (test_config_profile.ProfileTests.test_profile_filters_and_fixes_arguments) ... ok
+test_memory_timeout_defaults_to_one_second (test_config_profile.SettingsTests.test_memory_timeout_defaults_to_one_second) ... ok
+test_memory_timeout_is_read_from_environment (test_config_profile.SettingsTests.test_memory_timeout_is_read_from_environment) ... ok
+test_memory_timeout_rejects_non_numeric_and_out_of_bounds_values (test_config_profile.SettingsTests.test_memory_timeout_rejects_non_numeric_and_out_of_bounds_values) ... ok
+test_model_image_limits_are_read_from_environment (test_config_profile.SettingsTests.test_model_image_limits_are_read_from_environment) ... ok
+test_model_image_limits_have_bounded_defaults (test_config_profile.SettingsTests.test_model_image_limits_have_bounded_defaults) ... ok
+test_model_image_limits_reject_invalid_values (test_config_profile.SettingsTests.test_model_image_limits_reject_invalid_values) ... ok
+test_remote_origin_can_be_explicitly_allowed (test_config_profile.SettingsTests.test_remote_origin_can_be_explicitly_allowed) ... ok
+test_remote_origin_is_rejected_by_default (test_config_profile.SettingsTests.test_remote_origin_is_rejected_by_default) ... ok
+test_startup_context_matches_archived_transcripts_byte_for_byte (test_archive_context.ArchiveContext.test_startup_context_matches_archived_transcripts_byte_for_byte) ... ok
+test_archived_tools_keep_images_skills_and_omit_later_budget_telemetry (test_archive_context.ArchiveMCP.test_archived_tools_keep_images_skills_and_omit_later_budget_telemetry) ... Executing <Task pending name='Task-2' coro=<ArchiveMCP.test_archived_tools_keep_images_skills_and_omit_later_budget_telemetry() running at /mnt/nas_nfs/home/bince/RoboHarness/harness/claude_code/tests/test_archive_context.py:56> wait_for=<Future pending cb=[Task.task_wakeup()] created at /mnt/nas_nfs/home/bince/RoboHarness/harness/claude_code/.venv/lib/python3.13/site-packages/anyio/_backends/_asyncio.py:1007> cb=[_run_until_complete_cb() at /mnt/nas_nfs/home/bince/miniconda3/lib/python3.13/asyncio/base_events.py:181] created at /mnt/nas_nfs/home/bince/miniconda3/lib/python3.13/asyncio/runners.py:100> took 0.826 seconds
+Tool 'measure_shoulder_distance' failed: 'Unknown tool: measure_shoulder_distance'
+ok
+test_advertised_mark_on_map_wins_without_duplicate (test_catalog.ToolCatalogTests.test_advertised_mark_on_map_wins_without_duplicate) ... ok
+test_advertised_surface_facing_wins_without_duplicate (test_catalog.ToolCatalogTests.test_advertised_surface_facing_wins_without_duplicate) ... ok
+test_generic_python_annotation_is_dropped_not_copied (test_catalog.ToolCatalogTests.test_generic_python_annotation_is_dropped_not_copied) ... ok
+test_mark_on_map_is_restored_when_interface_profile_omits_it (test_catalog.ToolCatalogTests.test_mark_on_map_is_restored_when_interface_profile_omits_it) ... ok
+test_move_tracked_point_keeps_items_when_catalog_type_is_any (test_catalog.ToolCatalogTests.test_move_tracked_point_keeps_items_when_catalog_type_is_any) ... ok
+test_multi_uv_arm_uses_interface_point_payload (test_catalog.ToolCatalogTests.test_multi_uv_arm_uses_interface_point_payload) ... ok
+test_one_of_interface_alternatives_are_preserved (test_catalog.ToolCatalogTests.test_one_of_interface_alternatives_are_preserved) ... ok
+test_python_str_annotation_is_coerced_to_json_schema_string (test_catalog.ToolCatalogTests.test_python_str_annotation_is_coerced_to_json_schema_string) ... ok
+test_surface_facing_is_restored_when_interface_omits_it (test_catalog.ToolCatalogTests.test_surface_facing_is_restored_when_interface_omits_it) ... ok
+test_measurement_geometry_is_model_visible_without_media_paths (test_mcp_server.ActionEvidenceTests.test_measurement_geometry_is_model_visible_without_media_paths) ... ok
+test_nearby_object_warning_ignores_eef_field (test_mcp_server.ActionEvidenceTests.test_nearby_object_warning_ignores_eef_field) ... ok
+test_nearby_object_warning_is_model_visible (test_mcp_server.ActionEvidenceTests.test_nearby_object_warning_is_model_visible) ... ok
+test_nearby_object_warning_line_is_omitted_when_absent (test_mcp_server.ActionEvidenceTests.test_nearby_object_warning_line_is_omitted_when_absent) ... ok
+test_nearby_object_warning_omitted_when_corridor_clear (test_mcp_server.ActionEvidenceTests.test_nearby_object_warning_omitted_when_corridor_clear) ... ok
+test_persistent_tracking_media_text_is_bounded (test_mcp_server.ActionEvidenceTests.test_persistent_tracking_media_text_is_bounded) ... ok
+test_catalog_is_mirrored_and_direct_calls_are_recorded (test_mcp_server.MCPServerTests.test_catalog_is_mirrored_and_direct_calls_are_recorded) ... ok
+test_latest_image_survives_action_failure_without_hiding_failure (test_mcp_server.MCPServerTests.test_latest_image_survives_action_failure_without_hiding_failure) ... ok
+test_remote_error_is_bounded_at_mcp_boundary_only (test_mcp_server.MCPServerTests.test_remote_error_is_bounded_at_mcp_boundary_only) ... ok
+test_error_hard_limit_survives_expansive_unicode (test_mcp_server.ModelErrorContractTests.test_error_hard_limit_survives_expansive_unicode) ... ok
+test_structured_remote_error_keeps_only_bounded_action_evidence (test_mcp_server.ModelErrorContractTests.test_structured_remote_error_keeps_only_bounded_action_evidence) ... ok
+test_unstructured_remote_body_is_omitted_with_size_metadata (test_mcp_server.ModelErrorContractTests.test_unstructured_remote_body_is_omitted_with_size_metadata) ... ok
+test_all_advertised_point_tools_and_all_skill_loads_through_native_mcp (test_pixel720.NativeMCPPixelTests.test_all_advertised_point_tools_and_all_skill_loads_through_native_mcp) ... Executing <Task pending name='Task-22' coro=<NativeMCPPixelTests.test_all_advertised_point_tools_and_all_skill_loads_through_native_mcp() running at /mnt/nas_nfs/home/bince/RoboHarness/harness/claude_code/tests/test_pixel720.py:363> wait_for=<Future pending cb=[Task.task_wakeup()] created at /mnt/nas_nfs/home/bince/RoboHarness/harness/claude_code/.venv/lib/python3.13/site-packages/anyio/_backends/_asyncio.py:1007> cb=[_run_until_complete_cb() at /mnt/nas_nfs/home/bince/miniconda3/lib/python3.13/asyncio/base_events.py:181] created at /mnt/nas_nfs/home/bince/miniconda3/lib/python3.13/asyncio/runners.py:100> took 0.137 seconds
+ok
+test_native_mcp_passes_real_pixels_through_and_preserves_failure_images (test_pixel720.NativeMCPPixelTests.test_native_mcp_passes_real_pixels_through_and_preserves_failure_images) ... Executing <Task pending name='Task-27' coro=<NativeMCPPixelTests.test_native_mcp_passes_real_pixels_through_and_preserves_failure_images() running at /mnt/nas_nfs/home/bince/RoboHarness/harness/claude_code/tests/test_pixel720.py:398> wait_for=<Future pending cb=[Task.task_wakeup()] created at /mnt/nas_nfs/home/bince/RoboHarness/harness/claude_code/.venv/lib/python3.13/site-packages/anyio/_backends/_asyncio.py:1007> cb=[_run_until_complete_cb() at /mnt/nas_nfs/home/bince/miniconda3/lib/python3.13/asyncio/base_events.py:181] created at /mnt/nas_nfs/home/bince/miniconda3/lib/python3.13/asyncio/runners.py:100> took 0.133 seconds
+ok
+test_every_pixel_round_trips_through_unchanged_interface_exactly (test_pixel720.PixelMathTests.test_every_pixel_round_trips_through_unchanged_interface_exactly) ... ok
+test_invalid_pixels_fail_closed_even_without_json_schema (test_pixel720.PixelMathTests.test_invalid_pixels_fail_closed_even_without_json_schema) ... ok
+test_radio_session_three_clicks_remain_the_exact_selected_pixels (test_pixel720.PixelMathTests.test_radio_session_three_clicks_remain_the_exact_selected_pixels) ... ok
+test_response_inverse_covers_interface_public_aliases_without_scaling_xyz (test_pixel720.PixelMathTests.test_response_inverse_covers_interface_public_aliases_without_scaling_xyz) ... ok
+test_jpeg_transcoding_preserves_original_geometry_and_binding (test_pixel720.PixelMediaTests.test_jpeg_transcoding_preserves_original_geometry_and_binding) ... ok
+test_old_nested_frame_does_not_outrank_current_display_image (test_pixel720.PixelMediaTests.test_old_nested_frame_does_not_outrank_current_display_image) ... ok
+test_advertised_skills_and_session_hook_use_original_pixels (test_pixel720.PixelPromptTests.test_advertised_skills_and_session_hook_use_original_pixels) ... ok
+test_all_schemas_and_metadata_have_pixel_units_including_nested_points (test_pixel720.PixelServiceTests.test_all_schemas_and_metadata_have_pixel_units_including_nested_points) ... ok
+test_click_rejects_wrong_view_and_actual_source_or_declared_dimensions (test_pixel720.PixelServiceTests.test_click_rejects_wrong_view_and_actual_source_or_declared_dimensions) ... ok
+test_every_live_coordinate_tool_converts_at_the_service_boundary (test_pixel720.PixelServiceTests.test_every_live_coordinate_tool_converts_at_the_service_boundary) ... ok
+test_every_tool_rejects_unknown_image_before_any_http_post (test_pixel720.PixelServiceTests.test_every_tool_rejects_unknown_image_before_any_http_post) ... ok
+test_name_only_map_and_object_distance_do_not_require_click_image (test_pixel720.PixelServiceTests.test_name_only_map_and_object_distance_do_not_require_click_image) ... ok
+test_nested_observation_binds_the_image_actually_selected (test_pixel720.PixelServiceTests.test_nested_observation_binds_the_image_actually_selected) ... ok
+test_new_head_id_cannot_hide_a_nested_wrist_view (test_pixel720.PixelServiceTests.test_new_head_id_cannot_hide_a_nested_wrist_view) ... ok
+test_no_numeric_guessing_and_no_coordinate_conversion_in_bridge (test_pixel720.PixelServiceTests.test_no_numeric_guessing_and_no_coordinate_conversion_in_bridge) ... qwen-bridge: prompt-image inject=False configured=0 upstream_images=0
+ok
+test_partial_point_and_missing_id_never_fall_back_to_interface_defaults (test_pixel720.PixelServiceTests.test_partial_point_and_missing_id_never_fall_back_to_interface_defaults) ... ok
+test_persistent_track_uv_is_never_an_unbound_click_suggestion (test_pixel720.PixelServiceTests.test_persistent_track_uv_is_never_an_unbound_click_suggestion) ... ok
+test_stale_head_and_imageless_motion_require_new_capture (test_pixel720.PixelServiceTests.test_stale_head_and_imageless_motion_require_new_capture) ... ok
+
+----------------------------------------------------------------------
+Ran 57 tests in 3.655s
+
+OK

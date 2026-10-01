@@ -7,7 +7,10 @@ import tempfile
 import unittest
 from unittest import mock
 
-from roboharness.native_context import ROOT, PROFILE, contract, create_workspace, inspect_listing, seed
+from roboharness.native_context import (
+    ROOT, PROFILE, contract, create_workspace, inspect_case, inspect_listing,
+    inspect_tool_profile, seed,
+)
 
 
 class NativeContextTests(unittest.TestCase):
@@ -125,6 +128,78 @@ class NativeContextTests(unittest.TestCase):
                     self.assertEqual(native_contexts(run, 'task03', {301: {}}, {301})[0]['state'], state)
             (folder / 'two.jsonl').write_text('{}\n')
             self.assertEqual(native_contexts(run, 'task03', {301: {}}, {301})[0]['state'], 'ambiguous')
+
+
+class MCPToolProfileTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.case = Path(self.tmp.name)
+        self.expected = contract('task01', 301)['tool_profile']
+        self.path = self.case / 'trajectory/one/manifest.json'
+        self.path.parent.mkdir(parents=True)
+        self.payload = {
+            'profile': {key: self.expected[key] for key in
+                        ('allow_tools', 'deny_tools', 'fixed_arguments')},
+            'tool_catalog': {'tools': [{'name': name} for name in self.expected['required_tools']]},
+            'session_id': 'runtime-case',
+        }
+
+    def write(self):
+        self.path.write_text(json.dumps(self.payload))
+
+    def test_missing_manifest_waits_only_while_the_case_is_live(self):
+        self.assertEqual(inspect_tool_profile(self.case, self.expected)['state'], 'pending')
+        self.assertEqual(inspect_tool_profile(self.case, self.expected, finished=True)['state'], 'missing')
+
+    def test_later_exclusions_and_hidden_paper_actions_fail(self):
+        self.write()
+        self.assertEqual(inspect_tool_profile(self.case, self.expected)['state'], 'match')
+        self.payload['profile']['deny_tools'] = [*self.expected['deny_tools'], 'plan_press_point']
+        self.payload['tool_catalog']['tools'] = [{'name': 'cut_object'}, {'name': 'adjust_plan_pose'}]
+        self.write()
+        result = inspect_tool_profile(self.case, self.expected)
+        self.assertEqual(result['state'], 'mismatch')
+        self.assertEqual(result['missing_tools'], ['plan_press_point'])
+
+    def test_unexpected_fixed_arguments_and_wrong_session_fail(self):
+        (self.case / 'case.json').write_text(json.dumps({'session_id': 'runtime-case'}))
+        self.write()
+        self.assertEqual(inspect_tool_profile(self.case, self.expected)['state'], 'match')
+        self.payload['session_id'] = 'another-case'
+        self.payload['profile']['fixed_arguments'] = {'cut_object': {'arm': 'left'}}
+        self.write()
+        self.assertEqual(inspect_tool_profile(self.case, self.expected)['differences'],
+                         ['fixed_arguments', 'session_id'])
+
+    def test_malformed_or_multiple_manifests_never_pass(self):
+        self.path.write_text('{}')
+        self.assertEqual(inspect_tool_profile(self.case, self.expected)['state'], 'unreadable')
+        self.write()
+        case_path = self.case / 'case.json'
+        case_path.write_text('[]')
+        self.assertEqual(inspect_tool_profile(self.case, self.expected)['state'], 'unreadable')
+        case_path.unlink()
+        other = self.path.parent.parent / 'two/manifest.json'
+        other.parent.mkdir()
+        other.write_text(json.dumps(self.payload))
+        self.assertEqual(inspect_tool_profile(self.case, self.expected)['state'], 'ambiguous')
+
+    def test_matching_native_listing_cannot_hide_missing_tools(self):
+        config = self.case / 'claude-home'
+        transcript = config / 'projects/one/one.jsonl'
+        transcript.parent.mkdir(parents=True)
+        content = 'matching listing'
+        transcript.write_text(json.dumps({'attachment': {
+            'type': 'skill_listing', 'isInitial': True, 'content': content, 'names': []}}))
+        expected = {'pattern': {'sha256': hashlib.sha256(content.encode()).hexdigest(),
+                               'names': []}, 'tool_profile': self.expected}
+        self.assertEqual(inspect_case(config, expected, finished=True)['state'], 'missing')
+        self.write()
+        self.assertEqual(inspect_case(config, expected, finished=True)['state'], 'match')
+        self.payload['tool_catalog']['tools'] = []
+        self.write()
+        self.assertEqual(inspect_case(config, expected, finished=True)['state'], 'mismatch')
 
 
 @unittest.skipUnless(os.environ.get('ROBOHARNESS_NATIVE_CLAUDE_TESTS') == '1',

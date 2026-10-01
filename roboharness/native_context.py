@@ -1,4 +1,4 @@
-"""Recover the recorded native Skill listing in a fresh, case-local CLI home.
+"""Recover and verify native Skill context and the recorded MCP tool profile.
 
 Claude 2.1.259 ranks descriptions using persisted skillUsage. The archive did
 not save the original counters. We derive the minimum priority seed from the
@@ -31,7 +31,11 @@ def contract(task: str, instance_id: int, *, root: Path = ROOT) -> dict:
     pattern = index['patterns'][case['listing_sha256']]
     if pattern['sha256'] != case['listing_sha256']:
         raise ValueError('Native context profile checksum key mismatch')
-    return {'case': case, 'pattern': pattern, 'claude_version': index['claude_version']}
+    tool_profile = index.get('mcp_tool_profile')
+    if not isinstance(tool_profile, dict) or not tool_profile.get('required_tools'):
+        raise ValueError('Missing archived MCP tool profile')
+    return {'case': case, 'pattern': pattern, 'claude_version': index['claude_version'],
+            'tool_profile': tool_profile}
 
 
 def validate_workspace_root(path: Path) -> Path:
@@ -122,6 +126,54 @@ def inspect_listing(transcript: Path, expected: dict) -> dict:
     return {'state': 'pending'}
 
 
+def inspect_tool_profile(case_dir: Path, expected: dict, *, finished: bool = False) -> dict:
+    """Verify the profile/catalog recorded by the actual MCP service.
+
+    Native skill-listing equality cannot reveal filtered-out direct tools. The
+    recorder writes this manifest when MCP loads its live interface catalog.
+    """
+    manifests = list((case_dir / 'trajectory').glob('*/manifest.json'))
+    if not manifests:
+        return {'state': 'missing' if finished else 'pending',
+                'reason': 'No MCP tool manifest for the case'}
+    if len(manifests) != 1:
+        return {'state': 'ambiguous', 'reason': 'Multiple MCP tool manifests for one case'}
+    try:
+        manifest = json.loads(manifests[0].read_text())
+        profile = manifest['profile']
+        catalog = manifest['tool_catalog']['tools']
+        names = [item['name'] for item in catalog]
+        if not isinstance(profile, dict) or any(not isinstance(name, str) for name in names):
+            raise ValueError('Invalid MCP profile or tool names')
+        differences = []
+        for key in ('allow_tools', 'deny_tools'):
+            if sorted(profile[key]) != sorted(expected[key]):
+                differences.append(key)
+        if profile.get('fixed_arguments') != expected['fixed_arguments']:
+            differences.append('fixed_arguments')
+        missing = sorted(set(expected['required_tools']) - set(names))
+        forbidden = sorted(set(expected['deny_tools']) & set(names))
+        if missing or forbidden or len(names) != len(set(names)):
+            differences.append('tool_catalog')
+        case_path = case_dir / 'case.json'
+        if case_path.exists():
+            case = json.loads(case_path.read_text())
+            if not isinstance(case, dict):
+                raise ValueError('Invalid case session metadata')
+            session_id = case.get('session_id')
+            if not session_id or manifest.get('session_id') != session_id:
+                differences.append('session_id')
+        return {'state': 'mismatch' if differences else 'match',
+                'manifest': str(manifests[0]), 'profile': profile,
+                'tool_names': names, 'missing_tools': missing,
+                'forbidden_tools': forbidden, 'differences': differences,
+                **({'reason': 'Recorded MCP tool profile differs from archive'} if differences else {})}
+    except FileNotFoundError:
+        return {'state': 'missing' if finished else 'pending'}
+    except (OSError, ValueError, KeyError, TypeError) as error:
+        return {'state': 'unreadable', 'reason': f'Invalid MCP tool manifest: {error}'}
+
+
 def inspect_case(config_dir: Path, expected: dict, *, finished: bool = False) -> dict:
     """Inspect the case's unique native transcript without trusting a cached audit.
 
@@ -143,4 +195,9 @@ def inspect_case(config_dir: Path, expected: dict, *, finished: bool = False) ->
         result = {'state': 'unreadable', 'reason': str(error)}
     if finished and result['state'] == 'pending':
         result['state'] = 'missing'
+    if expected.get('tool_profile') is not None:
+        tools = inspect_tool_profile(config_dir.parent, expected['tool_profile'], finished=finished)
+        result['mcp_tool_profile'] = tools
+        if result['state'] == 'match' and tools['state'] != 'match':
+            result.update(state=tools['state'], reason=tools.get('reason', 'MCP tool profile not verified'))
     return result

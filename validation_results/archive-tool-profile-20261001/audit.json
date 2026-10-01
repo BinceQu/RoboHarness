@@ -1,0 +1,662 @@
+{
+  "diagnostic_only": true,
+  "created_at": "2026-10-01T02:38:15.856185+00:00",
+  "finding": "Later MCP exclusions hide tools called by archived agents. Archive-mode exclusions recovered from the surviving paper-period profile; complete historical request bodies were not archived.",
+  "paper_period_profile": {
+    "path": "/mnt/nas_nfs/home/bince/RoboUI/embodied_claude_code_norm/profiles/baseline.json",
+    "sha256": "20b1f4eb161ac0c8bb98ae5b60142c31888e42189b3e62e0ce2f7d3c94285e1f",
+    "mtime_utc": "2026-09-16T07:10:19.295105+00:00",
+    "payload": {
+      "schema_version": "embodied_claude_code.profile.v1",
+      "name": "baseline",
+      "description": "Allow advertised BEHAVIOR v2 tools except tools intentionally excluded from MCP.",
+      "allow_tools": [
+        "*"
+      ],
+      "deny_tools": [
+        "plan_grasp_point_filter",
+        "plan_grasp_point_filter_rgbd",
+        "plan_eef_translation_to_uvd_point",
+        "read_depth",
+        "move_point_to_point",
+        "control_wrist_roll"
+      ],
+      "fixed_arguments": {}
+    }
+  },
+  "sources_verified": 45,
+  "observed_call_counts": {
+    "plan_press_point": 25,
+    "adjust_plan_pose": 6
+  },
+  "cases_with_restored_tool_calls": [
+    {
+      "task": "task00",
+      "instance_id": 304,
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/63bc81fe-f611-4647-993d-e2f957251356.jsonl",
+      "sha256": "100c9760ad41a1da150b768114c372232ebcc5f66b487d79a79ea1f8996db07b",
+      "calls": [
+        {
+          "tool": "mcp__behavior-v2__plan_press_point",
+          "timestamp": "2026-09-16T15:38:16.721Z",
+          "tool_use_id": "chatcmpl-tool-b42e3e0aec75fc6e",
+          "arguments": {
+            "image_id": "img_0052",
+            "plan_arm": "right",
+            "u": 377,
+            "v": 258
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"remote_api_error\",\"details\":{\"http_status\":400,\"response_omitted\":{\"omitted\":true,\"reason\":\"non_object_remote_response\",\"size\":65536,\"type\":\"str\"}},\"message\":\"BEHAVIOR API request failed.\",\"retryable\":false,\"tool_name\":\"plan_press_point\"}"
+        },
+        {
+          "tool": "mcp__behavior-v2__plan_press_point",
+          "timestamp": "2026-09-16T15:38:54.120Z",
+          "tool_use_id": "chatcmpl-tool-967578767715cac5",
+          "arguments": {
+            "image_id": "img_0052",
+            "plan_arm": "right",
+            "seed": 7,
+            "u": 378,
+            "v": 260
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"remote_api_error\",\"details\":{\"http_status\":400,\"response_omitted\":{\"omitted\":true,\"reason\":\"non_object_remote_response\",\"size\":65536,\"type\":\"str\"}},\"message\":\"BEHAVIOR API request failed.\",\"retryable\":false,\"tool_name\":\"plan_press_point\"}"
+        },
+        {
+          "tool": "mcp__behavior-v2__plan_press_point",
+          "timestamp": "2026-09-16T18:53:46.921Z",
+          "tool_use_id": "chatcmpl-tool-97481086a55a7734",
+          "arguments": {
+            "image_id": "img_0173",
+            "u": 355,
+            "v": 242,
+            "plan_arm": "right"
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"remote_api_error\",\"details\":{\"http_status\":400,\"response_omitted\":{\"omitted\":true,\"reason\":\"non_object_remote_response\",\"size\":65536,\"type\":\"str\"}},\"message\":\"BEHAVIOR API request failed.\",\"retryable\":false,\"tool_name\":\"plan_press_point\"}"
+        }
+      ]
+    },
+    {
+      "task": "task00",
+      "instance_id": 306,
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/54d0dd0e-d8f4-4595-8b96-86543f432552.jsonl",
+      "sha256": "84060c6a642b8c9d92587c456f9afdbcb49fa317184030f85e210ac53eb62465",
+      "calls": [
+        {
+          "tool": "mcp__behavior-v2__plan_press_point",
+          "timestamp": "2026-09-17T07:08:24.791Z",
+          "tool_use_id": "chatcmpl-tool-b54bb947c437467c",
+          "arguments": {
+            "image_id": "img_0133",
+            "plan_arm": "right",
+            "u": 355,
+            "v": 508
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"remote_api_error\",\"details\":{\"http_status\":400,\"response_omitted\":{\"omitted\":true,\"reason\":\"non_object_remote_response\",\"size\":65536,\"type\":\"str\"}},\"message\":\"BEHAVIOR API request failed.\",\"retryable\":false,\"tool_name\":\"plan_press_point\"}"
+        },
+        {
+          "tool": "mcp__behavior-v2__plan_press_point",
+          "timestamp": "2026-09-17T07:09:15.191Z",
+          "tool_use_id": "chatcmpl-tool-b3ed83d28cdcaeba",
+          "arguments": {
+            "image_id": "img_0133",
+            "plan_arm": "right",
+            "seed": 7,
+            "u": 355,
+            "v": 508
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"remote_api_error\",\"details\":{\"http_status\":400,\"response_omitted\":{\"omitted\":true,\"reason\":\"non_object_remote_response\",\"size\":65536,\"type\":\"str\"}},\"message\":\"BEHAVIOR API request failed.\",\"retryable\":false,\"tool_name\":\"plan_press_point\"}"
+        }
+      ]
+    },
+    {
+      "task": "task02",
+      "instance_id": 308,
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/845ae2c6-aac9-4112-ac64-b1312ad59777.jsonl",
+      "sha256": "704be938458da48e848a3c080391392fa0362abccc58a2b2f58a19cb01aa08d5",
+      "calls": [
+        {
+          "tool": "mcp__behavior-v2__plan_press_point",
+          "timestamp": "2026-09-19T15:59:45.620Z",
+          "tool_use_id": "chatcmpl-tool-9b5e50334cc3583e",
+          "arguments": {
+            "image_id": "img_0348",
+            "u": 490,
+            "v": 590,
+            "plan_arm": "right"
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"remote_api_error\",\"details\":{\"http_status\":400,\"response_omitted\":{\"omitted\":true,\"reason\":\"non_object_remote_response\",\"size\":65536,\"type\":\"str\"}},\"message\":\"BEHAVIOR API request failed.\",\"retryable\":false,\"tool_name\":\"plan_press_point\"}"
+        },
+        {
+          "tool": "mcp__behavior-v2__plan_press_point",
+          "timestamp": "2026-09-19T16:02:59.010Z",
+          "tool_use_id": "chatcmpl-tool-9a61dd2ad86f2485",
+          "arguments": {
+            "image_id": "img_0352",
+            "plan_arm": "any",
+            "u": 400,
+            "v": 470
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"remote_api_error\",\"details\":{\"http_status\":400,\"response_omitted\":{\"omitted\":true,\"reason\":\"non_object_remote_response\",\"size\":65536,\"type\":\"str\"}},\"message\":\"BEHAVIOR API request failed.\",\"retryable\":false,\"tool_name\":\"plan_press_point\"}"
+        }
+      ]
+    },
+    {
+      "task": "task02",
+      "instance_id": 310,
+      "source": "experimental_gpu3_interface/eval_runs/t02-15062-0920114651-db5318bac7e0/p15062/runtime/t02p15062i9-0920115421-dceabceee1ae/claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/39b18317-b9f0-4c41-a6b0-83df5713d89a.jsonl",
+      "sha256": "0dc0210a2f9e9ffce4cd3d32a2ba4a121acd30d73b9247eba9a5b9d85b5c2c86",
+      "calls": [
+        {
+          "tool": "mcp__plugin_embodied-claude-code_behavior-v2__plan_press_point",
+          "timestamp": "2026-09-20T05:14:58.421Z",
+          "tool_use_id": "chatcmpl-tool-90e3c1c94893d657",
+          "arguments": {
+            "image_id": "img_0089",
+            "plan_arm": "left",
+            "u": 490,
+            "v": 291
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"tool_policy_error\",\"details\":{\"image_geometry\":{\"clickable\":true,\"coordinate_system\":\"image_pixels_720x720\",\"height\":720,\"image_id\":\"img_0089\",\"sha256\":\"3205d313c3aca9cbf73727221058462f362e1b12424cee4d1a1b8654685c8187\",\"source_height\":720,\"source_width\":720,\"view\":\"head\",\"width\":720},\"image_id\":\"img_0089\",\"latest_image_id\":\"img_0092\"},\"mes"
+        },
+        {
+          "tool": "mcp__plugin_embodied-claude-code_behavior-v2__plan_press_point",
+          "timestamp": "2026-09-20T05:16:04.555Z",
+          "tool_use_id": "chatcmpl-tool-9ff26f4a7176f274",
+          "arguments": {
+            "image_id": "img_0093",
+            "plan_arm": "left",
+            "u": 560,
+            "v": 295
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"remote_api_error\",\"details\":{\"http_status\":400,\"response_omitted\":{\"omitted\":true,\"reason\":\"non_object_remote_response\",\"size\":65536,\"type\":\"str\"}},\"message\":\"BEHAVIOR API request failed.\",\"retryable\":false,\"tool_name\":\"plan_press_point\"}"
+        },
+        {
+          "tool": "mcp__plugin_embodied-claude-code_behavior-v2__plan_press_point",
+          "timestamp": "2026-09-20T05:16:43.591Z",
+          "tool_use_id": "chatcmpl-tool-8695e1d41bb8c652",
+          "arguments": {
+            "image_id": "img_0093",
+            "plan_arm": "left",
+            "u": 595,
+            "v": 300
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"remote_api_error\",\"details\":{\"http_status\":400,\"response_omitted\":{\"omitted\":true,\"reason\":\"non_object_remote_response\",\"size\":65536,\"type\":\"str\"}},\"message\":\"BEHAVIOR API request failed.\",\"retryable\":false,\"tool_name\":\"plan_press_point\"}"
+        }
+      ]
+    },
+    {
+      "task": "task03",
+      "instance_id": 304,
+      "source": "test_results/task03/06_claude_transcripts/claude_t03p15063i3-09171808_304.jsonl",
+      "sha256": "c66fb5b28c37320ed5c6e3b586e45b740d47f190255cb9876578d32f130ebbf5",
+      "calls": [
+        {
+          "tool": "mcp__behavior-v2__adjust_plan_pose",
+          "timestamp": "2026-09-17T14:15:52.590Z",
+          "tool_use_id": "chatcmpl-tool-89f2259d6dbccdbe",
+          "arguments": {
+            "plan_id": "plan_0005",
+            "roll": 90
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"transport_error\",\"details\":{\"context\":\"[Errno 110] Connection timed out\"},\"message\":\"Unable to reach BEHAVIOR server at http://127.0.0.1:15063.\",\"retryable\":true,\"tool_name\":\"adjust_plan_pose\"}"
+        },
+        {
+          "tool": "mcp__behavior-v2__adjust_plan_pose",
+          "timestamp": "2026-09-17T14:18:59.794Z",
+          "tool_use_id": "chatcmpl-tool-bb8dd6fae2b6a0c5",
+          "arguments": {
+            "plan_id": "plan_0005",
+            "roll": 90
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"remote_api_error\",\"details\":{\"http_status\":400,\"response_omitted\":{\"omitted\":true,\"reason\":\"non_object_remote_response\",\"size\":65536,\"type\":\"str\"}},\"message\":\"BEHAVIOR API request failed.\",\"retryable\":false,\"tool_name\":\"adjust_plan_pose\"}"
+        }
+      ]
+    },
+    {
+      "task": "task03",
+      "instance_id": 306,
+      "source": "test_results/task03/06_claude_transcripts/claude_t03p15063i5-09180547_306.jsonl",
+      "sha256": "abf46514cabced8b430ad49a4918f67d32b0bba372b77338c3a8376527980137",
+      "calls": [
+        {
+          "tool": "mcp__behavior-v2__adjust_plan_pose",
+          "timestamp": "2026-09-18T01:29:28.927Z",
+          "tool_use_id": "chatcmpl-tool-94d8639a99a702e6",
+          "arguments": {
+            "plan_id": "plan_0012",
+            "upward": 0.1,
+            "leftward": -0.08
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"remote_api_error\",\"details\":{\"http_status\":400,\"response_omitted\":{\"omitted\":true,\"reason\":\"non_object_remote_response\",\"size\":65536,\"type\":\"str\"}},\"message\":\"BEHAVIOR API request failed.\",\"retryable\":false,\"tool_name\":\"adjust_plan_pose\"}"
+        },
+        {
+          "tool": "mcp__behavior-v2__adjust_plan_pose",
+          "timestamp": "2026-09-18T01:29:35.335Z",
+          "tool_use_id": "chatcmpl-tool-aff3ece7d6423ccd",
+          "arguments": {
+            "plan_id": "plan_0012",
+            "leftward": -0.08,
+            "upward": 0.1
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"remote_api_error\",\"details\":{\"http_status\":400,\"response_omitted\":{\"omitted\":true,\"reason\":\"non_object_remote_response\",\"size\":65536,\"type\":\"str\"}},\"message\":\"BEHAVIOR API request failed.\",\"retryable\":false,\"tool_name\":\"adjust_plan_pose\"}"
+        },
+        {
+          "tool": "mcp__behavior-v2__adjust_plan_pose",
+          "timestamp": "2026-09-18T01:29:41.546Z",
+          "tool_use_id": "chatcmpl-tool-bfa797c99646bd63",
+          "arguments": {
+            "plan_id": "plan_0012",
+            "upward": 0.09
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"remote_api_error\",\"details\":{\"http_status\":400,\"response_omitted\":{\"omitted\":true,\"reason\":\"non_object_remote_response\",\"size\":65536,\"type\":\"str\"}},\"message\":\"BEHAVIOR API request failed.\",\"retryable\":false,\"tool_name\":\"adjust_plan_pose\"}"
+        },
+        {
+          "tool": "mcp__behavior-v2__adjust_plan_pose",
+          "timestamp": "2026-09-18T01:31:40.398Z",
+          "tool_use_id": "chatcmpl-tool-b87976485868ddd4",
+          "arguments": {
+            "plan_id": "plan_0013",
+            "upward": 0.1,
+            "forward": -0.04
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"remote_api_error\",\"details\":{\"http_status\":400,\"response_omitted\":{\"omitted\":true,\"reason\":\"non_object_remote_response\",\"size\":65536,\"type\":\"str\"}},\"message\":\"BEHAVIOR API request failed.\",\"retryable\":false,\"tool_name\":\"adjust_plan_pose\"}"
+        }
+      ]
+    },
+    {
+      "task": "task03",
+      "instance_id": 308,
+      "source": "test_results/task03/06_claude_transcripts/claude_t03p15063i7-09181140_308.jsonl",
+      "sha256": "c075a03da39ad1f891734059de03e2de395734062c2849aefbf59e7c34f49676",
+      "calls": [
+        {
+          "tool": "mcp__behavior-v2__plan_press_point",
+          "timestamp": "2026-09-18T07:04:28.318Z",
+          "tool_use_id": "chatcmpl-tool-a072e3c945be5d75",
+          "arguments": {
+            "image_id": "img_0188",
+            "plan_arm": "any",
+            "u": 370,
+            "v": 470
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"tool_policy_error\",\"details\":{\"image_geometry\":{\"clickable\":true,\"coordinate_system\":\"image_pixels_720x720\",\"height\":720,\"image_id\":\"img_0188\",\"sha256\":\"6295eb3af6ddae53bd0d7362481e92cb94feb4716bd1098163a273cba021f8ae\",\"source_height\":720,\"source_width\":720,\"view\":\"head\",\"width\":720},\"image_id\":\"img_0188\",\"latest_image_id\":\"img_0189\"},\"mes"
+        },
+        {
+          "tool": "mcp__behavior-v2__plan_press_point",
+          "timestamp": "2026-09-18T07:04:43.853Z",
+          "tool_use_id": "chatcmpl-tool-837ae8b3c980d7ee",
+          "arguments": {
+            "image_id": "img_0190",
+            "plan_arm": "any",
+            "u": 362,
+            "v": 468
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"remote_api_error\",\"details\":{\"http_status\":400,\"response_omitted\":{\"omitted\":true,\"reason\":\"non_object_remote_response\",\"size\":65536,\"type\":\"str\"}},\"message\":\"BEHAVIOR API request failed.\",\"retryable\":false,\"tool_name\":\"plan_press_point\"}"
+        },
+        {
+          "tool": "mcp__behavior-v2__plan_press_point",
+          "timestamp": "2026-09-18T07:04:52.808Z",
+          "tool_use_id": "chatcmpl-tool-9f46f22b160614c5",
+          "arguments": {
+            "image_id": "img_0190",
+            "plan_arm": "right",
+            "u": 362,
+            "v": 468
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"remote_api_error\",\"details\":{\"http_status\":400,\"response_omitted\":{\"omitted\":true,\"reason\":\"non_object_remote_response\",\"size\":65536,\"type\":\"str\"}},\"message\":\"BEHAVIOR API request failed.\",\"retryable\":false,\"tool_name\":\"plan_press_point\"}"
+        },
+        {
+          "tool": "mcp__behavior-v2__plan_press_point",
+          "timestamp": "2026-09-18T07:05:36.354Z",
+          "tool_use_id": "chatcmpl-tool-ba76883d9717b3af",
+          "arguments": {
+            "image_id": "img_0190",
+            "plan_arm": "left",
+            "u": 362,
+            "v": 468
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"remote_api_error\",\"details\":{\"http_status\":400,\"response_omitted\":{\"omitted\":true,\"reason\":\"non_object_remote_response\",\"size\":65536,\"type\":\"str\"}},\"message\":\"BEHAVIOR API request failed.\",\"retryable\":false,\"tool_name\":\"plan_press_point\"}"
+        },
+        {
+          "tool": "mcp__behavior-v2__plan_press_point",
+          "timestamp": "2026-09-18T09:38:26.147Z",
+          "tool_use_id": "chatcmpl-tool-99d5ba4e32217b48",
+          "arguments": {
+            "image_id": "img_0305",
+            "plan_arm": "left",
+            "u": 345,
+            "v": 512
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"remote_api_error\",\"details\":{\"http_status\":400,\"response_omitted\":{\"omitted\":true,\"reason\":\"non_object_remote_response\",\"size\":65536,\"type\":\"str\"}},\"message\":\"BEHAVIOR API request failed.\",\"retryable\":false,\"tool_name\":\"plan_press_point\"}"
+        },
+        {
+          "tool": "mcp__behavior-v2__plan_press_point",
+          "timestamp": "2026-09-18T09:39:11.079Z",
+          "tool_use_id": "chatcmpl-tool-8b49534d7f2c6dbc",
+          "arguments": {
+            "image_id": "img_0305",
+            "plan_arm": "left",
+            "u": 345,
+            "v": 470
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"remote_api_error\",\"details\":{\"http_status\":400,\"response_omitted\":{\"omitted\":true,\"reason\":\"non_object_remote_response\",\"size\":65536,\"type\":\"str\"}},\"message\":\"BEHAVIOR API request failed.\",\"retryable\":false,\"tool_name\":\"plan_press_point\"}"
+        }
+      ]
+    },
+    {
+      "task": "task08",
+      "instance_id": 310,
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/45107895-0575-43e9-9260-06715f8268bd.jsonl",
+      "sha256": "5f617686b41fcb9a16b74b59304c61406f728ac946f3b5a2976f9cbfd47b22cd",
+      "calls": [
+        {
+          "tool": "mcp__behavior-v2__plan_press_point",
+          "timestamp": "2026-09-19T07:21:03.938Z",
+          "tool_use_id": "chatcmpl-tool-917e4f005f11f13d",
+          "arguments": {
+            "image_id": "img_0117",
+            "plan_arm": "right",
+            "u": 390,
+            "v": 105
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"remote_api_error\",\"details\":{\"http_status\":400,\"response_omitted\":{\"omitted\":true,\"reason\":\"non_object_remote_response\",\"size\":65536,\"type\":\"str\"}},\"message\":\"BEHAVIOR API request failed.\",\"retryable\":false,\"tool_name\":\"plan_press_point\"}"
+        },
+        {
+          "tool": "mcp__behavior-v2__plan_press_point",
+          "timestamp": "2026-09-19T07:21:23.739Z",
+          "tool_use_id": "chatcmpl-tool-86bea47b2ec24e6f",
+          "arguments": {
+            "image_id": "img_0117",
+            "plan_arm": "right",
+            "u": 330,
+            "v": 45
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"remote_api_error\",\"details\":{\"http_status\":400,\"response_omitted\":{\"omitted\":true,\"reason\":\"non_object_remote_response\",\"size\":65536,\"type\":\"str\"}},\"message\":\"BEHAVIOR API request failed.\",\"retryable\":false,\"tool_name\":\"plan_press_point\"}"
+        }
+      ]
+    },
+    {
+      "task": "task09",
+      "instance_id": 306,
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/87c33b29-838a-42b7-8db0-b5ced0bf7f28.jsonl",
+      "sha256": "bb7d51d6b4ef8976ac2bc0b331206ec7747195aa20645f677d8c6e626a11c161",
+      "calls": [
+        {
+          "tool": "mcp__behavior-v2__plan_press_point",
+          "timestamp": "2026-09-16T13:32:59.097Z",
+          "tool_use_id": "chatcmpl-tool-9a1fbf8e45ca8290",
+          "arguments": {
+            "image_id": "img_0409",
+            "plan_arm": "left",
+            "u": 390,
+            "v": 650
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"tool_policy_error\",\"details\":{\"image_geometry\":{\"clickable\":true,\"coordinate_system\":\"image_pixels_720x720\",\"height\":720,\"image_id\":\"img_0409\",\"sha256\":\"fc2cb0028c88388e7bda6cf3b25808e9f331a7f0190b83a41c436f3d7e06d2a1\",\"source_height\":720,\"source_width\":720,\"view\":\"head\",\"width\":720},\"image_id\":\"img_0409\",\"latest_image_id\":\"img_0411\"},\"mes"
+        },
+        {
+          "tool": "mcp__behavior-v2__plan_press_point",
+          "timestamp": "2026-09-16T13:36:51.909Z",
+          "tool_use_id": "chatcmpl-tool-be8a29cf122fca61",
+          "arguments": {
+            "image_id": "img_0412",
+            "plan_arm": "left",
+            "u": 395,
+            "v": 645
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"remote_api_error\",\"details\":{\"http_status\":400,\"response_omitted\":{\"omitted\":true,\"reason\":\"non_object_remote_response\",\"size\":65536,\"type\":\"str\"}},\"message\":\"BEHAVIOR API request failed.\",\"retryable\":false,\"tool_name\":\"plan_press_point\"}"
+        },
+        {
+          "tool": "mcp__behavior-v2__plan_press_point",
+          "timestamp": "2026-09-16T13:37:53.271Z",
+          "tool_use_id": "chatcmpl-tool-a953ac0d6a621114",
+          "arguments": {
+            "image_id": "img_0412",
+            "plan_arm": "left",
+            "u": 370,
+            "v": 635
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"remote_api_error\",\"details\":{\"http_status\":400,\"response_omitted\":{\"omitted\":true,\"reason\":\"non_object_remote_response\",\"size\":65536,\"type\":\"str\"}},\"message\":\"BEHAVIOR API request failed.\",\"retryable\":false,\"tool_name\":\"plan_press_point\"}"
+        }
+      ]
+    },
+    {
+      "task": "task09",
+      "instance_id": 308,
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/6e78c33d-b12d-4ee3-a8bf-d37e08cd1339.jsonl",
+      "sha256": "3d0aa4419ecd17f2fa253e2e7b121993206fbc85637ff321eac4ea4eaec2601c",
+      "calls": [
+        {
+          "tool": "mcp__behavior-v2__plan_press_point",
+          "timestamp": "2026-09-17T07:40:34.835Z",
+          "tool_use_id": "chatcmpl-tool-8495bc9575fe0009",
+          "arguments": {
+            "image_id": "img_0141",
+            "plan_arm": "right",
+            "u": 350,
+            "v": 540
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"remote_api_error\",\"details\":{\"http_status\":400,\"response_omitted\":{\"omitted\":true,\"reason\":\"non_object_remote_response\",\"size\":65536,\"type\":\"str\"}},\"message\":\"BEHAVIOR API request failed.\",\"retryable\":false,\"tool_name\":\"plan_press_point\"}"
+        },
+        {
+          "tool": "mcp__behavior-v2__plan_press_point",
+          "timestamp": "2026-09-17T07:41:38.174Z",
+          "tool_use_id": "chatcmpl-tool-b13bb428fd11a943",
+          "arguments": {
+            "image_id": "img_0141",
+            "plan_arm": "right",
+            "u": 400,
+            "v": 620
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"remote_api_error\",\"details\":{\"http_status\":400,\"response_omitted\":{\"omitted\":true,\"reason\":\"non_object_remote_response\",\"size\":65536,\"type\":\"str\"}},\"message\":\"BEHAVIOR API request failed.\",\"retryable\":false,\"tool_name\":\"plan_press_point\"}"
+        }
+      ]
+    },
+    {
+      "task": "task09",
+      "instance_id": 310,
+      "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/c1783e34-33a3-40a9-8b41-4dd57554427e.jsonl",
+      "sha256": "77f419e310d6c0e375d99dd8d1f2a1a33b722a0eb7ae438f4a70846f4696748c",
+      "calls": [
+        {
+          "tool": "mcp__behavior-v2__plan_press_point",
+          "timestamp": "2026-09-17T15:20:25.482Z",
+          "tool_use_id": "chatcmpl-tool-97939636b38a1c9e",
+          "arguments": {
+            "image_id": "img_0214",
+            "plan_arm": "left",
+            "u": 300,
+            "v": 60
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"remote_api_error\",\"details\":{\"http_status\":400,\"response_omitted\":{\"omitted\":true,\"reason\":\"non_object_remote_response\",\"size\":65536,\"type\":\"str\"}},\"message\":\"BEHAVIOR API request failed.\",\"retryable\":false,\"tool_name\":\"plan_press_point\"}"
+        },
+        {
+          "tool": "mcp__behavior-v2__plan_press_point",
+          "timestamp": "2026-09-17T15:21:27.454Z",
+          "tool_use_id": "chatcmpl-tool-8b912704b1d151b4",
+          "arguments": {
+            "image_id": "img_0214",
+            "plan_arm": "left",
+            "u": 200,
+            "v": 230
+          },
+          "result_is_error": true,
+          "result_recorded": true,
+          "result_text_preview": "{\"code\":\"remote_api_error\",\"details\":{\"http_status\":400,\"response_omitted\":{\"omitted\":true,\"reason\":\"non_object_remote_response\",\"size\":65536,\"type\":\"str\"}},\"message\":\"BEHAVIOR API request failed.\",\"retryable\":false,\"tool_name\":\"plan_press_point\"}"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "All 31 archived calls returned adapter errors (27 remote HTTP 400, one transport timeout, three pixel-policy rejections). They prove registered adapter dispatch, not successful robot actions or complete historical tool schemas.",
+    "cut_object is restored from the surviving profile; no archived call was observed.",
+    "This is context evidence, not an official score reproduction result."
+  ],
+  "observed_result_codes": {
+    "remote_api_error": 27,
+    "tool_policy_error": 3,
+    "transport_error": 1
+  },
+  "token_probe": {
+    "diagnostic_only": true,
+    "method": "Current endpoint count_tokens; only_restored_tools changes only the captured tools list. No generation or robot actions.",
+    "before": "/mnt/nas_nfs/home/bince/RoboHarness/.local/request-context-probe-20261001-101334/plain_seeded/requests.json",
+    "after": "/mnt/nas_nfs/home/bince/RoboHarness/.local/request-context-probe-20261001-103545/plain_seeded/requests.json",
+    "added_tools": [
+      "mcp__behavior-v2__adjust_plan_pose",
+      "mcp__behavior-v2__cut_object",
+      "mcp__behavior-v2__plan_press_point"
+    ],
+    "changed_existing_tools": [],
+    "results": [
+      {
+        "variant": "before",
+        "request_sha256": "45e763539e68eed8f1c717560b1c682c559cd28d466306b79a79b348dcc746ca",
+        "tool_count": 27,
+        "input_tokens": 18858,
+        "context_management": {
+          "original_input_tokens": 18858
+        }
+      },
+      {
+        "variant": "only_restored_tools",
+        "request_sha256": "312dcd6184035713fc435534a59c20cf809dc935d1cd8cbb9f3f5d5310e88761",
+        "tool_count": 30,
+        "input_tokens": 20619,
+        "context_management": {
+          "original_input_tokens": 20619
+        }
+      },
+      {
+        "variant": "new_capture",
+        "request_sha256": "941bb0249074b9febf25c9320a97d4f6a1dbf290de0ddd6a741b7abd47c6841e",
+        "tool_count": 30,
+        "input_tokens": 20613,
+        "context_management": {
+          "original_input_tokens": 20613
+        }
+      }
+    ],
+    "interpretation": "Restoring only the three tool definitions adds 1761 tokens. The captured non-Git startup counts 20613 tokens versus archived task01/301 first input usage 20647. Remaining path/date-dependent context is not proven byte-identical; token counts alone do not prove equivalence."
+  },
+  "archived_first_input": {
+    "task": "task01",
+    "instance_id": 301,
+    "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/282de2ac-1724-4003-b69e-0060656cbebb.jsonl",
+    "source_sha256": "9bde08ae54db3055b6b72ce5997312d40e0e07ad3777ebd4c53f60196ffbfe31",
+    "timestamp": "2026-09-15T13:47:35.623Z",
+    "usage": {
+      "input_tokens": 20647,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "output_tokens": 42,
+      "output_tokens_details": {
+        "thinking_tokens": 0
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "",
+      "iterations": [],
+      "speed": "standard"
+    }
+  },
+  "regressions": [
+    {
+      "log": "root-tests-tools-20261001.log",
+      "tests": 62,
+      "passed": 61,
+      "skipped": 1,
+      "sha256": "d526cb81adb68ae81664be3204e312e166b91adaa345ae44aefa51fc390dc1a1"
+    },
+    {
+      "log": "harness-profile-tests-20261001.log",
+      "tests": 57,
+      "passed": 57,
+      "skipped": 0,
+      "sha256": "28c8f8ecaf7d63bdc352d35f0987e8db5676a060a1132ed1e725d96ef69339f7"
+    },
+    {
+      "log": "native-profile-tests-final-20261001.log",
+      "tests": 13,
+      "passed": 13,
+      "skipped": 0,
+      "sha256": "cc742fc657563a7bb6f7644b8ce3503c8a94ba614e6c175525a51980e3246d7a"
+    }
+  ],
+  "base_revision": "eb527383b7c654fe1e0d1db5e55f0e726174fa78",
+  "tested_file_sha256": {
+    "harness/claude_code/src/embodied_claude_code/profile.py": "d07a658ae14fce29fd845017a99405bd83184cbd6a0928e9433f6ba18f2178c1",
+    "harness/claude_code/profiles/archived-native-context.json": "3022aa6274bab69ee8082b36898ed96a0b2af65ecb85cf66286ead147183fc6f",
+    "harness/claude_code/tests/test_config_profile.py": "7ca67aa86736e0c8c7660d4fb695979047a8e38e3702d206871ba73a8cc8189e",
+    "harness/claude_code/tests/test_archive_context.py": "00d23d11d7403e7b7e500ce04fa152c0e49d83e2aaa3a28a915d5a7008a8741b",
+    "harness/claude_code/tests/test_native_skill_lifecycle.py": "d26310f53e3ae8514eb9819100b880720ccdb9cff807a73a7e72c90548672deb",
+    "roboharness/native_context.py": "c1714a51cedde9564f83662e2b59b3f21a36661d466e748241982a4b8a1edb21",
+    "tests/test_native_context.py": "19fbd5b5d60ddff38d760f3e842c6d4f9d75a02ace3027806636d4ff67326405"
+  }
+}
