@@ -127,3 +127,17 @@ remaining outside can less than 0.5 m away. A comparison of archived gripper
 responses does not establish a control-timing regression. This is diagnostic
 evidence only; it does not isolate the failure cause or validate the queued
 fixes. See [the outcome audit](../validation_results/task01-301-r5-outcome-20261001/README.md).
+
+## Observed r5 task03/301 wall-clock cutoff
+
+On October 1 at 19:29:40 Asia/Shanghai, the old r5 controller submitted
+`wall_timeout` after 24 hours. The official result is Q=0 at 10,024 steps,
+below the archived 27,392-step budget. This confirms that the old wall-clock
+cap can truncate an otherwise live episode. It does not establish the score
+the model would achieve with the full step budget.
+
+Case 304 started automatically at 19:29:55. The previous agent processes
+exited and the controller, interface and evaluator continued running. The
+reporter preserves the official score while rejecting it for strict
+reproduction verification. The queued r6 configuration already disables this
+extra wall-clock cap. See [the cutoff and handoff evidence](../validation_results/task03-301-r5-timeout-20261001/README.md).
