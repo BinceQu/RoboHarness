@@ -1,7 +1,7 @@
 # Release validation
 
 **The three requested task means have not yet been verified.** This status
-snapshot was checked on October 1, 2026 at 21:12 Asia/Shanghai. The
+snapshot was checked on October 1, 2026 at 21:29 Asia/Shanghai. The
 [live r5 report](../validation_results/gpu5-20260930-r5/README.md) records
 completed official scores; a running process or a passing software test is
 not evidence that a task mean matches.
@@ -106,6 +106,14 @@ started. The loaded OpenCV binary matches the reference evaluator. Three
 compared package versions differ, and `pip check` retains seven dependency
 declaration conflicts; these limits are recorded in the audit. The new
 environment has not been selected by r6 or exercised in a GPU rollout.
+
+The fresh evaluator also passed an [actual TCP protocol check](../validation_results/evaluator-wire-20261001/README.md)
+against the independent interface environment: six full-resolution RGB-D
+observations (44,065,560 array bytes), six 27-element actions, two resets and
+two connections preserved the expected data. This used the release's client
+and server functions with a non-actuating runtime stub on port 15079; the
+listener was released afterwards. It establishes transport compatibility for
+those versions and payloads, not simulation or task-mean correctness.
 
 The earlier [mean-Q regression and activation evidence](../validation_results/mean-q-acceptance-20261001/README.md)
 documents the acceptance rule at `46e51e4`. Those runtime files are unchanged

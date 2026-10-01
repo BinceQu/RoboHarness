@@ -1,0 +1,601 @@
+{
+  "recorded_at": "2026-10-01T21:29:33.157654+08:00",
+  "scope": "Actual loopback TCP between release serve_policy and upstream WebsocketClientPolicy with the release main-thread client installed. The policy runtime is a non-actuating stub validating synthetic observation bytes and returning predetermined actions. No simulator or official score is produced.",
+  "source_revision": "c4763eb0947adf7f0186834b476a0ec375ee1d1e",
+  "behavior_revision": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+  "reports": {
+    "server": {
+      "passed": true,
+      "reset_count": 2,
+      "observations": [
+        {
+          "sequence": 0,
+          "arrays": {
+            "/cameras/head/depth_linear": {
+              "shape": [
+                720,
+                720
+              ],
+              "dtype": "<f4",
+              "sha256": "1d2fe8a58096511d544dc366acaa07598ef795147e19b959d194397340a3171a",
+              "bytes": 2073600
+            },
+            "/cameras/head/rgb": {
+              "shape": [
+                720,
+                720,
+                3
+              ],
+              "dtype": "|u1",
+              "sha256": "e7e3b6c7345eb0a1d2cb4d8a8c408daede55956b242592dda1e6d1ad29cdb440",
+              "bytes": 1555200
+            },
+            "/cameras/left_wrist/depth_linear": {
+              "shape": [
+                480,
+                480
+              ],
+              "dtype": "<f4",
+              "sha256": "f5018a881b787c48cf5efe0f71951a287fc9126b46dd8cabd4e037e2bfd5bd87",
+              "bytes": 921600
+            },
+            "/cameras/left_wrist/rgb": {
+              "shape": [
+                480,
+                480,
+                3
+              ],
+              "dtype": "|u1",
+              "sha256": "7b292a2093200fd8b27b2d38c509d8c9a95ebc258f006f2779c60759fc271848",
+              "bytes": 691200
+            },
+            "/cameras/right_wrist/depth_linear": {
+              "shape": [
+                480,
+                480
+              ],
+              "dtype": "<f4",
+              "sha256": "f5018a881b787c48cf5efe0f71951a287fc9126b46dd8cabd4e037e2bfd5bd87",
+              "bytes": 921600
+            },
+            "/cameras/right_wrist/rgb": {
+              "shape": [
+                480,
+                480,
+                3
+              ],
+              "dtype": "|u1",
+              "sha256": "7b292a2093200fd8b27b2d38c509d8c9a95ebc258f006f2779c60759fc271848",
+              "bytes": 691200
+            },
+            "/proprioception": {
+              "shape": [
+                65
+              ],
+              "dtype": "<f4",
+              "sha256": "b3e720b8f6a91c3d04e2813863a62948b687c6d8576620f1abfadedd10f54dfb",
+              "bytes": 260
+            }
+          }
+        },
+        {
+          "sequence": 1,
+          "arrays": {
+            "/cameras/head/depth_linear": {
+              "shape": [
+                720,
+                720
+              ],
+              "dtype": "<f4",
+              "sha256": "1d2fe8a58096511d544dc366acaa07598ef795147e19b959d194397340a3171a",
+              "bytes": 2073600
+            },
+            "/cameras/head/rgb": {
+              "shape": [
+                720,
+                720,
+                4
+              ],
+              "dtype": "|u1",
+              "sha256": "5047a91bd586ea295bfd17d1ff694e73d2541ccae345e8082a9c829df485a4d3",
+              "bytes": 2073600
+            },
+            "/cameras/left_wrist/depth_linear": {
+              "shape": [
+                480,
+                480
+              ],
+              "dtype": "<f4",
+              "sha256": "f5018a881b787c48cf5efe0f71951a287fc9126b46dd8cabd4e037e2bfd5bd87",
+              "bytes": 921600
+            },
+            "/cameras/left_wrist/rgb": {
+              "shape": [
+                480,
+                480,
+                4
+              ],
+              "dtype": "|u1",
+              "sha256": "868bc72f44a418e3629c9c853c1ff0434f373bb5dd3f62c9695b9d0e9f03673d",
+              "bytes": 921600
+            },
+            "/cameras/right_wrist/depth_linear": {
+              "shape": [
+                480,
+                480
+              ],
+              "dtype": "<f4",
+              "sha256": "f5018a881b787c48cf5efe0f71951a287fc9126b46dd8cabd4e037e2bfd5bd87",
+              "bytes": 921600
+            },
+            "/cameras/right_wrist/rgb": {
+              "shape": [
+                480,
+                480,
+                4
+              ],
+              "dtype": "|u1",
+              "sha256": "868bc72f44a418e3629c9c853c1ff0434f373bb5dd3f62c9695b9d0e9f03673d",
+              "bytes": 921600
+            },
+            "/proprioception": {
+              "shape": [
+                65
+              ],
+              "dtype": "<f4",
+              "sha256": "b3e720b8f6a91c3d04e2813863a62948b687c6d8576620f1abfadedd10f54dfb",
+              "bytes": 260
+            }
+          }
+        },
+        {
+          "sequence": 2,
+          "arrays": {
+            "/cameras/head/depth_linear": {
+              "shape": [
+                720,
+                720
+              ],
+              "dtype": "<f4",
+              "sha256": "1d2fe8a58096511d544dc366acaa07598ef795147e19b959d194397340a3171a",
+              "bytes": 2073600
+            },
+            "/cameras/head/rgb": {
+              "shape": [
+                720,
+                720,
+                3
+              ],
+              "dtype": "|u1",
+              "sha256": "7b6b574bdc237d15248bb1075affcc38bec52c23d2be5993dee2f5515d43e41d",
+              "bytes": 1555200
+            },
+            "/cameras/left_wrist/depth_linear": {
+              "shape": [
+                480,
+                480
+              ],
+              "dtype": "<f4",
+              "sha256": "f5018a881b787c48cf5efe0f71951a287fc9126b46dd8cabd4e037e2bfd5bd87",
+              "bytes": 921600
+            },
+            "/cameras/left_wrist/rgb": {
+              "shape": [
+                480,
+                480,
+                3
+              ],
+              "dtype": "|u1",
+              "sha256": "bc9597794186a7600b60550440ede209d08f58b726e7a33d644e2f1993ecc45f",
+              "bytes": 691200
+            },
+            "/cameras/right_wrist/depth_linear": {
+              "shape": [
+                480,
+                480
+              ],
+              "dtype": "<f4",
+              "sha256": "f5018a881b787c48cf5efe0f71951a287fc9126b46dd8cabd4e037e2bfd5bd87",
+              "bytes": 921600
+            },
+            "/cameras/right_wrist/rgb": {
+              "shape": [
+                480,
+                480,
+                3
+              ],
+              "dtype": "|u1",
+              "sha256": "bc9597794186a7600b60550440ede209d08f58b726e7a33d644e2f1993ecc45f",
+              "bytes": 691200
+            },
+            "/proprioception": {
+              "shape": [
+                65
+              ],
+              "dtype": "<f4",
+              "sha256": "b3e720b8f6a91c3d04e2813863a62948b687c6d8576620f1abfadedd10f54dfb",
+              "bytes": 260
+            }
+          }
+        },
+        {
+          "sequence": 3,
+          "arrays": {
+            "/cameras/head/depth_linear": {
+              "shape": [
+                720,
+                720
+              ],
+              "dtype": "<f4",
+              "sha256": "1d2fe8a58096511d544dc366acaa07598ef795147e19b959d194397340a3171a",
+              "bytes": 2073600
+            },
+            "/cameras/head/rgb": {
+              "shape": [
+                720,
+                720,
+                4
+              ],
+              "dtype": "|u1",
+              "sha256": "a7ea6ad628fe60e5139d5bdcc70b1742388adfcb48a253c688230942e0b70315",
+              "bytes": 2073600
+            },
+            "/cameras/left_wrist/depth_linear": {
+              "shape": [
+                480,
+                480
+              ],
+              "dtype": "<f4",
+              "sha256": "f5018a881b787c48cf5efe0f71951a287fc9126b46dd8cabd4e037e2bfd5bd87",
+              "bytes": 921600
+            },
+            "/cameras/left_wrist/rgb": {
+              "shape": [
+                480,
+                480,
+                4
+              ],
+              "dtype": "|u1",
+              "sha256": "c9ed1faf49e2efdc96265787aae08b5ef7363ee0680b3eafdd48bede36c4ad39",
+              "bytes": 921600
+            },
+            "/cameras/right_wrist/depth_linear": {
+              "shape": [
+                480,
+                480
+              ],
+              "dtype": "<f4",
+              "sha256": "f5018a881b787c48cf5efe0f71951a287fc9126b46dd8cabd4e037e2bfd5bd87",
+              "bytes": 921600
+            },
+            "/cameras/right_wrist/rgb": {
+              "shape": [
+                480,
+                480,
+                4
+              ],
+              "dtype": "|u1",
+              "sha256": "c9ed1faf49e2efdc96265787aae08b5ef7363ee0680b3eafdd48bede36c4ad39",
+              "bytes": 921600
+            },
+            "/proprioception": {
+              "shape": [
+                65
+              ],
+              "dtype": "<f4",
+              "sha256": "b3e720b8f6a91c3d04e2813863a62948b687c6d8576620f1abfadedd10f54dfb",
+              "bytes": 260
+            }
+          }
+        },
+        {
+          "sequence": 4,
+          "arrays": {
+            "/cameras/head/depth_linear": {
+              "shape": [
+                720,
+                720
+              ],
+              "dtype": "<f4",
+              "sha256": "1d2fe8a58096511d544dc366acaa07598ef795147e19b959d194397340a3171a",
+              "bytes": 2073600
+            },
+            "/cameras/head/rgb": {
+              "shape": [
+                720,
+                720,
+                3
+              ],
+              "dtype": "|u1",
+              "sha256": "7f2c605ef8ff99430682fadc4ef82b88bfbb8a0e18f198d1a4c82862fa069fea",
+              "bytes": 1555200
+            },
+            "/cameras/left_wrist/depth_linear": {
+              "shape": [
+                480,
+                480
+              ],
+              "dtype": "<f4",
+              "sha256": "f5018a881b787c48cf5efe0f71951a287fc9126b46dd8cabd4e037e2bfd5bd87",
+              "bytes": 921600
+            },
+            "/cameras/left_wrist/rgb": {
+              "shape": [
+                480,
+                480,
+                3
+              ],
+              "dtype": "|u1",
+              "sha256": "84ae7597d94809c6d8d924b990061d7db1bfb47e63df4de48a48613b8a61fb8c",
+              "bytes": 691200
+            },
+            "/cameras/right_wrist/depth_linear": {
+              "shape": [
+                480,
+                480
+              ],
+              "dtype": "<f4",
+              "sha256": "f5018a881b787c48cf5efe0f71951a287fc9126b46dd8cabd4e037e2bfd5bd87",
+              "bytes": 921600
+            },
+            "/cameras/right_wrist/rgb": {
+              "shape": [
+                480,
+                480,
+                3
+              ],
+              "dtype": "|u1",
+              "sha256": "84ae7597d94809c6d8d924b990061d7db1bfb47e63df4de48a48613b8a61fb8c",
+              "bytes": 691200
+            },
+            "/proprioception": {
+              "shape": [
+                65
+              ],
+              "dtype": "<f4",
+              "sha256": "b3e720b8f6a91c3d04e2813863a62948b687c6d8576620f1abfadedd10f54dfb",
+              "bytes": 260
+            }
+          }
+        },
+        {
+          "sequence": 5,
+          "arrays": {
+            "/cameras/head/depth_linear": {
+              "shape": [
+                720,
+                720
+              ],
+              "dtype": "<f4",
+              "sha256": "1d2fe8a58096511d544dc366acaa07598ef795147e19b959d194397340a3171a",
+              "bytes": 2073600
+            },
+            "/cameras/head/rgb": {
+              "shape": [
+                720,
+                720,
+                4
+              ],
+              "dtype": "|u1",
+              "sha256": "8ec0dafc2ab19d28e84b008798b1720ac975dd70d25b3e3c9c92b1b96e9690e6",
+              "bytes": 2073600
+            },
+            "/cameras/left_wrist/depth_linear": {
+              "shape": [
+                480,
+                480
+              ],
+              "dtype": "<f4",
+              "sha256": "f5018a881b787c48cf5efe0f71951a287fc9126b46dd8cabd4e037e2bfd5bd87",
+              "bytes": 921600
+            },
+            "/cameras/left_wrist/rgb": {
+              "shape": [
+                480,
+                480,
+                4
+              ],
+              "dtype": "|u1",
+              "sha256": "f37e2e90207b3526beaf9dc45211fd96944bf315352c61d453fd3ce01ca1b4f6",
+              "bytes": 921600
+            },
+            "/cameras/right_wrist/depth_linear": {
+              "shape": [
+                480,
+                480
+              ],
+              "dtype": "<f4",
+              "sha256": "f5018a881b787c48cf5efe0f71951a287fc9126b46dd8cabd4e037e2bfd5bd87",
+              "bytes": 921600
+            },
+            "/cameras/right_wrist/rgb": {
+              "shape": [
+                480,
+                480,
+                4
+              ],
+              "dtype": "|u1",
+              "sha256": "f37e2e90207b3526beaf9dc45211fd96944bf315352c61d453fd3ce01ca1b4f6",
+              "bytes": 921600
+            },
+            "/proprioception": {
+              "shape": [
+                65
+              ],
+              "dtype": "<f4",
+              "sha256": "b3e720b8f6a91c3d04e2813863a62948b687c6d8576620f1abfadedd10f54dfb",
+              "bytes": 260
+            }
+          }
+        }
+      ],
+      "array_bytes_received": 44065560,
+      "cuda_initialized": false,
+      "server_function": "behavior_interface_eval_test.official_policy_interface.serve_policy",
+      "observed_at": "2026-10-01T21:26:10.600605+08:00",
+      "python": "<fresh-interface>/bin/python",
+      "websockets": "16.1.1",
+      "numpy": "1.26.4",
+      "port": 15079,
+      "scope": "CPU-only loopback protocol check using synthetic RGB-D and a non-actuating runtime stub."
+    },
+    "client": {
+      "passed": true,
+      "sessions": [
+        {
+          "metadata": {
+            "layer": "behavior-interface",
+            "protocol": "BEHAVIOR v3.9.1",
+            "robot_profile": "r1pro_8dof_hf250",
+            "robot_model": "r1pro",
+            "arm_dof": 8,
+            "tool_version": "official_v2",
+            "action_dim": 27,
+            "allowed_observations": [
+              "RGB",
+              "depth_linear",
+              "proprioception",
+              "camera-relative poses supplied by evaluator",
+              "task_id"
+            ],
+            "display_only_metadata": [
+              "BDDL goal completion (removed before tool/downstream policy access)"
+            ]
+          },
+          "connection_class": "behavior_interface_eval_test.official_rgbd_wrapper._MainThreadWebSocketConnection"
+        },
+        {
+          "metadata": {
+            "layer": "behavior-interface",
+            "protocol": "BEHAVIOR v3.9.1",
+            "robot_profile": "r1pro_8dof_hf250",
+            "robot_model": "r1pro",
+            "arm_dof": 8,
+            "tool_version": "official_v2",
+            "action_dim": 27,
+            "allowed_observations": [
+              "RGB",
+              "depth_linear",
+              "proprioception",
+              "camera-relative poses supplied by evaluator",
+              "task_id"
+            ],
+            "display_only_metadata": [
+              "BDDL goal completion (removed before tool/downstream policy access)"
+            ]
+          },
+          "connection_class": "behavior_interface_eval_test.official_rgbd_wrapper._MainThreadWebSocketConnection"
+        }
+      ],
+      "actions": [
+        {
+          "sequence": 0,
+          "shape": [
+            27
+          ],
+          "sha256": "c29a03e1154c97efa8df1a778c03dcc8b5f2ac84589388b9389c4068d6c0a9df"
+        },
+        {
+          "sequence": 1,
+          "shape": [
+            27
+          ],
+          "sha256": "cce7355984e9290b867a93375f2d0728dbd70ebe6ae9cb23b2c2168264be2679"
+        },
+        {
+          "sequence": 2,
+          "shape": [
+            27
+          ],
+          "sha256": "cc5daa2e29b63a920cf2b45d074291b06796bfb1f005d696a8d07ae15ba4b2bf"
+        },
+        {
+          "sequence": 3,
+          "shape": [
+            27
+          ],
+          "sha256": "8b94293395e4038d014617b90462682fd162871fea74364bbeab450e3f158ec6"
+        },
+        {
+          "sequence": 4,
+          "shape": [
+            27
+          ],
+          "sha256": "7e52e9621190081d074055aa24de244969721072cea8f648cc002e9cc04a3264"
+        },
+        {
+          "sequence": 5,
+          "shape": [
+            27
+          ],
+          "sha256": "ded2e541874da3de89c54bf4f0f92c159869bec41323920cbb05503c1f0502c9"
+        }
+      ],
+      "cuda_initialized": false,
+      "simulator_started": false,
+      "observed_at": "2026-10-01T21:26:10.550126+08:00",
+      "python": "<fresh-evaluator>/bin/python",
+      "websockets": "17.1",
+      "numpy": "1.26.0",
+      "port": 15079,
+      "scope": "CPU-only loopback protocol check using synthetic RGB-D and a non-actuating runtime stub."
+    }
+  },
+  "checks": {
+    "health_check": "Actual HTTP GET /healthz returned 200.",
+    "handshake_and_metadata": "Two actual WebSocket handshakes returned the official protocol and custom robot profile with action_dim 27.",
+    "observations": "Six nested observations include full-resolution 720x720 head and two 480x480 wrist arrays, alternating RGB/RGBA uint8, float32 depth with non-finite sentinels, 65-value proprioception converted from a Torch tensor, and a NumPy int64 task identifier. Shapes, dtypes and SHA256 of every array match on receipt.",
+    "actions": "All six returned actions are CPU Torch float32 arrays with 27 entries, equal to independent expected values.",
+    "reset_and_reconnect": "Two reset messages and two distinct client connections complete.",
+    "listener_released": true,
+    "port": 15079,
+    "cuda_initialized": false,
+    "simulator_started": false
+  },
+  "test_harness_correction": "The first private probe assumed 25 action entries; the correct packaged custom profile advertises 27. The final probe uses the packaged contract. No release runtime code changed.",
+  "source_file_sha256": {
+    "interface/behavior_interface_eval_test/official_rgbd_wrapper.py": "a5e3ea5797db7e7be7e06f514aef8dd4d523f0d580393957d286eba57ff2bcda",
+    "interface/behavior_interface_eval_test/official_policy_interface.py": "df73365c2e7c07fc7419cb6bc7dfd1be98e018029d70ed43c652ad5c3f139754",
+    "interface/behavior_interface_eval_test/official_protocol.py": "96502114d8c6692f50c6110e03a4d5758bd3146205968b945e1d31f25c26ab62",
+    "interface/behavior_interface_eval_test/robot_profiles/r1pro_8dof_hf250/robot_contract.json": "6e6ab23fe23f7be760ebae23c0abdeb16df276e007eaa7a8613371f635ec5798",
+    "BEHAVIOR/OmniGibson/omnigibson/eval/utils/network_utils.py": "f94891efe51cd220dfb736fef42bc3d6c857a01dd2bef2ad68bcf79b3dfb1b90"
+  },
+  "probe_script_sha256": "680f386ed4e6b4ab366f916e627d99a369b9c223e9ccc6504e524294cea1fb17",
+  "r5_preservation": {
+    "task01": {
+      "controller": {
+        "MainPID": "2833423",
+        "ActiveState": "active"
+      },
+      "recorded_roles_alive": true,
+      "n_finished": 1,
+      "last_progress": "2026-10-01 21:29:29 instance 304: agent=running ticks=4510"
+    },
+    "task03": {
+      "controller": {
+        "MainPID": "2833447",
+        "ActiveState": "active"
+      },
+      "recorded_roles_alive": true,
+      "n_finished": 1,
+      "last_progress": "2026-10-01 21:29:20 instance 304: agent=running ticks=2362"
+    },
+    "task08": {
+      "controller": {
+        "MainPID": "2833459",
+        "ActiveState": "active"
+      },
+      "recorded_roles_alive": true,
+      "n_finished": 1,
+      "last_progress": "2026-10-01 21:29:28 instance 304: agent=running ticks=4476"
+    }
+  },
+  "r6_session_config_sha256": "6bc65dadcc9edf16052dcc070efd6a4daab445b36fd9783a129753529916e731",
+  "r6_status": "waiting_for_r5",
+  "limitations": [
+    "This loopback protocol check uses synthetic arrays and a policy stub; it is not a simulator, robot-control or task-score check.",
+    "It tests fresh evaluator websockets 17.1 with interface websockets 16.1.1, not every dependency or arbitrary versions.",
+    "The fresh evaluator remains unselected by r6. Pillow and pyarrow differences and pip metadata conflicts remain recorded in the installation audit.",
+    "All fifteen corrected cases and their three complete task means remain unverified."
+  ]
+}

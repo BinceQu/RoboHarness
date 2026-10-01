@@ -61,6 +61,13 @@ typing-extensions, websockets, Pillow, click and packaging. The audit retains
 the full output. Successful imports do not prove these conflicts or version
 differences harmless in every runtime path.
 
+A subsequent [actual TCP protocol check](../evaluator-wire-20261001/README.md)
+passed between this evaluator's websockets 17.1 and the independent
+interface environment's 16.1.1. Six full-resolution RGB-D observations
+(44,065,560 array bytes), six 27-element actions, two resets and two client
+connections passed exact data comparisons. That check used a non-actuating
+runtime stub and did not start a simulator.
+
 The newly installed environment has not run a simulator and is not selected
 by the pending r6 queue. This is an independent venv check on an existing
 host, not a clean-host or dataset installation check. At 21:12 Asia/Shanghai,
