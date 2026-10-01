@@ -141,3 +141,20 @@ exited and the controller, interface and evaluator continued running. The
 reporter preserves the official score while rejecting it for strict
 reproduction verification. The queued r6 configuration already disables this
 extra wall-clock cap. See [the cutoff and handoff evidence](../validation_results/task03-301-r5-timeout-20261001/README.md).
+
+## Archived versus current response timing
+
+A hash-verified comparison of the three completed case-301 native transcripts
+finds substantially longer tool-result-to-assistant-completion intervals in
+r5. Their medians changed from 29.8 to 199.9 seconds for task01, 57.6 to 216.4
+seconds for task03, and 28.0 to 190.0 seconds for task08. Typical output token
+counts are similar or lower. This supports investigating inference-path
+latency rather than assuming that larger replies explain the longer runs.
+
+The measurement includes model queueing and generation, transport and CLI
+behavior; it does not isolate server-only latency. Different trajectories and
+the task03 cutoff also prevent a controlled throughput comparison. The
+[timing audit](../validation_results/native-latency-comparison-20261001/README.md)
+retains the counting method, source hashes, response counts and limitations.
+It supports removing the extra wall-clock cutoff, not a score reproduction
+claim or a change to archived prompts and simulation budgets.

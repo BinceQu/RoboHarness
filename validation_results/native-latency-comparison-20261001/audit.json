@@ -1,0 +1,542 @@
+{
+  "observed_at": "2026-10-01T19:49:51.500868+08:00",
+  "output_length_method": "Group native assistant records by message.id, keep last content for each apiBlockIndex, use max cumulative token usage for each message. Compare full available transcripts and equal-length response prefixes. No model HTTP bodies read. Current 304 trajectories are partial; response prefixes need not describe the same actions.",
+  "latency_method": "For each unique assistant message.id, subtract the last preceding user tool_result timestamp from the last timestamp for that assistant ID. Intervals include model service queue/generation, transport, CLI overhead/retries, and possibly native continuation behavior; they are not isolated server timings. All available responses, not necessarily identical actions.",
+  "scope": "Read-only comparison of the three completed r5 case-301 native transcripts and their corresponding archived transcripts. R5 task03/301 was wall-clock truncated; response sequences and counts differ. This comparison does not establish score reproduction or isolate server-only latency.",
+  "tasks": {
+    "task01": {
+      "instance_id": 301,
+      "r5_termination": "model_done",
+      "equal_prefix_responses": 186,
+      "archive": {
+        "bytes": 70431539,
+        "start": "2026-09-15T13:47:29.041Z",
+        "end": "2026-09-15T16:54:15.496Z",
+        "elapsed_hours": 3.1129041666666666,
+        "models": {
+          "Qwen3.8-Flash-Next-FP8": 186
+        },
+        "all": {
+          "responses": 186,
+          "output_tokens": {
+            "n": 186,
+            "median": 447.0,
+            "p90": 2126,
+            "max": 3891,
+            "sum": 143096
+          },
+          "input_tokens": {
+            "n": 186,
+            "median": 89078.5,
+            "p90": 147436,
+            "max": 165860,
+            "sum": 16684435
+          },
+          "thinking_chars": {
+            "n": 186,
+            "median": 1064.5,
+            "p90": 5697,
+            "max": 11890,
+            "sum": 386989
+          },
+          "text_chars": {
+            "n": 186,
+            "median": 92.0,
+            "p90": 193,
+            "max": 575,
+            "sum": 18500
+          },
+          "stop_reasons": {
+            "tool_use": 186
+          }
+        },
+        "equal_prefix": {
+          "responses": 186,
+          "output_tokens": {
+            "n": 186,
+            "median": 447.0,
+            "p90": 2126,
+            "max": 3891,
+            "sum": 143096
+          },
+          "input_tokens": {
+            "n": 186,
+            "median": 89078.5,
+            "p90": 147436,
+            "max": 165860,
+            "sum": 16684435
+          },
+          "thinking_chars": {
+            "n": 186,
+            "median": 1064.5,
+            "p90": 5697,
+            "max": 11890,
+            "sum": 386989
+          },
+          "text_chars": {
+            "n": 186,
+            "median": 92.0,
+            "p90": 193,
+            "max": 575,
+            "sum": 18500
+          },
+          "stop_reasons": {
+            "tool_use": 186
+          }
+        },
+        "tool_result_to_assistant_completion": {
+          "count": 185,
+          "median_s": 29.811000108718872,
+          "p90_s": 88.35700011253357,
+          "max_s": 435.40899991989136
+        },
+        "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/282de2ac-1724-4003-b69e-0060656cbebb.jsonl",
+        "sha256": "9bde08ae54db3055b6b72ce5997312d40e0e07ad3777ebd4c53f60196ffbfe31",
+        "matches_task_manifest_source_hash": true
+      },
+      "current": {
+        "bytes": 65190719,
+        "start": "2026-09-30T11:29:42.647Z",
+        "end": "2026-10-01T00:41:00.902Z",
+        "elapsed_hours": 13.188404166666666,
+        "models": {
+          "Qwen3.8-Flash-Next-FP8": 189
+        },
+        "all": {
+          "responses": 189,
+          "output_tokens": {
+            "n": 189,
+            "median": 451,
+            "p90": 1570,
+            "max": 3553,
+            "sum": 123306
+          },
+          "input_tokens": {
+            "n": 189,
+            "median": 89468,
+            "p90": 148583,
+            "max": 165461,
+            "sum": 17131959
+          },
+          "thinking_chars": {
+            "n": 189,
+            "median": 1156,
+            "p90": 4351,
+            "max": 10582,
+            "sum": 325202
+          },
+          "text_chars": {
+            "n": 189,
+            "median": 95,
+            "p90": 241,
+            "max": 1413,
+            "sum": 22705
+          },
+          "stop_reasons": {
+            "tool_use": 188,
+            "end_turn": 1
+          }
+        },
+        "equal_prefix": {
+          "responses": 186,
+          "output_tokens": {
+            "n": 186,
+            "median": 451.5,
+            "p90": 1570,
+            "max": 3553,
+            "sum": 122081
+          },
+          "input_tokens": {
+            "n": 186,
+            "median": 86961.5,
+            "p90": 148583,
+            "max": 165461,
+            "sum": 16748258
+          },
+          "thinking_chars": {
+            "n": 186,
+            "median": 1168.5,
+            "p90": 4351,
+            "max": 10582,
+            "sum": 323101
+          },
+          "text_chars": {
+            "n": 186,
+            "median": 95.0,
+            "p90": 241,
+            "max": 433,
+            "sum": 21125
+          },
+          "stop_reasons": {
+            "tool_use": 186
+          }
+        },
+        "tool_result_to_assistant_completion": {
+          "count": 188,
+          "median_s": 199.94800007343292,
+          "p90_s": 396.66799998283386,
+          "max_s": 1716.0460000038147
+        },
+        "source": "runs/validation-20260930-task01-r5/instance_301/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/9a0aef16-9af5-4db4-b384-20323b8d4502.jsonl",
+        "sha256": "8b588629b9b3c8ef6ddb2d64aca02af39451e53bf3970d73ca588512dae5391e"
+      }
+    },
+    "task03": {
+      "instance_id": 301,
+      "r5_termination": "wall_timeout",
+      "equal_prefix_responses": 290,
+      "archive": {
+        "bytes": 170732255,
+        "start": "2026-09-15T15:28:45.637Z",
+        "end": "2026-09-16T03:52:54.271Z",
+        "elapsed_hours": 12.402398333333332,
+        "models": {
+          "Qwen3.8-Flash-Next-FP8": 469
+        },
+        "all": {
+          "responses": 469,
+          "output_tokens": {
+            "n": 469,
+            "median": 592,
+            "p90": 2425,
+            "max": 5607,
+            "sum": 456224
+          },
+          "input_tokens": {
+            "n": 469,
+            "median": 93602,
+            "p90": 150916,
+            "max": 165136,
+            "sum": 43952740
+          },
+          "thinking_chars": {
+            "n": 469,
+            "median": 1617,
+            "p90": 7262,
+            "max": 17163,
+            "sum": 1301298
+          },
+          "text_chars": {
+            "n": 469,
+            "median": 0,
+            "p90": 154,
+            "max": 1170,
+            "sum": 25588
+          },
+          "stop_reasons": {
+            "tool_use": 468,
+            "end_turn": 1
+          }
+        },
+        "equal_prefix": {
+          "responses": 290,
+          "output_tokens": {
+            "n": 290,
+            "median": 626.5,
+            "p90": 2258,
+            "max": 5245,
+            "sum": 270928
+          },
+          "input_tokens": {
+            "n": 290,
+            "median": 92439.0,
+            "p90": 150572,
+            "max": 165136,
+            "sum": 26774684
+          },
+          "thinking_chars": {
+            "n": 290,
+            "median": 1707.0,
+            "p90": 6531,
+            "max": 14884,
+            "sum": 774211
+          },
+          "text_chars": {
+            "n": 290,
+            "median": 0.0,
+            "p90": 155,
+            "max": 375,
+            "sum": 16512
+          },
+          "stop_reasons": {
+            "tool_use": 290
+          }
+        },
+        "tool_result_to_assistant_completion": {
+          "count": 468,
+          "median_s": 57.582499861717224,
+          "p90_s": 161.83400011062622,
+          "max_s": 1067.9379999637604
+        },
+        "source": "test_results/task03/06_claude_transcripts/claude_t03p15063i0-09152328_301.jsonl",
+        "sha256": "f05ef5d7e525533f87e8313fff26b9c44f7f827e10887451352639f1e98d0ce1",
+        "matches_task_manifest_source_hash": true
+      },
+      "current": {
+        "bytes": 108941205,
+        "start": "2026-09-30T11:29:45.692Z",
+        "end": "2026-10-01T11:18:30.608Z",
+        "elapsed_hours": 23.812476666666665,
+        "models": {
+          "Qwen3.8-Flash-Next-FP8": 290
+        },
+        "all": {
+          "responses": 290,
+          "output_tokens": {
+            "n": 290,
+            "median": 544.5,
+            "p90": 1845,
+            "max": 5243,
+            "sum": 243951
+          },
+          "input_tokens": {
+            "n": 290,
+            "median": 97351.5,
+            "p90": 152876,
+            "max": 165498,
+            "sum": 27462457
+          },
+          "thinking_chars": {
+            "n": 290,
+            "median": 1525.5,
+            "p90": 5752,
+            "max": 16861,
+            "sum": 722068
+          },
+          "text_chars": {
+            "n": 290,
+            "median": 90.0,
+            "p90": 186,
+            "max": 396,
+            "sum": 26094
+          },
+          "stop_reasons": {
+            "tool_use": 289,
+            "end_turn": 1
+          }
+        },
+        "equal_prefix": {
+          "responses": 290,
+          "output_tokens": {
+            "n": 290,
+            "median": 544.5,
+            "p90": 1845,
+            "max": 5243,
+            "sum": 243951
+          },
+          "input_tokens": {
+            "n": 290,
+            "median": 97351.5,
+            "p90": 152876,
+            "max": 165498,
+            "sum": 27462457
+          },
+          "thinking_chars": {
+            "n": 290,
+            "median": 1525.5,
+            "p90": 5752,
+            "max": 16861,
+            "sum": 722068
+          },
+          "text_chars": {
+            "n": 290,
+            "median": 90.0,
+            "p90": 186,
+            "max": 396,
+            "sum": 26094
+          },
+          "stop_reasons": {
+            "tool_use": 289,
+            "end_turn": 1
+          }
+        },
+        "tool_result_to_assistant_completion": {
+          "count": 289,
+          "median_s": 216.40599989891052,
+          "p90_s": 459.4300000667572,
+          "max_s": 2692.949999809265
+        },
+        "source": "runs/validation-20260930-task03-r5/instance_301/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/8d66162b-a1f2-4bc0-b43f-0519b6a44869.jsonl",
+        "sha256": "edb59d4b1eca9355c6c5c3d77ccf1e4bad05ce96e9e4f43a065aa77678e30a1e"
+      }
+    },
+    "task08": {
+      "instance_id": 301,
+      "r5_termination": "model_done",
+      "equal_prefix_responses": 286,
+      "archive": {
+        "bytes": 124787490,
+        "start": "2026-09-18T07:11:03.879Z",
+        "end": "2026-09-18T13:30:39.435Z",
+        "elapsed_hours": 6.326543333333333,
+        "models": {
+          "Qwen3.8-Flash-Next-FP8": 430
+        },
+        "all": {
+          "responses": 430,
+          "output_tokens": {
+            "n": 430,
+            "median": 619.0,
+            "p90": 1857,
+            "max": 6497,
+            "sum": 375679
+          },
+          "input_tokens": {
+            "n": 430,
+            "median": 92231.0,
+            "p90": 151053,
+            "max": 165669,
+            "sum": 39839468
+          },
+          "thinking_chars": {
+            "n": 430,
+            "median": 1553.0,
+            "p90": 5620,
+            "max": 18297,
+            "sum": 1051936
+          },
+          "text_chars": {
+            "n": 430,
+            "median": 87.0,
+            "p90": 151,
+            "max": 357,
+            "sum": 37061
+          },
+          "stop_reasons": {
+            "tool_use": 430
+          }
+        },
+        "equal_prefix": {
+          "responses": 286,
+          "output_tokens": {
+            "n": 286,
+            "median": 596.0,
+            "p90": 1960,
+            "max": 6497,
+            "sum": 257325
+          },
+          "input_tokens": {
+            "n": 286,
+            "median": 90954.5,
+            "p90": 151053,
+            "max": 165669,
+            "sum": 26457138
+          },
+          "thinking_chars": {
+            "n": 286,
+            "median": 1631.5,
+            "p90": 6090,
+            "max": 18297,
+            "sum": 741985
+          },
+          "text_chars": {
+            "n": 286,
+            "median": 85.0,
+            "p90": 150,
+            "max": 357,
+            "sum": 23636
+          },
+          "stop_reasons": {
+            "tool_use": 286
+          }
+        },
+        "tool_result_to_assistant_completion": {
+          "count": 429,
+          "median_s": 28.04200005531311,
+          "p90_s": 67.74399995803833,
+          "max_s": 246.63699984550476
+        },
+        "source": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/8d684dd8-d87c-4bb5-9543-80e6f8beae63.jsonl",
+        "sha256": "c8f7ab1c55c06bf7f8f4fa4e9f4fc3e55eacd31bf6adb471f3a47e863013ae3f",
+        "matches_task_manifest_source_hash": true
+      },
+      "current": {
+        "bytes": 85583378,
+        "start": "2026-09-30T11:30:17.720Z",
+        "end": "2026-10-01T07:45:46.666Z",
+        "elapsed_hours": 20.258040555555553,
+        "models": {
+          "Qwen3.8-Flash-Next-FP8": 286
+        },
+        "all": {
+          "responses": 286,
+          "output_tokens": {
+            "n": 286,
+            "median": 520.0,
+            "p90": 1445,
+            "max": 4386,
+            "sum": 195845
+          },
+          "input_tokens": {
+            "n": 286,
+            "median": 91203.5,
+            "p90": 150765,
+            "max": 166867,
+            "sum": 26371591
+          },
+          "thinking_chars": {
+            "n": 286,
+            "median": 1395.5,
+            "p90": 4562,
+            "max": 12910,
+            "sum": 558174
+          },
+          "text_chars": {
+            "n": 286,
+            "median": 85.0,
+            "p90": 151,
+            "max": 1061,
+            "sum": 26127
+          },
+          "stop_reasons": {
+            "tool_use": 285,
+            "end_turn": 1
+          }
+        },
+        "equal_prefix": {
+          "responses": 286,
+          "output_tokens": {
+            "n": 286,
+            "median": 520.0,
+            "p90": 1445,
+            "max": 4386,
+            "sum": 195845
+          },
+          "input_tokens": {
+            "n": 286,
+            "median": 91203.5,
+            "p90": 150765,
+            "max": 166867,
+            "sum": 26371591
+          },
+          "thinking_chars": {
+            "n": 286,
+            "median": 1395.5,
+            "p90": 4562,
+            "max": 12910,
+            "sum": 558174
+          },
+          "text_chars": {
+            "n": 286,
+            "median": 85.0,
+            "p90": 151,
+            "max": 1061,
+            "sum": 26127
+          },
+          "stop_reasons": {
+            "tool_use": 285,
+            "end_turn": 1
+          }
+        },
+        "tool_result_to_assistant_completion": {
+          "count": 285,
+          "median_s": 189.9670000076294,
+          "p90_s": 394.2739999294281,
+          "max_s": 2615.2490000724792
+        },
+        "source": "runs/validation-20260930-task08-r5/instance_301/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/dcd5866f-a1c7-4a79-aac8-c67a4f31f328.jsonl",
+        "sha256": "1f11fc567007b502f6b94df9883c31aa391cfa9b1e9e63324f7123608aed9522"
+      }
+    }
+  }
+}
