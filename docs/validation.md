@@ -305,3 +305,9 @@ The full evaluator and dataset installation has not been executed on a clean
 host. The GPU evaluations reuse existing numerical/simulator environments but import all
 RoboHarness interface, evaluator wrapper and harness code from this checkout.
 Datasets and the SAM 2 checkpoint remain external dependencies.
+
+## Mean-Q acceptance clarification
+
+Acceptance follows each complete task mean, not exact per-case score agreement.
+The current reporter and queued validation source apply the clarified rule.
+See [the mean-Q regression and activation audit](../validation_results/mean-q-acceptance-20261001/README.md).
