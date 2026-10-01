@@ -1,7 +1,7 @@
 # Release validation
 
 **The three requested task means have not yet been verified.** This status
-snapshot was checked on October 1, 2026 at 21:29 Asia/Shanghai. The
+snapshot was checked on October 1, 2026 at 22:16 Asia/Shanghai. The
 [live r5 report](../validation_results/gpu5-20260930-r5/README.md) records
 completed official scores; a running process or a passing software test is
 not evidence that a task mean matches.
@@ -102,10 +102,9 @@ A subsequent [independent evaluator installation](../validation_results/evaluato
 completed the evaluator stages in an initially empty Python 3.11 venv after
 recovering two dependency downloads. All 16 dependency imports and the
 process-local OmniClient ABI check passed, with no simulator or CUDA context
-started. The loaded OpenCV binary matches the reference evaluator. Three
-compared package versions differ, and `pip check` retains seven dependency
-declaration conflicts; these limits are recorded in the audit. The new
-environment has not been selected by r6 or exercised in a GPU rollout.
+started. The loaded OpenCV binary matches the reference evaluator. That
+initial installation had three compared version differences and seven
+dependency declaration conflicts, retained in its historical audit.
 
 The fresh evaluator also passed an [actual TCP protocol check](../validation_results/evaluator-wire-20261001/README.md)
 against the independent interface environment: six full-resolution RGB-D
@@ -114,6 +113,17 @@ two connections preserved the expected data. This used the release's client
 and server functions with a non-actuating runtime stub on port 15079; the
 listener was released afterwards. It establishes transport compatibility for
 those versions and payloads, not simulation or task-mean correctness.
+
+The [subsequent runtime pins](../validation_results/evaluator-runtime-pins-20261001/README.md)
+correct the observed drift to the reference versions. All 976 payload files
+across the six adjusted packages match the reference. Twenty-two imports and
+the native ABI check passed, and all 22 compared package versions now match.
+The custom robot's TCP exchange also passed with the corrected websockets
+17.0.1, including the six observations, actions, two resets and reconnect.
+Six unsatisfied SDK dependency declarations remain recorded; `pip check`
+still exits 1. The fresh environment has not been selected by r6 or exercised
+in a GPU rollout. These installer changes leave the queued runtime code,
+source pin and session configuration unchanged.
 
 The earlier [mean-Q regression and activation evidence](../validation_results/mean-q-acceptance-20261001/README.md)
 documents the acceptance rule at `46e51e4`. Those runtime files are unchanged
@@ -130,7 +140,7 @@ belong to separate runs and must not be added to the current release total.
 | HTTP transport | Real local HTTP-server checks verify connection retries do not replay transmitted POSTs; a captured loopback connection conflict was recovered by a separate read-only client. | [Transport evidence](http-transport.md) |
 | OpenCV dependency | A fresh installation loads the same OpenCV headless 4.10.0.84 binary as the active reference interface. The earlier 4.11 requirement came from overlapping package metadata. | [Runtime dependency audit](../validation_results/opencv-runtime-20261001/README.md) |
 | Evaluator Git dependency | LeRobot is installed from the recorded commit despite the upstream moving-branch requirement. All 402 fresh package files match the reference environment. | [Source pin audit](../validation_results/evaluator-source-pin-20261001/README.md) |
-| Fresh evaluator environment | Evaluator installation stages completed with download recovery; 16 imports and the native asset-watch ABI passed. Dependency declaration conflicts and three version differences remain recorded. No simulator was started. | [Installation audit](../validation_results/evaluator-clean-install-20261001/README.md) |
+| Fresh evaluator environment | Evaluator installation stages completed with download recovery. Subsequent runtime pins match six package payloads and all 22 compared versions; 22 imports, native ABI and the custom-robot protocol passed. Six SDK declaration conflicts remain. No simulator was started. | [Installation audit](../validation_results/evaluator-clean-install-20261001/README.md), [runtime pin audit](../validation_results/evaluator-runtime-pins-20261001/README.md) |
 | Installation and packaging | Earlier independent-clone, fresh interface-environment, cuRobo build and private Codex-install checks cover their recorded environments. They do not establish a complete clean-host evaluator installation. | [Historical checks](validation-history.md#automated-checks) |
 
 ## Runtime issues and fixes
@@ -165,7 +175,7 @@ and that diagnostic does not isolate the physical cause from context changes.
   remain outstanding. No archived result is substituted for a new result.
 - The full evaluator and dataset installation has not been executed on a clean
   host. The fresh venv check covers evaluator installation and CPU imports,
-  with its recorded download recoveries and dependency differences. GPU tests
+  with its recorded download recoveries and dependency declaration conflicts. GPU tests
   use existing simulator/numerical environments, the packaged
   runtime code, Claude Code 2.1.259 and the shared Qwen3.8-Flash-Next-FP8 server.
   Model queueing contributes to wall time. Datasets and checkpoints are external

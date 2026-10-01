@@ -54,6 +54,8 @@ with the evaluation dependencies, including Pillow and packaging. `pip check`
 therefore does not pass for this combined environment; the validation record
 distinguishes these declarations from the imports and protocol behavior
 actually checked. The final versions follow the working reference evaluator.
+See the [runtime pin audit](../validation_results/evaluator-runtime-pins-20261001/README.md)
+for the exact remaining declarations and the checks performed.
 
 The pinned upstream installer asks for its license agreements. Its flags can
 be supplied after `all`, for example `./scripts/setup.sh all --accept-nvidia-eula`.
