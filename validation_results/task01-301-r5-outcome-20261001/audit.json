@@ -1,0 +1,415 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-01T12:24:13.269739+08:00",
+  "scope": "Diagnostic analysis of one completed r5 case; not strict reproduction evidence",
+  "task": "task01",
+  "instance_id": 301,
+  "official_result": {
+    "task": "picking_up_trash",
+    "instance_id": 301,
+    "rollout_id": 0,
+    "steps": 7071,
+    "success": false,
+    "agent_distance": {
+      "base": 20.430754669975528,
+      "left": 52.47899529439577,
+      "right": 63.244962310681345
+    },
+    "normalized_agent_distance": {
+      "base": 0.7928096764728761,
+      "left": 0.20116619879587103,
+      "right": 0.1454898487376594
+    },
+    "q_score": {
+      "final": 0.6666666666666666
+    },
+    "time": {
+      "simulator_steps": 7070,
+      "simulator_time": 235.66666666666666,
+      "normalized_time": 0.7450848656294201
+    }
+  },
+  "run_completion_record": {
+    "instance_id": 301,
+    "q": 0.6666666666666666,
+    "reference_q": 1.0,
+    "delta_q": -0.33333333333333337,
+    "steps": 7071,
+    "success": false,
+    "result": "output/json/picking_up_trash_301_0.json",
+    "result_sha256": "432b5442db7d16d3a6fa4cfdfc863851892d5498f6f270342fde290ae5fd5876",
+    "finish_reason": "model_done",
+    "archive_reported_q": 1.0,
+    "delta_archive_q": -0.33333333333333337
+  },
+  "budget_steps": 10535,
+  "sources": {
+    "official_result": {
+      "path": "runs/validation-20260930-task01-r5/output/json/picking_up_trash_301_0.json",
+      "sha256": "432b5442db7d16d3a6fa4cfdfc863851892d5498f6f270342fde290ae5fd5876",
+      "bytes": 549
+    },
+    "archive_result": {
+      "path": "reference_results/task01/picking_up_trash_301_0.json",
+      "sha256": "126cb39ea0ff8fc85a8c11322315ab4cc9d1fd0bf06b7d5ac220af2ed891f779",
+      "bytes": 532
+    },
+    "archived_prompt": {
+      "path": "prompt/task01/v4_39be138fa40a.txt",
+      "sha256": "39be138fa40ae8766fa1c6190fbd5dcbeb526a4091d46b4be3fb519172009249",
+      "bytes": 8273
+    },
+    "archive_native_transcript": {
+      "path": "../RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/282de2ac-1724-4003-b69e-0060656cbebb.jsonl",
+      "sha256": "9bde08ae54db3055b6b72ce5997312d40e0e07ad3777ebd4c53f60196ffbfe31",
+      "bytes": 70431539
+    },
+    "new_native_transcript": {
+      "path": "runs/validation-20260930-task01-r5/instance_301/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/9a0aef16-9af5-4db4-b384-20323b8d4502.jsonl",
+      "sha256": "8b588629b9b3c8ef6ddb2d64aca02af39451e53bf3970d73ca588512dae5391e",
+      "bytes": 65190719
+    },
+    "new_tool_recorder": {
+      "path": "runs/validation-20260930-task01-r5/instance_301/trajectory/claude-20260930T112942Z-acabc0f0/turns.jsonl",
+      "sha256": "e19b88d455fcfda3dc87e6b6c50fbdd0ac1cab710756fb12da6af80641035fb2",
+      "bytes": 5472769
+    },
+    "new_agent_result": {
+      "path": "runs/validation-20260930-task01-r5/instance_301/agent.json",
+      "sha256": "3b5e1bc04a2af42ec8bb579effe2b42b295e2a757ce83aacbd92591eec6c6996",
+      "bytes": 3007
+    }
+  },
+  "placement_sequence": [
+    {
+      "turn_index": 76,
+      "tool_call": {
+        "name": "adjust_right_eef_pose_in_head_frame",
+        "arguments": {
+          "y": -0.01,
+          "z": -0.04
+        }
+      },
+      "completed_at": "2026-09-30T17:05:38.824+00:00",
+      "is_error": false,
+      "evidence": {
+        "ok": true,
+        "direct_simulator_mutation": false,
+        "error": null
+      },
+      "media": [
+        {
+          "image_id": "img_0057",
+          "path": "runs/validation-20260930-task01-r5/instance_301/trajectory/claude-20260930T112942Z-acabc0f0/media/d9085afd3e230c1a39eae9b6ffa13507579889da84f676b6666a6cc5a27737c1.jpg",
+          "sha256": "d9085afd3e230c1a39eae9b6ffa13507579889da84f676b6666a6cc5a27737c1",
+          "bytes": 162078
+        }
+      ]
+    },
+    {
+      "turn_index": 77,
+      "tool_call": {
+        "name": "open_gripper",
+        "arguments": {
+          "arm": "right"
+        }
+      },
+      "completed_at": "2026-09-30T17:08:39.256+00:00",
+      "is_error": false,
+      "evidence": {
+        "ok": true,
+        "open_action_steps": 3,
+        "open_target_reached": true,
+        "control_mode": "independent_effort",
+        "post_open_hold_mode": "qpos_effort_servo"
+      },
+      "media": [
+        {
+          "image_id": "img_0058",
+          "path": "runs/validation-20260930-task01-r5/instance_301/trajectory/claude-20260930T112942Z-acabc0f0/media/59ac6e5287605f734b2c8a500e7de78e31dff06afc1155de827d21ddb593ae13.jpg",
+          "sha256": "59ac6e5287605f734b2c8a500e7de78e31dff06afc1155de827d21ddb593ae13",
+          "bytes": 206716
+        }
+      ]
+    },
+    {
+      "turn_index": 78,
+      "tool_call": {
+        "name": "set_arm_to_grasp_position",
+        "arguments": {
+          "arm": "right",
+          "gripper": "open"
+        }
+      },
+      "completed_at": "2026-09-30T17:12:51.252+00:00",
+      "is_error": false,
+      "evidence": {
+        "ok": true,
+        "action_steps": 14,
+        "total_action_steps": 18,
+        "interpolation_steps": 14,
+        "entry_settle_steps": 0,
+        "execution": "feedback_governed_observed_qpos_to_absolute_targets",
+        "direct_simulator_mutation": false,
+        "converged": true,
+        "timed_out": false
+      },
+      "media": [
+        {
+          "image_id": "img_0059",
+          "path": "runs/validation-20260930-task01-r5/instance_301/trajectory/claude-20260930T112942Z-acabc0f0/media/1dd81d0f8b8398021d4bd9d08432ece44866ec4bc383f0bed483e7cf8ec70bb2.jpg",
+          "sha256": "1dd81d0f8b8398021d4bd9d08432ece44866ec4bc383f0bed483e7cf8ec70bb2",
+          "bytes": 161057
+        }
+      ]
+    }
+  ],
+  "model_observations": [
+    {
+      "native_line": 576,
+      "timestamp": "2026-09-30T17:18:59.278Z",
+      "text": "\n\nThe orange can landed **outside** the ashcan (to its right, at ~335,410) — a placement miss. Per the directive: ignore a can left outside after a miss, don't re-queue it. Right arm is already stowed open. Deactivating the place skill and returning to baseline to work the third can.\n\n"
+    },
+    {
+      "native_line": 1274,
+      "timestamp": "2026-10-01T00:41:00.902Z",
+      "text": "\n\nFinal distance check complete. Session wrap-up:\n\n**Last-step check (per parent directive):**\n- Ashcan interior: (0.479, −0.103) m robot-base XY\n- Only remaining outside can (the missed orange can): (0.452, −0.325) m\n- Separation ≈ **0.22 m < 0.5 m** → must not be picked; per directive, since every remaining outside can is within 0.5 m of the ashcan, the session ends (hand-in).\n\n**Episode outcome:**\n- **Can 1 (blue):** placed inside `ashcan 1` earlier this session — verified settled.\n- **Can 2 (orange):** missed on an earlier grasp attempt, lying outside the ashcan; per directive it was ignored, never re-queued, and now fails the ≥0.5 m re-pick test, so it stays outside.\n- **Can 3 (orange):** just completed the full `pick-up-object` → `place-object-in-container` loop — aligned over the interior on a fresh tracker bind (Δx +1.5 cm, Δy ≈ 0, release clearance ≈0.23 m within the 0.20–0.25 band), released over the bottom interior, confirmed settled inside next to the blue can on fresh head image img_0138, both arms stowed open with `set_arm_to_grasp_position`, and the skill deactivated.\n\nThe ashcan remains upright with its interior visible, and control has returned to the baseline. Two of the three requested soda cans are inside the kitchen trash can; the third is the ignored miss, which the directive explicitly forbids re-picking at this distance. No untouched cans remain — ending the session."
+    }
+  ],
+  "final_track": {
+    "turn_index": 178,
+    "tool_call": {
+      "name": "track_object_distance",
+      "arguments": {
+        "image_id": "img_0138",
+        "points": [
+          {
+            "name": "interior",
+            "u": 388,
+            "v": 420
+          },
+          {
+            "name": "outside_can",
+            "u": 443,
+            "v": 428
+          }
+        ]
+      }
+    },
+    "is_error": false,
+    "ok": true,
+    "observation_sequence": 7067,
+    "points": {
+      "interior": {
+        "status": "observed",
+        "identity_verified": false,
+        "xyz_in_robot_base_coord_m": [
+          0.47921688912072624,
+          -0.10299947262117448,
+          0.15489484535658593
+        ]
+      },
+      "outside_can": {
+        "status": "observed",
+        "identity_verified": false,
+        "xyz_in_robot_base_coord_m": [
+          0.45180303733125887,
+          -0.32487676498547385,
+          0.06260999577492243
+        ]
+      }
+    },
+    "xy_distance_m": 0.22356442502519863,
+    "prompt_threshold_m": 0.5
+  },
+  "archived_open_action_steps": [
+    2,
+    2,
+    3
+  ],
+  "archived_open_and_stow_evidence": [
+    {
+      "native_line": 111,
+      "tool_name": "mcp__behavior-v2__set_arm_to_grasp_position",
+      "evidence": {
+        "ok": true,
+        "action_steps": 2,
+        "total_action_steps": 6,
+        "interpolation_steps": 2,
+        "entry_settle_steps": 0,
+        "execution": "feedback_governed_observed_qpos_to_absolute_targets",
+        "direct_simulator_mutation": false,
+        "converged": true,
+        "timed_out": false
+      }
+    },
+    {
+      "native_line": 139,
+      "tool_name": "mcp__behavior-v2__set_arm_to_grasp_position",
+      "evidence": {
+        "ok": true,
+        "action_steps": 20,
+        "total_action_steps": 20,
+        "interpolation_steps": 20,
+        "entry_settle_steps": 0,
+        "execution": "feedback_governed_observed_qpos_to_absolute_targets",
+        "direct_simulator_mutation": false,
+        "converged": true,
+        "timed_out": false
+      }
+    },
+    {
+      "native_line": 385,
+      "tool_name": "mcp__behavior-v2__open_gripper",
+      "evidence": {
+        "ok": true,
+        "open_action_steps": 2,
+        "open_target_reached": true,
+        "control_mode": "independent_effort",
+        "post_open_hold_mode": "qpos_effort_servo"
+      }
+    },
+    {
+      "native_line": 399,
+      "tool_name": "mcp__behavior-v2__set_arm_to_grasp_position",
+      "evidence": {
+        "ok": true,
+        "action_steps": 13,
+        "total_action_steps": 17,
+        "interpolation_steps": 13,
+        "entry_settle_steps": 0,
+        "execution": "feedback_governed_observed_qpos_to_absolute_targets",
+        "direct_simulator_mutation": false,
+        "converged": true,
+        "timed_out": false
+      }
+    },
+    {
+      "native_line": 499,
+      "tool_name": "mcp__behavior-v2__set_arm_to_grasp_position",
+      "evidence": {
+        "ok": true,
+        "action_steps": 2,
+        "total_action_steps": 6,
+        "interpolation_steps": 2,
+        "entry_settle_steps": 0,
+        "execution": "feedback_governed_observed_qpos_to_absolute_targets",
+        "direct_simulator_mutation": false,
+        "converged": true,
+        "timed_out": false
+      }
+    },
+    {
+      "native_line": 527,
+      "tool_name": "mcp__behavior-v2__set_arm_to_grasp_position",
+      "evidence": {
+        "ok": true,
+        "action_steps": 19,
+        "total_action_steps": 19,
+        "interpolation_steps": 19,
+        "entry_settle_steps": 0,
+        "execution": "feedback_governed_observed_qpos_to_absolute_targets",
+        "direct_simulator_mutation": false,
+        "converged": true,
+        "timed_out": false
+      }
+    },
+    {
+      "native_line": 761,
+      "tool_name": "mcp__behavior-v2__open_gripper",
+      "evidence": {
+        "ok": true,
+        "open_action_steps": 2,
+        "open_target_reached": true,
+        "control_mode": "independent_effort",
+        "post_open_hold_mode": "qpos_effort_servo"
+      }
+    },
+    {
+      "native_line": 775,
+      "tool_name": "mcp__behavior-v2__set_arm_to_grasp_position",
+      "evidence": {
+        "ok": true,
+        "action_steps": 11,
+        "total_action_steps": 15,
+        "interpolation_steps": 11,
+        "entry_settle_steps": 0,
+        "execution": "feedback_governed_observed_qpos_to_absolute_targets",
+        "direct_simulator_mutation": false,
+        "converged": true,
+        "timed_out": false
+      }
+    },
+    {
+      "native_line": 909,
+      "tool_name": "mcp__behavior-v2__set_arm_to_grasp_position",
+      "evidence": {
+        "ok": true,
+        "action_steps": 2,
+        "total_action_steps": 6,
+        "interpolation_steps": 2,
+        "entry_settle_steps": 0,
+        "execution": "feedback_governed_observed_qpos_to_absolute_targets",
+        "direct_simulator_mutation": false,
+        "converged": true,
+        "timed_out": false
+      }
+    },
+    {
+      "native_line": 937,
+      "tool_name": "mcp__behavior-v2__set_arm_to_grasp_position",
+      "evidence": {
+        "ok": true,
+        "action_steps": 22,
+        "total_action_steps": 22,
+        "interpolation_steps": 22,
+        "entry_settle_steps": 0,
+        "execution": "feedback_governed_observed_qpos_to_absolute_targets",
+        "direct_simulator_mutation": false,
+        "converged": true,
+        "timed_out": false
+      }
+    },
+    {
+      "native_line": 1108,
+      "tool_name": "mcp__behavior-v2__set_arm_to_grasp_position",
+      "evidence": {
+        "ok": true,
+        "action_steps": 17,
+        "total_action_steps": 17,
+        "interpolation_steps": 17,
+        "entry_settle_steps": 0,
+        "execution": "feedback_governed_observed_qpos_to_absolute_targets",
+        "direct_simulator_mutation": false,
+        "converged": true,
+        "timed_out": false
+      }
+    },
+    {
+      "native_line": 1260,
+      "tool_name": "mcp__behavior-v2__open_gripper",
+      "evidence": {
+        "ok": true,
+        "open_action_steps": 3,
+        "open_target_reached": true,
+        "control_mode": "independent_effort",
+        "post_open_hold_mode": "qpos_effort_servo"
+      }
+    }
+  ],
+  "conclusions": [
+    "The official evaluator awarded 2/3; the runner recorded model_done rather than wall_timeout.",
+    "The captured post-release/post-stow image shows the orange can outside the ashcan; the model also described a placement miss.",
+    "The final tracker gave a 0.223564 m XY separation for model-labelled points. Their semantic identities are not independently verified.",
+    "The archived prompt instructs ignoring missed cans and ending if all remaining outside cans are within 0.5 m.",
+    "Archived successful releases also used two or three open-gripper action steps; this alone does not establish a timing regression.",
+    "This r5 run has known native-context mismatches. These observations do not isolate the physical or policy cause and do not prove that the queued fixes restore the score."
+  ],
+  "unchanged_for_fidelity": [
+    "archived_prompt",
+    "termination_rule",
+    "tool_execution_timing",
+    "archive_target_score",
+    "queued_r6_source_pin"
+  ]
+}
