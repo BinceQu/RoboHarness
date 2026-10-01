@@ -1,7 +1,7 @@
 # Release validation
 
 **The three requested task means have not yet been verified.** This status
-snapshot was checked on October 1, 2026 at 19:32 Asia/Shanghai. The
+snapshot was checked on October 1, 2026 at 20:23 Asia/Shanghai. The
 [live r5 report](../validation_results/gpu5-20260930-r5/README.md) records
 completed official scores; a running process or a passing software test is
 not evidence that a task mean matches.
@@ -56,10 +56,11 @@ reproduction attempt, even if a resulting mean happens to match.
 
 The corrected r6 evaluation is queued behind those runs and has not launched
 as of this snapshot. It uses an independent checkout pinned to
-`e711b7e584541d1a608faa08be43a4f8a558715d` and the BEHAVIOR v3.9.1 submodule
+`c4763eb0947adf7f0186834b476a0ec375ee1d1e` and the BEHAVIOR v3.9.1 submodule
 at `26f2c7ef7b9cf96bd0414f81e1e751e493762779`. Its reporter uses the task-mean
-acceptance rule. This pin corrects the OpenCV installation dependency; its
-runtime code is unchanged from the preceding mean-Q revision `46e51e4`.
+acceptance rule. This pin includes the OpenCV dependency correction and the
+fixed LeRobot source during installation. Simulation, harness and reporting
+code are unchanged from the preceding mean-Q revision `46e51e4`.
 The queue checks source revisions, a clean tracked worktree, GPU capacity
 and listener availability before launching.
 
