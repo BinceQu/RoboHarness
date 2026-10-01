@@ -82,8 +82,10 @@ The queued r6 watcher preserves the existing r5 processes and starts the
 strict release validation only after those processes exit, GPU5 has enough free
 memory, and the reserved ports are available.
 
-The queued r6 source is a separate checkout pinned to
-`83bb6f0461ee29c4736868299ab0ac06c7780571`, with BEHAVIOR at the archived commit.
+The queued r6 source is a separate checkout; its exact revision is recorded in
+the session-local `.local/session-config-r6-source.json`, with BEHAVIOR at the
+archived commit. The initial pinned-source audit used
+`83bb6f0461ee29c4736868299ab0ac06c7780571`.
 Both the evaluator launches and reporter run from that checkout. Before launch,
 the session-local watcher verifies its revision, submodule revision and clean
 tracked worktree. This prevents ongoing edits to the development checkout from
@@ -96,3 +98,11 @@ three representative archived cases. It verifies both MCP namespaces, both
 native Skill-listing patterns, source prompt hashes and case session identity.
 Its HTTP model/interface endpoints are controlled local stubs, so this is
 startup integration evidence, not a simulator run or an official score result.
+
+The original port selection covered only HTTP; the internal policy and idle
+gate listeners still used offsets outside the requested session range. New
+runs can set all three listeners with `task_ports` in the session config.
+The queued tasks use disjoint triples within 15070–15078, and the queue checks
+those actual ports before launch. The runner uses the same explicit values
+for its plan, interface environment, policy server, idle gate, evaluator and
+port locks. No global configuration or running r5 service is changed.

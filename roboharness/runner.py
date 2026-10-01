@@ -135,6 +135,28 @@ def read_config(path: Path | None) -> dict:
     return defaults
 
 
+def listener_ports(task: dict, config: dict, http_override: int | None = None) -> dict:
+    """Resolve all listeners from this run's config, keeping legacy defaults."""
+    mapping = config.get('task_ports', {})
+    if not isinstance(mapping, dict):
+        raise ValueError('task_ports must map task IDs to http, policy and gate ports.')
+    if task['task'] not in mapping:
+        http = http_override if http_override is not None else 15070 + task['task_index']
+        ports = {'http': http, 'policy': http + 1000, 'gate': http + 2000}
+    else:
+        selected = mapping[task['task']]
+        if not isinstance(selected, dict) or set(selected) != {'http', 'policy', 'gate'}:
+            raise ValueError(f"task_ports[{task['task']!r}] must specify http, policy and gate.")
+        ports = dict(selected)
+        if http_override is not None:
+            ports['http'] = http_override
+    if any(type(value) is not int or not 1024 <= value <= 65535 for value in ports.values()):
+        raise ValueError('All listener ports must be integers between 1024 and 65535.')
+    if len(set(ports.values())) != 3:
+        raise ValueError('HTTP, policy and gate must use three distinct listener ports.')
+    return ports
+
+
 def official_result(path: Path, task: dict, iid: int) -> dict | None:
     try:
         result = read_json(path)
@@ -212,6 +234,8 @@ class Run:
         self.path = Path(plan['run_dir'])
         self.task = plan['task_config']
         self.port = plan['port']
+        self.policy_port = plan.get('policy_port', self.port + 1000)
+        self.gate_port = plan.get('gate_port', self.port + 2000)
         self.token = plan['run_id']
         self.children = {}
         self.env = {}
@@ -277,7 +301,7 @@ class Run:
             'BEHAVIOR_EVAL_TEST_PORT': str(self.port), 'PORT': str(self.port),
             'BEHAVIOR_ROBOT_CONFIG': str(INTERFACE / 'configs/r1pro_8dof_high_force.yaml'),
             'BEHAVIOR_AGENT_MAX_TICKS': str(self.task['max_steps']),
-            'BEHAVIOR_EVAL_TEST_POLICY_PORT': str(self.port + 1000),
+            'BEHAVIOR_EVAL_TEST_POLICY_PORT': str(self.policy_port),
             'BEHAVIOR_EVAL_OPERATOR_DIR': str(self.path / 'operator'),
             'BEHAVIOR_EVAL_SESSION_GUARD': str(self.path / 'active_session.json'),
             'BEHAVIOR_AGENT_RUNS': str(self.path / 'recordings'),
@@ -318,7 +342,8 @@ class Run:
                    {k: v for k, v in env.items() if k != 'ROBOHARNESS_RUN_TOKEN'})
 
     def start_stack(self):
-        self.log(f'Starting {self.task["task"]} on GPU {self.plan["gpu"]}, HTTP {self.port}')
+        self.log(f'Starting {self.task["task"]} on GPU {self.plan["gpu"]}, '
+                 f'HTTP {self.port}, policy {self.policy_port}, gate {self.gate_port}')
         py = self.config['interface_python']
         env = dict(self.env)
         if self.config['interface_dependencies']:
@@ -326,7 +351,7 @@ class Run:
         self.spawn('interface', [py, '-m', 'behavior_interface_eval_test.official_policy_interface',
             '--task', self.task['task_name'], '--scene', self.task['scene'], '--robot-dof', '8',
             '--tool-version', 'official_v2', '--ui-tool-version', 'v2', '--policy-host', '127.0.0.1',
-            '--policy-port', str(self.port + 1000), '--http-host', '127.0.0.1', '--http-port', str(self.port)], env)
+            '--policy-port', str(self.policy_port), '--http-host', '127.0.0.1', '--http-port', str(self.port)], env)
         deadline = time.monotonic() + 180
         while True:
             self.assert_alive('interface')
@@ -340,13 +365,13 @@ class Run:
                 raise TimeoutError('Interface did not become healthy in 180 seconds.')
             time.sleep(2)
         self.spawn('gate', [py, '-m', 'official_idle_step_gate.proxy', '--listen-host', '127.0.0.1',
-            '--listen-port', str(self.port + 2000), '--backend-policy-uri', f'ws://127.0.0.1:{self.port + 1000}',
+            '--listen-port', str(self.gate_port), '--backend-policy-uri', f'ws://127.0.0.1:{self.policy_port}',
             '--backend-http-url', f'http://127.0.0.1:{self.port}', '--fail-closed', '--max-idle-wait-s', '0'], env)
         deadline = time.monotonic() + 60
         while True:
             self.assert_alive('gate')
             try:
-                status = request_json(self.port + 2000, '/status')
+                status = request_json(self.gate_port, '/status')
                 if status.get('fail_closed') is True and status.get('max_idle_wait_s') == 0:
                     break
             except (OSError, ValueError):
@@ -366,7 +391,7 @@ class Run:
         ]))
         self.spawn('evaluator', [self.config['evaluator_python'], '-m', 'behavior_interface_eval_test.official_evaluator_entrypoint',
             '--task-name', self.task['task_name'], '--robot-config', str(PROFILE / 'evaluator_robot.yaml'),
-            '--host', '127.0.0.1', '--port', str(self.port + 2000), '--mode', 'public_test',
+            '--host', '127.0.0.1', '--port', str(self.gate_port), '--mode', 'public_test',
             '--instance-indices', *[str(c['slot']) for c in self.plan['cases']], '--num-rollouts', '1',
             '--max-steps', str(self.task['max_steps']),
             '--env-wrapper', 'behavior_interface_eval_test.official_rgbd_wrapper.OfficialRGBDFullResWrapper',
@@ -625,7 +650,7 @@ def main(argv=None):
     ap.add_argument('--task', default='task00', help='task00, 0, or task name')
     ap.add_argument('--instances', help='Actual IDs, e.g. 301,304 (default: all five archived cases)')
     ap.add_argument('--gpu', type=int, default=0)
-    ap.add_argument('--port', type=int, help='HTTP port (default: 15070 + task index); reserves port+1000 and port+2000')
+    ap.add_argument('--port', type=int, help='HTTP port override; all listeners can be set with task_ports in --config')
     ap.add_argument('--harness', choices=['claude_code', 'codex'], default='claude_code')
     ap.add_argument('--config', type=Path)
     ap.add_argument('--model-url')
@@ -647,14 +672,16 @@ def main(argv=None):
         for key in ('model_url', 'model'):
             if getattr(args, key):
                 config[key] = getattr(args, key)
-        port = args.port or 15070 + task['task_index']
-        if not 1024 <= port <= 63535 or args.gpu < 0:
-            raise ValueError('Use GPU >= 0 and an unprivileged port <= 63535.')
+        ports = listener_ports(task, config, args.port)
+        port = ports['http']
+        if args.gpu < 0:
+            raise ValueError('Use GPU >= 0.')
         run_id = task['task'] + '-' + time.strftime('%Y%m%d-%H%M%S') + '-' + uuid.uuid4().hex[:8]
         path = args.run_dir.resolve() if args.run_dir else ROOT / 'runs' / run_id
         if path.exists():
             raise ValueError(f'Run directory must be new: {path}')
-        plan = {'run_id': run_id, 'run_dir': str(path), 'port': port, 'gpu': args.gpu,
+        plan = {'run_id': run_id, 'run_dir': str(path), 'port': port,
+                'policy_port': ports['policy'], 'gate_port': ports['gate'], 'gpu': args.gpu,
                 'harness': args.harness, 'model': config['model'], 'model_url': config['model_url'],
                 'diagnostic_only': (args.harness != task['harness'] or config['model'] != task['model']),
                 'write_video': args.write_video, 'task_config': task, 'cases': cases}
@@ -666,7 +693,7 @@ def main(argv=None):
         lock_root = Path(config['cache_dir']) / 'locks'
         lock_root.mkdir(parents=True, exist_ok=True)
         with contextlib.ExitStack() as stack:
-            for selected in sorted((port, port + 1000, port + 2000)):
+            for selected in sorted(ports.values()):
                 handle = stack.enter_context((lock_root / f'port-{selected}.lock').open('a'))
                 try:
                     fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)

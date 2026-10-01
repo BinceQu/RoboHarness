@@ -72,10 +72,29 @@ cp configs/example.json configs/local.json
 ./run.sh --task task01 --gpu 0
 ```
 
-For a session-scoped launch that automatically selects the 1507* HTTP range,
-use `scripts/reproduce_task.sh task01 --gpu 0`. It creates or reuses only
+For a session-scoped launch, use `scripts/reproduce_task.sh task01 --gpu 0`.
+It creates or reuses only
 `.local/session-config.json`; it does not modify `configs/local.json`, the
 global Claude home, or the global Codex home.
+
+All three listeners can be selected in that session file with a `task_ports`
+mapping, for example:
+
+```json
+{
+  "task_ports": {
+    "task01": {"http": 15071, "policy": 15070, "gate": 15072},
+    "task03": {"http": 15073, "policy": 15074, "gate": 15075},
+    "task08": {"http": 15078, "policy": 15076, "gate": 15077}
+  }
+}
+```
+
+This example fits three concurrent tasks in 15070–15078. Unlisted tasks keep
+the default HTTP/policy/gate offsets. `--port` overrides only HTTP when a
+task has an explicit mapping. Each task needs three distinct unprivileged
+ports; overlapping active runs fail before launch. The wrapper leaves the
+mapping intact, and `--dry-run` shows all three resolved ports.
 
 Relative configuration paths are resolved from the repository root. Reusing
 existing environments is supported by `interface_python`, `evaluator_python`,
