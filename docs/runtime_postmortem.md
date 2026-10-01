@@ -158,3 +158,24 @@ the task03 cutoff also prevent a controlled throughput comparison. The
 retains the counting method, source hashes, response counts and limitations.
 It supports removing the extra wall-clock cutoff, not a score reproduction
 claim or a change to archived prompts and simulation budgets.
+
+## Simulation ticks during native context compaction
+
+In r5 task03/304, simulation ticks stayed at 4,939 while the native CLI
+automatically compacted its context. The `compact_boundary` event at
+2026-10-02 03:13:42 Asia/Shanghai reports `durationMs: 1600712` (26 minutes
+40.712 seconds), with 166,722 tokens before compaction and 9,646 afterward.
+The next grasp-planning call completed at 03:16:30 and returned an error;
+a subsequent height adjustment completed successfully at 03:18:26. Ticks
+advanced to 4,945 and then 4,972, with the same agent and simulator processes.
+No restart or runtime configuration change was needed. The
+[event audit](../validation_results/native-latency-comparison-20261001/task03-304-compaction-20261002.json)
+preserves selected event metadata, source-record hashes and observed ticks.
+
+An unchanged tick count or low sampled GPU utilization alone does not establish
+a stopped episode. Correlate live process identities with native event times
+and completed tool records; resumed calls or increasing ticks establish
+progress. A responding HTTP monitor alone does not. The reported compaction
+duration includes the native CLI's elapsed processing time and does not isolate
+model-server queueing or generation. This observation explains one pause; it
+does not establish task success or account for every pause.
