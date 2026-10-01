@@ -208,7 +208,14 @@ def main():
             for case in cases:
                 case['archive_reported_q'] = reported[str(case['instance_id'])]
         else:
+            # For every other task the selected score JSON is the official
+            # score stored inside that case's trajectory directory. Preserve
+            # it explicitly so the strict report never falls back to a raw
+            # reference value when the archive has multiple score records.
             config['archive_reported_mean_q'] = config['reference_mean_q']
+            for case in cases:
+                case['archive_reported_q'] = case['reference_q']
+                case['archive_score_basis'] = 'trajectory-directory official score'
         (output / 'tasks').mkdir(exist_ok=True)
         (output / 'tasks' / (key + '.json')).write_text(json.dumps(config, indent=2, ensure_ascii=False) + '\n')
         summary.append({k: config[k] for k in ['task', 'task_name', 'archive_reported_mean_q', 'reference_mean_q']})
