@@ -33,6 +33,16 @@ variants share the `cv2` namespace, so installed package metadata alone does
 not identify the binary Python will load. Use a separate interface environment
 with only this variant; see the [runtime dependency audit](../validation_results/opencv-runtime-20261001/README.md).
 
+Evaluator setup fixes LeRobot to commit
+`436812bd8ee39b768c645c248c91f1330834e687`, recorded in the reference environment
+and [source manifest](../configs/evaluator-sources.json). Upstream requests the
+moving `release/b1k` branch. The installer serves that request from a private
+Git snapshot under `.local/setup-sources` and verifies the installed commit.
+The Git URL mapping exists only in the installer child process; it writes no
+global Git configuration and does not modify the BEHAVIOR submodule. Existing
+evaluator environments can be checked with their Python interpreter:
+`python scripts/with_evaluator_sources.py --check`.
+
 The pinned upstream installer asks for its license agreements. Its flags can
 be supplied after `all`, for example `./scripts/setup.sh all --accept-nvidia-eula`.
 Dataset installation is separate: follow the pinned

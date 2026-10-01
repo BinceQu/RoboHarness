@@ -30,8 +30,10 @@ PATH="$ROOT/.venv-interface/bin:$PATH" GIT_LFS_SKIP_SMUDGE=1 \
   # the caller's conda prefix and accidentally edit that separate environment.
   unset CONDA_PREFIX CONDA_DEFAULT_ENV CONDA_PROMPT_MODIFIER
   cd BEHAVIOR
-  bash setup.sh --bddl --omnigibson --joylo --eval --confirm-no-conda "$@"
+  python "$ROOT/scripts/with_evaluator_sources.py" -- \
+    bash setup.sh --bddl --omnigibson --joylo --eval --confirm-no-conda "$@"
 )
+.venv-evaluator/bin/python scripts/with_evaluator_sources.py --check
 .venv-evaluator/bin/python -m pip install warp-lang==1.12.0
 "$PYTHON_BIN" -c 'from roboharness.assets import prepare_robot_asset; print(prepare_robot_asset())'
 "$PYTHON_BIN" scripts/setup_perception.py
