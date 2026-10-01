@@ -6,6 +6,8 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+import threading
+import time
 import unittest
 from unittest import mock
 
@@ -295,6 +297,53 @@ class ValidationReport(unittest.TestCase):
                 path.write_text(json.dumps({**plan, 'cases': cases}))
                 with self.assertRaisesRegex(ValueError, 'nonempty, unique'):
                     collect(self.root)
+
+    def test_report_waits_for_asynchronously_published_startup_files(self):
+        self.add_case(301, 1.0)
+        self.add_case(304, 1.0)
+        self.summary['status'] = 'complete'
+        self.save()
+        paths = [self.root / name for name in ('plan.json', 'summary.json')]
+        for path in paths:
+            path.rename(path.with_suffix('.pending'))
+        errors = []
+        def publish():
+            try:
+                time.sleep(0.05)
+                for path in paths:
+                    path.with_suffix('.pending').replace(path)
+            except Exception as error:
+                errors.append(error)
+        writer = threading.Thread(target=publish)
+        writer.start()
+        try:
+            with mock.patch('sys.argv', ['report_validation', str(self.root),
+                            '--output', str(self.root / 'report'), '--watch',
+                            '--require-match', '--wait-for-start-s', '5']):
+                self.assertEqual(main(), 0)
+        finally:
+            writer.join(timeout=5)
+        self.assertFalse(writer.is_alive())
+        self.assertFalse(errors)
+        report = json.loads((self.root / 'report/report.json').read_text())
+        self.assertTrue(report['runs'][0]['reproduction_verified'])
+
+    def test_startup_timeout_is_nonzero_and_never_fabricates_results(self):
+        with mock.patch('sys.argv', ['report_validation', str(self.root),
+                        '--output', str(self.root / 'report'), '--watch',
+                        '--require-match', '--wait-for-start-s', '1']), \
+             mock.patch('scripts.report_validation.time.monotonic', side_effect=[0, 2]):
+            self.assertEqual(main(), 1)
+        self.assertFalse((self.root / 'report/report.json').exists())
+
+    def test_startup_wait_rejects_invalid_timeouts(self):
+        for value in ('-1', 'nan', 'inf'):
+            with self.subTest(value=value), \
+                 mock.patch('sys.argv', ['report_validation', str(self.root),
+                            '--wait-for-start-s', value]):
+                with self.assertRaises(SystemExit) as result:
+                    main()
+                self.assertEqual(result.exception.code, 2)
 
     def test_diagnostic_plan_never_becomes_verified_reproduction(self):
         plan_path = self.root / 'plan.json'
