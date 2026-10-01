@@ -41,7 +41,9 @@
       ],
       "reproduction_caveats": [
         "The archived Claude session starts after earlier navigation and arm operations in an already running scene. Their request parameters and a complete scene snapshot were not found in the supplied archive. A fresh reset does not reproduce that starting state; see reference_results/initial_states.json and docs/provenance.md."
-      ]
+      ],
+      "archive_reported_q": 1.0,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 304,
@@ -61,7 +63,9 @@
       "reference_source": "test_results/task06/01_official_json/hiding_Easter_eggs_304_0.json",
       "reference_q": 0.0,
       "reference_steps": 15240,
-      "notes": []
+      "notes": [],
+      "archive_reported_q": 0.0,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 306,
@@ -81,7 +85,9 @@
       "reference_source": "test_results/task06/01_official_json/hiding_Easter_eggs_306_0.json",
       "reference_q": 0.7777777777777778,
       "reference_steps": 15240,
-      "notes": []
+      "notes": [],
+      "archive_reported_q": 0.7777777777777778,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 308,
@@ -101,7 +107,9 @@
       "reference_source": "test_results/task06/01_official_json/hiding_Easter_eggs_308_0.json",
       "reference_q": 0.3333333333333333,
       "reference_steps": 15240,
-      "notes": []
+      "notes": [],
+      "archive_reported_q": 0.3333333333333333,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 310,
@@ -121,7 +129,9 @@
       "reference_source": "test_results/task06/01_official_json/hiding_Easter_eggs_310_0.json",
       "reference_q": 0.0,
       "reference_steps": 15240,
-      "notes": []
+      "notes": [],
+      "archive_reported_q": 0.0,
+      "archive_score_basis": "trajectory-directory official score"
     }
   ],
   "reference_mean_q": 0.4222222222222222,

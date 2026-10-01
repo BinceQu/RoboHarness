@@ -39,7 +39,9 @@
       "notes": [
         "The archived session_end JSON identifies the monitor session; the matching Claude transcript preserves the exact prompt bytes."
       ],
-      "source_session_id": "t08p15068i0-09181510"
+      "source_session_id": "t08p15068i0-09181510",
+      "archive_reported_q": 0.25,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 304,
@@ -62,7 +64,9 @@
       "notes": [
         "The archived session_end JSON identifies the monitor session; the matching Claude transcript preserves the exact prompt bytes."
       ],
-      "source_session_id": "t08p15068i3-0919202825-193b84074c8c"
+      "source_session_id": "t08p15068i3-0919202825-193b84074c8c",
+      "archive_reported_q": 0.5,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 306,
@@ -85,7 +89,9 @@
       "notes": [
         "The archived session_end JSON identifies the monitor session; the matching Claude transcript preserves the exact prompt bytes."
       ],
-      "source_session_id": "t08p15068i5-09182346"
+      "source_session_id": "t08p15068i5-09182346",
+      "archive_reported_q": 0.25,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 308,
@@ -108,7 +114,9 @@
       "notes": [
         "The archived session_end JSON identifies the monitor session; the matching Claude transcript preserves the exact prompt bytes."
       ],
-      "source_session_id": "t08p15068i7-09190728"
+      "source_session_id": "t08p15068i7-09190728",
+      "archive_reported_q": 0.5,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 310,
@@ -131,7 +139,9 @@
       "notes": [
         "The archived session_end JSON identifies the monitor session; the matching Claude transcript preserves the exact prompt bytes."
       ],
-      "source_session_id": "t08p15068i9-09191341"
+      "source_session_id": "t08p15068i9-09191341",
+      "archive_reported_q": 0.5,
+      "archive_score_basis": "trajectory-directory official score"
     }
   ],
   "reference_mean_q": 0.4,
