@@ -24,6 +24,21 @@ Three independent defects explain the observed behavior:
    CLAUDE_CONFIG_DIR, requires the full listing hash, and never touches the
    user's global Claude home.
 
+New launches also verify that emitted listing while the agent is running. A
+known mismatch, missing listing before the first assistant response, ambiguous
+transcript, or unreadable evidence fails the run immediately and saves
+`instance_<id>/native-context.check.json`. An unpublished or partially written
+startup transcript remains pending. Completion re-reads the real transcript,
+so neither a stale successful check nor a matching score bypasses the contract.
+This guard is not injected into the already running r5 controllers.
+
+The Skill listing mismatch does not establish the cause of the score difference.
+The first requests recorded for four observed r5 cases also report roughly
+1,600 fewer input tokens than their archived counterparts. The complete
+historical model request bodies were not saved, so the source of that gap and
+complete request equivalence remain unverified. Passing the listing check
+alone is not evidence of score reproduction.
+
 The release path is therefore:
 
 - use the current repository revision, not an in-flight diagnostic run;

@@ -45,6 +45,16 @@ Existing evaluation processes were not restarted. See the
 
 ## Automated checks
 
+The runtime now rejects a known initial native Skill-listing mismatch while
+the agent is still running instead of discovering it only in the final report.
+It tolerates an incomplete startup transcript, saves the actual check result,
+and re-reads the transcript when the agent or evaluator finishes. Five added
+regressions cover early divergence, absent completion evidence, partial startup,
+changed evidence after an earlier successful check, and normal CLI exit without
+the required listing. The current root suite ran 54 tests: 53 passed and one
+optional real-CLI test skipped. This change does not restart the existing r5
+jobs, modify their transcripts, or count any diagnostic score as reproduced.
+
 The October 1 report audit found that equal scores could previously certify a
 saved plan with a different budget, model or harness. The report now checks the
 plan against the packaged task archive: Challenge 2025 ×2 and its exact step

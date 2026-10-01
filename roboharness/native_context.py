@@ -84,3 +84,27 @@ def inspect_listing(transcript: Path, expected: dict) -> dict:
             if row.get('type') == 'assistant':
                 return {'state': 'missing', 'reason': 'No initial Skill listing before first assistant'}
     return {'state': 'pending'}
+
+
+def inspect_case(config_dir: Path, expected: dict, *, finished: bool = False) -> dict:
+    """Inspect the case's unique native transcript without trusting a cached audit.
+
+    A startup with no transcript or an incomplete first line is still pending.
+    Once the agent/evaluator finishes, the same absence is a failed contract.
+    """
+    transcripts = list(config_dir.glob('projects/*/*.jsonl'))
+    if len(transcripts) > 1:
+        return {'state': 'ambiguous', 'reason': 'Multiple native transcripts for one case'}
+    if not transcripts:
+        return {'state': 'missing' if finished else 'pending' if config_dir.exists() else 'not_started'}
+    try:
+        result = inspect_listing(transcripts[0], expected)
+        result['transcript'] = str(transcripts[0])
+    except FileNotFoundError:
+        # A live CLI can publish or move its transcript between glob and open.
+        result = {'state': 'missing' if finished else 'pending'}
+    except (OSError, ValueError) as error:
+        result = {'state': 'unreadable', 'reason': str(error)}
+    if finished and result['state'] == 'pending':
+        result['state'] = 'missing'
+    return result

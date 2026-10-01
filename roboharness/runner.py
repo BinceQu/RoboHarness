@@ -20,6 +20,7 @@ import urllib.request
 import uuid
 
 from roboharness.http_transport import LoopbackHTTPHandler
+from roboharness.native_context import contract as native_contract, inspect_case as inspect_native_case
 
 ROOT = Path(__file__).resolve().parents[1]
 INTERFACE = ROOT / 'interface'
@@ -466,8 +467,34 @@ class Run:
         timeout = self.config['session_timeout_s']
         deadline = time.monotonic() + timeout if timeout > 0 else None
         finished_at, reason, last_log = None, None, 0
+        expected_context = (native_contract(self.task['task'], iid)
+                            if self.plan['harness'] == 'claude_code' else None)
+        context_verified = False
+
+        def check_context(*, finished=False):
+            audit = inspect_native_case(case_dir / 'claude-home', expected_context, finished=finished)
+            if 'transcript' in audit:
+                audit['transcript'] = str(Path(audit['transcript']).relative_to(case_dir))
+            if audit['state'] in ('pending', 'not_started'):
+                return False
+            atomic_json(case_dir / 'native-context.check.json', audit)
+            if audit['state'] != 'match':
+                raise RuntimeError(
+                    f'instance {iid}: initial native Skill context {audit["state"]}; '
+                    f'see {case_dir / "native-context.check.json"}. '
+                    'This rollout cannot satisfy the archived context contract.'
+                )
+            if not context_verified:
+                self.log(f'instance {iid}: archived native Skill context verified')
+            return True
+
         while True:
             result = official_result(path, self.task, iid)
+            if expected_context is not None and (not context_verified or result is not None):
+                # Reject known startup divergence while the run is still active,
+                # then re-read the actual transcript at completion. A saved
+                # successful audit alone must never certify a finished rollout.
+                context_verified = check_context(finished=result is not None)
             if result is not None:
                 break
             self.assert_alive('interface', 'gate', 'evaluator')
@@ -480,6 +507,7 @@ class Run:
                     body = read_json(case_dir / 'agent.json')
                     if body.get('is_error') or body.get('type') != 'result':
                         raise RuntimeError('Agent returned an error or no final result; not a valid evaluation.')
+                    context_verified = check_context(finished=True)
                 reason = 'model_done' if code == 0 else 'wall_timeout'
                 self.finish_episode(reason)
                 finished_at = time.monotonic()
