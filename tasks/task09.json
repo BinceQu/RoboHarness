@@ -39,7 +39,9 @@
       "notes": [
         "Actual session prompt matches v3; INDEX.md calls this batch v2. Session text takes precedence."
       ],
-      "source_session_id": "t09p15069i0-09152352"
+      "source_session_id": "t09p15069i0-09152352",
+      "archive_reported_q": 0.3333333333333333,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 304,
@@ -62,7 +64,9 @@
       "notes": [
         "Actual session prompt matches v3; INDEX.md calls this batch v2. Session text takes precedence."
       ],
-      "source_session_id": "t09p15069i3-09160931"
+      "source_session_id": "t09p15069i3-09160931",
+      "archive_reported_q": 0.2222222222222222,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 306,
@@ -85,7 +89,9 @@
       "notes": [
         "Actual session prompt matches v3; INDEX.md calls this batch v2. Session text takes precedence."
       ],
-      "source_session_id": "t09p15069i5-09161316"
+      "source_session_id": "t09p15069i5-09161316",
+      "archive_reported_q": 0.3333333333333333,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 308,
@@ -106,7 +112,9 @@
       "reference_q": 0.1111111111111111,
       "reference_steps": 11898,
       "notes": [],
-      "source_session_id": "t09p15069i7-09171216"
+      "source_session_id": "t09p15069i7-09171216",
+      "archive_reported_q": 0.1111111111111111,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 310,
@@ -127,7 +135,9 @@
       "reference_q": 0.1111111111111111,
       "reference_steps": 15326,
       "notes": [],
-      "source_session_id": "t09p15069i9-09171809"
+      "source_session_id": "t09p15069i9-09171809",
+      "archive_reported_q": 0.1111111111111111,
+      "archive_score_basis": "trajectory-directory official score"
     }
   ],
   "reference_mean_q": 0.22222222222222224,

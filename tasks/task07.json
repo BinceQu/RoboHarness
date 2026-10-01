@@ -37,7 +37,9 @@
       "reference_q": 0.0,
       "reference_steps": 23816,
       "notes": [],
-      "source_session_id": "t07p15067i0-0920230454-cda49370334a"
+      "source_session_id": "t07p15067i0-0920230454-cda49370334a",
+      "archive_reported_q": 0.0,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 304,
@@ -58,7 +60,9 @@
       "reference_q": 0.6666666666666666,
       "reference_steps": 16609,
       "notes": [],
-      "source_session_id": "t07p15067i3-0921031841-14bb0e8c9acf"
+      "source_session_id": "t07p15067i3-0921031841-14bb0e8c9acf",
+      "archive_reported_q": 0.6666666666666666,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 306,
@@ -79,7 +83,9 @@
       "reference_q": 0.5,
       "reference_steps": 32032,
       "notes": [],
-      "source_session_id": "t07p15067i5-0921061445-5212922c582b"
+      "source_session_id": "t07p15067i5-0921061445-5212922c582b",
+      "archive_reported_q": 0.5,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 308,
@@ -100,7 +106,9 @@
       "reference_q": 0.6666666666666666,
       "reference_steps": 26697,
       "notes": [],
-      "source_session_id": "t07p15067i7-0921113556-5276fa5537f4"
+      "source_session_id": "t07p15067i7-0921113556-5276fa5537f4",
+      "archive_reported_q": 0.6666666666666666,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 310,
@@ -121,7 +129,9 @@
       "reference_q": 0.0,
       "reference_steps": 37782,
       "notes": [],
-      "source_session_id": "t07p15067i9-0921165909-f915cd1b87c5"
+      "source_session_id": "t07p15067i9-0921165909-f915cd1b87c5",
+      "archive_reported_q": 0.0,
+      "archive_score_basis": "trajectory-directory official score"
     }
   ],
   "reference_mean_q": 0.3666666666666666,

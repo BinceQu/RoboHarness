@@ -37,7 +37,9 @@
       "reference_q": 0.5714285714285714,
       "reference_steps": 27665,
       "notes": [],
-      "source_session_id": "t02p15062i0-09171214"
+      "source_session_id": "t02p15062i0-09171214",
+      "archive_reported_q": 0.5714285714285714,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 304,
@@ -60,7 +62,9 @@
       "notes": [
         "Historical evaluator reported 27778 steps, exceeding the planned 27664-step budget. New runs keep the declared budget; this overrun is not reproduced by silently increasing it."
       ],
-      "source_session_id": "t02p15062i0-09181018"
+      "source_session_id": "t02p15062i0-09181018",
+      "archive_reported_q": 0.7142857142857143,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 306,
@@ -81,7 +85,9 @@
       "reference_q": 0.42857142857142855,
       "reference_steps": 27665,
       "notes": [],
-      "source_session_id": "t02p15062i5-09191118"
+      "source_session_id": "t02p15062i5-09191118",
+      "archive_reported_q": 0.42857142857142855,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 308,
@@ -102,7 +108,9 @@
       "reference_q": 0.7142857142857143,
       "reference_steps": 27665,
       "notes": [],
-      "source_session_id": "t02p15062i7-09191845"
+      "source_session_id": "t02p15062i7-09191845",
+      "archive_reported_q": 0.7142857142857143,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 310,
@@ -125,7 +133,9 @@
       "notes": [
         "The top-level SUMMARY is stale; the selected case is the completed v18 rerun (q=1), not the v17 backup (q=0)."
       ],
-      "source_session_id": "t02p15062i9-0920115421-dceabceee1ae"
+      "source_session_id": "t02p15062i9-0920115421-dceabceee1ae",
+      "archive_reported_q": 1.0,
+      "archive_score_basis": "trajectory-directory official score"
     }
   ],
   "reference_mean_q": 0.6857142857142857,

@@ -37,7 +37,9 @@
       "reference_q": 1.0,
       "reference_steps": 10025,
       "notes": [],
-      "source_session_id": "t01p15061i0-09152145"
+      "source_session_id": "t01p15061i0-09152145",
+      "archive_reported_q": 1.0,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 304,
@@ -58,7 +60,9 @@
       "reference_q": 0.3333333333333333,
       "reference_steps": 10536,
       "notes": [],
-      "source_session_id": "t01p15061i3-09160054"
+      "source_session_id": "t01p15061i3-09160054",
+      "archive_reported_q": 0.3333333333333333,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 306,
@@ -79,7 +83,9 @@
       "reference_q": 1.0,
       "reference_steps": 8318,
       "notes": [],
-      "source_session_id": "t01p15061i5-09160613"
+      "source_session_id": "t01p15061i5-09160613",
+      "archive_reported_q": 1.0,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 308,
@@ -100,7 +106,9 @@
       "reference_q": 1.0,
       "reference_steps": 7040,
       "notes": [],
-      "source_session_id": "t01p15061i7-09160916"
+      "source_session_id": "t01p15061i7-09160916",
+      "archive_reported_q": 1.0,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 310,
@@ -121,7 +129,9 @@
       "reference_q": 1.0,
       "reference_steps": 6898,
       "notes": [],
-      "source_session_id": "t01p15061i9-09161235"
+      "source_session_id": "t01p15061i9-09161235",
+      "archive_reported_q": 1.0,
+      "archive_score_basis": "trajectory-directory official score"
     }
   ],
   "reference_mean_q": 0.8666666666666666,

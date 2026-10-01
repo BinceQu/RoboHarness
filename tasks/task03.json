@@ -36,7 +36,9 @@
       "reference_source": "test_results/task03/01_official_json/cleaning_up_plates_and_food_301_0.json",
       "reference_q": 0.2857142857142857,
       "reference_steps": 19969,
-      "notes": []
+      "notes": [],
+      "archive_reported_q": 0.2857142857142857,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 304,
@@ -56,7 +58,9 @@
       "reference_source": "test_results/task03/01_official_json/cleaning_up_plates_and_food_304_0.json",
       "reference_q": 0.2857142857142857,
       "reference_steps": 16801,
-      "notes": []
+      "notes": [],
+      "archive_reported_q": 0.2857142857142857,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 306,
@@ -76,7 +80,9 @@
       "reference_source": "test_results/task03/01_official_json/cleaning_up_plates_and_food_306_0.json",
       "reference_q": 0.2857142857142857,
       "reference_steps": 13336,
-      "notes": []
+      "notes": [],
+      "archive_reported_q": 0.2857142857142857,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 308,
@@ -96,7 +102,9 @@
       "reference_source": "test_results/task03/01_official_json/cleaning_up_plates_and_food_308_0.json",
       "reference_q": 0.14285714285714285,
       "reference_steps": 27393,
-      "notes": []
+      "notes": [],
+      "archive_reported_q": 0.14285714285714285,
+      "archive_score_basis": "trajectory-directory official score"
     },
     {
       "instance_id": 310,
@@ -116,7 +124,9 @@
       "reference_source": "test_results/task03/01_official_json/cleaning_up_plates_and_food_310_0.json",
       "reference_q": 0.2857142857142857,
       "reference_steps": 6645,
-      "notes": []
+      "notes": [],
+      "archive_reported_q": 0.2857142857142857,
+      "archive_score_basis": "trajectory-directory official score"
     }
   ],
   "reference_mean_q": 0.2571428571428571,
