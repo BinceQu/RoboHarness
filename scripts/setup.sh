@@ -34,7 +34,10 @@ PATH="$ROOT/.venv-interface/bin:$PATH" GIT_LFS_SKIP_SMUDGE=1 \
     bash setup.sh --bddl --omnigibson --joylo --eval --confirm-no-conda "$@"
 )
 .venv-evaluator/bin/python scripts/with_evaluator_sources.py --check
-.venv-evaluator/bin/python -m pip install warp-lang==1.12.0
+# Upstream installs SDK and evaluation dependencies in separate pip stages.
+# Converge the observed version drift without resolving their contradictory
+# SDK metadata or changing additional packages in the numerical environment.
+.venv-evaluator/bin/python -m pip install --no-deps -r requirements/evaluator-runtime.txt
 "$PYTHON_BIN" -c 'from roboharness.assets import prepare_robot_asset; print(prepare_robot_asset())'
 "$PYTHON_BIN" scripts/setup_perception.py
 echo 'Environments ready. Configure data and model access as described in docs/setup.md.'
