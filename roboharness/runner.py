@@ -617,6 +617,7 @@ def main(argv=None):
             raise ValueError(f'Run directory must be new: {path}')
         plan = {'run_id': run_id, 'run_dir': str(path), 'port': port, 'gpu': args.gpu,
                 'harness': args.harness, 'model': config['model'], 'model_url': config['model_url'],
+                'diagnostic_only': (args.harness != task['harness'] or config['model'] != task['model']),
                 'write_video': args.write_video, 'task_config': task, 'cases': cases}
         if args.dry_run:
             print(json.dumps(plan, indent=2, ensure_ascii=False)); return 0

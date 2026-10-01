@@ -1,3 +1,4 @@
+import copy
 import hashlib
 import json
 import os
@@ -9,7 +10,7 @@ import unittest
 from unittest import mock
 
 from scripts.report_validation import collect, main
-from roboharness.runner import process_start
+from roboharness.runner import load_task, process_start
 
 
 class ValidationReport(unittest.TestCase):
@@ -17,10 +18,19 @@ class ValidationReport(unittest.TestCase):
         temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
         self.root = Path(temporary.name)
-        self.task = {'task': 'task01', 'task_name': 'picking_up_trash'}
-        plan = {'task_config': self.task, 'model': 'test', 'harness': 'claude_code',
-                'cases': [{'instance_id': iid, 'reference_q': 1.0} for iid in (301, 304)]}
+        self.task = load_task('task01')
+        self.task['cases'] = self.task['cases'][:2]
+        for case in self.task['cases']:
+            case.update(reference_q=1.0, archive_reported_q=1.0)
+        plan = {'task_config': copy.deepcopy(self.task), 'model': self.task['model'],
+                'harness': 'claude_code', 'cases': copy.deepcopy(self.task['cases'])}
+        for case in plan['cases']:
+            case.pop('archive_reported_q')  # Also exercise legacy plans with equal raw targets.
         (self.root / 'plan.json').write_text(json.dumps(plan))
+        # Keep the trusted archive separate from the run's mutable saved plan.
+        archive_patch = mock.patch('scripts.report_validation.load_task', return_value=self.task)
+        self.archive_mock = archive_patch.start()
+        self.addCleanup(archive_patch.stop)
         self.summary = {'status': 'running', 'cases': []}
         (self.root / 'output/json').mkdir(parents=True)
         # These tests isolate score/liveness reporting. Native context parsing
@@ -72,6 +82,7 @@ class ValidationReport(unittest.TestCase):
         plan_path = self.root / 'plan.json'
         plan = json.loads(plan_path.read_text())
         plan['cases'][1]['reference_q'] = 0.0
+        self.task['cases'][1].update(reference_q=0.0, archive_reported_q=0.0)
         plan_path.write_text(json.dumps(plan))
         self.add_case(301, 5 / 9)
         self.save()
@@ -189,6 +200,7 @@ class ValidationReport(unittest.TestCase):
         plan_path = self.root / 'plan.json'
         plan = json.loads(plan_path.read_text())
         plan['cases'][1]['reference_q'] = 0.0
+        self.task['cases'][1].update(reference_q=0.0, archive_reported_q=0.0)
         plan_path.write_text(json.dumps(plan))
         self.add_case(301, 0.0)
         self.add_case(304, 1.0)
@@ -204,6 +216,7 @@ class ValidationReport(unittest.TestCase):
         plan_path = self.root / 'plan.json'
         plan = json.loads(plan_path.read_text())
         plan['cases'][0]['archive_reported_q'] = 0.0
+        self.task['cases'][0]['archive_reported_q'] = 0.0
         plan_path.write_text(json.dumps(plan))
         self.add_case(301, 0.0)
         self.add_case(304, 1.0)
@@ -214,6 +227,74 @@ class ValidationReport(unittest.TestCase):
         self.assertTrue(row['reproduction_verified'])
         self.assertEqual(row['cases'][0]['raw_reference_q'], 1.0)
         self.assertEqual(self.require_match_exit_code(), 0)
+
+    def test_equal_scores_do_not_certify_a_different_experiment(self):
+        self.add_case(301, 1.0)
+        self.add_case(304, 1.0)
+        self.summary['status'] = 'complete'
+        self.save()
+        path = self.root / 'plan.json'
+        original = json.loads(path.read_text())
+        self.assertTrue(collect(self.root)['reproduction_verified'])
+        variants = [
+            ('task_config', 'challenge_year', 2026),
+            ('task_config', 'budget_multiplier', 1.5),
+            ('task_config', 'max_steps', 7901),
+            ('task_config', 'evaluator_commit', 'different-revision'),
+            ('task_config', 'evaluator_seed', 42),
+            ('task_config', 'robot_profile', 'different-robot'),
+            ('task_config', 'idle_gate', False),
+            ('plan', 'model', 'different-model'),
+            ('plan', 'harness', 'codex'),
+            ('case', 'prompt_sha256', 'different-prompt'),
+            ('case', 'reference_sha256', 'different-reference'),
+            ('case', 'claude_mcp_name', 'different-namespace'),
+            ('case', 'slot', 9),
+        ]
+        for scope, field, value in variants:
+            with self.subTest(scope=scope, field=field):
+                plan = copy.deepcopy(original)
+                target = plan if scope == 'plan' else plan['cases'][0] if scope == 'case' else plan[scope]
+                target[field] = value
+                path.write_text(json.dumps(plan))
+                row = collect(self.root)
+                self.assertEqual(row['mean_q'], 1.0)
+                self.assertFalse(row['archive_contract_verified'])
+                self.assertFalse(row['reproduction_verified'])
+                self.assertEqual(self.require_match_exit_code(), 2)
+
+    def test_run_cannot_redefine_its_archive_target_to_match_output(self):
+        path = self.root / 'plan.json'
+        plan = json.loads(path.read_text())
+        plan['cases'][0]['archive_reported_q'] = 0.0
+        path.write_text(json.dumps(plan))
+        self.add_case(301, 0.0)
+        self.add_case(304, 1.0)
+        self.summary['status'] = 'complete'
+        self.save()
+        row = collect(self.root)
+        self.assertFalse(row['reproduction_verified'])
+        self.assertIn('archive_reported_q', row['reproduction_caveats'][0]['reason'])
+
+    def test_missing_trusted_archive_never_certifies_scores(self):
+        self.add_case(301, 1.0)
+        self.add_case(304, 1.0)
+        self.summary['status'] = 'complete'
+        self.save()
+        self.archive_mock.side_effect = FileNotFoundError('archive unavailable')
+        row = collect(self.root)
+        self.assertFalse(row['archive_contract_verified'])
+        self.assertFalse(row['reproduction_verified'])
+
+    def test_empty_or_duplicate_selected_instances_are_rejected(self):
+        path = self.root / 'plan.json'
+        plan = json.loads(path.read_text())
+        self.save()
+        for cases in ([], [plan['cases'][0], plan['cases'][0]]):
+            with self.subTest(cases=cases):
+                path.write_text(json.dumps({**plan, 'cases': cases}))
+                with self.assertRaisesRegex(ValueError, 'nonempty, unique'):
+                    collect(self.root)
 
     def test_diagnostic_plan_never_becomes_verified_reproduction(self):
         plan_path = self.root / 'plan.json'

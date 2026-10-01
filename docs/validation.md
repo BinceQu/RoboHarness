@@ -45,6 +45,20 @@ Existing evaluation processes were not restarted. See the
 
 ## Automated checks
 
+The October 1 report audit found that equal scores could previously certify a
+saved plan with a different budget, model or harness. The report now checks the
+plan against the packaged task archive: Challenge 2025 ×2 and its exact step
+limit, evaluator revision/seed, scene/robot configuration, model/harness, case
+slots, prompt/reference hashes, MCP namespace and directory-authoritative
+target scores. Missing archive evidence or a mismatch prevents verification;
+redefining a target in the run plan cannot make a score pass. Model and harness
+overrides are also marked diagnostic at launch. The root suite contains 46
+tests: 45 passed and one optional real-CLI test skipped in this invocation.
+This validates report acceptance and saved plans, not remote model weights or
+the unrecorded portions of historical model requests. The three existing r5
+plans and queued r6 plans pass the new configuration check; r5's native listing
+mismatches still prevent reproduction verification.
+
 The independent Git clone passed all 360 tests in `scripts/check.sh`:
 344 passed and 16 were skipped. Five additional result-reporting tests cover
 incomplete runs, incomplete completion claims, modified scoring files, and
@@ -122,7 +136,8 @@ The current three-task attempt started on September 30 at 19:21 CST from
 runtime commit 23fefd0 after the native regression passed. All five cases
 per task are selected, with HTTP ports task01=15071, task03=15073 and
 task08=15078. Budgets remain 10535, 27392 and 17886 (2025 ×2). These ports
-are explicit session launch arguments; the repository default is unchanged.
+are explicit session launch arguments; subsequent launches also default to
+15070 plus the task index, with configuration isolated to this session.
 Each task runs in its own user service, with a separate strict result reporter.
 The [current report](../validation_results/gpu5-20260930-r5/README.md) and
 [launch audit](../validation_results/gpu5-20260930-r5/launch_audit.json) record

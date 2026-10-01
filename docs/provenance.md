@@ -11,7 +11,7 @@ computed from the selected original evaluator JSON; no historical result is
 edited to reconcile conflicting records.
 
 archive_reported_q is the case-level value used by the strict report. For tasks
-02, 03, 06, 07, 08 and 09 it is read from the final official score JSON inside
+01, 02, 03, 06, 07, 08 and 09 it is read from the final official score JSON inside
 the corresponding trajectory directory. For task00 and task05, the directory
 manifest/session summary is authoritative when it conflicts with a quarantined or
 renamed JSON output; those directory values are kept unchanged.

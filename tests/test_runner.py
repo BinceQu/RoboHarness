@@ -1,3 +1,5 @@
+import contextlib
+import io
 import json
 import itertools
 import os
@@ -13,6 +15,20 @@ from roboharness import runner
 
 
 class ArchivedCases(unittest.TestCase):
+    def test_model_or_harness_overrides_are_diagnostic(self):
+        with tempfile.TemporaryDirectory() as directory:
+            config = Path(directory) / 'config.json'
+            config.write_text('{}')
+            for args, diagnostic in (([], False), (['--model', 'different-model'], True),
+                                     (['--harness', 'codex'], True)):
+                with self.subTest(args=args):
+                    stream = io.StringIO()
+                    with contextlib.redirect_stdout(stream):
+                        code = runner.main(['--task', 'task01', '--config', str(config),
+                                            '--dry-run', *args])
+                    self.assertEqual(code, 0)
+                    self.assertEqual(json.loads(stream.getvalue())['diagnostic_only'], diagnostic)
+
     def test_all_cases_have_trajectory_authoritative_scores(self):
         for path in sorted((runner.ROOT / 'tasks').glob('*.json')):
             task = runner.load_task(path.stem)
