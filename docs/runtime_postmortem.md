@@ -109,3 +109,12 @@ port locks. No global configuration or running r5 service is changed.
 The [session port audit](../validation_results/session-port-routing-20261001/README.md)
 records the selected listeners, updated pinned revision, regression evidence
 and unchanged r5 process identities.
+
+## Completed r5 task01/301 outcome
+
+The completed r5 case scored 2/3 and ended through model_done. Recorded images
+show a placement miss; the archived prompt then directs termination for a
+remaining outside can less than 0.5 m away. A comparison of archived gripper
+responses does not establish a control-timing regression. This is diagnostic
+evidence only; it does not isolate the failure cause or validate the queued
+fixes. See [the outcome audit](../validation_results/task01-301-r5-outcome-20261001/README.md).
