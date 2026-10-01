@@ -1,0 +1,234 @@
+{
+  "created_at": "2026-10-01T12:35:25.175405+08:00",
+  "scope": "Acceptance-policy and regression evidence, not GPU score verification",
+  "acceptance_criterion": "per_task_mean_q",
+  "absolute_tolerance": 1e-06,
+  "require_complete_archived_instance_set": true,
+  "case_score_differences": "diagnostic_only",
+  "cross_task_compensation_allowed": false,
+  "runtime_fidelity_checks_retained": true,
+  "source": {
+    "source_root": "/var/tmp/roboharness-validation-r6-46e51e4",
+    "source_revision": "46e51e4e8ffaafdfa802d8a9580aa42f8a5737f2",
+    "behavior_revision": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+    "scope": "this session r6 validation only",
+    "prepared_at": "2026-10-01T12:33:05.577084+08:00",
+    "acceptance_criterion": "per_task_mean_q"
+  },
+  "unchanged_evaluation_paths": [
+    "roboharness",
+    "interface",
+    "harness",
+    "tasks",
+    "prompt",
+    "BEHAVIOR",
+    "scripts/reproduce_task.sh"
+  ],
+  "tests": {
+    "total": 71,
+    "passed": 70,
+    "skipped": 1,
+    "log": "root-tests.log",
+    "sha256": "9b0eb0deccbe0a60352ecc00f82edf9d57d8f8805a194559906a8943b734849b"
+  },
+  "targets": {
+    "task00": {
+      "archive_reported_mean_q": 0.4,
+      "raw_reference_mean_q": 0.6,
+      "instance_ids": [
+        301,
+        304,
+        306,
+        308,
+        310
+      ]
+    },
+    "task01": {
+      "archive_reported_mean_q": 0.8666666666666666,
+      "raw_reference_mean_q": 0.8666666666666666,
+      "instance_ids": [
+        301,
+        304,
+        306,
+        308,
+        310
+      ]
+    },
+    "task02": {
+      "archive_reported_mean_q": 0.6857142857142857,
+      "raw_reference_mean_q": 0.6857142857142857,
+      "instance_ids": [
+        301,
+        304,
+        306,
+        308,
+        310
+      ]
+    },
+    "task03": {
+      "archive_reported_mean_q": 0.2571428571428571,
+      "raw_reference_mean_q": 0.2571428571428571,
+      "instance_ids": [
+        301,
+        304,
+        306,
+        308,
+        310
+      ]
+    },
+    "task05": {
+      "archive_reported_mean_q": 0.8333333333333334,
+      "raw_reference_mean_q": 0.7,
+      "instance_ids": [
+        301,
+        304,
+        306,
+        308,
+        310
+      ]
+    },
+    "task06": {
+      "archive_reported_mean_q": 0.4222222222222222,
+      "raw_reference_mean_q": 0.4222222222222222,
+      "instance_ids": [
+        301,
+        304,
+        306,
+        308,
+        310
+      ]
+    },
+    "task07": {
+      "archive_reported_mean_q": 0.3666666666666666,
+      "raw_reference_mean_q": 0.3666666666666666,
+      "instance_ids": [
+        301,
+        304,
+        306,
+        308,
+        310
+      ]
+    },
+    "task08": {
+      "archive_reported_mean_q": 0.4,
+      "raw_reference_mean_q": 0.4,
+      "instance_ids": [
+        301,
+        304,
+        306,
+        308,
+        310
+      ]
+    },
+    "task09": {
+      "archive_reported_mean_q": 0.22222222222222224,
+      "raw_reference_mean_q": 0.22222222222222224,
+      "instance_ids": [
+        301,
+        304,
+        306,
+        308,
+        310
+      ]
+    }
+  },
+  "current_report": {
+    "updated_at_utc": "2026-10-01T04:31:04+00:00",
+    "tasks": [
+      {
+        "task": "task01",
+        "criterion": "per_task_mean_q",
+        "finished": 1,
+        "expected": 5,
+        "archive_mean_q": 0.8666666666666666
+      },
+      {
+        "task": "task03",
+        "criterion": "per_task_mean_q",
+        "finished": 0,
+        "expected": 5,
+        "archive_mean_q": 0.2571428571428571
+      },
+      {
+        "task": "task08",
+        "criterion": "per_task_mean_q",
+        "finished": 0,
+        "expected": 5,
+        "archive_mean_q": 0.4
+      }
+    ]
+  },
+  "queue_activation": {
+    "updated_at": "2026-10-01T12:33:06.194641+08:00",
+    "scope": "this session only",
+    "acceptance_criterion": "per_task_mean_q",
+    "old_queue_pid": 784314,
+    "new_queue_pid": 2316195,
+    "old_source": {
+      "source_root": "/var/tmp/roboharness-validation-r6-f547d5a",
+      "source_revision": "f547d5a0c23ba3bcf67ff038b11ff02c054fb8ee",
+      "behavior_revision": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+      "scope": "this session r6 validation only",
+      "prepared_at": "2026-10-01T11:18:19.817964+08:00"
+    },
+    "new_source": {
+      "source_root": "/var/tmp/roboharness-validation-r6-46e51e4",
+      "source_revision": "46e51e4e8ffaafdfa802d8a9580aa42f8a5737f2",
+      "behavior_revision": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+      "scope": "this session r6 validation only",
+      "prepared_at": "2026-10-01T12:33:05.577084+08:00",
+      "acceptance_criterion": "per_task_mean_q"
+    },
+    "verified_source": {
+      "source_root": "/var/tmp/roboharness-validation-r6-46e51e4",
+      "source_revision": "46e51e4e8ffaafdfa802d8a9580aa42f8a5737f2",
+      "task_ports": {
+        "task01": {
+          "http": 15071,
+          "policy": 15070,
+          "gate": 15072
+        },
+        "task03": {
+          "http": 15073,
+          "policy": 15074,
+          "gate": 15075
+        },
+        "task08": {
+          "http": 15078,
+          "policy": 15076,
+          "gate": 15077
+        }
+      },
+      "verified": true
+    },
+    "controllers_before": {
+      "task01": {
+        "state": "active",
+        "pid": 2833423
+      },
+      "task03": {
+        "state": "active",
+        "pid": 2833447
+      },
+      "task08": {
+        "state": "active",
+        "pid": 2833459
+      }
+    },
+    "controllers_after": {
+      "task01": {
+        "state": "active",
+        "pid": 2833423
+      },
+      "task03": {
+        "state": "active",
+        "pid": 2833447
+      },
+      "task08": {
+        "state": "active",
+        "pid": 2833459
+      }
+    },
+    "r6_launched": false
+  }
+}
