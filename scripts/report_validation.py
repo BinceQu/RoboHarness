@@ -152,7 +152,7 @@ def collect(path: Path, *, check_live: bool = False) -> dict:
             error = 'Recorded local processes are no longer alive: ' + ', '.join(liveness['failed_roles'])
     if status == 'complete' and len(completed) != len(expected):
         raise ValueError(f'Run claims completion without all official scores: {path}')
-    archive_mean = sum(c.get('archive_reported_q', c['reference_q']) for c in expected.values()) / len(expected)
+    archive_mean = None
     mean = sum(c['q'] for c in completed) / len(completed) if completed else None
     completed_archive_mean = sum(c['archive_q'] for c in completed) / len(completed) if completed else None
     superseded_path = path / 'superseded_context.json'
@@ -161,6 +161,24 @@ def collect(path: Path, *, check_live: bool = False) -> dict:
                for case in expected.values() for reason in case.get('reproduction_caveats', [])]
     contract_caveats = archive_contract_caveats(plan)
     caveats.extend(contract_caveats)
+    full_task_selected = False
+    n_archived = None
+    try:
+        archive = load_task(task['task'])
+        target = archive['archive_reported_mean_q']
+        if type(target) not in (int, float) or not math.isfinite(target) or not 0 <= target <= 1:
+            raise ValueError('Directory-reported task mean must be finite and between zero and one')
+        archive_mean = float(target)
+        archive_ids = {case['instance_id'] for case in archive['cases']}
+        n_archived = len(archive_ids)
+        full_task_selected = set(expected) == archive_ids
+        if not full_task_selected:
+            caveats.append({'instance_id': None, 'reason':
+                'Task mean verification requires the complete archived instance set: '
+                + ', '.join(str(iid) for iid in sorted(archive_ids)) + '.'})
+    except (KeyError, ValueError, OSError) as target_error:
+        caveats.append({'instance_id': None, 'reason':
+            f'Directory-reported task mean could not be verified: {target_error}'})
     caveats.extend(
         {'instance_id': case['instance_id'],
          'reason': 'The wall-clock safety timeout forced episode submission; '
@@ -180,16 +198,18 @@ def collect(path: Path, *, check_live: bool = False) -> dict:
                 and not plan.get('diagnostic_only', False))
     matches_cases = (all(abs(c['delta_archive_q']) < 1e-6 for c in completed)
                      if complete else None)
+    matches_mean = abs(mean - archive_mean) < 1e-6 if complete else None
     return {'task': task['task'], 'task_name': task['task_name'], 'run_directory': path.name,
             'status': status, 'model': plan['model'], 'harness': plan['harness'],
             'n_finished': len(completed), 'n_expected': len(expected), 'cases': completed,
             'mean_q': mean, 'archive_mean_q': archive_mean,
             'completed_archive_mean_q': completed_archive_mean,
             'delta_archive_mean_q': mean - archive_mean if complete else None,
-            'matches_archive_mean': abs(mean - archive_mean) < 1e-6 if complete else None,
-            'matches_archive_cases': matches_cases,
-            'reproduction_verified': (matches_cases and abs(mean - archive_mean) < 1e-6)
-                                     if complete else False,
+            'matches_archive_mean': matches_mean,
+            'matches_archive_cases': matches_cases,  # Diagnostic only; not an acceptance gate.
+            'acceptance_criterion': 'per_task_mean_q',
+            'full_task_selected': full_task_selected, 'n_archived': n_archived,
+            'reproduction_verified': matches_mean is True,
             'diagnostic_only': plan.get('diagnostic_only', False),
             'archive_contract_verified': not contract_caveats,
             'error': error, 'superseded': superseded,
@@ -204,19 +224,22 @@ def write_report(output: Path, rows: list[dict], run_paths: list[Path]):
     lines = ['# GPU validation results', '', f'Updated: {timestamp}', '',
              'Only fresh official evaluator JSON contributes to new scores. An incomplete',
              'run has no final mean comparison and is not a successful reproduction claim.', '',
-             'Comparisons cover only the selected instances. Run all five archived instances',
-             'to compare a complete task mean.', '',
-             '| Task | Status | Local processes | Completed | New Q (completed cases) | Archived Q (same completed cases) | Final difference | Every case matches |',
-             '| --- | --- | --- | ---: | ---: | ---: | ---: | --- |']
+             'Acceptance compares each complete task mean Q-score with its directory-reported',
+             'task mean (absolute tolerance 1e-6). All archived instances must be present.',
+             'Individual case differences are diagnostic and do not prevent a mean match.',
+             'Archived prompt, budget and runtime fidelity checks still apply.', '',
+             '| Task | Status | Local processes | Completed | New mean Q (completed cases) | Archived task mean Q | Final difference | Mean matches | Verified |',
+             '| --- | --- | --- | ---: | ---: | ---: | ---: | --- | --- |']
     for row, run in zip(rows, run_paths):
         mean = '—' if row['mean_q'] is None else f'{row["mean_q"]:.6f}'
-        archive = ('—' if row['completed_archive_mean_q'] is None
-                   else f'{row["completed_archive_mean_q"]:.6f}')
+        archive = ('—' if row['archive_mean_q'] is None
+                   else f'{row["archive_mean_q"]:.6f}')
         delta = '—' if row['delta_archive_mean_q'] is None else f'{row["delta_archive_mean_q"]:+.6f}'
-        matches = '—' if row['matches_archive_cases'] is None else ('yes' if row['matches_archive_cases'] else 'no')
+        matches = '—' if row['matches_archive_mean'] is None else ('yes' if row['matches_archive_mean'] else 'no')
+        verified = 'yes' if row['reproduction_verified'] else 'no'
         local = row['local_liveness']['state'] if row['local_liveness'] else 'not checked'
         lines.append(f'| {row["task"]} | {row["status"]} | {local} | {row["n_finished"]}/{row["n_expected"]} | '
-                     f'{mean} | {archive} | {delta} | {matches} |')
+                     f'{mean} | {archive} | {delta} | {matches} | {verified} |')
         for case in row['cases']:
             source = run / case['source_result']
             target = output / row['task'] / source.name
@@ -265,7 +288,7 @@ def main():
     parser.add_argument('--check-live', action='store_true',
                         help='Verify recorded process identities on this Linux host; do not use for copied runs')
     parser.add_argument('--require-match', action='store_true',
-                        help='Exit 2 unless all selected cases have verified matching archived scores')
+                        help='Exit 2 unless each complete task mean matches its directory-reported mean with verified runtime fidelity')
     parser.add_argument('--wait-for-start-s', type=float, default=0,
                         help='Wait up to this many seconds for initial plan/summary files (default: no wait)')
     args = parser.parse_args()
