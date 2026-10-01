@@ -52,12 +52,22 @@ limit, evaluator revision/seed, scene/robot configuration, model/harness, case
 slots, prompt/reference hashes, MCP namespace and directory-authoritative
 target scores. Missing archive evidence or a mismatch prevents verification;
 redefining a target in the run plan cannot make a score pass. Model and harness
-overrides are also marked diagnostic at launch. The root suite contains 46
-tests: 45 passed and one optional real-CLI test skipped in this invocation.
+overrides are also marked diagnostic at launch. The root suite contains 49
+tests: 48 passed and one optional real-CLI test skipped in this invocation.
 This validates report acceptance and saved plans, not remote model weights or
 the unrecorded portions of historical model requests. The three existing r5
 plans and queued r6 plans pass the new configuration check; r5's native listing
 mismatches still prevent reproduction verification.
+
+An independent startup check reproduced a race in the queued report service:
+the controllers are launched asynchronously, so the reporter can start before
+their initial plan.json and summary.json exist. The optional
+--wait-for-start-s argument now waits for those files with a finite deadline;
+expiry returns a failure and never fabricates results. The session-local r6
+queue uses 2400 seconds. Tests cover delayed atomic publication, expiry, and
+invalid timeouts. Only the queue watcher was reloaded to pick up this option;
+all three r5 controller identities remained unchanged. This wait concerns
+report startup and does not impose a rollout wall-clock limit.
 
 The independent Git clone passed all 360 tests in `scripts/check.sh`:
 344 passed and 16 were skipped. Five additional result-reporting tests cover

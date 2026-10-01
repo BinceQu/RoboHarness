@@ -6,6 +6,7 @@ import argparse
 from datetime import datetime, timezone
 import hashlib
 import json
+import math
 from pathlib import Path
 import shutil
 import sys
@@ -244,6 +245,24 @@ def write_report(output: Path, rows: list[dict], run_paths: list[Path]):
     temporary.replace(output / 'README.md')
 
 
+def wait_for_start(run_paths: list[Path], timeout: float) -> None:
+    """Allow asynchronously launched controllers to publish their initial files."""
+    deadline = time.monotonic() + timeout
+    previous = None
+    while True:
+        missing = [str(path / name) for path in run_paths
+                   for name in ('plan.json', 'summary.json') if not (path / name).is_file()]
+        if not missing:
+            return
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            raise TimeoutError('Run startup files were not published: ' + ', '.join(missing))
+        if missing != previous:
+            print('Waiting for run startup files: ' + ', '.join(missing), flush=True)
+            previous = missing
+        time.sleep(min(1.0, remaining))
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('runs', nargs='+', type=Path)
@@ -253,7 +272,17 @@ def main():
                         help='Verify recorded process identities on this Linux host; do not use for copied runs')
     parser.add_argument('--require-match', action='store_true',
                         help='Exit 2 unless all selected cases have verified matching archived scores')
+    parser.add_argument('--wait-for-start-s', type=float, default=0,
+                        help='Wait up to this many seconds for initial plan/summary files (default: no wait)')
     args = parser.parse_args()
+    if not math.isfinite(args.wait_for_start_s) or args.wait_for_start_s < 0:
+        parser.error('--wait-for-start-s must be finite and non-negative')
+    if args.wait_for_start_s:
+        try:
+            wait_for_start([path.resolve() for path in args.runs], args.wait_for_start_s)
+        except TimeoutError as error:
+            print(f'Report startup failed: {error}', file=sys.stderr)
+            return 1
     previous = None
     while True:
         rows = [collect(path.resolve(), check_live=args.check_live) for path in args.runs]
