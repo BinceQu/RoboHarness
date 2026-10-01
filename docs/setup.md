@@ -10,6 +10,12 @@ at least 10 GiB free at `cache_dir` before starting. Concurrent runs require
 additional headroom. Remove only caches belonging to stopped runs, or select
 a larger scratch filesystem in `configs/local.json`.
 
+For archived Claude runs, `cache_dir` must also be outside Git checkouts and
+worktrees (including their ancestors). Each case launches from a fresh private
+workspace there. Otherwise the native CLI adds the release branch, dirty files
+and recent commits to the model's system context. The launcher rejects such a
+cache path before starting the simulator; no global Git or CLI settings change.
+
 Clone this repository with its submodule, then install:
 
 ```bash

@@ -5,7 +5,7 @@ from revision 23fefd0736ad45c7e91631bce2a12abba3e57937, before the release
 fidelity fixes landed, so its results must not be used as a strict reproduction
 claim.
 
-Three independent defects explain the observed behavior:
+The runtime investigation identified these independent defects:
 
 1. The old runner interpreted session_timeout_s: 0 as a deadline equal to
    the current monotonic time. A case could therefore submit a finish request
@@ -23,6 +23,14 @@ Three independent defects explain the observed behavior:
    The release runner seeds the minimal per-case state in a fresh
    CLAUDE_CONFIG_DIR, requires the full listing hash, and never touches the
    user's global Claude home.
+4. Running the CLI from the new Git checkout exposed the release branch,
+   worktree status and recent commits in its system prompt. All 45 archived
+   transcripts record the original harness cwd and the pinned CLI's `HEAD`
+   branch marker, also observed in the controlled non-Git launch. A controlled
+   capture shows that `GIT_CEILING_DIRECTORIES` alone does not suppress the
+   native metadata. New runs use a fresh case-local non-Git workspace in the
+   run's private cache, clear inherited Git overrides only for the agent child,
+   and verify the archived branch marker alongside the listing.
 
 New launches also verify that emitted listing while the agent is running. A
 known mismatch, missing listing before the first assistant response, ambiguous
@@ -33,6 +41,11 @@ so neither a stale successful check nor a matching score bypasses the contract.
 This guard is not injected into the already running r5 controllers.
 
 The Skill listing mismatch does not establish the cause of the score difference.
+Controlled token counting with the current model endpoint attributes 12 tokens
+to the two listing variants and 206 tokens to the captured release Git context.
+Each comparison changes only that component of one captured request, and
+neither invokes model generation. These differences do not explain the larger
+historical deficit, and the Git context actually adds tokens.
 The first requests recorded for four observed r5 cases also report roughly
 1,600 fewer input tokens than their archived counterparts. The complete
 historical model request bodies were not saved, so the source of that gap and

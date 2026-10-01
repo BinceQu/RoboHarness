@@ -171,8 +171,9 @@ def collect(path: Path, *, check_live: bool = False) -> dict:
                 if plan['harness'] == 'claude_code' else [])
     caveats.extend(
         {'instance_id': context['instance_id'],
-         'reason': 'Initial native Skill listing is ' + context['state'] +
-                   '; a complete recorded listing match is required, including descriptions.'}
+         'reason': 'Initial native context is ' + context['state'] +
+                   '; the full listing and archived workspace metadata must match.' +
+                   (' ' + context['reason'] if context.get('reason') else '')}
         for context in contexts if context['state'] not in ('match', 'pending', 'not_started')
     )
     complete = (status == 'complete' and superseded is None and not caveats

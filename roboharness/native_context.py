@@ -26,10 +26,39 @@ def contract(task: str, instance_id: int, *, root: Path = ROOT) -> dict:
     if len(matches) != 1:
         raise ValueError(f'No unique archived native context for {task}/{instance_id}')
     case = matches[0]
+    if case.get('git_branch') != 'HEAD':
+        raise ValueError('Missing or unsupported archived native workspace metadata')
     pattern = index['patterns'][case['listing_sha256']]
     if pattern['sha256'] != case['listing_sha256']:
         raise ValueError('Native context profile checksum key mismatch')
     return {'case': case, 'pattern': pattern, 'claude_version': index['claude_version']}
+
+
+def validate_workspace_root(path: Path) -> Path:
+    """Reject Git ancestors before starting a simulator or creating a workspace."""
+    if not path.is_absolute():
+        raise ValueError('Native workspace requires an absolute runtime directory')
+    resolved = path.resolve()
+    for parent in (resolved, *resolved.parents):
+        if os.path.lexists(parent / '.git'):
+            raise ValueError(
+                f'Native workspace would inherit Git metadata from {parent}; '
+                'configure cache_dir outside Git worktrees for archived reproduction.'
+            )
+    return resolved
+
+
+def create_workspace(runtime_dir: Path, instance_id: int) -> Path:
+    """Keep release Git state out of the model's native startup context.
+
+    The pinned CLI discovers Git metadata independently of Git's ceiling env
+    variable. Use a real non-Git directory, not an environment-only override.
+    Plugin, prompt and recorder paths remain absolute and case-local.
+    """
+    workspace = validate_workspace_root(
+        runtime_dir / 'agent-workspaces' / f'instance_{instance_id}' / 'embodied_claude_code')
+    workspace.mkdir(parents=True, exist_ok=False, mode=0o700)
+    return workspace
 
 
 def seed(config_dir: Path, task: str, instance_id: int, *, root: Path = ROOT) -> dict:
@@ -78,9 +107,16 @@ def inspect_listing(transcript: Path, expected: dict) -> dict:
                 digest = hashlib.sha256(content.encode()).hexdigest()
                 matches = (digest == expected['pattern']['sha256']
                            and attachment.get('names') == expected['pattern']['names'])
-                return {'state': 'match' if matches else 'mismatch',
-                        'expected_sha256': expected['pattern']['sha256'],
-                        'actual_sha256': digest, 'actual_chars': len(content)}
+                result = {'state': 'match' if matches else 'mismatch',
+                          'expected_sha256': expected['pattern']['sha256'],
+                          'actual_sha256': digest, 'actual_chars': len(content)}
+                expected_branch = expected.get('case', {}).get('git_branch')
+                if expected_branch is not None:
+                    result.update(expected_git_branch=expected_branch,
+                                  actual_git_branch=row.get('gitBranch'))
+                    if row.get('gitBranch') != expected_branch:
+                        result.update(state='mismatch', reason='Native workspace Git metadata differs from archive')
+                return result
             if row.get('type') == 'assistant':
                 return {'state': 'missing', 'reason': 'No initial Skill listing before first assistant'}
     return {'state': 'pending'}

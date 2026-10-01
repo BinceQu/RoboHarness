@@ -20,7 +20,8 @@ import urllib.request
 import uuid
 
 from roboharness.http_transport import LoopbackHTTPHandler
-from roboharness.native_context import contract as native_contract, inspect_case as inspect_native_case
+from roboharness.native_context import (contract as native_contract, create_workspace,
+                                        inspect_case as inspect_native_case, validate_workspace_root)
 
 ROOT = Path(__file__).resolve().parents[1]
 INTERFACE = ROOT / 'interface'
@@ -223,14 +224,14 @@ class Run:
         with (self.path / 'run.log').open('a') as stream:
             stream.write(line + '\n')
 
-    def spawn(self, role, command, env, *, stdin=None, stdout=None, stderr=None):
+    def spawn(self, role, command, env, *, stdin=None, stdout=None, stderr=None, cwd=ROOT):
         out = Path(stdout) if stdout else self.path / 'logs' / f'{role}.log'
         out.parent.mkdir(parents=True, exist_ok=True)
         with contextlib.ExitStack() as stack:
             output = stack.enter_context(out.open('wb'))
             error = stack.enter_context(Path(stderr).open('wb')) if stderr else subprocess.STDOUT
             input_stream = stack.enter_context(Path(stdin).open('rb')) if stdin else subprocess.DEVNULL
-            proc = subprocess.Popen(command, cwd=ROOT, env=env, stdin=input_stream,
+            proc = subprocess.Popen(command, cwd=cwd, env=env, stdin=input_stream,
                                     stdout=output, stderr=error, start_new_session=True)
         self.children[role] = proc
         atomic_json(self.path / 'processes.json', {k: {'pid': v.pid, 'start': process_start(v.pid)} for k, v in self.children.items()})
@@ -404,12 +405,15 @@ class Run:
         sid = f't{self.task["task_index"]:02d}p{self.port}i{slot}-{uuid.uuid4().hex[:16]}'
         case_dir = self.path / f'instance_{iid}'
         case_dir.mkdir()
+        agent_cwd = (create_workspace(Path(self.env['XDG_RUNTIME_DIR']), iid)
+                     if self.plan['harness'] == 'claude_code' else ROOT)
         raw = (ROOT / case['prompt']).read_text()
         # Preserve the archived bytes; only the connection-port hint is rendered.
         rendered = re.sub(r'\b1506\d\b', str(self.port), raw)
         (case_dir / 'prompt.source.txt').write_text(raw)
         (case_dir / 'prompt.txt').write_text(rendered)
-        atomic_json(case_dir / 'case.json', {**case, 'session_id': sid, 'rendered_prompt_sha256': sha(rendered.encode())})
+        atomic_json(case_dir / 'case.json', {**case, 'session_id': sid,
+                    'agent_cwd': str(agent_cwd), 'rendered_prompt_sha256': sha(rendered.encode())})
         atomic_json(self.path / 'active_session.json', {
             'port': self.port, 'session_id': sid, 'owner_pid': os.getpid(),
             'owner_start': process_start(os.getpid()), 'run_id': self.token,
@@ -433,6 +437,11 @@ class Run:
         })
         harness = ROOT / 'harness' / self.plan['harness']
         if self.plan['harness'] == 'claude_code':
+            # Do not let shell-level Git overrides reintroduce a source checkout
+            # into the independent native workspace. This affects only this child.
+            for key in list(env):
+                if key.startswith('GIT_'):
+                    env.pop(key)
             from .native_context import seed as seed_native_context
             env.update(seed_native_context(case_dir / 'claude-home', self.task['task'], iid))
             command = [str(harness / 'scripts/run'), '--port', str(self.port), '--qwen-model', self.config['model'],
@@ -443,7 +452,7 @@ class Run:
             env['ROBOHARNESS_CODEX_BASE_URL'] = self.config['model_url']
             command = [str(harness / 'scripts/run'), '--port', str(self.port), '--', 'exec', '--json', '-']
         proc = self.spawn('agent', command, env, stdin=case_dir / 'prompt.txt',
-                          stdout=case_dir / 'agent.json', stderr=case_dir / 'agent.stderr.log')
+                          stdout=case_dir / 'agent.json', stderr=case_dir / 'agent.stderr.log', cwd=agent_cwd)
         self.write_summary('running')
         self.log(f'instance {iid} session {sid} prompt={case["prompt"]}')
         return proc, case_dir
@@ -480,12 +489,12 @@ class Run:
             atomic_json(case_dir / 'native-context.check.json', audit)
             if audit['state'] != 'match':
                 raise RuntimeError(
-                    f'instance {iid}: initial native Skill context {audit["state"]}; '
+                    f'instance {iid}: initial native context {audit["state"]}; '
                     f'see {case_dir / "native-context.check.json"}. '
                     'This rollout cannot satisfy the archived context contract.'
                 )
             if not context_verified:
-                self.log(f'instance {iid}: archived native Skill context verified')
+                self.log(f'instance {iid}: archived native context verified')
             return True
 
         while True:
@@ -584,6 +593,8 @@ class Run:
 
 
 def preflight(config, harness):
+    if harness == 'claude_code':
+        validate_workspace_root(Path(config['cache_dir']))
     for key in ('interface_python', 'evaluator_python', 'agent_python'):
         if not Path(config[key]).is_file():
             raise ValueError(f'{key} does not exist: {config[key]}; run scripts/setup.sh or configure configs/local.json.')

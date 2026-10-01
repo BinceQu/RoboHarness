@@ -138,6 +138,28 @@ class WallClockBudget(unittest.TestCase):
 
 
 class NativeContextRuntime(unittest.TestCase):
+    def test_agent_launch_uses_private_workspace_without_inherited_git_settings(self):
+        with tempfile.TemporaryDirectory(dir='/var/tmp') as directory:
+            root = Path(directory)
+            task = runner.load_task('task01')
+            config = root / 'config.json'
+            config.write_text('{}')
+            run = runner.Run({'run_dir': directory, 'run_id': 'test-isolated-workspace',
+                              'task_config': task, 'port': 15079, 'harness': 'claude_code'},
+                             runner.read_config(config))
+            run.env = {'XDG_RUNTIME_DIR': str(root / 'runtime'), 'GIT_DIR': '/borrowed/git',
+                       'GIT_WORK_TREE': '/borrowed/worktree', 'GIT_INDEX_FILE': '/borrowed/index'}
+            run.spawn = Mock()
+            run.write_summary = Mock()
+            run.log = Mock()
+            with patch.object(runner, 'request_json', side_effect=lambda port, route, body, **kw: {'ok': True, **body}):
+                run.start_agent(task['cases'][0])
+            actual = run.spawn.call_args
+            self.assertEqual(actual.kwargs['cwd'], root / 'runtime/agent-workspaces/instance_301/embodied_claude_code')
+            self.assertFalse(any(k.startswith('GIT_') for k in actual.args[2]))
+            self.assertEqual(run.env['GIT_DIR'], '/borrowed/git')
+            self.assertEqual(json.loads((root / 'instance_301/case.json').read_text())['agent_cwd'], str(actual.kwargs['cwd']))
+
     def setUp(self):
         directory = tempfile.TemporaryDirectory()
         self.addCleanup(directory.cleanup)
@@ -174,7 +196,7 @@ class NativeContextRuntime(unittest.TestCase):
     def test_divergence_stops_before_waiting_for_an_official_score(self):
         self.write_listing('changed description')
         with patch.object(runner, 'official_result', return_value=None):
-            with self.assertRaisesRegex(RuntimeError, 'Skill context mismatch'):
+            with self.assertRaisesRegex(RuntimeError, 'native context mismatch'):
                 self.run.wait_score(self.case, self.agent, self.case_dir)
         self.agent.poll.assert_not_called()
         self.run.finish_episode.assert_not_called()
@@ -185,7 +207,7 @@ class NativeContextRuntime(unittest.TestCase):
 
     def test_a_score_without_native_evidence_does_not_count_as_a_completed_case(self):
         with patch.object(runner, 'official_result', return_value=self.result):
-            with self.assertRaisesRegex(RuntimeError, 'Skill context missing'):
+            with self.assertRaisesRegex(RuntimeError, 'native context missing'):
                 self.run.wait_score(self.case, self.agent, self.case_dir)
         self.assertEqual(self.run.results, [])
 
@@ -209,7 +231,7 @@ class NativeContextRuntime(unittest.TestCase):
         with patch.object(runner, 'official_result', side_effect=[None, self.result]), \
              patch.object(runner.time, 'sleep', side_effect=lambda _: self.write_listing('changed')), \
              patch.object(runner, 'request_json', return_value={'session_ticks': 7}):
-            with self.assertRaisesRegex(RuntimeError, 'Skill context mismatch'):
+            with self.assertRaisesRegex(RuntimeError, 'native context mismatch'):
                 self.run.wait_score(self.case, self.agent, self.case_dir)
         self.assertEqual(self.run.results, [])
         self.assertEqual(json.loads((self.case_dir / 'native-context.check.json').read_text())['state'], 'mismatch')
@@ -218,7 +240,7 @@ class NativeContextRuntime(unittest.TestCase):
         (self.case_dir / 'agent.json').write_text(json.dumps({'type': 'result', 'is_error': False}))
         self.agent.poll.return_value = 0
         with patch.object(runner, 'official_result', return_value=None):
-            with self.assertRaisesRegex(RuntimeError, 'Skill context missing'):
+            with self.assertRaisesRegex(RuntimeError, 'native context missing'):
                 self.run.wait_score(self.case, self.agent, self.case_dir)
         self.run.finish_episode.assert_not_called()
 
