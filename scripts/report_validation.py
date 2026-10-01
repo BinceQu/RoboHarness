@@ -13,7 +13,7 @@ import time
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from roboharness.runner import atomic_json, official_result, read_json
+from roboharness.runner import atomic_json, load_task, official_result, read_json, validate_archive_protocol
 from roboharness.native_context import contract as native_contract, inspect_listing
 
 
@@ -73,11 +73,53 @@ def native_contexts(path: Path, task: str, expected: dict, finished: set[int]) -
     return rows
 
 
+def archive_contract_caveats(plan: dict) -> list[dict]:
+    """Check the saved plan against the release archive, not against itself."""
+    task = plan['task_config']
+    caveats = []
+
+    def mismatch(field, actual, expected, iid=None):
+        caveats.append({'instance_id': iid, 'reason':
+            f'Archive contract mismatch for {field}: recorded {actual!r}, expected {expected!r}.'})
+
+    try:
+        validate_archive_protocol(task)
+        archive = load_task(task['task'])
+    except (KeyError, ValueError, OSError) as error:
+        return [{'instance_id': None, 'reason': f'Archive contract could not be verified: {error}'}]
+    for field in ('task_name', 'task_index', 'scene', 'evaluator_seed', 'robot_profile',
+                  'annotator', 'idle_gate', 'spatial_map'):
+        if field not in task or task[field] != archive[field]:
+            mismatch(field, task.get(field), archive[field])
+    for field in ('model', 'harness'):
+        if plan.get(field) != archive[field]:
+            mismatch(field, plan.get(field), archive[field])
+    archived_cases = {case['instance_id']: case for case in archive['cases']}
+    for case in plan['cases']:
+        iid = case['instance_id']
+        if iid not in archived_cases:
+            mismatch('instance_id', iid, sorted(archived_cases), iid)
+            continue
+        reference = archived_cases[iid]
+        for field in ('slot', 'prompt_sha256', 'reference_sha256', 'reference_q', 'claude_mcp_name'):
+            if field not in case or case[field] != reference[field]:
+                mismatch(field, case.get(field), reference[field], iid)
+        # Older plans omit the explicit field where it equals the raw score.
+        # They remain auditable, but must agree with the release's directory target.
+        target = reference.get('archive_reported_q', reference['reference_q'])
+        recorded = case.get('archive_reported_q', case.get('reference_q'))
+        if recorded != target:
+            mismatch('archive_reported_q', recorded, target, iid)
+    return caveats
+
+
 def collect(path: Path, *, check_live: bool = False) -> dict:
     plan = read_json(path / 'plan.json')
     summary = read_json(path / 'summary.json')
     task = plan['task_config']
     expected = {case['instance_id']: case for case in plan['cases']}
+    if not expected or len(expected) != len(plan['cases']):
+        raise ValueError(f'Run plan must select nonempty, unique archive instances: {path}')
     completed = []
     seen = set()
     for case in summary.get('cases', []):
@@ -123,6 +165,8 @@ def collect(path: Path, *, check_live: bool = False) -> dict:
     superseded = read_json(superseded_path) if superseded_path.is_file() else None
     caveats = [{'instance_id': case['instance_id'], 'reason': reason}
                for case in expected.values() for reason in case.get('reproduction_caveats', [])]
+    contract_caveats = archive_contract_caveats(plan)
+    caveats.extend(contract_caveats)
     caveats.extend(
         {'instance_id': case['instance_id'],
          'reason': 'The wall-clock safety timeout forced episode submission; '
@@ -152,6 +196,7 @@ def collect(path: Path, *, check_live: bool = False) -> dict:
             'reproduction_verified': (matches_cases and abs(mean - archive_mean) < 1e-6)
                                      if complete else False,
             'diagnostic_only': plan.get('diagnostic_only', False),
+            'archive_contract_verified': not contract_caveats,
             'error': error, 'superseded': superseded,
             'reported_status': summary['status'], 'local_liveness': liveness,
             'reproduction_caveats': caveats, 'native_skill_contexts': contexts}
@@ -186,7 +231,8 @@ def write_report(output: Path, rows: list[dict], run_paths: list[Path]):
         if row['error']:
             lines += ['', f'**{row["task"]}: {row["status"]}.** {row["error"]}']
         for caveat in row['reproduction_caveats']:
-            lines += ['', f'**{row["task"]}/{caveat["instance_id"]}: reproduction limitation.** '
+            label = row['task'] + (f'/{caveat["instance_id"]}' if caveat['instance_id'] is not None else '')
+            lines += ['', f'**{label}: reproduction limitation.** '
                       f'{caveat["reason"]}']
         if row['superseded']:
             note = row['superseded']
