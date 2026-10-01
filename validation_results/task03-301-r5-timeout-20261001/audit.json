@@ -1,0 +1,92 @@
+{
+  "observed_at": "2026-10-01T19:32:30+08:00",
+  "task": "task03",
+  "instance_id": 301,
+  "run_directory": "validation-20260930-task03-r5",
+  "launch_revision": "23fefd0736ad45c7e91631bce2a12abba3e57937",
+  "finish_reason": "wall_timeout",
+  "official_result_file": "official.json",
+  "official_result_sha256": "042aaee5b5c02e92dd51ee2648ddcbce9e4b6c0ce3de4a0196bb5bf7daceb8af",
+  "official_q": 0.0,
+  "steps": 10024,
+  "archived_max_steps": 27392,
+  "log_excerpt": [
+    "2026-09-30 19:29:39 instance 301 session t03p15073i0-d172707c12d24af1 prompt=prompt/task03/v4_11b5ae18163a.txt",
+    "2026-10-01 19:29:40 instance 301: wall_timeout; waiting for evaluator JSON",
+    "2026-10-01 19:29:42 instance 301: Q=0.000000, reference=0.285714, delta=-0.285714",
+    "2026-10-01 19:29:55 instance 304 ready",
+    "2026-10-01 19:29:55 instance 304 session t03p15073i3-41694092cde34a05 prompt=prompt/task03/v4_11b5ae18163a.txt"
+  ],
+  "next_instance": 304,
+  "next_agent_pid": 2973025,
+  "previous_launcher_and_native_pids_exited": [
+    2992111,
+    2992137
+  ],
+  "controller": "MainPID=2833447\nActiveState=active",
+  "report_timeout_caveats": [
+    {
+      "instance_id": 301,
+      "reason": "The wall-clock safety timeout forced episode submission; this is not termination under the archived step budget or model completion."
+    }
+  ],
+  "reproduction_verified": false,
+  "limit": "Observed score at the wall-clock cutoff. The score after consuming the full archived step budget is unknown. No complete task mean is established.",
+  "retained_stack": {
+    "before_sample_at_utc": "2026-10-01T11:28:12.751618+00:00",
+    "after_sample_at_utc": "2026-10-01T11:35:13.030478+00:00",
+    "before": {
+      "interface": {
+        "pid": 2834157,
+        "expected_start": "129070994",
+        "state": "alive",
+        "identity_after_read": "alive"
+      },
+      "gate": {
+        "pid": 2835562,
+        "expected_start": "129071196",
+        "state": "alive",
+        "identity_after_read": "alive"
+      },
+      "evaluator": {
+        "pid": 2836260,
+        "expected_start": "129071297",
+        "state": "alive",
+        "identity_after_read": "alive"
+      },
+      "controller": {
+        "pid": 2833447,
+        "expected_start": "129070895",
+        "state": "alive",
+        "identity_after_read": "alive"
+      }
+    },
+    "after": {
+      "interface": {
+        "pid": 2834157,
+        "expected_start": "129070994",
+        "state": "alive",
+        "identity_after_read": "alive"
+      },
+      "gate": {
+        "pid": 2835562,
+        "expected_start": "129071196",
+        "state": "alive",
+        "identity_after_read": "alive"
+      },
+      "evaluator": {
+        "pid": 2836260,
+        "expected_start": "129071297",
+        "state": "alive",
+        "identity_after_read": "alive"
+      },
+      "controller": {
+        "pid": 2833447,
+        "expected_start": "129070895",
+        "state": "alive",
+        "identity_after_read": "alive"
+      }
+    },
+    "identities_unchanged": true
+  }
+}
