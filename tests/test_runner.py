@@ -13,6 +13,15 @@ from roboharness import runner
 
 
 class ArchivedCases(unittest.TestCase):
+    def test_all_cases_have_trajectory_authoritative_scores(self):
+        for path in sorted((runner.ROOT / 'tasks').glob('*.json')):
+            task = runner.load_task(path.stem)
+            with self.subTest(task=path.stem):
+                self.assertTrue(all('archive_reported_q' in case for case in task['cases']))
+                self.assertTrue(all(case.get('archive_score_basis') == 'trajectory-directory official score'
+                                    for case in task['cases']
+                                    if path.stem not in {'task00', 'task05'}))
+
     def test_all_cases_have_exact_prompts_and_unmodified_scores(self):
         used = set()
         count = 0
