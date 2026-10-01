@@ -27,4 +27,6 @@ environment and GPU access disabled for the checks:
 
 This establishes dependency identity and software-check compatibility. It
 does not identify the cause of any Q-score difference or prove a complete
-task mean. The active r5 environments and processes were left intact.
+task mean. The comparison uses the current reused environment; it does not
+independently establish that environment's state on the archive dates. The
+active r5 environments and processes were left intact.

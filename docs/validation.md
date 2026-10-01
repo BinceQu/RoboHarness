@@ -1,7 +1,7 @@
 # Release validation
 
 **The three requested task means have not yet been verified.** This status
-snapshot was checked on October 1, 2026 at 15:58 Asia/Shanghai. The
+snapshot was checked on October 1, 2026 at 19:08 Asia/Shanghai. The
 [live r5 report](../validation_results/gpu5-20260930-r5/README.md) records
 completed official scores; a running process or a passing software test is
 not evidence that a task mean matches.
@@ -53,10 +53,11 @@ reproduction attempt, even if a resulting mean happens to match.
 
 The corrected r6 evaluation is queued behind those runs and has not launched
 as of this snapshot. It uses an independent checkout pinned to
-`46e51e4e8ffaafdfa802d8a9580aa42f8a5737f2` and the BEHAVIOR v3.9.1 submodule
+`e711b7e584541d1a608faa08be43a4f8a558715d` and the BEHAVIOR v3.9.1 submodule
 at `26f2c7ef7b9cf96bd0414f81e1e751e493762779`. Its reporter uses the task-mean
-acceptance rule; its agent behavior is unchanged from the preceding functional
-pin. The queue checks source revisions, a clean tracked worktree, GPU capacity
+acceptance rule. This pin corrects the OpenCV installation dependency; its
+runtime code is unchanged from the preceding mean-Q revision `46e51e4`.
+The queue checks source revisions, a clean tracked worktree, GPU capacity
 and listener availability before launching.
 
 Future r6 listeners are supplied by session-local configuration:
@@ -75,16 +76,21 @@ archived simulator step limits remain enforced.
 
 ## Automated checks
 
-The latest root-suite result belongs to the pinned mean-Q revision above:
-**71 tests: 70 passed and one optional native-CLI test skipped.** It passed in
-both the main checkout and the independent pinned checkout. Dependency and
-asset preflight also passed. The
-[regression log and activation evidence](../validation_results/mean-q-acceptance-20261001/README.md)
-identify the source, command, hashes and unchanged running controller identities.
-The skip is not counted as a passing check.
+The current release passed `scripts/check.sh` using the independent Python 3.11
+interface environment after the OpenCV correction: **450 tests, with 432
+passed and 18 skipped** across its five check groups. The root-suite portion
+is 71 tests: 70 passed and one optional native-CLI test skipped. GPU access was
+disabled for these checks. The
+[dependency audit and check summaries](../validation_results/opencv-runtime-20261001/README.md)
+record the actual loaded binary, matching wheel hash and results. The
+independent interface environment also passes `pip check`.
 
-The following earlier evidence supports specific runtime changes; these counts
-are separate suites and must not be summed into a latest-release pass total.
+The earlier [mean-Q regression and activation evidence](../validation_results/mean-q-acceptance-20261001/README.md)
+documents the acceptance rule at `46e51e4`. Those runtime files are unchanged
+in the current pin. Skipped checks are not counted as passing checks.
+
+The following evidence supports specific runtime changes. Earlier check counts
+belong to separate runs and must not be added to the current release total.
 
 | Area | Observed result and scope | Evidence |
 | --- | --- | --- |
@@ -92,6 +98,7 @@ are separate suites and must not be summed into a latest-release pass total.
 | Archived tools | 57 harness checks and 13 opt-in real-CLI checks passed, including both namespaces and compaction. Historical calls establish tool availability, not successful robot actions. | [Tool-profile audit](../validation_results/archive-tool-profile-20261001/README.md) |
 | Asset subscriptions | GPU 5 regression survived 20 content-preserving texture mtime events, a 90-second observation window and an explicit scene reset. | [Native regression](native-asset-reload.md) |
 | HTTP transport | Real local HTTP-server checks verify connection retries do not replay transmitted POSTs; a captured loopback connection conflict was recovered by a separate read-only client. | [Transport evidence](http-transport.md) |
+| OpenCV dependency | A fresh installation loads the same OpenCV headless 4.10.0.84 binary as the active reference interface. The earlier 4.11 requirement came from overlapping package metadata. | [Runtime dependency audit](../validation_results/opencv-runtime-20261001/README.md) |
 | Installation and packaging | Earlier independent-clone, fresh interface-environment, cuRobo build and private Codex-install checks cover their recorded environments. They do not establish a complete clean-host evaluator installation. | [Historical checks](validation-history.md#automated-checks) |
 
 ## Runtime issues and fixes
