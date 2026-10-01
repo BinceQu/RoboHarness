@@ -38,5 +38,8 @@ This establishes protocol interoperability for these installed versions and
 payloads. It does not validate GPU simulation, physical actions, Q-scores or
 complete task means. The fresh evaluator remains unselected by r6, and the
 other [installation differences and dependency conflicts](../evaluator-clean-install-20261001/README.md)
-remain recorded. All fifteen corrected cases and three task-mean comparisons
-are still required.
+remain recorded for this snapshot. A subsequent
+[runtime pin and protocol check](../evaluator-runtime-pins-20261001/README.md)
+corrects the observed version drift and repeats the custom-robot exchange
+with websockets 17.0.1. All fifteen corrected cases and three task-mean
+comparisons are still required.

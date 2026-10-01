@@ -1,0 +1,1221 @@
+{
+  "recorded_at": "2026-10-01T22:16:19.978377+08:00",
+  "scope": "Apply the final reference runtime pin stage to the independently installed evaluator venv; compare actual package contents, perform CPU imports/native ABI checks and a synthetic TCP protocol exchange. No simulator, dataset install, or task mean is validated.",
+  "installer_revision": "f440767232f9f7e59fc58b37b6afcc37f6792de7",
+  "runtime_source_revision": "c4763eb0947adf7f0186834b476a0ec375ee1d1e",
+  "behavior_revision": "26f2c7ef7b9cf96bd0414f81e1e751e493762779",
+  "requirements": {
+    "path": "requirements/evaluator-runtime.txt",
+    "sha256": "4aa0d9a41d05f567abcdf53104b0af15a66fd48fdbe0d449454d49fded9bd3b6",
+    "entries": [
+      "warp-lang==1.12.0",
+      "Pillow==11.0.0",
+      "pyarrow==25.0.0",
+      "websockets==17.0.1",
+      "packaging==25.0",
+      "psutil==7.2.2",
+      "click==8.4.2"
+    ]
+  },
+  "setup_script_sha256": "7d29f7dfd35c47cfb2c23daeaddbac56f038aff8258f3889dd77d4e8c4f8386d",
+  "installation": {
+    "result": {
+      "started_at": "2026-10-01T22:06:35.690595+08:00",
+      "completed_at": "2026-10-01T22:06:42.184271+08:00",
+      "environment": "<fresh-evaluator>",
+      "command": [
+        "<fresh-evaluator>/bin/python",
+        "-m",
+        "pip",
+        "install",
+        "--no-deps",
+        "-r",
+        "<repository>/requirements/evaluator-runtime.txt",
+        "--report",
+        "<private-audit>/pip-report.json",
+        "--timeout",
+        "90"
+      ],
+      "exit_code": 0,
+      "requirements_sha256": "37fcc4bfa3afc2242ae729f8a64f61b0c20ecb4177f7046c5297c8a6eaeb5ef8",
+      "session_config_sha256": "6bc65dadcc9edf16052dcc070efd6a4daab445b36fd9783a129753529916e731"
+    },
+    "versions_changed": {
+      "click": {
+        "before": "8.1.7",
+        "after": "8.4.2"
+      },
+      "packaging": {
+        "before": "23.0",
+        "after": "25.0"
+      },
+      "pillow": {
+        "before": "11.3.0",
+        "after": "11.0.0"
+      },
+      "psutil": {
+        "before": "5.9.8",
+        "after": "7.2.2"
+      },
+      "pyarrow": {
+        "before": "25.0.1",
+        "after": "25.0.0"
+      },
+      "websockets": {
+        "before": "17.1",
+        "after": "17.0.1"
+      }
+    },
+    "distributions_before": 265,
+    "distributions_after": 265,
+    "other_versions_unchanged": true,
+    "comment_only_update_after_install": true,
+    "downloaded_wheels": [
+      {
+        "name": "pillow",
+        "version": "11.0.0",
+        "url": "https://pypi.tuna.tsinghua.edu.cn/packages/39/63/b3fc299528d7df1f678b0666002b37affe6b8751225c3d9c12cf530e73ed/pillow-11.0.0-cp311-cp311-manylinux_2_28_x86_64.whl",
+        "hashes": {
+          "sha256": "45c566eb10b8967d71bf1ab8e4a525e5a93519e29ea071459ce517f6b903d7fa"
+        }
+      },
+      {
+        "name": "pyarrow",
+        "version": "25.0.0",
+        "url": "https://pypi.tuna.tsinghua.edu.cn/packages/7b/79/72d704b02bc5fc6d06954d76a0208c1e79cad3ab370f6d6a91ffe5078870/pyarrow-25.0.0-cp311-cp311-manylinux_2_28_x86_64.whl",
+        "hashes": {
+          "sha256": "0222f0071d13313962a88d21bf28b80d355ac39d81bfa6ff3fe00eeaf748e4be"
+        }
+      },
+      {
+        "name": "websockets",
+        "version": "17.0.1",
+        "url": "https://pypi.tuna.tsinghua.edu.cn/packages/45/a1/2b100e71aa1fe283ec8fb73f8b74a8576d855486a49117903b100dd3b78d/websockets-17.0.1-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl",
+        "hashes": {
+          "sha256": "d41e9845514754a42d1d83b2fca9d27fee2ca7b3b0bee6843ba5a9bb2b6e25ac"
+        }
+      },
+      {
+        "name": "packaging",
+        "version": "25.0",
+        "url": "https://pypi.tuna.tsinghua.edu.cn/packages/20/12/38679034af332785aac8774540895e234f4d07f7545804097de4b666afd8/packaging-25.0-py3-none-any.whl",
+        "hashes": {
+          "sha256": "29572ef2b1f17581046b3a2227d5c611fb25ec70ca1ba8554b24b0e69331a484"
+        }
+      },
+      {
+        "name": "psutil",
+        "version": "7.2.2",
+        "url": "https://pypi.tuna.tsinghua.edu.cn/packages/b5/70/5d8df3b09e25bce090399cf48e452d25c935ab72dad19406c77f4e828045/psutil-7.2.2-cp36-abi3-manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_28_x86_64.whl",
+        "hashes": {
+          "sha256": "076a2d2f923fd4821644f5ba89f059523da90dc9014e85f8e45a5774ca5bc6f9"
+        }
+      },
+      {
+        "name": "click",
+        "version": "8.4.2",
+        "url": "https://pypi.tuna.tsinghua.edu.cn/packages/fb/e2/79c688af8b210d232694e31e59da9f6ec747bae31c3f5946e4e9b98860d5/click-8.4.2-py3-none-any.whl",
+        "hashes": {
+          "sha256": "e6f9f66136c816745b9d65817da91d61d957fb16e02e4dcd0552553c5a197b76"
+        }
+      }
+    ]
+  },
+  "package_contents": {
+    "method": "Compare every distribution-listed payload file by relative path, byte length and SHA256; exclude distribution metadata, bytecode caches and paths outside site-packages. Include bundled shared libraries.",
+    "all_six_equal_to_reference": true,
+    "file_count": 976,
+    "bytes": 171253183,
+    "packages": {
+      "Pillow": {
+        "version": "11.0.0",
+        "file_count": 126,
+        "bytes": 12512489,
+        "manifest_sha256": "4ecc260775cc10b43a0d919f4b4b22cba11c726317b7841f970fa0e2c8ee32ed"
+      },
+      "pyarrow": {
+        "version": "25.0.0",
+        "file_count": 748,
+        "bytes": 156805917,
+        "manifest_sha256": "7b6d2b70823d25b18e13d832cddcca95c71a76a1256bb74979de56b3f60f4442"
+      },
+      "websockets": {
+        "version": "17.0.1",
+        "file_count": 56,
+        "bytes": 795230,
+        "manifest_sha256": "1c60093ecd5341152fa73e5b4cc77d78a32d690b996c137ffe72f3fc393c7c15"
+      },
+      "packaging": {
+        "version": "25.0",
+        "file_count": 17,
+        "bytes": 221406,
+        "manifest_sha256": "fdc144cca643a4b9f161f731e83ffabd8d7cd0ae7ee04973cf62054bc87328c0"
+      },
+      "psutil": {
+        "version": "7.2.2",
+        "file_count": 11,
+        "bytes": 495464,
+        "manifest_sha256": "fc0f879030cc7579097c7c082fdc202ea170a5ad41339d9ccb2c332abf79f63c"
+      },
+      "click": {
+        "version": "8.4.2",
+        "file_count": 18,
+        "bytes": 422677,
+        "manifest_sha256": "84339e20055b7001e6e132e00a080dc3262d0ebaddc8fd6f0b5093b601aec4f6"
+      }
+    }
+  },
+  "imports_and_native_abi": {
+    "observed_at": "2026-10-01T22:08:31.316105+08:00",
+    "scope": "Fresh evaluator dependency imports and native ABI only; no SimulationApp or rollout.",
+    "python": "<fresh-evaluator>/bin/python",
+    "source_root": "<runtime-checkout>",
+    "versions": {
+      "torch": "2.7.0+cu128",
+      "torchvision": "0.22.0+cu128",
+      "torchaudio": "2.7.0+cu128",
+      "torchcodec": "0.5+cu128",
+      "isaacsim": "5.1.0.0",
+      "isaacsim-kernel": "5.1.0.0",
+      "omniverse-kit": "107.3.1.206797",
+      "warp-lang": "1.12.0",
+      "numpy": "1.26.0",
+      "scipy": "1.15.3",
+      "h5py": "3.16.0",
+      "Pillow": "11.0.0",
+      "trimesh": "4.5.1",
+      "networkx": "3.3",
+      "lerobot": "0.5.2",
+      "datasets": "4.8.5",
+      "pyarrow": "25.0.0",
+      "opencv-python": "4.11.0.86",
+      "opencv-python-headless": "4.11.0.86",
+      "numpy-quaternion": "2024.0.13",
+      "websockets": "17.0.1",
+      "gymnasium": "1.3.0"
+    },
+    "imports": {
+      "numpy": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/numpy/__init__.py",
+        "version": "1.26.0"
+      },
+      "scipy": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/scipy/__init__.py",
+        "version": "1.15.3"
+      },
+      "torch": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/torch/__init__.py",
+        "version": "2.7.0+cu128"
+      },
+      "torchvision": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/torchvision/__init__.py",
+        "version": "0.22.0+cu128"
+      },
+      "torchaudio": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/torchaudio/__init__.py",
+        "version": "2.7.0+cu128"
+      },
+      "cv2": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/cv2/__init__.py",
+        "version": "4.11.0"
+      },
+      "h5py": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/h5py/__init__.py",
+        "version": "3.16.0"
+      },
+      "trimesh": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/trimesh/__init__.py",
+        "version": "4.5.1"
+      },
+      "networkx": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/networkx/__init__.py",
+        "version": "3.3"
+      },
+      "warp": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/warp/__init__.py",
+        "version": "1.12.0"
+      },
+      "torchcodec": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/torchcodec/__init__.py",
+        "version": "0.5+cu128"
+      },
+      "torch_cluster": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/torch_cluster/__init__.py",
+        "version": "1.6.3+pt27cu128"
+      },
+      "lerobot.configs": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/lerobot/configs/__init__.py",
+        "version": ""
+      },
+      "lerobot.datasets": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/lerobot/datasets/__init__.py",
+        "version": ""
+      },
+      "bddl": {
+        "loaded": true,
+        "file": "<runtime-checkout>/BEHAVIOR/bddl3/bddl/__init__.py",
+        "version": ""
+      },
+      "omnigibson": {
+        "loaded": true,
+        "file": "<runtime-checkout>/BEHAVIOR/OmniGibson/omnigibson/__init__.py",
+        "version": "3.9.1"
+      },
+      "PIL": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/PIL/__init__.py",
+        "version": "11.0.0"
+      },
+      "pyarrow": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/pyarrow/__init__.py",
+        "version": "25.0.0"
+      },
+      "websockets": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/websockets/__init__.py",
+        "version": "17.0.1"
+      },
+      "packaging": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/packaging/__init__.py",
+        "version": "25.0"
+      },
+      "psutil": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/psutil/__init__.py",
+        "version": "7.2.2"
+      },
+      "click": {
+        "loaded": true,
+        "file": "<fresh-evaluator>/lib/python3.11/site-packages/click/__init__.py",
+        "version": "8.4.2"
+      }
+    },
+    "version_differences": {},
+    "opencv_binary_sha256": "188d38ace4716a74534ddf4dd4f7d77a06641bd0908bf12eb218a3c2fef35f38",
+    "opencv_matches_reference_binary": true,
+    "isaacsim_bootstrap": {
+      "file": "<fresh-evaluator>/lib/python3.11/site-packages/isaacsim/__init__.py",
+      "simulation_app_api_available": true
+    },
+    "native_asset_watch_abi": {
+      "policy": "immutable-assets-no-native-watches",
+      "library": "<fresh-evaluator>/lib/python3.11/site-packages/isaacsim/kit/extscore/omni.client.lib/bin/libomniclient.so",
+      "sha256": "96d901619a7ed20db00e96b8cf41c523865289d11d426cd520bdf9f7c6e60302",
+      "version": "2.67.0-release.6072+gl.6293b5e9"
+    },
+    "cuda_initialized": false,
+    "simulator_started": false,
+    "imports_passed": true,
+    "native_abi_passed": true
+  },
+  "pip_check": {
+    "exit_code": 1,
+    "stdout": "isaacsim-core 5.1.0.0 has requirement packaging==23.0, but you have packaging 25.0.\nisaacsim-kernel 5.1.0.0 has requirement click==8.1.7, but you have click 8.4.2.\nisaacsim-kernel 5.1.0.0 has requirement Pillow==11.3.0, but you have pillow 11.0.0.\nisaacsim-kernel 5.1.0.0 has requirement psutil==5.9.8, but you have psutil 7.2.2.\nisaacsim-kernel 5.1.0.0 has requirement typing_extensions==4.12.2, but you have typing-extensions 4.16.0.\nisaacsim-kernel 5.1.0.0 has requirement websockets==12.0, but you have websockets 17.0.1.\n",
+    "stderr": ""
+  },
+  "relevant_dependency_declarations": {
+    "isaacsim-core": {
+      "version": "5.1.0.0",
+      "requirements": [
+        {
+          "requirement": "packaging==23.0",
+          "active": true
+        }
+      ]
+    },
+    "isaacsim-kernel": {
+      "version": "5.1.0.0",
+      "requirements": [
+        {
+          "requirement": "Pillow==11.3.0",
+          "active": true
+        },
+        {
+          "requirement": "click==8.1.7",
+          "active": true
+        },
+        {
+          "requirement": "websockets==12.0",
+          "active": true
+        },
+        {
+          "requirement": "typing_extensions==4.12.2",
+          "active": true
+        },
+        {
+          "requirement": "psutil==5.9.8",
+          "active": true
+        }
+      ]
+    },
+    "omnigibson": {
+      "version": "3.9.1",
+      "requirements": [
+        {
+          "requirement": "click>=8.1.3",
+          "active": true
+        },
+        {
+          "requirement": "pillow~=11.0.0",
+          "active": true
+        },
+        {
+          "requirement": "websockets>=15.0.1",
+          "active": true
+        },
+        {
+          "requirement": "warp-lang<1.13,>=0.9.0; extra == \"primitives\"",
+          "active": false
+        }
+      ]
+    },
+    "lerobot": {
+      "version": "0.5.2",
+      "requirements": [
+        {
+          "requirement": "Pillow<13.0.0,>=10.0.0",
+          "active": true
+        },
+        {
+          "requirement": "packaging<26.0,>=24.2",
+          "active": true
+        },
+        {
+          "requirement": "pyarrow<30.0.0,>=21.0.0; extra == \"dataset\"",
+          "active": false
+        }
+      ]
+    },
+    "ipython": {
+      "version": "9.17.1",
+      "requirements": [
+        {
+          "requirement": "psutil>=7; sys_platform != \"emscripten\" and sys_platform != \"cygwin\"",
+          "active": true
+        },
+        {
+          "requirement": "typing_extensions>=4.6; python_version < \"3.12\"",
+          "active": true
+        },
+        {
+          "requirement": "typing_extensions; extra == \"doc\"",
+          "active": false
+        },
+        {
+          "requirement": "packaging>=23.0.0; extra == \"test\"",
+          "active": false
+        }
+      ]
+    },
+    "huggingface-hub": {
+      "version": "1.33.0",
+      "requirements": [
+        {
+          "requirement": "click<9.0.0,>=8.4.2",
+          "active": true
+        },
+        {
+          "requirement": "packaging>=20.9",
+          "active": true
+        },
+        {
+          "requirement": "typing-extensions>=4.1.0",
+          "active": true
+        },
+        {
+          "requirement": "Pillow; extra == \"testing\"",
+          "active": false
+        },
+        {
+          "requirement": "typing-extensions>=4.8.0; extra == \"typing\"",
+          "active": false
+        },
+        {
+          "requirement": "Pillow; extra == \"all\"",
+          "active": false
+        },
+        {
+          "requirement": "typing-extensions>=4.8.0; extra == \"all\"",
+          "active": false
+        },
+        {
+          "requirement": "Pillow; extra == \"dev\"",
+          "active": false
+        },
+        {
+          "requirement": "typing-extensions>=4.8.0; extra == \"dev\"",
+          "active": false
+        }
+      ]
+    },
+    "pydantic-core": {
+      "version": "2.33.2",
+      "requirements": [
+        {
+          "requirement": "typing-extensions>=4.6.0,!=4.7.0",
+          "active": true
+        }
+      ]
+    },
+    "wheel": {
+      "version": "0.48.0",
+      "requirements": [
+        {
+          "requirement": "packaging >= 24.0",
+          "active": true
+        }
+      ]
+    }
+  },
+  "wire": {
+    "result": {
+      "started_at": "2026-10-01T22:14:48.858958+08:00",
+      "port": 15079,
+      "data_path": "<repository>/data",
+      "robot_profile": "r1pro_8dof_hf250",
+      "server_pid": 2439251,
+      "health_status": 200,
+      "client_exit": 0,
+      "server_exit": 0,
+      "passed": true,
+      "completed_at": "2026-10-01T22:15:07.887972+08:00"
+    },
+    "client": {
+      "passed": true,
+      "sessions": [
+        {
+          "metadata": {
+            "layer": "behavior-interface",
+            "protocol": "BEHAVIOR v3.9.1",
+            "robot_profile": "r1pro_8dof_hf250",
+            "robot_model": "r1pro",
+            "arm_dof": 8,
+            "tool_version": "official_v2",
+            "action_dim": 27,
+            "allowed_observations": [
+              "RGB",
+              "depth_linear",
+              "proprioception",
+              "camera-relative poses supplied by evaluator",
+              "task_id"
+            ],
+            "display_only_metadata": [
+              "BDDL goal completion (removed before tool/downstream policy access)"
+            ]
+          },
+          "connection_class": "behavior_interface_eval_test.official_rgbd_wrapper._MainThreadWebSocketConnection"
+        },
+        {
+          "metadata": {
+            "layer": "behavior-interface",
+            "protocol": "BEHAVIOR v3.9.1",
+            "robot_profile": "r1pro_8dof_hf250",
+            "robot_model": "r1pro",
+            "arm_dof": 8,
+            "tool_version": "official_v2",
+            "action_dim": 27,
+            "allowed_observations": [
+              "RGB",
+              "depth_linear",
+              "proprioception",
+              "camera-relative poses supplied by evaluator",
+              "task_id"
+            ],
+            "display_only_metadata": [
+              "BDDL goal completion (removed before tool/downstream policy access)"
+            ]
+          },
+          "connection_class": "behavior_interface_eval_test.official_rgbd_wrapper._MainThreadWebSocketConnection"
+        }
+      ],
+      "actions": [
+        {
+          "sequence": 0,
+          "shape": [
+            27
+          ],
+          "sha256": "c29a03e1154c97efa8df1a778c03dcc8b5f2ac84589388b9389c4068d6c0a9df"
+        },
+        {
+          "sequence": 1,
+          "shape": [
+            27
+          ],
+          "sha256": "cce7355984e9290b867a93375f2d0728dbd70ebe6ae9cb23b2c2168264be2679"
+        },
+        {
+          "sequence": 2,
+          "shape": [
+            27
+          ],
+          "sha256": "cc5daa2e29b63a920cf2b45d074291b06796bfb1f005d696a8d07ae15ba4b2bf"
+        },
+        {
+          "sequence": 3,
+          "shape": [
+            27
+          ],
+          "sha256": "8b94293395e4038d014617b90462682fd162871fea74364bbeab450e3f158ec6"
+        },
+        {
+          "sequence": 4,
+          "shape": [
+            27
+          ],
+          "sha256": "7e52e9621190081d074055aa24de244969721072cea8f648cc002e9cc04a3264"
+        },
+        {
+          "sequence": 5,
+          "shape": [
+            27
+          ],
+          "sha256": "ded2e541874da3de89c54bf4f0f92c159869bec41323920cbb05503c1f0502c9"
+        }
+      ],
+      "cuda_initialized": false,
+      "simulator_started": false,
+      "observed_at": "2026-10-01T22:15:05.917386+08:00",
+      "python": "<fresh-evaluator>/bin/python",
+      "websockets": "17.0.1",
+      "numpy": "1.26.0",
+      "port": 15079,
+      "scope": "CPU-only loopback protocol check using synthetic RGB-D and a non-actuating runtime stub."
+    },
+    "server": {
+      "passed": true,
+      "reset_count": 2,
+      "observations": [
+        {
+          "sequence": 0,
+          "arrays": {
+            "/cameras/head/depth_linear": {
+              "shape": [
+                720,
+                720
+              ],
+              "dtype": "<f4",
+              "sha256": "1d2fe8a58096511d544dc366acaa07598ef795147e19b959d194397340a3171a",
+              "bytes": 2073600
+            },
+            "/cameras/head/rgb": {
+              "shape": [
+                720,
+                720,
+                3
+              ],
+              "dtype": "|u1",
+              "sha256": "e7e3b6c7345eb0a1d2cb4d8a8c408daede55956b242592dda1e6d1ad29cdb440",
+              "bytes": 1555200
+            },
+            "/cameras/left_wrist/depth_linear": {
+              "shape": [
+                480,
+                480
+              ],
+              "dtype": "<f4",
+              "sha256": "f5018a881b787c48cf5efe0f71951a287fc9126b46dd8cabd4e037e2bfd5bd87",
+              "bytes": 921600
+            },
+            "/cameras/left_wrist/rgb": {
+              "shape": [
+                480,
+                480,
+                3
+              ],
+              "dtype": "|u1",
+              "sha256": "7b292a2093200fd8b27b2d38c509d8c9a95ebc258f006f2779c60759fc271848",
+              "bytes": 691200
+            },
+            "/cameras/right_wrist/depth_linear": {
+              "shape": [
+                480,
+                480
+              ],
+              "dtype": "<f4",
+              "sha256": "f5018a881b787c48cf5efe0f71951a287fc9126b46dd8cabd4e037e2bfd5bd87",
+              "bytes": 921600
+            },
+            "/cameras/right_wrist/rgb": {
+              "shape": [
+                480,
+                480,
+                3
+              ],
+              "dtype": "|u1",
+              "sha256": "7b292a2093200fd8b27b2d38c509d8c9a95ebc258f006f2779c60759fc271848",
+              "bytes": 691200
+            },
+            "/proprioception": {
+              "shape": [
+                65
+              ],
+              "dtype": "<f4",
+              "sha256": "b3e720b8f6a91c3d04e2813863a62948b687c6d8576620f1abfadedd10f54dfb",
+              "bytes": 260
+            }
+          }
+        },
+        {
+          "sequence": 1,
+          "arrays": {
+            "/cameras/head/depth_linear": {
+              "shape": [
+                720,
+                720
+              ],
+              "dtype": "<f4",
+              "sha256": "1d2fe8a58096511d544dc366acaa07598ef795147e19b959d194397340a3171a",
+              "bytes": 2073600
+            },
+            "/cameras/head/rgb": {
+              "shape": [
+                720,
+                720,
+                4
+              ],
+              "dtype": "|u1",
+              "sha256": "5047a91bd586ea295bfd17d1ff694e73d2541ccae345e8082a9c829df485a4d3",
+              "bytes": 2073600
+            },
+            "/cameras/left_wrist/depth_linear": {
+              "shape": [
+                480,
+                480
+              ],
+              "dtype": "<f4",
+              "sha256": "f5018a881b787c48cf5efe0f71951a287fc9126b46dd8cabd4e037e2bfd5bd87",
+              "bytes": 921600
+            },
+            "/cameras/left_wrist/rgb": {
+              "shape": [
+                480,
+                480,
+                4
+              ],
+              "dtype": "|u1",
+              "sha256": "868bc72f44a418e3629c9c853c1ff0434f373bb5dd3f62c9695b9d0e9f03673d",
+              "bytes": 921600
+            },
+            "/cameras/right_wrist/depth_linear": {
+              "shape": [
+                480,
+                480
+              ],
+              "dtype": "<f4",
+              "sha256": "f5018a881b787c48cf5efe0f71951a287fc9126b46dd8cabd4e037e2bfd5bd87",
+              "bytes": 921600
+            },
+            "/cameras/right_wrist/rgb": {
+              "shape": [
+                480,
+                480,
+                4
+              ],
+              "dtype": "|u1",
+              "sha256": "868bc72f44a418e3629c9c853c1ff0434f373bb5dd3f62c9695b9d0e9f03673d",
+              "bytes": 921600
+            },
+            "/proprioception": {
+              "shape": [
+                65
+              ],
+              "dtype": "<f4",
+              "sha256": "b3e720b8f6a91c3d04e2813863a62948b687c6d8576620f1abfadedd10f54dfb",
+              "bytes": 260
+            }
+          }
+        },
+        {
+          "sequence": 2,
+          "arrays": {
+            "/cameras/head/depth_linear": {
+              "shape": [
+                720,
+                720
+              ],
+              "dtype": "<f4",
+              "sha256": "1d2fe8a58096511d544dc366acaa07598ef795147e19b959d194397340a3171a",
+              "bytes": 2073600
+            },
+            "/cameras/head/rgb": {
+              "shape": [
+                720,
+                720,
+                3
+              ],
+              "dtype": "|u1",
+              "sha256": "7b6b574bdc237d15248bb1075affcc38bec52c23d2be5993dee2f5515d43e41d",
+              "bytes": 1555200
+            },
+            "/cameras/left_wrist/depth_linear": {
+              "shape": [
+                480,
+                480
+              ],
+              "dtype": "<f4",
+              "sha256": "f5018a881b787c48cf5efe0f71951a287fc9126b46dd8cabd4e037e2bfd5bd87",
+              "bytes": 921600
+            },
+            "/cameras/left_wrist/rgb": {
+              "shape": [
+                480,
+                480,
+                3
+              ],
+              "dtype": "|u1",
+              "sha256": "bc9597794186a7600b60550440ede209d08f58b726e7a33d644e2f1993ecc45f",
+              "bytes": 691200
+            },
+            "/cameras/right_wrist/depth_linear": {
+              "shape": [
+                480,
+                480
+              ],
+              "dtype": "<f4",
+              "sha256": "f5018a881b787c48cf5efe0f71951a287fc9126b46dd8cabd4e037e2bfd5bd87",
+              "bytes": 921600
+            },
+            "/cameras/right_wrist/rgb": {
+              "shape": [
+                480,
+                480,
+                3
+              ],
+              "dtype": "|u1",
+              "sha256": "bc9597794186a7600b60550440ede209d08f58b726e7a33d644e2f1993ecc45f",
+              "bytes": 691200
+            },
+            "/proprioception": {
+              "shape": [
+                65
+              ],
+              "dtype": "<f4",
+              "sha256": "b3e720b8f6a91c3d04e2813863a62948b687c6d8576620f1abfadedd10f54dfb",
+              "bytes": 260
+            }
+          }
+        },
+        {
+          "sequence": 3,
+          "arrays": {
+            "/cameras/head/depth_linear": {
+              "shape": [
+                720,
+                720
+              ],
+              "dtype": "<f4",
+              "sha256": "1d2fe8a58096511d544dc366acaa07598ef795147e19b959d194397340a3171a",
+              "bytes": 2073600
+            },
+            "/cameras/head/rgb": {
+              "shape": [
+                720,
+                720,
+                4
+              ],
+              "dtype": "|u1",
+              "sha256": "a7ea6ad628fe60e5139d5bdcc70b1742388adfcb48a253c688230942e0b70315",
+              "bytes": 2073600
+            },
+            "/cameras/left_wrist/depth_linear": {
+              "shape": [
+                480,
+                480
+              ],
+              "dtype": "<f4",
+              "sha256": "f5018a881b787c48cf5efe0f71951a287fc9126b46dd8cabd4e037e2bfd5bd87",
+              "bytes": 921600
+            },
+            "/cameras/left_wrist/rgb": {
+              "shape": [
+                480,
+                480,
+                4
+              ],
+              "dtype": "|u1",
+              "sha256": "c9ed1faf49e2efdc96265787aae08b5ef7363ee0680b3eafdd48bede36c4ad39",
+              "bytes": 921600
+            },
+            "/cameras/right_wrist/depth_linear": {
+              "shape": [
+                480,
+                480
+              ],
+              "dtype": "<f4",
+              "sha256": "f5018a881b787c48cf5efe0f71951a287fc9126b46dd8cabd4e037e2bfd5bd87",
+              "bytes": 921600
+            },
+            "/cameras/right_wrist/rgb": {
+              "shape": [
+                480,
+                480,
+                4
+              ],
+              "dtype": "|u1",
+              "sha256": "c9ed1faf49e2efdc96265787aae08b5ef7363ee0680b3eafdd48bede36c4ad39",
+              "bytes": 921600
+            },
+            "/proprioception": {
+              "shape": [
+                65
+              ],
+              "dtype": "<f4",
+              "sha256": "b3e720b8f6a91c3d04e2813863a62948b687c6d8576620f1abfadedd10f54dfb",
+              "bytes": 260
+            }
+          }
+        },
+        {
+          "sequence": 4,
+          "arrays": {
+            "/cameras/head/depth_linear": {
+              "shape": [
+                720,
+                720
+              ],
+              "dtype": "<f4",
+              "sha256": "1d2fe8a58096511d544dc366acaa07598ef795147e19b959d194397340a3171a",
+              "bytes": 2073600
+            },
+            "/cameras/head/rgb": {
+              "shape": [
+                720,
+                720,
+                3
+              ],
+              "dtype": "|u1",
+              "sha256": "7f2c605ef8ff99430682fadc4ef82b88bfbb8a0e18f198d1a4c82862fa069fea",
+              "bytes": 1555200
+            },
+            "/cameras/left_wrist/depth_linear": {
+              "shape": [
+                480,
+                480
+              ],
+              "dtype": "<f4",
+              "sha256": "f5018a881b787c48cf5efe0f71951a287fc9126b46dd8cabd4e037e2bfd5bd87",
+              "bytes": 921600
+            },
+            "/cameras/left_wrist/rgb": {
+              "shape": [
+                480,
+                480,
+                3
+              ],
+              "dtype": "|u1",
+              "sha256": "84ae7597d94809c6d8d924b990061d7db1bfb47e63df4de48a48613b8a61fb8c",
+              "bytes": 691200
+            },
+            "/cameras/right_wrist/depth_linear": {
+              "shape": [
+                480,
+                480
+              ],
+              "dtype": "<f4",
+              "sha256": "f5018a881b787c48cf5efe0f71951a287fc9126b46dd8cabd4e037e2bfd5bd87",
+              "bytes": 921600
+            },
+            "/cameras/right_wrist/rgb": {
+              "shape": [
+                480,
+                480,
+                3
+              ],
+              "dtype": "|u1",
+              "sha256": "84ae7597d94809c6d8d924b990061d7db1bfb47e63df4de48a48613b8a61fb8c",
+              "bytes": 691200
+            },
+            "/proprioception": {
+              "shape": [
+                65
+              ],
+              "dtype": "<f4",
+              "sha256": "b3e720b8f6a91c3d04e2813863a62948b687c6d8576620f1abfadedd10f54dfb",
+              "bytes": 260
+            }
+          }
+        },
+        {
+          "sequence": 5,
+          "arrays": {
+            "/cameras/head/depth_linear": {
+              "shape": [
+                720,
+                720
+              ],
+              "dtype": "<f4",
+              "sha256": "1d2fe8a58096511d544dc366acaa07598ef795147e19b959d194397340a3171a",
+              "bytes": 2073600
+            },
+            "/cameras/head/rgb": {
+              "shape": [
+                720,
+                720,
+                4
+              ],
+              "dtype": "|u1",
+              "sha256": "8ec0dafc2ab19d28e84b008798b1720ac975dd70d25b3e3c9c92b1b96e9690e6",
+              "bytes": 2073600
+            },
+            "/cameras/left_wrist/depth_linear": {
+              "shape": [
+                480,
+                480
+              ],
+              "dtype": "<f4",
+              "sha256": "f5018a881b787c48cf5efe0f71951a287fc9126b46dd8cabd4e037e2bfd5bd87",
+              "bytes": 921600
+            },
+            "/cameras/left_wrist/rgb": {
+              "shape": [
+                480,
+                480,
+                4
+              ],
+              "dtype": "|u1",
+              "sha256": "f37e2e90207b3526beaf9dc45211fd96944bf315352c61d453fd3ce01ca1b4f6",
+              "bytes": 921600
+            },
+            "/cameras/right_wrist/depth_linear": {
+              "shape": [
+                480,
+                480
+              ],
+              "dtype": "<f4",
+              "sha256": "f5018a881b787c48cf5efe0f71951a287fc9126b46dd8cabd4e037e2bfd5bd87",
+              "bytes": 921600
+            },
+            "/cameras/right_wrist/rgb": {
+              "shape": [
+                480,
+                480,
+                4
+              ],
+              "dtype": "|u1",
+              "sha256": "f37e2e90207b3526beaf9dc45211fd96944bf315352c61d453fd3ce01ca1b4f6",
+              "bytes": 921600
+            },
+            "/proprioception": {
+              "shape": [
+                65
+              ],
+              "dtype": "<f4",
+              "sha256": "b3e720b8f6a91c3d04e2813863a62948b687c6d8576620f1abfadedd10f54dfb",
+              "bytes": 260
+            }
+          }
+        }
+      ],
+      "array_bytes_received": 44065560,
+      "cuda_initialized": false,
+      "server_function": "behavior_interface_eval_test.official_policy_interface.serve_policy",
+      "observed_at": "2026-10-01T22:15:05.930069+08:00",
+      "python": "<fresh-interface>/bin/python",
+      "websockets": "16.1.1",
+      "numpy": "1.26.4",
+      "port": 15079,
+      "scope": "CPU-only loopback protocol check using synthetic RGB-D and a non-actuating runtime stub."
+    },
+    "probe_sha256": "680f386ed4e6b4ab366f916e627d99a369b9c223e9ccc6504e524294cea1fb17",
+    "probe_corrections": [
+      {
+        "reason": "The private client probe omitted OMNIGIBSON_DATA_PATH and could not import B100_task_misc.csv. The release runner already supplies this variable.",
+        "artifacts": "wire-without-data-path",
+        "change": "Use the data_path from the unchanged session configuration in this probe subprocess."
+      },
+      {
+        "reason": "The second private probe passed with the default stock profile (23 actions, 61 proprioception entries). It does not validate the custom profile used by the selected tasks.",
+        "artifacts": "wire-stock-profile",
+        "change": "Supply BEHAVIOR_EVAL_TEST_ROBOT_PROFILE from task01.json, as the release runner does, and check the explicit custom profile and dimensions."
+      }
+    ]
+  },
+  "preservation": {
+    "observed_at": "2026-10-01T22:16:19.978377+08:00",
+    "tasks": {
+      "task01": {
+        "unit": {
+          "MainPID": "2833423",
+          "ActiveState": "active",
+          "SubState": "running"
+        },
+        "roles": {
+          "guardian": {
+            "pid": 2834056,
+            "same_process_alive": true
+          },
+          "interface": {
+            "pid": 2834060,
+            "same_process_alive": true
+          },
+          "gate": {
+            "pid": 2835467,
+            "same_process_alive": true
+          },
+          "evaluator": {
+            "pid": 2836167,
+            "same_process_alive": true
+          },
+          "agent": {
+            "pid": 1684216,
+            "same_process_alive": true
+          }
+        },
+        "n_finished": 1,
+        "n_expected": 5
+      },
+      "task03": {
+        "unit": {
+          "MainPID": "2833447",
+          "ActiveState": "active",
+          "SubState": "running"
+        },
+        "roles": {
+          "guardian": {
+            "pid": 2834154,
+            "same_process_alive": true
+          },
+          "interface": {
+            "pid": 2834157,
+            "same_process_alive": true
+          },
+          "gate": {
+            "pid": 2835562,
+            "same_process_alive": true
+          },
+          "evaluator": {
+            "pid": 2836260,
+            "same_process_alive": true
+          },
+          "agent": {
+            "pid": 2973025,
+            "same_process_alive": true
+          }
+        },
+        "n_finished": 1,
+        "n_expected": 5
+      },
+      "task08": {
+        "unit": {
+          "MainPID": "2833459",
+          "ActiveState": "active",
+          "SubState": "running"
+        },
+        "roles": {
+          "guardian": {
+            "pid": 2845406,
+            "same_process_alive": true
+          },
+          "interface": {
+            "pid": 2845407,
+            "same_process_alive": true
+          },
+          "gate": {
+            "pid": 2845896,
+            "same_process_alive": true
+          },
+          "evaluator": {
+            "pid": 2846092,
+            "same_process_alive": true
+          },
+          "agent": {
+            "pid": 2292073,
+            "same_process_alive": true
+          }
+        },
+        "n_finished": 1,
+        "n_expected": 5
+      }
+    },
+    "session_config_sha256": "6bc65dadcc9edf16052dcc070efd6a4daab445b36fd9783a129753529916e731",
+    "queue_unit": "MainPID=4168481\nActiveState=active",
+    "queue": {
+      "schema": 2,
+      "scope": "this session only",
+      "mode": "sequential",
+      "acceptance_criterion": "per_task_mean_q",
+      "source_root": "<runtime-checkout>",
+      "source_revision": "c4763eb0947adf7f0186834b476a0ec375ee1d1e",
+      "source_pin": "<repository>/.local/session-config-r6-source.json",
+      "config": "<repository>/.local/session-config-r6.json",
+      "config_sha256": "6bc65dadcc9edf16052dcc070efd6a4daab445b36fd9783a129753529916e731",
+      "status": "waiting_for_r5",
+      "reproduction_verified": false,
+      "tasks": [
+        {
+          "task": "task01",
+          "port": 15071,
+          "policy_port": 15070,
+          "gate_port": 15072,
+          "status": "pending",
+          "run_dir": "<repository>/runs/validation-20260930-task01-r6",
+          "unit": "roboharness-validation-task01-20260930-r6.service"
+        },
+        {
+          "task": "task03",
+          "port": 15073,
+          "policy_port": 15074,
+          "gate_port": 15075,
+          "status": "pending",
+          "run_dir": "<repository>/runs/validation-20260930-task03-r6",
+          "unit": "roboharness-validation-task03-20260930-r6.service"
+        },
+        {
+          "task": "task08",
+          "port": 15078,
+          "policy_port": 15076,
+          "gate_port": 15077,
+          "status": "pending",
+          "run_dir": "<repository>/runs/validation-20260930-task08-r6",
+          "unit": "roboharness-validation-task08-20260930-r6.service"
+        }
+      ],
+      "updated_at": "2026-10-01T22:15:56+0800",
+      "waiting_on": {
+        "old_active": true,
+        "gpu_free_mib": 4340,
+        "ports_free": false
+      }
+    },
+    "pinned_source_head": "c4763eb0947adf7f0186834b476a0ec375ee1d1e",
+    "pinned_source_tracked_status": "",
+    "port_15079_accepting_connections": false
+  },
+  "runtime_source_unchanged": {
+    "relative_to": "c4763eb0947adf7f0186834b476a0ec375ee1d1e",
+    "checked_paths": [
+      "roboharness",
+      "interface",
+      "harness",
+      "prompt",
+      "tasks",
+      "run.sh",
+      "scripts/reproduce_task.sh",
+      "scripts/report_validation.py"
+    ],
+    "git_diff_name_only": ""
+  },
+  "limits": [
+    "The upstream installation had already completed with the download recoveries documented in the preceding audit; this did not rerun every setup stage on a new host.",
+    "These pins are not a complete lockfile. Twenty-two compared package versions match, and the six adjusted distributions have identical payload files; other dependencies may still differ.",
+    "pip check exits 1 with six unsatisfied SDK dependency declarations. Imports and protocol checks do not establish that every simulator path tolerates them.",
+    "The fresh venv has not run a GPU simulator and remains unselected by r6. The queued runtime code and session configuration are unchanged.",
+    "All fifteen corrected cases and their three complete mean Q-score comparisons remain required."
+  ]
+}

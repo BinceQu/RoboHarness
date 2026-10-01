@@ -61,6 +61,13 @@ typing-extensions, websockets, Pillow, click and packaging. The audit retains
 the full output. Successful imports do not prove these conflicts or version
 differences harmless in every runtime path.
 
+A later [runtime pin correction](../evaluator-runtime-pins-20261001/README.md)
+brings these three versions and three support libraries into agreement with
+the reference. That subsequent audit records matching package contents,
+22 successful imports, a repeated protocol check and six remaining SDK
+declaration conflicts. The table and seven-conflict count above describe
+this earlier installation snapshot.
+
 A subsequent [actual TCP protocol check](../evaluator-wire-20261001/README.md)
 passed between this evaluator's websockets 17.1 and the independent
 interface environment's 16.1.1. Six full-resolution RGB-D observations
