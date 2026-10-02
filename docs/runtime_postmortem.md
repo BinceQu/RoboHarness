@@ -142,6 +142,15 @@ reporter preserves the official score while rejecting it for strict
 reproduction verification. The queued r6 configuration already disables this
 extra wall-clock cap. See [the cutoff and handoff evidence](../validation_results/task03-301-r5-timeout-20261001/README.md).
 
+The same cutoff subsequently affected task08/304: its official score is Q=0
+at 12,089 of 17,886 allowed steps. Both truncated cases are now mandatory fresh
+retests in the queued r6 five-instance runs. Old scores and trajectories are
+preserved for diagnosis, while new runs use new evaluator outputs and native
+sessions with no additional wall-clock limit. The
+[current validation snapshot](validation.md#gpu-evaluation) records the
+temporary session-only handling of still-running legacy controllers. Removing
+the cutoff does not establish what either truncated case would have scored.
+
 ## Archived versus current response timing
 
 A hash-verified comparison of the three completed case-301 native transcripts

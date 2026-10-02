@@ -1,5 +1,5 @@
 {
-  "updated_at_utc": "2026-09-30T11:57:01+00:00",
+  "updated_at_utc": "2026-10-02T15:48:48+00:00",
   "runs": [
     {
       "task": "task01",
@@ -8,17 +8,58 @@
       "status": "running",
       "model": "Qwen3.8-Flash-Next-FP8",
       "harness": "claude_code",
-      "n_finished": 0,
+      "n_finished": 3,
       "n_expected": 5,
-      "cases": [],
-      "mean_q": null,
+      "cases": [
+        {
+          "instance_id": 301,
+          "q": 0.6666666666666666,
+          "archive_q": 1.0,
+          "raw_reference_q": 1.0,
+          "delta_archive_q": -0.33333333333333337,
+          "steps": 7071,
+          "success": false,
+          "finish_reason": "model_done",
+          "result_sha256": "432b5442db7d16d3a6fa4cfdfc863851892d5498f6f270342fde290ae5fd5876",
+          "source_result": "output/json/picking_up_trash_301_0.json"
+        },
+        {
+          "instance_id": 304,
+          "q": 0.6666666666666666,
+          "archive_q": 0.3333333333333333,
+          "raw_reference_q": 0.3333333333333333,
+          "delta_archive_q": 0.3333333333333333,
+          "steps": 10536,
+          "success": false,
+          "finish_reason": "evaluator_end",
+          "result_sha256": "898b7120642c4dc29c464a6ecdf2219a8f41ab39d7e499b66d0045981d20753f",
+          "source_result": "output/json/picking_up_trash_304_0.json"
+        },
+        {
+          "instance_id": 306,
+          "q": 1.0,
+          "archive_q": 1.0,
+          "raw_reference_q": 1.0,
+          "delta_archive_q": 0.0,
+          "steps": 6017,
+          "success": true,
+          "finish_reason": "evaluator_end",
+          "result_sha256": "08276f86145d6cdd8d461070aef1c71b140f07d099be533ad4010174c6f73a3b",
+          "source_result": "output/json/picking_up_trash_306_0.json"
+        }
+      ],
+      "mean_q": 0.7777777777777777,
       "archive_mean_q": 0.8666666666666666,
-      "completed_archive_mean_q": null,
+      "completed_archive_mean_q": 0.7777777777777777,
       "delta_archive_mean_q": null,
       "matches_archive_mean": null,
       "matches_archive_cases": null,
+      "acceptance_criterion": "per_task_mean_q",
+      "full_task_selected": true,
+      "n_archived": 5,
       "reproduction_verified": false,
       "diagnostic_only": false,
+      "archive_contract_verified": true,
       "error": null,
       "superseded": null,
       "reported_status": "running",
@@ -53,7 +94,296 @@
           }
         }
       },
-      "reproduction_caveats": []
+      "reproduction_caveats": [
+        {
+          "instance_id": 301,
+          "reason": "Initial native context is mismatch; the full listing and archived workspace metadata must match. Native workspace Git metadata differs from archive"
+        },
+        {
+          "instance_id": 304,
+          "reason": "Initial native context is mismatch; the full listing and archived workspace metadata must match. Native workspace Git metadata differs from archive"
+        },
+        {
+          "instance_id": 306,
+          "reason": "Initial native context is mismatch; the full listing and archived workspace metadata must match. Native workspace Git metadata differs from archive"
+        },
+        {
+          "instance_id": 308,
+          "reason": "Initial native context is mismatch; the full listing and archived workspace metadata must match. Native workspace Git metadata differs from archive"
+        }
+      ],
+      "native_skill_contexts": [
+        {
+          "instance_id": 301,
+          "state": "mismatch",
+          "expected_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+          "actual_sha256": "0423f1a6152f4b1a598c2be525f25fb294c18cc94690fdcefd38f0ffebd69ea0",
+          "actual_chars": 5959,
+          "expected_git_branch": "HEAD",
+          "actual_git_branch": "codex/open-source",
+          "reason": "Native workspace Git metadata differs from archive",
+          "transcript": "instance_301/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/9a0aef16-9af5-4db4-b384-20323b8d4502.jsonl",
+          "mcp_tool_profile": {
+            "state": "mismatch",
+            "manifest": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task01-r5/instance_301/trajectory/claude-20260930T112942Z-acabc0f0/manifest.json",
+            "profile": {
+              "name": "baseline",
+              "description": "Allow advertised v2 tools except MCP exclusions.",
+              "allow_tools": [
+                "*"
+              ],
+              "deny_tools": [
+                "adjust_plan_pose",
+                "cut_object",
+                "move_point_to_point",
+                "plan_eef_translation_to_uvd_point",
+                "plan_grasp_point_filter",
+                "plan_grasp_point_filter_rgbd",
+                "plan_press_point",
+                "read_depth"
+              ],
+              "fixed_arguments": {}
+            },
+            "tool_names": [
+              "adjust_chassis",
+              "adjust_height",
+              "adjust_left_eef_pose_in_head_frame",
+              "adjust_left_eef_pose_in_wrist_frame",
+              "adjust_pitch",
+              "adjust_right_eef_pose_in_head_frame",
+              "adjust_right_eef_pose_in_wrist_frame",
+              "capture_head_camera",
+              "capture_left_wrist_camera",
+              "capture_right_wrist_camera",
+              "close_gripper",
+              "exec_plan_pose",
+              "mark_on_map",
+              "measure_shoulder_distance",
+              "move_chassis_to_directly_facing_surface",
+              "move_chassis_to_floor_point",
+              "move_to_reach_point",
+              "move_tracked_point",
+              "open_gripper",
+              "plan_grasp_point_filter_rgbd_lite",
+              "reset_body",
+              "set_arm_to_grasp_position",
+              "spin_to_facing_point",
+              "track_object_distance"
+            ],
+            "missing_tools": [
+              "adjust_plan_pose",
+              "cut_object",
+              "plan_press_point"
+            ],
+            "forbidden_tools": [],
+            "differences": [
+              "deny_tools",
+              "tool_catalog"
+            ],
+            "reason": "Recorded MCP tool profile differs from archive"
+          }
+        },
+        {
+          "instance_id": 304,
+          "state": "mismatch",
+          "expected_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+          "actual_sha256": "0423f1a6152f4b1a598c2be525f25fb294c18cc94690fdcefd38f0ffebd69ea0",
+          "actual_chars": 5959,
+          "expected_git_branch": "HEAD",
+          "actual_git_branch": "codex/open-source",
+          "reason": "Native workspace Git metadata differs from archive",
+          "transcript": "instance_304/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/c0fffde0-bcad-4d40-9642-079976177c4a.jsonl",
+          "mcp_tool_profile": {
+            "state": "mismatch",
+            "manifest": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task01-r5/instance_304/trajectory/claude-20261001T004128Z-12a73db4/manifest.json",
+            "profile": {
+              "name": "baseline",
+              "description": "Allow advertised v2 tools except MCP exclusions.",
+              "allow_tools": [
+                "*"
+              ],
+              "deny_tools": [
+                "adjust_plan_pose",
+                "cut_object",
+                "move_point_to_point",
+                "plan_eef_translation_to_uvd_point",
+                "plan_grasp_point_filter",
+                "plan_grasp_point_filter_rgbd",
+                "plan_press_point",
+                "read_depth"
+              ],
+              "fixed_arguments": {}
+            },
+            "tool_names": [
+              "adjust_chassis",
+              "adjust_height",
+              "adjust_left_eef_pose_in_head_frame",
+              "adjust_left_eef_pose_in_wrist_frame",
+              "adjust_pitch",
+              "adjust_right_eef_pose_in_head_frame",
+              "adjust_right_eef_pose_in_wrist_frame",
+              "capture_head_camera",
+              "capture_left_wrist_camera",
+              "capture_right_wrist_camera",
+              "close_gripper",
+              "exec_plan_pose",
+              "mark_on_map",
+              "measure_shoulder_distance",
+              "move_chassis_to_directly_facing_surface",
+              "move_chassis_to_floor_point",
+              "move_to_reach_point",
+              "move_tracked_point",
+              "open_gripper",
+              "plan_grasp_point_filter_rgbd_lite",
+              "reset_body",
+              "set_arm_to_grasp_position",
+              "spin_to_facing_point",
+              "track_object_distance"
+            ],
+            "missing_tools": [
+              "adjust_plan_pose",
+              "cut_object",
+              "plan_press_point"
+            ],
+            "forbidden_tools": [],
+            "differences": [
+              "deny_tools",
+              "tool_catalog"
+            ],
+            "reason": "Recorded MCP tool profile differs from archive"
+          }
+        },
+        {
+          "instance_id": 306,
+          "state": "mismatch",
+          "expected_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+          "actual_sha256": "0423f1a6152f4b1a598c2be525f25fb294c18cc94690fdcefd38f0ffebd69ea0",
+          "actual_chars": 5959,
+          "expected_git_branch": "HEAD",
+          "actual_git_branch": "codex/open-source",
+          "reason": "Native workspace Git metadata differs from archive",
+          "transcript": "instance_306/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/6116413a-d42a-482b-a5fe-10d644002d5a.jsonl",
+          "mcp_tool_profile": {
+            "state": "match",
+            "manifest": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task01-r5/instance_306/trajectory/claude-20261001T184602Z-26745629/manifest.json",
+            "profile": {
+              "name": "baseline",
+              "description": "Allow advertised v2 tools except MCP exclusions.",
+              "allow_tools": [
+                "*"
+              ],
+              "deny_tools": [
+                "control_wrist_roll",
+                "move_point_to_point",
+                "plan_eef_translation_to_uvd_point",
+                "plan_grasp_point_filter",
+                "plan_grasp_point_filter_rgbd",
+                "read_depth"
+              ],
+              "fixed_arguments": {}
+            },
+            "tool_names": [
+              "adjust_chassis",
+              "adjust_height",
+              "adjust_left_eef_pose_in_head_frame",
+              "adjust_left_eef_pose_in_wrist_frame",
+              "adjust_pitch",
+              "adjust_plan_pose",
+              "adjust_right_eef_pose_in_head_frame",
+              "adjust_right_eef_pose_in_wrist_frame",
+              "capture_head_camera",
+              "capture_left_wrist_camera",
+              "capture_right_wrist_camera",
+              "close_gripper",
+              "cut_object",
+              "exec_plan_pose",
+              "mark_on_map",
+              "measure_shoulder_distance",
+              "move_chassis_to_directly_facing_surface",
+              "move_chassis_to_floor_point",
+              "move_to_reach_point",
+              "move_tracked_point",
+              "open_gripper",
+              "plan_grasp_point_filter_rgbd_lite",
+              "plan_press_point",
+              "reset_body",
+              "set_arm_to_grasp_position",
+              "spin_to_facing_point",
+              "track_object_distance"
+            ],
+            "missing_tools": [],
+            "forbidden_tools": [],
+            "differences": []
+          }
+        },
+        {
+          "instance_id": 308,
+          "state": "mismatch",
+          "expected_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+          "actual_sha256": "0423f1a6152f4b1a598c2be525f25fb294c18cc94690fdcefd38f0ffebd69ea0",
+          "actual_chars": 5959,
+          "expected_git_branch": "HEAD",
+          "actual_git_branch": "codex/open-source",
+          "reason": "Native workspace Git metadata differs from archive",
+          "transcript": "instance_308/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/06b677d2-806c-4c9a-9804-3cd08c47f65d.jsonl",
+          "mcp_tool_profile": {
+            "state": "match",
+            "manifest": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task01-r5/instance_308/trajectory/claude-20261002T061706Z-b9502fcd/manifest.json",
+            "profile": {
+              "name": "baseline",
+              "description": "Allow advertised v2 tools except MCP exclusions.",
+              "allow_tools": [
+                "*"
+              ],
+              "deny_tools": [
+                "control_wrist_roll",
+                "move_point_to_point",
+                "plan_eef_translation_to_uvd_point",
+                "plan_grasp_point_filter",
+                "plan_grasp_point_filter_rgbd",
+                "read_depth"
+              ],
+              "fixed_arguments": {}
+            },
+            "tool_names": [
+              "adjust_chassis",
+              "adjust_height",
+              "adjust_left_eef_pose_in_head_frame",
+              "adjust_left_eef_pose_in_wrist_frame",
+              "adjust_pitch",
+              "adjust_plan_pose",
+              "adjust_right_eef_pose_in_head_frame",
+              "adjust_right_eef_pose_in_wrist_frame",
+              "capture_head_camera",
+              "capture_left_wrist_camera",
+              "capture_right_wrist_camera",
+              "close_gripper",
+              "cut_object",
+              "exec_plan_pose",
+              "mark_on_map",
+              "measure_shoulder_distance",
+              "move_chassis_to_directly_facing_surface",
+              "move_chassis_to_floor_point",
+              "move_to_reach_point",
+              "move_tracked_point",
+              "open_gripper",
+              "plan_grasp_point_filter_rgbd_lite",
+              "plan_press_point",
+              "reset_body",
+              "set_arm_to_grasp_position",
+              "spin_to_facing_point",
+              "track_object_distance"
+            ],
+            "missing_tools": [],
+            "forbidden_tools": [],
+            "differences": []
+          }
+        },
+        {
+          "instance_id": 310,
+          "state": "not_started"
+        }
+      ]
     },
     {
       "task": "task03",
@@ -62,17 +392,46 @@
       "status": "running",
       "model": "Qwen3.8-Flash-Next-FP8",
       "harness": "claude_code",
-      "n_finished": 0,
+      "n_finished": 2,
       "n_expected": 5,
-      "cases": [],
-      "mean_q": null,
+      "cases": [
+        {
+          "instance_id": 301,
+          "q": 0.0,
+          "archive_q": 0.2857142857142857,
+          "raw_reference_q": 0.2857142857142857,
+          "delta_archive_q": -0.2857142857142857,
+          "steps": 10024,
+          "success": false,
+          "finish_reason": "wall_timeout",
+          "result_sha256": "042aaee5b5c02e92dd51ee2648ddcbce9e4b6c0ce3de4a0196bb5bf7daceb8af",
+          "source_result": "output/json/cleaning_up_plates_and_food_301_0.json"
+        },
+        {
+          "instance_id": 304,
+          "q": 0.2857142857142857,
+          "archive_q": 0.2857142857142857,
+          "raw_reference_q": 0.2857142857142857,
+          "delta_archive_q": 0.0,
+          "steps": 7839,
+          "success": false,
+          "finish_reason": "model_done",
+          "result_sha256": "cb08b9da8afbcffb4fea4fa6fac9b9de4104117df6a41b6b08145d4d3989bf9b",
+          "source_result": "output/json/cleaning_up_plates_and_food_304_0.json"
+        }
+      ],
+      "mean_q": 0.14285714285714285,
       "archive_mean_q": 0.2571428571428571,
-      "completed_archive_mean_q": null,
+      "completed_archive_mean_q": 0.2857142857142857,
       "delta_archive_mean_q": null,
       "matches_archive_mean": null,
       "matches_archive_cases": null,
+      "acceptance_criterion": "per_task_mean_q",
+      "full_task_selected": true,
+      "n_archived": 5,
       "reproduction_verified": false,
       "diagnostic_only": false,
+      "archive_contract_verified": true,
       "error": null,
       "superseded": null,
       "reported_status": "running",
@@ -107,7 +466,230 @@
           }
         }
       },
-      "reproduction_caveats": []
+      "reproduction_caveats": [
+        {
+          "instance_id": 301,
+          "reason": "The wall-clock safety timeout forced episode submission; this is not termination under the archived step budget or model completion."
+        },
+        {
+          "instance_id": 301,
+          "reason": "Initial native context is mismatch; the full listing and archived workspace metadata must match. Native workspace Git metadata differs from archive"
+        },
+        {
+          "instance_id": 304,
+          "reason": "Initial native context is mismatch; the full listing and archived workspace metadata must match. Native workspace Git metadata differs from archive"
+        },
+        {
+          "instance_id": 306,
+          "reason": "Initial native context is mismatch; the full listing and archived workspace metadata must match. Native workspace Git metadata differs from archive"
+        }
+      ],
+      "native_skill_contexts": [
+        {
+          "instance_id": 301,
+          "state": "mismatch",
+          "expected_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+          "actual_sha256": "0423f1a6152f4b1a598c2be525f25fb294c18cc94690fdcefd38f0ffebd69ea0",
+          "actual_chars": 5959,
+          "expected_git_branch": "HEAD",
+          "actual_git_branch": "codex/open-source",
+          "reason": "Native workspace Git metadata differs from archive",
+          "transcript": "instance_301/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/8d66162b-a1f2-4bc0-b43f-0519b6a44869.jsonl",
+          "mcp_tool_profile": {
+            "state": "mismatch",
+            "manifest": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task03-r5/instance_301/trajectory/claude-20260930T112945Z-26af7bc2/manifest.json",
+            "profile": {
+              "name": "baseline",
+              "description": "Allow advertised v2 tools except MCP exclusions.",
+              "allow_tools": [
+                "*"
+              ],
+              "deny_tools": [
+                "adjust_plan_pose",
+                "cut_object",
+                "move_point_to_point",
+                "plan_eef_translation_to_uvd_point",
+                "plan_grasp_point_filter",
+                "plan_grasp_point_filter_rgbd",
+                "plan_press_point",
+                "read_depth"
+              ],
+              "fixed_arguments": {}
+            },
+            "tool_names": [
+              "adjust_chassis",
+              "adjust_height",
+              "adjust_left_eef_pose_in_head_frame",
+              "adjust_left_eef_pose_in_wrist_frame",
+              "adjust_pitch",
+              "adjust_right_eef_pose_in_head_frame",
+              "adjust_right_eef_pose_in_wrist_frame",
+              "capture_head_camera",
+              "capture_left_wrist_camera",
+              "capture_right_wrist_camera",
+              "close_gripper",
+              "exec_plan_pose",
+              "mark_on_map",
+              "measure_shoulder_distance",
+              "move_chassis_to_directly_facing_surface",
+              "move_chassis_to_floor_point",
+              "move_to_reach_point",
+              "move_tracked_point",
+              "open_gripper",
+              "plan_grasp_point_filter_rgbd_lite",
+              "reset_body",
+              "set_arm_to_grasp_position",
+              "spin_to_facing_point",
+              "track_object_distance"
+            ],
+            "missing_tools": [
+              "adjust_plan_pose",
+              "cut_object",
+              "plan_press_point"
+            ],
+            "forbidden_tools": [],
+            "differences": [
+              "deny_tools",
+              "tool_catalog"
+            ],
+            "reason": "Recorded MCP tool profile differs from archive"
+          }
+        },
+        {
+          "instance_id": 304,
+          "state": "mismatch",
+          "expected_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+          "actual_sha256": "0423f1a6152f4b1a598c2be525f25fb294c18cc94690fdcefd38f0ffebd69ea0",
+          "actual_chars": 5959,
+          "expected_git_branch": "HEAD",
+          "actual_git_branch": "codex/open-source",
+          "reason": "Native workspace Git metadata differs from archive",
+          "transcript": "instance_304/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/a7b30c0b-f0a3-45b8-a47a-12e986a491c7.jsonl",
+          "mcp_tool_profile": {
+            "state": "match",
+            "manifest": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task03-r5/instance_304/trajectory/claude-20261001T112957Z-b8f0fb8c/manifest.json",
+            "profile": {
+              "name": "baseline",
+              "description": "Allow advertised v2 tools except MCP exclusions.",
+              "allow_tools": [
+                "*"
+              ],
+              "deny_tools": [
+                "control_wrist_roll",
+                "move_point_to_point",
+                "plan_eef_translation_to_uvd_point",
+                "plan_grasp_point_filter",
+                "plan_grasp_point_filter_rgbd",
+                "read_depth"
+              ],
+              "fixed_arguments": {}
+            },
+            "tool_names": [
+              "adjust_chassis",
+              "adjust_height",
+              "adjust_left_eef_pose_in_head_frame",
+              "adjust_left_eef_pose_in_wrist_frame",
+              "adjust_pitch",
+              "adjust_plan_pose",
+              "adjust_right_eef_pose_in_head_frame",
+              "adjust_right_eef_pose_in_wrist_frame",
+              "capture_head_camera",
+              "capture_left_wrist_camera",
+              "capture_right_wrist_camera",
+              "close_gripper",
+              "cut_object",
+              "exec_plan_pose",
+              "mark_on_map",
+              "measure_shoulder_distance",
+              "move_chassis_to_directly_facing_surface",
+              "move_chassis_to_floor_point",
+              "move_to_reach_point",
+              "move_tracked_point",
+              "open_gripper",
+              "plan_grasp_point_filter_rgbd_lite",
+              "plan_press_point",
+              "reset_body",
+              "set_arm_to_grasp_position",
+              "spin_to_facing_point",
+              "track_object_distance"
+            ],
+            "missing_tools": [],
+            "forbidden_tools": [],
+            "differences": []
+          }
+        },
+        {
+          "instance_id": 306,
+          "state": "mismatch",
+          "expected_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+          "actual_sha256": "0423f1a6152f4b1a598c2be525f25fb294c18cc94690fdcefd38f0ffebd69ea0",
+          "actual_chars": 5959,
+          "expected_git_branch": "HEAD",
+          "actual_git_branch": "codex/open-source",
+          "reason": "Native workspace Git metadata differs from archive",
+          "transcript": "instance_306/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/a5d15a0c-59a7-4ec9-a5ec-af7c86dea3c0.jsonl",
+          "mcp_tool_profile": {
+            "state": "match",
+            "manifest": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task03-r5/instance_306/trajectory/claude-20261002T030525Z-401b60f9/manifest.json",
+            "profile": {
+              "name": "baseline",
+              "description": "Allow advertised v2 tools except MCP exclusions.",
+              "allow_tools": [
+                "*"
+              ],
+              "deny_tools": [
+                "control_wrist_roll",
+                "move_point_to_point",
+                "plan_eef_translation_to_uvd_point",
+                "plan_grasp_point_filter",
+                "plan_grasp_point_filter_rgbd",
+                "read_depth"
+              ],
+              "fixed_arguments": {}
+            },
+            "tool_names": [
+              "adjust_chassis",
+              "adjust_height",
+              "adjust_left_eef_pose_in_head_frame",
+              "adjust_left_eef_pose_in_wrist_frame",
+              "adjust_pitch",
+              "adjust_plan_pose",
+              "adjust_right_eef_pose_in_head_frame",
+              "adjust_right_eef_pose_in_wrist_frame",
+              "capture_head_camera",
+              "capture_left_wrist_camera",
+              "capture_right_wrist_camera",
+              "close_gripper",
+              "cut_object",
+              "exec_plan_pose",
+              "mark_on_map",
+              "measure_shoulder_distance",
+              "move_chassis_to_directly_facing_surface",
+              "move_chassis_to_floor_point",
+              "move_to_reach_point",
+              "move_tracked_point",
+              "open_gripper",
+              "plan_grasp_point_filter_rgbd_lite",
+              "plan_press_point",
+              "reset_body",
+              "set_arm_to_grasp_position",
+              "spin_to_facing_point",
+              "track_object_distance"
+            ],
+            "missing_tools": [],
+            "forbidden_tools": [],
+            "differences": []
+          }
+        },
+        {
+          "instance_id": 308,
+          "state": "not_started"
+        },
+        {
+          "instance_id": 310,
+          "state": "not_started"
+        }
+      ]
     },
     {
       "task": "task08",
@@ -116,17 +698,46 @@
       "status": "running",
       "model": "Qwen3.8-Flash-Next-FP8",
       "harness": "claude_code",
-      "n_finished": 0,
+      "n_finished": 2,
       "n_expected": 5,
-      "cases": [],
-      "mean_q": null,
+      "cases": [
+        {
+          "instance_id": 301,
+          "q": 0.5,
+          "archive_q": 0.25,
+          "raw_reference_q": 0.25,
+          "delta_archive_q": 0.25,
+          "steps": 11993,
+          "success": false,
+          "finish_reason": "model_done",
+          "result_sha256": "813cd1e5358eadb6cd0e9c203bf7aa046a663dc738c87abff331d8f7790fe37d",
+          "source_result": "output/json/rearranging_kitchen_furniture_301_0.json"
+        },
+        {
+          "instance_id": 304,
+          "q": 0.0,
+          "archive_q": 0.5,
+          "raw_reference_q": 0.5,
+          "delta_archive_q": -0.5,
+          "steps": 12089,
+          "success": false,
+          "finish_reason": "wall_timeout",
+          "result_sha256": "5e2619dabe3a97b25842c9dfd28e4359e282580839f77aa72f4740079c2c8ed1",
+          "source_result": "output/json/rearranging_kitchen_furniture_304_0.json"
+        }
+      ],
+      "mean_q": 0.25,
       "archive_mean_q": 0.4,
-      "completed_archive_mean_q": null,
+      "completed_archive_mean_q": 0.375,
       "delta_archive_mean_q": null,
       "matches_archive_mean": null,
       "matches_archive_cases": null,
+      "acceptance_criterion": "per_task_mean_q",
+      "full_task_selected": true,
+      "n_archived": 5,
       "reproduction_verified": false,
       "diagnostic_only": false,
+      "archive_contract_verified": true,
       "error": null,
       "superseded": null,
       "reported_status": "running",
@@ -161,7 +772,230 @@
           }
         }
       },
-      "reproduction_caveats": []
+      "reproduction_caveats": [
+        {
+          "instance_id": 304,
+          "reason": "The wall-clock safety timeout forced episode submission; this is not termination under the archived step budget or model completion."
+        },
+        {
+          "instance_id": 301,
+          "reason": "Initial native context is mismatch; the full listing and archived workspace metadata must match. Native workspace Git metadata differs from archive"
+        },
+        {
+          "instance_id": 304,
+          "reason": "Initial native context is mismatch; the full listing and archived workspace metadata must match. Native workspace Git metadata differs from archive"
+        },
+        {
+          "instance_id": 306,
+          "reason": "Initial native context is mismatch; the full listing and archived workspace metadata must match. Native workspace Git metadata differs from archive"
+        }
+      ],
+      "native_skill_contexts": [
+        {
+          "instance_id": 301,
+          "state": "mismatch",
+          "expected_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+          "actual_sha256": "0423f1a6152f4b1a598c2be525f25fb294c18cc94690fdcefd38f0ffebd69ea0",
+          "actual_chars": 5959,
+          "expected_git_branch": "HEAD",
+          "actual_git_branch": "codex/open-source",
+          "reason": "Native workspace Git metadata differs from archive",
+          "transcript": "instance_301/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/dcd5866f-a1c7-4a79-aac8-c67a4f31f328.jsonl",
+          "mcp_tool_profile": {
+            "state": "mismatch",
+            "manifest": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task08-r5/instance_301/trajectory/claude-20260930T113017Z-905fd9f7/manifest.json",
+            "profile": {
+              "name": "baseline",
+              "description": "Allow advertised v2 tools except MCP exclusions.",
+              "allow_tools": [
+                "*"
+              ],
+              "deny_tools": [
+                "adjust_plan_pose",
+                "cut_object",
+                "move_point_to_point",
+                "plan_eef_translation_to_uvd_point",
+                "plan_grasp_point_filter",
+                "plan_grasp_point_filter_rgbd",
+                "plan_press_point",
+                "read_depth"
+              ],
+              "fixed_arguments": {}
+            },
+            "tool_names": [
+              "adjust_chassis",
+              "adjust_height",
+              "adjust_left_eef_pose_in_head_frame",
+              "adjust_left_eef_pose_in_wrist_frame",
+              "adjust_pitch",
+              "adjust_right_eef_pose_in_head_frame",
+              "adjust_right_eef_pose_in_wrist_frame",
+              "capture_head_camera",
+              "capture_left_wrist_camera",
+              "capture_right_wrist_camera",
+              "close_gripper",
+              "exec_plan_pose",
+              "mark_on_map",
+              "measure_shoulder_distance",
+              "move_chassis_to_directly_facing_surface",
+              "move_chassis_to_floor_point",
+              "move_to_reach_point",
+              "move_tracked_point",
+              "open_gripper",
+              "plan_grasp_point_filter_rgbd_lite",
+              "reset_body",
+              "set_arm_to_grasp_position",
+              "spin_to_facing_point",
+              "track_object_distance"
+            ],
+            "missing_tools": [
+              "adjust_plan_pose",
+              "cut_object",
+              "plan_press_point"
+            ],
+            "forbidden_tools": [],
+            "differences": [
+              "deny_tools",
+              "tool_catalog"
+            ],
+            "reason": "Recorded MCP tool profile differs from archive"
+          }
+        },
+        {
+          "instance_id": 304,
+          "state": "mismatch",
+          "expected_sha256": "0423f1a6152f4b1a598c2be525f25fb294c18cc94690fdcefd38f0ffebd69ea0",
+          "actual_sha256": "0423f1a6152f4b1a598c2be525f25fb294c18cc94690fdcefd38f0ffebd69ea0",
+          "actual_chars": 5959,
+          "expected_git_branch": "HEAD",
+          "actual_git_branch": "codex/open-source",
+          "reason": "Native workspace Git metadata differs from archive",
+          "transcript": "instance_304/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/843a31a3-cb75-4c6f-92b6-e6cde419c26b.jsonl",
+          "mcp_tool_profile": {
+            "state": "match",
+            "manifest": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task08-r5/instance_304/trajectory/claude-20261001T074614Z-6f896556/manifest.json",
+            "profile": {
+              "name": "baseline",
+              "description": "Allow advertised v2 tools except MCP exclusions.",
+              "allow_tools": [
+                "*"
+              ],
+              "deny_tools": [
+                "control_wrist_roll",
+                "move_point_to_point",
+                "plan_eef_translation_to_uvd_point",
+                "plan_grasp_point_filter",
+                "plan_grasp_point_filter_rgbd",
+                "read_depth"
+              ],
+              "fixed_arguments": {}
+            },
+            "tool_names": [
+              "adjust_chassis",
+              "adjust_height",
+              "adjust_left_eef_pose_in_head_frame",
+              "adjust_left_eef_pose_in_wrist_frame",
+              "adjust_pitch",
+              "adjust_plan_pose",
+              "adjust_right_eef_pose_in_head_frame",
+              "adjust_right_eef_pose_in_wrist_frame",
+              "capture_head_camera",
+              "capture_left_wrist_camera",
+              "capture_right_wrist_camera",
+              "close_gripper",
+              "cut_object",
+              "exec_plan_pose",
+              "mark_on_map",
+              "measure_shoulder_distance",
+              "move_chassis_to_directly_facing_surface",
+              "move_chassis_to_floor_point",
+              "move_to_reach_point",
+              "move_tracked_point",
+              "open_gripper",
+              "plan_grasp_point_filter_rgbd_lite",
+              "plan_press_point",
+              "reset_body",
+              "set_arm_to_grasp_position",
+              "spin_to_facing_point",
+              "track_object_distance"
+            ],
+            "missing_tools": [],
+            "forbidden_tools": [],
+            "differences": []
+          }
+        },
+        {
+          "instance_id": 306,
+          "state": "mismatch",
+          "expected_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+          "actual_sha256": "0423f1a6152f4b1a598c2be525f25fb294c18cc94690fdcefd38f0ffebd69ea0",
+          "actual_chars": 5959,
+          "expected_git_branch": "HEAD",
+          "actual_git_branch": "codex/open-source",
+          "reason": "Native workspace Git metadata differs from archive",
+          "transcript": "instance_306/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/7a67c21b-ef0f-4ed6-9048-8b59427bb929.jsonl",
+          "mcp_tool_profile": {
+            "state": "match",
+            "manifest": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task08-r5/instance_306/trajectory/claude-20261002T074628Z-ec0f737b/manifest.json",
+            "profile": {
+              "name": "baseline",
+              "description": "Allow advertised v2 tools except MCP exclusions.",
+              "allow_tools": [
+                "*"
+              ],
+              "deny_tools": [
+                "control_wrist_roll",
+                "move_point_to_point",
+                "plan_eef_translation_to_uvd_point",
+                "plan_grasp_point_filter",
+                "plan_grasp_point_filter_rgbd",
+                "read_depth"
+              ],
+              "fixed_arguments": {}
+            },
+            "tool_names": [
+              "adjust_chassis",
+              "adjust_height",
+              "adjust_left_eef_pose_in_head_frame",
+              "adjust_left_eef_pose_in_wrist_frame",
+              "adjust_pitch",
+              "adjust_plan_pose",
+              "adjust_right_eef_pose_in_head_frame",
+              "adjust_right_eef_pose_in_wrist_frame",
+              "capture_head_camera",
+              "capture_left_wrist_camera",
+              "capture_right_wrist_camera",
+              "close_gripper",
+              "cut_object",
+              "exec_plan_pose",
+              "mark_on_map",
+              "measure_shoulder_distance",
+              "move_chassis_to_directly_facing_surface",
+              "move_chassis_to_floor_point",
+              "move_to_reach_point",
+              "move_tracked_point",
+              "open_gripper",
+              "plan_grasp_point_filter_rgbd_lite",
+              "plan_press_point",
+              "reset_body",
+              "set_arm_to_grasp_position",
+              "spin_to_facing_point",
+              "track_object_distance"
+            ],
+            "missing_tools": [],
+            "forbidden_tools": [],
+            "differences": []
+          }
+        },
+        {
+          "instance_id": 308,
+          "state": "not_started"
+        },
+        {
+          "instance_id": 310,
+          "state": "not_started"
+        }
+      ]
     }
   ]
 }
