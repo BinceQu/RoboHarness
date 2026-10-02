@@ -1,7 +1,7 @@
 # Release validation
 
 **The three requested task means have not yet been verified.** This status
-snapshot was checked on October 2, 2026 at 23:43 Asia/Shanghai. The
+snapshot was checked on October 3, 2026 at 02:03 Asia/Shanghai. The
 [live r5 report](../validation_results/gpu5-20260930-r5/README.md) records
 completed official scores; a running process or a passing software test is
 not evidence that a task mean matches.
@@ -43,15 +43,23 @@ The selected tasks and immutable archive budgets are:
 | task08 | 301, 304, 306, 308, 310 | 17886 | 0.4 |
 
 At the snapshot time, all three r5 controllers, evaluators and active agents
-were alive with their recorded process identities. Task01 had completed 3/5
-cases and was running instance 308; task03 and task08 had completed 2/5 each
+were alive with their recorded process identities. Task01 had completed 4/5
+cases and was running instance 310; task03 and task08 had completed 2/5 each
 and were running instance 306. Completed official scores were:
 
-| Task | Instance 301 | Instance 304 | Instance 306 |
-| --- | ---: | ---: | ---: |
-| task01 | 2/3 | 2/3 | 1 |
-| task03 | 0 (wall-clock cutoff) | 2/7 | pending |
-| task08 | 1/2 | 0 (wall-clock cutoff) | pending |
+| Task | Instance 301 | Instance 304 | Instance 306 | Instance 308 |
+| --- | ---: | ---: | ---: | ---: |
+| task01 | 2/3 | 2/3 | 1 | 2/3 |
+| task03 | 0 (wall-clock cutoff) | 2/7 | pending | pending |
+| task08 | 1/2 | 0 (wall-clock cutoff) | pending | pending |
+
+Task01/308 ended by model decision at 5,484 steps. Its
+[outcome audit](../validation_results/task01-308-r5-outcome-20261003/README.md)
+traces the lost blue can to a transport plan executed through the tool that
+opens its selected gripper before motion, followed by the archived 0.5 m
+hand-in rule. The four completed task01 cases average 0.75; even a perfect
+last case would yield only 0.80 against the 0.866666667 target. This upper bound
+already rules out a task01 mean match for r5, while instance 310 continues.
 
 Task03/301 was truncated at 10,024 of 27,392 steps, and task08/304 at
 12,089 of 17,886 steps, by the old 24-hour cap. Their recorded Q=0 scores
@@ -198,6 +206,13 @@ The completed r5 task01/301 episode scored 2/3. Its
 preserves image and transcript evidence without altering the archived prompt
 or robot timing. A single-case difference does not determine the task mean,
 and that diagnostic does not isolate the physical cause from context changes.
+
+The later task01/308 episode also scored 2/3. Its
+[action and feedback audit](../validation_results/task01-308-r5-outcome-20261003/README.md)
+identifies opening the selected gripper before transport as the immediate
+failure mechanism. The successful archive records the same executor policy
+but uses direct transport execution. The audit does not establish why the
+model chose a different sequence or validate the queued context corrections.
 
 ## Remaining limits
 

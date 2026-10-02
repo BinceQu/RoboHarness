@@ -128,6 +128,25 @@ responses does not establish a control-timing regression. This is diagnostic
 evidence only; it does not isolate the failure cause or validate the queued
 fixes. See [the outcome audit](../validation_results/task01-301-r5-outcome-20261001/README.md).
 
+## Completed r5 task01/308 outcome
+
+This case returned Q=2/3 after 5,484 steps and ended through `model_done`.
+The agent planned transport of the held blue can with `move_tracked_point`
+in `plan` mode, then passed that plan to `exec_plan_pose`. The executor's
+recorded pre-motion opening cleared the right gripper's close keepalive and
+opened both fingers to 0.05 m in three steps. Subsequent images show the blue
+can on the floor. At hand-in, its measured XY separation from the model-labelled
+bin point was 0.417137853 m, invoking the archived prompt's 0.5 m stopping rule.
+
+The successful archive uses direct transport execution and its three grasp-plan
+executions already report the same pre-opening policy. The relevant executor,
+helper and transport entry-point functions are identical in the current original
+interface, the release and the queued checkout. This establishes an action
+sequence difference and its immediate release mechanism, not a newly introduced
+gripper policy or the cause of the model's changed choice. The native-context
+corrections still require r6 verification. See the
+[feedback, image and archive comparison](../validation_results/task01-308-r5-outcome-20261003/README.md).
+
 ## Observed r5 task03/301 wall-clock cutoff
 
 On October 1 at 19:29:40 Asia/Shanghai, the old r5 controller submitted

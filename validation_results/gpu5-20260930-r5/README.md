@@ -1,6 +1,6 @@
 # GPU validation results
 
-Updated: 2026-10-02T15:48:48+00:00
+Updated: 2026-10-02T18:07:21+00:00
 
 Only fresh official evaluator JSON contributes to new scores. An incomplete
 run has no final mean comparison and is not a successful reproduction claim.
@@ -12,7 +12,7 @@ Archived prompt, budget and runtime fidelity checks still apply.
 
 | Task | Status | Local processes | Completed | New mean Q (completed cases) | Archived task mean Q | Final difference | Mean matches | Verified |
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- | --- |
-| task01 | running | alive | 3/5 | 0.777778 | 0.866667 | — | — | no |
+| task01 | running | alive | 4/5 | 0.750000 | 0.866667 | — | — | no |
 | task03 | running | alive | 2/5 | 0.142857 | 0.257143 | — | — | no |
 | task08 | running | alive | 2/5 | 0.250000 | 0.400000 | — | — | no |
 
@@ -23,6 +23,8 @@ Archived prompt, budget and runtime fidelity checks still apply.
 **task01/306: reproduction limitation.** Initial native context is mismatch; the full listing and archived workspace metadata must match. Native workspace Git metadata differs from archive
 
 **task01/308: reproduction limitation.** Initial native context is mismatch; the full listing and archived workspace metadata must match. Native workspace Git metadata differs from archive
+
+**task01/310: reproduction limitation.** Initial native context is mismatch; the full listing and archived workspace metadata must match. Native workspace Git metadata differs from archive
 
 **task03/301: reproduction limitation.** The wall-clock safety timeout forced episode submission; this is not termination under the archived step budget or model completion.
 

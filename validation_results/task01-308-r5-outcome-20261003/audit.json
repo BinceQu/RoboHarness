@@ -1,0 +1,1298 @@
+{
+  "checked_at": "2026-10-03T02:07:07.450266+08:00",
+  "scope": "Diagnostic r5 case; no reproduction success claim and no runtime change.",
+  "case": {
+    "instance_id": 308,
+    "slot": 7,
+    "session_id": "t01p15071i7-44f3c16dc64b466b",
+    "source_session_id": "t01p15061i7-09160916",
+    "prompt": "prompt/task01/v4_39be138fa40a.txt",
+    "prompt_sha256": "39be138fa40ae8766fa1c6190fbd5dcbeb526a4091d46b4be3fb519172009249",
+    "rendered_prompt_sha256": "5c97ee1dbc37ed245e6004a3c64527afe16a23fe2970d91a0b974c4cb656572b",
+    "reference_q": 1.0,
+    "reference_steps": 7040
+  },
+  "sources": {
+    "official": {
+      "path": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task01-r5/output/json/picking_up_trash_308_0.json",
+      "sha256": "0df7003a5d6909c53011145287c3afb8a61cfb39defcebaf03d12fa29d9ee176",
+      "bytes": 549
+    },
+    "case_record": {
+      "path": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task01-r5/instance_308/case.json",
+      "sha256": "6adaced076588aa1255244c35b03bb7ffb2dcb408e641b479edb21f6af43ab8b",
+      "bytes": 1259
+    },
+    "native": {
+      "path": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task01-r5/instance_308/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/06b677d2-806c-4c9a-9804-3cd08c47f65d.jsonl",
+      "sha256": "ad7d2da68fc4c7fc41a263c91a4bc977a66a88bf0a50ce1bf1001965008d073b",
+      "bytes": 66702676
+    },
+    "native_result": {
+      "path": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task01-r5/instance_308/agent.json",
+      "sha256": "59eeeb2ee8b523fea2e84eb77cd02ea950b792d7ac6173994cde63589c0dc537",
+      "bytes": 2996
+    },
+    "recorder": {
+      "path": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task01-r5/instance_308/trajectory/claude-20261002T061706Z-b9502fcd/turns.jsonl",
+      "sha256": "ca23939330516299d558ad0ec2e5a0adcfd88c05c57a0ae37528e0ece7c924fd",
+      "bytes": 4407956
+    },
+    "archive_native": {
+      "path": "/mnt/nas_nfs/home/bince/RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/9c151129-9bc7-41f3-99ed-01691c862f23.jsonl",
+      "sha256": "341b91498e73b5a349cf5839279c0d2b12061d70a578c08ea037ad8c4e660886",
+      "bytes": 54446499
+    },
+    "prompt": {
+      "path": "/mnt/nas_nfs/home/bince/RoboHarness/prompt/task01/v4_39be138fa40a.txt",
+      "sha256": "39be138fa40ae8766fa1c6190fbd5dcbeb526a4091d46b4be3fb519172009249",
+      "bytes": 8273
+    }
+  },
+  "official": {
+    "task": "picking_up_trash",
+    "instance_id": 308,
+    "rollout_id": 0,
+    "steps": 5484,
+    "success": false,
+    "agent_distance": {
+      "base": 12.139344265838929,
+      "left": 45.29181616343554,
+      "right": 55.16327075375463
+    },
+    "normalized_agent_distance": {
+      "base": 1.3343142467407902,
+      "left": 0.23308846706224057,
+      "right": 0.16680482999412627
+    },
+    "q_score": {
+      "final": 0.6666666666666666
+    },
+    "time": {
+      "simulator_steps": 5483,
+      "simulator_time": 182.76666666666665,
+      "normalized_time": 0.9607422943643991
+    }
+  },
+  "finish_reason": "model_done",
+  "native_result": {
+    "type": "result",
+    "subtype": "success",
+    "is_error": false,
+    "duration_ms": 41173960,
+    "duration_api_ms": 39632860,
+    "num_turns": 169,
+    "session_id": "06b677d2-806c-4c9a-9804-3cd08c47f65d"
+  },
+  "native_prompt": {
+    "line": 5,
+    "record_sha256": "d26aedbb80e6b6b1d590cf8759a4f0a07b6ae6b001236dd396611f4038b1142c",
+    "timestamp": "2026-10-02T06:17:06.712Z",
+    "sha256": "5c97ee1dbc37ed245e6004a3c64527afe16a23fe2970d91a0b974c4cb656572b"
+  },
+  "native_final_response": {
+    "line": 1137,
+    "record_sha256": "5f1e23f1bb34b639a73137aef207d7f2481fd218de3d02585e2fbf45d1ea5815",
+    "timestamp": "2026-10-02T17:43:20.642Z"
+  },
+  "selected_native_calls": [
+    {
+      "line": 107,
+      "record_sha256": "0c2170efc514175341d4ba7491165860def3cf93ac922f665e662192d80334c9",
+      "timestamp": "2026-10-02T06:56:24.912Z",
+      "name": "mcp__behavior-v2__exec_plan_pose",
+      "arguments": {
+        "plan_id": "plan_0001",
+        "arm": "right"
+      }
+    },
+    {
+      "line": 135,
+      "record_sha256": "2e9fbef23603ed498e22098945e052e3bb89d3688eb6e2513a8fe422d4b5b114",
+      "timestamp": "2026-10-02T07:05:25.639Z",
+      "name": "mcp__behavior-v2__deactivate_skill",
+      "arguments": {
+        "name": "pick-up-object",
+        "reason": "Blue can grasped with right gripper, confirmed via wrist overlay, small-object stow done (set_arm_to_grasp_position keep + reset_body)."
+      }
+    },
+    {
+      "line": 257,
+      "record_sha256": "68d42fece1b56beb5decce2c04b186123a98f739a04416ba0f2183232d36f677",
+      "timestamp": "2026-10-02T09:08:14.594Z",
+      "name": "mcp__behavior-v2__move_tracked_point",
+      "arguments": {
+        "execution_mode": "plan",
+        "points": [
+          {
+            "name": "held_can",
+            "role": "on_hand",
+            "target_xyz_m": {
+              "x": 0.386,
+              "y": -0.014,
+              "z": 0.5
+            }
+          }
+        ]
+      }
+    },
+    {
+      "line": 266,
+      "record_sha256": "e41bf0b6a6f9d20882cdc342a854015a1e06956ababf0c3a110ce6c25e7b8bfc",
+      "timestamp": "2026-10-02T09:11:40.201Z",
+      "name": "mcp__behavior-v2__exec_plan_pose",
+      "arguments": {
+        "arm": "right",
+        "plan_id": "plan_0002"
+      }
+    },
+    {
+      "line": 280,
+      "record_sha256": "160b82acd13d510190f42d85b91118b910efb0dc9ff8eab78d4f66668278f0a8",
+      "timestamp": "2026-10-02T09:20:36.471Z",
+      "name": "mcp__behavior-v2__deactivate_skill",
+      "arguments": {
+        "name": "place-object-in-container",
+        "reason": "Placement unfinished: gripper opened during move_tracked_point transport and the blue can fell to the floor outside the ashcan. Ashcan still upright. Both arms stowed with gripper=open. Blue can is now an ignored outside can per parent rules."
+      }
+    },
+    {
+      "line": 383,
+      "record_sha256": "b699ce6c5868e60d0e8e545a95b669d1b48fec57569213aba311e710427a2a33",
+      "timestamp": "2026-10-02T10:29:51.267Z",
+      "name": "mcp__behavior-v2__exec_plan_pose",
+      "arguments": {
+        "plan_id": "plan_0003",
+        "arm": "right"
+      }
+    },
+    {
+      "line": 418,
+      "record_sha256": "5b45fdb82b4033fe641887503034f5be5d0e07f2aa279319ce029164ac32adec",
+      "timestamp": "2026-10-02T10:40:47.779Z",
+      "name": "mcp__behavior-v2__deactivate_skill",
+      "arguments": {
+        "name": "pick-up-object",
+        "reason": "Orange can grasped, lifted, and held securely by right arm; trunk reset upright. Handing off to placement."
+      }
+    },
+    {
+      "line": 648,
+      "record_sha256": "2e3017030bbe71e109434e3693f26f7f798806599b9a5277aef8b67a0cdbeb95",
+      "timestamp": "2026-10-02T12:59:12.960Z",
+      "name": "mcp__behavior-v2__deactivate_skill",
+      "arguments": {
+        "name": "place-object-in-container",
+        "reason": "Orange can released and verified settled inside the ashcan; both arms stowed to grasp-prep with grippers open."
+      }
+    },
+    {
+      "line": 739,
+      "record_sha256": "496d652c7a7bb919de84aba5cf24e9acd37e452a33674a0764d88430c8fc4e21",
+      "timestamp": "2026-10-02T13:46:28.507Z",
+      "name": "mcp__behavior-v2__exec_plan_pose",
+      "arguments": {
+        "plan_id": "plan_0004",
+        "arm": "right"
+      }
+    },
+    {
+      "line": 774,
+      "record_sha256": "f2e6120aa356ce3751a2fd0e2fbeb2c80cc2686f544272d072043979991c7bd2",
+      "timestamp": "2026-10-02T13:59:36.349Z",
+      "name": "mcp__behavior-v2__deactivate_skill",
+      "arguments": {
+        "name": "pick-up-object",
+        "reason": "Orange can #2 grasped with right arm (bilateral contact confirmed), trunk reset upright, held can visible in head view. Handing off to placement."
+      }
+    },
+    {
+      "line": 1133,
+      "record_sha256": "1922c7d098a0f8c41e27e2663cfc976339d911ebed6039256dd8bc9de252be51",
+      "timestamp": "2026-10-02T17:39:42.928Z",
+      "name": "mcp__behavior-v2__deactivate_skill",
+      "arguments": {
+        "name": "place-object-in-container",
+        "reason": "Orange can #2 released inside ashcan and verified settled; right arm stowed open. Last-step check: only remaining outside can (blue) is 0.42 m from ashcan (<0.5 m), so per hand-in rule the parent task ends here."
+      }
+    }
+  ],
+  "selected_recorder_turns": [
+    {
+      "turn_index": 15,
+      "record_sha256": "050908f50b1df7dd84d4240bdb16184b9ac7546015a1f9edbbeaa1f6a1e97088",
+      "completed_at": "2026-10-02T06:58:59.352+00:00",
+      "tool_call": {
+        "name": "close_gripper",
+        "arguments": {
+          "arm": "right"
+        }
+      },
+      "is_error": false,
+      "response": {
+        "arm": "right",
+        "image_id": "img_0014",
+        "ok": true,
+        "failure_stage": null,
+        "close_keepalive_active": true,
+        "action_steps": 20,
+        "commanded_gripper_action": [
+          -20.0,
+          -20.0
+        ],
+        "gripper_qpos_before": [
+          0.049995459616184235,
+          0.04999981448054314
+        ],
+        "gripper_qpos_after": [
+          0.04305880144238472,
+          0.029825862497091293
+        ],
+        "gripper_right_qpos": [
+          0.043058790266513824,
+          0.02982551045715809
+        ]
+      },
+      "media": [
+        {
+          "label": "rgb_overlay_path",
+          "role": "grasp_volume_overlay",
+          "mime_type": "image/png",
+          "sha256": "2baf59d93e4caa303d75cd6dbd6f3bae4c5853948f5b34d54dec679aa7f52e9e",
+          "bytes": 257400,
+          "width": 480,
+          "height": 480,
+          "source_width": 480,
+          "source_height": 480,
+          "path": "media/2baf59d93e4caa303d75cd6dbd6f3bae4c5853948f5b34d54dec679aa7f52e9e.png"
+        }
+      ]
+    },
+    {
+      "turn_index": 16,
+      "record_sha256": "bf34831a972557feee1f415093a5be9f7dec8e19b84d75d19fed288a131fa5ee",
+      "completed_at": "2026-10-02T07:01:08.045+00:00",
+      "tool_call": {
+        "name": "set_arm_to_grasp_position",
+        "arguments": {
+          "arm": "right",
+          "gripper": "keep"
+        }
+      },
+      "is_error": false,
+      "response": {
+        "image_id": "img_0015",
+        "execution": "feedback_governed_observed_qpos_to_absolute_targets",
+        "ok": true,
+        "close_keepalive_by_arm": {
+          "right": true
+        },
+        "action_steps": 30,
+        "gripper_right_qpos": [
+          0.0429874025285244,
+          0.029803110286593437
+        ]
+      },
+      "media": [
+        {
+          "label": "rgb_path",
+          "role": "raw_rgb",
+          "mime_type": "image/jpeg",
+          "sha256": "62ff919de0a59e480f807be3025e575999a63e6c92376a4ff2f26647a5ea07d8",
+          "bytes": 154533,
+          "width": 720,
+          "height": 720,
+          "source_width": 720,
+          "source_height": 720,
+          "path": "media/62ff919de0a59e480f807be3025e575999a63e6c92376a4ff2f26647a5ea07d8.jpg"
+        }
+      ]
+    },
+    {
+      "turn_index": 32,
+      "record_sha256": "f91931321be97aca06a3b61b2bd88dd816aeda6ff626408b7432f8d74f44134d",
+      "completed_at": "2026-10-02T08:55:18.843+00:00",
+      "tool_call": {
+        "name": "adjust_pitch",
+        "arguments": {
+          "degree": -10
+        }
+      },
+      "is_error": false,
+      "response": {
+        "image_id": "img_0028",
+        "ok": true,
+        "gripper_right_qpos": [
+          0.04296387359499931,
+          0.029753418639302254
+        ]
+      },
+      "media": [
+        {
+          "label": "rgb_overlay_path",
+          "role": "path_overlay",
+          "mime_type": "image/jpeg",
+          "sha256": "9d42dbca2d6d295f2c4f6b82a1ead69ed402d97cc8969169d6305a2fe2e51e7b",
+          "bytes": 205972,
+          "width": 720,
+          "height": 720,
+          "source_width": 720,
+          "source_height": 720,
+          "path": "media/9d42dbca2d6d295f2c4f6b82a1ead69ed402d97cc8969169d6305a2fe2e51e7b.jpg"
+        }
+      ]
+    },
+    {
+      "turn_index": 35,
+      "record_sha256": "eda37bd1da121699ad8a67c4b65ffaa3d3b7d9366debe3f0e1ec7dde58634f5a",
+      "completed_at": "2026-10-02T09:08:50.677+00:00",
+      "tool_call": {
+        "name": "move_tracked_point",
+        "arguments": {
+          "points": [
+            {
+              "name": "held_can",
+              "role": "on_hand",
+              "target_xyz_m": {
+                "x": 0.386,
+                "y": -0.014,
+                "z": 0.5
+              }
+            }
+          ],
+          "execution_mode": "plan"
+        }
+      },
+      "is_error": false,
+      "response": {
+        "arm": "right",
+        "image_id": "img_0029",
+        "plan_id": "plan_0002",
+        "plan_record_path": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task01-r5/recordings/t01p15071i7-44f3c16dc64b466b/plans/plan_0002.json",
+        "execution": "plan_only_no_robot_motion",
+        "execution_mode": "plan",
+        "ok": true,
+        "error": null,
+        "failure_stage": null,
+        "move_trajectory_schema": "official_v2_move_tracked_point_trajectory",
+        "move_trajectory_waypoint_count": 110
+      },
+      "media": [
+        {
+          "label": "rgb_overlay_path",
+          "role": "path_overlay",
+          "mime_type": "image/jpeg",
+          "sha256": "984419c649c4cc65018796791267d9e2fe18506d67a4a500978003f7488c0898",
+          "bytes": 174361,
+          "width": 720,
+          "height": 720,
+          "source_width": 720,
+          "source_height": 720,
+          "path": "media/984419c649c4cc65018796791267d9e2fe18506d67a4a500978003f7488c0898.jpg"
+        }
+      ]
+    },
+    {
+      "turn_index": 36,
+      "record_sha256": "2d2e628caf5b9556a62f4c5f43ddd729c00cc871138ba67fc9fa1aa4c340916d",
+      "completed_at": "2026-10-02T09:11:50.095+00:00",
+      "tool_call": {
+        "name": "exec_plan_pose",
+        "arguments": {
+          "plan_id": "plan_0002",
+          "arm": "right"
+        }
+      },
+      "is_error": false,
+      "response": {
+        "arm": "right",
+        "image_id": "img_0030",
+        "plan_id": "plan_0002",
+        "plan_record_path": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task01-r5/recordings/t01p15071i7-44f3c16dc64b466b/plans/plan_0002.json",
+        "execution": "official_action_joint_trajectory_replay",
+        "ok": true,
+        "gripper_policy": "open_selected_before_motion_then_hold_observed_qpos",
+        "pre_exec_gripper_open": {
+          "already_open": false,
+          "arm": "right",
+          "checked_before_motion": true,
+          "close_keepalive_after": false,
+          "close_keepalive_before": true,
+          "commanded_gripper_action": [
+            3.0,
+            3.0
+          ],
+          "control_mode": "independent_effort",
+          "execution_continues": true,
+          "gripper_qpos_after": [
+            0.05000000074505806,
+            0.05000000074505806
+          ],
+          "gripper_qpos_before": [
+            0.0429641455411911,
+            0.02975771576166153
+          ],
+          "open_action_steps": 3,
+          "open_invoked": true,
+          "open_target_reached": true,
+          "post_open_hold_qpos": [
+            0.05,
+            0.05
+          ]
+        },
+        "gripper_holds": {
+          "left": {
+            "entry_qpos": [
+              0.049995455890893936,
+              0.04999944567680359
+            ],
+            "hold_allows_close_effort": true,
+            "hold_qpos": [
+              0.049999985843896866,
+              0.04999837279319763
+            ],
+            "mode": "qpos_effort_servo"
+          },
+          "right": {
+            "entry_qpos": [
+              0.04998946562409401,
+              0.04998225346207619
+            ],
+            "hold_allows_close_effort": false,
+            "hold_qpos": [
+              0.04998946562409401,
+              0.04998225346207619
+            ],
+            "mode": "qpos_effort_servo"
+          }
+        },
+        "action_steps": 47,
+        "gripper_right_qpos": [
+          0.04999389871954918,
+          0.049976617097854614
+        ]
+      },
+      "media": [
+        {
+          "label": "rgb_overlay_path",
+          "role": "grasp_volume_overlay",
+          "mime_type": "image/jpeg",
+          "sha256": "d36b0f5d74e5fb086bd568aceebcea0f11b4811363c9ff850c46bed8462a31e6",
+          "bytes": 69775,
+          "width": 480,
+          "height": 480,
+          "source_width": 480,
+          "source_height": 480,
+          "path": "media/d36b0f5d74e5fb086bd568aceebcea0f11b4811363c9ff850c46bed8462a31e6.jpg"
+        }
+      ]
+    },
+    {
+      "turn_index": 37,
+      "record_sha256": "e642c7b74b4f0cd8f9e25dd3cd1da32a5b166f6df0f927bdd125dd9f91350407",
+      "completed_at": "2026-10-02T09:17:04.268+00:00",
+      "tool_call": {
+        "name": "set_arm_to_grasp_position",
+        "arguments": {
+          "arm": "both",
+          "gripper": "open"
+        }
+      },
+      "is_error": false,
+      "response": {
+        "image_id": "img_0031",
+        "execution": "feedback_governed_observed_qpos_to_absolute_targets",
+        "ok": true,
+        "close_keepalive_by_arm": {
+          "left": false,
+          "right": false
+        },
+        "action_steps": 17,
+        "gripper_right_qpos": [
+          0.04999915137887001,
+          0.04999660328030586
+        ]
+      },
+      "media": [
+        {
+          "label": "rgb_path",
+          "role": "raw_rgb",
+          "mime_type": "image/jpeg",
+          "sha256": "5425100c00d841a9a104adf995526a6ab49e2e34119f75618dea15e5116b4620",
+          "bytes": 172512,
+          "width": 720,
+          "height": 720,
+          "source_width": 720,
+          "source_height": 720,
+          "path": "media/5425100c00d841a9a104adf995526a6ab49e2e34119f75618dea15e5116b4620.jpg"
+        }
+      ]
+    },
+    {
+      "turn_index": 150,
+      "record_sha256": "34075d8a2431073c4d6df8623acc55b2aae7a780dc48e2c8a0a3340e5a1e8070",
+      "completed_at": "2026-10-02T17:21:00.265+00:00",
+      "tool_call": {
+        "name": "open_gripper",
+        "arguments": {
+          "arm": "right"
+        }
+      },
+      "is_error": false,
+      "response": {
+        "arm": "right",
+        "image_id": "img_0130",
+        "ok": true,
+        "close_keepalive_active": false,
+        "commanded_gripper_action": [
+          3.0,
+          3.0
+        ],
+        "gripper_qpos_before": [
+          0.040634285658597946,
+          0.040373895317316055
+        ],
+        "gripper_qpos_after": [
+          0.04999994486570358,
+          0.04999993368983269
+        ],
+        "gripper_right_qpos": [
+          0.049999482929706573,
+          0.04999571293592453
+        ]
+      },
+      "media": [
+        {
+          "label": "rgb_overlay_path",
+          "role": "path_overlay",
+          "mime_type": "image/jpeg",
+          "sha256": "9b0f581d682d2a417ba289d1723286d58af014a927f7d9add3425f6638797115",
+          "bytes": 212644,
+          "width": 720,
+          "height": 720,
+          "source_width": 720,
+          "source_height": 720,
+          "path": "media/9b0f581d682d2a417ba289d1723286d58af014a927f7d9add3425f6638797115.jpg"
+        }
+      ]
+    },
+    {
+      "turn_index": 152,
+      "record_sha256": "9f68c59a9a9fdd0595f613c087461edad836ea6b0155cd69f5c840be8838a722",
+      "completed_at": "2026-10-02T17:28:21.507+00:00",
+      "tool_call": {
+        "name": "set_arm_to_grasp_position",
+        "arguments": {
+          "arm": "right",
+          "gripper": "open"
+        }
+      },
+      "is_error": false,
+      "response": {
+        "image_id": "img_0132",
+        "execution": "feedback_governed_observed_qpos_to_absolute_targets",
+        "ok": true,
+        "close_keepalive_by_arm": {
+          "right": false
+        },
+        "action_steps": 19,
+        "gripper_right_qpos": [
+          0.04999982938170433,
+          0.04999399930238724
+        ]
+      },
+      "media": [
+        {
+          "label": "rgb_path",
+          "role": "raw_rgb",
+          "mime_type": "image/jpeg",
+          "sha256": "fb9aacc9085083ef2e475317e016954e075488949a58940901567b38f2b1a333",
+          "bytes": 177541,
+          "width": 720,
+          "height": 720,
+          "source_width": 720,
+          "source_height": 720,
+          "path": "media/fb9aacc9085083ef2e475317e016954e075488949a58940901567b38f2b1a333.jpg"
+        }
+      ]
+    },
+    {
+      "turn_index": 153,
+      "record_sha256": "3ffa5f175a162c6258bac33ff3e7dd490bea9e2c89680ba98a9bcaed080ec9e8",
+      "completed_at": "2026-10-02T17:34:55.109+00:00",
+      "tool_call": {
+        "name": "track_object_distance",
+        "arguments": {
+          "image_id": "img_0132",
+          "points": [
+            {
+              "name": "blue_can_outside",
+              "u": 508,
+              "v": 518
+            },
+            {
+              "name": "ashcan_interior",
+              "u": 372,
+              "v": 465
+            }
+          ]
+        }
+      },
+      "is_error": false,
+      "response": {
+        "image_id": "img_0132",
+        "execution": "official_action_only",
+        "ok": true,
+        "error": null
+      },
+      "media": []
+    }
+  ],
+  "final_outside_can_check": {
+    "turn_index": 153,
+    "image_id": "img_0132",
+    "identity_source": "model_annotation",
+    "identity_verified": false,
+    "tracked_points": {
+      "ashcan_interior": {
+        "u": 372,
+        "v": 465,
+        "status": "observed",
+        "xyz_in_robot_base_coord_m": [
+          0.591806950286085,
+          -0.03467746195563164,
+          0.15255298763527558
+        ],
+        "identity_verified": false
+      },
+      "blue_can_outside": {
+        "u": 508,
+        "v": 518,
+        "status": "observed",
+        "xyz_in_robot_base_coord_m": [
+          0.4707632784160673,
+          -0.4338671632134317,
+          0.06332809831098463
+        ],
+        "identity_verified": false
+      }
+    },
+    "xy_distance_m": 0.4171378526219698
+  },
+  "archive_action_comparison": {
+    "exec_plan_pose_calls": [
+      {
+        "call": {
+          "line": 114,
+          "record_sha256": "fae18f67b4706a5da0bf121cca08df6795c83f9f3aaf2cf016d948c346cbf3f3",
+          "timestamp": "2026-09-16T01:23:48.074Z",
+          "name": "mcp__behavior-v2__exec_plan_pose",
+          "arguments": {
+            "plan_id": "plan_0001",
+            "arm": "left"
+          }
+        },
+        "result": {
+          "line": 115,
+          "record_sha256": "03753158dd87d21894aa7dafdf1247b9dcda2b69659eb815cc3c193addf228e6",
+          "timestamp": "2026-09-16T01:23:54.875Z"
+        },
+        "response": {
+          "execution": "official_action_joint_trajectory_replay",
+          "gripper_policy": "open_selected_before_motion_then_hold_observed_qpos",
+          "ok": true
+        },
+        "plan_producer": {
+          "tool": "mcp__behavior-v2__plan_grasp_point_filter_rgbd_lite",
+          "call_line": 107,
+          "result_line": 108
+        }
+      },
+      {
+        "call": {
+          "line": 818,
+          "record_sha256": "b88211862ae32195b4fc9f941f3209c8b568c98bc4c7423c9760797fe7b76539",
+          "timestamp": "2026-09-16T03:51:53.557Z",
+          "name": "mcp__behavior-v2__exec_plan_pose",
+          "arguments": {
+            "plan_id": "plan_0007",
+            "arm": "left"
+          }
+        },
+        "result": {
+          "line": 819,
+          "record_sha256": "69b2b95d1323edf1c9c925633645c8c4ae6e78a013e00a036e2504e21f29a245",
+          "timestamp": "2026-09-16T03:52:01.110Z"
+        },
+        "response": {
+          "execution": "official_action_joint_trajectory_replay",
+          "gripper_policy": "open_selected_before_motion_then_hold_observed_qpos",
+          "ok": true
+        },
+        "plan_producer": {
+          "tool": "mcp__behavior-v2__plan_grasp_point_filter_rgbd_lite",
+          "call_line": 811,
+          "result_line": 812
+        }
+      },
+      {
+        "call": {
+          "line": 988,
+          "record_sha256": "ae3b1dee866158a0d99b1c15a5f62741dc75a058b453ec07a22261efb7240741",
+          "timestamp": "2026-09-16T04:19:24.827Z",
+          "name": "mcp__behavior-v2__exec_plan_pose",
+          "arguments": {
+            "arm": "left",
+            "plan_id": "plan_0011"
+          }
+        },
+        "result": {
+          "line": 989,
+          "record_sha256": "0cbacc612b65951137310f2f8aec6a98ee383c467dad00588b06a14523ab1d8b",
+          "timestamp": "2026-09-16T04:19:32.142Z"
+        },
+        "response": {
+          "execution": "official_action_joint_trajectory_replay",
+          "gripper_policy": "open_selected_before_motion_then_hold_observed_qpos",
+          "ok": true
+        },
+        "plan_producer": {
+          "tool": "mcp__behavior-v2__plan_grasp_point_filter_rgbd_lite",
+          "call_line": 981,
+          "result_line": 982
+        }
+      }
+    ],
+    "move_tracked_point_calls": [
+      {
+        "call": {
+          "line": 308,
+          "record_sha256": "3861ad09cb0639295e85037da2b4ed37321b8384bf3b422d8d37e65fe6178b46",
+          "timestamp": "2026-09-16T02:00:57.822Z",
+          "name": "mcp__behavior-v2__move_tracked_point",
+          "arguments": {
+            "points": [
+              {
+                "name": "held_can",
+                "role": "on_hand",
+                "target_xyz_m": {
+                  "x": 0.651,
+                  "y": 0,
+                  "z": 0.565
+                }
+              }
+            ],
+            "execution_mode": "exec"
+          }
+        },
+        "result": {
+          "line": 309,
+          "record_sha256": "e839ae351d922206f264d07efa8ec55e2d50c38f04798719502bc70b3bbac7b0",
+          "timestamp": "2026-09-16T02:02:33.731Z"
+        },
+        "response": {
+          "execution": "official_action_only",
+          "execution_mode": "exec",
+          "ok": false,
+          "error": "final live tracked-point goal was never observed"
+        }
+      },
+      {
+        "call": {
+          "line": 342,
+          "record_sha256": "e0a65c228071bbd94514dc17d6facf18307515e06f26aea4898713c2c4c0bf00",
+          "timestamp": "2026-09-16T02:11:26.036Z",
+          "name": "mcp__behavior-v2__move_tracked_point",
+          "arguments": {
+            "execution_mode": "exec",
+            "points": [
+              {
+                "name": "left_finger_tip",
+                "role": "on_hand",
+                "target_xyz_m": {
+                  "x": 0.648,
+                  "y": 0,
+                  "z": 0.62
+                }
+              }
+            ]
+          }
+        },
+        "result": {
+          "line": 343,
+          "record_sha256": "155516b9c1df316a68d143ccbdee0b2ec835201cb7f075f83e058c0239cceb48",
+          "timestamp": "2026-09-16T02:12:14.065Z"
+        },
+        "response": {
+          "execution": "official_action_only",
+          "execution_mode": "exec",
+          "ok": false,
+          "error": "final live tracked-point goal was never observed"
+        }
+      },
+      {
+        "call": {
+          "line": 546,
+          "record_sha256": "676ebe6765bceaeeb540ca5be7800a47a13ab291e6e77883af7fa3f66f0714dc",
+          "timestamp": "2026-09-16T02:52:50.660Z",
+          "name": "mcp__behavior-v2__move_tracked_point",
+          "arguments": {
+            "points": [
+              {
+                "name": "held_can",
+                "role": "on_hand",
+                "target_xyz_m": {
+                  "x": 0.529,
+                  "y": -0.005,
+                  "z": 0.5
+                }
+              }
+            ]
+          }
+        },
+        "result": {
+          "line": 547,
+          "record_sha256": "402eac34be9dc445d9b90c5579dcbdd9b412edf63baa8eca7a1195c17a9c554e",
+          "timestamp": "2026-09-16T02:53:51.740Z"
+        },
+        "response": {
+          "execution": "official_action_only",
+          "execution_mode": "exec",
+          "ok": false,
+          "error": "final live tracked-point goal was never observed"
+        }
+      },
+      {
+        "call": {
+          "line": 629,
+          "record_sha256": "f8d71ec5050750465b69b317aca87ec5aa436605367682cdb6b258f431dbe7c7",
+          "timestamp": "2026-09-16T03:10:32.103Z",
+          "name": "mcp__behavior-v2__move_tracked_point",
+          "arguments": {
+            "points": [
+              {
+                "name": "held_can",
+                "role": "on_hand",
+                "target_xyz_m": {
+                  "x": 0.547,
+                  "y": 0.032,
+                  "z": 0.48
+                }
+              }
+            ]
+          }
+        },
+        "result": {
+          "line": 630,
+          "record_sha256": "98df2336ecbcbb5b26b767a285644edf56d2f7c578db436ee4f2069f2686f318",
+          "timestamp": "2026-09-16T03:11:23.924Z"
+        },
+        "response": {
+          "execution": "official_action_only",
+          "execution_mode": "exec",
+          "ok": false,
+          "error": "final live tracked-point goal was never observed"
+        }
+      },
+      {
+        "call": {
+          "line": 657,
+          "record_sha256": "3cf298078e3bb326fe4ca45baccf4d09cd59f8c9b485e320443459ad0db5a3d0",
+          "timestamp": "2026-09-16T03:22:51.952Z",
+          "name": "mcp__behavior-v2__move_tracked_point",
+          "arguments": {
+            "points": [
+              {
+                "name": "held_can",
+                "role": "on_hand",
+                "target_xyz_m": {
+                  "x": 0.548,
+                  "y": 0.032,
+                  "z": 0.48
+                }
+              }
+            ]
+          }
+        },
+        "result": {
+          "line": 658,
+          "record_sha256": "12f500a78cb2892669a2a5444269df063a8fac652ddf0db142756fd49cb1a4bf",
+          "timestamp": "2026-09-16T03:23:40.334Z"
+        },
+        "response": {
+          "execution": "official_action_only",
+          "execution_mode": "exec",
+          "ok": false,
+          "error": "final live tracked-point goal was never observed"
+        }
+      },
+      {
+        "call": {
+          "line": 724,
+          "record_sha256": "451ca10976c1fff0dd1e80b17be8ca54ab30b3b8f0d5ccaf3a369b0d1a200dd8",
+          "timestamp": "2026-09-16T03:38:22.470Z",
+          "name": "mcp__behavior-v2__move_tracked_point",
+          "arguments": {
+            "points": [
+              {
+                "name": "held_can",
+                "role": "on_hand",
+                "target_xyz_m": {
+                  "x": 0.465,
+                  "y": 0.103,
+                  "z": 0.478
+                }
+              }
+            ]
+          }
+        },
+        "result": {
+          "line": 725,
+          "record_sha256": "bfe3b31239698547e66e77bdec9d93eb74c50ba6fc542131a278940bc6c0f32b",
+          "timestamp": "2026-09-16T03:38:54.220Z"
+        },
+        "response": {
+          "execution": "official_action_only",
+          "execution_mode": "exec",
+          "ok": true
+        }
+      },
+      {
+        "call": {
+          "line": 883,
+          "record_sha256": "f8fbd3990ceca24b8e36b35a32e46a76e7b03fd379fe9a864d0343d5dc32699d",
+          "timestamp": "2026-09-16T03:59:53.082Z",
+          "name": "mcp__behavior-v2__move_tracked_point",
+          "arguments": {
+            "points": [
+              {
+                "name": "held_can",
+                "role": "on_hand",
+                "target_xyz_m": {
+                  "x": 0.387,
+                  "y": 0.027,
+                  "z": 0.54
+                }
+              }
+            ]
+          }
+        },
+        "result": {
+          "line": 884,
+          "record_sha256": "c98f62d78000090399a9b346979306c301fb01538db4d7b75014bd2e3193b140",
+          "timestamp": "2026-09-16T04:00:05.229Z"
+        },
+        "response": {
+          "execution": "official_action_only",
+          "execution_mode": "exec",
+          "ok": false,
+          "error": "trajectory execution failed: base_disturbance"
+        }
+      },
+      {
+        "call": {
+          "line": 890,
+          "record_sha256": "88feb5f1bc17e9fb50773e2d15b5db294c351d542d2fd6828b98b4d73642f534",
+          "timestamp": "2026-09-16T04:00:58.412Z",
+          "name": "mcp__behavior-v2__move_tracked_point",
+          "arguments": {
+            "points": [
+              {
+                "name": "held_can",
+                "role": "on_hand",
+                "target_xyz_m": {
+                  "x": 0.387,
+                  "y": 0.028,
+                  "z": 0.545
+                }
+              }
+            ]
+          }
+        },
+        "result": {
+          "line": 891,
+          "record_sha256": "e42245bf548966f0e32145a9fc8549155b96d6dc5dae7c2a909cc7561a9e4e00",
+          "timestamp": "2026-09-16T04:01:14.182Z"
+        },
+        "response": {
+          "execution": "official_action_only",
+          "execution_mode": "exec",
+          "ok": true
+        }
+      },
+      {
+        "call": {
+          "line": 897,
+          "record_sha256": "5b84ce7b73ba301ca4e7413bd0970944774b791e6b2729f534f9f2d9dc5988cb",
+          "timestamp": "2026-09-16T04:02:18.116Z",
+          "name": "mcp__behavior-v2__move_tracked_point",
+          "arguments": {
+            "points": [
+              {
+                "name": "held_can",
+                "role": "on_hand",
+                "target_xyz_m": {
+                  "x": 0.387,
+                  "y": 0.028,
+                  "z": 0.44
+                }
+              }
+            ]
+          }
+        },
+        "result": {
+          "line": 898,
+          "record_sha256": "22d05f5c3a5896c171821a3cf2dd335994ec6520aaf6cca75d440f64bcbdbb5b",
+          "timestamp": "2026-09-16T04:02:30.667Z"
+        },
+        "response": {
+          "execution": "official_action_only",
+          "execution_mode": "exec",
+          "ok": true
+        }
+      },
+      {
+        "call": {
+          "line": 1069,
+          "record_sha256": "4fae5303821eae3a3b895911a952e010ebfeba9c439e4e9bb212057fadff81b3",
+          "timestamp": "2026-09-16T04:30:18.796Z",
+          "name": "mcp__behavior-v2__move_tracked_point",
+          "arguments": {
+            "points": [
+              {
+                "name": "held_can",
+                "role": "on_hand",
+                "target_xyz_m": {
+                  "x": 0.409,
+                  "y": 0.221,
+                  "z": 0.6
+                }
+              }
+            ]
+          }
+        },
+        "result": {
+          "line": 1070,
+          "record_sha256": "c3c3afdf595917fa490104282f5bad3efde0ff9e64d1aa864bfab390a3d08b8a",
+          "timestamp": "2026-09-16T04:31:12.739Z"
+        },
+        "response": {
+          "execution": "official_action_only",
+          "execution_mode": "exec",
+          "ok": false,
+          "error": "final live tracked-point goal was never observed"
+        }
+      },
+      {
+        "call": {
+          "line": 1095,
+          "record_sha256": "b1cffed8601efa75175119f11a49c56f404e982c0fce5490e148d6dc63db31d3",
+          "timestamp": "2026-09-16T04:33:14.152Z",
+          "name": "mcp__behavior-v2__move_tracked_point",
+          "arguments": {
+            "points": [
+              {
+                "name": "held_can",
+                "role": "on_hand",
+                "target_xyz_m": {
+                  "x": 0.393,
+                  "y": 0.145,
+                  "z": 0.58
+                }
+              }
+            ]
+          }
+        },
+        "result": {
+          "line": 1096,
+          "record_sha256": "9b5f2a1734e682830479ff8a490411b6b2df81b51cd39f89dbe82990b925908f",
+          "timestamp": "2026-09-16T04:33:41.052Z"
+        },
+        "response": {
+          "execution": "official_action_only",
+          "execution_mode": "exec",
+          "ok": true
+        }
+      },
+      {
+        "call": {
+          "line": 1102,
+          "record_sha256": "07b157f835b03787e7d7a74ba029401f2edd0461f88a901e29e245fc7faba1e9",
+          "timestamp": "2026-09-16T04:34:04.860Z",
+          "name": "mcp__behavior-v2__move_tracked_point",
+          "arguments": {
+            "points": [
+              {
+                "name": "held_can",
+                "role": "on_hand",
+                "target_xyz_m": {
+                  "x": 0.414,
+                  "y": 0.027,
+                  "z": 0.577
+                }
+              }
+            ]
+          }
+        },
+        "result": {
+          "line": 1103,
+          "record_sha256": "a0f424e4f117b2813a72debaf38f1566517038739bc1395a64dce90d76dec34d",
+          "timestamp": "2026-09-16T04:34:18.172Z"
+        },
+        "response": {
+          "execution": "official_action_only",
+          "execution_mode": "exec",
+          "ok": true
+        }
+      },
+      {
+        "call": {
+          "line": 1108,
+          "record_sha256": "979f16ed2e8749ee63d13a7b32ec2989cad648b8f72e9de7adb1c4a43625ee15",
+          "timestamp": "2026-09-16T04:34:40.060Z",
+          "name": "mcp__behavior-v2__move_tracked_point",
+          "arguments": {
+            "points": [
+              {
+                "name": "held_can",
+                "role": "on_hand",
+                "target_xyz_m": {
+                  "x": 0.415,
+                  "y": 0.027,
+                  "z": 0.473
+                }
+              }
+            ]
+          }
+        },
+        "result": {
+          "line": 1109,
+          "record_sha256": "30a1ba9d5c5f37f68e60ecea73e70f52924f51fb516e4864f3dff83e19a181c8",
+          "timestamp": "2026-09-16T04:34:53.244Z"
+        },
+        "response": {
+          "execution": "official_action_only",
+          "execution_mode": "exec",
+          "ok": true
+        }
+      }
+    ]
+  },
+  "code_comparison": {
+    "release": {
+      "path": "/mnt/nas_nfs/home/bince/RoboHarness/interface/behavior_interface_eval_test/tool/official_v2/tools.py",
+      "sha256": "dbbcc90e5a53dd7ef4a17ff77940ea4c515622cb456796f670b749578d332a44",
+      "bytes": 1840222,
+      "functions": {
+        "move_tracked_point": {
+          "line": 41006,
+          "sha256": "1cef8158546474bf49c1f434037607f5b7217e924b012df3537f0a62ef77c05c"
+        },
+        "_ensure_exec_selected_gripper_open": {
+          "line": 42878,
+          "sha256": "87d3810924b26aa2fbadb692fdd161f9c1311bca98cf9c89751766acba4cff23"
+        },
+        "exec_plan_pose": {
+          "line": 42973,
+          "sha256": "fcfd8fea0e2d611ba16d3573c331e552fd0143bb8c55136c7986b5565592eadc"
+        }
+      }
+    },
+    "original_current": {
+      "path": "/mnt/nas_nfs/home/bince/BEHAVIOR-1K/behavior_interface_eval_test/tool/official_v2/tools.py",
+      "sha256": "17c019d854813b59029771071b01113ad701e2fe6d642147876c0de059ad3c85",
+      "bytes": 1840208,
+      "functions": {
+        "move_tracked_point": {
+          "line": 41006,
+          "sha256": "1cef8158546474bf49c1f434037607f5b7217e924b012df3537f0a62ef77c05c"
+        },
+        "_ensure_exec_selected_gripper_open": {
+          "line": 42878,
+          "sha256": "87d3810924b26aa2fbadb692fdd161f9c1311bca98cf9c89751766acba4cff23"
+        },
+        "exec_plan_pose": {
+          "line": 42973,
+          "sha256": "fcfd8fea0e2d611ba16d3573c331e552fd0143bb8c55136c7986b5565592eadc"
+        }
+      }
+    },
+    "queued_r6": {
+      "path": "/var/tmp/roboharness-validation-r6-c4763eb/interface/behavior_interface_eval_test/tool/official_v2/tools.py",
+      "sha256": "dbbcc90e5a53dd7ef4a17ff77940ea4c515622cb456796f670b749578d332a44",
+      "bytes": 1840222,
+      "functions": {
+        "move_tracked_point": {
+          "line": 41006,
+          "sha256": "1cef8158546474bf49c1f434037607f5b7217e924b012df3537f0a62ef77c05c"
+        },
+        "_ensure_exec_selected_gripper_open": {
+          "line": 42878,
+          "sha256": "87d3810924b26aa2fbadb692fdd161f9c1311bca98cf9c89751766acba4cff23"
+        },
+        "exec_plan_pose": {
+          "line": 42973,
+          "sha256": "fcfd8fea0e2d611ba16d3573c331e552fd0143bb8c55136c7986b5565592eadc"
+        }
+      }
+    }
+  },
+  "images": [
+    {
+      "path": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task01-r5/recordings/t01p15071i7-44f3c16dc64b466b/images/img_0028.png",
+      "sha256": "555ca8cd1f2f76264f7cace8a866afb781ec69aef7df4878953b86463361c7d5",
+      "bytes": 643144
+    },
+    {
+      "path": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task01-r5/recordings/t01p15071i7-44f3c16dc64b466b/images/img_0030.right_wrist.png",
+      "sha256": "7b352471ed3238ef59210420bf01d57a173b58d2eec779328102bcd747e7f32f",
+      "bytes": 287988
+    },
+    {
+      "path": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task01-r5/recordings/t01p15071i7-44f3c16dc64b466b/images/img_0031.png",
+      "sha256": "7cdc601d7f116b6e35e431eef30e046e506950deb06f90377b9b197191ab5825",
+      "bytes": 654373
+    },
+    {
+      "path": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task01-r5/recordings/t01p15071i7-44f3c16dc64b466b/images/img_0132.png",
+      "sha256": "2d41722d9effd45364bc8ffd58532fdcafd641d913cc75a876abd8ab9da941f2",
+      "bytes": 699660
+    }
+  ],
+  "task_mean_bound": {
+    "completed_instance_ids": [
+      301,
+      304,
+      306,
+      308
+    ],
+    "completed_scores": [
+      0.6666666666666666,
+      0.6666666666666666,
+      1.0,
+      0.6666666666666666
+    ],
+    "completed_mean_q": 0.75,
+    "remaining_instance_ids": [
+      310
+    ],
+    "maximum_complete_mean_q": 0.8,
+    "archive_reported_mean_q": 0.8666666666666666
+  },
+  "limits": [
+    "The point tracker uses model annotations and does not verify object identities.",
+    "Matching function hashes compare the current original checkout; historical native results independently show the same pre-open gripper policy.",
+    "This establishes the release mechanism and stopping rule, not why the model chose this sequence. Known native-context mismatches still require the corrected r6 run."
+  ],
+  "figure": {
+    "path": "frames.jpg",
+    "sha256": "bd1030353346a4cc2b11b2e74d29e6a1cd9f4aed465967167a60853fe2fd5d30",
+    "source_images": [
+      "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task01-r5/recordings/t01p15071i7-44f3c16dc64b466b/images/img_0028.png",
+      "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task01-r5/recordings/t01p15071i7-44f3c16dc64b466b/images/img_0030.right_wrist.png",
+      "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task01-r5/recordings/t01p15071i7-44f3c16dc64b466b/images/img_0031.png",
+      "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task01-r5/recordings/t01p15071i7-44f3c16dc64b466b/images/img_0132.png"
+    ],
+    "transformation": "Four source views, proportional resizing for the wrist view, text labels and a white contact-sheet background."
+  }
+}
