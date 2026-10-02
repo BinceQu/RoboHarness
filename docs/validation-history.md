@@ -7,6 +7,11 @@ counts are not cumulative and do not describe the latest checkout. The
 pinned source and remaining work. Historical evidence and result files remain
 unchanged.
 
+The October 2 policy update supersedes this history's statement that active
+r5 cases retain a 24-hour cap: a session-local supervisor now handles those
+legacy controllers, and truncated cases are queued for fresh evaluation. See
+the [current snapshot](validation.md#gpu-evaluation) for its validation limits.
+
 
 Validation dates: September 29–October 1, 2026 (Asia/Shanghai). The source checkout is RoboHarness,
 with BEHAVIOR v3.9.1 at `26f2c7ef7b9cf96bd0414f81e1e751e493762779`.

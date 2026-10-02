@@ -1,7 +1,7 @@
 # Release validation
 
 **The three requested task means have not yet been verified.** This status
-snapshot was checked on October 1, 2026 at 22:16 Asia/Shanghai. The
+snapshot was checked on October 2, 2026 at 23:43 Asia/Shanghai. The
 [live r5 report](../validation_results/gpu5-20260930-r5/README.md) records
 completed official scores; a running process or a passing software test is
 not evidence that a task mean matches.
@@ -42,17 +42,37 @@ The selected tasks and immutable archive budgets are:
 | task03 | 301, 304, 306, 308, 310 | 27392 | 0.2571428571428571 |
 | task08 | 301, 304, 306, 308, 310 | 17886 | 0.4 |
 
-At the snapshot time, all three r5 controllers and evaluators were alive.
-Each had one completed official case out of five. Task03/301 scored Q=0
-after the old 24-hour wall-clock cap truncated it at 10,024 of 27,392 steps;
-case 304 started automatically. Its [cutoff audit](../validation_results/task03-301-r5-timeout-20261001/README.md)
-records the official JSON, exclusion and successful handoff. Task01/301
-scored 2/3 and task08/301 scored 0.5. These are partial diagnostic results;
-none establishes a final task mean. The existing
-runs retain their launch-time runtime and 24-hour per-case safety cap. They
-continue under the instruction to leave running tests in progress. Known
-native-context differences make r5 diagnostic evidence rather than a verified
-reproduction attempt, even if a resulting mean happens to match.
+At the snapshot time, all three r5 controllers, evaluators and active agents
+were alive with their recorded process identities. Task01 had completed 3/5
+cases and was running instance 308; task03 and task08 had completed 2/5 each
+and were running instance 306. Completed official scores were:
+
+| Task | Instance 301 | Instance 304 | Instance 306 |
+| --- | ---: | ---: | ---: |
+| task01 | 2/3 | 2/3 | 1 |
+| task03 | 0 (wall-clock cutoff) | 2/7 | pending |
+| task08 | 1/2 | 0 (wall-clock cutoff) | pending |
+
+Task03/301 was truncated at 10,024 of 27,392 steps, and task08/304 at
+12,089 of 17,886 steps, by the old 24-hour cap. Their recorded Q=0 scores
+remain diagnostic evidence; neither is a valid full-budget reproduction.
+The [task03 cutoff audit](../validation_results/task03-301-r5-timeout-20261001/README.md)
+and [r5 report](../validation_results/gpu5-20260930-r5/README.md) retain the
+official scores and hashes. These partial results establish no final task mean.
+Known native-context differences also prevent r5 from verifying reproduction,
+even if a resulting mean happens to match.
+
+On October 2 the requested wall-clock policy was changed to no additional
+cap, permitting episodes longer than 72 hours when needed. New launches use
+`session_timeout_s=0`. The already loaded r5 controllers still contain their
+old deadline, so a temporary supervisor confined to this validation session
+was armed without restarting their agents or evaluators. It holds only the
+coordinator at its polling sleep and resumes it when the evaluator supplies
+the score, or handles normal model completion through the existing finish
+request. Three isolated legacy-controller integration checks passed; no live
+case had reached its intervention threshold at this snapshot. This supervisor
+is a host-specific measure for the diagnostic r5 runs, not a dependency of
+the packaged runner or a claim that those runs reproduce the archive.
 
 The corrected r6 evaluation is queued behind those runs and has not launched
 as of this snapshot. It uses an independent checkout pinned to
@@ -63,6 +83,16 @@ fixed LeRobot source during installation. Simulation, harness and reporting
 code are unchanged from the preceding mean-Q revision `46e51e4`.
 The queue checks source revisions, a clean tracked worktree, GPU capacity
 and listener availability before launching.
+
+The two truncated cases are explicitly bound to fresh r6 evaluations:
+task03/301 and task08/304. Each task will run all five archived instances in
+order, with new output directories, initial scenes and native agent sessions.
+The sequence remains task01, task03, task08. The queue requires a fresh session
+and an untruncated result for each mandatory retest; the launcher refuses to
+reuse an existing run directory. Sixteen session-queue checks passed after
+adding these requirements. The old scores are retained separately and do not
+contribute to the new task means. Retests remain queued until r5 releases GPU
+5 and the reserved listeners; none had started at the snapshot time.
 
 Future r6 listeners are supplied by session-local configuration:
 
