@@ -1,0 +1,1362 @@
+{
+  "checked_at": "2026-10-03T22:14:55.593129+08:00",
+  "scope": "Ongoing diagnostic r5 case; no official score or mean acceptance",
+  "task": "task08",
+  "instance_id": 306,
+  "session_id": "t08p15078i5-105f2e133abe40ef",
+  "sources": {
+    "recorder_prefix": {
+      "path": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task08-r5/instance_306/trajectory/claude-20261002T074628Z-ec0f737b/turns.jsonl",
+      "offset": 0,
+      "bytes": 10196121,
+      "sha256": "6c79e3140a259b0836ec2e206d4b331ae1d0194b1610362315ece7371e167c20",
+      "size_at_open": 10196121
+    },
+    "archive_native": {
+      "path": "/mnt/nas_nfs/home/bince/RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/b73151ea-7a52-44d9-b1f1-bc9cd1c6a1de.jsonl",
+      "offset": 0,
+      "bytes": 161572117,
+      "sha256": "51005a135a83f174092233ef829ef5173e899addce9e439aaa90d1046ad2dfb9",
+      "size_at_open": 161572117
+    },
+    "manifest_sha256": "f580f19f5d5d327bf17ce8751d8b198ba69a937dd8162556e29301b0ea493bbb"
+  },
+  "prompt": {
+    "path": "prompt/task08/v25_62c12d99b1ce.txt",
+    "sha256": "62c12d99b1ce52e6a3e2c9b62c61068d8c10be93cbe3d342c884f6046fd6bd77",
+    "rendered_sha256": "160e897d030e2ae60b80080a3b28c9944e65cd16489d40cee69d63df4e44fe93",
+    "source_matches_canonical": true,
+    "rendered_changes_only_port_15068_to_15078": true,
+    "numeric_gate_lines": [
+      {
+        "line": 168,
+        "text": "   persistent_tracking. A true lip has z in 1.40-1.45 m"
+      },
+      {
+        "line": 169,
+        "text": "   and depth_m (camera distance) at most 0.7 m. If the"
+      },
+      {
+        "line": 170,
+        "text": "   lip click is unclear, or z is outside 1.40-1.45 m, or"
+      },
+      {
+        "line": 171,
+        "text": "   depth_m is greater than 0.7 m, do not use that lip."
+      },
+      {
+        "line": 177,
+        "text": "   1.40-1.45 m and depth_m at most 0.7 m. A deeper,"
+      },
+      {
+        "line": 210,
+        "text": "   1.40-1.45 m and depth_m at most 0.7 m. If the lip no"
+      }
+    ]
+  },
+  "selected_recorder_turns": [
+    {
+      "turn": 329,
+      "source_line": 329,
+      "source_record_sha256": "da8edd03aab6f8d1f040e2633af513f0ce3ca317b5674b113700f1a5839a8547",
+      "completed_at": "2026-10-03T13:05:37.984+00:00",
+      "duration_ms": 15801,
+      "call": {
+        "name": "adjust_chassis",
+        "arguments": {
+          "forward": 0.2
+        }
+      },
+      "result_is_error": false,
+      "response_ok": true,
+      "response_error": null,
+      "action_steps": 58,
+      "tracking_available": true,
+      "tracking_warning": null,
+      "response_tracks": {},
+      "persistent_tracks": {
+        "cabinet_lip": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.306787371635437,
+          "xyz_in_robot_base_coord_m": [
+            0.45435335949019234,
+            -0.2006123829169955,
+            1.3509096265776528
+          ],
+          "source_image_id": "img_0302",
+          "source_observation_sequence": 34735,
+          "observation_sequence": 34871,
+          "passes_numeric_lip_gates": false
+        },
+        "fp_body": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.9389766454696655,
+          "xyz_in_robot_base_coord_m": [
+            0.9094169050822438,
+            -0.14690788368580712,
+            0.8036100129345451
+          ],
+          "source_image_id": "img_0302",
+          "source_observation_sequence": 34735,
+          "observation_sequence": 34871,
+          "passes_numeric_lip_gates": false
+        }
+      }
+    },
+    {
+      "turn": 330,
+      "source_line": 330,
+      "source_record_sha256": "0934ba25d5ee9b61f701268b908880986eb1e2590f13b678a2d5717a5ccae323",
+      "completed_at": "2026-10-03T13:10:25.759+00:00",
+      "duration_ms": 527,
+      "call": {
+        "name": "track_object_distance",
+        "arguments": {
+          "image_id": "img_0304",
+          "points": [
+            {
+              "name": "fp_body",
+              "u": 420,
+              "v": 400
+            },
+            {
+              "name": "cabinet_lip",
+              "u": 380,
+              "v": 340
+            }
+          ]
+        }
+      },
+      "result_is_error": false,
+      "response_ok": true,
+      "response_error": null,
+      "action_steps": null,
+      "tracking_available": true,
+      "tracking_warning": null,
+      "response_tracks": {
+        "cabinet_lip": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 2.089268207550049,
+          "xyz_in_robot_base_coord_m": [
+            2.1913579581193425,
+            -0.13933959268846857,
+            0.8821313581727244
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34872,
+          "passes_numeric_lip_gates": false
+        },
+        "fp_body": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.7905614376068115,
+          "xyz_in_robot_base_coord_m": [
+            0.9021517437148193,
+            -0.15490159955098506,
+            1.167734580806121
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34872,
+          "passes_numeric_lip_gates": false
+        }
+      },
+      "persistent_tracks": {
+        "cabinet_lip": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 2.089268207550049,
+          "xyz_in_robot_base_coord_m": [
+            2.1913579581193425,
+            -0.13933959268846857,
+            0.8821313581727244
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34872,
+          "passes_numeric_lip_gates": false
+        },
+        "fp_body": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.7905614376068115,
+          "xyz_in_robot_base_coord_m": [
+            0.9021517437148193,
+            -0.15490159955098506,
+            1.167734580806121
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34872,
+          "passes_numeric_lip_gates": false
+        }
+      }
+    },
+    {
+      "turn": 331,
+      "source_line": 331,
+      "source_record_sha256": "4e5454c72b1ed861c3be2b4f0c42b6ca064c8733c1528d39499bd939acc984ff",
+      "completed_at": "2026-10-03T13:14:01.237+00:00",
+      "duration_ms": 1031,
+      "call": {
+        "name": "track_object_distance",
+        "arguments": {
+          "image_id": "img_0304",
+          "points": [
+            {
+              "name": "fp_body",
+              "u": 420,
+              "v": 400
+            },
+            {
+              "name": "cabinet_lip",
+              "u": 330,
+              "v": 315
+            }
+          ]
+        }
+      },
+      "result_is_error": false,
+      "response_ok": true,
+      "response_error": null,
+      "action_steps": null,
+      "tracking_available": true,
+      "tracking_warning": null,
+      "response_tracks": {
+        "cabinet_lip": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 1.6804383993148804,
+          "xyz_in_robot_base_coord_m": [
+            1.8582512692301911,
+            0.16420317157628816,
+            1.144049865181759
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34876,
+          "passes_numeric_lip_gates": false
+        },
+        "fp_body": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.7905607223510742,
+          "xyz_in_robot_base_coord_m": [
+            0.902143175026726,
+            -0.15496019655888946,
+            1.1677176162894933
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34876,
+          "passes_numeric_lip_gates": false
+        }
+      },
+      "persistent_tracks": {
+        "cabinet_lip": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 1.6804383993148804,
+          "xyz_in_robot_base_coord_m": [
+            1.8582512692301911,
+            0.16420317157628816,
+            1.144049865181759
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34876,
+          "passes_numeric_lip_gates": false
+        },
+        "fp_body": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.7905607223510742,
+          "xyz_in_robot_base_coord_m": [
+            0.902143175026726,
+            -0.15496019655888946,
+            1.1677176162894933
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34876,
+          "passes_numeric_lip_gates": false
+        }
+      }
+    },
+    {
+      "turn": 332,
+      "source_line": 332,
+      "source_record_sha256": "a4f398b18a09d9ad9ed44cf7147e125e122d9de1e0154b0b159d1f22424fe1aa",
+      "completed_at": "2026-10-03T13:20:34.331+00:00",
+      "duration_ms": 781,
+      "call": {
+        "name": "track_object_distance",
+        "arguments": {
+          "image_id": "img_0304",
+          "points": [
+            {
+              "name": "fp_body",
+              "u": 420,
+              "v": 400
+            },
+            {
+              "name": "lip_a",
+              "u": 350,
+              "v": 330
+            },
+            {
+              "name": "lip_b",
+              "u": 300,
+              "v": 345
+            },
+            {
+              "name": "lip_c",
+              "u": 400,
+              "v": 325
+            },
+            {
+              "name": "lip_d",
+              "u": 260,
+              "v": 320
+            }
+          ]
+        }
+      },
+      "result_is_error": false,
+      "response_ok": true,
+      "response_error": null,
+      "action_steps": null,
+      "tracking_available": true,
+      "tracking_warning": null,
+      "response_tracks": {
+        "fp_body": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.7905581593513489,
+          "xyz_in_robot_base_coord_m": [
+            0.9021331305789223,
+            -0.1549780980874515,
+            1.1676989827838304
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34880,
+          "passes_numeric_lip_gates": false
+        },
+        "lip_a": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 1.9255964756011963,
+          "xyz_in_robot_base_coord_m": [
+            2.061129207473895,
+            0.061460587992667966,
+            0.9943585804681379
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34880,
+          "passes_numeric_lip_gates": false
+        },
+        "lip_b": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 1.4213755130767822,
+          "xyz_in_robot_base_coord_m": [
+            1.5501817015235744,
+            0.2791600521285873,
+            1.0805054606997664
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34880,
+          "passes_numeric_lip_gates": false
+        },
+        "lip_c": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.7484922409057617,
+          "xyz_in_robot_base_coord_m": [
+            0.9367227872324285,
+            -0.0975030092811788,
+            1.3576167834176243
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34880,
+          "passes_numeric_lip_gates": false
+        },
+        "lip_d": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 1.1689873933792114,
+          "xyz_in_robot_base_coord_m": [
+            1.3503570297793077,
+            0.38065340643847195,
+            1.2559980774025845
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34880,
+          "passes_numeric_lip_gates": false
+        }
+      },
+      "persistent_tracks": {
+        "fp_body": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.7905581593513489,
+          "xyz_in_robot_base_coord_m": [
+            0.9021331305789223,
+            -0.1549780980874515,
+            1.1676989827838304
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34880,
+          "passes_numeric_lip_gates": false
+        },
+        "lip_a": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 1.9255964756011963,
+          "xyz_in_robot_base_coord_m": [
+            2.061129207473895,
+            0.061460587992667966,
+            0.9943585804681379
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34880,
+          "passes_numeric_lip_gates": false
+        },
+        "lip_b": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 1.4213755130767822,
+          "xyz_in_robot_base_coord_m": [
+            1.5501817015235744,
+            0.2791600521285873,
+            1.0805054606997664
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34880,
+          "passes_numeric_lip_gates": false
+        },
+        "lip_c": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.7484922409057617,
+          "xyz_in_robot_base_coord_m": [
+            0.9367227872324285,
+            -0.0975030092811788,
+            1.3576167834176243
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34880,
+          "passes_numeric_lip_gates": false
+        },
+        "lip_d": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 1.1689873933792114,
+          "xyz_in_robot_base_coord_m": [
+            1.3503570297793077,
+            0.38065340643847195,
+            1.2559980774025845
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34880,
+          "passes_numeric_lip_gates": false
+        }
+      }
+    },
+    {
+      "turn": 333,
+      "source_line": 333,
+      "source_record_sha256": "e10e95b0d469c7dc539d92ffd1ddd3a4c46388daffc2b18d87d3a2e9ed8ae037",
+      "completed_at": "2026-10-03T13:29:48.332+00:00",
+      "duration_ms": 1028,
+      "call": {
+        "name": "track_object_distance",
+        "arguments": {
+          "image_id": "img_0304",
+          "points": [
+            {
+              "name": "fp_body",
+              "u": 420,
+              "v": 400
+            },
+            {
+              "name": "lip_a",
+              "u": 300,
+              "v": 235
+            },
+            {
+              "name": "lip_b",
+              "u": 360,
+              "v": 240
+            },
+            {
+              "name": "lip_c",
+              "u": 480,
+              "v": 250
+            },
+            {
+              "name": "lip_d",
+              "u": 550,
+              "v": 260
+            }
+          ]
+        }
+      },
+      "result_is_error": false,
+      "response_ok": true,
+      "response_error": null,
+      "action_steps": null,
+      "tracking_available": true,
+      "tracking_warning": null,
+      "response_tracks": {
+        "fp_body": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.7905581593513489,
+          "xyz_in_robot_base_coord_m": [
+            0.9021260288988394,
+            -0.15504710936029933,
+            1.167682404629205
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34884,
+          "passes_numeric_lip_gates": false
+        },
+        "lip_a": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.6805598735809326,
+          "xyz_in_robot_base_coord_m": [
+            0.9489730407233518,
+            0.1335613402634285,
+            1.5610528483698771
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34884,
+          "passes_numeric_lip_gates": false
+        },
+        "lip_b": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.5762000679969788,
+          "xyz_in_robot_base_coord_m": [
+            0.8325520311471991,
+            -0.0006700659815278639,
+            1.5537047941716433
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34884,
+          "passes_numeric_lip_gates": false
+        },
+        "lip_c": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.44096308946609497,
+          "xyz_in_robot_base_coord_m": [
+            0.681684396029665,
+            -0.17361283222182886,
+            1.5441801754868438
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34884,
+          "passes_numeric_lip_gates": false
+        },
+        "lip_d": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.389362633228302,
+          "xyz_in_robot_base_coord_m": [
+            0.6219478409770562,
+            -0.2420903058202256,
+            1.5354062822440144
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34884,
+          "passes_numeric_lip_gates": false
+        }
+      },
+      "persistent_tracks": {
+        "fp_body": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.7905581593513489,
+          "xyz_in_robot_base_coord_m": [
+            0.9021260288988394,
+            -0.15504710936029933,
+            1.167682404629205
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34884,
+          "passes_numeric_lip_gates": false
+        },
+        "lip_a": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.6805598735809326,
+          "xyz_in_robot_base_coord_m": [
+            0.9489730407233518,
+            0.1335613402634285,
+            1.5610528483698771
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34884,
+          "passes_numeric_lip_gates": false
+        },
+        "lip_b": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.5762000679969788,
+          "xyz_in_robot_base_coord_m": [
+            0.8325520311471991,
+            -0.0006700659815278639,
+            1.5537047941716433
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34884,
+          "passes_numeric_lip_gates": false
+        },
+        "lip_c": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.44096308946609497,
+          "xyz_in_robot_base_coord_m": [
+            0.681684396029665,
+            -0.17361283222182886,
+            1.5441801754868438
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34884,
+          "passes_numeric_lip_gates": false
+        },
+        "lip_d": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.389362633228302,
+          "xyz_in_robot_base_coord_m": [
+            0.6219478409770562,
+            -0.2420903058202256,
+            1.5354062822440144
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34884,
+          "passes_numeric_lip_gates": false
+        }
+      }
+    },
+    {
+      "turn": 334,
+      "source_line": 334,
+      "source_record_sha256": "c5c590c0769f708780b3f8dc77d3558eafd7e0c696ec07370b059f5dd35d13bb",
+      "completed_at": "2026-10-03T13:42:01.934+00:00",
+      "duration_ms": 3526,
+      "call": {
+        "name": "track_object_distance",
+        "arguments": {
+          "image_id": "img_0304",
+          "points": [
+            {
+              "name": "fp_body",
+              "u": 420,
+              "v": 400
+            },
+            {
+              "name": "lip_a",
+              "u": 300,
+              "v": 280
+            },
+            {
+              "name": "lip_b",
+              "u": 330,
+              "v": 290
+            },
+            {
+              "name": "lip_c",
+              "u": 360,
+              "v": 300
+            },
+            {
+              "name": "lip_d",
+              "u": 260,
+              "v": 270
+            }
+          ]
+        }
+      },
+      "result_is_error": false,
+      "response_ok": true,
+      "response_error": null,
+      "action_steps": null,
+      "tracking_available": false,
+      "tracking_warning": "Persistent tracking is unavailable because /api/memory could not be read after this tool call.",
+      "response_tracks": {
+        "fp_body": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.7905596494674683,
+          "xyz_in_robot_base_coord_m": [
+            0.9021195992212434,
+            -0.15508620928694256,
+            1.167665230708911
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34888,
+          "passes_numeric_lip_gates": false
+        },
+        "lip_a": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.7416752576828003,
+          "xyz_in_robot_base_coord_m": [
+            0.9729171797061198,
+            0.14554215626181882,
+            1.460698125928605
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34888,
+          "passes_numeric_lip_gates": false
+        },
+        "lip_b": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.6843534708023071,
+          "xyz_in_robot_base_coord_m": [
+            0.9054819675472383,
+            0.06674690225228196,
+            1.448407283665253
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34888,
+          "passes_numeric_lip_gates": true
+        },
+        "lip_c": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.6352558135986328,
+          "xyz_in_robot_base_coord_m": [
+            0.8477214531816766,
+            -0.0007467107056156317,
+            1.4378788162205733
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34888,
+          "passes_numeric_lip_gates": true
+        },
+        "lip_d": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.7668296098709106,
+          "xyz_in_robot_base_coord_m": [
+            1.0077944103751513,
+            0.24958493411257057,
+            1.4785716580336281
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34888,
+          "passes_numeric_lip_gates": false
+        }
+      },
+      "persistent_tracks": {}
+    },
+    {
+      "turn": 335,
+      "source_line": 335,
+      "source_record_sha256": "39851331cb9e6b0f1923b16fabc35be163bb5e8f210292677b561d7e995e2e0d",
+      "completed_at": "2026-10-03T13:44:09.981+00:00",
+      "duration_ms": 1306,
+      "call": {
+        "name": "track_object_distance",
+        "arguments": {
+          "image_id": "img_0304",
+          "points": [
+            {
+              "name": "fp_body",
+              "u": 420,
+              "v": 400
+            },
+            {
+              "name": "lip_a",
+              "u": 300,
+              "v": 280
+            },
+            {
+              "name": "lip_b",
+              "u": 330,
+              "v": 290
+            },
+            {
+              "name": "lip_c",
+              "u": 360,
+              "v": 300
+            },
+            {
+              "name": "lip_d",
+              "u": 260,
+              "v": 270
+            }
+          ]
+        }
+      },
+      "result_is_error": false,
+      "response_ok": true,
+      "response_error": null,
+      "action_steps": null,
+      "tracking_available": true,
+      "tracking_warning": null,
+      "response_tracks": {
+        "fp_body": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.7905593514442444,
+          "xyz_in_robot_base_coord_m": [
+            0.9021129773977525,
+            -0.15513514005771056,
+            1.1676456759074034
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34892,
+          "passes_numeric_lip_gates": false
+        },
+        "lip_a": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.7420158982276917,
+          "xyz_in_robot_base_coord_m": [
+            0.9732665868005468,
+            0.14556954652080736,
+            1.4606439796587052
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34892,
+          "passes_numeric_lip_gates": false
+        },
+        "lip_b": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.684625506401062,
+          "xyz_in_robot_base_coord_m": [
+            0.905757003359928,
+            0.06673477915184632,
+            1.4483536304894946
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34892,
+          "passes_numeric_lip_gates": true
+        },
+        "lip_c": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.6354745030403137,
+          "xyz_in_robot_base_coord_m": [
+            0.8479390717830843,
+            -0.0007859076078672517,
+            1.4378265396751087
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34892,
+          "passes_numeric_lip_gates": true
+        },
+        "lip_d": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.766383171081543,
+          "xyz_in_robot_base_coord_m": [
+            1.0073337060518823,
+            0.24940061098691343,
+            1.4786222918567045
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34892,
+          "passes_numeric_lip_gates": false
+        }
+      },
+      "persistent_tracks": {
+        "fp_body": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.7905593514442444,
+          "xyz_in_robot_base_coord_m": [
+            0.9021129773977525,
+            -0.15513514005771056,
+            1.1676456759074034
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34892,
+          "passes_numeric_lip_gates": false
+        },
+        "lip_a": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.7420158982276917,
+          "xyz_in_robot_base_coord_m": [
+            0.9732665868005468,
+            0.14556954652080736,
+            1.4606439796587052
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34892,
+          "passes_numeric_lip_gates": false
+        },
+        "lip_b": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.684625506401062,
+          "xyz_in_robot_base_coord_m": [
+            0.905757003359928,
+            0.06673477915184632,
+            1.4483536304894946
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34892,
+          "passes_numeric_lip_gates": true
+        },
+        "lip_c": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.6354745030403137,
+          "xyz_in_robot_base_coord_m": [
+            0.8479390717830843,
+            -0.0007859076078672517,
+            1.4378265396751087
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34892,
+          "passes_numeric_lip_gates": true
+        },
+        "lip_d": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.766383171081543,
+          "xyz_in_robot_base_coord_m": [
+            1.0073337060518823,
+            0.24940061098691343,
+            1.4786222918567045
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34892,
+          "passes_numeric_lip_gates": false
+        }
+      }
+    },
+    {
+      "turn": 336,
+      "source_line": 336,
+      "source_record_sha256": "5182e8ac984bb41faacb0f2d850a2700684fc80454dbab5f25487018ec93cdd4",
+      "completed_at": "2026-10-03T13:52:33.538+00:00",
+      "duration_ms": 1279,
+      "call": {
+        "name": "track_object_distance",
+        "arguments": {
+          "image_id": "img_0304",
+          "points": [
+            {
+              "name": "fp_body",
+              "u": 420,
+              "v": 400
+            },
+            {
+              "name": "cabinet_lip",
+              "u": 360,
+              "v": 300
+            }
+          ]
+        }
+      },
+      "result_is_error": false,
+      "response_ok": true,
+      "response_error": null,
+      "action_steps": null,
+      "tracking_available": true,
+      "tracking_warning": null,
+      "response_tracks": {
+        "cabinet_lip": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.635185956954956,
+          "xyz_in_robot_base_coord_m": [
+            0.8476482665465463,
+            -0.0008194777677467471,
+            1.4378805830481214
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34896,
+          "passes_numeric_lip_gates": true
+        },
+        "fp_body": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.7905585765838623,
+          "xyz_in_robot_base_coord_m": [
+            0.9021042280967762,
+            -0.15517777700004157,
+            1.1676286132216982
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34896,
+          "passes_numeric_lip_gates": false
+        }
+      },
+      "persistent_tracks": {
+        "cabinet_lip": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.6350283026695251,
+          "xyz_in_robot_base_coord_m": [
+            0.8474885242618004,
+            -0.0008713928160204895,
+            1.4379088908785946
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34897,
+          "passes_numeric_lip_gates": true
+        },
+        "fp_body": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.7905591726303101,
+          "xyz_in_robot_base_coord_m": [
+            0.9020978332892469,
+            -0.15523935001354194,
+            1.1676127283940447
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34897,
+          "passes_numeric_lip_gates": false
+        }
+      }
+    },
+    {
+      "turn": 337,
+      "source_line": 337,
+      "source_record_sha256": "82af556c8c8caa7ae680b583cd934d9fe0f739d177a79b1e76a1a8da1e8f566a",
+      "completed_at": "2026-10-03T14:06:52.436+00:00",
+      "duration_ms": 13243,
+      "call": {
+        "name": "adjust_chassis",
+        "arguments": {
+          "translation": 0.18
+        }
+      },
+      "result_is_error": false,
+      "response_ok": true,
+      "response_error": null,
+      "action_steps": 53,
+      "tracking_available": true,
+      "tracking_warning": null,
+      "response_tracks": {},
+      "persistent_tracks": {
+        "cabinet_lip": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.6389554142951965,
+          "xyz_in_robot_base_coord_m": [
+            0.9118427986150194,
+            -0.08621518077825202,
+            1.5801489089857603
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34958,
+          "passes_numeric_lip_gates": false
+        },
+        "fp_body": {
+          "status": "observed",
+          "identity_verified": false,
+          "depth_m": 0.8210115432739258,
+          "xyz_in_robot_base_coord_m": [
+            0.9048634909448499,
+            -0.1550436554650006,
+            1.0959129046299148
+          ],
+          "source_image_id": "img_0304",
+          "source_observation_sequence": 34868,
+          "observation_sequence": 34958,
+          "passes_numeric_lip_gates": false
+        }
+      }
+    }
+  ],
+  "binding_summary": {
+    "turns": [
+      330,
+      331,
+      332,
+      333,
+      334,
+      335,
+      336
+    ],
+    "calls": 7,
+    "all_operations_ok": true,
+    "all_same_image": "img_0304",
+    "first_four_have_no_numeric_gate_candidate": true,
+    "first_numeric_gate_candidates_turn": 334,
+    "tracking_unavailable_turns": [
+      334
+    ],
+    "tracking_recovers_turn": 335,
+    "named_cabinet_lip_passes_turn": 336,
+    "tool_duration_total_ms": 9478,
+    "first_to_last_completion_s": 2527.779,
+    "next_action_turn": 337,
+    "next_action": {
+      "name": "adjust_chassis",
+      "arguments": {
+        "translation": 0.18
+      }
+    }
+  },
+  "archive_comparison": {
+    "instance_q": 0.25,
+    "native_calls": 500,
+    "binding_calls": 47,
+    "tracking_snapshots": 428,
+    "unavailable_tracking_snapshots": [
+      {
+        "source_line": 1078,
+        "source_record_sha256": "8df8732b58b482c9d97b77218b42d382b3fad3ec7c2e7d46667870695ba7726e",
+        "at": "2026-09-18T18:42:12.895Z",
+        "call_id": "chatcmpl-tool-8fb6bea606f1d1c8",
+        "warning": "Persistent tracking is unavailable because /api/memory could not be read after this tool call."
+      },
+      {
+        "source_line": 1102,
+        "source_record_sha256": "538de071d02ac411e119d786e77f0fb532e29a18eda0a36e0d32c54793f53833",
+        "at": "2026-09-18T18:45:17.035Z",
+        "call_id": "chatcmpl-tool-ae6eed018aa6bbfc",
+        "warning": "Persistent tracking is unavailable because /api/memory could not be read after this tool call."
+      },
+      {
+        "source_line": 1156,
+        "source_record_sha256": "be0196f666764da71365be4831424863e8147786d46fd957abda4ab59ad0e6a5",
+        "at": "2026-09-18T18:53:16.367Z",
+        "call_id": "chatcmpl-tool-9c3f6087951b12ab",
+        "warning": "Persistent tracking is unavailable because /api/memory could not be read after this tool call."
+      },
+      {
+        "source_line": 1220,
+        "source_record_sha256": "985be604c9d45874c336bade9e06ed9eb9561b7fdff7117e7afe84478584ee3f",
+        "at": "2026-09-18T19:17:56.403Z",
+        "call_id": "chatcmpl-tool-affbdf150e1cf2b5",
+        "warning": "Persistent tracking is unavailable because /api/memory could not be read after this tool call."
+      },
+      {
+        "source_line": 1296,
+        "source_record_sha256": "d7ad2679551368dc561b0eef42a9c5cf99010da629fc105eea6ffa4a2c2c5fd0",
+        "at": "2026-09-18T19:37:34.129Z",
+        "call_id": "chatcmpl-tool-abd50683ba615dbc",
+        "warning": "Persistent tracking is unavailable because /api/memory could not be read after this tool call."
+      },
+      {
+        "source_line": 1307,
+        "source_record_sha256": "00b734ec59afb69caaf7d2bb43150e260282c9ccadaa09800ebf0ba52cb9e198",
+        "at": "2026-09-18T19:39:53.836Z",
+        "call_id": "chatcmpl-tool-aadb7a58f28c3dee",
+        "warning": "Persistent tracking is unavailable because /api/memory could not be read after this tool call."
+      },
+      {
+        "source_line": 1410,
+        "source_record_sha256": "909ca2c56c423668ebcc01c87a10f920b6afc2d80f5e9c04ca0e31998cbf987c",
+        "at": "2026-09-18T19:57:24.710Z",
+        "call_id": "chatcmpl-tool-8dacdc4bc42731b9",
+        "warning": "Persistent tracking is unavailable because /api/memory could not be read after this tool call."
+      },
+      {
+        "source_line": 1417,
+        "source_record_sha256": "5849cec4a56c37308589df9c233722621091e8a91fd293cf536c31120b8058b7",
+        "at": "2026-09-18T19:58:18.315Z",
+        "call_id": "chatcmpl-tool-869c264924a9854c",
+        "warning": "Persistent tracking is unavailable because /api/memory could not be read after this tool call."
+      },
+      {
+        "source_line": 1515,
+        "source_record_sha256": "ffa36bd5e97e044c079a4cd444b5dcb6ef29010f7c9191a420a9d5e03500d963",
+        "at": "2026-09-18T20:15:23.577Z",
+        "call_id": "chatcmpl-tool-a0fb341b197368ee",
+        "warning": "Persistent tracking is unavailable because /api/memory could not be read after this tool call."
+      },
+      {
+        "source_line": 1593,
+        "source_record_sha256": "8be0519328a2368aa75e1271bed62390fcc34263fea4788c50f510ee3df231f7",
+        "at": "2026-09-18T20:24:25.209Z",
+        "call_id": "chatcmpl-tool-b973ac39c4d2916b",
+        "warning": "Persistent tracking is unavailable because /api/memory could not be read after this tool call."
+      },
+      {
+        "source_line": 1697,
+        "source_record_sha256": "94ac73789c4df3a6fe9919924261b22be72940950d552fb0028f56d53ec8345a",
+        "at": "2026-09-18T20:47:12.126Z",
+        "call_id": "chatcmpl-tool-b63546e06438a409",
+        "warning": "Persistent tracking is unavailable because /api/memory could not be read after this tool call."
+      },
+      {
+        "source_line": 1713,
+        "source_record_sha256": "65f64c7005f12019671e9da62ab4986119a32a8f26d2fccdd2010a89bc850021",
+        "at": "2026-09-18T20:51:15.329Z",
+        "call_id": "chatcmpl-tool-99b784861d77bdcb",
+        "warning": "Persistent tracking is unavailable because /api/memory could not be read after this tool call."
+      },
+      {
+        "source_line": 3079,
+        "source_record_sha256": "ef7a122e51f02395c63f5ef2d05e23cf6352e39766241ffa2eba07d84b5d1748",
+        "at": "2026-09-18T23:15:09.056Z",
+        "call_id": "chatcmpl-tool-a81e060effb3e5bb",
+        "warning": "Persistent tracking is unavailable because /api/memory could not be read after this tool call."
+      }
+    ],
+    "longest_consecutive_same_image_binding_count": 6,
+    "longest_groups": [
+      [
+        {
+          "name": "track_object_distance",
+          "image_id": "img_0062",
+          "source_line": 535,
+          "at": "2026-09-18T17:10:40.464Z",
+          "call_id": "chatcmpl-tool-bacef11387a85a50",
+          "source_record_sha256": "e7c2762173cbd3f7e7cb659788e1ca30e9ca6a49603946ef9265818e530c7049"
+        },
+        {
+          "name": "track_object_distance",
+          "image_id": "img_0062",
+          "source_line": 539,
+          "at": "2026-09-18T17:11:21.770Z",
+          "call_id": "chatcmpl-tool-922be30c3f8200f9",
+          "source_record_sha256": "c7684dd169ef58a50fff0aa4bde77d62626dd86a6b525077702f9f024c97626f"
+        },
+        {
+          "name": "track_object_distance",
+          "image_id": "img_0062",
+          "source_line": 543,
+          "at": "2026-09-18T17:11:54.112Z",
+          "call_id": "chatcmpl-tool-84d6c3d557bff316",
+          "source_record_sha256": "61a9f5c8cf9ba761960e040a31f216a52be1fb3866d1f54896bed8b7b4fca11b"
+        },
+        {
+          "name": "track_object_distance",
+          "image_id": "img_0062",
+          "source_line": 549,
+          "at": "2026-09-18T17:12:13.487Z",
+          "call_id": "chatcmpl-tool-9533a9a0df797b41",
+          "source_record_sha256": "80875effeb43703324522b4e98b39484606f722b33c4cdd316dd6eb3ff8a80e7"
+        },
+        {
+          "name": "track_object_distance",
+          "image_id": "img_0062",
+          "source_line": 553,
+          "at": "2026-09-18T17:12:38.965Z",
+          "call_id": "chatcmpl-tool-91ae4b802d988fe3",
+          "source_record_sha256": "7a1119224cb72762c163edb4831f965b79b1461e103a1eb352918b521ce53f77"
+        },
+        {
+          "name": "track_object_distance",
+          "image_id": "img_0062",
+          "source_line": 560,
+          "at": "2026-09-18T17:12:59.590Z",
+          "call_id": "chatcmpl-tool-be3c354e7a728d42",
+          "source_record_sha256": "35ebb90c6db5ca0c7bd0bd039eb4e3aa064daf357526568e3f966e7f4013bea4"
+        }
+      ],
+      [
+        {
+          "name": "track_object_distance",
+          "image_id": "img_0207",
+          "source_line": 1652,
+          "at": "2026-09-18T20:34:56.343Z",
+          "call_id": "chatcmpl-tool-b11d062e63a2602b",
+          "source_record_sha256": "e5579ac7167f8020c8bb6643c4c757a4accdcfa978812baceed8f5ada9e231f5"
+        },
+        {
+          "name": "track_object_distance",
+          "image_id": "img_0207",
+          "source_line": 1656,
+          "at": "2026-09-18T20:35:33.043Z",
+          "call_id": "chatcmpl-tool-a4b57eb7c8669d1a",
+          "source_record_sha256": "52ec5f1933b68a0c6bd92caa28733381c12dc9f298149150fcdb5891f28a0675"
+        },
+        {
+          "name": "track_object_distance",
+          "image_id": "img_0207",
+          "source_line": 1660,
+          "at": "2026-09-18T20:35:55.440Z",
+          "call_id": "chatcmpl-tool-acb103d45b156236",
+          "source_record_sha256": "dc739d5c93ab010c1eb2803054e6257655b6ef56cde17c899090591cbb9c54da"
+        },
+        {
+          "name": "track_object_distance",
+          "image_id": "img_0207",
+          "source_line": 1666,
+          "at": "2026-09-18T20:36:52.113Z",
+          "call_id": "chatcmpl-tool-8dd845dcee206e18",
+          "source_record_sha256": "290f39ce2432224a7c3915009a87f9dbb6759c984f4c444431b57fc60950fb20"
+        },
+        {
+          "name": "track_object_distance",
+          "image_id": "img_0207",
+          "source_line": 1670,
+          "at": "2026-09-18T20:37:15.682Z",
+          "call_id": "chatcmpl-tool-a199601cf6eda14e",
+          "source_record_sha256": "93560c1adf504871ad7c45267b827fa56e8569d7d37f29b76162824da526c896"
+        },
+        {
+          "name": "track_object_distance",
+          "image_id": "img_0207",
+          "source_line": 1676,
+          "at": "2026-09-18T20:40:25.262Z",
+          "call_id": "chatcmpl-tool-84ca213cc7417714",
+          "source_record_sha256": "ceb7e98844fb891d9ac09a013092b95b4372af08135d6ba1f3970262f155c2d9"
+        }
+      ]
+    ]
+  },
+  "limits": [
+    "Numeric gates do not verify the semantic identity of model-annotated points.",
+    "Unavailable telemetry does not make the underlying successful tool call fail.",
+    "The warning does not identify the original transport or parsing exception.",
+    "Historical and current scenes and trajectories differ; this is not controlled timing.",
+    "Recorded tool time is not model server latency; inter-call time includes inference and other work.",
+    "The r5 native-context mismatches remain; no strict reproduction claim is made.",
+    "No prompt, timeout, tool behavior, live agent, source pin, or queued run was changed."
+  ]
+}

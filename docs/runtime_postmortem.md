@@ -213,6 +213,17 @@ retains the counting method, source hashes, response counts and limitations.
 It supports removing the extra wall-clock cutoff, not a score reproduction
 claim or a change to archived prompts and simulation budgets.
 
+In the ongoing task08/306 episode, seven consecutive distance bindings on one
+image spanned 42 minutes 7.779 seconds while their recorded tool durations
+totaled 9.478 seconds. The first four selections failed the archived prompt's
+numeric lip conditions; later selections passed. One attached memory snapshot
+was unavailable and recovered on the next call. A subsequent chassis action
+completed normally. The archived case also contains repeated bindings and
+unavailable tracking snapshots, so this observation does not establish a new
+release defect. The [binding audit](../validation_results/task08-306-r5-tracking-20261003/README.md)
+retains source hashes, coordinates, historical counts and the limits of the
+comparison. It supplies no new Q-score.
+
 ## Simulation ticks during native context compaction
 
 In r5 task03/304, simulation ticks stayed at 4,939 while the native CLI
