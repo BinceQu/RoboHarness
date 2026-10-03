@@ -1,7 +1,7 @@
 # Release validation
 
 **The three requested task means have not yet been verified.** This status
-snapshot was checked on October 3, 2026 at 02:03 Asia/Shanghai. The
+snapshot was checked on October 3, 2026 at 11:21 Asia/Shanghai. The
 [live r5 report](../validation_results/gpu5-20260930-r5/README.md) records
 completed official scores; a running process or a passing software test is
 not evidence that a task mean matches.
@@ -77,10 +77,16 @@ old deadline, so a temporary supervisor confined to this validation session
 was armed without restarting their agents or evaluators. It holds only the
 coordinator at its polling sleep and resumes it when the evaluator supplies
 the score, or handles normal model completion through the existing finish
-request. Three isolated legacy-controller integration checks passed; no live
-case had reached its intervention threshold at this snapshot. This supervisor
-is a host-specific measure for the diagnostic r5 runs, not a dependency of
-the packaged runner or a claim that those runs reproduce the archive.
+request. Three isolated legacy-controller integration checks passed. The
+supervisor intervened for task03/306 at 09:05:30 on October 3. Its original
+agent and native CLI subsequently passed 24 hours of execution; between
+11:07:21 and 11:12:24 the actual monitor advanced from 16,556 to 16,565 steps,
+with a new native tool call and matching result. The
+[live audit](../validation_results/task03-306-r5-past-24h-20261003/README.md)
+retains process, transcript and score-hash evidence. Normal final scoring and
+handoff for this held case remain pending. This supervisor is a host-specific
+measure for diagnostic r5, not a dependency of the packaged runner or a claim
+that those runs reproduce the archive.
 
 The corrected r6 evaluation is queued behind those runs and has not launched
 as of this snapshot. It uses an independent checkout pinned to

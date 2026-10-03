@@ -1,0 +1,655 @@
+{
+  "schema_version": 1,
+  "scope": "Diagnostic r5 task03/306 execution beyond the former 24-hour wall-clock cap.",
+  "timezone": "Asia/Shanghai",
+  "run": "validation-20260930-task03-r5",
+  "task": "task03",
+  "instance_id": 306,
+  "session_id": "t03p15073i5-a61b94e1efcc468f",
+  "archived_simulation_step_limit": 27392,
+  "former_wall_clock_limit_s": 86400,
+  "intervention": {
+    "timestamp": "2026-10-03T09:05:30+0800",
+    "task": "task03",
+    "action": "legacy_deadline_disabled_for_case",
+    "instance_id": 306,
+    "controller": {
+      "pid": 2833447,
+      "start": "129070895"
+    },
+    "agent": {
+      "pid": 1942343,
+      "start": "143373414"
+    },
+    "pause_evidence": {
+      "sleep_transition_interval_s": 0.00521573587320745,
+      "signal_latency_s": 0.00011369213461875916,
+      "state": "T"
+    }
+  },
+  "process_snapshots": [
+    {
+      "checked_at": "2026-10-03T10:53:10.503296+08:00",
+      "roles": {
+        "controller": {
+          "pid": 2833447,
+          "state": "T",
+          "ppid": 3581,
+          "start": 129070895,
+          "expected_start": 129070895,
+          "identity_matches": true,
+          "age_s": 228692.99566536513
+        },
+        "guardian": {
+          "pid": 2834154,
+          "state": "S",
+          "ppid": 2833447,
+          "start": 129070994,
+          "expected_start": 129070994,
+          "identity_matches": true,
+          "age_s": 228692.005721614
+        },
+        "interface": {
+          "pid": 2834157,
+          "state": "S",
+          "ppid": 2833447,
+          "start": 129070994,
+          "expected_start": 129070994,
+          "identity_matches": true,
+          "age_s": 228692.00577294105
+        },
+        "gate": {
+          "pid": 2835562,
+          "state": "R",
+          "ppid": 2833447,
+          "start": 129071196,
+          "expected_start": 129071196,
+          "identity_matches": true,
+          "age_s": 228689.985808532
+        },
+        "evaluator": {
+          "pid": 2836260,
+          "state": "S",
+          "ppid": 2833447,
+          "start": 129071297,
+          "expected_start": 129071297,
+          "identity_matches": true,
+          "age_s": 228688.9760294871
+        },
+        "agent": {
+          "pid": 1942343,
+          "state": "S",
+          "ppid": 2833447,
+          "start": 143373414,
+          "expected_start": 143373414,
+          "identity_matches": true,
+          "age_s": 85667.80606473912
+        },
+        "native": {
+          "pid": 1942529,
+          "state": "S",
+          "ppid": 1942343,
+          "start": 143373439,
+          "expected_start": 143373439,
+          "identity_matches": true,
+          "age_s": 85667.55614568316
+        }
+      },
+      "native_tail": {
+        "path": "runs/validation-20260930-task03-r5/instance_306/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/a5d15a0c-59a7-4ec9-a5ec-af7c86dea3c0.jsonl",
+        "size": 126586849,
+        "offset": 118415266,
+        "sha256": "9365ac8a09214194663e337e1099912777d0ab4e6d03bafa8959a297e93e88b0",
+        "last_events": [
+          {
+            "timestamp": "2026-10-03T02:45:03.639Z",
+            "type": "assistant",
+            "model": "Qwen3.8-Flash-Next-FP8",
+            "calls": [
+              {
+                "name": "mcp__behavior-v2__adjust_chassis",
+                "id": "chatcmpl-tool-a3821a027b05e0cb"
+              }
+            ],
+            "results": []
+          },
+          {
+            "timestamp": "2026-10-03T02:45:23.193Z",
+            "type": "user",
+            "model": null,
+            "calls": [],
+            "results": [
+              {
+                "tool_use_id": "chatcmpl-tool-a3821a027b05e0cb",
+                "is_error": null
+              }
+            ]
+          },
+          {
+            "timestamp": "2026-10-03T02:50:04.893Z",
+            "type": "assistant",
+            "model": "Qwen3.8-Flash-Next-FP8",
+            "calls": [
+              {
+                "name": "mcp__behavior-v2__adjust_chassis",
+                "id": "chatcmpl-tool-b951ead8df36c77a"
+              }
+            ],
+            "results": []
+          },
+          {
+            "timestamp": "2026-10-03T02:50:27.444Z",
+            "type": "user",
+            "model": null,
+            "calls": [],
+            "results": [
+              {
+                "tool_use_id": "chatcmpl-tool-b951ead8df36c77a",
+                "is_error": null
+              }
+            ]
+          }
+        ]
+      },
+      "bridge_phase": "held"
+    },
+    {
+      "checked_at": "2026-10-03T11:07:21.387276+08:00",
+      "roles": {
+        "controller": {
+          "pid": 2833447,
+          "state": "T",
+          "ppid": 3581,
+          "start": 129070895,
+          "expected_start": 129070895,
+          "identity_matches": true,
+          "age_s": 229543.88069894304
+        },
+        "guardian": {
+          "pid": 2834154,
+          "state": "S",
+          "ppid": 2833447,
+          "start": 129070994,
+          "expected_start": 129070994,
+          "identity_matches": true,
+          "age_s": 229542.89075861708
+        },
+        "interface": {
+          "pid": 2834157,
+          "state": "S",
+          "ppid": 2833447,
+          "start": 129070994,
+          "expected_start": 129070994,
+          "identity_matches": true,
+          "age_s": 229542.89081300306
+        },
+        "gate": {
+          "pid": 2835562,
+          "state": "S",
+          "ppid": 2833447,
+          "start": 129071196,
+          "expected_start": 129071196,
+          "identity_matches": true,
+          "age_s": 229540.870850672
+        },
+        "evaluator": {
+          "pid": 2836260,
+          "state": "S",
+          "ppid": 2833447,
+          "start": 129071297,
+          "expected_start": 129071297,
+          "identity_matches": true,
+          "age_s": 229539.861079138
+        },
+        "agent": {
+          "pid": 1942343,
+          "state": "S",
+          "ppid": 2833447,
+          "start": 143373414,
+          "expected_start": 143373414,
+          "identity_matches": true,
+          "age_s": 86518.691114577
+        },
+        "native": {
+          "pid": 1942529,
+          "state": "S",
+          "ppid": 1942343,
+          "start": 143373439,
+          "expected_start": 143373439,
+          "identity_matches": true,
+          "age_s": 86518.44119777321
+        }
+      },
+      "native_tail": {
+        "path": "runs/validation-20260930-task03-r5/instance_306/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/a5d15a0c-59a7-4ec9-a5ec-af7c86dea3c0.jsonl",
+        "size": 127873577,
+        "offset": 119524346,
+        "sha256": "e7cc2763f143570efeb22a423f2723bac7e711d1ce0b986a4bf2b6337c87f365",
+        "last_events": [
+          {
+            "timestamp": "2026-10-03T02:59:48.854Z",
+            "type": "assistant",
+            "model": "Qwen3.8-Flash-Next-FP8",
+            "calls": [
+              {
+                "name": "mcp__behavior-v2__adjust_pitch",
+                "id": "chatcmpl-tool-a0de0ef48d63f549"
+              }
+            ],
+            "results": []
+          },
+          {
+            "timestamp": "2026-10-03T02:59:54.569Z",
+            "type": "user",
+            "model": null,
+            "calls": [],
+            "results": [
+              {
+                "tool_use_id": "chatcmpl-tool-a0de0ef48d63f549",
+                "is_error": null
+              }
+            ]
+          },
+          {
+            "timestamp": "2026-10-03T03:04:07.936Z",
+            "type": "assistant",
+            "model": "Qwen3.8-Flash-Next-FP8",
+            "calls": [
+              {
+                "name": "mcp__behavior-v2__adjust_chassis",
+                "id": "chatcmpl-tool-848064fc2f1c77f4"
+              }
+            ],
+            "results": []
+          },
+          {
+            "timestamp": "2026-10-03T03:04:34.590Z",
+            "type": "user",
+            "model": null,
+            "calls": [],
+            "results": [
+              {
+                "tool_use_id": "chatcmpl-tool-848064fc2f1c77f4",
+                "is_error": null
+              }
+            ]
+          }
+        ]
+      },
+      "bridge_phase": "held"
+    },
+    {
+      "checked_at": "2026-10-03T11:12:24.545272+08:00",
+      "roles": {
+        "controller": {
+          "pid": 2833447,
+          "state": "T",
+          "ppid": 3581,
+          "start": 129070895,
+          "expected_start": 129070895,
+          "identity_matches": true,
+          "age_s": 229847.031790531
+        },
+        "guardian": {
+          "pid": 2834154,
+          "state": "S",
+          "ppid": 2833447,
+          "start": 129070994,
+          "expected_start": 129070994,
+          "identity_matches": true,
+          "age_s": 229846.04186029616
+        },
+        "interface": {
+          "pid": 2834157,
+          "state": "S",
+          "ppid": 2833447,
+          "start": 129070994,
+          "expected_start": 129070994,
+          "identity_matches": true,
+          "age_s": 229846.04192272108
+        },
+        "gate": {
+          "pid": 2835562,
+          "state": "S",
+          "ppid": 2833447,
+          "start": 129071196,
+          "expected_start": 129071196,
+          "identity_matches": true,
+          "age_s": 229844.02196313906
+        },
+        "evaluator": {
+          "pid": 2836260,
+          "state": "S",
+          "ppid": 2833447,
+          "start": 129071297,
+          "expected_start": 129071297,
+          "identity_matches": true,
+          "age_s": 229843.01221524598
+        },
+        "agent": {
+          "pid": 1942343,
+          "state": "S",
+          "ppid": 2833447,
+          "start": 143373414,
+          "expected_start": 143373414,
+          "identity_matches": true,
+          "age_s": 86821.8422559381
+        },
+        "native": {
+          "pid": 1942529,
+          "state": "S",
+          "ppid": 1942343,
+          "start": 143373439,
+          "expected_start": 143373439,
+          "identity_matches": true,
+          "age_s": 86821.59236518503
+        }
+      },
+      "native_tail": {
+        "path": "runs/validation-20260930-task03-r5/instance_306/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/a5d15a0c-59a7-4ec9-a5ec-af7c86dea3c0.jsonl",
+        "size": 128343701,
+        "offset": 120061806,
+        "sha256": "d034a5826cdf91212991ce1bc950fe0d551630645e27f8d57e6f852ec07ce3d3",
+        "last_events": [
+          {
+            "timestamp": "2026-10-03T03:04:07.936Z",
+            "type": "assistant",
+            "model": "Qwen3.8-Flash-Next-FP8",
+            "calls": [
+              {
+                "name": "mcp__behavior-v2__adjust_chassis",
+                "id": "chatcmpl-tool-848064fc2f1c77f4"
+              }
+            ],
+            "results": []
+          },
+          {
+            "timestamp": "2026-10-03T03:04:34.590Z",
+            "type": "user",
+            "model": null,
+            "calls": [],
+            "results": [
+              {
+                "tool_use_id": "chatcmpl-tool-848064fc2f1c77f4",
+                "is_error": null
+              }
+            ]
+          },
+          {
+            "timestamp": "2026-10-03T03:12:07.629Z",
+            "type": "assistant",
+            "model": "Qwen3.8-Flash-Next-FP8",
+            "calls": [
+              {
+                "name": "mcp__behavior-v2__adjust_pitch",
+                "id": "chatcmpl-tool-8e232b34511aeedf"
+              }
+            ],
+            "results": []
+          },
+          {
+            "timestamp": "2026-10-03T03:12:10.458Z",
+            "type": "user",
+            "model": null,
+            "calls": [],
+            "results": [
+              {
+                "tool_use_id": "chatcmpl-tool-8e232b34511aeedf",
+                "is_error": null
+              }
+            ]
+          }
+        ]
+      },
+      "bridge_phase": "held"
+    }
+  ],
+  "http_snapshots": [
+    {
+      "checked_at": "2026-10-03T10:53:10.484821+08:00",
+      "active": {
+        "session_id": "t03p15073i5-a61b94e1efcc468f",
+        "session_ticks": 16293,
+        "max_ticks": 27392,
+        "matches_owned_session": true
+      },
+      "processes": {
+        "guardian": {
+          "pid": 2834154,
+          "state": "S",
+          "alive": true
+        },
+        "interface": {
+          "pid": 2834157,
+          "state": "S",
+          "alive": true
+        },
+        "gate": {
+          "pid": 2835562,
+          "state": "S",
+          "alive": true
+        },
+        "evaluator": {
+          "pid": 2836260,
+          "state": "S",
+          "alive": true
+        },
+        "agent": {
+          "pid": 1942343,
+          "state": "S",
+          "alive": true
+        },
+        "controller": {
+          "pid": 2833447,
+          "state": "T",
+          "alive": true
+        }
+      },
+      "completed": 2
+    },
+    {
+      "checked_at": "2026-10-03T11:07:21.370083+08:00",
+      "active": {
+        "session_id": "t03p15073i5-a61b94e1efcc468f",
+        "session_ticks": 16556,
+        "max_ticks": 27392,
+        "matches_owned_session": true
+      },
+      "processes": {
+        "guardian": {
+          "pid": 2834154,
+          "state": "S",
+          "alive": true
+        },
+        "interface": {
+          "pid": 2834157,
+          "state": "S",
+          "alive": true
+        },
+        "gate": {
+          "pid": 2835562,
+          "state": "S",
+          "alive": true
+        },
+        "evaluator": {
+          "pid": 2836260,
+          "state": "S",
+          "alive": true
+        },
+        "agent": {
+          "pid": 1942343,
+          "state": "S",
+          "alive": true
+        },
+        "controller": {
+          "pid": 2833447,
+          "state": "T",
+          "alive": true
+        }
+      },
+      "completed": 2
+    },
+    {
+      "checked_at": "2026-10-03T11:12:24.532260+08:00",
+      "active": {
+        "session_id": "t03p15073i5-a61b94e1efcc468f",
+        "session_ticks": 16565,
+        "max_ticks": 27392,
+        "matches_owned_session": true
+      },
+      "processes": {
+        "guardian": {
+          "pid": 2834154,
+          "state": "S",
+          "alive": true
+        },
+        "interface": {
+          "pid": 2834157,
+          "state": "S",
+          "alive": true
+        },
+        "gate": {
+          "pid": 2835562,
+          "state": "S",
+          "alive": true
+        },
+        "evaluator": {
+          "pid": 2836260,
+          "state": "S",
+          "alive": true
+        },
+        "agent": {
+          "pid": 1942343,
+          "state": "S",
+          "alive": true
+        },
+        "controller": {
+          "pid": 2833447,
+          "state": "T",
+          "alive": true
+        }
+      },
+      "completed": 2
+    }
+  ],
+  "conclusion": {
+    "original_agent_and_native_ages_exceeded_86400_seconds_at_both_post_deadline_snapshots": true,
+    "original_process_identities_and_session_preserved": true,
+    "controller_held_children_running": true,
+    "steps_after_24_hour_threshold": {
+      "first": 16556,
+      "second": 16565,
+      "delta": 9
+    },
+    "native_tool_call_after_first_post_deadline_snapshot": {
+      "timestamp": "2026-10-03T03:12:07.629Z",
+      "model": "Qwen3.8-Flash-Next-FP8",
+      "name": "mcp__behavior-v2__adjust_pitch",
+      "id": "chatcmpl-tool-8e232b34511aeedf"
+    },
+    "corresponding_tool_result": {
+      "timestamp": "2026-10-03T03:12:10.458Z",
+      "tool_use_id": "chatcmpl-tool-8e232b34511aeedf",
+      "is_error": null
+    },
+    "official_score_created_for_this_case": false,
+    "normal_resume_and_next_case_handoff_observed": false,
+    "mean_q_reproduction_established": false
+  },
+  "existing_scores": [
+    {
+      "key": "task01/301",
+      "path": "runs/validation-20260930-task01-r5/output/json/picking_up_trash_301_0.json",
+      "q_score": 0.6666666666666666,
+      "steps": 7071,
+      "sha256": "432b5442db7d16d3a6fa4cfdfc863851892d5498f6f270342fde290ae5fd5876",
+      "matches_previous": true,
+      "current_sha256": "432b5442db7d16d3a6fa4cfdfc863851892d5498f6f270342fde290ae5fd5876",
+      "repository_copy": "validation_results/gpu5-20260930-r5/task01/picking_up_trash_301_0.json"
+    },
+    {
+      "key": "task01/304",
+      "path": "runs/validation-20260930-task01-r5/output/json/picking_up_trash_304_0.json",
+      "q_score": 0.6666666666666666,
+      "steps": 10536,
+      "sha256": "898b7120642c4dc29c464a6ecdf2219a8f41ab39d7e499b66d0045981d20753f",
+      "matches_previous": true,
+      "current_sha256": "898b7120642c4dc29c464a6ecdf2219a8f41ab39d7e499b66d0045981d20753f",
+      "repository_copy": "validation_results/gpu5-20260930-r5/task01/picking_up_trash_304_0.json"
+    },
+    {
+      "key": "task01/306",
+      "path": "runs/validation-20260930-task01-r5/output/json/picking_up_trash_306_0.json",
+      "q_score": 1,
+      "steps": 6017,
+      "sha256": "08276f86145d6cdd8d461070aef1c71b140f07d099be533ad4010174c6f73a3b",
+      "matches_previous": true,
+      "current_sha256": "08276f86145d6cdd8d461070aef1c71b140f07d099be533ad4010174c6f73a3b",
+      "repository_copy": "validation_results/gpu5-20260930-r5/task01/picking_up_trash_306_0.json"
+    },
+    {
+      "key": "task01/308",
+      "path": "runs/validation-20260930-task01-r5/output/json/picking_up_trash_308_0.json",
+      "q_score": 0.6666666666666666,
+      "steps": 5484,
+      "sha256": "0df7003a5d6909c53011145287c3afb8a61cfb39defcebaf03d12fa29d9ee176",
+      "matches_previous": true,
+      "current_sha256": "0df7003a5d6909c53011145287c3afb8a61cfb39defcebaf03d12fa29d9ee176",
+      "repository_copy": "validation_results/gpu5-20260930-r5/task01/picking_up_trash_308_0.json"
+    },
+    {
+      "key": "task03/301",
+      "path": "runs/validation-20260930-task03-r5/output/json/cleaning_up_plates_and_food_301_0.json",
+      "q_score": 0,
+      "steps": 10024,
+      "sha256": "042aaee5b5c02e92dd51ee2648ddcbce9e4b6c0ce3de4a0196bb5bf7daceb8af",
+      "matches_previous": true,
+      "current_sha256": "042aaee5b5c02e92dd51ee2648ddcbce9e4b6c0ce3de4a0196bb5bf7daceb8af",
+      "repository_copy": "validation_results/gpu5-20260930-r5/task03/cleaning_up_plates_and_food_301_0.json"
+    },
+    {
+      "key": "task03/304",
+      "path": "runs/validation-20260930-task03-r5/output/json/cleaning_up_plates_and_food_304_0.json",
+      "q_score": 0.2857142857142857,
+      "steps": 7839,
+      "sha256": "cb08b9da8afbcffb4fea4fa6fac9b9de4104117df6a41b6b08145d4d3989bf9b",
+      "matches_previous": true,
+      "current_sha256": "cb08b9da8afbcffb4fea4fa6fac9b9de4104117df6a41b6b08145d4d3989bf9b",
+      "repository_copy": "validation_results/gpu5-20260930-r5/task03/cleaning_up_plates_and_food_304_0.json"
+    },
+    {
+      "key": "task08/301",
+      "path": "runs/validation-20260930-task08-r5/output/json/rearranging_kitchen_furniture_301_0.json",
+      "q_score": 0.5,
+      "steps": 11993,
+      "sha256": "813cd1e5358eadb6cd0e9c203bf7aa046a663dc738c87abff331d8f7790fe37d",
+      "matches_previous": true,
+      "current_sha256": "813cd1e5358eadb6cd0e9c203bf7aa046a663dc738c87abff331d8f7790fe37d",
+      "repository_copy": "validation_results/gpu5-20260930-r5/task08/rearranging_kitchen_furniture_301_0.json"
+    },
+    {
+      "key": "task08/304",
+      "path": "runs/validation-20260930-task08-r5/output/json/rearranging_kitchen_furniture_304_0.json",
+      "q_score": 0,
+      "steps": 12089,
+      "sha256": "5e2619dabe3a97b25842c9dfd28e4359e282580839f77aa72f4740079c2c8ed1",
+      "matches_previous": true,
+      "current_sha256": "5e2619dabe3a97b25842c9dfd28e4359e282580839f77aa72f4740079c2c8ed1",
+      "repository_copy": "validation_results/gpu5-20260930-r5/task08/rearranging_kitchen_furniture_304_0.json"
+    }
+  ],
+  "session_supervisor_source_sha256": "67e18e6af4c2fd59eca0f3c4b8f9b5fad8aa3db324160cdc87a36221dbd98979",
+  "evidence_method": [
+    "Read Linux /proc process state and start ticks to match each original process identity; compute elapsed seconds from monotonic time and SC_CLK_TCK.",
+    "Read actual evaluator monitor HTTP responses and match the original session ID.",
+    "Parse only bounded native transcript event metadata; record SHA-256 for each exact byte range [offset, size).",
+    "Verify that the original eight official score files and their retained release copies still have the recorded SHA-256 hashes."
+  ],
+  "limitations": [
+    "This is a live check of a temporary session-only supervisor for diagnostic r5; the packaged runner already uses session_timeout_s=0 and does not depend on this supervisor.",
+    "Normal final scoring, coordinator resume and handoff for this held case remain unobserved.",
+    "The original controller launcher log stops updating while the controller is held; the HTTP snapshots establish actual simulator progress.",
+    "An absent tool-result error flag is not proof of task success.",
+    "Fresh r6 runs, including new task03/301 and task08/304 sessions, remain queued. No complete r6 task mean has been verified."
+  ]
+}
