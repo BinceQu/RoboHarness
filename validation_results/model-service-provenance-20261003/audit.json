@@ -1,0 +1,576 @@
+{
+  "checked_at": "2026-10-03T20:47:02.370615+08:00",
+  "source_revision_at_audit": "b74333b15935933fd9e463a0d7c52528464ad7aa",
+  "scope": "Recovered historical model-service records and current read-only endpoint identity. No model generation, server change or benchmark restart.",
+  "sources": {
+    "sglang_snapshot": {
+      "path": "/mnt/nas_nfs/home/bince/RoboUI/embodied_claude_code/evaluations/qwen_15060_a16/server_snapshot.json",
+      "bytes": 826,
+      "sha256": "2595fc081640e7f99f5e957ec9a0e09bcc2d99e29ac048632de84ba58a98ccec"
+    },
+    "vllm_report": {
+      "path": "/mnt/nas_nfs/home/bince/RoboUI/embodied_claude_code/QWEN_COORDINATE_REPORT.md",
+      "bytes": 12597,
+      "sha256": "a8d31e5a6eb88f6d5bfc58639d367c15af631fd1377f9d3ff3ccbd5f8a460d4d"
+    },
+    "vllm_launcher": {
+      "path": "/mnt/nas_nfs/home/bince/RoboUI/embodied_claude_code/deploy/qwen38_vllm.sh",
+      "bytes": 1938,
+      "sha256": "f241390a6d2c02d677a54a91405ac547c9e65f6f82fffaacd5ae8c00cf3cdb5b"
+    },
+    "saved_visual_replay": {
+      "path": "/mnt/nas_nfs/home/bince/RoboUI/embodied_claude_code/evaluations/qwen_15060_a16/runs/vllm_tp2_20260905_release_21/results.json",
+      "bytes": 65166,
+      "sha256": "b956044c3b894a5e442f5fb5bda27442ec5ebfc666c2b9ee2b06f1b78940e48a"
+    }
+  },
+  "earlier_sglang_snapshot": {
+    "captured_at": "2026-09-04T23:17:34+08:00",
+    "endpoint": "http://100.101.73.1:31000",
+    "owned_by": "sglang",
+    "sglang_version": "0.0.0.dev1+g78c5024e9",
+    "served_model_name": "Qwen3.8-Flash-Next-FP8",
+    "model_path": "/home/bince/models/models--Qwen--Qwen3.8-Flash-Next-FP8",
+    "context_length": 262144,
+    "tp_size": 2,
+    "attention_backend": "flashinfer",
+    "chunked_prefill_size": 2048,
+    "enable_deterministic_inference": false
+  },
+  "later_vllm_report": {
+    "report_date": "2026-09-05",
+    "reported_version": "0.28.1rc1.dev202+gffc445f",
+    "source": "sources.vllm_report",
+    "interpretation": "Historical deployment report, not a server snapshot for every archived rollout."
+  },
+  "saved_visual_replay": {
+    "endpoint": "http://100.101.73.1:31000/v1/chat/completions",
+    "model": "Qwen3.8-Flash-Next-FP8",
+    "started_at": "2026-09-04T19:17:17.381419Z",
+    "completed_at": "2026-09-04T19:17:38.761060Z",
+    "repeat": 3,
+    "require_all": true,
+    "expected_resolution": [
+      720,
+      720
+    ],
+    "cases": 7,
+    "calls": 21,
+    "coordinate_hits": 21,
+    "passes": 21,
+    "all_passed": true,
+    "results_metadata": [
+      {
+        "image_id": "img_0004",
+        "repetition": 1,
+        "passed": true,
+        "coordinate_hit": true,
+        "tool_call_count": 1,
+        "request_sha256": "aeeceb36958f7970182cfce825145984e128b7d683bf25c635883ba185021276",
+        "image_sha256": "b1190217e711234479cb868ec8f28dfca746f553aa5353218f7f6ee6f64c784f",
+        "bridge_assertions_passed": 17
+      },
+      {
+        "image_id": "img_0004",
+        "repetition": 2,
+        "passed": true,
+        "coordinate_hit": true,
+        "tool_call_count": 1,
+        "request_sha256": "aeeceb36958f7970182cfce825145984e128b7d683bf25c635883ba185021276",
+        "image_sha256": "b1190217e711234479cb868ec8f28dfca746f553aa5353218f7f6ee6f64c784f",
+        "bridge_assertions_passed": 17
+      },
+      {
+        "image_id": "img_0004",
+        "repetition": 3,
+        "passed": true,
+        "coordinate_hit": true,
+        "tool_call_count": 1,
+        "request_sha256": "aeeceb36958f7970182cfce825145984e128b7d683bf25c635883ba185021276",
+        "image_sha256": "b1190217e711234479cb868ec8f28dfca746f553aa5353218f7f6ee6f64c784f",
+        "bridge_assertions_passed": 17
+      },
+      {
+        "image_id": "img_0006",
+        "repetition": 1,
+        "passed": true,
+        "coordinate_hit": true,
+        "tool_call_count": 1,
+        "request_sha256": "46067b37bfb1ddde7789a1b3d4a2c6495aa46bfdb2ce3503e53b8970115ded37",
+        "image_sha256": "7da4a0110b2674d23cb78b9769dd9fd03a423bedcd47bcb6aad4ffeaa73e11ed",
+        "bridge_assertions_passed": 17
+      },
+      {
+        "image_id": "img_0006",
+        "repetition": 2,
+        "passed": true,
+        "coordinate_hit": true,
+        "tool_call_count": 1,
+        "request_sha256": "46067b37bfb1ddde7789a1b3d4a2c6495aa46bfdb2ce3503e53b8970115ded37",
+        "image_sha256": "7da4a0110b2674d23cb78b9769dd9fd03a423bedcd47bcb6aad4ffeaa73e11ed",
+        "bridge_assertions_passed": 17
+      },
+      {
+        "image_id": "img_0006",
+        "repetition": 3,
+        "passed": true,
+        "coordinate_hit": true,
+        "tool_call_count": 1,
+        "request_sha256": "46067b37bfb1ddde7789a1b3d4a2c6495aa46bfdb2ce3503e53b8970115ded37",
+        "image_sha256": "7da4a0110b2674d23cb78b9769dd9fd03a423bedcd47bcb6aad4ffeaa73e11ed",
+        "bridge_assertions_passed": 17
+      },
+      {
+        "image_id": "img_0007",
+        "repetition": 1,
+        "passed": true,
+        "coordinate_hit": true,
+        "tool_call_count": 1,
+        "request_sha256": "13319c889edb922c9faf6f55a0578e74dd00532912bb2ee19bea8a43772561ab",
+        "image_sha256": "66ff05d4c11f2cb66a1dec6e11d3fc775600f955f5a689a57f441d5560db7e07",
+        "bridge_assertions_passed": 17
+      },
+      {
+        "image_id": "img_0007",
+        "repetition": 2,
+        "passed": true,
+        "coordinate_hit": true,
+        "tool_call_count": 1,
+        "request_sha256": "13319c889edb922c9faf6f55a0578e74dd00532912bb2ee19bea8a43772561ab",
+        "image_sha256": "66ff05d4c11f2cb66a1dec6e11d3fc775600f955f5a689a57f441d5560db7e07",
+        "bridge_assertions_passed": 17
+      },
+      {
+        "image_id": "img_0007",
+        "repetition": 3,
+        "passed": true,
+        "coordinate_hit": true,
+        "tool_call_count": 1,
+        "request_sha256": "13319c889edb922c9faf6f55a0578e74dd00532912bb2ee19bea8a43772561ab",
+        "image_sha256": "66ff05d4c11f2cb66a1dec6e11d3fc775600f955f5a689a57f441d5560db7e07",
+        "bridge_assertions_passed": 17
+      },
+      {
+        "image_id": "img_0009",
+        "repetition": 1,
+        "passed": true,
+        "coordinate_hit": true,
+        "tool_call_count": 1,
+        "request_sha256": "44e33524043c7dbc0c75849e4682ed537cb1f44d0c5f8b53de9be72f958744bd",
+        "image_sha256": "e1f00a4002aa8c5de347b04b337a44e7c6a9d9320b753123f10ba7bc137d7334",
+        "bridge_assertions_passed": 17
+      },
+      {
+        "image_id": "img_0009",
+        "repetition": 2,
+        "passed": true,
+        "coordinate_hit": true,
+        "tool_call_count": 1,
+        "request_sha256": "44e33524043c7dbc0c75849e4682ed537cb1f44d0c5f8b53de9be72f958744bd",
+        "image_sha256": "e1f00a4002aa8c5de347b04b337a44e7c6a9d9320b753123f10ba7bc137d7334",
+        "bridge_assertions_passed": 17
+      },
+      {
+        "image_id": "img_0009",
+        "repetition": 3,
+        "passed": true,
+        "coordinate_hit": true,
+        "tool_call_count": 1,
+        "request_sha256": "44e33524043c7dbc0c75849e4682ed537cb1f44d0c5f8b53de9be72f958744bd",
+        "image_sha256": "e1f00a4002aa8c5de347b04b337a44e7c6a9d9320b753123f10ba7bc137d7334",
+        "bridge_assertions_passed": 17
+      },
+      {
+        "image_id": "img_0010",
+        "repetition": 1,
+        "passed": true,
+        "coordinate_hit": true,
+        "tool_call_count": 1,
+        "request_sha256": "6cf13d8f504ff4f659be45959ceff14c2aaf33ff8043b5c16c35cfde2ed22977",
+        "image_sha256": "1b65e11bae862d099d86ed697d400609da2dfaae45a3feba48cf14c7e32a97d7",
+        "bridge_assertions_passed": 17
+      },
+      {
+        "image_id": "img_0010",
+        "repetition": 2,
+        "passed": true,
+        "coordinate_hit": true,
+        "tool_call_count": 1,
+        "request_sha256": "6cf13d8f504ff4f659be45959ceff14c2aaf33ff8043b5c16c35cfde2ed22977",
+        "image_sha256": "1b65e11bae862d099d86ed697d400609da2dfaae45a3feba48cf14c7e32a97d7",
+        "bridge_assertions_passed": 17
+      },
+      {
+        "image_id": "img_0010",
+        "repetition": 3,
+        "passed": true,
+        "coordinate_hit": true,
+        "tool_call_count": 1,
+        "request_sha256": "6cf13d8f504ff4f659be45959ceff14c2aaf33ff8043b5c16c35cfde2ed22977",
+        "image_sha256": "1b65e11bae862d099d86ed697d400609da2dfaae45a3feba48cf14c7e32a97d7",
+        "bridge_assertions_passed": 17
+      },
+      {
+        "image_id": "img_0011",
+        "repetition": 1,
+        "passed": true,
+        "coordinate_hit": true,
+        "tool_call_count": 1,
+        "request_sha256": "3b123ce1bd8b81a87b8d52e1ff0c6218ce4aa20700b573a75447b481cf069a21",
+        "image_sha256": "4d74494eeb7785fc2e3613406d35cb36f756282ebdd9168b071f645ace41d059",
+        "bridge_assertions_passed": 17
+      },
+      {
+        "image_id": "img_0011",
+        "repetition": 2,
+        "passed": true,
+        "coordinate_hit": true,
+        "tool_call_count": 1,
+        "request_sha256": "3b123ce1bd8b81a87b8d52e1ff0c6218ce4aa20700b573a75447b481cf069a21",
+        "image_sha256": "4d74494eeb7785fc2e3613406d35cb36f756282ebdd9168b071f645ace41d059",
+        "bridge_assertions_passed": 17
+      },
+      {
+        "image_id": "img_0011",
+        "repetition": 3,
+        "passed": true,
+        "coordinate_hit": true,
+        "tool_call_count": 1,
+        "request_sha256": "3b123ce1bd8b81a87b8d52e1ff0c6218ce4aa20700b573a75447b481cf069a21",
+        "image_sha256": "4d74494eeb7785fc2e3613406d35cb36f756282ebdd9168b071f645ace41d059",
+        "bridge_assertions_passed": 17
+      },
+      {
+        "image_id": "img_0013",
+        "repetition": 1,
+        "passed": true,
+        "coordinate_hit": true,
+        "tool_call_count": 1,
+        "request_sha256": "0346505c3528c8e105326007782d7fe6613eb0a41bb574f3f2c4c8215951f91f",
+        "image_sha256": "d4e8265ed1035b5c6ee45cef0a42c27cbe97d259d2667a3a228106447e934428",
+        "bridge_assertions_passed": 17
+      },
+      {
+        "image_id": "img_0013",
+        "repetition": 2,
+        "passed": true,
+        "coordinate_hit": true,
+        "tool_call_count": 1,
+        "request_sha256": "0346505c3528c8e105326007782d7fe6613eb0a41bb574f3f2c4c8215951f91f",
+        "image_sha256": "d4e8265ed1035b5c6ee45cef0a42c27cbe97d259d2667a3a228106447e934428",
+        "bridge_assertions_passed": 17
+      },
+      {
+        "image_id": "img_0013",
+        "repetition": 3,
+        "passed": true,
+        "coordinate_hit": true,
+        "tool_call_count": 1,
+        "request_sha256": "0346505c3528c8e105326007782d7fe6613eb0a41bb574f3f2c4c8215951f91f",
+        "image_sha256": "d4e8265ed1035b5c6ee45cef0a42c27cbe97d259d2667a3a228106447e934428",
+        "bridge_assertions_passed": 17
+      }
+    ],
+    "interpretation": "Saved pre-experiment visual grounding check, not BEHAVIOR Q or a new test of the current endpoint."
+  },
+  "archived_cases": [
+    {
+      "task": "task01",
+      "instance_id": 301,
+      "source": {
+        "path": "/mnt/nas_nfs/home/bince/RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/282de2ac-1724-4003-b69e-0060656cbebb.jsonl",
+        "bytes": 70431539,
+        "sha256": "9bde08ae54db3055b6b72ce5997312d40e0e07ad3777ebd4c53f60196ffbfe31"
+      },
+      "first_response": {
+        "line": 12,
+        "record_sha256": "f3ec999cd3e2aebb6845b9e8ef9e921686d96c4e5385b13a629f15922930d2f0",
+        "timestamp": "2026-09-15T13:47:35.623Z",
+        "model": "Qwen3.8-Flash-Next-FP8",
+        "cli_version": "2.1.259"
+      },
+      "recorded_after_saved_vllm_replay": true
+    },
+    {
+      "task": "task01",
+      "instance_id": 304,
+      "source": {
+        "path": "/mnt/nas_nfs/home/bince/RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/6a82d31a-8045-4462-8c4c-2acc323dc127.jsonl",
+        "bytes": 73260086,
+        "sha256": "5281377e5a46c0bf7b436bd66aa8a81f1f3d4d498689c7288b63ca2f0545e84f"
+      },
+      "first_response": {
+        "line": 11,
+        "record_sha256": "febf25366910ed10aa6362a68adbf64e3f6338d199c8f01b5819b515c5003e0d",
+        "timestamp": "2026-09-15T16:55:16.128Z",
+        "model": "Qwen3.8-Flash-Next-FP8",
+        "cli_version": "2.1.259"
+      },
+      "recorded_after_saved_vllm_replay": true
+    },
+    {
+      "task": "task01",
+      "instance_id": 306,
+      "source": {
+        "path": "/mnt/nas_nfs/home/bince/RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/4edbee83-f50d-4b8b-9e88-eb0752086c47.jsonl",
+        "bytes": 57170042,
+        "sha256": "b108a58eb5dbe51fd33a57a7614a70798e513a183f9d185d110a59f6b67ab182"
+      },
+      "first_response": {
+        "line": 11,
+        "record_sha256": "564df6dbfb3d99bda5c1a24a96af1966bc0453d241225bc403e95e445b9a1039",
+        "timestamp": "2026-09-15T22:13:29.040Z",
+        "model": "Qwen3.8-Flash-Next-FP8",
+        "cli_version": "2.1.259"
+      },
+      "recorded_after_saved_vllm_replay": true
+    },
+    {
+      "task": "task01",
+      "instance_id": 308,
+      "source": {
+        "path": "/mnt/nas_nfs/home/bince/RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/9c151129-9bc7-41f3-99ed-01691c862f23.jsonl",
+        "bytes": 54446499,
+        "sha256": "341b91498e73b5a349cf5839279c0d2b12061d70a578c08ea037ad8c4e660886"
+      },
+      "first_response": {
+        "line": 11,
+        "record_sha256": "28c8b6a74de896433150c6a191b331935c546cf487cfd8c6cd4b560c22146105",
+        "timestamp": "2026-09-16T01:16:42.057Z",
+        "model": "Qwen3.8-Flash-Next-FP8",
+        "cli_version": "2.1.259"
+      },
+      "recorded_after_saved_vllm_replay": true
+    },
+    {
+      "task": "task01",
+      "instance_id": 310,
+      "source": {
+        "path": "/mnt/nas_nfs/home/bince/RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/48c73b78-c55b-4a92-a844-5a8040ff34fa.jsonl",
+        "bytes": 52967287,
+        "sha256": "b3f595cf1778a3f0c4d28470e66d5ff7417289354e5159dffa33e62c35003a91"
+      },
+      "first_response": {
+        "line": 11,
+        "record_sha256": "6c9d90bbfd8c8f10c7d34f91e2d86daaff9c189e44a87ecf5c37d09faf2bc202",
+        "timestamp": "2026-09-16T04:36:22.286Z",
+        "model": "Qwen3.8-Flash-Next-FP8",
+        "cli_version": "2.1.259"
+      },
+      "recorded_after_saved_vllm_replay": true
+    },
+    {
+      "task": "task03",
+      "instance_id": 301,
+      "source": {
+        "path": "/mnt/nas_nfs/home/bince/BEHAVIOR-1K/test_results/task03/06_claude_transcripts/claude_t03p15063i0-09152328_301.jsonl",
+        "bytes": 170732255,
+        "sha256": "f05ef5d7e525533f87e8313fff26b9c44f7f827e10887451352639f1e98d0ce1"
+      },
+      "first_response": {
+        "line": 11,
+        "record_sha256": "fbf1f5a8297d480b3b141fe9e2e1b0f775061e6366cba3f6c891e1991ec6e2f9",
+        "timestamp": "2026-09-15T15:28:54.513Z",
+        "model": "Qwen3.8-Flash-Next-FP8",
+        "cli_version": "2.1.259"
+      },
+      "recorded_after_saved_vllm_replay": true
+    },
+    {
+      "task": "task03",
+      "instance_id": 304,
+      "source": {
+        "path": "/mnt/nas_nfs/home/bince/BEHAVIOR-1K/test_results/task03/06_claude_transcripts/claude_t03p15063i3-09171808_304.jsonl",
+        "bytes": 147004620,
+        "sha256": "c66fb5b28c37320ed5c6e3b586e45b740d47f190255cb9876578d32f130ebbf5"
+      },
+      "first_response": {
+        "line": 11,
+        "record_sha256": "0b04b525cfe7d6924956c4135a36c8b0ddfc06634ef75c1f04a8b98993dbfc31",
+        "timestamp": "2026-09-17T10:08:46.624Z",
+        "model": "Qwen3.8-Flash-Next-FP8",
+        "cli_version": "2.1.259"
+      },
+      "recorded_after_saved_vllm_replay": true
+    },
+    {
+      "task": "task03",
+      "instance_id": 306,
+      "source": {
+        "path": "/mnt/nas_nfs/home/bince/BEHAVIOR-1K/test_results/task03/06_claude_transcripts/claude_t03p15063i5-09180547_306.jsonl",
+        "bytes": 112745462,
+        "sha256": "abf46514cabced8b430ad49a4918f67d32b0bba372b77338c3a8376527980137"
+      },
+      "first_response": {
+        "line": 11,
+        "record_sha256": "41174048d695eccc650c111f21a586a93d56e4ebace59b6353622abe00227e9f",
+        "timestamp": "2026-09-17T21:47:57.105Z",
+        "model": "Qwen3.8-Flash-Next-FP8",
+        "cli_version": "2.1.259"
+      },
+      "recorded_after_saved_vllm_replay": true
+    },
+    {
+      "task": "task03",
+      "instance_id": 308,
+      "source": {
+        "path": "/mnt/nas_nfs/home/bince/BEHAVIOR-1K/test_results/task03/06_claude_transcripts/claude_t03p15063i7-09181140_308.jsonl",
+        "bytes": 233549830,
+        "sha256": "c075a03da39ad1f891734059de03e2de395734062c2849aefbf59e7c34f49676"
+      },
+      "first_response": {
+        "line": 11,
+        "record_sha256": "1972b3f753b964ca161d55bc7bf20fa50d9146ca80afba22155ce95d0c88b2ea",
+        "timestamp": "2026-09-18T03:40:42.775Z",
+        "model": "Qwen3.8-Flash-Next-FP8",
+        "cli_version": "2.1.259"
+      },
+      "recorded_after_saved_vllm_replay": true
+    },
+    {
+      "task": "task03",
+      "instance_id": 310,
+      "source": {
+        "path": "/mnt/nas_nfs/home/bince/BEHAVIOR-1K/test_results/task03/06_claude_transcripts/claude_t03p15063i9-09182135_310.jsonl",
+        "bytes": 67216300,
+        "sha256": "d930d7065a7c1985026587998f3a6ddc2a7737d12017db1b272128f945e5d2bc"
+      },
+      "first_response": {
+        "line": 11,
+        "record_sha256": "b7b42f93f998b65a84d66450cba919c4cfcf6cab1ba7574567374984a3f2a216",
+        "timestamp": "2026-09-18T13:35:32.354Z",
+        "model": "Qwen3.8-Flash-Next-FP8",
+        "cli_version": "2.1.259"
+      },
+      "recorded_after_saved_vllm_replay": true
+    },
+    {
+      "task": "task08",
+      "instance_id": 301,
+      "source": {
+        "path": "/mnt/nas_nfs/home/bince/RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/8d684dd8-d87c-4bb5-9543-80e6f8beae63.jsonl",
+        "bytes": 124787490,
+        "sha256": "c8f7ab1c55c06bf7f8f4fa4e9f4fc3e55eacd31bf6adb471f3a47e863013ae3f"
+      },
+      "first_response": {
+        "line": 11,
+        "record_sha256": "28d23614b79ddac715256e4770b88c0dfca308b22b98575e8e3bb2ac09b6f1d8",
+        "timestamp": "2026-09-18T07:11:08.365Z",
+        "model": "Qwen3.8-Flash-Next-FP8",
+        "cli_version": "2.1.259"
+      },
+      "recorded_after_saved_vllm_replay": true
+    },
+    {
+      "task": "task08",
+      "instance_id": 304,
+      "source": {
+        "path": "/mnt/nas_nfs/home/bince/BEHAVIOR-1K/test_results/task08/instance_304/claude-home/claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/3234697d-b93f-4a8b-87b8-7b72c98034e1.jsonl",
+        "bytes": 163507052,
+        "sha256": "8736d63d5def9e4814c839ab159289c206f31d9fc49af334e5e372799b7b09f2"
+      },
+      "first_response": {
+        "line": 11,
+        "record_sha256": "c4c94005cc7b71ef55cf0a0b5678720007468cf28278fe79834d87009e5495ff",
+        "timestamp": "2026-09-19T12:28:38.484Z",
+        "model": "Qwen3.8-Flash-Next-FP8",
+        "cli_version": "2.1.259"
+      },
+      "recorded_after_saved_vllm_replay": true
+    },
+    {
+      "task": "task08",
+      "instance_id": 306,
+      "source": {
+        "path": "/mnt/nas_nfs/home/bince/RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/b73151ea-7a52-44d9-b1f1-bc9cd1c6a1de.jsonl",
+        "bytes": 161572117,
+        "sha256": "51005a135a83f174092233ef829ef5173e899addce9e439aaa90d1046ad2dfb9"
+      },
+      "first_response": {
+        "line": 11,
+        "record_sha256": "225eec6847c0a3c0738b3e4fbdc58ac2a294b4bd556c569c1662c63cbcceae3b",
+        "timestamp": "2026-09-18T15:46:42.824Z",
+        "model": "Qwen3.8-Flash-Next-FP8",
+        "cli_version": "2.1.259"
+      },
+      "recorded_after_saved_vllm_replay": true
+    },
+    {
+      "task": "task08",
+      "instance_id": 308,
+      "source": {
+        "path": "/mnt/nas_nfs/home/bince/RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/50d96073-c3f1-4839-8f8b-6fbd0f4bcc38.jsonl",
+        "bytes": 178021488,
+        "sha256": "2844192f36b7bcb7098f38cca885bb09616f77b706752c8651fb73653f871e90"
+      },
+      "first_response": {
+        "line": 11,
+        "record_sha256": "df125eee425ccb598fb8ebe20063b7a8057434c55f07eb7485f40d05768dbe9b",
+        "timestamp": "2026-09-18T23:28:27.190Z",
+        "model": "Qwen3.8-Flash-Next-FP8",
+        "cli_version": "2.1.259"
+      },
+      "recorded_after_saved_vllm_replay": true
+    },
+    {
+      "task": "task08",
+      "instance_id": 310,
+      "source": {
+        "path": "/mnt/nas_nfs/home/bince/RoboUI/embodied_claude_code/.claude-home/projects/-mnt-nas-nfs-home-bince-RoboUI-embodied-claude-code/45107895-0575-43e9-9260-06715f8268bd.jsonl",
+        "bytes": 164501957,
+        "sha256": "5f617686b41fcb9a16b74b59304c61406f728ac946f3b5a2976f9cbfd47b22cd"
+      },
+      "first_response": {
+        "line": 11,
+        "record_sha256": "3170baa37f5452962f19057b054a24c484a2135168b8259bdff939ebb63e8c84",
+        "timestamp": "2026-09-19T05:41:39.627Z",
+        "model": "Qwen3.8-Flash-Next-FP8",
+        "cli_version": "2.1.259"
+      },
+      "recorded_after_saved_vllm_replay": true
+    }
+  ],
+  "current_endpoint": {
+    "checked_at": "2026-10-03T20:47:02.357942+08:00",
+    "base_url": "http://100.101.73.1:31000",
+    "/version": {
+      "response_sha256": "ab1ce8b26795433bfd7c0a00054cf19f73d418a13c48b1b0c2315cc2b9bd161c",
+      "value": {
+        "version": "0.28.1rc1.dev202+gffc445f"
+      }
+    },
+    "/v1/models": {
+      "response_sha256": "e4322d93e79fbd6164924d81989f9cbc6bcf7f09ad39a5ca374778877f423d4c",
+      "value": {
+        "data": [
+          {
+            "id": "Qwen3.8-Flash-Next-FP8",
+            "root": "/home/bince/models/models--Qwen--Qwen3.8-Flash-Next-FP8",
+            "parent": null,
+            "max_model_len": 262144
+          }
+        ]
+      }
+    }
+  },
+  "comparisons": {
+    "current_version_matches_september_5_report": true,
+    "current_model_id_and_path_match_september_4_snapshot": true,
+    "all_15_selected_archive_first_responses_follow_saved_vllm_replay": true,
+    "exact_per_episode_server_configuration_verified": false,
+    "historical_and_current_weight_hashes_verified": false,
+    "reproduction_verified": false
+  },
+  "remaining_unknowns": [
+    "Historical and current weight and tokenizer hashes.",
+    "Actual server launch arguments and sampling defaults during each paper rollout.",
+    "Current full server command, runtime configuration and deployment source tree.",
+    "Complete historical inference request bytes and current response equivalence."
+  ],
+  "reference_launcher": {
+    "path": "reference-launcher.sh",
+    "sha256": "f241390a6d2c02d677a54a91405ac547c9e65f6f82fffaacd5ae8c00cf3cdb5b",
+    "status": "Exact recovered host-specific script, preserved as evidence only. Not executed or selected by RoboHarness.",
+    "environment_overrides_possible": true
+  }
+}

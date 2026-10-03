@@ -179,6 +179,23 @@ preserves process identities, native transcript byte-range hashes and actual
 HTTP observations. Final scoring and the held coordinator's normal handoff
 remain pending; this observation is not a task-mean verification.
 
+## Recovered model service history
+
+A separate deployment archive predates the selected paper trajectories.
+Its September 4 snapshot reports SGLang, while the September 5 deployment
+report identifies the replacement as vLLM `0.28.1rc1.dev202+gffc445f`. The
+saved visual replay records 21/21 passes. All 15 selected archived transcripts
+postdate that replay and name the same Qwen model; their hashes were checked
+again. On October 3, the live endpoint reports the September 5 vLLM version,
+the same model and checkpoint path, and a 262144-token context limit.
+
+The [model service audit](../validation_results/model-service-provenance-20261003/README.md)
+preserves the source hashes and original launch script. It does not establish
+which launch arguments or sampling defaults applied to every paper rollout,
+or identical historical/current weights. The saved visual check was not rerun
+and is not a BEHAVIOR mean-Q result. The evidence does not identify a service
+change as the cause of the observed score differences.
+
 ## Archived versus current response timing
 
 A hash-verified comparison of the three completed case-301 native transcripts
