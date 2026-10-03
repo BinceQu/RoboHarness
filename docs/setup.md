@@ -95,6 +95,14 @@ an Anthropic-compatible `/v1/messages` server. The `model_url` is the origin,
 without `/v1`. Authentication is supplied through `ANTHROPIC_API_KEY` or
 `ANTHROPIC_AUTH_TOKEN` in the environment; keys are never committed.
 
+A recovered deployment report names vLLM `0.28.1rc1.dev202+gffc445f`; the current
+validation endpoint reports that same version. The
+[model service evidence](../validation_results/model-service-provenance-20261003/README.md)
+preserves the original host's launch script and distinguishes its defaults
+from verified live settings. The custom serving installation, checkpoint and
+historical weight hashes are not bundled. An identical model name alone does
+not establish equivalent server behavior.
+
 ```bash
 cp configs/example.json configs/local.json
 # Edit data_path, Python executables and model_url for this machine.
