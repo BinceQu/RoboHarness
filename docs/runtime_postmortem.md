@@ -170,6 +170,15 @@ sessions with no additional wall-clock limit. The
 temporary session-only handling of still-running legacy controllers. Removing
 the cutoff does not establish what either truncated case would have scored.
 
+On October 3, task03/306 provided the first live verification that the
+temporary supervisor prevented the old deadline from truncating an active
+case: the original agent and native CLI passed 24 hours, then produced a new
+tool call and result while the monitor advanced another nine steps. The
+[continuation audit](../validation_results/task03-306-r5-past-24h-20261003/README.md)
+preserves process identities, native transcript byte-range hashes and actual
+HTTP observations. Final scoring and the held coordinator's normal handoff
+remain pending; this observation is not a task-mean verification.
+
 ## Archived versus current response timing
 
 A hash-verified comparison of the three completed case-301 native transcripts
