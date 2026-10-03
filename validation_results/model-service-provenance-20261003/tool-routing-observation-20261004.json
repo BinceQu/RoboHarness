@@ -1,0 +1,320 @@
+{
+  "schema": 1,
+  "checked_at": "2026-10-04T04:05:45.844032+08:00",
+  "scope": "Model environment and public v2 tool routing for the two active r5 instances; static route comparison with the r5 launch revision and queued r6 source.",
+  "observations": [
+    {
+      "task": "task03",
+      "instance_id": 306,
+      "native_process": {
+        "pid": 1942529,
+        "start": 143373439,
+        "state": "S",
+        "parent_pid": 1942343,
+        "identity_verified": true
+      },
+      "model_environment": {
+        "QWEN_MODEL": "Qwen3.8-Flash-Next-FP8",
+        "ANTHROPIC_BASE_URL": "http://100.101.73.1:31000"
+      },
+      "http_port": 15073,
+      "session_id": "t03p15073i5-a61b94e1efcc468f",
+      "session_ticks": 23288,
+      "case_source": {
+        "path": "runs/validation-20260930-task03-r5/instance_306/case.json",
+        "sha256": "bab8a6d99c060ca00c3283bc973d5443f7d4633520b755ebd9d7168fb395ddbf"
+      },
+      "catalog_tool_names": [
+        "capture_head_camera",
+        "capture_left_wrist_camera",
+        "capture_right_wrist_camera",
+        "read_depth",
+        "move_chassis_to_floor_point",
+        "move_chassis_to_directly_facing_surface",
+        "adjust_chassis",
+        "adjust_pitch",
+        "adjust_height",
+        "spin_to_facing_point",
+        "open_gripper",
+        "close_gripper",
+        "adjust_left_eef_pose_in_wrist_frame",
+        "adjust_right_eef_pose_in_wrist_frame",
+        "move_point_to_point",
+        "plan_eef_translation_to_uvd_point",
+        "adjust_plan_pose",
+        "move_to_reach_point",
+        "measure_shoulder_distance",
+        "plan_grasp_point_filter",
+        "plan_grasp_point_filter_rgbd",
+        "plan_grasp_point_filter_rgbd_lite",
+        "plan_press_point",
+        "exec_plan_pose",
+        "set_arm_to_grasp_position",
+        "reset_body",
+        "adjust_left_eef_pose_in_head_frame",
+        "adjust_right_eef_pose_in_head_frame",
+        "cut_object",
+        "track_object_distance",
+        "move_tracked_point"
+      ],
+      "selected_tools": [
+        {
+          "name": "plan_grasp_point_filter_rgbd_lite",
+          "endpoint": "/api/v2/plan",
+          "coordinate_system": "qwen3vl_relative_0_1000",
+          "coordinate_range": {
+            "u": [
+              0,
+              1000
+            ],
+            "v": [
+              0,
+              1000
+            ]
+          }
+        },
+        {
+          "name": "track_object_distance",
+          "endpoint": "/api/v2/track_object_distance",
+          "coordinate_system": "Qwen3-VL relative image coordinates 0..1000",
+          "coordinate_range": null
+        }
+      ],
+      "legacy_plan_grasp_advertised": false
+    },
+    {
+      "task": "task08",
+      "instance_id": 308,
+      "native_process": {
+        "pid": 1185651,
+        "start": 157741599,
+        "state": "S",
+        "parent_pid": 1185594,
+        "identity_verified": true
+      },
+      "model_environment": {
+        "QWEN_MODEL": "Qwen3.8-Flash-Next-FP8",
+        "ANTHROPIC_BASE_URL": "http://100.101.73.1:31000"
+      },
+      "http_port": 15078,
+      "session_id": "t08p15078i7-51b00d285df649f1",
+      "session_ticks": 939,
+      "case_source": {
+        "path": "runs/validation-20260930-task08-r5/instance_308/case.json",
+        "sha256": "b23bc89cb04e7b55f77edabfc7141f5922caba83760c7a671a7483c08cd45a25"
+      },
+      "catalog_tool_names": [
+        "capture_head_camera",
+        "capture_left_wrist_camera",
+        "capture_right_wrist_camera",
+        "read_depth",
+        "move_chassis_to_floor_point",
+        "move_chassis_to_directly_facing_surface",
+        "adjust_chassis",
+        "adjust_pitch",
+        "adjust_height",
+        "spin_to_facing_point",
+        "open_gripper",
+        "close_gripper",
+        "adjust_left_eef_pose_in_wrist_frame",
+        "adjust_right_eef_pose_in_wrist_frame",
+        "move_point_to_point",
+        "plan_eef_translation_to_uvd_point",
+        "adjust_plan_pose",
+        "move_to_reach_point",
+        "measure_shoulder_distance",
+        "plan_grasp_point_filter",
+        "plan_grasp_point_filter_rgbd",
+        "plan_grasp_point_filter_rgbd_lite",
+        "plan_press_point",
+        "exec_plan_pose",
+        "set_arm_to_grasp_position",
+        "reset_body",
+        "adjust_left_eef_pose_in_head_frame",
+        "adjust_right_eef_pose_in_head_frame",
+        "cut_object",
+        "track_object_distance",
+        "move_tracked_point"
+      ],
+      "selected_tools": [
+        {
+          "name": "plan_grasp_point_filter_rgbd_lite",
+          "endpoint": "/api/v2/plan",
+          "coordinate_system": "qwen3vl_relative_0_1000",
+          "coordinate_range": {
+            "u": [
+              0,
+              1000
+            ],
+            "v": [
+              0,
+              1000
+            ]
+          }
+        },
+        {
+          "name": "track_object_distance",
+          "endpoint": "/api/v2/track_object_distance",
+          "coordinate_system": "Qwen3-VL relative image coordinates 0..1000",
+          "coordinate_range": null
+        }
+      ],
+      "legacy_plan_grasp_advertised": false
+    }
+  ],
+  "coordinate_label": {
+    "name": "Qwen3-VL",
+    "meaning": "Relative image coordinates with u and v in 0..1000",
+    "configured_agent_model": "Qwen3.8-Flash-Next-FP8"
+  },
+  "rgbd_lite_route": [
+    "The native agent supplies image_id, u and v.",
+    "The harness loads its tool catalog from the owned interface /api/v2/tools.",
+    "The sealed official v2 registry maps plan_grasp_point_filter_rgbd_lite to the official v2 implementation.",
+    "That implementation converts relative coordinates to pixels on the frozen capture and calls the local RGB-D Lite planner and IK routines."
+  ],
+  "legacy_vlm_branch": {
+    "caller": "behavior_interface.skills.plan_grasp._resolve_point",
+    "trigger": "point_source=vlm",
+    "helper": "behavior_interface.skills.plan_grasp_core.run_vlm_on_session",
+    "model": "amazon/nova-premier-v1",
+    "endpoint": "https://openrouter.ai/api/v1/chat/completions",
+    "present_in_observed_v2_catalogs": false
+  },
+  "source_files": [
+    {
+      "path": "interface/behavior_interface/coordinate_contract.py",
+      "sha256": "85dc159ed77010d07e9fbd1103a8ce87979054ecf4291b366942681db9e76a03",
+      "commits": {
+        "r5_start": {
+          "revision": "23fefd0736ad45c7e91631bce2a12abba3e57937",
+          "sha256": "85dc159ed77010d07e9fbd1103a8ce87979054ecf4291b366942681db9e76a03",
+          "matches_current": true
+        },
+        "r6_pin": {
+          "revision": "c4763eb0947adf7f0186834b476a0ec375ee1d1e",
+          "sha256": "85dc159ed77010d07e9fbd1103a8ce87979054ecf4291b366942681db9e76a03",
+          "matches_current": true
+        }
+      }
+    },
+    {
+      "path": "interface/behavior_interface/skills/plan_grasp.py",
+      "sha256": "7a7b7b0ac0e67a663901f3dbeb54954edbc5a923180700d3964ff331991f910d",
+      "commits": {
+        "r5_start": {
+          "revision": "23fefd0736ad45c7e91631bce2a12abba3e57937",
+          "sha256": "7a7b7b0ac0e67a663901f3dbeb54954edbc5a923180700d3964ff331991f910d",
+          "matches_current": true
+        },
+        "r6_pin": {
+          "revision": "c4763eb0947adf7f0186834b476a0ec375ee1d1e",
+          "sha256": "7a7b7b0ac0e67a663901f3dbeb54954edbc5a923180700d3964ff331991f910d",
+          "matches_current": true
+        }
+      }
+    },
+    {
+      "path": "interface/behavior_interface/skills/plan_grasp_core.py",
+      "sha256": "f26838c8ae7694092499559cdf7d5e627e821869587255fe8912b19ae62eab14",
+      "commits": {
+        "r5_start": {
+          "revision": "23fefd0736ad45c7e91631bce2a12abba3e57937",
+          "sha256": "f26838c8ae7694092499559cdf7d5e627e821869587255fe8912b19ae62eab14",
+          "matches_current": true
+        },
+        "r6_pin": {
+          "revision": "c4763eb0947adf7f0186834b476a0ec375ee1d1e",
+          "sha256": "f26838c8ae7694092499559cdf7d5e627e821869587255fe8912b19ae62eab14",
+          "matches_current": true
+        }
+      }
+    },
+    {
+      "path": "interface/behavior_interface_eval_test/tool/official_v2/registry.py",
+      "sha256": "ec13913846008b7eb91cfd70a01414527023269d674f630b96c244746b7a864d",
+      "commits": {
+        "r5_start": {
+          "revision": "23fefd0736ad45c7e91631bce2a12abba3e57937",
+          "sha256": "ec13913846008b7eb91cfd70a01414527023269d674f630b96c244746b7a864d",
+          "matches_current": true
+        },
+        "r6_pin": {
+          "revision": "c4763eb0947adf7f0186834b476a0ec375ee1d1e",
+          "sha256": "ec13913846008b7eb91cfd70a01414527023269d674f630b96c244746b7a864d",
+          "matches_current": true
+        }
+      }
+    },
+    {
+      "path": "interface/behavior_interface_eval_test/tool/official_v2/tools.py",
+      "sha256": "dbbcc90e5a53dd7ef4a17ff77940ea4c515622cb456796f670b749578d332a44",
+      "commits": {
+        "r5_start": {
+          "revision": "23fefd0736ad45c7e91631bce2a12abba3e57937",
+          "sha256": "dbbcc90e5a53dd7ef4a17ff77940ea4c515622cb456796f670b749578d332a44",
+          "matches_current": true
+        },
+        "r6_pin": {
+          "revision": "c4763eb0947adf7f0186834b476a0ec375ee1d1e",
+          "sha256": "dbbcc90e5a53dd7ef4a17ff77940ea4c515622cb456796f670b749578d332a44",
+          "matches_current": true
+        }
+      }
+    },
+    {
+      "path": "interface/behavior_interface_eval_test/tool/official_v2/rgbd_grasp_lite.py",
+      "sha256": "025cd1732c4a58f232910d77aaeee0ed5e091cca74646206280679eb842f6d0b",
+      "commits": {
+        "r5_start": {
+          "revision": "23fefd0736ad45c7e91631bce2a12abba3e57937",
+          "sha256": "025cd1732c4a58f232910d77aaeee0ed5e091cca74646206280679eb842f6d0b",
+          "matches_current": true
+        },
+        "r6_pin": {
+          "revision": "c4763eb0947adf7f0186834b476a0ec375ee1d1e",
+          "sha256": "025cd1732c4a58f232910d77aaeee0ed5e091cca74646206280679eb842f6d0b",
+          "matches_current": true
+        }
+      }
+    },
+    {
+      "path": "harness/claude_code/src/embodied_claude_code/service.py",
+      "sha256": "24ac6a2de099b42aeea34760519801010985d0ec951d5a92a719fde1f9894605",
+      "commits": {
+        "r5_start": {
+          "revision": "23fefd0736ad45c7e91631bce2a12abba3e57937",
+          "sha256": "24ac6a2de099b42aeea34760519801010985d0ec951d5a92a719fde1f9894605",
+          "matches_current": true
+        },
+        "r6_pin": {
+          "revision": "c4763eb0947adf7f0186834b476a0ec375ee1d1e",
+          "sha256": "24ac6a2de099b42aeea34760519801010985d0ec951d5a92a719fde1f9894605",
+          "matches_current": true
+        }
+      }
+    },
+    {
+      "path": "harness/claude_code/src/embodied_claude_code/launcher.py",
+      "sha256": "5ecccaed1ea846cc38b1c7409cbe292da4a3ece728ea71258015851e34e08c4f",
+      "commits": {
+        "r5_start": {
+          "revision": "23fefd0736ad45c7e91631bce2a12abba3e57937",
+          "sha256": "5ecccaed1ea846cc38b1c7409cbe292da4a3ece728ea71258015851e34e08c4f",
+          "matches_current": true
+        },
+        "r6_pin": {
+          "revision": "c4763eb0947adf7f0186834b476a0ec375ee1d1e",
+          "sha256": "5ecccaed1ea846cc38b1c7409cbe292da4a3ece728ea71258015851e34e08c4f",
+          "matches_current": true
+        }
+      }
+    }
+  ],
+  "evidence_limits": [
+    "The model environment and public catalogs were read from the identified active processes and their owned HTTP interfaces.",
+    "This is source inspection and a live configuration snapshot, not a capture of all historical or current network traffic.",
+    "Historical model weights, server arguments and complete task-mean reproduction remain subject to the limitations in the model-service audit and validation report."
+  ],
+  "reproduction_verified": false
+}

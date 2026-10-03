@@ -41,6 +41,24 @@ current configuration. Public host keys matched an existing trusted local
 record, but strict SSH authentication failed. No remote process arguments or
 weight files were read, and no global SSH configuration was changed.
 
+At 04:05 on October 4, process identity checks and model-only environment reads
+for task03/306 and task08/308 confirmed `Qwen3.8-Flash-Next-FP8` with
+`ANTHROPIC_BASE_URL=http://100.101.73.1:31000`. Both live v2 catalogs label image
+coordinates with `Qwen3-VL`, meaning relative `u,v` values in 0..1000. The main
+agent supplies those values; the v2 RGB-D Lite grasp implementation resolves
+them on the frozen capture and calls local geometry and IK routines.
+
+The retained interactive `plan_grasp` helper has a separate `point_source=vlm`
+branch calling `amazon/nova-premier-v1` through OpenRouter. That helper is
+absent from both observed v2 catalogs. The sealed v2 registry binds the selected
+grasp tool directly to its official implementation. The
+[routing observation](tool-routing-observation-20261004.json) records process
+birth identities, the two model environment values, catalog names, selected
+tool metadata and source hashes. All eight inspected tool and harness files
+match the r5 launch revision and r6 source pin byte for byte. This observation
+covers those active configurations and the inspected source routes; it does
+not record all network traffic or establish task-mean reproduction.
+
 ## Recovered launch settings
 
 [reference-launcher.sh](reference-launcher.sh) is a byte-for-byte copy of the
