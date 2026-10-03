@@ -1,6 +1,6 @@
 # GPU validation results
 
-Updated: 2026-10-03T11:44:07+00:00
+Updated: 2026-10-03T19:07:03+00:00
 
 Only fresh official evaluator JSON contributes to new scores. An incomplete
 run has no final mean comparison and is not a successful reproduction claim.
@@ -14,7 +14,7 @@ Archived prompt, budget and runtime fidelity checks still apply.
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- | --- |
 | task01 | complete | not checked | 5/5 | 0.800000 | 0.866667 | — | — | no |
 | task03 | running | alive | 2/5 | 0.142857 | 0.257143 | — | — | no |
-| task08 | running | alive | 2/5 | 0.250000 | 0.400000 | — | — | no |
+| task08 | running | alive | 3/5 | 0.333333 | 0.400000 | — | — | no |
 
 **task01/301: reproduction limitation.** Initial native context is mismatch; the full listing and archived workspace metadata must match. Native workspace Git metadata differs from archive
 
@@ -41,5 +41,7 @@ Archived prompt, budget and runtime fidelity checks still apply.
 **task08/304: reproduction limitation.** Initial native context is mismatch; the full listing and archived workspace metadata must match. Native workspace Git metadata differs from archive
 
 **task08/306: reproduction limitation.** Initial native context is mismatch; the full listing and archived workspace metadata must match. Native workspace Git metadata differs from archive
+
+**task08/308: reproduction limitation.** Initial native context is mismatch; the full listing and archived workspace metadata must match. Native workspace Git metadata differs from archive
 
 Case scores, hashes and failure details are in [report.json](report.json).

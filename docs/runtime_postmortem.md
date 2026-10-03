@@ -177,7 +177,20 @@ tool call and result while the monitor advanced another nine steps. The
 [continuation audit](../validation_results/task03-306-r5-past-24h-20261003/README.md)
 preserves process identities, native transcript byte-range hashes and actual
 HTTP observations. Final scoring and the held coordinator's normal handoff
-remain pending; this observation is not a task-mean verification.
+for task03/306 remain pending; this observation is not a task-mean verification.
+
+On October 4, task08/306 provided the first real completion and handoff for
+this supervisor. The native agent ended normally after about 35 hours and
+13 minutes. The supervisor requested model completion at 02:59:39, validated
+the official Q=0.5 score at 12,651 steps, and resumed the original coordinator
+at 02:59:49. Instance 308 started with a new agent and session on port 15078
+while the same interface and evaluator remained alive. The legacy controller
+labels the existing result evaluator_end; the supervisor events preserve the
+earlier model_done trigger. The
+[completion audit](../validation_results/task08-306-r5-completion-20261004/README.md)
+records both labels, source hashes, process identities and the next native
+session's first tool call. This validates the operational handoff, while r5
+remains diagnostic and the complete task mean is still unverified.
 
 ## Recovered model service history
 

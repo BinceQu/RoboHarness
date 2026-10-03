@@ -1,0 +1,247 @@
+{
+  "schema": 1,
+  "checked_at": "2026-10-04T03:10:59.307394+08:00",
+  "task": "task08",
+  "instance_id": 306,
+  "run": "validation-20260930-task08-r5",
+  "reproduction_verified": false,
+  "official_result": {
+    "path": "runs/validation-20260930-task08-r5/output/json/rearranging_kitchen_furniture_306_0.json",
+    "sha256": "3161269594eba92d5feae599a124b38e11ec091c4476abe83e6deeaa939991bf",
+    "q": 0.5,
+    "steps": 12651,
+    "success": false
+  },
+  "published_result": {
+    "path": "validation_results/gpu5-20260930-r5/task08/rearranging_kitchen_furniture_306_0.json",
+    "sha256": "3161269594eba92d5feae599a124b38e11ec091c4476abe83e6deeaa939991bf"
+  },
+  "archive": {
+    "manifest": {
+      "path": "tasks/task08.json",
+      "sha256": "f580f19f5d5d327bf17ce8751d8b198ba69a937dd8162556e29301b0ea493bbb"
+    },
+    "q": 0.25,
+    "task_mean_q": 0.4,
+    "case_delta_q": 0.25
+  },
+  "budget": {
+    "challenge_year": 2025,
+    "multiplier": 2,
+    "max_steps": 17886
+  },
+  "prompt": {
+    "path": "prompt/task08/v25_62c12d99b1ce.txt",
+    "sha256": "62c12d99b1ce52e6a3e2c9b62c61068d8c10be93cbe3d342c884f6046fd6bd77",
+    "rendered_sha256": "160e897d030e2ae60b80080a3b28c9944e65cd16489d40cee69d63df4e44fe93",
+    "case_source": {
+      "path": "runs/validation-20260930-task08-r5/instance_306/case.json",
+      "sha256": "8c94eb46e2b41ba399e47039d4ce17748fa8ec3e222a8e9d736d848f7469072c"
+    }
+  },
+  "native_result": {
+    "path": "runs/validation-20260930-task08-r5/instance_306/agent.json",
+    "sha256": "48f2a8638becb65a6c9f5d2ceb7ed9d515bf070e1db9900a80fb9a6d7a025f04",
+    "type": "result",
+    "subtype": "success",
+    "is_error": false,
+    "duration_ms": 126785429,
+    "duration_api_ms": 123072958,
+    "num_turns": 417,
+    "stop_reason": "end_turn"
+  },
+  "completion": {
+    "observed_trigger": "model_done",
+    "controller_recorded_finish_reason": "evaluator_end",
+    "note": "The resumed legacy controller found the existing official result and used its evaluator_end label; supervisor events preserve the preceding model_done finish request.",
+    "wall_clock_forced_submission": false,
+    "supervisor_source": {
+      "path": ".local/r5_no_wall_timeout.py",
+      "sha256": "67e18e6af4c2fd59eca0f3c4b8f9b5fad8aa3db324160cdc87a36221dbd98979"
+    },
+    "events_source": {
+      "path": ".local/r5-no-wall-timeout-events.jsonl",
+      "offset": 0,
+      "bytes": 1286,
+      "sha256": "20bfb4109561d7692f0c2ae6dbdbcac3cdbb63b3e1fe3c5fc56839efb733dab2"
+    },
+    "events": [
+      {
+        "timestamp": "2026-10-03T13:46:31+0800",
+        "task": "task08",
+        "action": "legacy_deadline_disabled_for_case",
+        "instance_id": 306,
+        "controller": {
+          "pid": 2833459,
+          "start": "129070896"
+        },
+        "agent": {
+          "pid": 3779769,
+          "start": "145059711"
+        },
+        "pause_evidence": {
+          "sleep_transition_interval_s": 0.005402617854997516,
+          "signal_latency_s": 0.00011794408783316612,
+          "state": "T"
+        }
+      },
+      {
+        "timestamp": "2026-10-04T02:59:39+0800",
+        "task": "task08",
+        "action": "model_done_finish_requested",
+        "instance_id": 306,
+        "request_id": "558257f528fd4f55"
+      },
+      {
+        "timestamp": "2026-10-04T02:59:49+0800",
+        "task": "task08",
+        "action": "official_score_received_then_resume",
+        "instance_id": 306,
+        "q": 0.5,
+        "steps": 12651,
+        "score_sha256": "3161269594eba92d5feae599a124b38e11ec091c4476abe83e6deeaa939991bf",
+        "finish_reason": "model_done"
+      }
+    ]
+  },
+  "handoff": {
+    "instance_id": 308,
+    "session_id": "t08p15078i7-51b00d285df649f1",
+    "case_source": {
+      "path": "runs/validation-20260930-task08-r5/instance_308/case.json",
+      "sha256": "b23bc89cb04e7b55f77edabfc7141f5922caba83760c7a671a7483c08cd45a25"
+    },
+    "port": 15078,
+    "session_ticks": 178,
+    "prior_processes": {
+      "agent": {
+        "pid": 3779769,
+        "expected_start": "145059711",
+        "identity_matches": false,
+        "alive": false
+      },
+      "native": {
+        "pid": 3779819,
+        "expected_start": "145059732",
+        "identity_matches": false,
+        "alive": false
+      }
+    },
+    "current_processes": {
+      "guardian": {
+        "pid": 2845406,
+        "expected_start": "129074014",
+        "state": "S",
+        "parent": 2833459,
+        "start": "129074014",
+        "identity_matches": true,
+        "alive": true
+      },
+      "interface": {
+        "pid": 2845407,
+        "expected_start": "129074015",
+        "state": "S",
+        "parent": 2833459,
+        "start": "129074015",
+        "identity_matches": true,
+        "alive": true
+      },
+      "gate": {
+        "pid": 2845896,
+        "expected_start": "129074216",
+        "state": "S",
+        "parent": 2833459,
+        "start": "129074216",
+        "identity_matches": true,
+        "alive": true
+      },
+      "evaluator": {
+        "pid": 2846092,
+        "expected_start": "129074317",
+        "state": "S",
+        "parent": 2833459,
+        "start": "129074317",
+        "identity_matches": true,
+        "alive": true
+      },
+      "agent": {
+        "pid": 1185594,
+        "expected_start": "157741565",
+        "state": "S",
+        "parent": 2833459,
+        "start": "157741565",
+        "identity_matches": true,
+        "alive": true
+      },
+      "controller": {
+        "pid": 2833459,
+        "expected_start": "129070896",
+        "state": "S",
+        "parent": 3581,
+        "start": "129070896",
+        "identity_matches": true,
+        "alive": true
+      },
+      "native": {
+        "pid": 1185651,
+        "expected_start": "157741599",
+        "state": "S",
+        "parent": 1185594,
+        "start": "157741599",
+        "identity_matches": true,
+        "alive": true
+      }
+    },
+    "native_source": {
+      "path": "runs/validation-20260930-task08-r5/instance_308/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/f511ad66-b614-439c-9143-6f1872a08087.jsonl",
+      "offset": 0,
+      "bytes": 1015256,
+      "sha256": "6831ea2c734eb9ee023b30513393f4439f9bed31ddf421d09743ebd21fe6c5bd"
+    },
+    "first_tool_call": {
+      "timestamp": "2026-10-03T19:03:04.343Z",
+      "name": "mcp__behavior-v2__capture_head_camera",
+      "id": "chatcmpl-tool-9fe7808a3f64f399"
+    },
+    "first_tool_result": {
+      "timestamp": "2026-10-03T19:03:14.419Z",
+      "tool_use_id": "chatcmpl-tool-9fe7808a3f64f399",
+      "is_error": null
+    }
+  },
+  "task_progress": {
+    "finished": 3,
+    "expected": 5,
+    "scores": [
+      {
+        "instance_id": 301,
+        "q": 0.5
+      },
+      {
+        "instance_id": 304,
+        "q": 0.0
+      },
+      {
+        "instance_id": 306,
+        "q": 0.5
+      }
+    ],
+    "partial_mean_q": 0.3333333333333333,
+    "final_mean_q": null,
+    "limits": [
+      "Missing instances 308 and 310",
+      "Instance 304 was wall-clock truncated",
+      "Known r5 native-context differences"
+    ]
+  },
+  "acceptance_check": {
+    "command": "python3 scripts/report_validation.py runs/validation-20260930-task01-r5 runs/validation-20260930-task03-r5 runs/validation-20260930-task08-r5 --output validation_results/gpu5-20260930-r5 --check-live --require-match",
+    "exit_code": 2
+  },
+  "r6": {
+    "state": "waiting_for_r5",
+    "launched": false,
+    "fresh_case_required": "task08/304",
+    "acceptance": "A fresh complete five-case task mean; old scores are not reused"
+  }
+}
