@@ -95,6 +95,12 @@ an Anthropic-compatible `/v1/messages` server. The `model_url` is the origin,
 without `/v1`. Authentication is supplied through `ANTHROPIC_API_KEY` or
 `ANTHROPIC_AUTH_TOKEN` in the environment; keys are never committed.
 
+The `Qwen3-VL` label in v2 tool descriptions names the relative image-coordinate
+convention: `u` and `v` range from 0 to 1000. The configured main agent supplies
+those coordinates to the local RGB-D grasp planner. The
+[tool-routing observation](../validation_results/model-service-provenance-20261003/README.md)
+records the active model configuration and the v2 catalog used for validation.
+
 A recovered deployment report names vLLM `0.28.1rc1.dev202+gffc445f`; the current
 validation endpoint reports that same version. The
 [model service evidence](../validation_results/model-service-provenance-20261003/README.md)
