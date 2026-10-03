@@ -1,0 +1,159 @@
+{
+  "checked_at": "2026-10-03T19:48:35.182671+08:00",
+  "task": "task01",
+  "run_directory": "runs/validation-20260930-task01-r5",
+  "source_revision_at_audit": "f56e3c965a26177eac1553c4cebbc4e17586958b",
+  "status": "complete",
+  "n_finished": 5,
+  "n_expected": 5,
+  "computed_mean_q": 0.8,
+  "runner_mean_q": 0.7999999999999999,
+  "archive_reported_mean_q": 0.8666666666666666,
+  "numeric_mean_difference": -0.06666666666666654,
+  "numeric_mean_matches": false,
+  "reproduction_verified": false,
+  "interpretation": "Completed diagnostic run. The numeric task mean does not match and all five initial native contexts differ from the archive. This is not an accepted reproduction.",
+  "archive_manifest": {
+    "path": "tasks/task01.json",
+    "sha256": "49547f01e48f75389eea198140c21789a575c30553084e1a93592c0228cb7464"
+  },
+  "plan_sha256": "731e1839109b31c839f3a1d3d6f48a7d728deca3004065370e40b6b36fa4d4f9",
+  "summary_sha256": "664820757b94e69f37df0ee375526fe19b1ae9e5fb1c1dce4ecc36647666ff94",
+  "budget": {
+    "protocol": "archived-v391-x2",
+    "challenge_year": 2025,
+    "budget_multiplier": 2,
+    "max_steps": 10535
+  },
+  "prompt_hashes": {
+    "prompt/task01/v4_39be138fa40a.txt": "39be138fa40ae8766fa1c6190fbd5dcbeb526a4091d46b4be3fb519172009249"
+  },
+  "cases": [
+    {
+      "instance_id": 301,
+      "q": 0.6666666666666666,
+      "archive_reported_q": 1.0,
+      "delta_q": -0.33333333333333337,
+      "steps": 7071,
+      "success": false,
+      "finish_reason": "model_done",
+      "source_result": "runs/validation-20260930-task01-r5/output/json/picking_up_trash_301_0.json",
+      "published_result": "validation_results/gpu5-20260930-r5/task01/picking_up_trash_301_0.json",
+      "result_sha256": "432b5442db7d16d3a6fa4cfdfc863851892d5498f6f270342fde290ae5fd5876"
+    },
+    {
+      "instance_id": 304,
+      "q": 0.6666666666666666,
+      "archive_reported_q": 0.3333333333333333,
+      "delta_q": 0.3333333333333333,
+      "steps": 10536,
+      "success": false,
+      "finish_reason": "evaluator_end",
+      "source_result": "runs/validation-20260930-task01-r5/output/json/picking_up_trash_304_0.json",
+      "published_result": "validation_results/gpu5-20260930-r5/task01/picking_up_trash_304_0.json",
+      "result_sha256": "898b7120642c4dc29c464a6ecdf2219a8f41ab39d7e499b66d0045981d20753f"
+    },
+    {
+      "instance_id": 306,
+      "q": 1.0,
+      "archive_reported_q": 1.0,
+      "delta_q": 0.0,
+      "steps": 6017,
+      "success": true,
+      "finish_reason": "evaluator_end",
+      "source_result": "runs/validation-20260930-task01-r5/output/json/picking_up_trash_306_0.json",
+      "published_result": "validation_results/gpu5-20260930-r5/task01/picking_up_trash_306_0.json",
+      "result_sha256": "08276f86145d6cdd8d461070aef1c71b140f07d099be533ad4010174c6f73a3b"
+    },
+    {
+      "instance_id": 308,
+      "q": 0.6666666666666666,
+      "archive_reported_q": 1.0,
+      "delta_q": -0.33333333333333337,
+      "steps": 5484,
+      "success": false,
+      "finish_reason": "model_done",
+      "source_result": "runs/validation-20260930-task01-r5/output/json/picking_up_trash_308_0.json",
+      "published_result": "validation_results/gpu5-20260930-r5/task01/picking_up_trash_308_0.json",
+      "result_sha256": "0df7003a5d6909c53011145287c3afb8a61cfb39defcebaf03d12fa29d9ee176"
+    },
+    {
+      "instance_id": 310,
+      "q": 1.0,
+      "archive_reported_q": 1.0,
+      "delta_q": 0.0,
+      "steps": 6148,
+      "success": true,
+      "finish_reason": "evaluator_end",
+      "source_result": "runs/validation-20260930-task01-r5/output/json/picking_up_trash_310_0.json",
+      "published_result": "validation_results/gpu5-20260930-r5/task01/picking_up_trash_310_0.json",
+      "result_sha256": "5095c32b5a635f836aab69d0b7acf0fcf70c08a2b2c46f2dcd96e6df4115cf85"
+    }
+  ],
+  "native_contexts": [
+    {
+      "instance_id": 301,
+      "state": "mismatch",
+      "reason": "Native workspace Git metadata differs from archive"
+    },
+    {
+      "instance_id": 304,
+      "state": "mismatch",
+      "reason": "Native workspace Git metadata differs from archive"
+    },
+    {
+      "instance_id": 306,
+      "state": "mismatch",
+      "reason": "Native workspace Git metadata differs from archive"
+    },
+    {
+      "instance_id": 308,
+      "state": "mismatch",
+      "reason": "Native workspace Git metadata differs from archive"
+    },
+    {
+      "instance_id": 310,
+      "state": "mismatch",
+      "reason": "Native workspace Git metadata differs from archive"
+    }
+  ],
+  "archive_contract_verified": true,
+  "acceptance_gate": {
+    "command": "python3 scripts/report_validation.py runs/validation-20260930-task01-r5 --output .local/task01-completion-check-20261003 --check-live --require-match",
+    "exit_code": 2,
+    "stdout": "task01: complete, 5/5"
+  },
+  "cleanup": {
+    "checked_at": "2026-10-03T19:47:10.547112+08:00",
+    "service": {
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ActiveState": "inactive",
+      "SubState": "dead"
+    },
+    "gpu5": {
+      "index": 5,
+      "uuid": "GPU-9c3d4c87-a3b6-0095-7934-5b0ca8962e36",
+      "free_mib": 16947
+    },
+    "task01_gpu_pids_absent": true,
+    "checked_task01_gpu_pids": [
+      2834060,
+      2836167,
+      3014514
+    ],
+    "task01_ports": [
+      15071,
+      16071,
+      17071
+    ],
+    "task01_ports_free": true
+  },
+  "queued_retest": {
+    "status": "waiting_for_r5",
+    "source_revision": "c4763eb0947adf7f0186834b476a0ec375ee1d1e",
+    "scope": "All five archived instances for each of task01, task03, task08 in new runs; task03/301 and task08/304 explicitly require fresh untruncated evaluations."
+  }
+}

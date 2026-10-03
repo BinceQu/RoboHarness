@@ -1,7 +1,7 @@
 # Release validation
 
 **The three requested task means have not yet been verified.** This status
-snapshot was checked on October 3, 2026 at 11:21 Asia/Shanghai. The
+snapshot was checked on October 3, 2026 at 19:47 Asia/Shanghai. The
 [live r5 report](../validation_results/gpu5-20260930-r5/README.md) records
 completed official scores; a running process or a passing software test is
 not evidence that a task mean matches.
@@ -42,31 +42,38 @@ The selected tasks and immutable archive budgets are:
 | task03 | 301, 304, 306, 308, 310 | 27392 | 0.2571428571428571 |
 | task08 | 301, 304, 306, 308, 310 | 17886 | 0.4 |
 
-At the snapshot time, all three r5 controllers, evaluators and active agents
-were alive with their recorded process identities. Task01 had completed 4/5
-cases and was running instance 310; task03 and task08 had completed 2/5 each
-and were running instance 306. Completed official scores were:
+At the snapshot time, task01 had completed all 5/5 r5 cases and its service
+had exited successfully. Its recorded GPU processes and listeners were
+released. Task03 and task08 had completed 2/5 each and were running instance
+306; their evaluators and active agents were alive with their recorded
+process identities. Completed official scores were:
 
-| Task | Instance 301 | Instance 304 | Instance 306 | Instance 308 |
-| --- | ---: | ---: | ---: | ---: |
-| task01 | 2/3 | 2/3 | 1 | 2/3 |
-| task03 | 0 (wall-clock cutoff) | 2/7 | pending | pending |
-| task08 | 1/2 | 0 (wall-clock cutoff) | pending | pending |
+| Task | Instance 301 | Instance 304 | Instance 306 | Instance 308 | Instance 310 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| task01 | 2/3 | 2/3 | 1 | 2/3 | 1 |
+| task03 | 0 (wall-clock cutoff) | 2/7 | pending | pending | pending |
+| task08 | 1/2 | 0 (wall-clock cutoff) | pending | pending | pending |
 
 Task01/308 ended by model decision at 5,484 steps. Its
 [outcome audit](../validation_results/task01-308-r5-outcome-20261003/README.md)
 traces the lost blue can to a transport plan executed through the tool that
 opens its selected gripper before motion, followed by the archived 0.5 m
-hand-in rule. The four completed task01 cases average 0.75; even a perfect
-last case would yield only 0.80 against the 0.866666667 target. This upper bound
-already rules out a task01 mean match for r5, while instance 310 continues.
+hand-in rule. Instance 310 subsequently completed at 6,148 steps with Q=1.0
+and `evaluator_end`. The full task01 mean is **0.80**, below its
+0.8666666666666666 target by 0.06666666666666654. The differences for 301 and
+304 cancel, leaving the net deficit from 308. The
+[completion audit](../validation_results/task01-r5-complete-20261003/README.md)
+verifies all five official score hashes, the arithmetic, normal cleanup and
+the acceptance command's expected exit code 2. This is a measured final
+diagnostic mean, not a successful reproduction.
 
 Task03/301 was truncated at 10,024 of 27,392 steps, and task08/304 at
 12,089 of 17,886 steps, by the old 24-hour cap. Their recorded Q=0 scores
 remain diagnostic evidence; neither is a valid full-budget reproduction.
 The [task03 cutoff audit](../validation_results/task03-301-r5-timeout-20261001/README.md)
 and [r5 report](../validation_results/gpu5-20260930-r5/README.md) retain the
-official scores and hashes. These partial results establish no final task mean.
+official scores and hashes. These two partial task results establish no final
+mean for task03 or task08.
 Known native-context differences also prevent r5 from verifying reproduction,
 even if a resulting mean happens to match.
 
@@ -88,7 +95,7 @@ handoff for this held case remain pending. This supervisor is a host-specific
 measure for diagnostic r5, not a dependency of the packaged runner or a claim
 that those runs reproduce the archive.
 
-The corrected r6 evaluation is queued behind those runs and has not launched
+The corrected r6 evaluation is queued behind the remaining r5 runs and has not launched
 as of this snapshot. It uses an independent checkout pinned to
 `c4763eb0947adf7f0186834b476a0ec375ee1d1e` and the BEHAVIOR v3.9.1 submodule
 at `26f2c7ef7b9cf96bd0414f81e1e751e493762779`. Its reporter uses the task-mean

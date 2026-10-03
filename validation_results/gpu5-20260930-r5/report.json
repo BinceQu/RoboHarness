@@ -1,14 +1,14 @@
 {
-  "updated_at_utc": "2026-10-02T18:07:21+00:00",
+  "updated_at_utc": "2026-10-03T11:44:07+00:00",
   "runs": [
     {
       "task": "task01",
       "task_name": "picking_up_trash",
       "run_directory": "validation-20260930-task01-r5",
-      "status": "running",
+      "status": "complete",
       "model": "Qwen3.8-Flash-Next-FP8",
       "harness": "claude_code",
-      "n_finished": 4,
+      "n_finished": 5,
       "n_expected": 5,
       "cases": [
         {
@@ -58,11 +58,23 @@
           "finish_reason": "model_done",
           "result_sha256": "0df7003a5d6909c53011145287c3afb8a61cfb39defcebaf03d12fa29d9ee176",
           "source_result": "output/json/picking_up_trash_308_0.json"
+        },
+        {
+          "instance_id": 310,
+          "q": 1.0,
+          "archive_q": 1.0,
+          "raw_reference_q": 1.0,
+          "delta_archive_q": 0.0,
+          "steps": 6148,
+          "success": true,
+          "finish_reason": "evaluator_end",
+          "result_sha256": "5095c32b5a635f836aab69d0b7acf0fcf70c08a2b2c46f2dcd96e6df4115cf85",
+          "source_result": "output/json/picking_up_trash_310_0.json"
         }
       ],
-      "mean_q": 0.7499999999999999,
+      "mean_q": 0.7999999999999999,
       "archive_mean_q": 0.8666666666666666,
-      "completed_archive_mean_q": 0.8333333333333333,
+      "completed_archive_mean_q": 0.8666666666666666,
       "delta_archive_mean_q": null,
       "matches_archive_mean": null,
       "matches_archive_cases": null,
@@ -74,38 +86,8 @@
       "archive_contract_verified": true,
       "error": null,
       "superseded": null,
-      "reported_status": "running",
-      "local_liveness": {
-        "state": "alive",
-        "failed_roles": [],
-        "processes": {
-          "guardian": {
-            "pid": 2834056,
-            "expected_start": "129070981",
-            "state": "alive"
-          },
-          "interface": {
-            "pid": 2834060,
-            "expected_start": "129070981",
-            "state": "alive"
-          },
-          "gate": {
-            "pid": 2835467,
-            "expected_start": "129071183",
-            "state": "alive"
-          },
-          "evaluator": {
-            "pid": 2836167,
-            "expected_start": "129071284",
-            "state": "alive"
-          },
-          "controller": {
-            "pid": 2833423,
-            "expected_start": "129070891",
-            "state": "alive"
-          }
-        }
-      },
+      "reported_status": "complete",
+      "local_liveness": null,
       "reproduction_caveats": [
         {
           "instance_id": 301,
