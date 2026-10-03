@@ -25,6 +25,22 @@ BEHAVIOR task result, does not use mean Q, and cannot replace the pending
 five-instance GPU evaluations. The older coordinate-adapter discussion in
 the historical report is superseded and is not used to configure this release.
 
+## Current service observation
+
+At 21:08 on October 3, the endpoint's metrics reported 11 running requests,
+four waiting requests and KV cache utilization of about 84% for engine 0.
+These counts cover the whole service, including unrelated workloads. The
+[saved observation](current-runtime-observation.json) retains the selected
+metric lines. It also confirms prefix caching and GPU memory utilization
+0.88, two settings present in the recovered script. This single snapshot
+does not isolate request latency or explain any Q-score difference.
+
+The running service's full command and sequence limit remain unverified; the
+historical script's default of four sequences must not be treated as its
+current configuration. Public host keys matched an existing trusted local
+record, but strict SSH authentication failed. No remote process arguments or
+weight files were read, and no global SSH configuration was changed.
+
 ## Recovered launch settings
 
 [reference-launcher.sh](reference-launcher.sh) is a byte-for-byte copy of the

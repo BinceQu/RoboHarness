@@ -1,0 +1,42 @@
+{
+  "checked_at": "2026-10-03T21:08:12.339617+08:00",
+  "endpoint": "http://100.101.73.1:31000",
+  "scope": "Read-only public service metadata and aggregate metrics. No inference, configuration change, queue mutation or benchmark restart.",
+  "metadata_routes": [
+    "/version",
+    "/health",
+    "/v1/models"
+  ],
+  "selected_metrics": [
+    "vllm:num_requests_running{engine=\"0\",model_name=\"Qwen3.8-Flash-Next-FP8\"} 11.0",
+    "vllm:num_requests_waiting{engine=\"0\",model_name=\"Qwen3.8-Flash-Next-FP8\"} 4.0",
+    "vllm:kv_cache_usage_perc{engine=\"0\",model_name=\"Qwen3.8-Flash-Next-FP8\"} 0.8397790055248618",
+    "vllm:cache_config_info{_block_size_resolved=\"True\",block_size=\"4\",cache_dtype=\"auto\",enable_prefix_caching=\"True\",engine=\"0\",gpu_memory_utilization=\"0.88\",is_attention_free=\"False\",kv_cache_dtype_skip_layers=\"[]\",kv_cache_layout=\"None\",kv_cache_max_concurrency=\"5.11864406779661\",kv_cache_memory_bytes=\"None\",kv_cache_size_tokens=\"1341821\",kv_offloading_backend=\"native\",kv_offloading_size=\"None\",kv_sharing_fast_prefill=\"False\",mamba_block_size=\"16\",mamba_cache_dtype=\"auto\",mamba_cache_mode=\"align\",mamba_page_size_padded=\"None\",mamba_ssm_cache_dtype=\"float32\",num_cpu_blocks=\"None\",num_gpu_blocks=\"906\",num_gpu_blocks_override=\"None\",prefix_cache_retention_interval=\"0\",prefix_caching_hash_algo=\"sha256\",prefix_match_unit=\"None\",replayssm_buffer_len=\"16\",skip_page_size_padded=\"None\",sliding_window=\"None\",use_kda_recoverssm=\"False\",use_replayssm=\"False\",user_specified_block_size=\"False\",user_specified_mamba_block_size=\"False\"} 1.0"
+  ],
+  "parsed_observation": {
+    "engine": "0",
+    "model": "Qwen3.8-Flash-Next-FP8",
+    "running_requests": 11,
+    "waiting_requests": 4,
+    "kv_cache_usage_fraction": 0.8397790055248618,
+    "enable_prefix_caching": true,
+    "gpu_memory_utilization": 0.88
+  },
+  "limits": [
+    "Request counts cover the whole model service, including unrelated workloads; they are not counts of the two active RoboHarness cases.",
+    "One aggregate snapshot does not isolate per-request latency or prove the cause of any task Q-score difference.",
+    "The recovered launcher's max-num-seqs default is 4; environment overrides and the current actual sequence limit remain unverified. Do not infer the current limit from the recorded default or request counters.",
+    "The metadata API does not expose the full launch command, historical sampling parameters or weight hashes."
+  ],
+  "ssh_observation": {
+    "host_key_checked_at": "2026-10-03T21:04:41.872291+08:00",
+    "target_host_key_matched_existing_trusted_key": true,
+    "strict_host_key_checking": true,
+    "authentication_result": "Permission denied (publickey,password).",
+    "authentication_exit_code": 255,
+    "session_local_known_hosts": true,
+    "global_configuration_changed": false,
+    "private_key_contents_accessed": false,
+    "effect": "Remote process arguments and weight files could not be read."
+  }
+}
