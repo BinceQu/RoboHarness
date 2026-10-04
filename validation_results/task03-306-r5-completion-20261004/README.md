@@ -47,3 +47,7 @@ prompt hashes, native completion metadata, supervisor event prefix, process
 birth identities and the next session's first call/result pair. The
 [official result](../gpu5-20260930-r5/task03/cleaning_up_plates_and_food_306_0.json)
 and [live report](../gpu5-20260930-r5/README.md) retain the new score.
+
+The separate [outcome audit](../task03-306-r5-outcome-20261004/README.md)
+compares the completed trajectory with the archive and documents its
+second confirmed grasp of a plate during the bowl-only task.

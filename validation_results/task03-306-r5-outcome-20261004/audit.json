@@ -1,0 +1,693 @@
+{
+  "checked_at": "2026-10-04T13:14:57.016537+08:00",
+  "task": "task03",
+  "instance_id": 306,
+  "run": "validation-20260930-task03-r5",
+  "reproduction_verified": false,
+  "scope": "Offline outcome diagnosis; no prompt, policy, simulator, scoring, queued source or active rollout changes.",
+  "official": {
+    "path": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task03-r5/output/json/cleaning_up_plates_and_food_306_0.json",
+    "sha256": "3ebbdeb9ff690fe4fef4cfa018c5a140057d526265fe6aa524a1453b0764acc9",
+    "bytes": 564,
+    "q": 0.14285714285714285,
+    "steps": 25852
+  },
+  "archive_official": {
+    "path": "/mnt/nas_nfs/home/bince/RoboHarness/reference_results/task03/cleaning_up_plates_and_food_306_0.json",
+    "sha256": "6ebf346769226fbe13d0a051d699bbd0fe9c2b39219b96496667e18e1643dfaf",
+    "bytes": 560,
+    "q": 0.2857142857142857,
+    "steps": 13336
+  },
+  "case_source": {
+    "path": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task03-r5/instance_306/case.json",
+    "sha256": "bab8a6d99c060ca00c3283bc973d5443f7d4633520b755ebd9d7168fb395ddbf",
+    "bytes": 1216
+  },
+  "prompt_source": {
+    "path": "/mnt/nas_nfs/home/bince/RoboHarness/prompt/task03/v4_11b5ae18163a.txt",
+    "sha256": "11b5ae18163af2168ba6603649782a2c4ab6fd1ca41eff4b9bb7ed001671b4b6",
+    "bytes": 4912
+  },
+  "rendered_prompt_sha256": "0792fa213daea7ad11784a2ff931e1fff55b35b379bc54b80a468a23049bf48d",
+  "archive_native": {
+    "source": {
+      "path": "/mnt/nas_nfs/home/bince/BEHAVIOR-1K/test_results/task03/06_claude_transcripts/claude_t03p15063i5-09180547_306.jsonl",
+      "sha256": "abf46514cabced8b430ad49a4918f67d32b0bba372b77338c3a8376527980137",
+      "bytes": 112745462
+    },
+    "tool_calls": 330,
+    "tool_counts": {
+      "mcp__behavior-v2__capture_head_camera": 18,
+      "mcp__behavior-v2__adjust_chassis": 62,
+      "mcp__behavior-v2__spin_to_facing_point": 7,
+      "mcp__behavior-v2__move_to_reach_point": 10,
+      "mcp__behavior-v2__reset_body": 8,
+      "mcp__behavior-v2__activate_skill": 6,
+      "mcp__behavior-v2__capture_left_wrist_camera": 9,
+      "mcp__behavior-v2__capture_right_wrist_camera": 2,
+      "mcp__behavior-v2__set_arm_to_grasp_position": 21,
+      "mcp__behavior-v2__plan_grasp_point_filter_rgbd_lite": 33,
+      "mcp__behavior-v2__exec_plan_pose": 21,
+      "mcp__behavior-v2__close_gripper": 18,
+      "mcp__behavior-v2__open_gripper": 16,
+      "mcp__behavior-v2__deactivate_skill": 6,
+      "mcp__behavior-v2__track_object_distance": 14,
+      "mcp__behavior-v2__adjust_left_eef_pose_in_head_frame": 11,
+      "mcp__behavior-v2__move_tracked_point": 37,
+      "mcp__behavior-v2__adjust_pitch": 10,
+      "mcp__behavior-v2__adjust_height": 5,
+      "mcp__behavior-v2__measure_shoulder_distance": 2,
+      "mcp__behavior-v2__adjust_plan_pose": 4,
+      "mcp__behavior-hyphen-v2__plan_grasp_point_filter_rgbd_lite": 1,
+      "mcp__behavior-v2__adjust_left_eef_pose_in_wrist_frame": 9
+    },
+    "compactions": 7,
+    "first_user_prompt": {
+      "line": 5,
+      "record_sha256": "a5e76224cd0e4b66265214ae324368a74d492d015863ab8bc6e147916e1b8a47",
+      "timestamp": "2026-09-17T21:47:54.726Z",
+      "sha256": "11b5ae18163af2168ba6603649782a2c4ab6fd1ca41eff4b9bb7ed001671b4b6"
+    },
+    "selected_plan": {}
+  },
+  "r5_native": {
+    "source": {
+      "path": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task03-r5/instance_306/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/a5d15a0c-59a7-4ec9-a5ec-af7c86dea3c0.jsonl",
+      "sha256": "2d3e35dbeed15e4c1831b2a256229d4b88acc8d637d8b2b91051c83dcf7fbcba",
+      "bytes": 195643367
+    },
+    "tool_calls": 532,
+    "tool_counts": {
+      "mcp__behavior-v2__capture_head_camera": 12,
+      "mcp__behavior-v2__adjust_chassis": 181,
+      "mcp__behavior-v2__spin_to_facing_point": 6,
+      "mcp__behavior-v2__move_to_reach_point": 11,
+      "mcp__behavior-v2__reset_body": 11,
+      "mcp__behavior-v2__activate_skill": 4,
+      "mcp__behavior-v2__capture_left_wrist_camera": 7,
+      "mcp__behavior-v2__capture_right_wrist_camera": 4,
+      "mcp__behavior-v2__set_arm_to_grasp_position": 23,
+      "mcp__behavior-v2__plan_grasp_point_filter_rgbd_lite": 35,
+      "mcp__behavior-v2__exec_plan_pose": 18,
+      "mcp__behavior-v2__close_gripper": 22,
+      "mcp__behavior-v2__adjust_pitch": 27,
+      "mcp__behavior-chassis-placeholder": 1,
+      "mcp__behavior-v2__measure_shoulder_distance": 6,
+      "mcp__behavior-v2__track_object_distance": 64,
+      "mcp__behavior-v2__move_tracked_point": 8,
+      "mcp__behavior-v2__adjust_right_eef_pose_in_wrist_frame": 1,
+      "mcp__behavior-v2__open_gripper": 19,
+      "mcp__behavior-v2__adjust_left_eef_pose_in_head_frame": 34,
+      "mcp__behavior-v2__adjust_left_eef_pose_in_wrist_frame": 13,
+      "mcp__behavior-v2__adjust_right_eef_pose_in_head_frame": 16,
+      "mcp__behavior-v2__deactivate_skill": 4,
+      "mcp__behavior-v2__adjust_height": 5
+    },
+    "compactions": 11,
+    "first_user_prompt": {
+      "line": 5,
+      "record_sha256": "10ace72a73e2e40887c131e4697e8e45def53822ed2f8758a3b051dfd24e0d96",
+      "timestamp": "2026-10-02T03:05:25.766Z",
+      "sha256": "0792fa213daea7ad11784a2ff931e1fff55b35b379bc54b80a468a23049bf48d"
+    },
+    "selected_plan": {
+      "call": {
+        "line": 3040,
+        "record_sha256": "24a896dcfb6fe554d59f64363ae5fb8c3acb2d291f58c84adcb79d15efe8c408",
+        "timestamp": "2026-10-03T19:59:14.604Z",
+        "id": "chatcmpl-tool-bdefab54b0e7652f",
+        "name": "mcp__behavior-v2__plan_grasp_point_filter_rgbd_lite",
+        "arguments": {
+          "image_id": "img_0390",
+          "plan_arm": "left",
+          "seed": 11,
+          "u": 355,
+          "v": 435
+        }
+      },
+      "result": {
+        "line": 3041,
+        "record_sha256": "743ab1b5f934d5080894efa176c04d20c526fe87110c0de4a396a2f5b133c15c",
+        "timestamp": "2026-10-03T20:00:13.444Z",
+        "tool_use_id": "chatcmpl-tool-bdefab54b0e7652f",
+        "is_error": null
+      }
+    }
+  },
+  "recorder_source": {
+    "path": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task03-r5/instance_306/trajectory/claude-20261002T030525Z-401b60f9/turns.jsonl",
+    "sha256": "e35ba12b72fd586d4981eb6cb986b1db80ebe03a94999787d21dc1b3bd771c17",
+    "bytes": 17607661
+  },
+  "confirmed_grasp_turns": [
+    245,
+    448
+  ],
+  "selected_turns": {
+    "281": {
+      "turn_index": 281,
+      "record_sha256": "e208240323fb1e074f6636d499e98627143d122d209bee8a18f59e905d29c76c",
+      "completed_at": "2026-10-03T01:49:24.471+00:00",
+      "tool_call": {
+        "name": "open_gripper",
+        "arguments": {
+          "arm": "right"
+        }
+      },
+      "is_error": false,
+      "response": {
+        "ok": true,
+        "arm": "right",
+        "image_id": "img_0270"
+      },
+      "image_geometry": {
+        "image_id": "img_0270",
+        "view": "head",
+        "width": 720,
+        "height": 720,
+        "source_width": 720,
+        "source_height": 720,
+        "sha256": "58dbab083e01d7ca50d86b041801436b1cedbf906381673d5d29a721656ac405",
+        "clickable": true,
+        "coordinate_system": "image_pixels_720x720"
+      },
+      "media": [
+        {
+          "label": "rgb_overlay_path",
+          "role": "path_overlay",
+          "mime_type": "image/jpeg",
+          "sha256": "58dbab083e01d7ca50d86b041801436b1cedbf906381673d5d29a721656ac405",
+          "bytes": 90922,
+          "width": 720,
+          "height": 720,
+          "source_width": 720,
+          "source_height": 720,
+          "path": "media/58dbab083e01d7ca50d86b041801436b1cedbf906381673d5d29a721656ac405.jpg"
+        }
+      ]
+    },
+    "442": {
+      "turn_index": 442,
+      "record_sha256": "2983d77e157cd4425291eda66b5e707389433d3372bd46ce88af9e4d4cfbbd83",
+      "completed_at": "2026-10-03T19:26:36.986+00:00",
+      "tool_call": {
+        "name": "set_arm_to_grasp_position",
+        "arguments": {
+          "arm": "left",
+          "gripper": "open"
+        }
+      },
+      "is_error": false,
+      "response": {
+        "ok": true,
+        "image_id": "img_0390",
+        "direct_simulator_mutation": false
+      },
+      "image_geometry": {
+        "image_id": "img_0390",
+        "view": "head",
+        "width": 720,
+        "height": 720,
+        "source_width": 720,
+        "source_height": 720,
+        "sha256": "776dd4004bb811ca717482adc9298138a4dff48598ed65557fe34c7d4ec3d2c0",
+        "clickable": true,
+        "coordinate_system": "image_pixels_720x720"
+      },
+      "media": [
+        {
+          "label": "rgb_path",
+          "role": "raw_rgb",
+          "mime_type": "image/jpeg",
+          "sha256": "776dd4004bb811ca717482adc9298138a4dff48598ed65557fe34c7d4ec3d2c0",
+          "bytes": 101422,
+          "width": 720,
+          "height": 720,
+          "source_width": 720,
+          "source_height": 720,
+          "path": "media/776dd4004bb811ca717482adc9298138a4dff48598ed65557fe34c7d4ec3d2c0.jpg"
+        }
+      ]
+    },
+    "446": {
+      "turn_index": 446,
+      "record_sha256": "a97ab7868ae3ba98931628f23adc42d7b2c1e6c4fe48b1abd4533e5d038d86bb",
+      "completed_at": "2026-10-03T20:00:13.144+00:00",
+      "tool_call": {
+        "name": "plan_grasp_point_filter_rgbd_lite",
+        "arguments": {
+          "image_id": "img_0390",
+          "u": 355,
+          "v": 435,
+          "plan_arm": "left",
+          "seed": 11
+        }
+      },
+      "is_error": false,
+      "response": {
+        "ok": true,
+        "arm": "left",
+        "plan_arm": "left",
+        "plan_id": "plan_0015",
+        "input_image_id": "img_0390",
+        "image_id": "img_0391",
+        "object_identity_used": false,
+        "segmentation_used": false,
+        "simulator_mesh_used": false,
+        "direct_simulator_mutation": false,
+        "hit": {
+          "input_pixel": [
+            355,
+            435
+          ],
+          "depth_pixel": [
+            354,
+            436
+          ],
+          "source": "raw_observed_depth"
+        }
+      },
+      "image_geometry": {
+        "image_id": "img_0391",
+        "view": "head",
+        "width": 720,
+        "height": 720,
+        "source_width": 720,
+        "source_height": 720,
+        "sha256": "0d53215aae52b423cd5b648c2c23a300de485caec473578d81592630cb1b33cd",
+        "clickable": true,
+        "coordinate_system": "image_pixels_720x720"
+      },
+      "media": [
+        {
+          "label": "marked_image_url",
+          "role": "planning_overlay",
+          "mime_type": "image/jpeg",
+          "sha256": "0d53215aae52b423cd5b648c2c23a300de485caec473578d81592630cb1b33cd",
+          "bytes": 104509,
+          "width": 720,
+          "height": 720,
+          "source_width": 720,
+          "source_height": 720,
+          "path": "media/0d53215aae52b423cd5b648c2c23a300de485caec473578d81592630cb1b33cd.jpg"
+        }
+      ]
+    },
+    "447": {
+      "turn_index": 447,
+      "record_sha256": "b46c66176235df851d9976e731d26280b81cf002e84b912773c15dfbe6984430",
+      "completed_at": "2026-10-03T20:03:50.345+00:00",
+      "tool_call": {
+        "name": "exec_plan_pose",
+        "arguments": {
+          "plan_id": "plan_0015",
+          "arm": "left",
+          "back_m": "0.1"
+        }
+      },
+      "is_error": false,
+      "response": {
+        "ok": true,
+        "arm": "left",
+        "plan_id": "plan_0015",
+        "image_id": "img_0392",
+        "direct_simulator_mutation": false
+      },
+      "image_geometry": {
+        "image_id": "img_0392",
+        "view": "left_wrist",
+        "width": 480,
+        "height": 480,
+        "source_width": 480,
+        "source_height": 480,
+        "sha256": "63becf97f72d9c62b330dad7f3f8536691247ae045f2a5db503c1eb18119fd15",
+        "clickable": false,
+        "coordinate_system": "observation_only"
+      },
+      "media": [
+        {
+          "label": "rgb_overlay_path",
+          "role": "grasp_volume_overlay",
+          "mime_type": "image/png",
+          "sha256": "63becf97f72d9c62b330dad7f3f8536691247ae045f2a5db503c1eb18119fd15",
+          "bytes": 178960,
+          "width": 480,
+          "height": 480,
+          "source_width": 480,
+          "source_height": 480,
+          "path": "media/63becf97f72d9c62b330dad7f3f8536691247ae045f2a5db503c1eb18119fd15.png"
+        }
+      ]
+    },
+    "448": {
+      "turn_index": 448,
+      "record_sha256": "e8b1eac5333f19bbf9443cb9339ef36c56cc580a50bf5bbdde4ceec3aa2daceb",
+      "completed_at": "2026-10-03T20:07:04.048+00:00",
+      "tool_call": {
+        "name": "close_gripper",
+        "arguments": {
+          "arm": "left"
+        }
+      },
+      "is_error": false,
+      "response": {
+        "ok": true,
+        "arm": "left",
+        "image_id": "img_0393",
+        "grasp_confirmed": true,
+        "failure_reason": "bilateral_contact"
+      },
+      "image_geometry": {
+        "image_id": "img_0393",
+        "view": "left_wrist",
+        "width": 480,
+        "height": 480,
+        "source_width": 480,
+        "source_height": 480,
+        "sha256": "184c5448c29235382732697bab3e7c4d128f1080866011a376cbc512f3b4fe4b",
+        "clickable": false,
+        "coordinate_system": "observation_only"
+      },
+      "media": [
+        {
+          "label": "rgb_overlay_path",
+          "role": "grasp_volume_overlay",
+          "mime_type": "image/png",
+          "sha256": "184c5448c29235382732697bab3e7c4d128f1080866011a376cbc512f3b4fe4b",
+          "bytes": 185408,
+          "width": 480,
+          "height": 480,
+          "source_width": 480,
+          "source_height": 480,
+          "path": "media/184c5448c29235382732697bab3e7c4d128f1080866011a376cbc512f3b4fe4b.png"
+        }
+      ]
+    },
+    "449": {
+      "turn_index": 449,
+      "record_sha256": "ddeba6ea85be1a3f393f0a24d521c4bf6e1b28fdccb0a85c165f2a4e4591f345",
+      "completed_at": "2026-10-03T20:10:12.475+00:00",
+      "tool_call": {
+        "name": "capture_head_camera",
+        "arguments": {}
+      },
+      "is_error": false,
+      "response": {
+        "ok": true,
+        "image_id": "img_0394"
+      },
+      "image_geometry": {
+        "image_id": "img_0394",
+        "view": "head",
+        "width": 720,
+        "height": 720,
+        "source_width": 720,
+        "source_height": 720,
+        "sha256": "53a381955e22d7157cd19cb90da96defbe2cf3b4bd71696e4c7e7e4d4569368f",
+        "clickable": true,
+        "coordinate_system": "image_pixels_720x720"
+      },
+      "media": [
+        {
+          "label": "rgb_overlay_path",
+          "role": "path_overlay",
+          "mime_type": "image/jpeg",
+          "sha256": "53a381955e22d7157cd19cb90da96defbe2cf3b4bd71696e4c7e7e4d4569368f",
+          "bytes": 113521,
+          "width": 720,
+          "height": 720,
+          "source_width": 720,
+          "source_height": 720,
+          "path": "media/53a381955e22d7157cd19cb90da96defbe2cf3b4bd71696e4c7e7e4d4569368f.jpg"
+        }
+      ]
+    },
+    "514": {
+      "turn_index": 514,
+      "record_sha256": "bc898209b012c2a9d6a0431a9041c0cc1298e3371cbcabd40a34ce5ca2e53355",
+      "completed_at": "2026-10-04T03:12:23.828+00:00",
+      "tool_call": {
+        "name": "open_gripper",
+        "arguments": {
+          "arm": "left"
+        }
+      },
+      "is_error": false,
+      "response": {
+        "ok": true,
+        "arm": "left",
+        "image_id": "img_0451"
+      },
+      "image_geometry": {
+        "image_id": "img_0451",
+        "view": "head",
+        "width": 720,
+        "height": 720,
+        "source_width": 720,
+        "source_height": 720,
+        "sha256": "eba260255b8a7aee6fbffeaf22e8a1b51e20a43838816f0fa47d53ff1578b430",
+        "clickable": true,
+        "coordinate_system": "image_pixels_720x720"
+      },
+      "media": [
+        {
+          "label": "rgb_overlay_path",
+          "role": "path_overlay",
+          "mime_type": "image/jpeg",
+          "sha256": "eba260255b8a7aee6fbffeaf22e8a1b51e20a43838816f0fa47d53ff1578b430",
+          "bytes": 115878,
+          "width": 720,
+          "height": 720,
+          "source_width": 720,
+          "source_height": 720,
+          "path": "media/eba260255b8a7aee6fbffeaf22e8a1b51e20a43838816f0fa47d53ff1578b430.jpg"
+        }
+      ]
+    },
+    "523": {
+      "turn_index": 523,
+      "record_sha256": "be988bc58f769c603a33bfc4b7a25e93412d5b96ac1c48f643e45d780b3bd634",
+      "completed_at": "2026-10-04T04:17:06.280+00:00",
+      "tool_call": {
+        "name": "adjust_chassis",
+        "arguments": {
+          "spin": 14
+        }
+      },
+      "is_error": false,
+      "response": {
+        "ok": true,
+        "image_id": "img_0457"
+      },
+      "image_geometry": {
+        "image_id": "img_0457",
+        "view": "head",
+        "width": 720,
+        "height": 720,
+        "source_width": 720,
+        "source_height": 720,
+        "sha256": "6c22c6a73b5f77adc5da6e382b017335a41857015681eeca1c9e6a938986cc41",
+        "clickable": true,
+        "coordinate_system": "image_pixels_720x720"
+      },
+      "media": [
+        {
+          "label": "rgb_overlay_path",
+          "role": "path_overlay",
+          "mime_type": "image/jpeg",
+          "sha256": "6c22c6a73b5f77adc5da6e382b017335a41857015681eeca1c9e6a938986cc41",
+          "bytes": 85820,
+          "width": 720,
+          "height": 720,
+          "source_width": 720,
+          "source_height": 720,
+          "path": "media/6c22c6a73b5f77adc5da6e382b017335a41857015681eeca1c9e6a938986cc41.jpg"
+        }
+      ]
+    }
+  },
+  "images": [
+    {
+      "path": "/mnt/nas_nfs/home/bince/RoboHarness/validation_results/task03-306-r5-outcome-20261004/images/r5-before-second-grasp.jpg",
+      "sha256": "776dd4004bb811ca717482adc9298138a4dff48598ed65557fe34c7d4ec3d2c0",
+      "source": {
+        "path": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task03-r5/instance_306/trajectory/claude-20261002T030525Z-401b60f9/media/776dd4004bb811ca717482adc9298138a4dff48598ed65557fe34c7d4ec3d2c0.jpg",
+        "sha256": "776dd4004bb811ca717482adc9298138a4dff48598ed65557fe34c7d4ec3d2c0",
+        "bytes": 101422
+      },
+      "turn_index": 442,
+      "visual_observation": "The source image shows pizzas on overlapping plates at the selected location."
+    },
+    {
+      "path": "/mnt/nas_nfs/home/bince/RoboHarness/validation_results/task03-306-r5-outcome-20261004/images/r5-second-grasp.jpg",
+      "sha256": "53a381955e22d7157cd19cb90da96defbe2cf3b4bd71696e4c7e7e4d4569368f",
+      "source": {
+        "path": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task03-r5/instance_306/trajectory/claude-20261002T030525Z-401b60f9/media/53a381955e22d7157cd19cb90da96defbe2cf3b4bd71696e4c7e7e4d4569368f.jpg",
+        "sha256": "53a381955e22d7157cd19cb90da96defbe2cf3b4bd71696e4c7e7e4d4569368f",
+        "bytes": 113521
+      },
+      "turn_index": 449,
+      "visual_observation": "The left gripper is visibly on the rim of the plate carrying pizza."
+    },
+    {
+      "path": "/mnt/nas_nfs/home/bince/RoboHarness/validation_results/task03-306-r5-outcome-20261004/images/r5-final.jpg",
+      "sha256": "6c22c6a73b5f77adc5da6e382b017335a41857015681eeca1c9e6a938986cc41",
+      "source": {
+        "path": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task03-r5/instance_306/trajectory/claude-20261002T030525Z-401b60f9/media/6c22c6a73b5f77adc5da6e382b017335a41857015681eeca1c9e6a938986cc41.jpg",
+        "sha256": "6c22c6a73b5f77adc5da6e382b017335a41857015681eeca1c9e6a938986cc41",
+        "bytes": 85820
+      },
+      "turn_index": 523,
+      "visual_observation": "One bowl is clearly visible in the basin; large overlapping white tableware obscures part of the sink."
+    },
+    {
+      "path": "/mnt/nas_nfs/home/bince/RoboHarness/validation_results/task03-306-r5-outcome-20261004/images/archive-final.jpg",
+      "sha256": "faf3b64ff14c4b0f5fea01c1cade00a39878f524ba9041ff7d5070a553e745dd",
+      "native_source": {
+        "line": 2107,
+        "record_sha256": "8315f052023aea29f1328c7577afb4d1d43280bbb9bb1933fa3d1a99b4a47f5b",
+        "timestamp": "2026-09-18T03:39:40.787Z",
+        "tool_use_id": "chatcmpl-tool-99cb4a09e6a7eea3",
+        "sha256": "faf3b64ff14c4b0f5fea01c1cade00a39878f524ba9041ff7d5070a553e745dd"
+      },
+      "visual_observation": "Two bowls are visibly resting inside the sink basin."
+    }
+  ],
+  "code_comparison": {
+    "release": {
+      "path": "/mnt/nas_nfs/home/bince/RoboHarness/interface/behavior_interface_eval_test/tool/official_v2/tools.py",
+      "sha256": "dbbcc90e5a53dd7ef4a17ff77940ea4c515622cb456796f670b749578d332a44",
+      "bytes": 1840222,
+      "functions": {
+        "open_gripper": {
+          "line": 21007,
+          "end_line": 21094,
+          "sha256": "3c3c55b3c694530d7b9273a037e29a7f3a3e88b32b475eaf342f435d1bc58300"
+        },
+        "close_gripper": {
+          "line": 21144,
+          "end_line": 22181,
+          "sha256": "672844d77dc607942b8e28b462e4f600586de6c47089064658089513d8b1e170"
+        },
+        "adjust_left_eef_pose_in_head_frame": {
+          "line": 27425,
+          "end_line": 27460,
+          "sha256": "a0f277470ea9b0c600732893c78ba5bc7b53ae9d3c78819961f9780fd5cbddd5"
+        },
+        "plan_grasp_point_filter_rgbd_lite": {
+          "line": 42568,
+          "end_line": 42846,
+          "sha256": "a7d0bc40fe6dd9e2aa202223412b79199b43527e87346f30a8303126f9e9bbe4"
+        },
+        "exec_plan_pose": {
+          "line": 42973,
+          "end_line": 43496,
+          "sha256": "fcfd8fea0e2d611ba16d3573c331e552fd0143bb8c55136c7986b5565592eadc"
+        },
+        "set_arm_to_grasp_position": {
+          "line": 43887,
+          "end_line": 44758,
+          "sha256": "dabfa34ce12045777bb18ed17f5d2b404e6956f8d746d2100b2fee4342bf862c"
+        }
+      }
+    },
+    "original_current": {
+      "path": "/mnt/nas_nfs/home/bince/BEHAVIOR-1K/behavior_interface_eval_test/tool/official_v2/tools.py",
+      "sha256": "17c019d854813b59029771071b01113ad701e2fe6d642147876c0de059ad3c85",
+      "bytes": 1840208,
+      "functions": {
+        "open_gripper": {
+          "line": 21007,
+          "end_line": 21094,
+          "sha256": "3c3c55b3c694530d7b9273a037e29a7f3a3e88b32b475eaf342f435d1bc58300"
+        },
+        "close_gripper": {
+          "line": 21144,
+          "end_line": 22181,
+          "sha256": "672844d77dc607942b8e28b462e4f600586de6c47089064658089513d8b1e170"
+        },
+        "adjust_left_eef_pose_in_head_frame": {
+          "line": 27425,
+          "end_line": 27460,
+          "sha256": "a0f277470ea9b0c600732893c78ba5bc7b53ae9d3c78819961f9780fd5cbddd5"
+        },
+        "plan_grasp_point_filter_rgbd_lite": {
+          "line": 42568,
+          "end_line": 42846,
+          "sha256": "a7d0bc40fe6dd9e2aa202223412b79199b43527e87346f30a8303126f9e9bbe4"
+        },
+        "exec_plan_pose": {
+          "line": 42973,
+          "end_line": 43496,
+          "sha256": "fcfd8fea0e2d611ba16d3573c331e552fd0143bb8c55136c7986b5565592eadc"
+        },
+        "set_arm_to_grasp_position": {
+          "line": 43887,
+          "end_line": 44758,
+          "sha256": "dabfa34ce12045777bb18ed17f5d2b404e6956f8d746d2100b2fee4342bf862c"
+        }
+      }
+    },
+    "queued_r6": {
+      "path": "/var/tmp/roboharness-validation-r6-c4763eb/interface/behavior_interface_eval_test/tool/official_v2/tools.py",
+      "sha256": "dbbcc90e5a53dd7ef4a17ff77940ea4c515622cb456796f670b749578d332a44",
+      "bytes": 1840222,
+      "functions": {
+        "open_gripper": {
+          "line": 21007,
+          "end_line": 21094,
+          "sha256": "3c3c55b3c694530d7b9273a037e29a7f3a3e88b32b475eaf342f435d1bc58300"
+        },
+        "close_gripper": {
+          "line": 21144,
+          "end_line": 22181,
+          "sha256": "672844d77dc607942b8e28b462e4f600586de6c47089064658089513d8b1e170"
+        },
+        "adjust_left_eef_pose_in_head_frame": {
+          "line": 27425,
+          "end_line": 27460,
+          "sha256": "a0f277470ea9b0c600732893c78ba5bc7b53ae9d3c78819961f9780fd5cbddd5"
+        },
+        "plan_grasp_point_filter_rgbd_lite": {
+          "line": 42568,
+          "end_line": 42846,
+          "sha256": "a7d0bc40fe6dd9e2aa202223412b79199b43527e87346f30a8303126f9e9bbe4"
+        },
+        "exec_plan_pose": {
+          "line": 42973,
+          "end_line": 43496,
+          "sha256": "fcfd8fea0e2d611ba16d3573c331e552fd0143bb8c55136c7986b5565592eadc"
+        },
+        "set_arm_to_grasp_position": {
+          "line": 43887,
+          "end_line": 44758,
+          "sha256": "dabfa34ce12045777bb18ed17f5d2b404e6956f8d746d2100b2fee4342bf862c"
+        }
+      }
+    }
+  },
+  "coordinate_contract_source": {
+    "path": "/mnt/nas_nfs/home/bince/RoboHarness/harness/claude_code/src/embodied_claude_code/coordinates.py",
+    "sha256": "f4302f1d957085c5ee97ff87152969d63ffde2aca5b24375f8adfb84818ecdf2",
+    "bytes": 10587
+  },
+  "coordinate_observation": "The native 720-pixel click (355,435) reaches the planner as pixel (355,435), with first depth hit (354,436). Native and recorder arguments match. This selection shows no coordinate-roundtrip displacement.",
+  "metric_source": {
+    "path": "/mnt/nas_nfs/home/bince/RoboHarness/BEHAVIOR/OmniGibson/omnigibson/metrics/task_metric.py",
+    "sha256": "4c65a29ba0647e9a1ee66b00bf30a7b3796e0e13e4e598379b64fec18922767a",
+    "bytes": 2080
+  },
+  "findings": [
+    "The actual initial user prompt in each native transcript matches its recorded archived or port-rendered prompt hash.",
+    "The second confirmed grasp is visually a plate carrying pizza, which the preserved task prompt excludes.",
+    "The final views differ: the archive shows both bowls in the sink; r5 has obstructing tableware and only one clearly visible bowl.",
+    "The six compared tool functions match the current original interface and queued r6; whole module hashes need not match."
+  ],
+  "limits": [
+    "Image recognition is visual evidence, not a simulator object-ID or final grounded-predicate dump.",
+    "The official score file does not identify the individual predicate responsible for the missing 1/7.",
+    "The evidence does not isolate why the model chose this object or prove which tool code was deployed during the historical archive.",
+    "R5 retains native-context differences; complete fresh task means are still required."
+  ]
+}
