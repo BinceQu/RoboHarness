@@ -8,6 +8,13 @@ sink and excludes plates and pizza. The actual initial user messages in
 both native transcripts match the archived prompt and its port-rendered
 copy, respectively.
 
+The [Skill body comparison](skill-body-comparison.json) also checks every
+successful `activate_skill` response in these two completed transcripts.
+All six archived and four r5 responses contain the same byte-identical
+`pick-up-object` or `place-object-in-container` body as the release and
+queued r6 files. This excludes a different activated Skill body for this
+case; it does not establish identical activation order or native context.
+
 The selected recorder sequence establishes the execution difference:
 
 | Recorder turn | Evidence |

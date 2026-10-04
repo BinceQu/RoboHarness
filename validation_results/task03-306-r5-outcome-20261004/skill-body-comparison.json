@@ -1,0 +1,197 @@
+{
+  "checked_at": "2026-10-04T13:43:43.710436+08:00",
+  "scope": "Completed task03 instance 306: archived and diagnostic r5 activated Skill bodies, release files and queued r6 files.",
+  "comparison": "SHA-256 of the exact UTF-8 body string in native tool_result; source Skill files use read_text(encoding=\"utf-8\").strip(), matching activate_skill.",
+  "sources": {
+    "archive": {
+      "source": "/mnt/nas_nfs/home/bince/BEHAVIOR-1K/test_results/task03/06_claude_transcripts/claude_t03p15063i5-09180547_306.jsonl",
+      "source_bytes": 112745462,
+      "source_sha256": "abf46514cabced8b430ad49a4918f67d32b0bba372b77338c3a8376527980137",
+      "activation_count": 6,
+      "activations": [
+        {
+          "skill": "pick-up-object",
+          "call_id": "chatcmpl-tool-9563f9e4a3e32cd5",
+          "call_line": 89,
+          "call_timestamp": "2026-09-17T22:04:03.896Z",
+          "call_record_sha256": "1ed772d02920abe93257b07cc65664efe86cfdd91cf981ec298101dc5066cd65",
+          "result_line": 90,
+          "result_timestamp": "2026-09-17T22:04:04.096Z",
+          "result_record_sha256": "c39acb56f1051d032d169218314b892e3dedc97d3fe3b3d353c46a916ed3d857",
+          "body_sha256": "93e2648b4d6f3bd6e064355b84057c50c7710219b1e892e336a3f732595ce9c9",
+          "body_utf8_bytes": 18256,
+          "body_characters": 18256
+        },
+        {
+          "skill": "place-object-in-container",
+          "call_id": "chatcmpl-tool-96a894d245b0aa16",
+          "call_line": 365,
+          "call_timestamp": "2026-09-17T22:41:39.078Z",
+          "call_record_sha256": "bad2d08714297dea01d54d317024695d9568047ef45c9df62cea7177083d7eab",
+          "result_line": 366,
+          "result_timestamp": "2026-09-17T22:41:39.344Z",
+          "result_record_sha256": "2b00b765519d3b87e7db98efad01006e920707d3c9d2c7ef158a065bc71c34fe",
+          "body_sha256": "b226ace85b05b0b347adc1b54e9b270b6ed6da2b26636ea4c3dbf8443977146d",
+          "body_utf8_bytes": 35467,
+          "body_characters": 35445
+        },
+        {
+          "skill": "pick-up-object",
+          "call_id": "chatcmpl-tool-91469cbee09afcd1",
+          "call_line": 565,
+          "call_timestamp": "2026-09-17T23:32:46.737Z",
+          "call_record_sha256": "81dc1259bbe9981d7f641e60f1f8aa11ea0e98deb6883651e155964e01fa15d3",
+          "result_line": 566,
+          "result_timestamp": "2026-09-17T23:32:46.955Z",
+          "result_record_sha256": "2f255a175e96fbebc202fcf5489177cd46239cdb21f0529075f16a575874479a",
+          "body_sha256": "93e2648b4d6f3bd6e064355b84057c50c7710219b1e892e336a3f732595ce9c9",
+          "body_utf8_bytes": 18256,
+          "body_characters": 18256
+        },
+        {
+          "skill": "place-object-in-container",
+          "call_id": "chatcmpl-tool-a24578794ce00c34",
+          "call_line": 1433,
+          "call_timestamp": "2026-09-18T01:56:28.165Z",
+          "call_record_sha256": "dd8598da54f59b2778b8cc3a536e1fc51ecc57ba5b8bc8835c668bb118d4fdd5",
+          "result_line": 1435,
+          "result_timestamp": "2026-09-18T01:56:34.374Z",
+          "result_record_sha256": "3869890876305f003a9b85d1c271169d76d4de9d16a9af8f8334b68f94dc7384",
+          "body_sha256": "b226ace85b05b0b347adc1b54e9b270b6ed6da2b26636ea4c3dbf8443977146d",
+          "body_utf8_bytes": 35467,
+          "body_characters": 35445
+        },
+        {
+          "skill": "pick-up-object",
+          "call_id": "chatcmpl-tool-a137197f20cca39e",
+          "call_line": 1671,
+          "call_timestamp": "2026-09-18T02:33:28.342Z",
+          "call_record_sha256": "8fce7a8009e1b38b86f7319432ac74c6fccfb7cc24882d6e1576998455a622e4",
+          "result_line": 1672,
+          "result_timestamp": "2026-09-18T02:33:28.537Z",
+          "result_record_sha256": "fe965ad59bbd89eee0cd62d20fb1f79ac26e06a6076aec59e962ed6c5f006c5a",
+          "body_sha256": "93e2648b4d6f3bd6e064355b84057c50c7710219b1e892e336a3f732595ce9c9",
+          "body_utf8_bytes": 18256,
+          "body_characters": 18256
+        },
+        {
+          "skill": "place-object-in-container",
+          "call_id": "chatcmpl-tool-af43964dd1ae19e8",
+          "call_line": 1886,
+          "call_timestamp": "2026-09-18T03:05:37.900Z",
+          "call_record_sha256": "d33417a53462e3d212ab400c682ac5d5eb4783924f4680a81a7b936c500be49c",
+          "result_line": 1887,
+          "result_timestamp": "2026-09-18T03:05:38.439Z",
+          "result_record_sha256": "71ecab4bc2db3a00c1e0f0738306f425447db2c22045f4aa694828d8033e5550",
+          "body_sha256": "b226ace85b05b0b347adc1b54e9b270b6ed6da2b26636ea4c3dbf8443977146d",
+          "body_utf8_bytes": 35467,
+          "body_characters": 35445
+        }
+      ]
+    },
+    "r5": {
+      "source": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task03-r5/instance_306/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/a5d15a0c-59a7-4ec9-a5ec-af7c86dea3c0.jsonl",
+      "source_bytes": 195643367,
+      "source_sha256": "2d3e35dbeed15e4c1831b2a256229d4b88acc8d637d8b2b91051c83dcf7fbcba",
+      "activation_count": 4,
+      "activations": [
+        {
+          "skill": "pick-up-object",
+          "call_id": "chatcmpl-tool-97085f46411af2ea",
+          "call_line": 138,
+          "call_timestamp": "2026-10-02T05:14:24.560Z",
+          "call_record_sha256": "7fe689b2a645d4c433528722f846e5abff6155b5999008c5e41d35cfc70e54e5",
+          "result_line": 139,
+          "result_timestamp": "2026-10-02T05:14:24.708Z",
+          "result_record_sha256": "b33541d740dd9ee3bd57d145849898e0776d91520949e5a071c9eb403f1a9d46",
+          "body_sha256": "93e2648b4d6f3bd6e064355b84057c50c7710219b1e892e336a3f732595ce9c9",
+          "body_utf8_bytes": 18256,
+          "body_characters": 18256
+        },
+        {
+          "skill": "place-object-in-container",
+          "call_id": "chatcmpl-tool-92358a2f87111a5a",
+          "call_line": 1781,
+          "call_timestamp": "2026-10-02T23:26:43.506Z",
+          "call_record_sha256": "7a41e31c794a49a093ec95c4cd70b6e6290a89984ab8394b7e0baa5fe5dfb5cf",
+          "result_line": 1782,
+          "result_timestamp": "2026-10-02T23:26:43.663Z",
+          "result_record_sha256": "97e339f80abd6ed300768d17cc40b5c5cf7d386b1ba15148ce0ab1cbfa6b41c8",
+          "body_sha256": "b226ace85b05b0b347adc1b54e9b270b6ed6da2b26636ea4c3dbf8443977146d",
+          "body_utf8_bytes": 35467,
+          "body_characters": 35445
+        },
+        {
+          "skill": "pick-up-object",
+          "call_id": "chatcmpl-tool-a024a984b72f7270",
+          "call_line": 2548,
+          "call_timestamp": "2026-10-03T10:30:48.787Z",
+          "call_record_sha256": "d1768b3c1efa3254c0db4a4ab5b7c2f04ecb19bb953e6a3fab7448da87abe5f9",
+          "result_line": 2549,
+          "result_timestamp": "2026-10-03T10:30:48.960Z",
+          "result_record_sha256": "91129b9dd4c7b928abebd15d1ed0913a4fdfe686a9653b84cdd5b4ac54da7e07",
+          "body_sha256": "93e2648b4d6f3bd6e064355b84057c50c7710219b1e892e336a3f732595ce9c9",
+          "body_utf8_bytes": 18256,
+          "body_characters": 18256
+        },
+        {
+          "skill": "place-object-in-container",
+          "call_id": "chatcmpl-tool-85c59344ac6d503d",
+          "call_line": 3164,
+          "call_timestamp": "2026-10-03T21:44:11.228Z",
+          "call_record_sha256": "488330be9a117d14bbba3791a6c5351930c30189d6032d5e214460c5d87f6245",
+          "result_line": 3165,
+          "result_timestamp": "2026-10-03T21:44:12.443Z",
+          "result_record_sha256": "89892795d76e4407b3c60bab0b8d8e3fcba70a6f974027f2e6e901f4f1c4d279",
+          "body_sha256": "b226ace85b05b0b347adc1b54e9b270b6ed6da2b26636ea4c3dbf8443977146d",
+          "body_utf8_bytes": 35467,
+          "body_characters": 35445
+        }
+      ]
+    }
+  },
+  "documents": [
+    {
+      "checkout": "release",
+      "skill": "pick-up-object",
+      "source": "/mnt/nas_nfs/home/bince/RoboHarness/harness/claude_code/skills/pick-up-object/SKILL.md",
+      "source_sha256": "a39a414f2efc5d865a07832906cbc962c9c994bbc397ab0c4b82c05025a55a1c",
+      "source_bytes": 18257,
+      "activated_body_sha256": "93e2648b4d6f3bd6e064355b84057c50c7710219b1e892e336a3f732595ce9c9",
+      "activated_body_utf8_bytes": 18256
+    },
+    {
+      "checkout": "release",
+      "skill": "place-object-in-container",
+      "source": "/mnt/nas_nfs/home/bince/RoboHarness/harness/claude_code/skills/place-object-in-container/SKILL.md",
+      "source_sha256": "320d09d22dd078bcf5f5dcd365ce6c1b9e8ef5daf8cd377dbb4b062c17119299",
+      "source_bytes": 35468,
+      "activated_body_sha256": "b226ace85b05b0b347adc1b54e9b270b6ed6da2b26636ea4c3dbf8443977146d",
+      "activated_body_utf8_bytes": 35467
+    },
+    {
+      "checkout": "queued_r6",
+      "skill": "pick-up-object",
+      "source": "/var/tmp/roboharness-validation-r6-c4763eb/harness/claude_code/skills/pick-up-object/SKILL.md",
+      "source_sha256": "a39a414f2efc5d865a07832906cbc962c9c994bbc397ab0c4b82c05025a55a1c",
+      "source_bytes": 18257,
+      "activated_body_sha256": "93e2648b4d6f3bd6e064355b84057c50c7710219b1e892e336a3f732595ce9c9",
+      "activated_body_utf8_bytes": 18256
+    },
+    {
+      "checkout": "queued_r6",
+      "skill": "place-object-in-container",
+      "source": "/var/tmp/roboharness-validation-r6-c4763eb/harness/claude_code/skills/place-object-in-container/SKILL.md",
+      "source_sha256": "320d09d22dd078bcf5f5dcd365ce6c1b9e8ef5daf8cd377dbb4b062c17119299",
+      "source_bytes": 35468,
+      "activated_body_sha256": "b226ace85b05b0b347adc1b54e9b270b6ed6da2b26636ea4c3dbf8443977146d",
+      "activated_body_utf8_bytes": 35467
+    }
+  ],
+  "all_observed_bodies_match_archive": true,
+  "limits": [
+    "Only the two activated Skill bodies are compared; activation order, count, envelopes and native context are not asserted equal.",
+    "This does not remove the separately documented r5 startup-context and workspace differences.",
+    "Queued r6 file equality is a pre-run check, not a completed fresh rollout or mean-Q acceptance result."
+  ]
+}
