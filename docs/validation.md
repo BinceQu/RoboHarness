@@ -120,6 +120,14 @@ evaluator_end label. This case was not wall-clock truncated. The current
 task03 partial mean is 1/7; instances 308 and 310 remain unfinished, and the
 earlier truncated instance 301 still requires a fresh full rollout.
 
+The [task03/306 outcome audit](../validation_results/task03-306-r5-outcome-20261004/README.md)
+traces its second confirmed grasp to a plate carrying pizza, which the
+unchanged bowl-only prompt excludes. Native and planner input pixels match;
+the six compared tool functions match the current original interface and
+queued r6. The final images differ visibly, but the aggregate score does not
+identify individual grounded predicates or isolate why the model selected
+the plate. This diagnosis does not establish that r6 will match the task mean.
+
 The corrected r6 evaluation is queued behind the remaining r5 runs and has not launched
 as of this snapshot. It uses an independent checkout pinned to
 `c4763eb0947adf7f0186834b476a0ec375ee1d1e` and the BEHAVIOR v3.9.1 submodule

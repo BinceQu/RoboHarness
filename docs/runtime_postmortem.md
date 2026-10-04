@@ -207,6 +207,17 @@ No wall-clock cutoff submitted this case. Its Q differs from the archived
 case Q=2/7; the complete five-case mean remains unverified, and the earlier
 truncated instance 301 remains a mandatory fresh retest.
 
+The subsequent [task03/306 outcome audit](../validation_results/task03-306-r5-outcome-20261004/README.md)
+finds a wrong-object grasp: the second confirmed closure is visibly on a
+plate carrying pizza, although the actual archived task prompt restricts
+the episode to two empty bowls. Its native click and planner input both
+use pixel (355,435), and the six compared tool functions match the current
+original interface and queued r6. The archive's final image shows both
+bowls in the sink; the r5 image has obstructing tableware and only one
+clearly visible bowl. This establishes the action difference, without
+isolating the model's reason or reconstructing unavailable final grounded
+predicate states. No runtime or prompt changes were made for this diagnosis.
+
 ## Recovered model service history
 
 A separate deployment archive predates the selected paper trajectories.
