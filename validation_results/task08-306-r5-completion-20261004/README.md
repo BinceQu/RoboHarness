@@ -26,7 +26,11 @@ rewriting the official scoring file.
 This verifies a real final-score and handoff path for the temporary r5
 supervisor. The earlier [task03 continuation observation](../task03-306-r5-past-24h-20261003/README.md)
 established continued operation past 24 hours; final scoring for that
-separate held case remains pending.
+separate held case was pending at this observation. Later on October 4,
+task03/306 also completed and handed off normally, at **Q=1/7 and 25,852
+steps** after more than 49 hours. Its separate
+[completion audit](../task03-306-r5-completion-20261004/README.md)
+preserves that subsequent event.
 
 The three current task08 scores are 0.5, 0 and 0.5 for instances 301, 304
 and 306. Their partial mean of 1/3 is **not a complete task mean**. Instances

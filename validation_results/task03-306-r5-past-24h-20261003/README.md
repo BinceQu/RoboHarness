@@ -20,8 +20,14 @@ All eight preexisting official scores and their retained release copies
 were hash-checked and unchanged.
 
 This observation verifies continuation beyond the old deadline. Final
-scoring, coordinator resume and handoff for this held case are still pending.
+scoring, coordinator resume and handoff were pending at this observation.
 It establishes no task mean or r6 reproduction result. The previously
 truncated task03/301 and task08/304 remain mandatory fresh retests in the
 queued five-instance r6 groups. The packaged runner has no extra wall-clock
 cap when `session_timeout_s=0` and does not need this temporary supervisor.
+
+On October 4, this case completed normally at **Q=1/7 and 25,852 steps**
+after more than 49 hours. The supervisor validated the official score and
+resumed the original coordinator; instance 308 then started on port 15073.
+The [completion audit](../task03-306-r5-completion-20261004/README.md)
+records that subsequent event separately from this historical snapshot.

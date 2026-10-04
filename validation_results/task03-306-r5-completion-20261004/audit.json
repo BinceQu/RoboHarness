@@ -1,0 +1,255 @@
+{
+  "schema": 1,
+  "checked_at": "2026-10-04T12:51:51.731607+08:00",
+  "task": "task03",
+  "instance_id": 306,
+  "run": "validation-20260930-task03-r5",
+  "reproduction_verified": false,
+  "official_result": {
+    "path": "runs/validation-20260930-task03-r5/output/json/cleaning_up_plates_and_food_306_0.json",
+    "sha256": "3ebbdeb9ff690fe4fef4cfa018c5a140057d526265fe6aa524a1453b0764acc9",
+    "q": 0.14285714285714285,
+    "steps": 25852,
+    "success": false
+  },
+  "published_result": {
+    "path": "validation_results/gpu5-20260930-r5/task03/cleaning_up_plates_and_food_306_0.json",
+    "sha256": "3ebbdeb9ff690fe4fef4cfa018c5a140057d526265fe6aa524a1453b0764acc9"
+  },
+  "archive": {
+    "manifest": {
+      "path": "tasks/task03.json",
+      "sha256": "37be188a30afce3057d4c791baf06ae6ea6a19c58e9a9ba865eefa909c8b41fc"
+    },
+    "q": 0.2857142857142857,
+    "task_mean_q": 0.2571428571428571,
+    "case_delta_q": -0.14285714285714285
+  },
+  "budget": {
+    "challenge_year": 2025,
+    "multiplier": 2,
+    "max_steps": 27392
+  },
+  "prompt": {
+    "path": "prompt/task03/v4_11b5ae18163a.txt",
+    "sha256": "11b5ae18163af2168ba6603649782a2c4ab6fd1ca41eff4b9bb7ed001671b4b6",
+    "rendered_sha256": "0792fa213daea7ad11784a2ff931e1fff55b35b379bc54b80a468a23049bf48d",
+    "case_source": {
+      "path": "runs/validation-20260930-task03-r5/instance_306/case.json",
+      "sha256": "bab8a6d99c060ca00c3283bc973d5443f7d4633520b755ebd9d7168fb395ddbf"
+    }
+  },
+  "native_result": {
+    "path": "runs/validation-20260930-task03-r5/instance_306/agent.json",
+    "sha256": "23cd4c20d0416e9f58a7be1fc282a96b46986e5aaa76e856acfd5c2b8b729596",
+    "type": "result",
+    "subtype": "success",
+    "is_error": false,
+    "duration_ms": 178169447,
+    "duration_api_ms": 171240221,
+    "num_turns": 544,
+    "stop_reason": "end_turn"
+  },
+  "completion": {
+    "observed_trigger": "model_done",
+    "controller_recorded_finish_reason": "evaluator_end",
+    "note": "The resumed legacy controller found the existing official result and used its evaluator_end label; supervisor events preserve the preceding model_done finish request.",
+    "wall_clock_forced_submission": false,
+    "supervisor_source": {
+      "path": ".local/r5_no_wall_timeout.py",
+      "sha256": "67e18e6af4c2fd59eca0f3c4b8f9b5fad8aa3db324160cdc87a36221dbd98979"
+    },
+    "events_source": {
+      "path": ".local/r5-no-wall-timeout-events.jsonl",
+      "offset": 0,
+      "bytes": 1727,
+      "sha256": "a76e06c8443a7f9c3008f05c74fa82bc1450f65fb5dc6b756dc879ff9154ebe2"
+    },
+    "events": [
+      {
+        "timestamp": "2026-10-03T09:05:30+0800",
+        "task": "task03",
+        "action": "legacy_deadline_disabled_for_case",
+        "instance_id": 306,
+        "controller": {
+          "pid": 2833447,
+          "start": "129070895"
+        },
+        "agent": {
+          "pid": 1942343,
+          "start": "143373414"
+        },
+        "pause_evidence": {
+          "sleep_transition_interval_s": 0.00521573587320745,
+          "signal_latency_s": 0.00011369213461875916,
+          "state": "T"
+        }
+      },
+      {
+        "timestamp": "2026-10-04T12:35:02+0800",
+        "task": "task03",
+        "action": "model_done_finish_requested",
+        "instance_id": 306,
+        "request_id": "6942d80b85f24f94"
+      },
+      {
+        "timestamp": "2026-10-04T12:35:12+0800",
+        "task": "task03",
+        "action": "official_score_received_then_resume",
+        "instance_id": 306,
+        "q": 0.14285714285714285,
+        "steps": 25852,
+        "score_sha256": "3ebbdeb9ff690fe4fef4cfa018c5a140057d526265fe6aa524a1453b0764acc9",
+        "finish_reason": "model_done"
+      }
+    ]
+  },
+  "handoff": {
+    "instance_id": 308,
+    "session_id": "t03p15073i7-619f31e97cd64d68",
+    "case_source": {
+      "path": "runs/validation-20260930-task03-r5/instance_308/case.json",
+      "sha256": "c079a83f87bf6684365b42adf9cf569d79dc158cb121d08a94504c6a324db9cd"
+    },
+    "port": 15073,
+    "session_ticks": 134,
+    "prompt_sha256": "11b5ae18163af2168ba6603649782a2c4ab6fd1ca41eff4b9bb7ed001671b4b6",
+    "rendered_prompt_sha256": "0792fa213daea7ad11784a2ff931e1fff55b35b379bc54b80a468a23049bf48d",
+    "prior_processes": {
+      "agent": {
+        "pid": 1942343,
+        "expected_start": "143373414",
+        "identity_matches": false,
+        "alive": false
+      },
+      "native": {
+        "pid": 1942529,
+        "expected_start": "143373439",
+        "identity_matches": false,
+        "alive": false
+      }
+    },
+    "current_processes": {
+      "guardian": {
+        "pid": 2834154,
+        "expected_start": "129070994",
+        "state": "S",
+        "parent": 2833447,
+        "start": "129070994",
+        "identity_matches": true,
+        "alive": true
+      },
+      "interface": {
+        "pid": 2834157,
+        "expected_start": "129070994",
+        "state": "S",
+        "parent": 2833447,
+        "start": "129070994",
+        "identity_matches": true,
+        "alive": true
+      },
+      "gate": {
+        "pid": 2835562,
+        "expected_start": "129071196",
+        "state": "S",
+        "parent": 2833447,
+        "start": "129071196",
+        "identity_matches": true,
+        "alive": true
+      },
+      "evaluator": {
+        "pid": 2836260,
+        "expected_start": "129071297",
+        "state": "R",
+        "parent": 2833447,
+        "start": "129071297",
+        "identity_matches": true,
+        "alive": true
+      },
+      "agent": {
+        "pid": 2192945,
+        "expected_start": "161193839",
+        "state": "S",
+        "parent": 2833447,
+        "start": "161193839",
+        "identity_matches": true,
+        "alive": true
+      },
+      "controller": {
+        "pid": 2833447,
+        "expected_start": "129070895",
+        "state": "S",
+        "parent": 3581,
+        "start": "129070895",
+        "identity_matches": true,
+        "alive": true
+      },
+      "native": {
+        "pid": 2192993,
+        "expected_start": "161193867",
+        "state": "S",
+        "parent": 2192945,
+        "start": "161193867",
+        "identity_matches": true,
+        "alive": true
+      }
+    },
+    "native_source": {
+      "path": "runs/validation-20260930-task03-r5/instance_308/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/a439261a-0914-4dc7-b86a-54a512d89c85.jsonl",
+      "offset": 0,
+      "bytes": 1037118,
+      "sha256": "94173a6290d47c7656aa219e6e1074b1a3c7af66eedd679265c98842e23d153d"
+    },
+    "first_tool_call": {
+      "timestamp": "2026-10-04T04:37:00.004Z",
+      "name": "mcp__behavior-v2__capture_head_camera",
+      "id": "chatcmpl-tool-a0f2de0642117374"
+    },
+    "first_tool_result": {
+      "timestamp": "2026-10-04T04:37:05.766Z",
+      "tool_use_id": "chatcmpl-tool-a0f2de0642117374",
+      "is_error": null
+    },
+    "tool_result_error_flag_note": "null is an absent flag; the call/result pair proves a response, not semantic task success",
+    "model_service_environment": {
+      "QWEN_MODEL": "Qwen3.8-Flash-Next-FP8",
+      "ANTHROPIC_BASE_URL": "http://100.101.73.1:31000"
+    },
+    "model_service_scope": "Two allowlisted environment keys of the new owned native process; not a verification of historical model weights or full server arguments."
+  },
+  "task_progress": {
+    "finished": 3,
+    "expected": 5,
+    "scores": [
+      {
+        "instance_id": 301,
+        "q": 0.0
+      },
+      {
+        "instance_id": 304,
+        "q": 0.2857142857142857
+      },
+      {
+        "instance_id": 306,
+        "q": 0.14285714285714285
+      }
+    ],
+    "partial_mean_q": 0.14285714285714285,
+    "final_mean_q": null,
+    "limits": [
+      "Missing instances 308 and 310",
+      "Instance 301 was wall-clock truncated",
+      "Known r5 native-context differences"
+    ]
+  },
+  "acceptance_check": {
+    "command": "python3 scripts/report_validation.py runs/validation-20260930-task01-r5 runs/validation-20260930-task03-r5 runs/validation-20260930-task08-r5 --output validation_results/gpu5-20260930-r5 --check-live --require-match",
+    "exit_code": 2
+  },
+  "r6": {
+    "state": "waiting_for_r5",
+    "launched": false,
+    "fresh_case_required": "task03/301",
+    "acceptance": "A fresh complete five-case task mean; old scores are not reused"
+  }
+}

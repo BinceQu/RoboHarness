@@ -177,7 +177,8 @@ tool call and result while the monitor advanced another nine steps. The
 [continuation audit](../validation_results/task03-306-r5-past-24h-20261003/README.md)
 preserves process identities, native transcript byte-range hashes and actual
 HTTP observations. Final scoring and the held coordinator's normal handoff
-for task03/306 remain pending; this observation is not a task-mean verification.
+were pending at that observation and subsequently completed as recorded below.
+Continuation alone does not verify a task mean.
 
 On October 4, task08/306 provided the first real completion and handoff for
 this supervisor. The native agent ended normally after about 35 hours and
@@ -191,6 +192,20 @@ earlier model_done trigger. The
 records both labels, source hashes, process identities and the next native
 session's first tool call. This validates the operational handoff, while r5
 remains diagnostic and the complete task mean is still unverified.
+
+Task03/306 subsequently completed normally after 49 hours, 29 minutes and
+29.447 seconds. On October 4 the supervisor requested model completion at
+12:35:02, validated the official **Q=1/7 at 25,852 steps**, and resumed the
+original coordinator at 12:35:12. Its old agent and native CLI exited, and
+instance 308 started a fresh native session on port 15073 while retaining
+the same interface and evaluator. The
+[task03 completion audit](../validation_results/task03-306-r5-completion-20261004/README.md)
+verifies the score and prompt hashes, process identities, supervisor events
+and the next session's first camera call/result pair. The observed trigger
+was model_done; the resumed controller labels the existing result evaluator_end.
+No wall-clock cutoff submitted this case. Its Q differs from the archived
+case Q=2/7; the complete five-case mean remains unverified, and the earlier
+truncated instance 301 remains a mandatory fresh retest.
 
 ## Recovered model service history
 
@@ -226,7 +241,7 @@ retains the counting method, source hashes, response counts and limitations.
 It supports removing the extra wall-clock cutoff, not a score reproduction
 claim or a change to archived prompts and simulation budgets.
 
-In the ongoing task08/306 episode, seven consecutive distance bindings on one
+In the recorded task08/306 episode, seven consecutive distance bindings on one
 image spanned 42 minutes 7.779 seconds while their recorded tool durations
 totaled 9.478 seconds. The first four selections failed the archived prompt's
 numeric lip conditions; later selections passed. One attached memory snapshot

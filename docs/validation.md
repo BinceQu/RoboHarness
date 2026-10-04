@@ -1,7 +1,7 @@
 # Release validation
 
 **The three requested task means have not yet been verified.** This status
-snapshot was checked on October 4, 2026 at 03:11 Asia/Shanghai. The
+snapshot was checked on October 4, 2026 at 12:51 Asia/Shanghai. The
 [live r5 report](../validation_results/gpu5-20260930-r5/README.md) records
 completed official scores; a running process or a passing software test is
 not evidence that a task mean matches.
@@ -44,7 +44,7 @@ The selected tasks and immutable archive budgets are:
 
 At the snapshot time, task01 had completed all 5/5 r5 cases and its service
 had exited successfully. Its recorded GPU processes and listeners were
-released. Task03 had 2/5 official scores and was running instance 306;
+released. Task03 had 3/5 official scores and was running instance 308;
 task08 had 3/5 scores and had advanced to instance 308. Their evaluators and
 active agents were alive with their recorded process identities. Completed
 official scores were:
@@ -52,7 +52,7 @@ official scores were:
 | Task | Instance 301 | Instance 304 | Instance 306 | Instance 308 | Instance 310 |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | task01 | 2/3 | 2/3 | 1 | 2/3 | 1 |
-| task03 | 0 (wall-clock cutoff) | 2/7 | pending | pending | pending |
+| task03 | 0 (wall-clock cutoff) | 2/7 | 1/7 | pending | pending |
 | task08 | 1/2 | 0 (wall-clock cutoff) | 1/2 | pending | pending |
 
 Task01/308 ended by model decision at 5,484 steps. Its
@@ -91,10 +91,10 @@ agent and native CLI subsequently passed 24 hours of execution; between
 11:07:21 and 11:12:24 the actual monitor advanced from 16,556 to 16,565 steps,
 with a new native tool call and matching result. The
 [live audit](../validation_results/task03-306-r5-past-24h-20261003/README.md)
-retains process, transcript and score-hash evidence. Normal final scoring and
-handoff for task03/306 remain pending. This supervisor is a host-specific
-measure for diagnostic r5, not a dependency of the packaged runner or a claim
-that those runs reproduce the archive.
+retains process, transcript and score-hash evidence. Final scoring and handoff
+were pending at that observation and subsequently completed as recorded below.
+This supervisor is a host-specific measure for diagnostic r5, not a dependency
+of the packaged runner or a claim that those runs reproduce the archive.
 
 Task08/306 subsequently completed at **Q=0.5 and 12,651 steps**, compared with
 the archived case Q=0.25. Its native agent returned normally after about
@@ -107,6 +107,18 @@ verifies this real continuation through final scoring. It retains the legacy
 controller's evaluator_end label and the supervisor's preceding model_done
 request. This case was not wall-clock truncated. The current task08 partial
 mean of 1/3 is not a complete five-case mean or a verified reproduction.
+
+Task03/306 then completed at **Q=1/7 and 25,852 steps**, compared with the
+archived case Q=2/7. Its native agent returned normally after **49 hours and
+29 minutes**. The supervisor requested model completion at 12:35:02 on
+October 4 and validated the official score before resuming the same
+coordinator at 12:35:12. Instance 308 started with a new agent and native
+session on port 15073; the existing interface and evaluator remained alive.
+The [task03 completion audit](../validation_results/task03-306-r5-completion-20261004/README.md)
+preserves both the model_done trigger and the resumed controller's
+evaluator_end label. This case was not wall-clock truncated. The current
+task03 partial mean is 1/7; instances 308 and 310 remain unfinished, and the
+earlier truncated instance 301 still requires a fresh full rollout.
 
 The corrected r6 evaluation is queued behind the remaining r5 runs and has not launched
 as of this snapshot. It uses an independent checkout pinned to
