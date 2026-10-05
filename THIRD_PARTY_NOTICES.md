@@ -18,8 +18,8 @@
   Optional RTAB-Map is fetched from the commit and archive hash in
   `interface/behavior_interface/rtabmap_slam/upstream.lock` under BSD-3-Clause;
   the archived task runner disables the spatial map.
-- The project page and READMEs include the supplied RoboHarness manuscript's
-  figures and wordmark, credited to Bince Qu, Wei Chen and Bo Zhang. Original
-  PDFs and web renders are in `docs/assets/`; `sources.json` records their
+- The project page and READMEs include the figures and wordmark from the supplied
+  `roboharness.zip` archive. Original PDFs and web renders are in `docs/assets/`;
+  `sources.json` records their
   provenance and checksums. Depicted scene assets and third-party model or
   product marks retain their respective terms and ownership.

@@ -2,10 +2,7 @@
 
 <img src="docs/assets/roboharness-wordmark.svg" alt="RoboHarness" width="500">
 
-### A Simple Harness Outperforms VLA and World Actions Models
-
-**[Bince Qu](https://openreview.net/profile?id=~Bince_Qu1) · [Wei Chen](https://openreview.net/profile?id=~Wei_Chen34) · [Bo Zhang](https://openreview.net/profile?id=~Bo_Zhang9)**<br>
-Zhejiang University
+### A visual-geometric harness for embodied coding agents
 
 **[Project Page](https://cbq349.github.io/RoboHarness/) · [Quick Start](#run-a-task) · [Documentation](docs/setup.md) · [中文](README.zh-CN.md)**
 
@@ -193,6 +190,8 @@ checksums are recorded in [the asset manifest](docs/assets/sources.json).
 See [project-page maintenance](docs/project-page.md) for building the website.
 
 ## Development and license
+
+**Contributors:** [cbq349](https://github.com/cbq349) and **Codex** (AI coding agent).
 
 Run the installed environments' CPU checks with `./scripts/check.sh`.
 See [contribution guidelines](CONTRIBUTING.md) for focused checks and the
