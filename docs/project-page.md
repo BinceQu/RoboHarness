@@ -1,6 +1,6 @@
 # Project homepage
 
-The public project page is hosted at
+The project page is prepared for
 [cbq349.github.io/RoboHarness](https://cbq349.github.io/RoboHarness/).
 The source is in [`website/`](../website). It uses HTML, CSS and JavaScript,
 with no Node.js build dependencies or third-party scripts.
@@ -44,8 +44,19 @@ third-party terms remain applicable; see [THIRD_PARTY_NOTICES.md](../THIRD_PARTY
 
 ## Deployment
 
-GitHub Pages uses GitHub Actions. The
-[`pages.yml` workflow](../.github/workflows/pages.yml) builds and deploys changes
-to the page, task manifests, prompts or validation records on `main`. It can
-also be run manually. Only the generated `_site/` files enter the Pages artifact;
-local run data and credentials are not included.
+In the repository's **Settings → Pages**, select **GitHub Actions** as the
+publishing source. The [`pages.yml` workflow](../.github/workflows/pages.yml)
+builds and deploys changes to the page, task manifests, prompts or validation
+records on `main`. It can also be run manually. Only the generated `_site/`
+files enter the Pages artifact; local run data and credentials are not included.
+
+For branch-based publishing, build into a fresh directory, commit its contents
+to a separate `gh-pages` branch, and select **Deploy from a branch → gh-pages →
+/(root)** in Pages settings. Include the generated `.nojekyll` file. The branch
+must contain the generated site at its root, not the source `website/` template.
+This mode requires rebuilding and pushing the site after source changes.
+
+A successful Git push does not confirm that Pages is live. Check the Pages
+deployment status and open the published URL without signing in. If GitHub
+reports that Actions is disabled for the account, repository permissions alone
+cannot restore it; see [GitHub's account-state guidance](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#managing-github-actions-permissions-for-your-repository).
