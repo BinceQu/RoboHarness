@@ -1,0 +1,45 @@
+name: Publish project page
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - website/**
+      - docs/assets/**
+      - scripts/build_site.py
+      - tasks/**
+      - prompt/**
+      - validation_results/**
+      - .github/workflows/pages.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out project
+        uses: actions/checkout@v6
+      - name: Build static page from archived manifests
+        run: python3 scripts/build_site.py
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Upload page
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - name: Deploy page
+        id: deployment
+        uses: actions/deploy-pages@v4

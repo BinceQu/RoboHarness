@@ -1,6 +1,23 @@
-# RoboHarness
+<div align="center">
 
-[English](README.md) · [安装说明](docs/setup.md) · [逐例提示词](docs/case-prompts.md) · [验证记录](docs/validation.md)
+<img src="docs/assets/roboharness-wordmark.svg" alt="RoboHarness" width="500">
+
+### A Simple Harness Outperforms VLA and World Actions Models
+
+**Bince Qu · Wei Chen · Bo Zhang**<br>
+Zhejiang University
+
+**[项目主页](https://cbq349.github.io/RoboHarness/) · [English](README.md) · [安装说明](docs/setup.md) · [逐例提示词](docs/case-prompts.md) · [验证记录](docs/validation.md)**
+
+**让 coding agent 通过视觉关键点与几何约束观察、推理并执行机器人任务。**
+
+<a href="docs/assets/overview.pdf"><img src="docs/assets/overview.png" alt="论文总览图：几何跟踪、几何动作工具、agent harness 与任务执行示例。" width="100%"></a>
+
+<sub>论文原始总览图。图中成绩属于历史实验；开源代码的复现验证仍在进行。[查看原始 PDF](docs/assets/overview.pdf)</sub>
+
+</div>
+
+## 项目介绍
 
 RoboHarness 将 **BEHAVIOR-1K** 的 evaltest 交互接口、**Claude Code / Codex**
 具身执行 harness、归档提示词和官方评分器整理为独立仓库，支持选择任务后用一条命令运行，
