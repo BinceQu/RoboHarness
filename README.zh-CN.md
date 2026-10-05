@@ -2,10 +2,7 @@
 
 <img src="docs/assets/roboharness-wordmark.svg" alt="RoboHarness" width="500">
 
-### A Simple Harness Outperforms VLA and World Actions Models
-
-**Bince Qu · Wei Chen · Bo Zhang**<br>
-Zhejiang University
+### 面向具身 coding agent 的视觉几何交互框架
 
 **[项目主页](https://cbq349.github.io/RoboHarness/) · [English](README.md) · [安装说明](docs/setup.md) · [逐例提示词](docs/case-prompts.md) · [验证记录](docs/validation.md)**
 
@@ -18,6 +15,8 @@ Zhejiang University
 </div>
 
 ## 项目介绍
+
+**贡献者：** [cbq349](https://github.com/cbq349) 和 **Codex**（AI 编程助手）。
 
 RoboHarness 将 **BEHAVIOR-1K** 的 evaltest 交互接口、**Claude Code / Codex**
 具身执行 harness、归档提示词和官方评分器整理为独立仓库，支持选择任务后用一条命令运行，

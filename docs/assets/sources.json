@@ -1,11 +1,6 @@
 {
   "archive": "roboharness.zip",
-  "paper": "RoboHarness: A Simple Harness Outperforms VLA and World Actions Models",
-  "authors": [
-    "Bince Qu",
-    "Wei Chen",
-    "Bo Zhang"
-  ],
+  "project": "RoboHarness",
   "figures": [
     {
       "source": "robogeo/output/arxiv-submission-20260929-v2/source/figures/overview.pdf",
