@@ -1,7 +1,7 @@
 # Release validation
 
 **The three requested task means have not yet been verified.** This status
-snapshot was checked on October 4, 2026 at 12:51 Asia/Shanghai. The
+snapshot was checked on October 5, 2026 at 16:43 Asia/Shanghai. The
 [live r5 report](../validation_results/gpu5-20260930-r5/README.md) records
 completed official scores; a running process or a passing software test is
 not evidence that a task mean matches.
@@ -44,7 +44,7 @@ The selected tasks and immutable archive budgets are:
 
 At the snapshot time, task01 had completed all 5/5 r5 cases and its service
 had exited successfully. Its recorded GPU processes and listeners were
-released. Task03 had 3/5 official scores and was running instance 308;
+released. Task03 had 4/5 official scores and was running instance 310;
 task08 had 3/5 scores and had advanced to instance 308. Their evaluators and
 active agents were alive with their recorded process identities. Completed
 official scores were:
@@ -52,8 +52,22 @@ official scores were:
 | Task | Instance 301 | Instance 304 | Instance 306 | Instance 308 | Instance 310 |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | task01 | 2/3 | 2/3 | 1 | 2/3 | 1 |
-| task03 | 0 (wall-clock cutoff) | 2/7 | 1/7 | pending | pending |
+| task03 | 0 (wall-clock cutoff) | 2/7 | 1/7 | 1/7 | pending |
 | task08 | 1/2 | 0 (wall-clock cutoff) | 1/2 | pending | pending |
+
+Excluding the two wall-clock-truncated cases and all unfinished instances gives
+the following diagnostic means. They do not establish full-task reproduction:
+
+| Task | Completed, untruncated instances | Mean Q of those instances |
+| --- | --- | ---: |
+| task01 | 301, 304, 306, 308, 310 (5/5) | 0.800000 |
+| task03 | 304, 306, 308 (3/5) | 0.190476 |
+| task08 | 301, 306 (2/5) | 0.500000 |
+
+The machine-readable r5 report retains the old cutoff scores as well, so its
+"completed cases" mean includes those diagnostic zeros. Its verification gate
+rejects wall-clock-forced submissions. Neither table counts pending cases as
+zero or combines scores from separate rounds.
 
 Task01/308 ended by model decision at 5,484 steps. Its
 [outcome audit](../validation_results/task01-308-r5-outcome-20261003/README.md)
@@ -105,7 +119,7 @@ agent and native session; the existing interface and evaluator remained alive.
 The [completion and handoff audit](../validation_results/task08-306-r5-completion-20261004/README.md)
 verifies this real continuation through final scoring. It retains the legacy
 controller's evaluator_end label and the supervisor's preceding model_done
-request. This case was not wall-clock truncated. The current task08 partial
+request. This case was not wall-clock truncated. The task08 partial
 mean of 1/3 is not a complete five-case mean or a verified reproduction.
 
 Task03/306 then completed at **Q=1/7 and 25,852 steps**, compared with the
@@ -116,9 +130,17 @@ coordinator at 12:35:12. Instance 308 started with a new agent and native
 session on port 15073; the existing interface and evaluator remained alive.
 The [task03 completion audit](../validation_results/task03-306-r5-completion-20261004/README.md)
 preserves both the model_done trigger and the resumed controller's
-evaluator_end label. This case was not wall-clock truncated. The current
-task03 partial mean is 1/7; instances 308 and 310 remain unfinished, and the
-earlier truncated instance 301 still requires a fresh full rollout.
+evaluator_end label. This case was not wall-clock truncated. At that handoff,
+instances 308 and 310 remained unfinished; the earlier truncated instance 301
+still requires a fresh full rollout.
+
+Task03/308 subsequently completed normally at **Q=1/7 and 7,718 steps**, matching
+that individual archived case's Q. Its official JSON has SHA-256
+`f933ff613f601f43739e19752b03220a3fd1c34ce66562127bc89791ee44c624`
+and is included in the r5 report. The run advanced to instance 310 with a fresh
+agent and session. At the current snapshot task03/310 had reached 4,316 steps
+and task08/308 had reached 12,916 steps; neither had a final score. The task08
+agent and evaluator continued beyond 24 hours under the temporary supervisor.
 
 The [task03/306 outcome audit](../validation_results/task03-306-r5-outcome-20261004/README.md)
 traces its second confirmed grasp to a plate carrying pizza, which the
