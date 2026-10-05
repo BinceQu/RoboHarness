@@ -19,9 +19,13 @@ cache path before starting the simulator; no global Git or CLI settings change.
 Clone this repository with its submodule, then install:
 
 ```bash
-git submodule update --init --recursive
+git clone --recurse-submodules https://github.com/cbq349/RoboHarness.git
+cd RoboHarness
 ./scripts/setup.sh
 ```
+
+For an existing checkout, initialize the pinned source with
+`git submodule update --init --recursive` before setup.
 
 The installer builds the pinned cuRobo source with the interface environment's
 build tools. Its example meshes and videos are skipped; RoboHarness supplies
@@ -115,6 +119,8 @@ cp configs/example.json configs/local.json
 ./run.sh --list
 ./run.sh --task task01 --gpu 0
 ```
+
+## Session configuration and ports
 
 For a session-scoped launch, use `scripts/reproduce_task.sh task01 --gpu 0`.
 It creates or reuses only

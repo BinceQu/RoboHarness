@@ -1,5 +1,5 @@
 {
-  "updated_at_utc": "2026-10-04T04:39:43+00:00",
+  "updated_at_utc": "2026-10-05T08:53:35+00:00",
   "runs": [
     {
       "task": "task01",
@@ -449,7 +449,7 @@
       "status": "running",
       "model": "Qwen3.8-Flash-Next-FP8",
       "harness": "claude_code",
-      "n_finished": 3,
+      "n_finished": 4,
       "n_expected": 5,
       "cases": [
         {
@@ -487,11 +487,23 @@
           "finish_reason": "evaluator_end",
           "result_sha256": "3ebbdeb9ff690fe4fef4cfa018c5a140057d526265fe6aa524a1453b0764acc9",
           "source_result": "output/json/cleaning_up_plates_and_food_306_0.json"
+        },
+        {
+          "instance_id": 308,
+          "q": 0.14285714285714285,
+          "archive_q": 0.14285714285714285,
+          "raw_reference_q": 0.14285714285714285,
+          "delta_archive_q": 0.0,
+          "steps": 7718,
+          "success": false,
+          "finish_reason": "model_done",
+          "result_sha256": "f933ff613f601f43739e19752b03220a3fd1c34ce66562127bc89791ee44c624",
+          "source_result": "output/json/cleaning_up_plates_and_food_308_0.json"
         }
       ],
       "mean_q": 0.14285714285714285,
       "archive_mean_q": 0.2571428571428571,
-      "completed_archive_mean_q": 0.2857142857142857,
+      "completed_archive_mean_q": 0.25,
       "delta_archive_mean_q": null,
       "matches_archive_mean": null,
       "matches_archive_cases": null,
@@ -554,6 +566,10 @@
         },
         {
           "instance_id": 308,
+          "reason": "Initial native context is mismatch; the full listing and archived workspace metadata must match. Native workspace Git metadata differs from archive"
+        },
+        {
+          "instance_id": 310,
           "reason": "Initial native context is mismatch; the full listing and archived workspace metadata must match. Native workspace Git metadata differs from archive"
         }
       ],
@@ -819,7 +835,66 @@
         },
         {
           "instance_id": 310,
-          "state": "not_started"
+          "state": "mismatch",
+          "expected_sha256": "73e84a17aa782b589bf11cbe213ecf784325c9711f0eda5cd087cc26135d16e3",
+          "actual_sha256": "0423f1a6152f4b1a598c2be525f25fb294c18cc94690fdcefd38f0ffebd69ea0",
+          "actual_chars": 5959,
+          "expected_git_branch": "HEAD",
+          "actual_git_branch": "codex/open-source",
+          "reason": "Native workspace Git metadata differs from archive",
+          "transcript": "instance_310/claude-home/projects/-mnt-nas-nfs-home-bince-RoboHarness/df802896-a4b6-4755-8902-4b32196ac79e.jsonl",
+          "mcp_tool_profile": {
+            "state": "match",
+            "manifest": "/mnt/nas_nfs/home/bince/RoboHarness/runs/validation-20260930-task03-r5/instance_310/trajectory/claude-20261004T231357Z-a03cbf17/manifest.json",
+            "profile": {
+              "name": "baseline",
+              "description": "Allow advertised v2 tools except MCP exclusions.",
+              "allow_tools": [
+                "*"
+              ],
+              "deny_tools": [
+                "control_wrist_roll",
+                "move_point_to_point",
+                "plan_eef_translation_to_uvd_point",
+                "plan_grasp_point_filter",
+                "plan_grasp_point_filter_rgbd",
+                "read_depth"
+              ],
+              "fixed_arguments": {}
+            },
+            "tool_names": [
+              "adjust_chassis",
+              "adjust_height",
+              "adjust_left_eef_pose_in_head_frame",
+              "adjust_left_eef_pose_in_wrist_frame",
+              "adjust_pitch",
+              "adjust_plan_pose",
+              "adjust_right_eef_pose_in_head_frame",
+              "adjust_right_eef_pose_in_wrist_frame",
+              "capture_head_camera",
+              "capture_left_wrist_camera",
+              "capture_right_wrist_camera",
+              "close_gripper",
+              "cut_object",
+              "exec_plan_pose",
+              "mark_on_map",
+              "measure_shoulder_distance",
+              "move_chassis_to_directly_facing_surface",
+              "move_chassis_to_floor_point",
+              "move_to_reach_point",
+              "move_tracked_point",
+              "open_gripper",
+              "plan_grasp_point_filter_rgbd_lite",
+              "plan_press_point",
+              "reset_body",
+              "set_arm_to_grasp_position",
+              "spin_to_facing_point",
+              "track_object_distance"
+            ],
+            "missing_tools": [],
+            "forbidden_tools": [],
+            "differences": []
+          }
         }
       ]
     },
