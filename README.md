@@ -1,6 +1,27 @@
-# RoboHarness
+<div align="center">
 
-[中文说明](README.zh-CN.md) · [Installation](docs/setup.md) · [Case prompts](docs/case-prompts.md) · [Validation](docs/validation.md)
+<img src="docs/assets/roboharness-wordmark.svg" alt="RoboHarness" width="500">
+
+### A Simple Harness Outperforms VLA and World Actions Models
+
+**[Bince Qu](https://openreview.net/profile?id=~Bince_Qu1) · [Wei Chen](https://openreview.net/profile?id=~Wei_Chen34) · [Bo Zhang](https://openreview.net/profile?id=~Bo_Zhang9)**<br>
+Zhejiang University
+
+**[Project Page](https://cbq349.github.io/RoboHarness/) · [Quick Start](#run-a-task) · [Documentation](docs/setup.md) · [中文](README.zh-CN.md)**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-263c78?style=flat-square)](LICENSE)
+[![Benchmark](https://img.shields.io/badge/BEHAVIOR-Challenge_2025-d56045?style=flat-square)](docs/provenance.md)
+[![Prompts](https://img.shields.io/badge/Archive-45_cases-263c78?style=flat-square)](docs/case-prompts.md)
+
+**A visual-geometric control panel for coding agents to perceive, reason, and act.**
+
+<a href="docs/assets/overview.pdf"><img src="docs/assets/overview.png" alt="RoboHarness paper overview: geometry tracking, geometric action tools, agent harnesses, and an example rollout." width="100%"></a>
+
+<sub>Overview figure from the paper. Its benchmark chart reports historical results; release-code validation is ongoing. [View original PDF](docs/assets/overview.pdf) · [Validation status](#validation-status)</sub>
+
+</div>
+
+## Overview
 
 Run embodied robot tasks in **BEHAVIOR-1K** with **Claude Code** or **Codex**
 as the agent harness. RoboHarness brings together the evaltest observation and
@@ -150,6 +171,26 @@ See [validation status and evidence](docs/validation.md), the
 [case-to-prompt index](docs/case-prompts.md). Model weights and complete historical
 server arguments are not available in the archive, so matching a model name
 alone does not establish an identical serving configuration.
+
+## Research figures
+
+**From visual keypoints to robot coordinates.** Optical-flow tracking and depth
+back-projection keep geometric references grounded as the scene changes.
+
+<p align="center"><a href="docs/assets/keypoint-tracking.pdf"><img src="docs/assets/keypoint-tracking.png" alt="Optical-flow keypoint tracking, depth sampling, and back-projection into the robot coordinate frame." width="760"></a></p>
+
+**Generalization across objects.** The paper also evaluates pick-up behavior on
+100 household objects. These historical research experiments are separate from
+the nine-task reproduction archive packaged here.
+
+<table>
+<tr><td width="42%"><a href="docs/assets/object-generalization.pdf"><img src="docs/assets/object-generalization.png" alt="The paper's 100-object catalog."></a></td><td width="58%"><a href="docs/assets/robot-data-comparison.pdf"><img src="docs/assets/robot-data-comparison.png" alt="Paper comparison of successes out of 100 objects versus estimated robot-data hours."></a></td></tr>
+<tr><td align="center">100-object evaluation catalog</td><td align="center">Pick-up success and robot-training data</td></tr>
+</table>
+
+Figures and the wordmark come from the supplied manuscript; their sources and
+checksums are recorded in [the asset manifest](docs/assets/sources.json).
+See [project-page maintenance](docs/project-page.md) for building the website.
 
 ## Development and license
 

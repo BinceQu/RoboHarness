@@ -1,0 +1,57 @@
+{
+  "archive": "roboharness.zip",
+  "paper": "RoboHarness: A Simple Harness Outperforms VLA and World Actions Models",
+  "authors": [
+    "Bince Qu",
+    "Wei Chen",
+    "Bo Zhang"
+  ],
+  "figures": [
+    {
+      "source": "robogeo/output/arxiv-submission-20260929-v2/source/figures/overview.pdf",
+      "source_sha256": "ebe82b67b38733ca414227e9f9cf5a8ccb70642f66962ab8f11bc7ff3a643a82",
+      "pdf": "overview.pdf",
+      "image": "overview.png",
+      "image_sha256": "25b6afe7a1bf37c957abd431a0895bc829135cc1137e0d0d7f6dcb0c10a7b772",
+      "conversion": "PDF rendered to PNG at 2800px long edge; white outer margins cropped with 30px padding; content unchanged."
+    },
+    {
+      "source": "robogeo/output/arxiv-submission-20260929-v2/source/figures/track.pdf",
+      "source_sha256": "c84c56f5f3f68a5affc920a41f952864ec1880b8685ac32ea1238e3e1b0a4cfe",
+      "pdf": "keypoint-tracking.pdf",
+      "image": "keypoint-tracking.png",
+      "image_sha256": "c4e298da1117069684e8723d28c7227e2c802185c3eca77b94704c975fd0b5a4",
+      "conversion": "PDF rendered to PNG at 2800px long edge; white outer margins cropped with 30px padding; content unchanged."
+    },
+    {
+      "source": "robogeo/output/arxiv-submission-20260929-v2/source/figures/sec53_100_objects.pdf",
+      "source_sha256": "0c0f1d84a75b9ddb0ba3e3bf6e21e1ebd45ddf1ab66a8df06c20b37c3d01250c",
+      "pdf": "object-generalization.pdf",
+      "image": "object-generalization.png",
+      "image_sha256": "9cfe646ccd940970a0909baa1520dc77d17e961ee22a3a12223812f3c70cefc1",
+      "conversion": "PDF rendered to PNG at 2800px long edge; white outer margins cropped with 30px padding; content unchanged."
+    },
+    {
+      "source": "robogeo/output/arxiv-submission-20260929-v2/source/figures/sec54_robot_hours.pdf",
+      "source_sha256": "6065b8f93f56d6eb111e0de995c5e134eab8de09041c041bd3ef3ccfc54c63b0",
+      "pdf": "robot-data-comparison.pdf",
+      "image": "robot-data-comparison.png",
+      "image_sha256": "e97d316a918db8ef560683b223269b40d8bcb945d69522c40f3e080ca808ec7c",
+      "conversion": "PDF rendered to PNG at 2800px long edge; white outer margins cropped with 30px padding; content unchanged."
+    },
+    {
+      "source": "robogeo/figures/roboharness-wordmark.pdf",
+      "source_sha256": "e1836009d7396429be570441cbb5670fd8b33b8aa5ca6e6762b3df021e35db6f",
+      "image": "roboharness-wordmark.png",
+      "image_sha256": "f6d6e89e7954786ae90d566c27b07942f1da492c77952e7fd8b45173889ae2c3",
+      "vector": "roboharness-wordmark.svg",
+      "conversion": "Original paper wordmark rendered as PNG and SVG."
+    },
+    {
+      "source": "robogeo/output/roboharness/svg/roboharness-h-monogram-color.svg",
+      "source_sha256": "6a9341c8e1f46eac43dbfeb05448fed5921a15db3e82af2c5f74c06c1acd3b12",
+      "vector": "roboharness-icon.svg",
+      "conversion": "Unmodified source SVG."
+    }
+  ]
+}
