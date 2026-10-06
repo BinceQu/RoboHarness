@@ -1,16 +1,16 @@
 <div align="center">
 
-<img src="docs/assets/roboharness-wordmark.svg" alt="RoboHarness" width="500">
+<img src="./docs/assets/roboharness-wordmark.png?raw=true" alt="RoboHarness" width="500">
 
-### 面向具身 coding agent 的视觉几何交互框架
+### 一个简单而有效的机器人 harness
 
-**[项目主页](https://cbq349.github.io/RoboHarness/) · [English](README.md) · [安装说明](docs/setup.md) · [逐例提示词](docs/case-prompts.md) · [验证记录](docs/validation.md)**
+**[项目主页](https://cbq349.github.io/RoboHarness/) · [English](README.md) · [安装说明](docs/setup.md) · [逐例提示词](docs/case-prompts.md)**
 
-**让 coding agent 通过视觉关键点与几何约束观察、推理并执行机器人任务。**
+**为 LLM agent 提供视觉几何控制面板，使其能够直接理解并执行具身任务。**
 
-<a href="docs/assets/overview.pdf"><img src="docs/assets/overview.png" alt="论文总览图：几何跟踪、几何动作工具、agent harness 与任务执行示例。" width="100%"></a>
+[![RoboHarness 总览](./docs/assets/overview.png?raw=true)](docs/assets/overview.pdf)
 
-<sub>论文原始总览图。图中成绩属于历史实验；开源代码的复现验证仍在进行。[查看原始 PDF](docs/assets/overview.pdf)</sub>
+<sub>RoboHarness 总览：持续跟踪视觉关键点，将其转换为几何约束，并在闭环中执行与验证。[查看原始 PDF](docs/assets/overview.pdf)</sub>
 
 </div>
 
@@ -18,14 +18,14 @@
 
 **贡献者：** [cbq349](https://github.com/cbq349) 和 **Codex**（AI 编程助手）。
 
-RoboHarness 将 **BEHAVIOR-1K** 的 evaltest 交互接口、**Claude Code / Codex**
-具身执行 harness、归档提示词和官方评分器整理为独立仓库，支持选择任务后用一条命令运行，
-并独立保存每次测试的轨迹和成绩。
+RoboHarness 无需训练模型，将视觉点选、关键点跟踪和几何约束相结合，为 LLM agent
+提供具身控制面板。
+
+LLM 在二维图像中标记感兴趣的点，并通过光流跟踪与深度反投影持续获取这些点的位置；
+借助这些信息，它能够组合准确的基本动作，完成复杂操作。
 
 仓库包含 **9 个任务、45 个归档 case**。参考实验使用 Claude Code 2.1.259 和
 `Qwen3.8-Flash-Next-FP8`。Codex 是可选 harness，归档中没有对应的 Codex 成绩。
-
-**复现验证仍在进行。** 归档成绩与本仓库新跑出的成绩分别保存；当前尚未验证三个任务的完整均分均已匹配。
 
 ## 仓库结构
 
@@ -103,24 +103,6 @@ python3 scripts/report_validation.py runs/YOUR_RUN_A runs/YOUR_RUN_B \
 
 `--check-live` 用于实际运行评测的 Linux 主机；分析复制来的运行目录时省略它。
 `--require-match` 对未完成、失败、均分不匹配或归档约束未满足的运行返回非零退出码。
-
-## 当前验证状态
-
-截至 **2026 年 10 月 5 日 16:43（北京时间）**，r5 中已完成且未截断的实例为：
-
-| 任务 | 已完成且未截断 | 这些实例的 mean Q | 归档完整任务 mean Q |
-| --- | ---: | ---: | ---: |
-| task01 | 5/5 | 0.8000 | 0.8667 |
-| task03 | 3/5 | 0.1905 | 0.2571 |
-| task08 | 2/5 | 0.5000 | 0.4000 |
-
-上表排除了 task03/301、task08/304 的旧截断成绩。task03、task08 的部分实例均分不能视为
-完整五例的复现结果。r5 还存在已记录的原生上下文差异，因此用于诊断。
-修正后的完整测试以及两条截断实例的从头重测仍在队列中，尚未完成验收。
-
-[验证文档](docs/validation.md)记录正式评分、测试范围和限制；
-[归档说明](docs/provenance.md)记录 task00、task05 的历史评分冲突及 task06/301 初始场景缺失等问题。
-模型名一致并不证明历史服务参数和权重完全一致。
 
 ## 开发与许可
 

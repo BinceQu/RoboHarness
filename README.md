@@ -1,37 +1,34 @@
 <div align="center">
 
-<img src="docs/assets/roboharness-wordmark.svg" alt="RoboHarness" width="500">
+<img src="./docs/assets/roboharness-wordmark.png?raw=true" alt="RoboHarness" width="500">
 
-### A visual-geometric harness for embodied coding agents
+### A simple yet effective robot harness
 
 **[Project Page](https://cbq349.github.io/RoboHarness/) · [Quick Start](#run-a-task) · [Documentation](docs/setup.md) · [中文](README.zh-CN.md)**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-263c78?style=flat-square)](LICENSE)
-[![Benchmark](https://img.shields.io/badge/BEHAVIOR-Challenge_2025-d56045?style=flat-square)](docs/provenance.md)
-[![Prompts](https://img.shields.io/badge/Archive-45_cases-263c78?style=flat-square)](docs/case-prompts.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-263c78?style=flat-square)](LICENSE) [![Benchmark](https://img.shields.io/badge/BEHAVIOR-Challenge_2025-d56045?style=flat-square)](docs/provenance.md) [![Prompts](https://img.shields.io/badge/Archive-45_cases-263c78?style=flat-square)](docs/case-prompts.md)
 
-**A visual-geometric control panel for coding agents to perceive, reason, and act.**
+**A robotic harness that gives LLM agents a visual-geometric control panel so that they can directly understand and invoke embodied tasks.**
 
-<a href="docs/assets/overview.pdf"><img src="docs/assets/overview.png" alt="RoboHarness paper overview: geometry tracking, geometric action tools, agent harnesses, and an example rollout." width="100%"></a>
+[![RoboHarness overview](./docs/assets/overview.png?raw=true)](docs/assets/overview.pdf)
 
-<sub>Overview figure from the paper. Its benchmark chart reports historical results; release-code validation is ongoing. [View original PDF](docs/assets/overview.pdf) · [Validation status](#validation-status)</sub>
+<sub>RoboHarness overview: visual keypoints are tracked persistently, converted into geometric constraints, executed, and verified in a closed loop. [View original PDF](docs/assets/overview.pdf)</sub>
 
 </div>
 
 ## Overview
 
-Run embodied robot tasks in **BEHAVIOR-1K** with **Claude Code** or **Codex**
-as the agent harness. RoboHarness brings together the evaltest observation and
-control interface, archived task prompts, and an official-evaluator runner that
-keeps each rollout and its score independently auditable.
+Without training models, RoboHarness combines visual clicks, keypoint tracking,
+and geometric constraints to provide an embodied control panel for an LLM agent.
+
+The LLM marks points of interest on a 2D image and continuously receives their
+positions via optical-flow tracking and depth back-projection; with this
+information, it composes accurate primitive actions to perform complex
+manipulation.
 
 The release contains **9 tasks and 45 archived cases**. The reference experiments
 used Claude Code 2.1.259 with `Qwen3.8-Flash-Next-FP8`; Codex is an alternative
 harness and has no reference scores in this archive.
-
-**Validation is ongoing.** The packaged reference scores are historical results,
-not a claim that the released code has already reproduced every task mean. See
-the [current results](#validation-status) and [recorded limitations](docs/provenance.md).
 
 ## What is included
 
@@ -146,44 +143,32 @@ evaluation host; it verifies recorded PIDs and process start times. Omit it for
 copied runs. `--require-match` exits nonzero for incomplete, failed, mismatched
 or archive-contract-invalid runs. The report retains official JSON and hashes.
 
-## Validation status
+## Geometry state for spatial grounding
 
-Snapshot: **October 5, 2026, 16:43 Asia/Shanghai**. The diagnostic r5 runs have
-the following completed scores after excluding wall-clock-truncated cases:
+Pipeline of the `track_object` tool: optical-flow keypoint tracking followed by
+depth back-projection into the robot coordinate frame.
 
-| Task | Completed, untruncated cases | Mean Q of those cases | Archived full-task mean Q |
-| --- | ---: | ---: | ---: |
-| task01 — picking up trash | 5/5 | 0.8000 | 0.8667 |
-| task03 — cleaning up plates and food | 3/5 | 0.1905 | 0.2571 |
-| task08 — rearranging kitchen furniture | 2/5 | 0.5000 | 0.4000 |
+[![Pipeline of the track_object tool](./docs/assets/keypoint-tracking.png?raw=true)](docs/assets/keypoint-tracking.pdf)
 
-Task03/301 and task08/304 were cut off by an earlier wall-clock limit and are
-excluded from this table's means. The partial means for task03 and task08 are
-not full-task comparisons. Known native-context differences also make r5
-diagnostic. Fresh full-task evaluations, including both mandatory retests,
-remain queued; the requested three task means have **not yet been verified**.
+1. The LLM selects one or more points of interest that are visible in the head camera.
+2. Harness continuously tracks each marked point across successive head-camera frames.
+3. The latest 2D location is projected onto the depth view to recover the metric distance.
+4. The pixel coordinate and depth are then back-projected into the robot camera frame.
 
-See [validation status and evidence](docs/validation.md), the
-[official score report](validation_results/gpu5-20260930-r5/README.md), and the
-[case-to-prompt index](docs/case-prompts.md). Model weights and complete historical
-server arguments are not available in the archive, so matching a model name
-alone does not establish an identical serving configuration.
+## Generalization across objects
 
-## Research figures
+The figures below report the manuscript experiments.
 
-**From visual keypoints to robot coordinates.** Optical-flow tracking and depth
-back-projection keep geometric references grounded as the scene changes.
+[![The 100 objects used to evaluate generalization across objects](./docs/assets/object-generalization.png?raw=true)](docs/assets/object-generalization.pdf)
 
-<p align="center"><a href="docs/assets/keypoint-tracking.pdf"><img src="docs/assets/keypoint-tracking.png" alt="Optical-flow keypoint tracking, depth sampling, and back-projection into the robot coordinate frame." width="760"></a></p>
+The 100 objects used to evaluate generalization across objects. The catalog is
+drawn from the BEHAVIOR object library.
 
-**Generalization across objects.** The paper also evaluates pick-up behavior on
-100 household objects. These historical research experiments are separate from
-the nine-task reproduction archive packaged here.
+[![Successes out of 100 objects versus estimated hours of robot data](./docs/assets/robot-data-comparison.png?raw=true)](docs/assets/robot-data-comparison.pdf)
 
-<table>
-<tr><td width="42%"><a href="docs/assets/object-generalization.pdf"><img src="docs/assets/object-generalization.png" alt="The paper's 100-object catalog."></a></td><td width="58%"><a href="docs/assets/robot-data-comparison.pdf"><img src="docs/assets/robot-data-comparison.png" alt="Paper comparison of successes out of 100 objects versus estimated robot-data hours."></a></td></tr>
-<tr><td align="center">100-object evaluation catalog</td><td align="center">Pick-up success and robot-training data</td></tr>
-</table>
+Successes out of 100 objects versus estimated hours of robot data. Colors: VLA
+(blue), world action model (green), RoboHarness (red), and the ASPIRE-pick
+baseline (gray).
 
 Figures and the wordmark come from the supplied manuscript; their sources and
 checksums are recorded in [the asset manifest](docs/assets/sources.json).

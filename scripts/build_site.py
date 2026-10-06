@@ -6,14 +6,12 @@ import hashlib
 import html
 import json
 import shutil
-from datetime import datetime, timezone
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
 REPO = "https://github.com/cbq349/RoboHarness"
 INSTANCES = [301, 304, 306, 308, 310]
-REPORT = "validation_results/gpu5-20260930-r5/report.json"
 
 
 def archive_data():
@@ -55,22 +53,6 @@ def archive_rows(tasks):
     return "\n".join(rows)
 
 
-def validation_rows():
-    report = json.loads((ROOT / REPORT).read_text())
-    rows = []
-    # Only normal finishes with an official score count in this partial-mean view.
-    for run in report["runs"]:
-        cases = [case for case in run["cases"]
-                 if case.get("finish_reason") in ("model_done", "evaluator_end")
-                 and case.get("result_sha256") and case.get("q") is not None]
-        mean = f'{sum(case["q"] for case in cases) / len(cases):.4f}' if cases else "—"
-        rows.append(f'<tr><th scope="row">{html.escape(run["task"])}</th>'
-                    f'<td>{len(cases)}/{run["n_expected"]}</td><td>{mean}</td>'
-                    f'<td>{run["archive_mean_q"]:.4f}</td></tr>')
-    stamp = datetime.fromisoformat(report["updated_at_utc"]).astimezone(timezone.utc)
-    return "\n".join(rows), stamp.strftime("%d %b %Y · %H:%M UTC")
-
-
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=ROOT / "_site")
@@ -81,7 +63,6 @@ def main():
         parser.error("choose a separate generated-output directory")
     source = ROOT / "website"
     tasks = archive_data()
-    rows, stamp = validation_rows()
     options = "\n".join(
         f'<option value="{task["id"]}"'
         f'{" selected" if task["id"] == "task01" else ""}>'
@@ -90,7 +71,6 @@ def main():
     replacements = {
         "{{ARCHIVE_ROWS}}": archive_rows(tasks), "{{TASK_OPTIONS}}": options,
         "{{TASK_DATA}}": json.dumps(tasks, separators=(",", ":")).replace("<", "\\u003c"),
-        "{{VALIDATION_ROWS}}": rows, "{{VALIDATION_DATE}}": stamp,
         "{{TASK_COUNT}}": str(len(tasks)),
         "{{CASE_COUNT}}": str(sum(len(task["cases"]) for task in tasks)),
     }
