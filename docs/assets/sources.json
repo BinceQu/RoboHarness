@@ -48,5 +48,16 @@
       "vector": "roboharness-icon.svg",
       "conversion": "Unmodified source SVG."
     }
-  ]
+  ],
+  "text_source": {
+    "path": "robogeo/output/arxiv-submission-20260929-v2/source/arxiv.tex",
+    "sha256": "a39e16a32b7935c08b4a986377a06301e3fdbfa0916e328ad84c3fe74d35e8fa",
+    "sections": [
+      "Abstract",
+      "Introduction",
+      "Method",
+      "Experiments"
+    ],
+    "adaptation": "English descriptions and figure captions retain the manuscript wording, with LaTeX formatting and cross-references adapted for Markdown and HTML. The Chinese introduction translates the same source."
+  }
 }

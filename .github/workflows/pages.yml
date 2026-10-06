@@ -9,7 +9,6 @@ on:
       - scripts/build_site.py
       - tasks/**
       - prompt/**
-      - validation_results/**
       - .github/workflows/pages.yml
   workflow_dispatch:
 

@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#fafbfc">
-  <meta name="description" content="RoboHarness connects coding-agent harnesses to embodied robot tasks in BEHAVIOR-1K, with archived prompts, task-level evaluation, and auditable trajectories.">
+  <meta name="description" content="A robotic harness that gives LLM agents a visual-geometric control panel so that they can directly understand and invoke embodied tasks.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="RoboHarness — A visual-geometric harness for embodied coding agents">
-  <meta property="og:description" content="An open-source harness for embodied agents in BEHAVIOR-1K. Explore 9 tasks, 45 archived cases, and the code to run your own evaluations.">
+  <meta property="og:title" content="RoboHarness — A simple yet effective robot harness">
+  <meta property="og:description" content="Without training models, RoboHarness combines visual clicks, keypoint tracking, and geometric constraints to provide an embodied control panel for an LLM agent.">
   <meta property="og:url" content="https://cbq349.github.io/RoboHarness/">
   <meta property="og:image" content="https://cbq349.github.io/RoboHarness/assets/overview.png">
   <meta property="og:image:alt" content="RoboHarness paper overview: geometry tracking, embodied skills, geometric action tools, and an agent rollout.">
@@ -15,13 +15,13 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="styles.css">
   <script src="app.js" defer></script>
-  <title>RoboHarness — A Simple Harness for Embodied Agents</title>
+  <title>RoboHarness — A Simple Yet Effective Robot Harness</title>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <nav class="container nav" aria-label="Main navigation">
-      <a class="wordmark" href="#" aria-label="RoboHarness home"><img src="assets/roboharness-wordmark.svg" alt="RoboHarness" width="180" height="29"></a>
+      <a class="wordmark" href="#" aria-label="RoboHarness home"><img src="assets/roboharness-wordmark.png" alt="RoboHarness" width="180" height="35"></a>
       <div class="nav-links">
         <a href="#overview">Overview</a><a href="#archive">Results</a><a href="#run">Get started</a>
         <a class="repo-link" href="https://github.com/cbq349/RoboHarness">GitHub <span aria-hidden="true">↗</span></a>
@@ -32,10 +32,10 @@
   <main id="main">
     <section class="container hero paper-hero" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <p class="eyebrow"><span class="accent-line" aria-hidden="true"></span> Coding agents. Embodied action.</p>
-        <img class="hero-wordmark" src="assets/roboharness-wordmark.svg" alt="RoboHarness" width="480" height="77">
-        <h1 id="hero-title">A visual-geometric harness<br> for embodied coding agents.</h1>
-        <p class="hero-description">A visual-geometric control panel that lets coding agents track keypoints, express geometric constraints, and act through robot tools.</p>
+        <p class="eyebrow"><span class="accent-line" aria-hidden="true"></span> An expressive, LLM-friendly robot harness</p>
+        <img class="hero-wordmark" src="assets/roboharness-wordmark.png" alt="RoboHarness" width="480" height="93">
+        <h1 id="hero-title">A simple yet effective<br> robot harness.</h1>
+        <p class="hero-description">A robotic harness that gives LLM agents a visual-geometric control panel so that they can directly understand and invoke embodied tasks.</p>
         <div class="hero-actions">
           <a class="button primary" href="https://github.com/cbq349/RoboHarness">Explore the code <span aria-hidden="true">↗</span></a>
           <a class="button secondary" href="#overview">Explore the method <span aria-hidden="true">↓</span></a>
@@ -45,7 +45,7 @@
       </div>
       <figure class="paper-overview">
         <a class="figure-link" href="assets/overview.pdf" target="_blank" rel="noopener" aria-label="Open the original overview figure PDF"><img src="assets/overview.png" width="1618" height="1315" alt="Paper overview: RoboHarness connects geometry tracking and geometric action tools to agent harnesses and language models. A key-insertion rollout illustrates the observe, constrain, act and verify loop. The historical first-ten-task comparison reports a 44.54 percent mean Q-score." fetchpriority="high"><span class="figure-zoom">Original figure <span aria-hidden="true">↗</span></span></a>
-        <figcaption><strong>RoboHarness at a glance.</strong> Persistent visual keypoints become geometric constraints, which are executed and verified in a closed loop. The chart is the paper's historical comparison; <a href="#validation">release validation is ongoing</a>.</figcaption>
+        <figcaption><strong>RoboHarness overview:</strong> visual keypoints are tracked persistently, converted into geometric constraints, executed, and verified in a closed loop.</figcaption>
       </figure>
     </section>
 
@@ -58,29 +58,29 @@
 
     <section class="container section" id="overview" aria-labelledby="overview-title">
       <div class="section-intro">
-          <div><p class="eyebrow">01 / The method</p><h2 id="overview-title">Track. Constrain.<br> Act. Verify.</h2></div>
-          <p>RoboHarness gives an agent a shared geometric language for perception and action. Tracked image points become robot-frame coordinates; geometric tools turn constraints into executable motions.</p>
+          <div><p class="eyebrow">01 / Method</p><h2 id="overview-title">Geometry state for<br> spatial grounding.</h2></div>
+          <p>Without training models, RoboHarness combines visual clicks, keypoint tracking, and geometric constraints to provide an embodied control panel for an LLM agent.</p>
         </div>
-        <div class="method-figure-row"><figure class="method-figure"><a class="figure-link" href="assets/keypoint-tracking.pdf" target="_blank" rel="noopener"><img src="assets/keypoint-tracking.png" width="952" height="566" loading="lazy" alt="Optical flow tracks keypoints across RGB observations, depth is sampled, and the points are back-projected into robot coordinates."><span class="figure-zoom">Original figure ↗</span></a><figcaption>The paper's keypoint-tracking pipeline.</figcaption></figure><div class="method-copy"><h3>Keep the geometry grounded.</h3><p>Track a visual keypoint across observations. Sample its depth and back-project it into the robot's coordinate frame. The agent can refer to the same point as the scene changes.</p><h3>Compose actions as constraints.</h3><p>Align a gripper, move a tracked point, or adjust the robot's pose. Embodied skills compose these tools into longer interactions.</p></div></div>
+        <div class="method-figure-row"><figure class="method-figure"><a class="figure-link" href="assets/keypoint-tracking.pdf" target="_blank" rel="noopener"><img src="assets/keypoint-tracking.png" width="952" height="566" loading="lazy" alt="Pipeline of the track_object tool: optical-flow keypoint tracking followed by depth back-projection into the robot coordinate frame."><span class="figure-zoom">Original figure ↗</span></a><figcaption>Pipeline of the <code>track_object</code> tool: optical-flow keypoint tracking followed by depth back-projection into the robot coordinate frame.</figcaption></figure><div class="method-copy"><h3>Track keypoints.</h3><p>The LLM marks points of interest on a 2D image and continuously receives their positions via optical-flow tracking and depth back-projection; with this information, it composes accurate primitive actions to perform complex manipulation.</p><h3>Keypoint-constraint tools.</h3><p>The model supplies a set of input points together with their spatial relations, and the harness automatically solves and executes the corresponding action.</p></div></div>
       <ol class="pipeline">
-        <li><span class="step-index">01</span><span class="pipeline-symbol" aria-hidden="true">[&nbsp;]</span><h3>Task &amp; prompt</h3><p>Load a selected scene instance and the prompt recorded in its original trajectory.</p><a href="https://github.com/cbq349/RoboHarness/blob/main/docs/case-prompts.md">Explore prompts <span aria-hidden="true">↗</span></a></li>
-        <li><span class="step-index">02</span><span class="pipeline-symbol" aria-hidden="true">&gt;_</span><h3>Agent harness</h3><p>Let Claude Code or Codex reason over observations and call the available tools.</p><a href="https://github.com/cbq349/RoboHarness/tree/main/harness">See the harnesses <span aria-hidden="true">↗</span></a></li>
-        <li><span class="step-index">03</span><span class="pipeline-symbol" aria-hidden="true">⌖</span><h3>Robot interface</h3><p>Observe through RGB-D cameras. Navigate, grasp, and manipulate through the evaltest interface.</p><a href="https://github.com/cbq349/RoboHarness/tree/main/interface">Inspect the interface <span aria-hidden="true">↗</span></a></li>
-        <li><span class="step-index">04</span><span class="pipeline-symbol" aria-hidden="true">Σ</span><h3>Official evaluation</h3><p>Save the evaluator's Q-score and compare the mean over all five task instances.</p><a href="https://github.com/cbq349/RoboHarness/blob/main/docs/validation.md">Read the evidence <span aria-hidden="true">↗</span></a></li>
+        <li><span class="step-index">01</span><span class="pipeline-symbol" aria-hidden="true">[&nbsp;]</span><h3>Select points</h3><p>The LLM selects one or more points of interest that are visible in the head camera.</p></li>
+        <li><span class="step-index">02</span><span class="pipeline-symbol" aria-hidden="true">&gt;_</span><h3>Track keypoints</h3><p>Harness continuously tracks each marked point across successive head-camera frames.</p></li>
+        <li><span class="step-index">03</span><span class="pipeline-symbol" aria-hidden="true">⌖</span><h3>Recover depth</h3><p>The latest 2D location is projected onto the depth view to recover the metric distance.</p></li>
+        <li><span class="step-index">04</span><span class="pipeline-symbol" aria-hidden="true">Σ</span><h3>Back-project</h3><p>The pixel coordinate and depth are then back-projected into the robot camera frame.</p></li>
       </ol>
       <div class="reference-setup"><span>Reference setup</span><p>Claude Code <b>2.1.259</b> <i aria-hidden="true">+</i> Qwen3.8-Flash-Next-FP8 <i aria-hidden="true">+</i> BEHAVIOR <b>v3.9.1</b></p><span>Codex is available as an alternative harness.</span></div>
     </section>
 
     <section class="container section paper-experiments" aria-labelledby="generalization-title">
-      <div class="section-intro"><div><p class="eyebrow">From the paper</p><h2 id="generalization-title">Across objects.<br> Beyond a single interaction.</h2></div><p>The paper studies manipulation across 100 objects from the BEHAVIOR library and compares pick-up success with estimated robot-training data. The original research figures are shown below.</p></div>
-      <div class="research-figures"><figure><a class="figure-link" href="assets/object-generalization.pdf" target="_blank" rel="noopener"><img src="assets/object-generalization.png" width="2797" height="2800" loading="lazy" alt="The paper's catalog of 100 household objects, including food, containers, tools, and toys."><span class="figure-zoom">100-object catalog ↗</span></a><figcaption><strong>Object diversity.</strong> The 100 objects used in the paper's generalization experiment.</figcaption></figure><figure><a class="figure-link" href="assets/robot-data-comparison.pdf" target="_blank" rel="noopener"><img src="assets/robot-data-comparison.png" width="2771" height="1664" loading="lazy" alt="Paper plot of successes out of 100 objects versus estimated hours of robot data. RoboHarness with Qwen3.8-Flash-Next and Qwen3.8-27B each achieves 86 out of 100 in the reported experiment."><span class="figure-zoom">Original comparison ↗</span></a><figcaption><strong>Generalization and robot data.</strong> Historical results from the paper; these experiments are separate from the task-reproduction runs packaged in this release.</figcaption></figure></div>
+      <div class="section-intro"><div><p class="eyebrow">Reported experiments</p><h2 id="generalization-title">Generalization<br> across objects.</h2></div><p>The task is to pick up each of the 100 objects, and to place each object in the embodiment and simulation environment on which the corresponding model was trained. For ASPIRE and RoboHarness, the object is placed on the floor and the robot starts from a stooping pose.</p></div>
+      <div class="research-figures"><figure><a class="figure-link" href="assets/object-generalization.pdf" target="_blank" rel="noopener"><img src="assets/object-generalization.png" width="2797" height="2800" loading="lazy" alt="The 100 objects used to evaluate generalization across objects. The catalog is drawn from the BEHAVIOR object library."><span class="figure-zoom">100-object catalog ↗</span></a><figcaption>The 100 objects used to evaluate generalization across objects. The catalog is drawn from the BEHAVIOR object library.</figcaption></figure><figure><a class="figure-link" href="assets/robot-data-comparison.pdf" target="_blank" rel="noopener"><img src="assets/robot-data-comparison.png" width="2771" height="1664" loading="lazy" alt="Successes out of 100 objects versus estimated hours of robot data."><span class="figure-zoom">Original comparison ↗</span></a><figcaption>Successes out of 100 objects versus estimated hours of robot data. Colors: VLA (blue), world action model (green), RoboHarness (red), and the ASPIRE-pick baseline (gray).</figcaption></figure></div>
     </section>
 
     <section class="archive-section" id="archive" aria-labelledby="archive-title">
       <div class="container section">
         <div class="section-intro">
-          <div><p class="eyebrow">02 / Experiment archive</p><h2 id="archive-title">Every score has a source.</h2></div>
-          <p>Historical, directory-reported Q-scores for five instances per task. Select a task to explore its scores, then inspect the linked manifest for prompts and provenance.</p>
+          <div><p class="eyebrow">02 / Experiment archive</p><h2 id="archive-title">BEHAVIOR Challenge 2025.</h2></div>
+          <p>Each entry is the mean Q-score over five instances per task. The archived runs use Qwen3.8-Flash-Next, with slots 0, 3, 5, 7, 9 (instance IDs 301, 304, 306, 308, 310).</p>
         </div>
         <div class="archive-explorer" id="archive-explorer" hidden>
           <div class="explorer-details">
@@ -101,13 +101,6 @@
         </div>
         <div class="archive-notes"><p>Task04 has no supplied trajectory archive and is not included in the release. For task00 and task05, directory reports differ from some preserved evaluator JSON; the directory values above remain the reference.</p><a href="https://github.com/cbq349/RoboHarness/blob/main/docs/provenance.md">Provenance &amp; limitations <span aria-hidden="true">↗</span></a></div>
 
-        <details class="validation-details" id="validation">
-          <summary><span><span class="status-dot" aria-hidden="true"></span> Release validation is in progress</span><span class="details-toggle" aria-hidden="true">+</span></summary>
-          <div class="validation-body">
-            <div><p class="eyebrow">Diagnostic snapshot · {{VALIDATION_DATE}}</p><h3>The archived means have not yet been reproduced by all three selected release tests.</h3><p>These means include only completed, untruncated cases in the diagnostic r5 runs. Partial means are not full-task comparisons. Known differences in the native agent context also prevent a reproduction claim.</p><p>Task03/301 and task08/304 were cut short by an old wall-clock limit. Both require fresh runs from the initial scene. Fresh full-task evaluations are queued.</p><a href="https://github.com/cbq349/RoboHarness/blob/main/docs/validation.md">Read the current validation record <span aria-hidden="true">↗</span></a></div>
-            <div class="table-scroll"><table class="validation-table"><caption>Completed, untruncated episodes</caption><thead><tr><th scope="col">Task</th><th scope="col">Cases</th><th scope="col">Mean Q</th><th scope="col">Archive</th></tr></thead><tbody>{{VALIDATION_ROWS}}</tbody></table><p class="small-note">A checked-in snapshot, not live telemetry.</p></div>
-          </div>
-        </details>
       </div>
     </section>
 
