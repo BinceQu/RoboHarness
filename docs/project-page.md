@@ -39,7 +39,18 @@ margins were cropped; figure content and plotted values were not edited.
 Paper figures are identified as historical research results. Dataset and
 third-party terms remain applicable; see [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md).
 
+The READMEs embed GitHub attachments uploaded to this repository. The original
+raw-file URLs returned HTTP 404 after redirecting to `raw.githubusercontent.com`,
+including in an authenticated browser. The attachment URLs and image hashes
+are recorded in the asset manifest; the website build uses the checked-in PNGs.
+When replacing a README image, upload it through this repository's Markdown
+editor and record the permanent `github.com/user-attachments/assets/...` URL.
+Do not copy a temporary signed image URL. GitHub attachments follow the
+[repository's access permissions](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/attaching-files).
+
 ## Deployment
+
+The deployment job is skipped while the repository is private.
 
 In the repository's **Settings → Pages**, select **GitHub Actions** as the
 publishing source. The [`pages.yml` workflow](../.github/workflows/pages.yml)
