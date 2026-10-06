@@ -143,18 +143,6 @@ evaluation host; it verifies recorded PIDs and process start times. Omit it for
 copied runs. `--require-match` exits nonzero for incomplete, failed, mismatched
 or archive-contract-invalid runs. The report retains official JSON and hashes.
 
-## Geometry state for spatial grounding
-
-Pipeline of the `track_object` tool: optical-flow keypoint tracking followed by
-depth back-projection into the robot coordinate frame.
-
-[![Pipeline of the track_object tool](https://github.com/user-attachments/assets/0c04a410-0348-4cf7-8fa9-d3e45e36998e)](docs/assets/keypoint-tracking.pdf)
-
-1. The LLM selects one or more points of interest that are visible in the head camera.
-2. Harness continuously tracks each marked point across successive head-camera frames.
-3. The latest 2D location is projected onto the depth view to recover the metric distance.
-4. The pixel coordinate and depth are then back-projected into the robot camera frame.
-
 ## Generalization across objects
 
 The figures below report the manuscript experiments.
