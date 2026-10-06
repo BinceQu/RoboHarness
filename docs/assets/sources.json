@@ -1,6 +1,7 @@
 {
   "archive": "roboharness.zip",
   "project": "RoboHarness",
+  "github_attachment_repository": "cbq349/RoboHarness",
   "figures": [
     {
       "source": "robogeo/output/arxiv-submission-20260929-v2/source/figures/overview.pdf",
@@ -8,6 +9,7 @@
       "pdf": "overview.pdf",
       "image": "overview.png",
       "image_sha256": "25b6afe7a1bf37c957abd431a0895bc829135cc1137e0d0d7f6dcb0c10a7b772",
+      "github_attachment": "https://github.com/user-attachments/assets/b7c1347c-72a2-4b03-8e8d-4aeb5ea9ae17",
       "conversion": "PDF rendered to PNG at 2800px long edge; white outer margins cropped with 30px padding; content unchanged."
     },
     {
@@ -16,6 +18,7 @@
       "pdf": "keypoint-tracking.pdf",
       "image": "keypoint-tracking.png",
       "image_sha256": "c4e298da1117069684e8723d28c7227e2c802185c3eca77b94704c975fd0b5a4",
+      "github_attachment": "https://github.com/user-attachments/assets/0c04a410-0348-4cf7-8fa9-d3e45e36998e",
       "conversion": "PDF rendered to PNG at 2800px long edge; white outer margins cropped with 30px padding; content unchanged."
     },
     {
@@ -24,6 +27,7 @@
       "pdf": "object-generalization.pdf",
       "image": "object-generalization.png",
       "image_sha256": "9cfe646ccd940970a0909baa1520dc77d17e961ee22a3a12223812f3c70cefc1",
+      "github_attachment": "https://github.com/user-attachments/assets/63d075ad-29a6-43f5-92a0-b943e0be2804",
       "conversion": "PDF rendered to PNG at 2800px long edge; white outer margins cropped with 30px padding; content unchanged."
     },
     {
@@ -32,6 +36,7 @@
       "pdf": "robot-data-comparison.pdf",
       "image": "robot-data-comparison.png",
       "image_sha256": "e97d316a918db8ef560683b223269b40d8bcb945d69522c40f3e080ca808ec7c",
+      "github_attachment": "https://github.com/user-attachments/assets/48867d49-1f79-4769-af57-59b76688be94",
       "conversion": "PDF rendered to PNG at 2800px long edge; white outer margins cropped with 30px padding; content unchanged."
     },
     {
@@ -39,6 +44,7 @@
       "source_sha256": "e1836009d7396429be570441cbb5670fd8b33b8aa5ca6e6762b3df021e35db6f",
       "image": "roboharness-wordmark.png",
       "image_sha256": "f6d6e89e7954786ae90d566c27b07942f1da492c77952e7fd8b45173889ae2c3",
+      "github_attachment": "https://github.com/user-attachments/assets/de0ded29-d85c-4b66-aeda-a83252a349c8",
       "vector": "roboharness-wordmark.svg",
       "conversion": "Original paper wordmark rendered as PNG and SVG."
     },

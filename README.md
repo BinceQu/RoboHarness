@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./docs/assets/roboharness-wordmark.png?raw=true" alt="RoboHarness" width="500">
+<img src="https://github.com/user-attachments/assets/de0ded29-d85c-4b66-aeda-a83252a349c8" alt="RoboHarness" width="500">
 
 ### A simple yet effective robot harness
 
@@ -10,7 +10,7 @@
 
 **A robotic harness that gives LLM agents a visual-geometric control panel so that they can directly understand and invoke embodied tasks.**
 
-[![RoboHarness overview](./docs/assets/overview.png?raw=true)](docs/assets/overview.pdf)
+[![RoboHarness overview](https://github.com/user-attachments/assets/b7c1347c-72a2-4b03-8e8d-4aeb5ea9ae17)](docs/assets/overview.pdf)
 
 <sub>RoboHarness overview: visual keypoints are tracked persistently, converted into geometric constraints, executed, and verified in a closed loop. [View original PDF](docs/assets/overview.pdf)</sub>
 
@@ -148,7 +148,7 @@ or archive-contract-invalid runs. The report retains official JSON and hashes.
 Pipeline of the `track_object` tool: optical-flow keypoint tracking followed by
 depth back-projection into the robot coordinate frame.
 
-[![Pipeline of the track_object tool](./docs/assets/keypoint-tracking.png?raw=true)](docs/assets/keypoint-tracking.pdf)
+[![Pipeline of the track_object tool](https://github.com/user-attachments/assets/0c04a410-0348-4cf7-8fa9-d3e45e36998e)](docs/assets/keypoint-tracking.pdf)
 
 1. The LLM selects one or more points of interest that are visible in the head camera.
 2. Harness continuously tracks each marked point across successive head-camera frames.
@@ -159,12 +159,12 @@ depth back-projection into the robot coordinate frame.
 
 The figures below report the manuscript experiments.
 
-[![The 100 objects used to evaluate generalization across objects](./docs/assets/object-generalization.png?raw=true)](docs/assets/object-generalization.pdf)
+[![The 100 objects used to evaluate generalization across objects](https://github.com/user-attachments/assets/63d075ad-29a6-43f5-92a0-b943e0be2804)](docs/assets/object-generalization.pdf)
 
 The 100 objects used to evaluate generalization across objects. The catalog is
 drawn from the BEHAVIOR object library.
 
-[![Successes out of 100 objects versus estimated hours of robot data](./docs/assets/robot-data-comparison.png?raw=true)](docs/assets/robot-data-comparison.pdf)
+[![Successes out of 100 objects versus estimated hours of robot data](https://github.com/user-attachments/assets/48867d49-1f79-4769-af57-59b76688be94)](docs/assets/robot-data-comparison.pdf)
 
 Successes out of 100 objects versus estimated hours of robot data. Colors: VLA
 (blue), world action model (green), RoboHarness (red), and the ASPIRE-pick
