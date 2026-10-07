@@ -1,6 +1,6 @@
 # Contributing
 
-Use [GitHub issues](https://github.com/cbq349/RoboHarness/issues) for installation
+Use [GitHub issues](https://github.com/BinceQu/RoboHarness/issues) for installation
 problems, reproducibility findings and proposed changes. Include the repository
 commit, task and instance IDs, harness and CLI version, Python/CUDA versions,
 model identifier, and the command you ran. Attach a minimal relevant log excerpt

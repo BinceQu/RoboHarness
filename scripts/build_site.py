@@ -10,7 +10,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-REPO = "https://github.com/cbq349/RoboHarness"
+REPO = "https://github.com/BinceQu/RoboHarness"
 INSTANCES = [301, 304, 306, 308, 310]
 
 

@@ -1,14 +1,14 @@
 <div align="center">
 
-<img src="https://github.com/user-attachments/assets/de0ded29-d85c-4b66-aeda-a83252a349c8" alt="RoboHarness" width="500">
+<img src="docs/assets/roboharness-wordmark.png" alt="RoboHarness" width="500">
 
 ### 一个简单而有效的机器人 harness
 
-**[项目主页](https://cbq349.github.io/RoboHarness/) · [English](README.md) · [安装说明](docs/setup.md) · [逐例提示词](docs/case-prompts.md)**
+**[项目主页](https://bincequ.github.io/RoboHarness/) · [English](README.md) · [安装说明](docs/setup.md) · [逐例提示词](docs/case-prompts.md)**
 
 **为 LLM agent 提供视觉几何控制面板，使其能够直接理解并执行具身任务。**
 
-[![RoboHarness 总览](https://github.com/user-attachments/assets/b7c1347c-72a2-4b03-8e8d-4aeb5ea9ae17)](docs/assets/overview.pdf)
+[![RoboHarness 总览](docs/assets/overview.png)](docs/assets/overview.pdf)
 
 <sub>RoboHarness 总览：持续跟踪视觉关键点，将其转换为几何约束，并在闭环中执行与验证。[查看原始 PDF](docs/assets/overview.pdf)</sub>
 
@@ -16,7 +16,7 @@
 
 ## 项目介绍
 
-**贡献者：** [cbq349](https://github.com/cbq349) 和 **Codex**（AI 编程助手）。
+**贡献者：** [BinceQu](https://github.com/BinceQu) 和 **Codex**（AI 编程助手）。
 
 RoboHarness 无需训练模型，将视觉点选、关键点跟踪和几何约束相结合，为 LLM agent
 提供具身控制面板。
@@ -52,7 +52,7 @@ validation_results/ 新测试评分与验证证据
 验证机器每卡显存为 48 GB；该值是测试环境配置，不是经过验证的最低要求。
 
 ```bash
-git clone --recurse-submodules https://github.com/cbq349/RoboHarness.git
+git clone --recurse-submodules https://github.com/BinceQu/RoboHarness.git
 cd RoboHarness
 ./scripts/setup.sh
 cp configs/example.json configs/local.json

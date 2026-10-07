@@ -8,10 +8,10 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="RoboHarness — A simple yet effective robot harness">
   <meta property="og:description" content="Without training models, RoboHarness combines visual clicks, keypoint tracking, and geometric constraints to provide an embodied control panel for an LLM agent.">
-  <meta property="og:url" content="https://cbq349.github.io/RoboHarness/">
-  <meta property="og:image" content="https://cbq349.github.io/RoboHarness/assets/overview.png">
+  <meta property="og:url" content="https://bincequ.github.io/RoboHarness/">
+  <meta property="og:image" content="https://bincequ.github.io/RoboHarness/assets/overview.png">
   <meta property="og:image:alt" content="RoboHarness paper overview: geometry tracking, embodied skills, geometric action tools, and an agent rollout.">
-  <link rel="canonical" href="https://cbq349.github.io/RoboHarness/">
+  <link rel="canonical" href="https://bincequ.github.io/RoboHarness/">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="styles.css">
   <script src="app.js" defer></script>
@@ -24,7 +24,7 @@
       <a class="wordmark" href="#" aria-label="RoboHarness home"><img src="assets/roboharness-wordmark.png" alt="RoboHarness" width="180" height="35"></a>
       <div class="nav-links">
         <a href="#overview">Overview</a><a href="#archive">Results</a><a href="#run">Get started</a>
-        <a class="repo-link" href="https://github.com/cbq349/RoboHarness">GitHub <span aria-hidden="true">↗</span></a>
+        <a class="repo-link" href="https://github.com/BinceQu/RoboHarness">GitHub <span aria-hidden="true">↗</span></a>
       </div>
     </nav>
   </header>
@@ -37,7 +37,7 @@
         <h1 id="hero-title">A simple yet effective<br> robot harness.</h1>
         <p class="hero-description">A robotic harness that gives LLM agents a visual-geometric control panel so that they can directly understand and invoke embodied tasks.</p>
         <div class="hero-actions">
-          <a class="button primary" href="https://github.com/cbq349/RoboHarness">Explore the code <span aria-hidden="true">↗</span></a>
+          <a class="button primary" href="https://github.com/BinceQu/RoboHarness">Explore the code <span aria-hidden="true">↗</span></a>
           <a class="button secondary" href="#overview">Explore the method <span aria-hidden="true">↓</span></a>
           <a class="button secondary" href="#run">Run a task <span aria-hidden="true">→</span></a>
         </div>
@@ -88,7 +88,7 @@
             <select id="task-select">{{TASK_OPTIONS}}</select>
             <div class="selected-metric"><span id="selected-mean">0.8667</span><span>archived mean Q-score</span></div>
             <p id="task-budget"></p>
-            <a id="manifest-link" href="https://github.com/cbq349/RoboHarness/blob/main/tasks/task01.json">Case manifest &amp; prompt hashes <span aria-hidden="true">↗</span></a>
+            <a id="manifest-link" href="https://github.com/BinceQu/RoboHarness/blob/main/tasks/task01.json">Case manifest &amp; prompt hashes <span aria-hidden="true">↗</span></a>
           </div>
           <div class="chart-wrap"><p class="chart-heading">Q-score by instance <span>Higher is better · 0–1</span></p><div id="score-chart" class="score-chart" role="img" aria-label="Archived scores for picking up trash"></div></div>
         </div>
@@ -99,17 +99,17 @@
             <tbody>{{ARCHIVE_ROWS}}</tbody>
           </table>
         </div>
-        <div class="archive-notes"><p>Task04 has no supplied trajectory archive and is not included in the release. For task00 and task05, directory reports differ from some preserved evaluator JSON; the directory values above remain the reference.</p><a href="https://github.com/cbq349/RoboHarness/blob/main/docs/provenance.md">Provenance &amp; limitations <span aria-hidden="true">↗</span></a></div>
+        <div class="archive-notes"><p>Task04 has no supplied trajectory archive and is not included in the release. For task00 and task05, directory reports differ from some preserved evaluator JSON; the directory values above remain the reference.</p><a href="https://github.com/BinceQu/RoboHarness/blob/main/docs/provenance.md">Provenance &amp; limitations <span aria-hidden="true">↗</span></a></div>
 
       </div>
     </section>
 
     <section class="container section run-section" id="run" aria-labelledby="run-title">
-      <div class="run-copy"><p class="eyebrow">03 / Get started</p><h2 id="run-title">Pick a task.<br> Run the full episode set.</h2><p>Set up the environment and model endpoint, then launch all five archived instances with one command.</p><ul class="requirements"><li>Linux + NVIDIA RTX GPU</li><li>BEHAVIOR scene data and CUDA 12.4</li><li>A configured model endpoint</li></ul><a class="text-link" href="https://github.com/cbq349/RoboHarness/blob/main/docs/setup.md">Complete installation guide <span aria-hidden="true">↗</span></a><a class="text-link" href="https://github.com/cbq349/RoboHarness/blob/main/README.zh-CN.md" lang="zh-CN">中文安装与使用说明 <span aria-hidden="true">↗</span></a></div>
+      <div class="run-copy"><p class="eyebrow">03 / Get started</p><h2 id="run-title">Pick a task.<br> Run the full episode set.</h2><p>Set up the environment and model endpoint, then launch all five archived instances with one command.</p><ul class="requirements"><li>Linux + NVIDIA RTX GPU</li><li>BEHAVIOR scene data and CUDA 12.4</li><li>A configured model endpoint</li></ul><a class="text-link" href="https://github.com/BinceQu/RoboHarness/blob/main/docs/setup.md">Complete installation guide <span aria-hidden="true">↗</span></a><a class="text-link" href="https://github.com/BinceQu/RoboHarness/blob/main/README.zh-CN.md" lang="zh-CN">中文安装与使用说明 <span aria-hidden="true">↗</span></a></div>
       <div class="terminal">
         <div class="terminal-header"><span><span class="terminal-dot" aria-hidden="true"></span> Your terminal</span><span>bash</span></div>
         <div class="terminal-content"><p class="terminal-comment"># 1. Clone and install</p><pre><code>git clone --recurse-submodules \
-  https://github.com/cbq349/RoboHarness.git
+  https://github.com/BinceQu/RoboHarness.git
 cd RoboHarness
 ./scripts/setup.sh
 cp configs/example.json configs/local.json</code></pre><p class="terminal-comment"># 2. Configure data paths and model authentication</p><pre><code>${EDITOR:-nano} configs/local.json</code></pre><div class="terminal-command-heading"><p class="terminal-comment"># 3. Run five instances</p><button type="button" class="copy-button" id="copy-command" hidden>Copy command</button></div><label class="terminal-label" for="run-task">Task</label><select id="run-task" aria-describedby="run-note" disabled><option value="task01">task01 · picking up trash</option></select><pre class="run-command"><code id="run-command">./scripts/reproduce_task.sh task01 --gpu 0</code></pre><p class="copy-feedback" id="copy-feedback" role="status" aria-live="polite"></p><p id="run-note">Challenge 2025 ×2 budget · No wall-clock cap by default</p></div>
@@ -122,9 +122,9 @@ cp configs/example.json configs/local.json</code></pre><p class="terminal-commen
       <article><span class="principle-mark" aria-hidden="true">03 /</span><h3>Keep the evidence</h3><p>New trajectories and official score files stay separate from the historical reference results.</p></article>
     </section>
 
-    <section class="container closing"><div><p class="eyebrow">Built for inspection. Open for extension.</p><h2>Bring your next agent<br> into the loop.</h2></div><a class="button primary" href="https://github.com/cbq349/RoboHarness">Get RoboHarness <span aria-hidden="true">↗</span></a></section>
+    <section class="container closing"><div><p class="eyebrow">Built for inspection. Open for extension.</p><h2>Bring your next agent<br> into the loop.</h2></div><a class="button primary" href="https://github.com/BinceQu/RoboHarness">Get RoboHarness <span aria-hidden="true">↗</span></a></section>
   </main>
-  <footer class="container footer"><a class="wordmark" href="#">RoboHarness<span class="footer-dot" aria-hidden="true">.</span></a><p class="contributors">Contributors: <a href="https://github.com/cbq349">cbq349</a> · <span>Codex <span class="contributor-role">(AI coding agent)</span></span></p><div><a href="https://github.com/cbq349/RoboHarness/blob/main/LICENSE">MIT license</a><a href="https://github.com/cbq349/RoboHarness/blob/main/THIRD_PARTY_NOTICES.md">Third-party terms</a><a href="https://github.com/cbq349/RoboHarness/issues">Issues ↗</a></div></footer>
+  <footer class="container footer"><a class="wordmark" href="#">RoboHarness<span class="footer-dot" aria-hidden="true">.</span></a><p class="contributors">Contributors: <a href="https://github.com/BinceQu">BinceQu</a> · <span>Codex <span class="contributor-role">(AI coding agent)</span></span></p><div><a href="https://github.com/BinceQu/RoboHarness/blob/main/LICENSE">MIT license</a><a href="https://github.com/BinceQu/RoboHarness/blob/main/THIRD_PARTY_NOTICES.md">Third-party terms</a><a href="https://github.com/BinceQu/RoboHarness/issues">Issues ↗</a></div></footer>
   <script type="application/json" id="archive-data">{{TASK_DATA}}</script>
 </body>
 </html>
