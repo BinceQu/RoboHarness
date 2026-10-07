@@ -22,7 +22,7 @@
     document.getElementById("task-budget").textContent =
       `${task.maxSteps.toLocaleString("en-US")} simulation steps · Challenge 2025 ×2`;
     document.getElementById("manifest-link").href =
-      `https://github.com/cbq349/RoboHarness/blob/main/tasks/${task.id}.json`;
+      `https://github.com/BinceQu/RoboHarness/blob/main/tasks/${task.id}.json`;
     chart.setAttribute("aria-label", `${task.name}. Archived Q-scores: ` +
       task.cases.map(item => `instance ${item.instance}: ${item.q.toFixed(4)}`).join("; "));
     chart.replaceChildren(...task.cases.map(item => {

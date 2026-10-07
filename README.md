@@ -1,16 +1,16 @@
 <div align="center">
 
-<img src="https://github.com/user-attachments/assets/de0ded29-d85c-4b66-aeda-a83252a349c8" alt="RoboHarness" width="500">
+<img src="docs/assets/roboharness-wordmark.png" alt="RoboHarness" width="500">
 
 ### A simple yet effective robot harness
 
-**[Project Page](https://cbq349.github.io/RoboHarness/) · [Quick Start](#run-a-task) · [Documentation](docs/setup.md) · [中文](README.zh-CN.md)**
+**[Project Page](https://bincequ.github.io/RoboHarness/) · [Quick Start](#run-a-task) · [Documentation](docs/setup.md) · [中文](README.zh-CN.md)**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-263c78?style=flat-square)](LICENSE) [![Benchmark](https://img.shields.io/badge/BEHAVIOR-Challenge_2025-d56045?style=flat-square)](docs/provenance.md) [![Prompts](https://img.shields.io/badge/Archive-45_cases-263c78?style=flat-square)](docs/case-prompts.md)
 
 **A robotic harness that gives LLM agents a visual-geometric control panel so that they can directly understand and invoke embodied tasks.**
 
-[![RoboHarness overview](https://github.com/user-attachments/assets/b7c1347c-72a2-4b03-8e8d-4aeb5ea9ae17)](docs/assets/overview.pdf)
+[![RoboHarness overview](docs/assets/overview.png)](docs/assets/overview.pdf)
 
 <sub>RoboHarness overview: visual keypoints are tracked persistently, converted into geometric constraints, executed, and verified in a closed loop. [View original PDF](docs/assets/overview.pdf)</sub>
 
@@ -56,7 +56,7 @@ measured minimum. You also need BEHAVIOR scene data, local cache space and a
 separately configured model endpoint.
 
 ```bash
-git clone --recurse-submodules https://github.com/cbq349/RoboHarness.git
+git clone --recurse-submodules https://github.com/BinceQu/RoboHarness.git
 cd RoboHarness
 ./scripts/setup.sh
 cp configs/example.json configs/local.json
@@ -147,12 +147,12 @@ or archive-contract-invalid runs. The report retains official JSON and hashes.
 
 The figures below report the manuscript experiments.
 
-[![The 100 objects used to evaluate generalization across objects](https://github.com/user-attachments/assets/63d075ad-29a6-43f5-92a0-b943e0be2804)](docs/assets/object-generalization.pdf)
+[![The 100 objects used to evaluate generalization across objects](docs/assets/object-generalization.png)](docs/assets/object-generalization.pdf)
 
 The 100 objects used to evaluate generalization across objects. The catalog is
 drawn from the BEHAVIOR object library.
 
-[![Successes out of 100 objects versus estimated hours of robot data](https://github.com/user-attachments/assets/48867d49-1f79-4769-af57-59b76688be94)](docs/assets/robot-data-comparison.pdf)
+[![Successes out of 100 objects versus estimated hours of robot data](docs/assets/robot-data-comparison.png)](docs/assets/robot-data-comparison.pdf)
 
 Successes out of 100 objects versus estimated hours of robot data. Colors: VLA
 (blue), world action model (green), RoboHarness (red), and the ASPIRE-pick
@@ -164,7 +164,7 @@ See [project-page maintenance](docs/project-page.md) for building the website.
 
 ## Development and license
 
-**Contributors:** [cbq349](https://github.com/cbq349) and **Codex** (AI coding agent).
+**Contributors:** [BinceQu](https://github.com/BinceQu) and **Codex** (AI coding agent).
 
 Run the installed environments' CPU checks with `./scripts/check.sh`.
 See [contribution guidelines](CONTRIBUTING.md) for focused checks and the

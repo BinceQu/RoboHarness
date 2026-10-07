@@ -19,7 +19,7 @@ cache path before starting the simulator; no global Git or CLI settings change.
 Clone this repository with its submodule, then install:
 
 ```bash
-git clone --recurse-submodules https://github.com/cbq349/RoboHarness.git
+git clone --recurse-submodules https://github.com/BinceQu/RoboHarness.git
 cd RoboHarness
 ./scripts/setup.sh
 ```

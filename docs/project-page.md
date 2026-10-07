@@ -1,7 +1,7 @@
 # Project homepage
 
 The project page is prepared for
-[cbq349.github.io/RoboHarness](https://cbq349.github.io/RoboHarness/).
+[bincequ.github.io/RoboHarness](https://bincequ.github.io/RoboHarness/).
 The source is in [`website/`](../website). It uses HTML, CSS and JavaScript,
 with no Node.js build dependencies or third-party scripts.
 
@@ -39,14 +39,11 @@ margins were cropped; figure content and plotted values were not edited.
 Paper figures are identified as historical research results. Dataset and
 third-party terms remain applicable; see [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md).
 
-The READMEs embed GitHub attachments uploaded to this repository. The original
-raw-file URLs returned HTTP 404 after redirecting to `raw.githubusercontent.com`,
-including in an authenticated browser. The attachment URLs and image hashes
-are recorded in the asset manifest; the website build uses the checked-in PNGs.
-When replacing a README image, upload it through this repository's Markdown
-editor and record the permanent `github.com/user-attachments/assets/...` URL.
-Do not copy a temporary signed image URL. GitHub attachments follow the
-[repository's access permissions](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/attaching-files).
+The READMEs embed the checked-in PNGs using relative paths under `docs/assets/`.
+The website build copies those same files into its generated `assets/` directory.
+When replacing an image, commit the PNG alongside its source PDF and update the
+image hash in the asset manifest. After publication, verify the repository,
+README images and project page without signing in.
 
 ## Deployment
 
