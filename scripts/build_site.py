@@ -46,8 +46,7 @@ def archive_rows(tasks):
         scores = "".join(f'<td>{case["q"]:.4f}</td>' for case in task["cases"])
         rows.append(
             f'<tr><th scope="row"><a href="{REPO}/blob/main/tasks/{task["id"]}.json">'
-            f'<span class="task-id">{task["id"]}</span>'
-            f'{html.escape(task["name"])}</a></th>{scores}'
+            f'{html.escape(task["name"].capitalize())}</a></th>{scores}'
             f'<td class="mean-cell">{task["mean"]:.4f}</td></tr>'
         )
     return "\n".join(rows)
@@ -66,13 +65,11 @@ def main():
     options = "\n".join(
         f'<option value="{task["id"]}"'
         f'{" selected" if task["id"] == "task01" else ""}>'
-        f'{task["id"]} · {html.escape(task["name"])}</option>' for task in tasks
+        f'{html.escape(task["name"].capitalize())}</option>' for task in tasks
     )
     replacements = {
         "{{ARCHIVE_ROWS}}": archive_rows(tasks), "{{TASK_OPTIONS}}": options,
         "{{TASK_DATA}}": json.dumps(tasks, separators=(",", ":")).replace("<", "\\u003c"),
-        "{{TASK_COUNT}}": str(len(tasks)),
-        "{{CASE_COUNT}}": str(sum(len(task["cases"]) for task in tasks)),
     }
     page = (source / "index.html").read_text()
     for marker, value in replacements.items():
