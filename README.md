@@ -6,7 +6,7 @@
 
 **[Project Page](https://bincequ.github.io/RoboHarness/) · [Quick Start](#run-a-task) · [Documentation](docs/setup.md) · [中文](README.zh-CN.md)**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-263c78?style=flat-square)](LICENSE) [![Benchmark](https://img.shields.io/badge/BEHAVIOR-Challenge_2025-d56045?style=flat-square)](docs/provenance.md) [![Prompts](https://img.shields.io/badge/Archive-45_cases-263c78?style=flat-square)](docs/case-prompts.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-263c78?style=flat-square)](LICENSE) [![Benchmark](https://img.shields.io/badge/BEHAVIOR-Challenge_2025-d56045?style=flat-square)](#reproduction-contract)
 
 [![RoboHarness overview](docs/assets/overview.png)](docs/assets/overview.pdf)
 
@@ -24,27 +24,22 @@ positions via optical-flow tracking and depth back-projection; with this
 information, it composes accurate primitive actions to perform complex
 manipulation.
 
-The release contains **9 tasks and 45 archived cases**. The reference experiments
-used Claude Code 2.1.259 with `Qwen3.8-Flash-Next-FP8`; Codex is an alternative
-harness and has no reference scores in this archive.
+The reported BEHAVIOR results use Claude Code 2.1.259 with
+`Qwen3.8-Flash-Next-FP8` and the R1 Pro robot. A Codex harness is also available.
 
 ## What is included
 
 | Component | Purpose |
 | --- | --- |
-| [`BEHAVIOR/`](BEHAVIOR) | Upstream submodule pinned to v3.9.1 and commit `26f2c7ef7b9cf96bd0414f81e1e751e493762779` |
-| [`interface/`](interface) | evaltest interface, RGB-D tools, custom robot profile and idle gate |
-| [`harness/claude_code/`](harness/claude_code) | Claude Code harness used by the reference experiments |
-| [`harness/codex/`](harness/codex) | Alternative Codex harness |
-| [`prompt/`](prompt) | Only the prompt texts used by the selected archived cases |
-| [`tasks/`](tasks) | Instance IDs, prompt hashes, budgets, score targets and provenance |
-| [`reference_results/`](reference_results) | Original evaluator scores and recorded initial observations |
-| [`roboharness/`](roboharness) | Task runner, process ownership and archive-contract checks |
-| [`validation_results/`](validation_results) | New evaluator scores and scoped validation evidence |
-
-Full historical trajectories, BEHAVIOR datasets, model weights and credentials
-are external to this repository. Included manifests retain source identifiers
-and hashes; new trajectories are saved locally under `runs/`.
+| [`BEHAVIOR/`](BEHAVIOR) | BEHAVIOR simulator and evaluator, pinned to v3.9.1 |
+| [`interface/`](interface) | RGB-D observations, robot control and interactive interface |
+| [`harness/claude_code/`](harness/claude_code) | Claude Code harness |
+| [`harness/codex/`](harness/codex) | Codex harness |
+| [`prompt/`](prompt) | Task-specific instructions for household manipulation |
+| [`tasks/`](tasks) | Task definitions, evaluation instances and step budgets |
+| [`reference_results/`](reference_results) | Reference evaluator scores |
+| [`roboharness/`](roboharness) | Task runner and evaluation pipeline |
+| [`validation_results/`](validation_results) | Evaluation reports and scores |
 
 ## Installation
 
@@ -62,13 +57,11 @@ cp configs/example.json configs/local.json
 
 Follow the [installation guide](docs/setup.md) to obtain the licensed datasets,
 install Claude Code 2.1.259, and configure the model endpoint and authentication.
-Edit `configs/local.json` for this machine's data and Python paths. The setup
-guide also documents evaluator dependency constraints and the native asset
-workaround used by this release.
+Edit `configs/local.json` for this machine's data and Python paths.
 
 ## Run a task
 
-After installation and model configuration, one command runs all five archived
+After installation and model configuration, one command runs all five evaluation
 instances of a task:
 
 ```bash
@@ -84,7 +77,7 @@ for later launches. It does not change global Claude or Codex configuration.
 # Inspect the resolved plan without launching the simulator.
 ./scripts/reproduce_task.sh task03 --gpu 0 --dry-run
 
-# Run selected actual instance IDs for diagnosis.
+# Run selected instances.
 ./scripts/reproduce_task.sh task08 --gpu 0 --instances 301,304
 
 # Use the alternative harness with a Responses-compatible model endpoint.
@@ -93,12 +86,10 @@ for later launches. It does not change global Claude or Codex configuration.
 ```
 
 Codex requires its CLI and `OPENAI_API_KEY`; see [model setup](docs/setup.md).
-Instance IDs are **301, 304, 306, 308, 310**, corresponding to archived slots
-**0, 3, 5, 7, 9**. A partial instance selection cannot verify a full task mean.
-Task04 is unavailable because the supplied archive contains no task04 cases.
+Use `./run.sh --list` to see the supported tasks; task04 is not included.
 
 The runner starts the interface, idle gate, official evaluator and agent, then
-loads each case with its archived prompt. It saves the run plan, rendered prompt,
+loads the task configuration. It saves the run plan, prompt,
 native agent transcript, trajectory, official scoring JSON and summary under a
 fresh `runs/<run-id>/` directory. Ctrl-C cleans up only that run's owned processes.
 
@@ -110,33 +101,25 @@ ports to task01, task03 and task08. Use SSH forwarding for a remote host.
 
 ## Reproduction contract
 
-- **Task-specific prompts, shared across instances.** The paper specifies:
-  "The prompt is specific to each task but shared across instances, and is
-  written by a human." Each task's prompt describes the procedure for
-  accomplishing that task and the behavioral boundaries the model must respect.
-  Under this protocol, all five instances of a task (301, 304, 306, 308, 310)
-  share the same task-specific prompt.
-- **Challenge 2025, multiplier 2.** Exact integer step limits come from the
-  archived plans; the launcher rejects changes to the year, multiplier, step
-  limit or evaluator revision. See the [budget table](docs/provenance.md#evaluation-budgets).
-- **No additional wall-clock cap by default.** `session_timeout_s: 0` allows
-  long model calls and episodes exceeding 72 hours. The simulation-step budget
-  still applies. An operator-selected positive timeout is recorded; a forced
-  submission cannot pass reproduction verification.
-- **Archived prompt and context provenance.** The release preserves the prompt
-  versions recovered from the selected transcripts, including the within-task
-  version differences documented in the [archive mapping](docs/case-prompts.md).
-  Prompt bytes, native Skill listings,
-  activated Skill bodies and MCP namespaces are checked against the recovered
-  archive contract. Only historical connection-port hints are rendered for a
-  new run, with both prompt hashes recorded.
-- **Complete task mean Q-score.** All five instances must finish. Their
-  arithmetic mean must match the directory-reported task mean within `1e-6`.
-  Individual case scores may differ; tasks are checked independently.
-- **Separate historical and new evidence.** Original score files are preserved.
-  New runs obtain their scores from the official evaluator. Archive conflicts
-  and unavailable starting-state information are documented in
-  [provenance](docs/provenance.md).
+The paper's BEHAVIOR evaluation protocol is:
+
+- **Task-specific prompts, shared across instances.** The prompt is specific
+  to each task but shared across instances, and is written by a human. It
+  specifies the execution steps and the behavioral boundaries the model must
+  respect. See [task prompts](docs/case-prompts.md).
+- **Five instances per task.** The sample is fixed by seed `20260911`. Every
+  task uses evaluation slots **0, 3, 5, 7, 9**, corresponding to instance IDs
+  **301, 304, 306, 308, 310**. Each instance is one official rollout.
+- **Challenge 2025, multiplier 2.** The maximum tick count is set separately
+  for each task to twice the mean length of its human demonstrations, counted
+  in simulator control steps. An episode ends when the goal is satisfied or
+  this limit is reached. See the [step budgets](docs/provenance.md#evaluation-budgets).
+- **Mean Q-score.** The official BEHAVIOR Challenge 2025 evaluator provides
+  `q_score.final` for each rollout. The task mean is the unweighted average of
+  all five scores, reported to four decimal places.
+
+The runner defaults to `session_timeout_s: 0`, so there is no additional
+wall-clock limit. The simulation-step budget still applies.
 
 Collect and check runs with:
 
@@ -145,14 +128,13 @@ python3 scripts/report_validation.py runs/YOUR_RUN_A runs/YOUR_RUN_B \
   --output validation_results/latest --check-live --require-match
 ```
 
-Add `--watch` for continuous reporting. Use `--check-live` only on the Linux
-evaluation host; it verifies recorded PIDs and process start times. Omit it for
-copied runs. `--require-match` exits nonzero for incomplete, failed, mismatched
-or archive-contract-invalid runs. The report retains official JSON and hashes.
+The report compares each complete task mean with its reference value using a
+tolerance of `1e-6`. Individual instance scores may differ. `--require-match`
+exits nonzero if a task is incomplete, its mean differs, or the run fails the
+evaluation checks. Use `--check-live` on the evaluation host; omit it when
+analyzing copied runs. Add `--watch` for continuous reporting.
 
 ## Generalization across objects
-
-The figures below report the manuscript experiments.
 
 [![The 100 objects used to evaluate generalization across objects](docs/assets/object-generalization.png)](docs/assets/object-generalization.pdf)
 
@@ -164,10 +146,6 @@ drawn from the BEHAVIOR object library.
 Successes out of 100 objects versus estimated hours of robot data. Colors: VLA
 (blue), world action model (green), RoboHarness (red), and the ASPIRE-pick
 baseline (gray).
-
-Figures and the wordmark come from the supplied manuscript; their sources and
-checksums are recorded in [the asset manifest](docs/assets/sources.json).
-See [project-page maintenance](docs/project-page.md) for building the website.
 
 ## Development and license
 
