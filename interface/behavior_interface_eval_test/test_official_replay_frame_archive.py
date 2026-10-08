@@ -2,6 +2,9 @@
 
 import gc
 import os
+from pathlib import Path
+import subprocess
+import sys
 import unittest
 import weakref
 from concurrent.futures import ThreadPoolExecutor
@@ -45,7 +48,10 @@ class ReplayFrameArchiveTest(unittest.TestCase):
         first = archive.store(b"ab", b"cd")
         chunk = weakref.ref(first.chunk)
         stream = first.chunk.stream
+        first_path = Path(stream.name)
+        directory = first_path.parent
         second = archive.store(b"ef", b"gh")
+        self.assertTrue(stream.closed)
         del archive
         gc.collect()
         self.assertEqual(first.read(), (b"ab", b"cd"))
@@ -54,6 +60,11 @@ class ReplayFrameArchiveTest(unittest.TestCase):
         gc.collect()
         self.assertIsNone(chunk())
         self.assertTrue(stream.closed)
+        self.assertFalse(first_path.exists())
+        self.assertTrue(directory.exists())
+        del second
+        gc.collect()
+        self.assertFalse(directory.exists())
 
     def test_concurrent_archiving_preserves_each_frame(self):
         archive = ReplayFrameArchive(64, chunk_bytes=128)
@@ -79,7 +90,7 @@ class ReplayFrameArchiveTest(unittest.TestCase):
 
     def test_write_failure_is_reported(self):
         archive = ReplayFrameArchive(1024)
-        with mock.patch("tempfile.TemporaryFile", side_effect=OSError("disk full")):
+        with mock.patch("tempfile.NamedTemporaryFile", side_effect=OSError("disk full")):
             with self.assertRaisesRegex(OSError, "disk full"):
                 archive.store(b"gray", b"depth")
 
@@ -93,6 +104,51 @@ class ReplayFrameArchiveTest(unittest.TestCase):
         self.assertIsNot(previous.chunk, following.chunk)
         self.assertEqual(previous.read(), (b"old gray", b"old depth"))
         self.assertEqual(following.read(), (b"next gray", b"next depth"))
+
+    def test_thousands_of_retained_chunks_fit_a_small_descriptor_limit(self):
+        # An isolated child makes the limit test independent of the test
+        # runner's own descriptors, and leaves its limits unchanged.
+        code = '''
+import gc, os, resource
+from pathlib import Path
+from behavior_interface_eval_test.tool.official_v2.replay_frame_archive import ReplayFrameArchive
+soft, hard = resource.getrlimit(resource.RLIMIT_NOFILE)
+resource.setrlimit(resource.RLIMIT_NOFILE, (min(128, hard), hard))
+baseline = len(os.listdir('/proc/self/fd'))
+archive = ReplayFrameArchive(0, chunk_bytes=8)
+payloads = [archive.store(i.to_bytes(4, 'little'), b'dpth') for i in range(2048)]
+assert len(os.listdir('/proc/self/fd')) <= baseline + 1
+directory = Path(payloads[0].chunk.stream.name).parent
+del archive
+for i, payload in enumerate(payloads):
+    assert payload.read() == (i.to_bytes(4, 'little'), b'dpth')
+assert len(os.listdir('/proc/self/fd')) <= baseline + 1
+del payload, payloads
+gc.collect()
+assert len(os.listdir('/proc/self/fd')) == baseline
+assert not directory.exists()
+'''
+        subprocess.run([sys.executable, '-c', code], check=True, timeout=30)
+
+    def test_failed_rotation_does_not_leave_a_closed_writer(self):
+        archive = ReplayFrameArchive(0, chunk_bytes=16)
+        previous = archive.store(b"12345678", b"")
+        with mock.patch("tempfile.NamedTemporaryFile", side_effect=OSError("disk full")):
+            with self.assertRaises(OSError):
+                archive.store(b"123456789", b"")
+        following = archive.store(b"tiny", b"")
+        self.assertEqual(previous.read(), (b"12345678", b""))
+        self.assertEqual(following.read(), (b"tiny", b""))
+
+    def test_read_failure_closes_its_descriptor(self):
+        archive = ReplayFrameArchive(0)
+        payload = archive.store(b"gray", b"depth")
+        baseline = len(os.listdir('/proc/self/fd'))
+        with mock.patch("os.pread", side_effect=OSError("read error")):
+            for _ in range(20):
+                with self.assertRaises(OSError):
+                    payload.read()
+        self.assertEqual(len(os.listdir('/proc/self/fd')), baseline)
 
 
 if __name__ == "__main__":

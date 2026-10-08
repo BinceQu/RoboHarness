@@ -137,6 +137,80 @@ class WallClockBudget(unittest.TestCase):
         self.assertEqual(run.results[0]['finish_reason'], 'wall_timeout')
 
 
+class SupplementalCases(unittest.TestCase):
+    def test_new_instances_inherit_only_the_selected_setup(self):
+        task = runner.load_task('task01')
+        cases = runner.supplemental_cases(task, '302,303,305,307,309', 301)
+        self.assertEqual([c['slot'] for c in cases], [1, 2, 4, 6, 8])
+        for case in cases:
+            self.assertEqual(case['context_reference_instance_id'], 301)
+            self.assertEqual(case['prompt_sha256'], task['cases'][0]['prompt_sha256'])
+            self.assertIsNone(case['reference_q'])
+            self.assertIsNone(case['archive_reported_q'])
+            self.assertNotIn('reference_result', case)
+        self.assertEqual(task['cases'][0]['reference_q'], 1.0)
+        for ids, template in [('301', 301), ('302,302', 301), ('321', 301),
+                              ('2', 301), ('302', None), ('302', 302)]:
+            with self.subTest(ids=ids, template=template), self.assertRaises(ValueError):
+                runner.supplemental_cases(task, ids, template)
+
+    def test_supplemental_score_has_no_fabricated_archive_comparison(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            task = runner.load_task('task03')
+            cases = runner.supplemental_cases(task, '302', 301)
+            plan = {'run_dir': directory, 'run_id': 'supplemental-score',
+                    'task_config': task, 'cases': cases, 'port': 15073,
+                    'harness': 'claude_code', 'evaluation_scope': 'supplemental'}
+            run = runner.Run(plan, {'session_timeout_s': 0, 'model': task['model']})
+            case_dir = root / 'instance_302'
+            case_dir.mkdir()
+            score = {'task': task['task_name'], 'instance_id': 302, 'rollout_id': 0,
+                     'q_score': {'final': 2/7}, 'steps': 20, 'success': False}
+            path = root / 'output/json' / f'{task["task_name"]}_302_0.json'
+            path.parent.mkdir(parents=True)
+            path.write_text(json.dumps(score))
+            agent = Mock()
+            agent.poll.return_value = 0
+            with patch.object(runner, 'native_contract', return_value={}) as contract, \
+                    patch.object(runner, 'inspect_native_case', return_value={'state': 'match'}):
+                run.wait_score(cases[0], agent, case_dir)
+            contract.assert_called_once_with('task03', 301)
+            run.write_summary('complete')
+            summary = runner.read_json(root / 'summary.json')
+            self.assertEqual(summary['mean_q'], 2/7)
+            self.assertEqual(summary['evaluation_scope'], 'supplemental')
+            self.assertIsNone(summary['reference_mean_q'])
+            self.assertIsNone(summary['archive_reported_mean_q'])
+            self.assertIsNone(summary['delta_archive_mean_q'])
+            self.assertIsNone(summary['cases'][0]['delta_q'])
+
+
+class FileDescriptorLimit(unittest.TestCase):
+    def test_limit_is_inherited_without_changing_the_parent_or_hard_limit(self):
+        import resource
+        before = resource.getrlimit(resource.RLIMIT_NOFILE)
+        code = '''
+import json, resource, subprocess, sys
+from roboharness.runner import ensure_file_limit
+soft, hard = resource.getrlimit(resource.RLIMIT_NOFILE)
+resource.setrlimit(resource.RLIMIT_NOFILE, (1024, hard))
+record = ensure_file_limit(4096)
+assert record['before_soft'] == 1024 and record['soft'] == 4096 and record['hard'] == hard
+subprocess.run([sys.executable, '-c', 'import resource; assert resource.getrlimit(resource.RLIMIT_NOFILE)[0] == 4096'], check=True)
+assert ensure_file_limit(2048)['soft'] == 4096
+'''
+        subprocess.run([sys.executable, '-c', code], cwd=runner.ROOT, check=True, timeout=10)
+        self.assertEqual(resource.getrlimit(resource.RLIMIT_NOFILE), before)
+
+    def test_insufficient_hard_limit_is_rejected_before_launch(self):
+        with patch.object(runner.resource, 'getrlimit', return_value=(1024, 2048)), \
+                patch.object(runner.resource, 'setrlimit') as setter:
+            with self.assertRaisesRegex(ValueError, 'hard limit'):
+                runner.ensure_file_limit(4096)
+            setter.assert_not_called()
+
+
 class NativeContextRuntime(unittest.TestCase):
     def test_agent_launch_uses_private_workspace_without_inherited_git_settings(self):
         with tempfile.TemporaryDirectory(dir='/var/tmp') as directory:

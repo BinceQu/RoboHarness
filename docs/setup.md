@@ -146,6 +146,15 @@ task has an explicit mapping. Each task needs three distinct unprivileged
 ports; overlapping active runs fail before launch. The wrapper leaves the
 mapping intact, and `--dry-run` shows all three resolved ports.
 
+The launcher raises its own file-descriptor soft limit to `nofile_soft_limit`
+(default 65536), inherited only by its new child processes. The hard limit
+must already allow this value; no system-wide settings are edited. The actual
+limits are saved in each run's `runtime_config.json`. Replay history closes
+completed chunk files and opens them only during reads, so retained frames do
+not each consume a permanently open descriptor. Files live in private local
+scratch and are removed after the last reader releases them; an abrupt process
+kill can leave files in the stopped run's scratch directory.
+
 Relative configuration paths are resolved from the repository root. Reusing
 existing environments is supported by `interface_python`, `evaluator_python`,
 and `agent_python`; the runner always imports the interface and evaluator
@@ -183,3 +192,19 @@ to opt into a safety timeout. If that timeout forces submission, the official
 result is retained but the strict reporter excludes the run from reproduction
 verification, even when its score matches. The selected timeout is recorded
 in each new run's runtime configuration.
+
+## Additional public test instances
+
+The default remains the five archived instances. Additional instances need an
+explicit archived prompt/context template, for example:
+
+```bash
+./run.sh --task task01 --supplemental-instances 302,303,305,307,309 \
+  --context-instance 301 --gpu 0 --config .local/session-config.json
+```
+
+These cases use the same task budget and the selected template's prompt, MCP
+name and native context. They are marked `supplemental`; their historical
+reference scores and score differences are `null`. Their mean is reported
+separately from reproduction on the five archived instances. The template
+instance is recorded in every case, and is not itself rerun by this command.

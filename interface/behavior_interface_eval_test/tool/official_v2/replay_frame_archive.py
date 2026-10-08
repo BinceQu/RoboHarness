@@ -2,7 +2,8 @@
 
 Only compressed, policy-owned observation bytes enter this module. Chunk
 references keep in-flight readers valid across history eviction / episode
-reset; dropping the last reference closes the anonymous temporary file.
+reset. Sealed chunks retain a private filename, not an open descriptor;
+dropping the last reference deletes the file.
 """
 
 from __future__ import annotations
@@ -11,6 +12,7 @@ import hashlib
 import os
 import tempfile
 import threading
+import weakref
 from collections import deque
 from dataclasses import dataclass
 from typing import BinaryIO
@@ -20,12 +22,37 @@ REPLAY_ARCHIVE_CHUNK_BYTES = 16 * 1024 * 1024
 
 
 @dataclass
+class _ArchiveDirectory:
+    temporary: tempfile.TemporaryDirectory
+
+    @property
+    def name(self) -> str:
+        return self.temporary.name
+
+    def __post_init__(self) -> None:
+        weakref.finalize(self, self.temporary.cleanup)
+
+
+@dataclass
 class _ArchiveChunk:
     stream: BinaryIO
+    directory: _ArchiveDirectory
     size: int = 0
 
-    def __del__(self) -> None:
-        self.stream.close()
+    def __post_init__(self) -> None:
+        # Keep the resources alive until this chunk is finalized, including
+        # when a tracker/future cycle is collected as a group.
+        weakref.finalize(self, self._delete, self.stream, self.directory)
+
+    @staticmethod
+    def _delete(stream: BinaryIO, directory: _ArchiveDirectory) -> None:
+        try:
+            stream.close()
+        finally:
+            try:
+                os.unlink(stream.name)
+            except FileNotFoundError:
+                pass
 
 
 @dataclass
@@ -44,7 +71,11 @@ class ReplayFramePayload:
         if cached is not None:
             return cached
         size = self.gray_size + self.depth_size
-        payload = os.pread(self.chunk.stream.fileno(), size, self.offset)
+        # Opening a sealed chunk only for this read bounds descriptor use by
+        # concurrent readers, even when a full episode retains thousands of
+        # chunks. The payload reference keeps the file and directory alive.
+        with open(self.chunk.stream.name, "rb", buffering=0) as stream:
+            payload = os.pread(stream.fileno(), size, self.offset)
         if len(payload) != size or hashlib.sha256(payload).digest() != self.digest:
             raise OSError("lossless replay archive payload failed integrity check")
         return payload[:self.gray_size], payload[self.gray_size:]
@@ -54,7 +85,7 @@ class ReplayFrameArchive:
     """Archive in compression workers; retain the existing RAM cache budget.
 
     The owner bounds total retained bytes / frames and releases history refs.
-    This class retains at most one writable chunk plus the bounded hot cache.
+    This class retains at most one open writer plus the bounded hot cache.
     Disk usage beyond retained payloads is limited to the hot cache, chunk
     edge slack and the owner's bounded pending queue. No per-frame files, fsync or
     network storage are used on the evaluator observation callback.
@@ -75,6 +106,12 @@ class ReplayFrameArchive:
         self._cache: deque[ReplayFramePayload] = deque()
         self._cache_bytes = 0
         self._published_cache_bytes = 0
+        # The runner supplies private local scratch. Standalone interfaces
+        # default to /tmp, never an inherited TMPDIR on network storage.
+        self._directory = _ArchiveDirectory(tempfile.TemporaryDirectory(
+            prefix="official-track-replay-",
+            dir=os.environ.get("BEHAVIOR_INTERFACE_RUNTIME_TMP_ROOT") or "/tmp",
+        ))
 
     def store(self, gray: bytes, depth: bytes) -> ReplayFramePayload:
         size = len(gray) + len(depth)
@@ -82,12 +119,15 @@ class ReplayFrameArchive:
         digest.update(depth)
         with self._lock:
             if self._chunk is None or self._chunk.size + size > self._chunk_bytes:
-                # Explicit local scratch avoids TMPDIR pointing at the NFS
-                # submission directory. TemporaryFile is private and removed
-                # automatically, including after a process crash.
-                self._chunk = _ArchiveChunk(tempfile.TemporaryFile(
-                    prefix="official-track-replay-", dir="/tmp", buffering=0,
-                ))
+                if self._chunk is not None:
+                    self._chunk.stream.close()
+                    self._chunk = None
+                # Retained replay frames can outlive this archive after an
+                # episode reset, so each chunk also owns its directory lease.
+                self._chunk = _ArchiveChunk(tempfile.NamedTemporaryFile(
+                    prefix="chunk-", dir=self._directory.name,
+                    buffering=0, delete=False,
+                ), self._directory)
             chunk = self._chunk
             offset = chunk.size
             try:
@@ -96,6 +136,7 @@ class ReplayFrameArchive:
             except OSError:
                 # Never reuse offsets after a partial write / ENOSPC. Earlier
                 # payloads in this chunk remain readable via their own refs.
+                chunk.stream.close()
                 self._chunk = None
                 raise
             chunk.size += size
@@ -114,7 +155,7 @@ class ReplayFrameArchive:
     def status(self) -> dict[str, int | str]:
         # Health / ingest must never wait for a compression worker's disk I/O.
         return {
-            "replay_archive_backend": "local_anonymous_tempfile_with_bounded_hot_cache",
+            "replay_archive_backend": "local_chunk_files_with_bounded_handles_and_hot_cache",
             "replay_memory_cache_bytes": self._published_cache_bytes,
             "replay_memory_cache_max_bytes": self.memory_max_bytes,
             "replay_memory_cache_max_frames": self._cache_max_frames,
