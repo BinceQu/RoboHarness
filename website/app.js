@@ -19,8 +19,6 @@
     select.value = task.id;
     runSelect.value = task.id;
     document.getElementById("selected-mean").textContent = task.mean.toFixed(4);
-    document.getElementById("task-budget").textContent =
-      `${task.maxSteps.toLocaleString("en-US")} simulation steps · Challenge 2025 ×2`;
     document.getElementById("manifest-link").href =
       `https://github.com/BinceQu/RoboHarness/blob/main/tasks/${task.id}.json`;
     chart.setAttribute("aria-label", `${task.name}. Archived Q-scores: ` +

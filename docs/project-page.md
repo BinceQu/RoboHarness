@@ -25,13 +25,15 @@ Q-score table, task selector and exact step limits. It validates each referenced
 prompt hash. Directory-reported scores are authoritative; the build does not
 substitute values from conflicting evaluator JSON.
 
-The introduction, method descriptions and figure captions use the supplied
-manuscript's wording, with LaTeX formatting and cross-references adapted for the
-web. The Chinese README translates the same introduction. The manuscript source
-and its hash are recorded in the [asset manifest](assets/sources.json).
+The page presents the supplied manuscript's overview and robot-data comparison
+with a short introduction. The object catalog and full task table are folded
+under expandable sections. Evaluation notes remain alongside the full table;
+the setup guide is linked from the task runner. The manuscript source and its
+hash are recorded in the [asset manifest](assets/sources.json).
 
-The page and READMEs use the original manuscript's overview, keypoint-tracking,
-object-catalog and robot-data comparison figures, plus its RoboHarness wordmark.
+The page uses the original manuscript's overview, object catalog and robot-data
+comparison figures, plus its RoboHarness wordmark. The READMEs also include the
+keypoint-tracking figure.
 Original PDFs and browser-friendly renders are in [`docs/assets/`](assets).
 The [asset manifest](assets/sources.json) records source paths in the supplied
 `roboharness.zip`, SHA-256 hashes and the rendering process. Only outer white

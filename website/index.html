@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="RoboHarness gives LLM agents a visual-geometric control panel for embodied tasks. A simple harness for generalist robot manipulation.">
+  <meta name="description" content="RoboHarness connects coding agents to robots for generalist manipulation through visual feedback and geometric actions.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="RoboHarness: A Simple Harness Outperforms VLA and World Action Models">
-  <meta property="og:description" content="A robotic harness that gives LLM agents a visual-geometric control panel so that they can directly understand and invoke embodied tasks.">
+  <meta property="og:description" content="Generalist robot manipulation with coding agents.">
   <meta property="og:url" content="https://bincequ.github.io/RoboHarness/">
   <meta property="og:image" content="https://bincequ.github.io/RoboHarness/assets/overview.png">
   <meta property="og:image:alt" content="RoboHarness paper overview: geometry tracking, geometric action tools, coding agents, and an example rollout.">
@@ -20,170 +20,101 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <nav class="container nav" aria-label="Main navigation">
-      <a class="wordmark" href="#top" aria-label="RoboHarness home"><img src="assets/roboharness-wordmark.png" alt="RoboHarness" width="180" height="35"></a>
-      <div class="nav-links">
-        <a href="#method">Method</a>
-        <a href="#results">Results</a>
-        <a href="#reproduce">Reproduce</a>
-        <a lang="zh-CN" href="https://github.com/BinceQu/RoboHarness/blob/main/README.zh-CN.md">中文</a>
-        <a class="repo-link" href="https://github.com/BinceQu/RoboHarness">GitHub <span aria-hidden="true">↗</span></a>
-      </div>
-    </nav>
-  </header>
 
   <main id="main">
     <section class="container hero" id="top" aria-labelledby="hero-title">
-      <p class="paper-label"><span>Embodied AI</span><span class="label-divider" aria-hidden="true"></span><span>Open-source project</span></p>
       <img class="hero-wordmark" src="assets/roboharness-wordmark.png" alt="RoboHarness" width="480" height="93">
-      <h1 id="hero-title">A Simple Harness Outperforms VLA and World Action Models</h1>
-      <p class="hero-description">A robotic harness that gives LLM agents a visual-geometric control panel so that they can directly understand and invoke embodied tasks.</p>
-      <div class="hero-meta" aria-label="Project scope">
-        <span>BEHAVIOR Challenge 2025</span><span>9 archived tasks</span><span>45 archived cases</span>
-      </div>
+      <h1 id="hero-title"><span>A Simple Harness Outperforms</span><span>VLA and World Action Models</span></h1>
+      <p class="hero-description">Generalist robot manipulation with coding agents.</p>
       <div class="hero-links">
-        <a class="text-button primary" href="https://github.com/BinceQu/RoboHarness">Explore the code <span aria-hidden="true">↗</span></a>
-        <a class="text-button" href="#results">Browse archived results <span aria-hidden="true">↓</span></a>
-      </div>
-    </section>
-
-    <section class="container abstract" aria-labelledby="abstract-title">
-      <h2 id="abstract-title">Abstract</h2>
-      <div class="abstract-copy">
-        <p>The rise of large language models (LLMs) has opened a path toward generalist embodied AI, raising the question of how LLMs can act in the physical world. One straightforward approach is training the model to generate actions: collect robot-action data and video demonstration, refine LLM architecture with an action head, and train a vision-language-action (VLA) model at scale.</p>
-        <p>However, we argue that coding agents have the potential to realize generalist embodied manipulation. All they need is a simple yet effective robot harness. We present <em>RoboHarness</em>: a robotic harness that gives LLM agents a visual-geometric control panel so that they can directly understand and invoke embodied tasks. With RoboHarness, Qwen3.8-Flash-Next outperforms state-of-the-art VLA models on BEHAVIOR Challenge 2025 tasks. The implementation is open source.</p>
+        <a class="button primary" href="https://github.com/BinceQu/RoboHarness"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 .75a11.25 11.25 0 0 0-3.56 21.92c.56.1.77-.24.77-.54v-2.1c-3.14.68-3.8-1.34-3.8-1.34-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.68.08-.68 1.13.08 1.73 1.16 1.73 1.16 1 1.72 2.63 1.22 3.27.93.1-.73.4-1.23.71-1.51-2.5-.28-5.13-1.25-5.13-5.56 0-1.23.44-2.24 1.16-3.03-.12-.28-.5-1.43.11-2.98 0 0 .95-.3 3.1 1.16a10.8 10.8 0 0 1 5.64 0c2.15-1.46 3.1-1.16 3.1-1.16.61 1.55.23 2.7.11 2.98.72.79 1.16 1.8 1.16 3.03 0 4.32-2.63 5.28-5.14 5.56.4.35.76 1.04.76 2.1v3.09c0 .3.2.65.78.54A11.25 11.25 0 0 0 12 .75Z"/></svg>Code</a>
+        <a class="button" href="#results">Results <span aria-hidden="true">↓</span></a>
       </div>
     </section>
 
     <figure class="container overview-figure">
-      <a class="figure-link" href="assets/overview.pdf" target="_blank" rel="noopener" aria-label="Open the original overview figure PDF">
-        <img src="assets/overview.png" width="1618" height="1315" alt="RoboHarness overview: a geometry tracker and minimal toolset connect an LLM agent to a robot harness; an example rollout shows key insertion through visual feedback and geometric constraints." fetchpriority="high">
-        <span class="figure-open">Open figure PDF <span aria-hidden="true">↗</span></span>
+      <a class="figure-link" href="assets/overview.pdf" target="_blank" rel="noopener" aria-label="Open the original RoboHarness overview PDF">
+        <img src="assets/overview.png" width="1618" height="1315" alt="RoboHarness overview: a geometry tracker and minimal toolset connect a coding agent to a robot; an example rollout shows key insertion through visual feedback and geometric constraints." fetchpriority="high">
       </a>
-      <figcaption><strong>Figure 1.</strong> RoboHarness overview: visual keypoints are tracked persistently, converted into geometric constraints, executed, and verified in a closed loop.</figcaption>
     </figure>
 
-    <div class="container stats" aria-label="Release at a glance">
-      <div><strong>{{TASK_COUNT}}</strong><span>archived tasks</span></div>
-      <div><strong>{{CASE_COUNT}}</strong><span>archived cases</span></div>
-      <div><strong>2</strong><span>agent harnesses</span></div>
-      <div><strong>2025 ×2</strong><span>challenge budget</span></div>
-    </div>
-
-    <section class="container section method-section" id="method" aria-labelledby="method-title">
+    <section class="container section generalization-section" id="results" aria-labelledby="generalization-title">
       <div class="section-heading">
-        <p class="section-index">01 <span>/</span> Method</p>
-        <h2 id="method-title">A visual-geometric control panel for embodied tasks</h2>
-        <p class="section-lead">Without training models, RoboHarness combines visual clicks, keypoint tracking, and geometric constraints to provide an embodied control panel for an LLM agent.</p>
+        <h2 id="generalization-title">Generalization without robot data</h2>
+        <p>Pick-and-place success across 100 objects.</p>
       </div>
-
-      <div class="method-feature">
-        <figure class="method-figure">
-          <a class="figure-link" href="assets/keypoint-tracking.pdf" target="_blank" rel="noopener" aria-label="Open the original keypoint-tracking figure PDF">
-            <img src="assets/keypoint-tracking.png" width="952" height="566" loading="lazy" alt="Pipeline of the track_object tool: optical-flow keypoint tracking followed by depth back-projection into the robot coordinate frame.">
-            <span class="figure-open">Open figure PDF <span aria-hidden="true">↗</span></span>
+      <figure class="comparison-figure">
+        <a class="figure-link" href="assets/robot-data-comparison.pdf" target="_blank" rel="noopener" aria-label="Open the original robot-data comparison PDF">
+          <img src="assets/robot-data-comparison.png" width="2771" height="1664" loading="lazy" alt="Successes out of 100 objects versus estimated hours of robot data, comparing RoboHarness with VLA models, world action models, and a pick-function baseline.">
+        </a>
+      </figure>
+      <details class="disclosure object-details">
+        <summary>Explore the 100 objects <span aria-hidden="true">+</span></summary>
+        <figure>
+          <a class="figure-link" href="assets/object-generalization.pdf" target="_blank" rel="noopener" aria-label="Open the original 100-object catalog PDF">
+            <img src="assets/object-generalization.png" width="2797" height="2800" loading="lazy" alt="The 100 objects used to evaluate generalization, drawn from the BEHAVIOR object library.">
           </a>
-          <figcaption><strong>Figure 2.</strong> Pipeline of the <code>track_object</code> tool: optical-flow keypoint tracking followed by depth back-projection into the robot coordinate frame.</figcaption>
+          <figcaption>Objects from BEHAVIOR. ASPIRE and RoboHarness start with the object on the floor and the robot in a stooping pose; other models use their training embodiment and simulation environment.</figcaption>
         </figure>
-        <div class="method-copy">
-          <p class="section-index">Persistent visual grounding</p>
-          <h3>Track points. Recover geometry. Compose actions.</h3>
-          <p>The LLM selects one or more points of interest that are visible in the head camera. The harness continuously tracks each marked point across successive frames, recovers metric distance from depth, and back-projects the pixel coordinate into the robot camera frame.</p>
-          <p>The model supplies points and their spatial relations; the harness solves and executes the corresponding action. The same interface supports both keypoint-and-constraint actions and direct robot adjustment.</p>
-        </div>
-      </div>
-
-      <ol class="pipeline" aria-label="Keypoint tracking pipeline">
-        <li><span class="step-index">01</span><h3>Select points</h3><p>Mark points of interest in the head-camera image.</p></li>
-        <li><span class="step-index">02</span><h3>Track keypoints</h3><p>Follow each marked point across successive frames.</p></li>
-        <li><span class="step-index">03</span><h3>Recover depth</h3><p>Project image locations onto depth to recover metric distance.</p></li>
-        <li><span class="step-index">04</span><h3>Back-project</h3><p>Express the point in the robot camera frame.</p></li>
-      </ol>
+      </details>
     </section>
 
-    <section class="research-section" aria-labelledby="generalization-title">
-      <div class="container section">
-        <div class="section-heading section-heading-row">
-          <div><p class="section-index">02 <span>/</span> Generalization</p><h2 id="generalization-title">Across objects and robot data</h2></div>
-          <p class="section-lead">The task is to pick up each of the 100 objects and place it in the embodiment and simulation environment on which the corresponding model was trained. For ASPIRE and RoboHarness, the object is placed on the floor and the robot starts from a stooping pose.</p>
+    <section class="container section archive-section" aria-labelledby="results-title">
+      <div class="section-heading">
+        <h2 id="results-title">Task results</h2>
+        <p>Qwen3.8-Flash-Next · mean Q-score over five instances.</p>
+      </div>
+      <div class="archive-explorer" id="archive-explorer" hidden>
+        <div class="explorer-details">
+          <label for="task-select">Task</label>
+          <select id="task-select">{{TASK_OPTIONS}}</select>
+          <div class="selected-metric"><span id="selected-mean">0.8667</span><span>Mean Q-score</span></div>
+          <a class="text-link" id="manifest-link" href="https://github.com/BinceQu/RoboHarness/blob/main/tasks/task01.json">Source data <span aria-hidden="true">↗</span></a>
         </div>
-        <div class="research-figures">
-          <figure>
-            <a class="figure-link" href="assets/object-generalization.pdf" target="_blank" rel="noopener" aria-label="Open the original 100-object catalog PDF">
-              <img src="assets/object-generalization.png" width="2797" height="2800" loading="lazy" alt="The 100 objects used to evaluate generalization across objects, drawn from the BEHAVIOR object library.">
-              <span class="figure-open">100-object catalog <span aria-hidden="true">↗</span></span>
-            </a>
-            <figcaption><strong>Figure 3.</strong> The 100 objects used to evaluate generalization across objects. The catalog is drawn from the BEHAVIOR object library.</figcaption>
-          </figure>
-          <figure>
-            <a class="figure-link" href="assets/robot-data-comparison.pdf" target="_blank" rel="noopener" aria-label="Open the original robot-data comparison PDF">
-              <img src="assets/robot-data-comparison.png" width="2771" height="1664" loading="lazy" alt="Successes out of 100 objects versus estimated hours of robot data for VLA, world action model, RoboHarness and ASPIRE-pick.">
-              <span class="figure-open">Original comparison <span aria-hidden="true">↗</span></span>
-            </a>
-            <figcaption><strong>Figure 4.</strong> Successes out of 100 objects versus estimated hours of robot data. Colors: VLA (blue), world action model (green), RoboHarness (red), and the ASPIRE-pick baseline (gray).</figcaption>
-          </figure>
+        <div class="chart-wrap">
+          <p class="chart-heading">Q-score by instance</p>
+          <div id="score-chart" class="score-chart" role="img" aria-label="Archived scores for picking up trash"></div>
         </div>
       </div>
-    </section>
-
-    <section class="archive-section" id="results" aria-labelledby="results-title">
-      <div class="container section">
-        <div class="section-heading section-heading-row">
-          <div><p class="section-index">03 <span>/</span> Experiment archive</p><h2 id="results-title">BEHAVIOR Challenge 2025</h2></div>
-          <p class="section-lead">Each entry is the mean Q-score over five instances per task. The archived runs use Qwen3.8-Flash-Next, with slots 0, 3, 5, 7, 9 (instance IDs 301, 304, 306, 308, 310).</p>
-        </div>
-        <div class="archive-explorer" id="archive-explorer" hidden>
-          <div class="explorer-details">
-            <label for="task-select">Select a task</label>
-            <select id="task-select">{{TASK_OPTIONS}}</select>
-            <div class="selected-metric"><span id="selected-mean">0.8667</span><span>mean Q-score</span></div>
-            <p id="task-budget"></p>
-            <a id="manifest-link" href="https://github.com/BinceQu/RoboHarness/blob/main/tasks/task01.json">Case manifest &amp; prompt hashes <span aria-hidden="true">↗</span></a>
-          </div>
-          <div class="chart-wrap"><p class="chart-heading">Q-score by instance <span>0–1</span></p><div id="score-chart" class="score-chart" role="img" aria-label="Archived scores for picking up trash"></div></div>
-        </div>
+      <details class="disclosure results-details">
+        <summary>All task scores <span aria-hidden="true">+</span></summary>
         <div class="table-scroll" role="region" aria-label="Archived Q-score results; scroll horizontally on narrow screens" tabindex="0">
           <table class="archive-table">
             <caption class="sr-only">Historical directory-reported Q-scores. The mean is over five instances per task.</caption>
-            <thead><tr><th scope="col">Task</th><th scope="col">301<small>slot 0</small></th><th scope="col">304<small>slot 3</small></th><th scope="col">306<small>slot 5</small></th><th scope="col">308<small>slot 7</small></th><th scope="col">310<small>slot 9</small></th><th scope="col">Mean Q</th></tr></thead>
+            <thead><tr><th scope="col">Task</th><th scope="col">301</th><th scope="col">304</th><th scope="col">306</th><th scope="col">308</th><th scope="col">310</th><th scope="col">Mean Q</th></tr></thead>
             <tbody>{{ARCHIVE_ROWS}}</tbody>
           </table>
         </div>
-        <div class="archive-notes"><p>Task04 has no supplied trajectory archive and is not included in the release. For task00 and task05, directory reports differ from some preserved evaluator JSON; the directory values above remain the reference.</p><a href="https://github.com/BinceQu/RoboHarness/blob/main/docs/provenance.md">Provenance &amp; limitations <span aria-hidden="true">↗</span></a></div>
-      </div>
+        <div class="archive-notes">
+          <p>BEHAVIOR Challenge 2025, with twice the challenge step budget. Task04 has no supplied archive. For task00 and task05, directory reports differ from some preserved evaluator JSON; the directory values shown here remain the reference.</p>
+          <a class="text-link" href="https://github.com/BinceQu/RoboHarness/blob/main/docs/provenance.md">Evaluation details <span aria-hidden="true">↗</span></a>
+        </div>
+      </details>
     </section>
 
-    <section class="container section reproduce-section" id="reproduce" aria-labelledby="reproduce-title">
-      <div class="section-heading section-heading-row">
-        <div><p class="section-index">04 <span>/</span> Reproduction</p><h2 id="reproduce-title">Run the archived task set</h2></div>
-        <div class="reproduce-intro"><p class="section-lead">Set up the environment and model endpoint, then launch all five archived instances with one command.</p><a class="text-link" href="https://github.com/BinceQu/RoboHarness/blob/main/docs/setup.md">Complete installation guide <span aria-hidden="true">↗</span></a><a class="text-link" lang="zh-CN" href="https://github.com/BinceQu/RoboHarness/blob/main/README.zh-CN.md">中文安装与使用说明 <span aria-hidden="true">↗</span></a></div>
+    <section class="container reproduce-section" id="reproduce" aria-labelledby="reproduce-title">
+      <div class="reproduce-heading">
+        <h2 id="reproduce-title">Run a task</h2>
+        <a class="text-link" href="https://github.com/BinceQu/RoboHarness/blob/main/docs/setup.md">Get started <span aria-hidden="true">↗</span></a>
       </div>
-      <div class="terminal">
-        <div class="terminal-header"><span><span class="terminal-dot" aria-hidden="true"></span> Reproduce a task</span><span>bash</span></div>
-        <div class="terminal-content">
-          <p class="terminal-comment"># Clone and install</p>
-          <pre><code>git clone --recurse-submodules https://github.com/BinceQu/RoboHarness.git
-cd RoboHarness
-./scripts/setup.sh
-cp configs/example.json configs/local.json</code></pre>
-          <p class="terminal-comment"># Configure data paths and model endpoint in configs/local.json</p>
-          <div class="terminal-command-heading"><p class="terminal-comment"># Run all five archived instances</p><button type="button" class="copy-button" id="copy-command" hidden>Copy command</button></div>
-          <label class="terminal-label" for="run-task">Task</label>
-          <select id="run-task" aria-describedby="run-note" disabled><option value="task01">task01 · picking up trash</option></select>
-          <pre class="run-command"><code id="run-command">./scripts/reproduce_task.sh task01 --gpu 0</code></pre>
-          <p class="copy-feedback" id="copy-feedback" role="status" aria-live="polite"></p>
-          <p id="run-note">Challenge 2025 ×2 budget · No wall-clock cap by default</p>
+      <div class="command-panel">
+        <label class="sr-only" for="run-task">Task to reproduce</label>
+        <select id="run-task" disabled><option value="task01">Picking up trash</option></select>
+        <div class="command-line">
+          <pre><code id="run-command">./scripts/reproduce_task.sh task01 --gpu 0</code></pre>
+          <button type="button" class="copy-button" id="copy-command" hidden aria-label="Copy run command">Copy</button>
         </div>
       </div>
+      <p class="copy-feedback" id="copy-feedback" role="status" aria-live="polite"></p>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer">
-      <a class="wordmark" href="#top" aria-label="RoboHarness home"><img src="assets/roboharness-wordmark.png" alt="RoboHarness" width="180" height="35"></a>
-      <p class="contributors">Contributors: <a href="https://github.com/BinceQu">BinceQu</a> · <span>Codex <span class="contributor-role">(AI coding agent)</span></span></p>
-      <div><a href="https://github.com/BinceQu/RoboHarness/blob/main/LICENSE">MIT license</a><a href="https://github.com/BinceQu/RoboHarness/blob/main/THIRD_PARTY_NOTICES.md">Third-party terms</a><a href="https://github.com/BinceQu/RoboHarness/issues">Issues ↗</a></div>
+  <footer class="container site-footer">
+    <p class="contributors" aria-label="Project contributors"><a href="https://github.com/BinceQu">BinceQu</a> <span aria-hidden="true">·</span> Codex</p>
+    <div class="footer-links">
+      <a lang="zh-CN" href="https://github.com/BinceQu/RoboHarness/blob/main/README.zh-CN.md">中文</a>
+      <a href="https://github.com/BinceQu/RoboHarness/blob/main/LICENSE">MIT license</a>
+      <a href="https://github.com/BinceQu/RoboHarness/blob/main/THIRD_PARTY_NOTICES.md">Third-party terms</a>
     </div>
   </footer>
   <script type="application/json" id="archive-data">{{TASK_DATA}}</script>
