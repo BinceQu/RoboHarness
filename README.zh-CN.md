@@ -4,8 +4,7 @@
 
 ### 一个简单而有效的机器人 harness
 
-**[项目主页](https://bincequ.github.io/RoboHarness/) · [English](README.md) · [安装说明](docs/setup.md) · [逐例提示词](docs/case-prompts.md)**
-
+**[项目主页](https://bincequ.github.io/RoboHarness/) · [English](README.md) · [安装说明](docs/setup.md) · [任务提示词](docs/case-prompts.md)**
 
 [![RoboHarness 总览](docs/assets/overview.png)](docs/assets/overview.pdf)
 
@@ -23,27 +22,24 @@ RoboHarness 无需训练模型，将视觉点选、关键点跟踪和几何约�
 LLM 在二维图像中标记感兴趣的点，并通过光流跟踪与深度反投影持续获取这些点的位置；
 借助这些信息，它能够组合准确的基本动作，完成复杂操作。
 
-仓库包含 **9 个任务、45 个归档 case**。参考实验使用 Claude Code 2.1.259 和
-`Qwen3.8-Flash-Next-FP8`。Codex 是可选 harness，归档中没有对应的 Codex 成绩。
+BEHAVIOR 实验使用 Claude Code 2.1.259、`Qwen3.8-Flash-Next-FP8` 和 R1 Pro 机器人。
+仓库同时提供 Codex harness。
 
 ## 仓库结构
 
 ```text
-BEHAVIOR/           上游子模块，固定为 v3.9.1
-interface/          evaltest 接口、RGB-D 工具、机器人配置和 idle gate
+BEHAVIOR/           BEHAVIOR 仿真器与评测器，固定为 v3.9.1
+interface/          RGB-D 观测、机器人控制和交互界面
 harness/
-  claude_code/      参考实验所用的 Claude Code harness
-  codex/            可选 Codex harness
-prompt/             仅保留归档 case 实际使用的提示词
-tasks/              case、实例 ID、预算、提示词哈希与来源
-reference_results/  原始官方评分与初始观测记录
-roboharness/        启动、进程管理和归档约束检查
+  claude_code/      Claude Code harness
+  codex/            Codex harness
+prompt/             各项家居操作任务的专用提示词
+tasks/              任务定义、评测实例和步数预算
+reference_results/  参考评测成绩
+roboharness/        任务运行与评测流程
 scripts/            安装、一键运行、验证和成绩报告
-validation_results/ 新测试评分与验证证据
+validation_results/ 评测报告与成绩
 ```
-
-完整历史轨迹、BEHAVIOR 数据集、模型权重和密钥不随仓库分发。归档来源和哈希保留在清单中，
-新测试的完整轨迹保存于本机 `runs/`。
 
 ## 安装与一键运行
 
@@ -68,35 +64,34 @@ cp configs/example.json configs/local.json
 # 查看计划，不启动仿真。
 ./scripts/reproduce_task.sh task03 --gpu 0 --dry-run
 
-# 仅测试指定实例，用于排查。
+# 运行指定实例。
 ./scripts/reproduce_task.sh task08 --gpu 0 --instances 301,304
 ```
 
-默认运行该任务全部五个实例：**301、304、306、308、310**，对应归档 slot
-**0、3、5、7、9**。task04 没有归档数据，因此不提供该任务的复现入口。
+默认运行该任务的全部五个评测实例。使用 `./run.sh --list` 查看支持的任务；task04 未包含在内。
 
 包装脚本首次运行时将 `configs/local.json` 复制到 `.local/session-config.json`，
 后续复用该 session 文件。之后调整配置请修改该文件；不会改动全局 Claude 或 Codex 配置。
 通过 `task_ports` 可为每个任务指定 HTTP、policy、idle gate 三个端口，
 参见[全部使用 1507* 的示例](docs/setup.md#session-configuration-and-ports)。
 
-运行器依次加载归档场景和提示词，保存计划、会话、模型轨迹、官方评分 JSON 与汇总到新的
+运行器按任务配置加载场景和提示词，保存计划、会话、模型轨迹、官方评分 JSON 与汇总到新的
 `runs/<run-id>/` 目录。网页接口位于 `http://127.0.0.1:<port>/`；远程访问可使用 SSH 转发。
 
 ## 复现与评分规则
 
-- **每个任务使用专用 prompt，同一任务的所有实例共享该 prompt。** 按论文描述，
-  prompt 由人工编写，包含完成任务的执行步骤和模型必须遵守的行为边界。
-  每个任务的五个实例（301、304、306、308、310）均使用该任务的同一份 prompt。
-- 使用 **Challenge 2025 ×2**，严格采用归档中的最终整数步数预算。
-- 默认 `session_timeout_s: 0`，不增加墙钟时限，可运行超过 72 小时；仿真步数限制仍有效。
-- 发布版保留所选轨迹中恢复出的 prompt 版本，归档中同一任务的版本差异见
-  [逐例提示词记录](docs/case-prompts.md)。运行时按归档映射加载并记录来源与 SHA-256，
-  同时检查已恢复的 Skill 上下文和 MCP 命名空间。
-- 每个任务的全部五例完成后，比较 **mean Q-score**，绝对误差容限为 `1e-6`。
-  单例分数允许不同，各任务分别验收。
-- 以轨迹目录报告的均分为目标。原始 JSON 与目录汇总冲突时保留两者及说明，不改写历史成绩。
-- 被墙钟时限截断的结果保留作排查证据，不作为有效的完整复现结果。
+论文中的 BEHAVIOR 评测设置如下：
+
+- **每个任务使用专用 prompt，同一任务的所有实例共享该 prompt。** prompt 由人工编写，
+  包含完成任务的执行步骤和模型必须遵守的行为边界，见[任务提示词](docs/case-prompts.md)。
+- **每个任务评测五个实例。** 使用采样种子 `20260911`，所有任务均选取 slot
+  **0、3、5、7、9**，对应实例 **301、304、306、308、310**。每个实例进行一次正式 rollout。
+- **Challenge 2025，两倍步数预算。** 每个任务的最大步数为该任务人类演示平均长度的两倍，
+  按仿真控制步计数。达到任务目标或步数上限时结束，见[步数预算](docs/provenance.md#evaluation-budgets)。
+- **Mean Q-score。** 使用 BEHAVIOR Challenge 2025 官方评测器的 `q_score.final`，
+  对全部五个实例的分数取不加权平均，报告值保留四位小数。
+
+运行器默认使用 `session_timeout_s: 0`，不增加墙钟时限；仿真步数预算仍然有效。
 
 生成报告：
 
@@ -105,8 +100,9 @@ python3 scripts/report_validation.py runs/YOUR_RUN_A runs/YOUR_RUN_B \
   --output validation_results/latest --check-live --require-match
 ```
 
-`--check-live` 用于实际运行评测的 Linux 主机；分析复制来的运行目录时省略它。
-`--require-match` 对未完成、失败、均分不匹配或归档约束未满足的运行返回非零退出码。
+报告逐任务比较完整的五例均分与参考值，容限为 `1e-6`，单例分数允许不同。
+`--require-match` 在任务未完成、均分不匹配或未通过评测检查时返回非零退出码。
+在评测主机上使用 `--check-live`；分析复制来的运行目录时省略它。添加 `--watch` 可持续更新报告。
 
 ## 开发与许可
 
