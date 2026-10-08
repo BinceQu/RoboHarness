@@ -7,5 +7,6 @@
   "model": "Qwen3.8-Flash-Next-FP8",
   "startup_timeout_s": 2400,
   "session_timeout_s": 0,
+  "nofile_soft_limit": 65536,
   "unmask_evaluator_cuda": false
 }

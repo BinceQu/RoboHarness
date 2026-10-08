@@ -10,6 +10,7 @@ import math
 import os
 from pathlib import Path
 import re
+import resource
 import shutil
 import signal
 import socket
@@ -86,17 +87,58 @@ def load_task(token: str) -> dict:
     raise ValueError(f'No archived task {token!r}; use --list (task04 is not in the supplied archive).')
 
 
-def select_cases(task: dict, instances: str | None) -> list[dict]:
-    if instances is None:
-        return task['cases']
+def instance_ids(instances: str) -> list[int]:
     ids = [int(x) for x in re.split(r'[,\s]+', instances.strip()) if x]
     if len(ids) != len(set(ids)) or not ids:
         raise ValueError('Instance IDs must be nonempty and unique.')
+    return ids
+
+
+def select_cases(task: dict, instances: str | None) -> list[dict]:
+    if instances is None:
+        return task['cases']
+    ids = instance_ids(instances)
     mapping = {c['instance_id']: c for c in task['cases']}
     if set(ids) - mapping.keys():
         raise ValueError('Use actual instance IDs from this archive: 301,304,306,308,310.')
     # Preserve the caller's order, and use the same order in the evaluator.
     return [mapping[i] for i in ids]
+
+
+def supplemental_cases(task: dict, instances: str, context_instance: int | None) -> list[dict]:
+    """Evaluate new public instances with an explicitly selected archived setup.
+
+    Only the prompt and native context are inherited. There is no historical
+    score, reference result or archived rollout for these additional cases.
+    """
+    mapping = {c['instance_id']: c for c in task['cases']}
+    if context_instance not in mapping:
+        raise ValueError('--supplemental-instances requires --context-instance from this task archive.')
+    ids = instance_ids(instances)
+    if any(i < 301 or i > 320 or i in mapping for i in ids):
+        raise ValueError('Supplemental IDs must be public test instances 301..320 absent from the archive.')
+    template = mapping[context_instance]
+    return [{**{key: template[key] for key in (
+                 'prompt', 'prompt_sha256', 'prompt_source', 'prompt_source_sha256', 'claude_mcp_name')},
+             'instance_id': iid, 'slot': iid - 301, 'evaluation_scope': 'supplemental',
+             'context_reference_instance_id': context_instance,
+             'reference_q': None, 'archive_reported_q': None} for iid in ids]
+
+
+def ensure_file_limit(requested: int) -> dict:
+    """Raise only this controller's soft limit, inherited by its new children."""
+    before, hard = resource.getrlimit(resource.RLIMIT_NOFILE)
+    if hard != resource.RLIM_INFINITY and requested > hard:
+        raise ValueError(f'nofile_soft_limit={requested} exceeds this process hard limit {hard}; '
+                         'raise the launch service/shell limit before starting the evaluator.')
+    if before != resource.RLIM_INFINITY and before < requested:
+        resource.setrlimit(resource.RLIMIT_NOFILE, (requested, hard))
+    soft, hard = resource.getrlimit(resource.RLIMIT_NOFILE)
+    return {'before_soft': before, 'soft': soft, 'hard': hard, 'requested_soft': requested}
+
+
+def mean_or_none(values):
+    return sum(values) / len(values) if values and all(v is not None for v in values) else None
 
 
 def read_config(path: Path | None) -> dict:
@@ -113,6 +155,7 @@ def read_config(path: Path | None) -> dict:
         # Wall time is not part of the archived rollout budget. Operators may
         # opt into a safety cap; 0 leaves the official step budget authoritative.
         'session_timeout_s': 0,
+        'nofile_soft_limit': 65536,
         'cache_dir': str(Path(os.environ.get('XDG_CACHE_HOME', Path.home() / '.cache')) / 'roboharness'),
         'evaluator_dependencies': '',
         'interface_dependencies': '',
@@ -127,6 +170,8 @@ def read_config(path: Path | None) -> dict:
     if (isinstance(timeout, bool) or not isinstance(timeout, (int, float))
             or not math.isfinite(timeout) or timeout < 0):
         raise ValueError('session_timeout_s must be a finite non-negative number; 0 disables the wall-clock cap.')
+    if type(defaults['nofile_soft_limit']) is not int or defaults['nofile_soft_limit'] < 1024:
+        raise ValueError('nofile_soft_limit must be an integer >= 1024.')
     for key in ('interface_python', 'evaluator_python', 'agent_python', 'data_path', 'cache_dir',
                 'interface_dependencies', 'evaluator_dependencies'):
         if defaults[key]:
@@ -275,10 +320,12 @@ class Run:
         (self.path / 'logs').mkdir()
         (self.path / 'operator').mkdir()
         atomic_json(self.path / 'plan.json', self.plan)
-        atomic_json(self.path / 'runtime_config.json', {
+        nofile = ensure_file_limit(self.config['nofile_soft_limit'])
+        self.log(f'File descriptor limit: soft={nofile["soft"]}, hard={nofile["hard"]}')
+        atomic_json(self.path / 'runtime_config.json', {**{
             key: self.config[key] for key in ('interface_python', 'evaluator_python', 'agent_python',
                 'data_path', 'unmask_evaluator_cuda', 'interface_dependencies', 'evaluator_dependencies',
-                'session_timeout_s')})
+                'session_timeout_s', 'nofile_soft_limit')}, 'file_descriptor_limit': nofile})
         # No inherited source checkout, plugin cache, simulator root or stale session.
         env = {k: v for k, v in os.environ.items() if not k.startswith(
             ('BEHAVIOR_', 'OMNIGIBSON_', 'EMBODIED_', 'CLAUDE_', 'QWEN_', 'ROBOHARNESS_'))
@@ -468,7 +515,8 @@ class Run:
                 if key.startswith('GIT_'):
                     env.pop(key)
             from .native_context import seed as seed_native_context
-            env.update(seed_native_context(case_dir / 'claude-home', self.task['task'], iid))
+            env.update(seed_native_context(case_dir / 'claude-home', self.task['task'],
+                                           case.get('context_reference_instance_id', iid)))
             command = [str(harness / 'scripts/run'), '--port', str(self.port), '--qwen-model', self.config['model'],
                        '--', 'exec', '--output-format', 'json', '-']
         else:
@@ -501,7 +549,7 @@ class Run:
         timeout = self.config['session_timeout_s']
         deadline = time.monotonic() + timeout if timeout > 0 else None
         finished_at, reason, last_log = None, None, 0
-        expected_context = (native_contract(self.task['task'], iid)
+        expected_context = (native_contract(self.task['task'], case.get('context_reference_instance_id', iid))
                             if self.plan['harness'] == 'claude_code' else None)
         context_verified = False
 
@@ -565,30 +613,36 @@ class Run:
             except subprocess.TimeoutExpired:
                 os.killpg(agent.pid, signal.SIGKILL)
                 agent.wait(timeout=5)
-        row = {'instance_id': iid, 'q': result['q_score']['final'], 'reference_q': case['reference_q'],
-               'delta_q': result['q_score']['final'] - case['reference_q'], 'steps': result['steps'],
+        reference_q = case['reference_q']
+        row = {'instance_id': iid, 'q': result['q_score']['final'], 'reference_q': reference_q,
+               'delta_q': result['q_score']['final'] - reference_q if reference_q is not None else None,
+               'evaluation_scope': case.get('evaluation_scope', 'archived'), 'steps': result['steps'],
                'success': result['success'], 'result': str(path.relative_to(self.path)),
                'result_sha256': sha(path.read_bytes()), 'finish_reason': reason or 'evaluator_end'}
         row['archive_reported_q'] = case.get('archive_reported_q', case['reference_q'])
-        row['delta_archive_q'] = row['q'] - row['archive_reported_q']
+        row['delta_archive_q'] = row['q'] - row['archive_reported_q'] if row['archive_reported_q'] is not None else None
         atomic_json(case_dir / 'comparison.json', row)
         self.results.append(row)
         self.write_summary('running')
-        self.log(f'instance {iid}: Q={row["q"]:.6f}, reference={row["reference_q"]:.6f}, delta={row["delta_q"]:+.6f}')
+        comparison = (f'reference={reference_q:.6f}, delta={row["delta_q"]:+.6f}'
+                      if reference_q is not None else 'supplemental instance; no archived reference score')
+        self.log(f'instance {iid}: Q={row["q"]:.6f}, {comparison}')
 
     def write_summary(self, status, error=None):
         result = {'status': status, 'run_id': self.token, 'task': self.task['task'],
+                  'evaluation_scope': self.plan.get('evaluation_scope', 'archived'),
                   'harness': self.plan['harness'], 'model': self.config['model'], 'protocol': self.task['protocol'],
                   'n_expected': len(self.plan['cases']), 'n_finished': len(self.results), 'cases': self.results,
                   'mean_q': sum(x['q'] for x in self.results) / len(self.results) if self.results else None,
-                  'reference_mean_q': sum(x['reference_q'] for x in self.plan['cases']) / len(self.plan['cases'])}
-        result['archive_reported_mean_q'] = sum(
-            x.get('archive_reported_q', x['reference_q']) for x in self.plan['cases']) / len(self.plan['cases'])
+                  'reference_mean_q': mean_or_none([x['reference_q'] for x in self.plan['cases']])}
+        result['archive_reported_mean_q'] = mean_or_none([
+            x.get('archive_reported_q', x['reference_q']) for x in self.plan['cases']])
         result['reproduction_caveats'] = [
             {'instance_id': case['instance_id'], 'reason': reason}
             for case in self.plan['cases'] for reason in case.get('reproduction_caveats', [])]
         result['delta_archive_mean_q'] = (result['mean_q'] - result['archive_reported_mean_q']
                                          if len(self.results) == len(self.plan['cases'])
+                                         and result['archive_reported_mean_q'] is not None
                                          and not result['reproduction_caveats'] else None)
         if error:
             result['error'] = str(error)
@@ -648,7 +702,10 @@ def preflight(config, harness):
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--task', default='task00', help='task00, 0, or task name')
-    ap.add_argument('--instances', help='Actual IDs, e.g. 301,304 (default: all five archived cases)')
+    selection = ap.add_mutually_exclusive_group()
+    selection.add_argument('--instances', help='Actual IDs, e.g. 301,304 (default: all five archived cases)')
+    selection.add_argument('--supplemental-instances', help='Additional public IDs, e.g. 302,303; no archived scores')
+    ap.add_argument('--context-instance', type=int, help='Archived instance whose prompt/context supplemental cases inherit')
     ap.add_argument('--gpu', type=int, default=0)
     ap.add_argument('--port', type=int, help='HTTP port override; all listeners can be set with task_ports in --config')
     ap.add_argument('--harness', choices=['claude_code', 'codex'], default='claude_code')
@@ -667,7 +724,10 @@ def main(argv=None):
                 print(f'{task["task"]}  {task["task_name"]:42s} archive Q={task["archive_reported_mean_q"]:.6f}  JSON Q={task["reference_mean_q"]:.6f}')
             return 0
         task = load_task(args.task)
-        cases = select_cases(task, args.instances)
+        if args.context_instance is not None and args.supplemental_instances is None:
+            raise ValueError('--context-instance is only valid with --supplemental-instances.')
+        cases = (supplemental_cases(task, args.supplemental_instances, args.context_instance)
+                 if args.supplemental_instances is not None else select_cases(task, args.instances))
         config = read_config(args.config)
         for key in ('model_url', 'model'):
             if getattr(args, key):
@@ -684,6 +744,7 @@ def main(argv=None):
                 'policy_port': ports['policy'], 'gate_port': ports['gate'], 'gpu': args.gpu,
                 'harness': args.harness, 'model': config['model'], 'model_url': config['model_url'],
                 'diagnostic_only': (args.harness != task['harness'] or config['model'] != task['model']),
+                'evaluation_scope': 'supplemental' if args.supplemental_instances is not None else 'archived',
                 'write_video': args.write_video, 'task_config': task, 'cases': cases}
         if args.dry_run:
             print(json.dumps(plan, indent=2, ensure_ascii=False)); return 0
