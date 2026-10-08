@@ -2,12 +2,11 @@
 
 <img src="docs/assets/roboharness-wordmark.png" alt="RoboHarness" width="500">
 
+## A Simple Harness Can Outperform VLA and World Action Models
 
 **[Project Page](https://bincequ.github.io/RoboHarness/) · [Quick Start](#run-a-task) · [Documentation](docs/setup.md) · [中文](README.zh-CN.md)**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-263c78?style=flat-square)](LICENSE) [![Benchmark](https://img.shields.io/badge/BEHAVIOR-Challenge_2025-d56045?style=flat-square)](docs/provenance.md) [![Prompts](https://img.shields.io/badge/Archive-45_cases-263c78?style=flat-square)](docs/case-prompts.md)
-
-**A robotic harness that gives LLM agents a visual-geometric control panel so that they can directly understand and invoke embodied tasks.**
 
 [![RoboHarness overview](docs/assets/overview.png)](docs/assets/overview.pdf)
 
