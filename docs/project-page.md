@@ -25,11 +25,14 @@ Q-score table, task selector and exact step limits. It validates each referenced
 prompt hash. Directory-reported scores are authoritative; the build does not
 substitute values from conflicting evaluator JSON.
 
-The page presents the supplied manuscript's overview and robot-data comparison
-with a short introduction. The object catalog and full task table are folded
-under expandable sections. Evaluation notes remain alongside the full table;
-the setup guide is linked from the task runner. The manuscript source and its
-hash are recorded in the [asset manifest](assets/sources.json).
+The page presents the supplied manuscript's abstract, overview, object catalog
+and robot-data comparison. The 100-object catalog is visible beside a description
+of the objects, environments and success criterion from the manuscript. The
+abstract retains the manuscript wording, with LaTeX citations removed and the
+open-source release statement updated to reflect the public repository. The full
+task table is expandable; evaluation notes remain alongside it, and the setup
+guide is linked from the task runner. The manuscript source and its hash are
+recorded in the [asset manifest](assets/sources.json).
 
 The page uses the original manuscript's overview, object catalog and robot-data
 comparison figures, plus its RoboHarness wordmark. The READMEs also include the
