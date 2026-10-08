@@ -6,7 +6,6 @@
 
 **[项目主页](https://bincequ.github.io/RoboHarness/) · [English](README.md) · [安装说明](docs/setup.md) · [逐例提示词](docs/case-prompts.md)**
 
-**为 LLM agent 提供视觉几何控制面板，使其能够直接理解并执行具身任务。**
 
 [![RoboHarness 总览](docs/assets/overview.png)](docs/assets/overview.pdf)
 
