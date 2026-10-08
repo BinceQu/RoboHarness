@@ -1,5 +1,14 @@
 # Case prompts
 
+The paper specifies a human-written, task-specific prompt shared across all
+instances of that task. It includes the procedure for accomplishing the task
+and the behavioral boundaries the model must respect.
+
+The selected archived transcripts contain multiple recovered prompt versions
+within task00, task02, task05 and task06, as shown below. These records therefore
+do not establish that those archived instances used an identical prompt.
+The release preserves their recorded versions and mappings for archive replay.
+
 Every link below points to the exact user prompt bytes in the selected
 original Claude transcript, including its final newline. The runtime substitutes
 only its local HTTP port. The manifest records transcript, prompt and result hashes.

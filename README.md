@@ -110,6 +110,12 @@ ports to task01, task03 and task08. Use SSH forwarding for a remote host.
 
 ## Reproduction contract
 
+- **Task-specific prompts, shared across instances.** The paper specifies:
+  "The prompt is specific to each task but shared across instances, and is
+  written by a human." Each task's prompt describes the procedure for
+  accomplishing that task and the behavioral boundaries the model must respect.
+  Under this protocol, all five instances of a task (301, 304, 306, 308, 310)
+  share the same task-specific prompt.
 - **Challenge 2025, multiplier 2.** Exact integer step limits come from the
   archived plans; the launcher rejects changes to the year, multiplier, step
   limit or evaluator revision. See the [budget table](docs/provenance.md#evaluation-budgets).
@@ -117,7 +123,10 @@ ports to task01, task03 and task08. Use SSH forwarding for a remote host.
   long model calls and episodes exceeding 72 hours. The simulation-step budget
   still applies. An operator-selected positive timeout is recorded; a forced
   submission cannot pass reproduction verification.
-- **Per-case prompts and context.** Prompt bytes, native Skill listings,
+- **Archived prompt and context provenance.** The release preserves the prompt
+  versions recovered from the selected transcripts, including the within-task
+  version differences documented in the [archive mapping](docs/case-prompts.md).
+  Prompt bytes, native Skill listings,
   activated Skill bodies and MCP namespaces are checked against the recovered
   archive contract. Only historical connection-port hints are rendered for a
   new run, with both prompt hashes recorded.
