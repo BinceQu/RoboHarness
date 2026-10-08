@@ -2,7 +2,6 @@
 
 <img src="docs/assets/roboharness-wordmark.png" alt="RoboHarness" width="500">
 
-### A simple yet effective robot harness
 
 **[Project Page](https://bincequ.github.io/RoboHarness/) · [Quick Start](#run-a-task) · [Documentation](docs/setup.md) · [中文](README.zh-CN.md)**
 
