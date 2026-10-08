@@ -38,25 +38,44 @@
       </a>
     </figure>
 
+    <section class="container section abstract-section" id="abstract" aria-labelledby="abstract-title">
+      <div class="section-heading">
+        <h2 id="abstract-title">Abstract</h2>
+      </div>
+      <div class="abstract-copy">
+        <p>The rise of large language models (LLMs) has opened a path toward generalist embodied AI, raising the question of how LLMs can act in the physical world. One straightforward approach is training the model to generate actions: collect robot-action data and video demonstration, refine LLM architecture with an action head, and train a vision-language-action (VLA) model at scale.</p>
+        <p>However, we argue that coding agents have the potential to realize generalist embodied manipulation. All they need is a simple yet effective robot harness. We present <strong>RoboHarness</strong>: a robotic harness that gives LLM agents a visual-geometric control panel so that they can directly understand and invoke embodied tasks. With RoboHarness, Qwen3.8-Flash-Next outperforms state-of-the-art VLA models on BEHAVIOR Challenge 2025 tasks. The implementation is open source.</p>
+      </div>
+    </section>
+
     <section class="container section generalization-section" id="results" aria-labelledby="generalization-title">
       <div class="section-heading">
-        <h2 id="generalization-title">Generalization without robot data</h2>
-        <p>Pick-and-place success across 100 objects.</p>
+        <h2 id="generalization-title">Generalization across 100 objects</h2>
+      </div>
+      <div class="object-study">
+        <div class="object-copy">
+          <h3>Objects</h3>
+          <p>The catalog contains 100 rigid objects from the BEHAVIOR object library. Most have an extent of at most 0.21 m and a mass of at most 1.2 kg; the saucepan and one recorded outlier are retained as exceptions.</p>
+          <h3>Task</h3>
+          <p>The task is to pick up each object. Learned policies are evaluated in their training embodiment and simulation environment. For ASPIRE and RoboHarness, the object starts on the floor and the robot begins in a stooping pose. LIBERO-trained models use a cleared table with the object at its center.</p>
+          <p>Each trial runs for up to 2,000 simulation steps. Success means lifting the object at least 5 cm above its initial height.</p>
+        </div>
+        <figure class="object-figure">
+          <a class="figure-link" href="assets/object-generalization.pdf" target="_blank" rel="noopener" aria-label="Open the original 100-object catalog PDF">
+            <img src="assets/object-generalization.png" width="2797" height="2800" loading="lazy" alt="The 100 rigid objects used to evaluate generalization, drawn from the BEHAVIOR object library.">
+          </a>
+          <figcaption>100 objects from the BEHAVIOR library.</figcaption>
+        </figure>
+      </div>
+      <div class="comparison-heading">
+        <h3>Generalization without robot data</h3>
+        <p>Across the three tested LLMs, RoboHarness achieves 68–86 successes out of 100 without robot manipulation training data. More robot data does not consistently lead to better generalization among the VLA and world action model baselines.</p>
       </div>
       <figure class="comparison-figure">
         <a class="figure-link" href="assets/robot-data-comparison.pdf" target="_blank" rel="noopener" aria-label="Open the original robot-data comparison PDF">
           <img src="assets/robot-data-comparison.png" width="2771" height="1664" loading="lazy" alt="Successes out of 100 objects versus estimated hours of robot data, comparing RoboHarness with VLA models, world action models, and a pick-function baseline.">
         </a>
       </figure>
-      <details class="disclosure object-details">
-        <summary>Explore the 100 objects <span aria-hidden="true">+</span></summary>
-        <figure>
-          <a class="figure-link" href="assets/object-generalization.pdf" target="_blank" rel="noopener" aria-label="Open the original 100-object catalog PDF">
-            <img src="assets/object-generalization.png" width="2797" height="2800" loading="lazy" alt="The 100 objects used to evaluate generalization, drawn from the BEHAVIOR object library.">
-          </a>
-          <figcaption>Objects from BEHAVIOR. ASPIRE and RoboHarness start with the object on the floor and the robot in a stooping pose; other models use their training embodiment and simulation environment.</figcaption>
-        </figure>
-      </details>
     </section>
 
     <section class="container section archive-section" aria-labelledby="results-title">

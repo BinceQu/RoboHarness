@@ -67,6 +67,21 @@ figcaption { margin-top: 18px; font-size: 13px; line-height: 1.7; color: var(--m
 .section-heading { margin-bottom: 36px; text-align: center; }
 .section-heading h2 { font-size: 38px; line-height: 1.2; letter-spacing: -.025em; text-wrap: balance; }
 .section-heading > p { margin-top: 14px; font-size: 15px; text-wrap: balance; }
+.abstract-copy { max-width: 840px; margin-inline: auto; font-size: 17px; line-height: 1.85; }
+.abstract-copy p, .object-copy p, .comparison-heading p { color: #4c5a70; }
+.abstract-copy p + p { margin-top: 20px; }
+.abstract-copy strong { color: var(--ink); font-weight: 600; }
+.object-study { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: center; gap: 54px; }
+.object-copy { min-width: 0; }
+.object-copy h3 { margin: 0 0 10px; font-size: 17px; font-weight: 600; line-height: 1.4; }
+.object-copy p { font-size: 16px; line-height: 1.8; }
+.object-copy h3:not(:first-child) { margin-top: 24px; }
+.object-copy p + p { margin-top: 16px; }
+.object-figure { min-width: 0; }
+.object-figure figcaption { text-align: center; }
+.comparison-heading { max-width: 800px; margin: 72px auto 36px; text-align: center; }
+.comparison-heading h3 { margin: 0 0 16px; font-family: var(--serif); font-size: 30px; font-weight: 400; line-height: 1.25; letter-spacing: -.025em; text-wrap: balance; }
+.comparison-heading p { font-size: 16px; line-height: 1.8; text-wrap: pretty; }
 .comparison-figure { width: min(100%, 900px); margin-inline: auto; }
 .disclosure { margin-top: 30px; border-bottom: 1px solid var(--rule); }
 .disclosure > summary { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 18px 0; list-style: none; font-size: 14px; cursor: pointer; }
@@ -74,8 +89,6 @@ figcaption { margin-top: 18px; font-size: 13px; line-height: 1.7; color: var(--m
 .disclosure > summary:hover { color: var(--coral); }
 .disclosure > summary > span { font-size: 24px; line-height: 1; font-weight: 300; transition: transform 160ms ease; }
 .disclosure[open] > summary > span { transform: rotate(45deg); }
-.object-details { max-width: 900px; margin-inline: auto; }
-.object-details figure { max-width: 660px; margin: 20px auto 36px; }
 
 .archive-explorer { display: grid; grid-template-columns: minmax(0, 310px) minmax(0, 1fr); gap: 52px; padding: 36px; border: 1px solid var(--rule); border-radius: 18px; background: var(--wash); }
 .explorer-details, .chart-wrap { min-width: 0; }
@@ -123,6 +136,9 @@ select { display: block; width: 100%; min-height: 44px; padding: 10px 32px 10px 
   .container { width: calc(100% - 64px); }
   .hero { padding-top: 72px; }
   .hero h1 { font-size: clamp(36px, 5.1vw, 47px); }
+  .object-study { grid-template-columns: 1fr; gap: 36px; }
+  .object-copy { max-width: 660px; margin-inline: auto; }
+  .object-figure { width: min(100%, 660px); margin-inline: auto; }
   .archive-explorer { grid-template-columns: minmax(0, 255px) minmax(0, 1fr); gap: 32px; padding: 28px; }
   .score-chart { gap: 16px; }
   .chart-value { font-size: 11px; }
@@ -139,9 +155,14 @@ select { display: block; width: 100%; min-height: 44px; padding: 10px 32px 10px 
   .section-heading { margin-bottom: 28px; }
   .section-heading h2 { font-size: 30px; }
   .section-heading > p { margin-top: 12px; font-size: 14px; }
+  .abstract-copy { font-size: 16px; line-height: 1.8; }
+  .object-copy p { font-size: 15px; }
+  .object-study { gap: 28px; }
+  .comparison-heading { margin-block: 52px 28px; }
+  .comparison-heading h3 { font-size: 27px; }
+  .comparison-heading p { font-size: 15px; }
   .disclosure { margin-top: 20px; }
   .disclosure > summary { font-size: 13px; }
-  .object-details figure { margin-top: 12px; }
   .archive-explorer { grid-template-columns: 1fr; gap: 32px; padding: 24px 22px 46px; border-radius: 14px; }
   .selected-metric { margin-top: 22px; }
   .selected-metric > span:first-child { font-size: 42px; }
