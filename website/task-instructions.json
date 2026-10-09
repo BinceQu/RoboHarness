@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "source": {
+    "repository": "StanfordVL/BEHAVIOR-1K",
+    "path": "docs/challenge/task_data.json",
+    "commit": "f654ab37b6b2a9ae4913a1a24e377e611fb22eb3",
+    "url": "https://raw.githubusercontent.com/StanfordVL/BEHAVIOR-1K/f654ab37b6b2a9ae4913a1a24e377e611fb22eb3/docs/challenge/task_data.json",
+    "sha256": "9bea32b2860a36ac11f9425c944c16b260a1b71e649389e0097169b117e4e8e7"
+  },
+  "tasks": {
+    "task00": {
+      "taskName": "turning_on_radio",
+      "title": "Turning On Radio",
+      "instruction": "Turn on the radio receiver that's on the table in the living room.",
+      "officialPage": "https://behavior.stanford.edu/challenge/tasks/00_turning_on_radio.html",
+      "instructionSha256": "69ba05535d21f6dee93ef752db941fd9fb7f43935c03d63e3b8daf4d17f5d4ea"
+    },
+    "task01": {
+      "taskName": "picking_up_trash",
+      "title": "Picking Up Trash",
+      "instruction": "Put the three cans of soda from the living room inside the trash can in the kitchen.",
+      "officialPage": "https://behavior.stanford.edu/challenge/tasks/01_picking_up_trash.html",
+      "instructionSha256": "f96bc0b2662449cb09a971a4bd0fa6696e7adcf7e53601773119604fbb346c0f"
+    },
+    "task02": {
+      "taskName": "putting_away_Halloween_decorations",
+      "title": "Putting Away Halloween Decorations",
+      "instruction": "Place each of the two pumpkins and all three candles from the living room inside a cabinet in the living room (use any cabinet), then make sure every cabinet is closed, and position the cauldron so it is next to a table in the living room.",
+      "officialPage": "https://behavior.stanford.edu/challenge/tasks/02_putting_away_Halloween_decorations.html",
+      "instructionSha256": "9f24190f864e006358b8597b68b7fd1e7b770c6aa99f93ca6b3c6aa0382be85e"
+    },
+    "task03": {
+      "taskName": "cleaning_up_plates_and_food",
+      "title": "Cleaning Up Plates and Food",
+      "instruction": "From the breakfast table in the kitchen, move both pizzas - keeping each on its plate - into the same refrigerator, put both bowls into one sink, and make sure the refrigerator is closed.",
+      "officialPage": "https://behavior.stanford.edu/challenge/tasks/03_cleaning_up_plates_and_food.html",
+      "instructionSha256": "88c3ef9f59a8a460a9454e190d356786343351643ebffae27dacdc658934383e"
+    },
+    "task05": {
+      "taskName": "setting_mousetraps",
+      "title": "Setting Mousetraps",
+      "instruction": "Take the four mousetraps from the cabinet in the bathroom and place them on the bathroom floor. Make sure all four end up on the same floor surface, and ensure that at least two of them are either under or directly next to the same bathroom sink.",
+      "officialPage": "https://behavior.stanford.edu/challenge/tasks/05_setting_mousetraps.html",
+      "instructionSha256": "68d78129afb59131e35895c7826404824dbb32c0694547597843d640b13be0fb"
+    },
+    "task06": {
+      "taskName": "hiding_Easter_eggs",
+      "title": "Hiding Easter Eggs",
+      "instruction": "Take the three Easter eggs out of the wicker basket on the lawn in the garden, then place them on the lawn next to a single tree (choose any tree) so that all three eggs are next to the same tree and none are left in the basket.",
+      "officialPage": "https://behavior.stanford.edu/challenge/tasks/06_hiding_Easter_eggs.html",
+      "instructionSha256": "95bf75a0b23637e2093ea8b80f896972c062ad684ac07a18ce1d88b0e03f2e50"
+    },
+    "task07": {
+      "taskName": "picking_up_toys",
+      "title": "Picking Up Toys",
+      "instruction": "Put all the toys in the child's room - the three board games (two on the bed and one on the table), the two jigsaw puzzles on the table, and the tennis ball on the table - inside the toy box on the table in the child's room.",
+      "officialPage": "https://behavior.stanford.edu/challenge/tasks/07_picking_up_toys.html",
+      "instructionSha256": "5272596ef2b1f7d842bb74cfb61eba4af84eb4a730783c0c5139a0a1177514c0"
+    },
+    "task08": {
+      "taskName": "rearranging_kitchen_furniture",
+      "title": "Rearranging Kitchen Furniture",
+      "instruction": "Move the toaster, food processor, and French press from the kitchen countertop into the same kitchen cabinet, and make sure that cabinet is closed at the end.",
+      "officialPage": "https://behavior.stanford.edu/challenge/tasks/08_rearranging_kitchen_furniture.html",
+      "instructionSha256": "41f47be7b907db10f78ed49ab050bb2be4f75002d9d05771851140f198616f93"
+    },
+    "task09": {
+      "taskName": "putting_up_Christmas_decorations_inside",
+      "title": "Putting Up Christmas Decorations Inside",
+      "instruction": "In the living room, take the wreath, three candy canes, and two pillar candles out of the wicker basket. Place the wreath and two of the candy canes on the same living-room sofa. Put the remaining candy cane on top of a dining-room table. Put both pillar candles together on top of one dining-room table (they can share the same table). Finally, place all three gift boxes under or right next to the Christmas tree in the living room.",
+      "officialPage": "https://behavior.stanford.edu/challenge/tasks/09_putting_up_Christmas_decorations_inside.html",
+      "instructionSha256": "5efa02e2b96d9083be48ed2fd51edb1927849b94c8ca62bc7bcdf36d9e1a92ed"
+    }
+  }
+}
