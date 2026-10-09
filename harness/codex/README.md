@@ -3,10 +3,14 @@
 This is the alternate Codex implementation of the embodied MCP adapter.
 The supplied historical scores were obtained with the Claude Code harness.
 
+Start a model service with the Responses API and configure your local data and
+Python paths first; see [Codex model service](../../docs/setup.md#codex-model-service).
+Keep that service running while the task executes.
+
 ```bash
-export OPENAI_API_KEY=...  # supply in your environment
-./run.sh --task task01 --gpu 0 --harness codex \
-  --model YOUR_MODEL --model-url https://your-responses-endpoint/v1
+export OPENAI_API_KEY='YOUR_RESPONSES_SERVICE_KEY'
+./scripts/reproduce_task.sh task01 --gpu 0 --harness codex \
+  --model YOUR_SERVED_MODEL_ID --model-url https://YOUR_MODEL_HOST/v1
 ```
 
 The launcher renders `profiles/embodied.config.toml` into a private CODEX_HOME,
