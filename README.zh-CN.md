@@ -91,7 +91,8 @@ cp configs/example.json configs/local.json
 - **Mean Q-score。** 使用 BEHAVIOR Challenge 2025 官方评测器的 `q_score.final`，
   对全部五个实例的分数取不加权平均，报告值保留四位小数。
 
-运行器默认使用 `session_timeout_s: 0`，不增加墙钟时限；仿真步数预算仍然有效。
+运行器默认使用 `session_timeout_s: 0`，不增加墙钟时限。实际运行耗时取决于硬件、模型服务和
+并发负载；评测预算按仿真控制步数计算。
 
 生成报告：
 

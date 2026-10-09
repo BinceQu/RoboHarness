@@ -119,7 +119,8 @@ The paper's BEHAVIOR evaluation protocol is:
   all five scores, reported to four decimal places.
 
 The runner defaults to `session_timeout_s: 0`, so there is no additional
-wall-clock limit. The simulation-step budget still applies.
+wall-clock limit. Execution time varies with hardware, model serving and
+concurrent load; evaluation budgets are measured in simulation control steps.
 
 Collect and check runs with:
 

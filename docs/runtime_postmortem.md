@@ -150,7 +150,7 @@ corrections still require r6 verification. See the
 ## Observed r5 task03/301 wall-clock cutoff
 
 On October 1 at 19:29:40 Asia/Shanghai, the old r5 controller submitted
-`wall_timeout` after 24 hours. The official result is Q=0 at 10,024 steps,
+`wall_timeout`. The official result is Q=0 at 10,024 steps,
 below the archived 27,392-step budget. This confirms that the old wall-clock
 cap can truncate an otherwise live episode. It does not establish the score
 the model would achieve with the full step budget.
@@ -172,7 +172,7 @@ the cutoff does not establish what either truncated case would have scored.
 
 On October 3, task03/306 provided the first live verification that the
 temporary supervisor prevented the old deadline from truncating an active
-case: the original agent and native CLI passed 24 hours, then produced a new
+case: the original agent and native CLI continued, then produced a new
 tool call and result while the monitor advanced another nine steps. The
 [continuation audit](../validation_results/task03-306-r5-past-24h-20261003/README.md)
 preserves process identities, native transcript byte-range hashes and actual
@@ -181,8 +181,8 @@ were pending at that observation and subsequently completed as recorded below.
 Continuation alone does not verify a task mean.
 
 On October 4, task08/306 provided the first real completion and handoff for
-this supervisor. The native agent ended normally after about 35 hours and
-13 minutes. The supervisor requested model completion at 02:59:39, validated
+this supervisor. The native agent ended normally.
+The supervisor requested model completion at 02:59:39, validated
 the official Q=0.5 score at 12,651 steps, and resumed the original coordinator
 at 02:59:49. Instance 308 started with a new agent and session on port 15078
 while the same interface and evaluator remained alive. The legacy controller
@@ -193,8 +193,8 @@ records both labels, source hashes, process identities and the next native
 session's first tool call. This validates the operational handoff, while r5
 remains diagnostic and the complete task mean is still unverified.
 
-Task03/306 subsequently completed normally after 49 hours, 29 minutes and
-29.447 seconds. On October 4 the supervisor requested model completion at
+Task03/306 subsequently completed normally.
+On October 4 the supervisor requested model completion at
 12:35:02, validated the official **Q=1/7 at 25,852 steps**, and resumed the
 original coordinator at 12:35:12. Its old agent and native CLI exited, and
 instance 308 started a fresh native session on port 15073 while retaining
@@ -235,26 +235,19 @@ or identical historical/current weights. The saved visual check was not rerun
 and is not a BEHAVIOR mean-Q result. The evidence does not identify a service
 change as the cause of the observed score differences.
 
-## Archived versus current response timing
+## Execution progress and simulation steps
 
-A hash-verified comparison of the three completed case-301 native transcripts
-finds substantially longer tool-result-to-assistant-completion intervals in
-r5. Their medians changed from 29.8 to 199.9 seconds for task01, 57.6 to 216.4
-seconds for task03, and 28.0 to 190.0 seconds for task08. Typical output token
-counts are similar or lower. This supports investigating inference-path
-latency rather than assuming that larger replies explain the longer runs.
+Execution time depends on hardware, model serving, queueing and concurrent
+load. The evaluation budget is measured in simulation control steps.
+A wall-clock cutoff can end an episode before that budget is consumed.
 
-The measurement includes model queueing and generation, transport and CLI
-behavior; it does not isolate server-only latency. Different trajectories and
-the task03 cutoff also prevent a controlled throughput comparison. The
-[timing audit](../validation_results/native-latency-comparison-20261001/README.md)
-retains the counting method, source hashes, response counts and limitations.
-It supports removing the extra wall-clock cutoff, not a score reproduction
-claim or a change to archived prompts and simulation budgets.
+The [response comparison](../validation_results/native-latency-comparison-20261001/README.md)
+records source hashes, response counts and output-token statistics. The
+trajectories contain different actions and are not a controlled inference
+speed benchmark.
 
-In the recorded task08/306 episode, seven consecutive distance bindings on one
-image spanned 42 minutes 7.779 seconds while their recorded tool durations
-totaled 9.478 seconds. The first four selections failed the archived prompt's
+In the recorded task08/306 episode, seven consecutive distance bindings used
+the same image. The first four selections failed the archived prompt's
 numeric lip conditions; later selections passed. One attached memory snapshot
 was unavailable and recovered on the next call. A subsequent chassis action
 completed normally. The archived case also contains repeated bindings and
@@ -267,8 +260,8 @@ comparison. It supplies no new Q-score.
 
 In r5 task03/304, simulation ticks stayed at 4,939 while the native CLI
 automatically compacted its context. The `compact_boundary` event at
-2026-10-02 03:13:42 Asia/Shanghai reports `durationMs: 1600712` (26 minutes
-40.712 seconds), with 166,722 tokens before compaction and 9,646 afterward.
+2026-10-02 03:13:42 Asia/Shanghai records 166,722 tokens before compaction
+and 9,646 afterward.
 The next grasp-planning call completed at 03:16:30 and returned an error;
 a subsequent height adjustment completed successfully at 03:18:26. Ticks
 advanced to 4,945 and then 4,972, with the same agent and simulator processes.
@@ -279,7 +272,5 @@ preserves selected event metadata, source-record hashes and observed ticks.
 An unchanged tick count or low sampled GPU utilization alone does not establish
 a stopped episode. Correlate live process identities with native event times
 and completed tool records; resumed calls or increasing ticks establish
-progress. A responding HTTP monitor alone does not. The reported compaction
-duration includes the native CLI's elapsed processing time and does not isolate
-model-server queueing or generation. This observation explains one pause; it
-does not establish task success or account for every pause.
+progress. A responding HTTP monitor alone does not. This observation explains
+one pause; it does not establish task success or account for every pause.

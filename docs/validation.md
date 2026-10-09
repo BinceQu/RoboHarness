@@ -83,7 +83,7 @@ the acceptance command's expected exit code 2. This is a measured final
 diagnostic mean, not a successful reproduction.
 
 Task03/301 was truncated at 10,024 of 27,392 steps, and task08/304 at
-12,089 of 17,886 steps, by the old 24-hour cap. Their recorded Q=0 scores
+12,089 of 17,886 steps, by the old wall-clock cap. Their recorded Q=0 scores
 remain diagnostic evidence; neither is a valid full-budget reproduction.
 The [task03 cutoff audit](../validation_results/task03-301-r5-timeout-20261001/README.md)
 and [r5 report](../validation_results/gpu5-20260930-r5/README.md) retain the
@@ -92,8 +92,8 @@ mean for task03 or task08.
 Known native-context differences also prevent r5 from verifying reproduction,
 even if a resulting mean happens to match.
 
-On October 2 the requested wall-clock policy was changed to no additional
-cap, permitting episodes longer than 72 hours when needed. New launches use
+On October 2 the wall-clock policy was changed to no additional
+cap. New launches use
 `session_timeout_s=0`. The already loaded r5 controllers still contain their
 old deadline, so a temporary supervisor confined to this validation session
 was armed without restarting their agents or evaluators. It holds only the
@@ -101,7 +101,7 @@ coordinator at its polling sleep and resumes it when the evaluator supplies
 the score, or handles normal model completion through the existing finish
 request. Three isolated legacy-controller integration checks passed. The
 supervisor intervened for task03/306 at 09:05:30 on October 3. Its original
-agent and native CLI subsequently passed 24 hours of execution; between
+agent and native CLI continued beyond the old deadline; between
 11:07:21 and 11:12:24 the actual monitor advanced from 16,556 to 16,565 steps,
 with a new native tool call and matching result. The
 [live audit](../validation_results/task03-306-r5-past-24h-20261003/README.md)
@@ -111,8 +111,8 @@ This supervisor is a host-specific measure for diagnostic r5, not a dependency
 of the packaged runner or a claim that those runs reproduce the archive.
 
 Task08/306 subsequently completed at **Q=0.5 and 12,651 steps**, compared with
-the archived case Q=0.25. Its native agent returned normally after about
-35 hours and 13 minutes. On October 4 the supervisor requested model completion
+the archived case Q=0.25. Its native agent returned normally.
+On October 4 the supervisor requested model completion
 at 02:59:39 and validated the official score before resuming the original
 coordinator at 02:59:49. Instance 308 then started on port 15078 with a new
 agent and native session; the existing interface and evaluator remained alive.
@@ -123,8 +123,8 @@ request. This case was not wall-clock truncated. The task08 partial
 mean of 1/3 is not a complete five-case mean or a verified reproduction.
 
 Task03/306 then completed at **Q=1/7 and 25,852 steps**, compared with the
-archived case Q=2/7. Its native agent returned normally after **49 hours and
-29 minutes**. The supervisor requested model completion at 12:35:02 on
+archived case Q=2/7. Its native agent returned normally.
+The supervisor requested model completion at 12:35:02 on
 October 4 and validated the official score before resuming the same
 coordinator at 12:35:12. Instance 308 started with a new agent and native
 session on port 15073; the existing interface and evaluator remained alive.
@@ -140,7 +140,7 @@ that individual archived case's Q. Its official JSON has SHA-256
 and is included in the r5 report. The run advanced to instance 310 with a fresh
 agent and session. At the current snapshot task03/310 had reached 4,316 steps
 and task08/308 had reached 12,916 steps; neither had a final score. The task08
-agent and evaluator continued beyond 24 hours under the temporary supervisor.
+agent and evaluator continued under the temporary supervisor.
 
 The [task03/306 outcome audit](../validation_results/task03-306-r5-outcome-20261004/README.md)
 traces its second confirmed grasp to a plate carrying pizza, which the
