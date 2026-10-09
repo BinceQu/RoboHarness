@@ -52,8 +52,8 @@ python3 scripts/package_site.py --output /home/bince/roboharness_homepage --zip 
 ## Method 视频
 
 页面顺序为 Abstract → Method → Task results。Method 只有标题和一个视频。
-当前用 `roboharness_promo_v5.mp4`；后续自动选取以下目录中版本编号最大的
-成品 `roboharness_promo_vN.mp4`：
+v5 是最初占位版本；自动选取以下目录中版本编号最大的
+成品 `roboharness_promo_vN.mp4`，当前版本见 `assets/method/manifest.json`：
 
 ```text
 /mnt/nas_nfs/home/bince/BEHAVIOR-1K/video/demo_edits/roboharness_promo_20261005

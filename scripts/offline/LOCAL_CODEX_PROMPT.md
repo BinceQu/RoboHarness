@@ -30,7 +30,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\Users\16593\Desktop\
 测试一次同步，并确认没有重传未变化的视频。查看 `.sync.log` 和当前用户的
 `RoboHarness Homepage Sync.lnk` 登录启动项，确认后台同步已启动。
 双击 `index.html` 或 `open.cmd` 打开网页。临时阻止浏览器访问外网，
-验证 Abstract 后、Task results 前的 Method 演示视频（当前 v5）、100 objects 图片、
+验证 Abstract 后、Task results 前的 Method 演示视频、100 objects 图片、
 九张任务卡片的说明和成绩、六段任务视频播放与
 左右箭头切换都可用；另外三张卡片原本就没有录像。浏览本页不应依赖 CDN、
 GitHub、Python 或本地服务器。GitHub 和官方任务的外部链接需联网，这不影响离线浏览。
