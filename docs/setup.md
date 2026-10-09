@@ -92,12 +92,36 @@ include its Python dependencies. You can override
 `EEF_NEAR_SAM2_DEVICE` in the environment. Without the checkpoint the interface
 uses its existing 3D growth fallback; this is a different perception configuration.
 
+## Model service
+
+Run your model server separately, using the serving environment and GPU settings
+for your checkpoint. Keep it running while RoboHarness evaluates the task.
+The model can run on the evaluation machine or on another reachable machine.
+The repository installer prepares the simulator and harness environments; it
+does not install an LLM serving engine, download LLM weights or start inference.
+
 Install Claude Code **2.1.259** separately and make `claude` available on PATH.
-The reproduction launcher checks this version before starting the simulator. The
-archived runs use the Claude Code harness with `Qwen3.8-Flash-Next-FP8` through
-an Anthropic-compatible `/v1/messages` server. The `model_url` is the origin,
-without `/v1`. Authentication is supplied through `ANTHROPIC_API_KEY` or
-`ANTHROPIC_AUTH_TOKEN` in the environment; keys are never committed.
+The launcher checks this version before starting the simulator. For the paper
+configuration, serve `Qwen3.8-Flash-Next-FP8` with an Anthropic-compatible
+`/v1/messages` API that supports images, tools and streaming. Configure the
+server's model ID, context capacity and tool parser for that checkpoint.
+
+| Harness | Required model API | Example `model_url` | Authentication environment |
+| --- | --- | --- | --- |
+| Claude Code | Anthropic Messages, including images, tool use and streaming | `http://MODEL_HOST:31000` (without `/v1`) | `ANTHROPIC_API_KEY` or `ANTHROPIC_AUTH_TOKEN` |
+| Codex | OpenAI Responses, including images, tools and streaming | `https://MODEL_HOST/v1` (API base, without `/responses`) | `OPENAI_API_KEY` |
+
+Use the exact model ID advertised by your server, rather than the local path to
+the weights. The URL must be reachable **from the evaluation machine**. On that
+machine, `127.0.0.1` refers to itself, not your laptop or another model host.
+`--gpu` chooses the simulation GPU; it does not change the model server's GPUs.
+
+Follow [Run a task](../README.md#run-a-task) for the complete sequence: export
+the endpoint and credentials, send a small Messages request, save the session
+configuration, inspect the plan, and launch the five-instance evaluation.
+The example sets both Anthropic authentication variables to the same service
+key so an older token in the shell cannot select different credentials. If the
+server disables authentication, use `local-no-auth`. Keep keys in the environment.
 
 The `Qwen3-VL` label in v2 tool descriptions names the relative image-coordinate
 convention: `u` and `v` range from 0 to 1000. The configured main agent supplies
@@ -105,27 +129,68 @@ those coordinates to the local RGB-D grasp planner. The
 [tool-routing observation](../validation_results/model-service-provenance-20261003/README.md)
 records the active model configuration and the v2 catalog used for validation.
 
-A recovered deployment report names vLLM `0.28.1rc1.dev202+gffc445f`; the current
-validation endpoint reports that same version. The
-[model service evidence](../validation_results/model-service-provenance-20261003/README.md)
-preserves the original host's launch script and distinguishes its defaults
-from verified live settings. The custom serving installation, checkpoint and
-historical weight hashes are not bundled. An identical model name alone does
-not establish equivalent server behavior.
+### Chat Completions services
+
+A server exposing only `/v1/chat/completions` needs a Messages adapter before
+the default Claude Code runner can use it. For a Qwen Chat Completions service,
+start the included bridge in a **separate terminal on the evaluation machine**:
 
 ```bash
-cp configs/example.json configs/local.json
-# Edit data_path, Python executables and model_url for this machine.
-./run.sh --list
-./run.sh --task task01 --gpu 0
+export QWEN_API_KEY='YOUR_UPSTREAM_SERVICE_KEY'
+./harness/claude_code/scripts/qwen-anthropic-bridge \
+  --host 127.0.0.1 --port 15079 \
+  --upstream http://YOUR_MODEL_HOST:31000/v1/chat/completions \
+  --model Qwen3.8-Flash-Next-FP8
 ```
+
+Use an empty `QWEN_API_KEY` if the upstream server requires no authentication.
+This command starts the protocol adapter; the upstream model server must
+already be running and support image inputs and tool calls. Keep both processes
+running. Choose another free bridge port if `15079` is in use.
+
+In the **evaluation terminal**, use these values for the README's connection
+check and session configuration steps:
+
+```bash
+export ROBOHARNESS_MODEL_URL='http://127.0.0.1:15079'
+export ROBOHARNESS_MODEL='Qwen3.8-Flash-Next-FP8'
+export ANTHROPIC_API_KEY='local-no-auth'
+export ANTHROPIC_AUTH_TOKEN="$ANTHROPIC_API_KEY"
+```
+
+The upstream key belongs in the bridge terminal's `QWEN_API_KEY`; the runner
+connects to the local adapter. The bridge is an optional integration path.
+The reported paper results use the direct Messages service, so changing the
+adapter, checkpoint or serving configuration is a different experimental setup.
+
+### Model connection troubleshooting
+
+Resolve connection errors with the small request in the README before launching
+the GPU evaluation. A successful text response checks routing and authentication;
+the full harness also needs working image, tool and streaming support.
+
+| Symptom | Check |
+| --- | --- |
+| Connection refused or unreachable | The server is running, the port is correct, and its bind address and firewall permit the evaluation host. For a remote model host, replace `127.0.0.1` with a reachable address or forward the port. |
+| HTTP 401 or 403 | Use the model service's key. Check both Anthropic authentication variables in the launch terminal. |
+| HTTP 404 on `/v1/messages` | Check whether the service supports Messages. For Chat Completions, start the bridge and point the runner at it. |
+| Unknown model or invalid model ID | Use the server's served model name, not a checkpoint path. |
+| Text works but image or tool requests fail | Check multimodal support, tool parsing, context capacity and streaming in the model-serving configuration. |
+| Runner still uses an old address | Edit the active `.local/session-config.json`; the wrapper reuses it after first launch. CLI `--model-url` and `--model` override this file for that invocation. |
+
+For an evaluation that has already started, inspect `logs/evaluator.log` and
+`logs/interface.log` in its run directory, plus
+`instance_<id>/agent.stderr.log` for model/agent errors. `--dry-run` only resolves
+the plan; it does not test the service, CLI installation or simulator.
 
 ## Session configuration and ports
 
-For a session-scoped launch, use `scripts/reproduce_task.sh task01 --gpu 0`.
-It creates or reuses only
-`.local/session-config.json`; it does not modify `configs/local.json`, the
-global Claude home, or the global Codex home.
+After saving model access and installation paths as shown in the README, use
+`scripts/reproduce_task.sh task01 --gpu 0`. The wrapper reads
+`.local/session-config.json`, copying `configs/local.json` only if that session
+file does not yet exist. Later changes to `configs/local.json` are not copied
+into an existing session file. `ROBOHARNESS_SESSION_CONFIG` can select a different
+session file. Global Claude and Codex configuration remains separate.
 
 All three listeners can be selected in that session file with a `task_ports`
 mapping, for example:
@@ -172,15 +237,30 @@ and simulation still select `--gpu`; the interface remains masked. In this
 mode Kit can create small CUDA contexts on other visible cards. The default
 is a single visible GPU. Each run records the selected mode.
 
+## Codex model service
+
 For Codex, install a compatible Codex CLI with plugin, hook and direct MCP
-support. Use `--harness codex --model YOUR_MODEL --model-url YOUR_RESPONSES_URL`
-and provide `OPENAI_API_KEY`. The launcher builds a private `CODEX_HOME` and
+support, and start a service exposing the Responses API. Complete the session
+data and Python path configuration above, then run:
+
+```bash
+export OPENAI_API_KEY='YOUR_RESPONSES_SERVICE_KEY'
+./scripts/reproduce_task.sh task01 --gpu 0 --harness codex \
+  --model YOUR_SERVED_MODEL_ID --model-url https://YOUR_MODEL_HOST/v1 \
+  --run-dir runs/task01-codex-001
+```
+
+The URL is the API base before `/responses`; use your server's actual prefix.
+The same model must support images, tool calls and streaming. Use a new output
+directory for each run. The launcher builds a private `CODEX_HOME` and
 retains the original embodied tool restrictions. It does not read another
 user's relay configuration. This is an alternate harness: the supplied
 reference scores are Claude Code / Qwen runs. The launcher installs the local
 plugin through the CLI into that run's private home and verifies its source
 and version. See the
 [Codex plugin documentation](https://developers.openai.com/plugins/build/plugins).
+
+## Evaluation checks and budgets
 
 Run CPU checks with `./scripts/check.sh`. Existing interpreters can be selected
 using `ROBOHARNESS_INTERFACE_PYTHON` and `ROBOHARNESS_AGENT_PYTHON`.

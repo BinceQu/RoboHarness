@@ -41,7 +41,7 @@ scripts/            安装、一键运行、验证和成绩报告
 validation_results/ 评测报告与成绩
 ```
 
-## 安装与一键运行
+## 安装
 
 需要 Linux x86-64、NVIDIA RTX GPU、Python 3.11 和 CUDA 12.4 工具链。
 验证机器每卡显存为 48 GB；该值是测试环境配置，不是经过验证的最低要求。
@@ -53,30 +53,132 @@ cd RoboHarness
 cp configs/example.json configs/local.json
 ```
 
-按[安装说明](docs/setup.md)准备 BEHAVIOR 数据、Claude Code 2.1.259 和模型服务，
-并在 `configs/local.json` 中填写本机的数据目录、Python 路径和服务地址。
-模型服务使用环境变量提供认证信息。环境准备好后：
+按[安装说明](docs/setup.md)准备 BEHAVIOR 数据与 Claude Code 2.1.259，
+并在 `configs/local.json` 中填写本机的数据目录和 Python 路径。
+
+## 运行任务
+
+模型服务和评测运行器是两个独立进程。评测期间需要保持自己的模型服务运行。
+`setup.sh` 安装仿真与 agent 环境，不会下载大模型权重或启动推理服务。
+
+**1. 连接自己的模型服务。**
+
+默认的 Claude Code harness 使用 **Anthropic 兼容的 `/v1/messages` 接口**，
+服务须支持图片输入、工具调用和流式输出。论文配置使用 `Qwen3.8-Flash-Next-FP8`。
+如果服务只支持 OpenAI Chat Completions，先按[桥接说明](docs/setup.md#chat-completions-services)
+配置适配器；Codex 使用另一套 [Responses 配置](docs/setup.md#codex-model-service)。
+
+在**评测机器**上进入本仓库目录，打开终端，将以下地址、模型名和密钥替换为自己的服务信息：
 
 ```bash
-./run.sh --list
-./scripts/reproduce_task.sh task01 --gpu 0
-
-# 查看计划，不启动仿真。
-./scripts/reproduce_task.sh task03 --gpu 0 --dry-run
-
-# 运行指定实例。
-./scripts/reproduce_task.sh task08 --gpu 0 --instances 301,304
+export ROBOHARNESS_MODEL_URL='http://YOUR_MODEL_HOST:31000'
+export ROBOHARNESS_MODEL='Qwen3.8-Flash-Next-FP8'
+export ANTHROPIC_API_KEY='YOUR_MODEL_SERVER_KEY'
+export ANTHROPIC_AUTH_TOKEN="$ANTHROPIC_API_KEY"
 ```
 
-默认运行该任务的全部五个评测实例。使用 `./run.sh --list` 查看支持的任务；task04 未包含在内。
+地址填写服务 origin，**不带 `/v1`**；模型名必须与服务实际提供的 ID 一致。
+服务未启用认证时，密钥填写 `local-no-auth`。
+只有模型服务与评测在同一台机器，或已通过 SSH 转发到评测机器时，才使用 `127.0.0.1`。
 
-包装脚本首次运行时将 `configs/local.json` 复制到 `.local/session-config.json`，
-后续复用该 session 文件。之后调整配置请修改该文件；不会改动全局 Claude 或 Codex 配置。
-通过 `task_ports` 可为每个任务指定 HTTP、policy、idle gate 三个端口，
-参见[全部使用 1507* 的示例](docs/setup.md#session-configuration-and-ports)。
+先发送一个小请求，确认模型服务可用：
 
-运行器按任务配置加载场景和提示词，保存计划、会话、模型轨迹、官方评分 JSON 与汇总到新的
-`runs/<run-id>/` 目录。网页接口位于 `http://127.0.0.1:<port>/`；远程访问可使用 SSH 转发。
+```bash
+python3 - <<'PY' | curl --fail-with-body --silent --show-error \
+  "${ROBOHARNESS_MODEL_URL%/}/v1/messages" \
+  -H 'Content-Type: application/json' \
+  -H 'anthropic-version: 2023-06-01' \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN" \
+  --data-binary @-
+import json, os
+print(json.dumps({
+    "model": os.environ["ROBOHARNESS_MODEL"], "max_tokens": 128,
+    "messages": [{"role": "user", "content": "Reply with OK."}]
+}))
+PY
+```
+
+预期返回包含 `"type": "message"` 的 Messages 响应。这一步检查连接、认证和模型名；
+服务还须支持上面的图片与工具功能。连接失败、401/403、404 等问题见
+[模型连接排查](docs/setup.md#model-connection-troubleshooting)。
+
+**2. 保存本次评测的配置。**
+
+在同一终端执行以下命令。首次从安装配置创建 session 文件，后续保留已有设置，
+只更新模型地址和模型名：
+
+```bash
+python3 - <<'PY'
+import json, os
+from pathlib import Path
+path = Path(os.environ.get("ROBOHARNESS_SESSION_CONFIG", ".local/session-config.json"))
+source = path if path.exists() else Path("configs/local.json")
+config = json.loads(source.read_text())
+config.update(model_url=os.environ["ROBOHARNESS_MODEL_URL"],
+              model=os.environ["ROBOHARNESS_MODEL"])
+path.parent.mkdir(parents=True, exist_ok=True)
+path.write_text(json.dumps(config, indent=2) + "\n")
+print("Saved", path)
+PY
+```
+
+默认 session 文件为 `.local/session-config.json`，也可通过 `ROBOHARNESS_SESSION_CONFIG` 指定其他文件。
+检查其中的配置：`data_path` 指向 [BEHAVIOR 数据根目录](docs/setup.md)，
+`interface_python`、`evaluator_python`、`agent_python` 指向已安装的环境。
+使用 `setup.sh` 安装时可沿用示例中的 Python 路径。需要时将 `cache_dir` 设为 Git 仓库之外、
+空间充足且可写的临时目录。相对路径均相对于仓库根目录。
+密钥只保存在 shell 环境中，新开终端后需重新 export；后续配置修改应写到这个 session 文件。
+
+**3. 核对计划，再启动评测。**
+
+```bash
+claude --version  # 论文配置要求 2.1.259
+./run.sh --list
+./scripts/reproduce_task.sh task01 --gpu 0 --dry-run
+./scripts/reproduce_task.sh task01 --gpu 0 --run-dir runs/task01-001
+```
+
+核对 dry-run 输出中的 `model_url`、`model`、`gpu`、三个端口和五个实例 ID。
+dry-run 只解析配置，不请求模型或检查仿真安装。最后一条命令启动接口、官方评测器与
+Claude Code agent，按顺序运行全部五个实例。
+`--gpu 0` 选择的是**仿真 GPU**；模型服务使用哪些 GPU，由启动自己的模型服务时决定。
+需要为仿真与模型服务分别预留足够资源。
+
+换任务时将 `task01` 替换为列表中的任务；task04 未包含在内。
+每次运行使用新的输出目录，也可省略 `--run-dir` 让程序自动生成。
+先试跑单个实例可添加 `--instances 301` 并使用单独目录；完整均分需要全部五个实例。
+
+**4. 查看轨迹与成绩。**
+
+默认配置下，task01 的网页接口是评测机器上的 `http://127.0.0.1:15071`。
+若评测在远程机器上，在**自己的电脑**执行以下命令，再用浏览器打开该地址：
+
+```bash
+ssh -N -L 15071:127.0.0.1:15071 YOUR_USER@YOUR_EVALUATION_HOST
+```
+
+启动日志会显示 HTTP、policy、idle gate 三个端口，需要时通过
+[`task_ports`](docs/setup.md#session-configuration-and-ports) 修改。
+上面的启动命令将结果保存到：
+
+| 路径 | 内容 |
+| --- | --- |
+| `runs/task01-001/summary.json` | 已完成实例数、分数与当前 mean Q-score |
+| `runs/task01-001/output/json/` | 各实例的官方评分 |
+| `runs/task01-001/instance_301/` | 实例 301 的 prompt、agent 输出、错误日志和轨迹 |
+| `runs/task01-001/run.log` 和 `runs/task01-001/logs/` | 运行器、接口与评测器日志 |
+
+全部五个实例完成后，生成对比报告：
+
+```bash
+python3 scripts/report_validation.py runs/task01-001 \
+  --output .local/reports/task01-001 --check-live --require-match
+```
+
+打开 `.local/reports/task01-001/README.md` 查看结果。
+任务未完成或评测结果不匹配时，`--require-match` 返回非零退出码。
+`runs/` 和 `.local/` 均已被 Git 忽略。
 
 ## 复现与评分规则
 
@@ -93,13 +195,6 @@ cp configs/example.json configs/local.json
 
 运行器默认使用 `session_timeout_s: 0`，不增加墙钟时限。实际运行耗时取决于硬件、模型服务和
 并发负载；评测预算按仿真控制步数计算。
-
-生成报告：
-
-```bash
-python3 scripts/report_validation.py runs/YOUR_RUN_A runs/YOUR_RUN_B \
-  --output validation_results/latest --check-live --require-match
-```
 
 报告逐任务比较完整的五例均分与参考值，容限为 `1e-6`，单例分数允许不同。
 `--require-match` 在任务未完成、均分不匹配或未通过评测检查时返回非零退出码。

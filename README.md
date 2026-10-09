@@ -61,43 +61,137 @@ Edit `configs/local.json` for this machine's data and Python paths.
 
 ## Run a task
 
-After installation and model configuration, one command runs all five evaluation
-instances of a task:
+The model server and the evaluation runner are separate processes. Keep your
+model server running throughout evaluation. `setup.sh` installs the simulation
+and agent environments; it does not download LLM weights or start a model server.
+
+**1. Connect to your model service.**
+
+The default Claude Code harness uses an **Anthropic-compatible `/v1/messages`
+endpoint with image input, tool calls and streaming**. The paper configuration
+uses `Qwen3.8-Flash-Next-FP8`. If your server only provides OpenAI Chat
+Completions, follow the [bridge setup](docs/setup.md#chat-completions-services)
+first. Codex uses a different [Responses configuration](docs/setup.md#codex-model-service).
+
+On the **evaluation machine**, open a terminal in this repository and replace
+the host, served model ID and key below with your service's values:
 
 ```bash
+export ROBOHARNESS_MODEL_URL='http://YOUR_MODEL_HOST:31000'
+export ROBOHARNESS_MODEL='Qwen3.8-Flash-Next-FP8'
+export ANTHROPIC_API_KEY='YOUR_MODEL_SERVER_KEY'
+export ANTHROPIC_AUTH_TOKEN="$ANTHROPIC_API_KEY"
+```
+
+Use the origin **without `/v1`** for `ROBOHARNESS_MODEL_URL`. The model ID must
+match the name exposed by your server. For a server with authentication disabled,
+use `local-no-auth` as the key. `127.0.0.1` works only when the model service is
+on this evaluation machine, or an SSH tunnel forwards it here.
+
+Send a small request before starting the simulator:
+
+```bash
+python3 - <<'PY' | curl --fail-with-body --silent --show-error \
+  "${ROBOHARNESS_MODEL_URL%/}/v1/messages" \
+  -H 'Content-Type: application/json' \
+  -H 'anthropic-version: 2023-06-01' \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "Authorization: Bearer $ANTHROPIC_AUTH_TOKEN" \
+  --data-binary @-
+import json, os
+print(json.dumps({
+    "model": os.environ["ROBOHARNESS_MODEL"], "max_tokens": 128,
+    "messages": [{"role": "user", "content": "Reply with OK."}]
+}))
+PY
+```
+
+Expect a Messages response with `"type": "message"`. This checks reachability,
+authentication and the model ID; the service must also support the image and
+tool features above. Connection errors, HTTP 401/403 and HTTP 404 are covered in
+[model connection troubleshooting](docs/setup.md#model-connection-troubleshooting).
+
+**2. Save the session configuration.**
+
+In the same terminal, copy your installation settings on first use and save
+the model address and name. Existing session settings are retained:
+
+```bash
+python3 - <<'PY'
+import json, os
+from pathlib import Path
+path = Path(os.environ.get("ROBOHARNESS_SESSION_CONFIG", ".local/session-config.json"))
+source = path if path.exists() else Path("configs/local.json")
+config = json.loads(source.read_text())
+config.update(model_url=os.environ["ROBOHARNESS_MODEL_URL"],
+              model=os.environ["ROBOHARNESS_MODEL"])
+path.parent.mkdir(parents=True, exist_ok=True)
+path.write_text(json.dumps(config, indent=2) + "\n")
+print("Saved", path)
+PY
+```
+
+The default session file is `.local/session-config.json`; set
+`ROBOHARNESS_SESSION_CONFIG` to select another file. Review it: `data_path` must point to the
+[BEHAVIOR data root](docs/setup.md), and `interface_python`, `evaluator_python`
+and `agent_python` must point to the installed environments. The example paths
+work with `setup.sh`. Set `cache_dir` to writable scratch space outside any
+Git checkout when needed. Relative paths are resolved from the repository root.
+Credentials stay in the shell environment; export them again in each new
+terminal. Later configuration edits belong in this session file.
+
+**3. Inspect the plan, then launch.**
+
+```bash
+claude --version  # must be 2.1.259 for the paper configuration
 ./run.sh --list
-./scripts/reproduce_task.sh task01 --gpu 0
+./scripts/reproduce_task.sh task01 --gpu 0 --dry-run
+./scripts/reproduce_task.sh task01 --gpu 0 --run-dir runs/task01-001
 ```
 
-The wrapper creates a session configuration at `.local/session-config.json`
-from `configs/local.json` on first use, then reuses it. Edit that session file
-for later launches. It does not change global Claude or Codex configuration.
+In the dry-run output, check `model_url`, `model`, `gpu`, the three ports and
+the five instance IDs. Dry-run prints configuration; it does not contact the
+model or validate the simulator installation. The final command starts the
+interface, evaluator and Claude Code agent and runs all five instances in order.
+`--gpu 0` selects the **simulation GPU**; model-serving GPUs are selected when
+you start your own model server. Choose resources with enough capacity for both.
+
+Change `task01` to another listed task; task04 is not included. Use a new output
+directory for every run, or omit `--run-dir` to generate one automatically.
+For a single-instance trial, add `--instances 301` and use a separate directory;
+the full task mean requires all five instances.
+
+**4. Watch the rollout and read the results.**
+
+With default ports, task01's interface is `http://127.0.0.1:15071` on the
+evaluation machine. For a remote machine, run this on your **own computer**, then
+open that address in your browser:
 
 ```bash
-# Inspect the resolved plan without launching the simulator.
-./scripts/reproduce_task.sh task03 --gpu 0 --dry-run
-
-# Run selected instances.
-./scripts/reproduce_task.sh task08 --gpu 0 --instances 301,304
-
-# Use the alternative harness with a Responses-compatible model endpoint.
-./scripts/reproduce_task.sh task01 --gpu 0 --harness codex \
-  --model YOUR_MODEL --model-url YOUR_RESPONSES_URL
+ssh -N -L 15071:127.0.0.1:15071 YOUR_USER@YOUR_EVALUATION_HOST
 ```
 
-Codex requires its CLI and `OPENAI_API_KEY`; see [model setup](docs/setup.md).
-Use `./run.sh --list` to see the supported tasks; task04 is not included.
+The launcher prints the HTTP, policy and gate ports. Configure them with
+[`task_ports`](docs/setup.md#session-configuration-and-ports) if needed.
+For the command above, outputs are in:
 
-The runner starts the interface, idle gate, official evaluator and agent, then
-loads the task configuration. It saves the run plan, prompt,
-native agent transcript, trajectory, official scoring JSON and summary under a
-fresh `runs/<run-id>/` directory. Ctrl-C cleans up only that run's owned processes.
+| Path | Contents |
+| --- | --- |
+| `runs/task01-001/summary.json` | Completed instance count, scores and current mean Q-score |
+| `runs/task01-001/output/json/` | Official per-instance evaluator results |
+| `runs/task01-001/instance_301/` | Prompt, agent output, error log and trajectory for instance 301 |
+| `runs/task01-001/run.log` and `runs/task01-001/logs/` | Controller, interface and evaluator logs |
 
-The interface is available at `http://127.0.0.1:<port>/`. HTTP defaults to
-`15070 + task index`, with policy and idle-gate ports at HTTP +1000 and +2000.
-Use the session file's `task_ports` mapping to choose all three listeners. The
-[1507* example](docs/setup.md#session-configuration-and-ports) assigns distinct
-ports to task01, task03 and task08. Use SSH forwarding for a remote host.
+After all five instances finish, generate the comparison report:
+
+```bash
+python3 scripts/report_validation.py runs/task01-001 \
+  --output .local/reports/task01-001 --check-live --require-match
+```
+
+Open `.local/reports/task01-001/README.md` for the result. `--require-match`
+returns a nonzero exit code for an incomplete or mismatched evaluation.
+Both `runs/` and `.local/` are ignored by Git.
 
 ## Reproduction contract
 
@@ -121,13 +215,6 @@ The paper's BEHAVIOR evaluation protocol is:
 The runner defaults to `session_timeout_s: 0`, so there is no additional
 wall-clock limit. Execution time varies with hardware, model serving and
 concurrent load; evaluation budgets are measured in simulation control steps.
-
-Collect and check runs with:
-
-```bash
-python3 scripts/report_validation.py runs/YOUR_RUN_A runs/YOUR_RUN_B \
-  --output validation_results/latest --check-live --require-match
-```
 
 The report compares each complete task mean with its reference value using a
 tolerance of `1e-6`. Individual instance scores may differ. `--require-match`
