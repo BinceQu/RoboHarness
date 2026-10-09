@@ -2,7 +2,7 @@
 
 直接双击 **index.html** 或 **open.cmd**，在 Edge / Chrome 中浏览。
 无需联网，无需 Python，无需安装 RoboHarness。网页的图片、PDF 原图、
-任务说明、成绩和已有的六段 head-camera 视频都在此文件夹中。
+任务说明、成绩、Method 演示视频和已有的六段 head-camera 视频都在此文件夹中。
 没有录制的三个任务保留原网页的提示。GitHub、官方任务网站等外部链接
 需要联网，浏览本页及其视频不需要。
 
@@ -35,8 +35,8 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\sync.ps1 -Install -Ser
 中由 12023 发布的页面文件；个人新增文件不会被删除。同步脚本不包含
 密码或私钥。移动整个文件夹后，请重新运行 **enable-sync.cmd**。
 
-服务器的 `roboharness-homepage-publisher.service` 每 30 秒检查 RoboHarness
-仓库中的主页源码，有变化就更新这个离线文件夹和 ZIP。检查状态：
+服务器的 `roboharness-homepage-publisher.service` 每 30 秒检查主页源码
+和 Method 视频目录，有变化就更新这个离线文件夹和 ZIP。检查状态：
 
 ```bash
 systemctl --user status roboharness-homepage-publisher.service
@@ -48,6 +48,22 @@ systemctl --user status roboharness-homepage-publisher.service
 cd /mnt/nas_nfs/home/bince/RoboHarness
 python3 scripts/package_site.py --output /home/bince/roboharness_homepage --zip /home/bince/roboharness_homepage.zip
 ```
+
+## Method 视频
+
+页面顺序为 Abstract → Method → Task results。Method 只有标题和一个视频。
+当前用 `roboharness_promo_v5.mp4`；后续自动选取以下目录中版本编号最大的
+成品 `roboharness_promo_vN.mp4`：
+
+```text
+/mnt/nas_nfs/home/bince/BEHAVIOR-1K/video/demo_edits/roboharness_promo_20261005
+```
+
+编辑工程、预览图和仍在写入或解码失败的视频不会替换已有版本。
+导出完成后，12023 会更新离线包，并通过独立 Git checkout 发布到 GitHub Pages。
+laptop 的同步脚本会拉取新的 Method 视频；可在
+`assets/method/manifest.json` 查看当前源文件名和 SHA-256。
+浏览器使用本地 `assets/method/roboharness-method.mp4`，断网也能播放。
 
 ## laptop 首次下载
 

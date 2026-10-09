@@ -71,6 +71,7 @@ figcaption { margin-top: 18px; font-size: 13px; line-height: 1.7; color: var(--m
 .abstract-copy p, .object-copy p, .comparison-heading p { color: #4c5a70; }
 .abstract-copy p + p { margin-top: 20px; }
 .abstract-copy strong { color: var(--ink); font-weight: 600; }
+.method-video { display: block; width: 100%; height: auto; border-radius: 16px; background: #111923; }
 .object-study { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: center; gap: 54px; }
 .object-copy { min-width: 0; }
 .object-copy h3 { margin: 0 0 10px; font-size: 17px; font-weight: 600; line-height: 1.4; }

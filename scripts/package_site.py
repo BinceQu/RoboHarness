@@ -14,6 +14,8 @@ import tempfile
 import time
 import zipfile
 
+import method_video
+
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -24,14 +26,29 @@ def digest(path):
 
 
 def source_fingerprint():
-    paths = {Path(__file__), ROOT / "scripts/build_site.py", ROOT / "LICENSE", ROOT / "THIRD_PARTY_NOTICES.md"}
+    paths = {Path(__file__), ROOT / "scripts/build_site.py", ROOT / "scripts/method_video.py",
+             ROOT / "LICENSE", ROOT / "THIRD_PARTY_NOTICES.md"}
     for directory in ("website", "tasks", "prompt", "docs/assets", "scripts/offline"):
         paths.update(path for path in (ROOT / directory).rglob("*") if path.is_file())
-    stats = [(str(path.relative_to(ROOT)), path.stat().st_size, path.stat().st_mtime_ns) for path in sorted(paths)]
+    for _, path in method_video.source_candidates(method_video.configuration(ROOT)):
+        paths.add(path)
+        validation = path.with_suffix(".validation.json")
+        if validation.exists():
+            paths.add(validation)
+    stats = [(str(path), path.stat().st_size, path.stat().st_mtime_ns) for path in sorted(paths)]
     return hashlib.sha256(json.dumps(stats, separators=(",", ":")).encode()).hexdigest()
 
 
 def package(output, archive=None):
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with (output.parent / ("." + output.name + ".package.lock")).open("w") as lock:
+        if os.name == "posix":
+            import fcntl
+            fcntl.flock(lock, fcntl.LOCK_EX)
+        return _package(output, archive)
+
+
+def _package(output, archive=None):
     fingerprint = source_fingerprint()
     output.mkdir(parents=True, exist_ok=True)
     manifest_path = output / "offline-manifest.json"
@@ -39,7 +56,7 @@ def package(output, archive=None):
         raise ValueError(f"Refusing to overwrite a nonempty folder without an offline manifest: {output}")
     with tempfile.TemporaryDirectory(prefix=".roboharness-package-", dir=output.parent) as temporary:
         staging = Path(temporary) / "site"
-        subprocess.run([sys.executable, str(ROOT / "scripts/build_site.py"), "--output", str(staging)], check=True)
+        subprocess.run([sys.executable, str(ROOT / "scripts/build_site.py"), "--output", str(staging), "--latest-method"], check=True)
         for path in (ROOT / "scripts/offline").iterdir():
             if path.is_file():
                 target = staging / path.name
@@ -102,6 +119,7 @@ def main():
     parser.add_argument("--output", type=Path, default=Path.home() / "roboharness_homepage")
     parser.add_argument("--zip", type=Path, dest="archive")
     parser.add_argument("--watch", action="store_true", help="Rebuild after the website source changes")
+    parser.add_argument("--publish-method", action="store_true", help="Publish new method exports using an isolated Git checkout")
     parser.add_argument("--interval", type=float, default=30)
     args = parser.parse_args()
     output = args.output.expanduser().resolve()
@@ -122,6 +140,8 @@ def main():
             current = source_fingerprint()
             if not args.watch or current != previous or (archive and not archive.exists()):
                 previous = package(output, archive)
+            if args.publish_method:
+                method_video.publish_package(output, ROOT)
         except Exception as error:
             if not args.watch:
                 raise
