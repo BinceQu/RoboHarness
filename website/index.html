@@ -106,15 +106,20 @@
 
     <section class="container reproduce-section" id="reproduce" aria-labelledby="reproduce-title">
       <div class="reproduce-heading">
-        <h2 id="reproduce-title">Run a task</h2>
-        <a class="text-link" href="https://github.com/BinceQu/RoboHarness/blob/main/docs/setup.md">Get started <span aria-hidden="true">↗</span></a>
+        <div>
+          <h2 id="reproduce-title">Get started</h2>
+          <p>RoboHarness is open source.</p>
+        </div>
+        <a class="button primary" href="https://github.com/BinceQu/RoboHarness">GitHub <span aria-hidden="true">↗</span></a>
       </div>
       <div class="command-panel">
-        <p class="run-task-name" id="run-task-name">Picking Up Trash</p>
-        <div class="command-line">
-          <pre><code id="run-command">./scripts/reproduce_task.sh task01 --gpu 0</code></pre>
-          <button type="button" class="copy-button" id="copy-command" hidden aria-label="Copy run command">Copy</button>
+        <div class="command-toolbar">
+          <span>Bash</span>
+          <button type="button" class="copy-button" id="copy-command" hidden aria-label="Copy setup commands">Copy</button>
         </div>
+        <pre><code id="setup-command">git clone --recurse-submodules https://github.com/BinceQu/RoboHarness.git
+cd RoboHarness
+bash scripts/setup.sh</code></pre>
       </div>
       <p class="copy-feedback" id="copy-feedback" role="status" aria-live="polite"></p>
     </section>

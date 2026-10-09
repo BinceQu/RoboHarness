@@ -138,10 +138,11 @@ figcaption { margin-top: 18px; font-size: 13px; line-height: 1.7; color: var(--m
 .reproduce-section { padding-block: 72px 68px; }
 .reproduce-heading { display: flex; justify-content: space-between; align-items: center; gap: 20px; margin-bottom: 24px; }
 .reproduce-heading h2 { font-size: 30px; letter-spacing: -.025em; }
-.command-panel { padding: 24px; border: 1px solid var(--rule); border-radius: 14px; }
-.run-task-name { color: var(--muted); font-size: 14px; }
-.command-line { display: flex; align-items: center; gap: 18px; margin-top: 18px; }
-.command-line pre { flex: 1; min-width: 0; margin: 0; overflow-x: auto; padding-block: 4px; color: var(--ink); font-size: 13px; line-height: 1.6; }
+.reproduce-heading p { margin-top: 8px; font-size: 15px; }
+.reproduce-heading .button { flex-shrink: 0; }
+.command-panel { min-width: 0; padding: 24px; border: 1px solid var(--rule); border-radius: 14px; background: var(--wash); }
+.command-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; color: var(--muted); font-size: 12px; }
+.command-panel pre { margin: 16px 0 0; overflow-x: auto; padding-bottom: 4px; color: var(--ink); font-size: 13px; line-height: 1.9; }
 .copy-button { min-height: 36px; padding: 7px 14px; border: 1px solid var(--rule); border-radius: 6px; background: var(--wash); color: var(--ink); font-size: 12px; cursor: pointer; }
 .copy-button:hover { border-color: var(--ink); }
 .copy-feedback { font-size: 13px; }
@@ -210,10 +211,10 @@ figcaption { margin-top: 18px; font-size: 13px; line-height: 1.7; color: var(--m
   .rollout-empty p { font-size: 10px; line-height: 1.45; }
   .task-navigation { margin-top: 18px; }
   .reproduce-section { padding-block: 50px; }
+  .reproduce-heading { flex-wrap: wrap; gap: 18px; }
   .reproduce-heading h2 { font-size: 27px; }
   .command-panel { padding: 20px 18px; }
-  .command-line { flex-wrap: wrap; gap: 12px; }
-  .command-line pre { flex-basis: 100%; font-size: 12px; }
+  .command-panel pre { font-size: 12px; }
   .site-footer { gap: 16px; padding-block: 24px 30px; }
   .footer-links { gap: 16px; }
 }
