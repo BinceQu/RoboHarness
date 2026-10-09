@@ -1,14 +1,13 @@
-# task03/306: Q 1/7 and handoff after more than 49 hours
+# task03/306: Q 1/7 and normal handoff
 
 Checked at 2026-10-04T12:51:51.731607+08:00. The original r5 instance completed at **Q=1/7
 (0.14285714285714285)** and **25,852 steps**, compared with the directory-reported
 archived case Q=2/7. Its official task-success flag is false. The native CLI
-returned normally after 178,169.447 seconds (**49 hours, 29 minutes, 29.447
-seconds**), with 544 turns and no native error flag. The archived Challenge
+returned normally, with 544 turns and no native error flag. The archived Challenge
 2025 times 2 step limit remains 27,392.
 
 The session-local supervisor had held the original coordinator at its polling
-sleep on October 3 to prevent its already loaded 24-hour deadline from
+sleep on October 3 to prevent its already loaded wall-clock deadline from
 truncating this case. On October 4 it observed normal model completion and
 requested the existing finish operation at **12:35:02 Asia/Shanghai**. It
 validated the official Q=1/7 result before resuming the same coordinator at
@@ -29,7 +28,7 @@ completed and next case prompts match their archived case manifests, including
 the recorded render with this session's port.
 
 This completes the runtime path whose earlier
-[past-24-hour observation](../task03-306-r5-past-24h-20261003/README.md)
+[continuation observation](../task03-306-r5-past-24h-20261003/README.md)
 had established continued execution. The separate
 [task08 completion](../task08-306-r5-completion-20261004/README.md)
 had already verified another real final-score and handoff event.

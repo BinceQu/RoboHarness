@@ -79,8 +79,6 @@
     "type": "result",
     "subtype": "success",
     "is_error": false,
-    "duration_ms": 41173960,
-    "duration_api_ms": 39632860,
     "num_turns": 169,
     "session_id": "06b677d2-806c-4c9a-9804-3cd08c47f65d"
   },

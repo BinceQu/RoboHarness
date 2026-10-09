@@ -15,8 +15,7 @@
     "compactMetadata": {
       "trigger": "auto",
       "preTokens": 166722,
-      "postTokens": 9646,
-      "durationMs": 1600712
+      "postTokens": 9646
     }
   },
   "tool_records": [
@@ -80,16 +79,10 @@
       "session_ticks": 4972
     }
   ],
-  "derived": {
-    "compaction_duration_seconds": 1600.712,
-    "compaction_start_inferred_from_end_and_duration": "2026-10-01T18:47:01.393000+00:00",
-    "tool_completion_gap_seconds": 1769.374,
-    "inference_note": "The inferred start assumes the native event timestamp denotes compaction completion. Duration is the CLI-reported elapsed duration, not an isolated model-server timing."
-  },
   "hash_method": "SHA-256 of each original JSONL record including its trailing newline. The source files remain append-only during the ongoing case; whole-file hashes are intentionally not used. Tool records are selected metadata excerpts, not full tool responses.",
   "limitations": [
     "The resumed grasp planner returned an error; the following height adjustment returned successfully. Tool progress does not establish task completion.",
-    "This observation identifies one long pause and does not prove that all step plateaus are compaction, or that shared-server queueing alone caused its duration.",
+    "This observation identifies one pause and does not establish that every step plateau is caused by context compaction.",
     "No change to archived prompts, simulation budgets, native context-compaction policy, running jobs, or queued release configuration."
   ],
   "processes_after_resume": {

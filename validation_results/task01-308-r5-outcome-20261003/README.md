@@ -1,8 +1,8 @@
 # task01/308 r5 outcome analysis — 2026-10-03
 
 The official evaluator returned **Q = 2/3 after 5,484 steps**. The runner
-recorded `model_done`, and the native agent returned without an error after
-about 11.44 hours. This case was not cut off by the wall-clock limit. It remains
+recorded `model_done`, and the native agent returned without an error.
+This case was not cut off by the wall-clock limit. It remains
 diagnostic because r5 has known native-context mismatches.
 
 The recorded action sequence identifies how the blue can was lost:

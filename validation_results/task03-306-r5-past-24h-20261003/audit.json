@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "scope": "Diagnostic r5 task03/306 execution beyond the former 24-hour wall-clock cap.",
+  "scope": "Diagnostic r5 task03/306 continued execution after disabling the former wall-clock deadline.",
   "timezone": "Asia/Shanghai",
   "run": "validation-20260930-task03-r5",
   "task": "task03",

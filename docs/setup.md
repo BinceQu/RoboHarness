@@ -185,7 +185,8 @@ and version. See the
 Run CPU checks with `./scripts/check.sh`. Existing interpreters can be selected
 using `ROBOHARNESS_INTERFACE_PYTHON` and `ROBOHARNESS_AGENT_PYTHON`.
 
-The archived budget is a simulation-step budget. The default
+Execution time varies with hardware, model serving and concurrent load.
+The evaluation budget is measured in simulation control steps. The default
 `session_timeout_s: 0` therefore disables any additional per-case wall-clock
 cap. An operator may set a positive number of seconds in the local configuration
 to opt into a safety timeout. If that timeout forces submission, the official

@@ -3,12 +3,9 @@
 This is a snapshot of an ongoing diagnostic episode. It supplies no new
 official Q-score and does not validate the queued r6 corrections.
 
-Between 21:10 and 21:52 Asia/Shanghai, recorder turns 330–336 made seven
+Recorder turns 330–336 made seven
 consecutive `track_object_distance` calls on `img_0304`. All seven operations
-returned `ok=true` and `is_error=false`. The first-to-last completion interval
-was 42 minutes 7.779 seconds; the seven recorded tool durations total 9.478
-seconds. Inter-call time includes inference, transport and CLI behavior; these
-measurements do not isolate model-server latency.
+returned `ok=true` and `is_error=false`.
 
 The [archived v25 prompt](../../prompt/task08/v25_62c12d99b1ce.txt) requires a
 cabinet-lip height of 1.40–1.45 m and camera depth at most 0.7 m. It instructs

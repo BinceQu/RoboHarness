@@ -65,7 +65,7 @@ fresh r6 task means still require verification.
 
 No prompt, tool policy, scoring rule or active rollout was changed for
 this diagnosis. The [completion audit](../task03-306-r5-completion-20261004/README.md)
-records the normal end after more than 49 hours and the subsequent handoff;
+records the normal end and the subsequent handoff;
 this case was not wall-clock truncated. The earlier truncated task03/301
 remains a mandatory fresh retest. Acceptance remains the complete five-case
 task mean, rather than a requirement to match this individual case.

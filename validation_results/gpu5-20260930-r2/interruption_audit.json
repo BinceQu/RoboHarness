@@ -211,8 +211,7 @@
       "status": "failed",
       "exit_code": -1,
       "started_at_ms": 1790702200210,
-      "completed_at_ms": 1790717355970,
-      "duration_seconds": 15155
+      "completed_at_ms": 1790717355970
     },
     {
       "event_timestamp_utc": "2026-09-29T21:29:15.974Z",
@@ -222,8 +221,7 @@
       "status": "failed",
       "exit_code": -1,
       "started_at_ms": 1790702227188,
-      "completed_at_ms": 1790717355970,
-      "duration_seconds": 15128
+      "completed_at_ms": 1790717355970
     },
     {
       "event_timestamp_utc": "2026-09-29T21:29:15.978Z",
@@ -233,8 +231,7 @@
       "status": "failed",
       "exit_code": 137,
       "started_at_ms": 1790703144394,
-      "completed_at_ms": 1790717355971,
-      "duration_seconds": 14211
+      "completed_at_ms": 1790717355971
     },
     {
       "event_timestamp_utc": "2026-09-29T21:29:15.979Z",
@@ -244,12 +241,11 @@
       "status": "failed",
       "exit_code": -1,
       "started_at_ms": 1790703098253,
-      "completed_at_ms": 1790717355971,
-      "duration_seconds": 14257
+      "completed_at_ms": 1790717355971
     }
   ],
   "interpretation": {
-    "confirmed": "The three task launcher commands and result watcher ended in a 1 ms completion window, before their step or 24-hour wall-time limits. The controller/child identities were subsequently absent.",
+    "confirmed": "The three task launcher commands and result watcher ended in a 1 ms completion window, before their step or wall-clock limits. The controller/child identities were subsequently absent.",
     "hypothesis": "A shared execution-session cleanup is consistent with the simultaneous command endings, but the records do not identify who initiated termination.",
     "limitations": "The available execution events do not identify the signal sender. System/kernel journals are not readable by the current account. The user-wide cumulative oom_kill counter is nonzero but has no timestamps and cannot attribute this event. No definite OOM or session-cleanup attribution is made.",
     "mitigation": "Replacement runs use independent one-shot systemd user services and preserve the archived model, prompts, task settings, and 2025 x2 budgets."

@@ -3,8 +3,8 @@
 The official evaluator recorded **Q=0 at 10,024 steps** after the old r5
 controller requested `wall_timeout` on October 1, 2026 at 19:29:40
 Asia/Shanghai. The archived Challenge 2025 ×2 limit is 27,392 steps.
-The case had started at 19:29:39 on September 30; this was the old runner's
-24-hour safety deadline, not exhaustion of the archived simulation budget.
+The old runner's safety deadline ended the case before its simulation-step
+budget was exhausted.
 
 [The original official JSON](official.json) is copied byte for byte, and
 [the audit](audit.json) retains its hash, the controller log excerpt and

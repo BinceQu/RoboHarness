@@ -45,8 +45,6 @@
     "type": "result",
     "subtype": "success",
     "is_error": false,
-    "duration_ms": 126785429,
-    "duration_api_ms": 123072958,
     "num_turns": 417,
     "stop_reason": "end_turn"
   },

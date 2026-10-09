@@ -8,7 +8,7 @@ pinned source and remaining work. Historical evidence and result files remain
 unchanged.
 
 The October 2 policy update supersedes this history's statement that active
-r5 cases retain a 24-hour cap: a session-local supervisor now handles those
+r5 cases retain a wall-clock cap: a session-local supervisor now handles those
 legacy controllers, and truncated cases are queued for fresh evaluation. See
 the [current snapshot](validation.md#gpu-evaluation) for its validation limits.
 
@@ -32,7 +32,7 @@ The launcher now defaults to no additional wall-clock cap (session_timeout_s=0);
 operators can opt into a finite safety timeout. Three more runner regressions
 cover configuration validation, large clock advances with the cap disabled,
 and explicit timeout labeling. All 22 runner/report/budget tests pass.
-The already running r5 controllers retain their original 24-hour per-case cap;
+The already running r5 controllers retain their original per-case wall-clock cap;
 they are not restarted for this change. A cap-triggered result cannot pass
 strict verification, and subsequent launches use the uncapped default.
 The reporter's local liveness check additionally detects externally terminated

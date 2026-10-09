@@ -1138,8 +1138,6 @@
     ],
     "tracking_recovers_turn": 335,
     "named_cabinet_lip_passes_turn": 336,
-    "tool_duration_total_ms": 9478,
-    "first_to_last_completion_s": 2527.779,
     "next_action_turn": 337,
     "next_action": {
       "name": "adjust_chassis",
@@ -1355,7 +1353,6 @@
     "Unavailable telemetry does not make the underlying successful tool call fail.",
     "The warning does not identify the original transport or parsing exception.",
     "Historical and current scenes and trajectories differ; this is not controlled timing.",
-    "Recorded tool time is not model server latency; inter-call time includes inference and other work.",
     "The r5 native-context mismatches remain; no strict reproduction claim is made.",
     "No prompt, timeout, tool behavior, live agent, source pin, or queued run was changed."
   ]
