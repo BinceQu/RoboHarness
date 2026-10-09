@@ -2,7 +2,7 @@
 
 <img src="docs/assets/roboharness-wordmark.png" alt="RoboHarness" width="500">
 
-## A Simple Harness Can Outperform VLA and World Action Models
+## A Simple Harness Outperforms VLA and World Action Models
 
 **[Project Page](https://bincequ.github.io/RoboHarness/) · [Quick Start](#run-a-task) · [Documentation](docs/setup.md) · [中文](README.zh-CN.md)**
 
