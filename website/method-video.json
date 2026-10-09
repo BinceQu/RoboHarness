@@ -4,14 +4,14 @@
   "minimumVersion": 5,
   "published": {
     "version": 1,
-    "sourceFile": "roboharness_promo_v8.mp4",
-    "sourceVersion": 8,
+    "sourceFile": "roboharness_promo_v9.mp4",
+    "sourceVersion": 9,
     "video": "assets/method/roboharness-method.mp4",
-    "videoSha256": "435ae70dce48868fb6f4c72ac269e9679c61e027d0525dd0e71f975393e50887",
-    "bytes": 45874459,
+    "videoSha256": "68352e18831b8a9932a4d249c96e6dfe36795eacc4e2ea4569c245adab7e6bde",
+    "bytes": 49101077,
     "poster": "assets/method/roboharness-method-poster.jpg",
     "posterSha256": "9f78138e776fd7751bc76e2f88c6b0a49ff36198e7fb1128fb183ed0500ae931",
-    "duration": 159.734,
+    "duration": 165.767,
     "width": 1920,
     "height": 1080
   }
