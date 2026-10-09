@@ -48,6 +48,32 @@
       </div>
     </section>
 
+    <section class="container section archive-section" id="task-results" aria-labelledby="results-title">
+      <div class="section-heading">
+        <h2 id="results-title">Task results</h2>
+        <p>Qwen3.8-Flash-Next · mean Q-score over five instances.</p>
+      </div>
+      <div class="task-carousel" id="task-carousel" role="region" aria-roledescription="carousel" aria-label="Task results" tabindex="0" hidden>
+        {{TASK_CARDS}}
+      </div>
+      <p class="sr-only" id="task-announcement" aria-live="polite" aria-atomic="true"></p>
+      <details class="disclosure results-details">
+        <summary>All task scores <span aria-hidden="true">+</span></summary>
+        <div class="table-scroll" role="region" aria-label="Archived Q-score results; scroll horizontally on narrow screens" tabindex="0">
+          <table class="archive-table">
+            <caption class="sr-only">Historical directory-reported Q-scores. The mean is over five instances per task.</caption>
+            <thead><tr><th scope="col">Task</th><th scope="col">301</th><th scope="col">304</th><th scope="col">306</th><th scope="col">308</th><th scope="col">310</th><th scope="col">Mean Q</th></tr></thead>
+            <tbody>{{ARCHIVE_ROWS}}</tbody>
+          </table>
+        </div>
+        <div class="archive-notes">
+          <p>BEHAVIOR Challenge 2025, with twice the challenge step budget. Task04 has no supplied archive. For task00 and task05, directory reports differ from some preserved evaluator JSON; the directory values shown here remain the reference.</p>
+          <p>Videos show the highest-scoring available recorded run for each task. Recorded-run Q-scores and the historical five-instance results are reported separately. Easter eggs has an interrupted recording with no final score. The recovered Halloween recording ends 6.2 seconds before its evaluation.</p>
+          <a class="text-link" href="https://github.com/BinceQu/RoboHarness/blob/main/docs/provenance.md">Evaluation details <span aria-hidden="true">↗</span></a>
+        </div>
+      </details>
+    </section>
+
     <section class="container section generalization-section" id="results" aria-labelledby="generalization-title">
       <div class="section-heading">
         <h2 id="generalization-title">Generalization across 100 objects</h2>
@@ -76,32 +102,6 @@
           <img src="assets/robot-data-comparison.png" width="2771" height="1664" loading="lazy" alt="Successes out of 100 objects versus estimated hours of robot data, comparing RoboHarness with VLA models, world action models, and a pick-function baseline.">
         </a>
       </figure>
-    </section>
-
-    <section class="container section archive-section" id="task-results" aria-labelledby="results-title">
-      <div class="section-heading">
-        <h2 id="results-title">Task results</h2>
-        <p>Qwen3.8-Flash-Next · mean Q-score over five instances.</p>
-      </div>
-      <div class="task-carousel" id="task-carousel" role="region" aria-roledescription="carousel" aria-label="Task results" tabindex="0" hidden>
-        {{TASK_CARDS}}
-      </div>
-      <p class="sr-only" id="task-announcement" aria-live="polite" aria-atomic="true"></p>
-      <details class="disclosure results-details">
-        <summary>All task scores <span aria-hidden="true">+</span></summary>
-        <div class="table-scroll" role="region" aria-label="Archived Q-score results; scroll horizontally on narrow screens" tabindex="0">
-          <table class="archive-table">
-            <caption class="sr-only">Historical directory-reported Q-scores. The mean is over five instances per task.</caption>
-            <thead><tr><th scope="col">Task</th><th scope="col">301</th><th scope="col">304</th><th scope="col">306</th><th scope="col">308</th><th scope="col">310</th><th scope="col">Mean Q</th></tr></thead>
-            <tbody>{{ARCHIVE_ROWS}}</tbody>
-          </table>
-        </div>
-        <div class="archive-notes">
-          <p>BEHAVIOR Challenge 2025, with twice the challenge step budget. Task04 has no supplied archive. For task00 and task05, directory reports differ from some preserved evaluator JSON; the directory values shown here remain the reference.</p>
-          <p>Videos show the highest-scoring available recorded run for each task. Recorded-run Q-scores and the historical five-instance results are reported separately. Easter eggs has an interrupted recording with no final score. The recovered Halloween recording ends 6.2 seconds before its evaluation.</p>
-          <a class="text-link" href="https://github.com/BinceQu/RoboHarness/blob/main/docs/provenance.md">Evaluation details <span aria-hidden="true">↗</span></a>
-        </div>
-      </details>
     </section>
 
     <section class="container reproduce-section" id="reproduce" aria-labelledby="reproduce-title">
