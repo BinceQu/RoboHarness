@@ -30,8 +30,10 @@ and robot-data comparison. The 100-object catalog is visible beside a descriptio
 of the objects, environments and success criterion from the manuscript. The
 abstract retains the manuscript wording, with LaTeX citations removed and the
 open-source release statement updated to reflect the public repository. The full
-task table is expandable; evaluation notes remain alongside it, and the setup
-guide is linked from the task runner. The manuscript source and its hash are
+task table is expandable; evaluation notes remain alongside it. A final
+"Get started" section highlights the open-source release, links to the GitHub
+repository homepage, and shows three commands to clone and set up the project.
+The manuscript source and its hash are
 recorded in the [asset manifest](assets/sources.json).
 
 The page uses the original manuscript's overview, object catalog and robot-data
@@ -61,8 +63,8 @@ chart uses horizontal rows while the video and scores remain side by side.
 
 `website/task-instructions.json` pins the instructions to the upstream
 `StanfordVL/BEHAVIOR-1K` task catalog, with the source commit and content hashes.
-The builder validates the task names and instruction hashes. The reproduction
-command follows the currently displayed card. Use `?task=task05#task-results`
+The builder validates the task names and instruction hashes.
+Use `?task=task05#task-results`
 to link to a specific task.
 
 `website/rollouts.json` selects

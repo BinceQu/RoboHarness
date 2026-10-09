@@ -4,7 +4,7 @@
   const tasks = JSON.parse(document.getElementById("archive-data").textContent);
   const cards = tasks.map(task => document.getElementById(`card-${task.id}`));
   const carousel = document.getElementById("task-carousel");
-  const command = document.getElementById("run-command");
+  const command = document.getElementById("setup-command");
   const feedback = document.getElementById("copy-feedback");
   const motion = matchMedia("(prefers-reduced-motion: reduce)");
   const rates = [1, 2, 4, 8];
@@ -49,9 +49,6 @@
     const card = cards[current];
     card.hidden = false;
     carousel.dataset.task = task.id;
-    command.textContent = `./scripts/reproduce_task.sh ${task.id} --gpu 0`;
-    document.getElementById("run-task-name").textContent = task.title;
-    feedback.textContent = "";
     document.getElementById("task-announcement").textContent = `${current + 1} of ${tasks.length}: ${task.title}`;
     const video = card.querySelector("video");
     if (video) {
@@ -112,14 +109,14 @@
   document.getElementById("copy-command").addEventListener("click", async () => {
     try {
       await navigator.clipboard.writeText(command.textContent);
-      feedback.textContent = "Command copied.";
+      feedback.textContent = "Commands copied.";
     } catch {
       const range = document.createRange();
       range.selectNodeContents(command);
       const selection = window.getSelection();
       selection.removeAllRanges();
       selection.addRange(range);
-      feedback.textContent = "Select and copy the highlighted command.";
+      feedback.textContent = "Select and copy the highlighted commands.";
     }
   });
   addEventListener("popstate", () => {
