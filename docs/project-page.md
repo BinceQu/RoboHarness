@@ -114,3 +114,32 @@ A successful Git push does not confirm that Pages is live. Check the Pages
 deployment status and open the published URL without signing in. If GitHub
 reports that Actions is disabled for the account, repository permissions alone
 cannot restore it; see [GitHub's account-state guidance](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#managing-github-actions-permissions-for-your-repository).
+
+## Offline copy and laptop sync
+
+Package the complete page into a standalone folder, including the six published
+head-camera videos, images, original figure PDFs, scores and instructions:
+
+```bash
+python3 scripts/package_site.py --output ~/roboharness_homepage --zip ~/roboharness_homepage.zip
+```
+
+Copy the generated folder to the laptop. Double-click `index.html` or `open.cmd`
+to browse without a connection, Python installation or local web server. External
+GitHub and official-task links still require a connection. Legal documents are
+included locally. The package includes a SHA-256 manifest and Windows sync tools;
+passwords, private keys and agent reasoning are excluded.
+
+The configured laptop location is
+`C:\Users\16593\Desktop\robotics\roboharness_homepage`. `sync.cmd` pulls changed
+files from `/home/bince/roboharness_homepage` on 12023 using
+`bince@221.12.22.151` and SSH port `12023` with the laptop's existing credentials.
+`enable-sync.cmd` enables a background check every minute and starts it again at
+Windows sign-in; `disable-sync.cmd` stops it. Transfers
+are checked before replacing files. Network failures preserve the offline copy.
+The laptop does not upload edits or delete personal files.
+
+Use `--watch` on the server to refresh the package after website source changes.
+The package's `README-offline.md` describes the SSH alias and port options.
+The 12023 user service `roboharness-homepage-publisher.service` checks every
+30 seconds and refreshes the folder and ZIP. Its unit is included in `scripts/`.
