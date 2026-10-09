@@ -54,6 +54,20 @@ README images and project page without signing in.
 
 ## Task cards and recorded rollouts
 
+The page order is Abstract → Method → Task results → Generalization → Get started.
+The Method section contains only its heading and the full promotional video.
+`website/method-video.json` records its source directory and the checked-in
+published snapshot. The current snapshot is `roboharness_promo_v5.mp4`, preserved
+without re-encoding. The build validates the video and poster hashes, copies the
+assets under `assets/method/`, and includes their hashes in the playback URLs.
+
+Use `python3 scripts/method_video.py` to refresh the checked-in snapshot from
+the source directory. `build_site.py --latest-method` and the offline packager
+select the highest numbered completed `roboharness_promo_vN.mp4`. A newly written
+file must settle and pass full decoding (or have a matching successful validation
+report); an unfinished export leaves the existing offline package available.
+Engineering files and preview images are not candidates.
+
 Each task has a card with its title and full official instruction above two
 equal-height panels: the head-camera video on the left and the historical
 per-instance Q-scores on the right. Previous and next arrows at the bottom
@@ -90,8 +104,8 @@ were preserved; every published video was fully decoded before publication.
 
 Videos and posters live in [`docs/assets/rollouts/`](assets/rollouts). The public
 build copies only those referenced by the recording manifest, alongside the
-paper figures. Agent traces and reasoning previews are kept locally and are
-excluded from the Pages artifact. Rebuilding an existing output directory also
+paper figures. Raw agent traces and standalone reasoning exports are kept locally
+and are excluded from the Pages artifact. Rebuilding an existing output directory also
 removes trace JSON exported by earlier versions of the page.
 
 ## Deployment
@@ -117,8 +131,8 @@ cannot restore it; see [GitHub's account-state guidance](https://docs.github.com
 
 ## Offline copy and laptop sync
 
-Package the complete page into a standalone folder, including the six published
-head-camera videos, images, original figure PDFs, scores and instructions:
+Package the complete page into a standalone folder, including the Method film,
+six published head-camera videos, images, original figure PDFs, scores and instructions:
 
 ```bash
 python3 scripts/package_site.py --output ~/roboharness_homepage --zip ~/roboharness_homepage.zip
@@ -128,7 +142,7 @@ Copy the generated folder to the laptop. Double-click `index.html` or `open.cmd`
 to browse without a connection, Python installation or local web server. External
 GitHub and official-task links still require a connection. Legal documents are
 included locally. The package includes a SHA-256 manifest and Windows sync tools;
-passwords, private keys and agent reasoning are excluded.
+passwords, private keys and separate agent-trace exports are excluded.
 
 The configured laptop location is
 `C:\Users\16593\Desktop\robotics\roboharness_homepage`. `sync.cmd` pulls changed
@@ -142,4 +156,10 @@ The laptop does not upload edits or delete personal files.
 Use `--watch` on the server to refresh the package after website source changes.
 The package's `README-offline.md` describes the SSH alias and port options.
 The 12023 user service `roboharness-homepage-publisher.service` checks every
-30 seconds and refreshes the folder and ZIP. Its unit is included in `scripts/`.
+30 seconds and refreshes the folder and ZIP. It also watches the Method export
+directory and publishes new completed versions to Pages. Publication uses a
+dedicated generated checkout under `.local/method-publisher/`; it fetches current
+`main`, commits only the Method video, poster and snapshot manifest, and pushes
+that commit. It never stages files from the working repository. Failed publication
+retries on the next check while the updated offline package remains available.
+Its unit is included in `scripts/` and enables `package_site.py --publish-method`.

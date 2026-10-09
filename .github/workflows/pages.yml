@@ -7,6 +7,7 @@ on:
       - website/**
       - docs/assets/**
       - scripts/build_site.py
+      - scripts/method_video.py
       - tasks/**
       - prompt/**
       - .github/workflows/pages.yml

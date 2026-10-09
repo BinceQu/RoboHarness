@@ -4,7 +4,7 @@ Description=Refresh the complete RoboHarness offline homepage
 [Service]
 Type=simple
 WorkingDirectory=/mnt/nas_nfs/home/bince/RoboHarness
-ExecStart=/usr/bin/python3 /mnt/nas_nfs/home/bince/RoboHarness/scripts/package_site.py --output /home/bince/roboharness_homepage --zip /home/bince/roboharness_homepage.zip --watch --interval 30
+ExecStart=/usr/bin/python3 /mnt/nas_nfs/home/bince/RoboHarness/scripts/package_site.py --output /home/bince/roboharness_homepage --zip /home/bince/roboharness_homepage.zip --watch --interval 30 --publish-method
 Restart=on-failure
 RestartSec=20
 Nice=10

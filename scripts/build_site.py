@@ -8,6 +8,8 @@ import json
 import shutil
 from pathlib import Path
 
+import method_video
+
 
 ROOT = Path(__file__).resolve().parents[1]
 REPO = "https://github.com/BinceQu/RoboHarness"
@@ -152,6 +154,7 @@ def task_cards(tasks):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=ROOT / "_site")
+    parser.add_argument("--latest-method", action="store_true", help="Use the latest completed method export when its local directory is available")
     args = parser.parse_args()
     output = args.output.resolve()
     # Do not overwrite source directories, including an accidentally selected root.
@@ -160,6 +163,8 @@ def main():
     ):
         parser.error("choose a separate generated-output directory")
     source = ROOT / "website"
+    prepared_method = method_video.latest(ROOT) if args.latest_method else method_video.snapshot(ROOT)
+    method = prepared_method[0]
     tasks = archive_data()
     instructions = official_instructions()
     recordings, media_assets = recorded_rollouts()
@@ -179,6 +184,9 @@ def main():
         "{{ARCHIVE_ROWS}}": archive_rows(tasks), "{{TASK_CARDS}}": task_cards(tasks),
         "{{STYLE_VERSION}}": hashlib.sha256((source / "styles.css").read_bytes()).hexdigest()[:12],
         "{{SCRIPT_VERSION}}": hashlib.sha256((source / "app.js").read_bytes()).hexdigest()[:12],
+        "{{METHOD_VERSION}}": method["videoSha256"][:12],
+        "{{METHOD_POSTER_VERSION}}": method["posterSha256"][:12],
+        "{{METHOD_WIDTH}}": str(method["width"]), "{{METHOD_HEIGHT}}": str(method["height"]),
         "{{TASK_DATA}}": json.dumps(tasks, separators=(",", ":")).replace("<", "\\u003c"),
     }
     page = (source / "index.html").read_text()
@@ -203,9 +211,10 @@ def main():
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / "docs" / relative, target)
     shutil.copyfile(source / "rollouts.json", output / "assets/rollouts/manifest.json")
+    method_video.copy_assets(output, prepared_method)
     shutil.copyfile(ROOT / "docs/assets/roboharness-icon.svg", output / "favicon.svg")
     (output / ".nojekyll").touch()
-    print(f"Built {output}: {len(tasks)} tasks, {len(recordings)} recorded head-camera rollouts")
+    print(f"Built {output}: {len(tasks)} tasks, {len(recordings)} recorded head-camera rollouts, method {method['sourceFile']}")
 
 
 if __name__ == "__main__":
