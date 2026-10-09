@@ -57,8 +57,9 @@ README images and project page without signing in.
 The page order is Abstract → Method → Task results → Generalization → Get started.
 The Method section contains only its heading and the full promotional video.
 `website/method-video.json` records its source directory and the checked-in
-published snapshot. The current snapshot is `roboharness_promo_v5.mp4`, preserved
-without re-encoding. The build validates the video and poster hashes, copies the
+published snapshot. It began with `roboharness_promo_v5.mp4`; the selected source
+file is recorded in the manifest and preserved without re-encoding.
+The build validates the video and poster hashes, copies the
 assets under `assets/method/`, and includes their hashes in the playback URLs.
 
 Use `python3 scripts/method_video.py` to refresh the checked-in snapshot from

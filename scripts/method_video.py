@@ -137,14 +137,22 @@ def write_snapshot(root, prepared):
 def git(root, *arguments, capture=False):
     result = subprocess.run(["git", "-C", str(root), *arguments], check=True,
                             stdout=subprocess.PIPE if capture else None, text=True,
-                            env=git_environment(), timeout=120)
+                            env=git_environment(root), timeout=120)
     return result.stdout.strip() if capture else None
 
 
-def git_environment():
+def configured_ssh_command(root):
+    if os.environ.get("GIT_SSH_COMMAND"):
+        return os.environ["GIT_SSH_COMMAND"]
+    result = subprocess.run(["git", "-C", str(root), "config", "--get", "core.sshCommand"],
+                            stdout=subprocess.PIPE, text=True, check=False)
+    return result.stdout.strip() or "ssh"
+
+
+def git_environment(root=ROOT):
     environment = dict(os.environ)
     environment["GIT_TERMINAL_PROMPT"] = "0"
-    environment["GIT_SSH_COMMAND"] = "ssh -o BatchMode=yes -o ConnectTimeout=10 -o ServerAliveInterval=10 -o ServerAliveCountMax=2"
+    environment["GIT_SSH_COMMAND"] = configured_ssh_command(root) + " -o BatchMode=yes -o ConnectTimeout=10 -o ServerAliveInterval=10 -o ServerAliveCountMax=2"
     return environment
 
 
@@ -182,11 +190,12 @@ def _publish_package(output, root=ROOT):
         with tempfile.TemporaryDirectory(prefix="clone-", dir=state_dir) as temporary:
             staging = Path(temporary) / "repository"
             subprocess.run(["git", "clone", "--single-branch", "--branch", "main", "--no-tags", remote, str(staging)],
-                           check=True, env=git_environment(), timeout=120)
+                           check=True, env=git_environment(root), timeout=120)
             (staging / ".git/roboharness-method-publisher").write_text(str(root.resolve()))
             os.replace(staging, checkout)
     if not marker.is_file() or marker.read_text() != str(root.resolve()):
         raise ValueError("Refusing to modify a checkout not owned by the method publisher")
+    git(checkout, "config", "core.sshCommand", configured_ssh_command(root))
     git(checkout, "fetch", "origin", "main")
     # This disposable checkout contains only the publisher's own generated edits.
     git(checkout, "reset", "--hard", "origin/main")
