@@ -45,9 +45,6 @@ code, pre { font-family: var(--mono); }
 }
 .skip-link { position: fixed; z-index: 20; top: -70px; left: 16px; padding: 10px 16px; background: var(--ink); color: #fff; border-radius: 8px; }
 .skip-link:focus { top: 10px; }
-.site-header { display: flex; justify-content: flex-end; padding-top: 22px; }
-.site-star-link { display: inline-flex; align-items: center; gap: 8px; min-height: 38px; padding: 7px 14px; border: 1px solid var(--ink); border-radius: 999px; background: var(--ink); color: #fff; font-size: 13px; font-weight: 600; line-height: 1.2; }
-.site-star-link:hover { border-color: var(--blue); background: var(--blue); color: #fff; }
 
 .hero { padding-block: 94px 58px; text-align: center; }
 .hero-wordmark { width: 290px; max-width: 72%; margin: 0 auto 32px; }
@@ -174,8 +171,6 @@ figcaption { margin-top: 18px; font-size: 13px; line-height: 1.7; color: var(--m
 
 @media (max-width: 680px) {
   .container { width: calc(100% - 40px); }
-  .site-header { padding-top: 16px; }
-  .site-star-link { min-height: 36px; padding-inline: 12px; font-size: 12px; }
   .hero { padding-block: 58px 38px; }
   .hero-wordmark { width: 225px; margin-bottom: 26px; }
   .hero h1 { font-size: clamp(33px, 6.1vw, 41px); line-height: 1.16; letter-spacing: -.04em; }
