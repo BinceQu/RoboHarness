@@ -50,6 +50,48 @@ When replacing an image, commit the PNG alongside its source PDF and update the
 image hash in the asset manifest. After publication, verify the repository,
 README images and project page without signing in.
 
+## Recorded rollouts and agent traces
+
+The task explorer places a head-camera video below the task selector, with the
+historical per-instance Q-score chart on the right. `website/rollouts.json` selects
+the highest final Q among the available scored recordings for each task; ties
+use the shortest recording. It records candidate scores, the selected evaluator
+result, video and trace hashes, and any missing tail. The builder checks the
+selection, hashes and trace timeline before copying these assets into the site.
+
+Recordings are available for task01, task02, task05, task07 and task08. Task06
+has only an interrupted recording and is explicitly unscored. Task00, task03
+and task09 have no usable head-camera recording. The recorded-run score in the
+video caption is independent of the historical scores in the chart.
+
+The native evaluation recorder combines wrist cameras on the left with a
+448 × 448 head-camera view on the right. The published clips retain that right
+view, the original 30 fps, full available duration and simulator timeline.
+They use H.264/yuv420p, CRF 26 and faststart, without audio or source metadata.
+Playback defaults to 4×, with 1×, 2× and 8× also selectable. Task02's recovered
+recording ends 6.2 simulator seconds before its evaluator result. Original files
+were preserved; every published video was fully decoded before publication.
+
+The reasoning panels display actual emitted agent messages and tool calls from
+the same selected run. Their timestamps use the recorder's wall-clock-to-frame
+map, floored to the last recorded frame, so inference gaps are omitted. Calls
+sharing a simulator frame are represented by the last call on that frame.
+The trace JSON contains source line references and the original transcript and
+frame-clock hashes. Private thinking blocks, prompts, raw tool responses and
+session metadata are not included. There are no invented messages or outcomes.
+
+Three views share the same player and synchronized trace: `?trace=below`
+(a card below the video), `?trace=beside` (the default, below the chart and beside
+the video), and `?trace=cards` (a short stream of cards below the video). Add
+`&task=task05#task-results` to link a particular task and view. On phones,
+reasoning stays below the video. Seeking or pausing immediately shows the
+corresponding full agent message. Reduced-motion preferences disable autoplay
+and the typing and card animations.
+
+Media and traces live in [`docs/assets/rollouts/`](assets/rollouts). The public
+build copies only those referenced by the recording manifest, alongside the
+paper figures. Raw local run directories are not part of the Pages artifact.
+
 ## Deployment
 
 The deployment job is skipped while the repository is private.

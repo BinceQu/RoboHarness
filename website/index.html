@@ -78,21 +78,55 @@
       </figure>
     </section>
 
-    <section class="container section archive-section" aria-labelledby="results-title">
+    <section class="container section archive-section" id="task-results" aria-labelledby="results-title">
       <div class="section-heading">
         <h2 id="results-title">Task results</h2>
         <p>Qwen3.8-Flash-Next · mean Q-score over five instances.</p>
       </div>
-      <div class="archive-explorer" id="archive-explorer" hidden>
+      <div class="reasoning-views" id="reasoning-views" role="group" aria-label="Reasoning layout" hidden>
+        <span>Reasoning view</span>
+        <div class="view-buttons">
+          <button type="button" data-view="below" aria-pressed="false">Below</button>
+          <button type="button" data-view="beside" aria-pressed="true">Beside</button>
+          <button type="button" data-view="cards" aria-pressed="false">Cards</button>
+        </div>
+      </div>
+      <div class="archive-explorer" id="archive-explorer" data-view="beside" hidden>
         <div class="explorer-details">
           <label for="task-select">Task</label>
           <select id="task-select">{{TASK_OPTIONS}}</select>
-          <div class="selected-metric"><span id="selected-mean">0.8667</span><span>Mean Q-score</span></div>
-          <a class="text-link" id="manifest-link" href="https://github.com/BinceQu/RoboHarness/blob/main/tasks/task01.json">Source data <span aria-hidden="true">↗</span></a>
+          <figure class="rollout-figure" id="rollout-figure" hidden>
+            <video id="rollout-video" controls autoplay muted loop playsinline preload="metadata" aria-describedby="rollout-caption">
+              Your browser does not support video playback.
+            </video>
+            <figcaption id="rollout-caption">
+              <div class="rollout-meta"><span id="rollout-label"></span><span id="rollout-score"></span></div>
+              <label class="playback-label"><span class="sr-only">Playback speed</span><select id="playback-speed" aria-label="Playback speed"><option value="1">1×</option><option value="2">2×</option><option value="4" selected>4×</option><option value="8">8×</option></select></label>
+            </figcaption>
+            <p class="rollout-note" id="rollout-note" hidden></p>
+            <p class="rollout-error" id="rollout-error" role="status" hidden>Video could not load. <a id="rollout-download" href="#">Open the video ↗</a></p>
+          </figure>
+          <div class="rollout-empty" id="rollout-empty" hidden><span aria-hidden="true">◷</span><p>Head-camera recording unavailable.</p></div>
+          <div class="trace-dock" id="trace-below">
+            <section class="trace-panel" id="trace-panel" aria-label="Recorded agent reasoning" hidden>
+              <div class="trace-heading"><span><i aria-hidden="true"></i>Agent reasoning</span><a id="trace-source" href="#" class="trace-source">Recorded trace ↗</a></div>
+              <div class="trace-history" id="trace-history" aria-hidden="true"></div>
+              <div class="trace-card" id="trace-card">
+                <div class="trace-card-heading"><span>Agent message</span><time id="trace-time">00:00</time></div>
+                <p class="trace-message" id="trace-message"></p>
+                <div class="trace-action"><span class="tool-chip" id="trace-tool" hidden></span><code id="trace-params"></code></div>
+              </div>
+            </section>
+          </div>
         </div>
         <div class="chart-wrap">
+          <div class="chart-summary">
+            <div class="selected-metric"><span id="selected-mean">0.8667</span><span>Archived mean Q-score</span></div>
+            <a class="text-link" id="manifest-link" href="https://github.com/BinceQu/RoboHarness/blob/main/tasks/task01.json">Source data <span aria-hidden="true">↗</span></a>
+          </div>
           <p class="chart-heading">Q-score by instance</p>
           <div id="score-chart" class="score-chart" role="img" aria-label="Archived scores for picking up trash"></div>
+          <div class="trace-dock" id="trace-beside"></div>
         </div>
       </div>
       <details class="disclosure results-details">
@@ -106,6 +140,7 @@
         </div>
         <div class="archive-notes">
           <p>BEHAVIOR Challenge 2025, with twice the challenge step budget. Task04 has no supplied archive. For task00 and task05, directory reports differ from some preserved evaluator JSON; the directory values shown here remain the reference.</p>
+          <p>Videos show the highest-scoring available recorded run for each task. Recorded-run Q-scores and the historical five-instance results are reported separately. Easter eggs has an interrupted recording with no final score. Agent messages and tool calls follow the recorded simulator timeline; model inference time is omitted.</p>
           <a class="text-link" href="https://github.com/BinceQu/RoboHarness/blob/main/docs/provenance.md">Evaluation details <span aria-hidden="true">↗</span></a>
         </div>
       </details>
