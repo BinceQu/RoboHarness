@@ -177,9 +177,12 @@ def main():
         task.update({"title": instruction["title"], "instruction": instruction["instruction"],
                      "instructionUrl": instruction["officialPage"]})
         if task["id"] in recordings:
-            task["rollout"] = {key: recordings[task["id"]][key] for key in (
+            recording = recordings[task["id"]]
+            task["rollout"] = {key: recording[key] for key in (
                 "run", "instance", "q", "label", "video", "poster", "duration",
                 "defaultPlaybackRate", "missingTailSeconds")}
+            for asset in ("video", "poster"):
+                task["rollout"][asset] += "?v=" + recording[asset + "Sha256"][:12]
     replacements = {
         "{{ARCHIVE_ROWS}}": archive_rows(tasks), "{{TASK_CARDS}}": task_cards(tasks),
         "{{STYLE_VERSION}}": hashlib.sha256((source / "styles.css").read_bytes()).hexdigest()[:12],
