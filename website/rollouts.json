@@ -1,6 +1,99 @@
 {
   "version": 1,
   "recordings": {
+    "task00": {
+      "run": "task00-20261012-153655-03455c3a",
+      "instance": 307,
+      "q": 1.0,
+      "label": "Head camera",
+      "model": "Qwen3.8-Flash-Next-NVFP4",
+      "video": "assets/rollouts/task00-head.mp4",
+      "poster": "assets/rollouts/task00-poster.jpg",
+      "duration": 31.2,
+      "width": 720,
+      "height": 720,
+      "frames": 936,
+      "defaultPlaybackRate": 4,
+      "videoSha256": "0ab7a1613f5923c8f91f9c56b7838616526989c0a5372dca524dc06476ae747c",
+      "posterSha256": "154aa9706bb5a82590a71f6a3a0fb792513aa37224953a44a80cf9753aab91b2",
+      "headRecordingSha256": "6f8de63079af701308c2cbd3e7bd16730de4a92beafcb9c05ac4b9ae1b14aebb",
+      "evaluatorResultSha256": "86033a6d1949ce873d597fcf61b72021faca9998b6d660d4a6182a4ea292d061",
+      "crop": "None; native 720x720 head camera.",
+      "encoding": "H.264, yuv420p, original stream remuxed without re-encoding, 30 fps and original timeline, no audio, faststart",
+      "selection": "Highest final Q among scored available recordings; shortest duration breaks ties.",
+      "candidates": [
+        {
+          "run": "task00-20261011-232514-652de357",
+          "instance": 301,
+          "q": 1.0,
+          "steps": 972
+        },
+        {
+          "run": "task00-20261012-153655-03455c3a",
+          "instance": 302,
+          "q": 0.0,
+          "steps": 4300
+        },
+        {
+          "run": "task00-20261012-153655-03455c3a",
+          "instance": 303,
+          "q": 0.0,
+          "steps": 2293
+        },
+        {
+          "run": "task00-20261011-232514-652de357",
+          "instance": 304,
+          "q": 0.0,
+          "steps": 4300
+        },
+        {
+          "run": "task00-20261012-153655-03455c3a",
+          "instance": 305,
+          "q": 0.0,
+          "steps": 1306
+        },
+        {
+          "run": "task00-20261011-232514-652de357",
+          "instance": 306,
+          "q": 0.0,
+          "steps": 4300
+        },
+        {
+          "run": "task00-20261012-153655-03455c3a",
+          "instance": 307,
+          "q": 1.0,
+          "steps": 936
+        },
+        {
+          "run": "task00-20261011-232514-652de357",
+          "instance": 308,
+          "q": 1.0,
+          "steps": 3612
+        },
+        {
+          "run": "task00-20261012-153655-03455c3a",
+          "instance": 309,
+          "q": 0.0,
+          "steps": 4300
+        },
+        {
+          "run": "task00-20261011-232514-652de357",
+          "instance": 310,
+          "q": 0.0,
+          "steps": 4300
+        }
+      ],
+      "evaluatorResult": {
+        "task": "turning_on_radio",
+        "instance_id": 307,
+        "q_score": {
+          "final": 1.0
+        },
+        "steps": 936,
+        "success": true
+      },
+      "missingTailSeconds": 0.0
+    },
     "task01": {
       "run": "t01-15061-0930011643-fe2bf3730c13",
       "instance": 310,
