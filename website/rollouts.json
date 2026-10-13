@@ -106,12 +106,12 @@
       "height": 448,
       "frames": 9024,
       "defaultPlaybackRate": 4,
-      "videoSha256": "81dc7f4ade6615606133e4f6f1470cf27a1374aa2e30bf3b04f94cf71286d4a2",
-      "posterSha256": "837fdaecedd6de855b8b70cd930cc99b208bd982a3d17e75fed471bf14de48bc",
+      "videoSha256": "9fd35aa9f23bf8a731c9e7c4201a2dbe6f267bc7a27d05326c11ee8c1165752e",
+      "posterSha256": "e5c4f15443a47b31a66a38b624af4f888cbf4a1dd99aeed165dbd5b6c6012dce",
       "nativeRecordingSha256": "18a079cf1bb3c6cd1e768db4014eab5bdd6ff8a0cc97112f6c466a11ae900624",
       "headRecordingSha256": "85668146b24af74c09ccf2b7c6589f9d12405401baeb98bee004d218d4ddea4f",
       "crop": "448:448:224:0 from native 672x448 wrist/head recording",
-      "encoding": "H.264, yuv420p, CRF 26, original 30 fps and timeline, no audio, faststart",
+      "encoding": "H.264, yuv420p, CRF 16, slow preset, encoded directly from the original recording, native resolution and 30 fps, no audio, faststart",
       "selection": "Highest final Q among scored available recordings; shortest duration breaks ties.",
       "candidates": [
         {
@@ -148,12 +148,12 @@
       "height": 448,
       "frames": 27384,
       "defaultPlaybackRate": 4,
-      "videoSha256": "627813c69b1b609d08c7d52609a1ce8d64864e4fa6e07863ec5a35faf1d01c36",
-      "posterSha256": "87bf6e66284383d3bf4e270f2e2ed128833de82b0583ad06994c0b8b13709999",
+      "videoSha256": "e34a8ad46e2c2aaf209385c1e4ca8d12d98ad16f170189b6fd6445683f8b6b18",
+      "posterSha256": "9a3bdf3818ad759b4d3461bdb12d2fc933608fb0f635c12cee7f8eb2d7a48cbb",
       "nativeRecordingSha256": "073ec53d52ce64326548a8e0b21b736bbad731b86356fc27f321334d36c9cfa5",
       "headRecordingSha256": "84ef873ddab70ab746d4089ddc15d4ce6166ab9a54440c5dc6c7348b2afeaf3b",
       "crop": "448:448:224:0 from native 672x448 wrist/head recording",
-      "encoding": "H.264, yuv420p, CRF 26, original 30 fps and timeline, no audio, faststart",
+      "encoding": "H.264, yuv420p, CRF 16, slow preset, encoded directly from the original recording, native resolution and 30 fps, no audio, faststart",
       "selection": "Highest final Q among scored available recordings; shortest duration breaks ties.",
       "candidates": [
         {
@@ -193,6 +193,57 @@
       },
       "missingTailSeconds": 6.233
     },
+    "task03": {
+      "run": "task03-20261011-233250-ee035d6f",
+      "instance": 301,
+      "q": 0.2857142857142857,
+      "label": "Head camera",
+      "model": "Qwen3.8-Flash-Next-NVFP4",
+      "video": "assets/rollouts/task03-head.mp4",
+      "poster": "assets/rollouts/task03-poster.jpg",
+      "duration": 509.1,
+      "width": 720,
+      "height": 720,
+      "frames": 15273,
+      "defaultPlaybackRate": 4,
+      "headRecordingSha256": "f97cdc49f18ebb813396a4750900187600e2b2197cef24223a2c4e59d0d9efce",
+      "evaluatorResultSha256": "19cdb346b1d17678024af7ec722632aa0d4b9960abf06f0fcc446c2b8249839e",
+      "crop": "None; native 720x720 head camera.",
+      "selection": "Highest final Q among scored available recordings; shortest duration breaks ties.",
+      "candidates": [
+        {
+          "run": "task03-20261011-233250-ee035d6f",
+          "instance": 301,
+          "q": 0.2857142857142857,
+          "steps": 15274
+        },
+        {
+          "run": "task03-20261011-233250-ee035d6f",
+          "instance": 304,
+          "q": 0.14285714285714285,
+          "steps": 27393
+        },
+        {
+          "run": "task03-20261011-233250-ee035d6f",
+          "instance": 306,
+          "q": 0.14285714285714285,
+          "steps": 12890
+        }
+      ],
+      "evaluatorResult": {
+        "task": "cleaning_up_plates_and_food",
+        "instance_id": 301,
+        "q_score": {
+          "final": 0.2857142857142857
+        },
+        "steps": 15274,
+        "success": false
+      },
+      "missingTailSeconds": 0.0,
+      "videoSha256": "a7dd0c09d6f6b46d15cfba34376e445b6b2cdfdad6d985ab5ef11a98e10b7bd8",
+      "posterSha256": "6b00ebbf3b696c8caa5e6a0d0d71110e35859e86e1d03cbfb0dfe40490ad85b5",
+      "encoding": "H.264, yuv420p, CRF 18, slow preset, encoded directly from the original recording, native resolution and 30 fps, no audio, faststart"
+    },
     "task05": {
       "run": "t05-15065-1002183453-eddfd30d4cf1",
       "instance": 304,
@@ -205,12 +256,12 @@
       "height": 448,
       "frames": 15597,
       "defaultPlaybackRate": 4,
-      "videoSha256": "de96b912fc39dc5368c5e700ba8b5754a874a060e305ddea9f95ab1238d5b8f0",
-      "posterSha256": "068384664bf3d003776c4e73188522f5786ab673e0d6c32db607256c4e40e0bb",
+      "videoSha256": "b3b4c47a4dd92c323aae98c41c3c6942418f0e22c69f6c39020f924b6babd19d",
+      "posterSha256": "91fe9cb3ee029ced46502bee85090e4ebcdae15c5786bc81029e636b7c99acbb",
       "nativeRecordingSha256": "99cbdd6a5c77da96a061eeea96509dc14c692297371266f1dfe68bf4663acb71",
       "headRecordingSha256": "4d672d6608b3b358ad36aec5b9f9b26713f7a0f3622c6b6cf41fb0be64d8ac0b",
       "crop": "448:448:224:0 from native 672x448 wrist/head recording",
-      "encoding": "H.264, yuv420p, CRF 26, original 30 fps and timeline, no audio, faststart",
+      "encoding": "H.264, yuv420p, CRF 16, slow preset, encoded directly from the original recording, native resolution and 30 fps, no audio, faststart",
       "selection": "Highest final Q among scored available recordings; shortest duration breaks ties.",
       "candidates": [
         {
@@ -257,12 +308,12 @@
       "height": 448,
       "frames": 6961,
       "defaultPlaybackRate": 4,
-      "videoSha256": "2d188ca9048bd9619817ac19c7ce9a55fbb49c0f2873c2408c55e14732e3b6c9",
-      "posterSha256": "5a99f7441eae8a950a2b029fb340479d8f8ee061ea66156edefc2b42248813de",
+      "videoSha256": "fe0810fa493d7393bef959e9fd5d2e9e3004819da9ab167d5b4b8bf9412f5eba",
+      "posterSha256": "b5353df84bb40afbad9f2de3ef6fedadc6429c696998ef71625593c3c0c8055e",
       "nativeRecordingSha256": "2eae7658215e7e27e88e64860b9f21fa21155cbabf1c59a246fcf8689d2952ca",
       "headRecordingSha256": "eec6bf0cca8433474c042d816a5dd71df5da80b6219373011b4f1ba044757de8",
       "crop": "448:448:224:0 from native 672x448 wrist/head recording",
-      "encoding": "H.264, yuv420p, CRF 26, original 30 fps and timeline, no audio, faststart",
+      "encoding": "H.264, yuv420p, CRF 16, slow preset, encoded directly from the original recording, native resolution and 30 fps, no audio, faststart",
       "selection": "Only available head recording; interrupted, no final Q.",
       "candidates": [
         {
@@ -286,12 +337,12 @@
       "height": 448,
       "frames": 37738,
       "defaultPlaybackRate": 4,
-      "videoSha256": "0342f7e4034fca1f103349e732868ea967a655f287adac3d3955c5d3b9604657",
-      "posterSha256": "576734b61dfb71ae47f853a03f6787f2d0c3bd14226c64e3c415725362447f92",
+      "videoSha256": "4c03d4fb46747e7b9d1e93edc6892fd2e8958ac09b5b3bee3e4800fd474fae09",
+      "posterSha256": "bbc4d9298524611db42d57bb0db02c3eb09674e457988b141799dbc98022e9fb",
       "nativeRecordingSha256": "1f6401c527094cb240f812ddc81ef672f0d9877db1dcda7be650b08416a87a35",
       "headRecordingSha256": "0942d58c9bd437ae6f07823d1561c9cbf9eafb0e0d1baff006d900fb0dfa6ad4",
       "crop": "448:448:224:0 from native 672x448 wrist/head recording",
-      "encoding": "H.264, yuv420p, CRF 26, original 30 fps and timeline, no audio, faststart",
+      "encoding": "H.264, yuv420p, CRF 16, slow preset, encoded directly from the original recording, native resolution and 30 fps, no audio, faststart",
       "selection": "Highest final Q among scored available recordings; shortest duration breaks ties.",
       "candidates": [
         {
@@ -337,23 +388,21 @@
       "missingTailSeconds": 0.0
     },
     "task08": {
-      "run": "t08-15068-1001001651-725ca40a06b1",
-      "instance": 304,
-      "q": 0.25,
+      "run": "task08-20261011-234028-3e997e34",
+      "instance": 301,
+      "q": 0.5,
       "label": "Head camera",
+      "model": "Qwen3.8-Flash-Next-NVFP4",
       "video": "assets/rollouts/task08-head.mp4",
       "poster": "assets/rollouts/task08-poster.jpg",
-      "duration": 328.166667,
-      "width": 448,
-      "height": 448,
-      "frames": 9845,
+      "duration": 397.8666666666667,
+      "width": 720,
+      "height": 720,
+      "frames": 11936,
       "defaultPlaybackRate": 4,
-      "videoSha256": "d8d221ef94d128e03406a09c79459d240938560e2d25b14957b47a2ecc30dea4",
-      "posterSha256": "53af5a71c7d38f58db40e596517ed13b7adb23de9bb7bd0678875ccf38700481",
-      "nativeRecordingSha256": "7eca0cb0b7b3c9d2c161f08f9d691e9aad88f818edd2f882adf1995f509318a7",
-      "headRecordingSha256": "587b8504a28b3727b0a24decbcd88d33c742752ee2cb535c951674869be771ae",
-      "crop": "448:448:224:0 from native 672x448 wrist/head recording",
-      "encoding": "H.264, yuv420p, CRF 26, original 30 fps and timeline, no audio, faststart",
+      "headRecordingSha256": "ab6c769fd1819068e01da8722776467829fb52eddd4e74dadf5d01d90785acba",
+      "evaluatorResultSha256": "ef7d65a597c7fc01ce445ef156dba7fe895be6e244fe2c5fdd474e901d267e5d",
+      "crop": "None; native 720x720 head camera.",
       "selection": "Highest final Q among scored available recordings; shortest duration breaks ties.",
       "candidates": [
         {
@@ -385,18 +434,39 @@
           "run": "t08-15068-1007094442-14aa35538521",
           "instance": 304,
           "q": 0.25
+        },
+        {
+          "run": "task08-20261011-234028-3e997e34",
+          "instance": 301,
+          "q": 0.5,
+          "steps": 11937
+        },
+        {
+          "run": "task08-20261011-234028-3e997e34",
+          "instance": 304,
+          "q": 0.0,
+          "steps": 3455
+        },
+        {
+          "run": "task08-20261011-234028-3e997e34",
+          "instance": 306,
+          "q": 0.25,
+          "steps": 17887
         }
       ],
       "evaluatorResult": {
         "task": "rearranging_kitchen_furniture",
-        "instance_id": 304,
+        "instance_id": 301,
         "q_score": {
-          "final": 0.25
+          "final": 0.5
         },
-        "steps": 9845,
+        "steps": 11937,
         "success": false
       },
-      "missingTailSeconds": 0.0
+      "missingTailSeconds": 0.0,
+      "videoSha256": "713fa485b5bc9753c117a39e58cd1728286da259dd248adaf77e91ebdaca06fc",
+      "posterSha256": "d1ae148c031cfd6c172f2039bc9dd30c69682d16c1b66d9510f82d739eb10be5",
+      "encoding": "H.264, yuv420p, CRF 18, slow preset, encoded directly from the original recording, native resolution and 30 fps, no audio, faststart"
     }
   }
 }

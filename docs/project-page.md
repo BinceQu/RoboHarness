@@ -88,15 +88,23 @@ use the shortest recording. It records candidate scores, the selected evaluator
 result, video and poster hashes, and any missing tail. The builder checks the
 selection and hashes before copying these assets into the site.
 
-Recordings are available for task01, task02, task05, task07 and task08. Task06
-has only an interrupted recording and is explicitly unscored. Task00, task03
-and task09 have no usable head-camera recording. The recorded-run score in the
+Recordings are available for task00, task01, task02, task03, task05, task07 and
+task08. Task06 has only an interrupted recording and is explicitly unscored.
+Task09 has no usable head-camera recording. The recorded-run score in the
 video caption is independent of the historical scores in the chart.
 
-The native evaluation recorder combines wrist cameras on the left with a
-448 × 448 head-camera view on the right. The published clips retain that right
-view, the original 30 fps, full available duration and simulator timeline.
-They use H.264/yuv420p, CRF 26 and faststart, without audio or source metadata.
+Task00, task03 and task08 use native 720 × 720 head-camera recordings.
+For task01, task02, task05, task06 and task07, the saved source combines wrist
+cameras on the left with a 448 × 448 head view on the right. Those clips are
+cropped directly from the original recording at their native resolution.
+Upscaling cannot recover the details absent from these older sources.
+
+All clips preserve the original 30 fps, full available duration and simulator
+timeline. H.264/yuv420p and faststart support browser playback. Where encoding
+is needed, it starts from the original recording using a slow preset and a
+high quality setting recorded in the manifest. The task00 stream is remuxed
+without re-encoding. Video and poster URLs include content hashes so updated
+assets replace cached versions.
 Playback defaults to 4×; the speed button cycles through 1×, 2×, 4× and 8×.
 Reduced-motion preferences disable autoplay and the card transition.
 Task02's recovered
@@ -133,7 +141,7 @@ cannot restore it; see [GitHub's account-state guidance](https://docs.github.com
 ## Offline copy and laptop sync
 
 Package the complete page into a standalone folder, including the Method film,
-six published head-camera videos, images, original figure PDFs, scores and instructions:
+eight published head-camera videos, images, original figure PDFs, scores and instructions:
 
 ```bash
 python3 scripts/package_site.py --output ~/roboharness_homepage --zip ~/roboharness_homepage.zip
