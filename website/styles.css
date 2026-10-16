@@ -175,7 +175,8 @@ figcaption { margin-top: 18px; font-size: 13px; line-height: 1.7; color: var(--m
   .hero-wordmark { width: 225px; margin-bottom: 26px; }
   .hero h1 { font-size: clamp(33px, 6.1vw, 41px); line-height: 1.16; letter-spacing: -.04em; }
   .hero-description { max-width: 340px; margin: 20px auto 0; font-size: 16px; }
-  .hero-links { margin-top: 24px; }
+  .hero-links { gap: 8px; margin-top: 24px; }
+  .hero-links .button { padding-inline: 12px; }
   .section { padding-top: 64px; }
   .section-heading { margin-bottom: 28px; }
   .section-heading h2 { font-size: 30px; }
