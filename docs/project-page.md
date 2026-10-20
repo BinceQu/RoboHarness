@@ -56,14 +56,18 @@ README images and project page without signing in.
 
 The page order is Abstract → Method → Task results → Generalization → Get started.
 The Method section contains only its heading and the full promotional video.
-`website/method-video.json` records its source directory and the checked-in
-published snapshot. It began with `roboharness_promo_v5.mp4`; the selected source
+`website/method-video.json` records its source directory and the published
+snapshot. It began with `roboharness_promo_v5.mp4`; the selected source
 file is recorded in the manifest and preserved without re-encoding.
-The build validates the video and poster hashes, copies the
-assets under `assets/method/`, and includes their hashes in the playback URLs.
+Videos are not stored in git: they are hosted in the
+[RoboHarness-assets](https://huggingface.co/datasets/BinceQu/RoboHarness-assets)
+dataset and pinned by `assets.lock.json` (dataset revision and SHA-256).
+The build checks that the manifest and lock hashes agree, links the video to
+its pinned dataset URL, and copies the poster under `assets/method/`.
 
-Use `python3 scripts/method_video.py` to refresh the checked-in snapshot from
-the source directory. `build_site.py --latest-method` and the offline packager
+Use `python3 scripts/method_video.py` to refresh the snapshot from the source
+directory; it uploads the video to the dataset (requires `huggingface_hub` and an
+`HF_TOKEN` with write access) and updates the lock entry. `build_site.py --latest-method` and the offline packager
 select the highest numbered completed `roboharness_promo_vN.mp4`. A newly written
 file must settle and pass full decoding (or have a matching successful validation
 report); an unfinished export leaves the existing offline package available.
@@ -86,7 +90,7 @@ to link to a specific task.
 the highest final Q among the available scored recordings for each task; ties
 use the shortest recording. It records candidate scores, the selected evaluator
 result, video and poster hashes, and any missing tail. The builder checks the
-selection and hashes before copying these assets into the site.
+selection, the poster hashes and the locked video hashes before publishing.
 
 Recordings are available for task00, task01, task02, task03, task05, task07 and
 task08. Task06 has only an interrupted recording and is explicitly unscored.
@@ -111,9 +115,12 @@ Task02's recovered
 recording ends 6.2 simulator seconds before its evaluator result. Original files
 were preserved; every published video was fully decoded before publication.
 
-Videos and posters live in [`docs/assets/rollouts/`](assets/rollouts). The public
-build copies only those referenced by the recording manifest, alongside the
-paper figures. Raw agent traces and standalone reasoning exports are kept locally
+Posters live in [`docs/assets/rollouts/`](assets/rollouts); the videos are in the
+asset dataset under `v1/docs/assets/rollouts/`, and
+`python3 scripts/fetch_assets.py --group media` restores them to their original
+paths. The Pages build (`--media remote`) links each video to its pinned dataset
+URL and copies only the referenced posters, alongside the paper figures; it first
+checks that every locked video is reachable with the expected size. Raw agent traces and standalone reasoning exports are kept locally
 and are excluded from the Pages artifact. Rebuilding an existing output directory also
 removes trace JSON exported by earlier versions of the page.
 
@@ -168,7 +175,10 @@ The 12023 user service `roboharness-homepage-publisher.service` checks every
 30 seconds and refreshes the folder and ZIP. It also watches the Method export
 directory and publishes new completed versions to Pages. Publication uses a
 dedicated generated checkout under `.local/method-publisher/`; it fetches current
-`main`, commits only the Method video, poster and snapshot manifest, and pushes
-that commit. It never stages files from the working repository. Failed publication
+`main`, uploads the Method video to the asset dataset, commits only the poster,
+snapshot manifest and `assets.lock.json`, and pushes that commit. The offline
+package fetches the locked videos before building with `--media local`.
+The unit reads `HF_TOKEN` and any HTTPS proxy from
+`~/.config/roboharness/publisher.env`. It never stages files from the working repository. Failed publication
 retries on the next check while the updated offline package remains available.
 Its unit is included in `scripts/` and enables `package_site.py --publish-method`.

@@ -36,6 +36,8 @@ jobs:
     steps:
       - name: Check out project
         uses: actions/checkout@v6
+      - name: Check that the linked videos are hosted
+        run: python3 scripts/fetch_assets.py --check-remote --group media
       - name: Build static page from archived manifests
         run: python3 scripts/build_site.py
       - name: Configure GitHub Pages

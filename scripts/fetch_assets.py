@@ -88,6 +88,31 @@ def fetch_groups(groups, root=ROOT, force=False):
     return len(rows), downloaded
 
 
+def remote_size(data, row):
+    """Return the hosted size from a one-byte range request, without downloading the file."""
+    request = urllib.request.Request(url(data, row), headers={"Range": "bytes=0-0"})
+    for attempt in range(ATTEMPTS):
+        try:
+            with urllib.request.urlopen(request, timeout=60) as response:
+                content_range = response.headers.get("Content-Range", "")
+                if response.status != 206 or "/" not in content_range:
+                    raise ValueError(f'No range support for {row["path"]}: HTTP {response.status}')
+                return int(content_range.rsplit("/", 1)[1])
+        except OSError:
+            if attempt + 1 == ATTEMPTS:
+                raise
+            time.sleep(2 ** attempt)
+
+
+def check_remote(groups, root=ROOT):
+    data = lock(root)
+    rows = [row for row in data["files"] if row["group"] in groups]
+    wrong = [row["path"] for row in rows if remote_size(data, row) != row["bytes"]]
+    if wrong:
+        raise ValueError("Hosted assets differ from the lock: " + ", ".join(wrong))
+    return len(rows)
+
+
 def upload(root, source, path, group, remote, message):
     """Upload one file to the asset repository and pin it in the lock."""
     try:
@@ -115,8 +140,13 @@ def main():
                         help="asset group to fetch (repeatable; default: reference)")
     parser.add_argument("--force", action="store_true", help="download even if a verified copy exists")
     parser.add_argument("--list", action="store_true", help="print the selected files and their URLs")
+    parser.add_argument("--check-remote", action="store_true",
+                        help="check that each selected file is hosted with its locked size, without downloading")
     args = parser.parse_args()
     selected = set(groups) if "all" in (args.group or []) else set(args.group or ["reference"])
+    if args.check_remote:
+        print(f"{check_remote(selected)} hosted assets match the lock for: {', '.join(sorted(selected))}", file=sys.stderr)
+        return
     if args.list:
         for row in data["files"]:
             if row["group"] in selected:
