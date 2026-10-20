@@ -14,6 +14,7 @@ import tempfile
 import time
 import zipfile
 
+import fetch_assets
 import method_video
 
 
@@ -27,6 +28,7 @@ def digest(path):
 
 def source_fingerprint():
     paths = {Path(__file__), ROOT / "scripts/build_site.py", ROOT / "scripts/method_video.py",
+             ROOT / "scripts/fetch_assets.py", ROOT / fetch_assets.LOCK,
              ROOT / "LICENSE", ROOT / "THIRD_PARTY_NOTICES.md"}
     for directory in ("website", "tasks", "prompt", "docs/assets", "scripts/offline"):
         paths.update(path for path in (ROOT / directory).rglob("*") if path.is_file())
@@ -49,6 +51,8 @@ def package(output, archive=None):
 
 
 def _package(output, archive=None):
+    # The offline copy embeds the videos, which are hosted outside git.
+    fetch_assets.fetch_groups({"media"})
     fingerprint = source_fingerprint()
     output.mkdir(parents=True, exist_ok=True)
     manifest_path = output / "offline-manifest.json"
@@ -56,7 +60,7 @@ def _package(output, archive=None):
         raise ValueError(f"Refusing to overwrite a nonempty folder without an offline manifest: {output}")
     with tempfile.TemporaryDirectory(prefix=".roboharness-package-", dir=output.parent) as temporary:
         staging = Path(temporary) / "site"
-        subprocess.run([sys.executable, str(ROOT / "scripts/build_site.py"), "--output", str(staging), "--latest-method"], check=True)
+        subprocess.run([sys.executable, str(ROOT / "scripts/build_site.py"), "--output", str(staging), "--latest-method", "--media", "local"], check=True)
         for path in (ROOT / "scripts/offline").iterdir():
             if path.is_file():
                 target = staging / path.name

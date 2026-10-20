@@ -27,3 +27,8 @@ relay_auth.json
 .claude-home/
 /data__*/
 /_site/
+
+# Hosted on Hugging Face and pinned in assets.lock.json; fetch with scripts/fetch_assets.py.
+*.mp4
+/reference_results/
+/validation_results/

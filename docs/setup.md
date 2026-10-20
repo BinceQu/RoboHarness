@@ -35,7 +35,7 @@ The interface pins `opencv-python-headless==4.10.0.84`. Its imported OpenCV
 binary matches the reference interface environment. Multiple OpenCV wheel
 variants share the `cv2` namespace, so installed package metadata alone does
 not identify the binary Python will load. Use a separate interface environment
-with only this variant; see the [runtime dependency audit](../validation_results/opencv-runtime-20261001/README.md).
+with only this variant; see the [runtime dependency audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/opencv-runtime-20261001/README.md).
 
 Evaluator setup fixes LeRobot to commit
 `436812bd8ee39b768c645c248c91f1330834e687`, recorded in the reference environment
@@ -58,7 +58,7 @@ with the evaluation dependencies, including Pillow and packaging. `pip check`
 therefore does not pass for this combined environment; the validation record
 distinguishes these declarations from the imports and protocol behavior
 actually checked. The final versions follow the working reference evaluator.
-See the [runtime pin audit](../validation_results/evaluator-runtime-pins-20261001/README.md)
+See the [runtime pin audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/evaluator-runtime-pins-20261001/README.md)
 for the exact remaining declarations and the checks performed.
 
 The pinned upstream installer asks for its license agreements. Its flags can
@@ -126,7 +126,7 @@ server disables authentication, use `local-no-auth`. Keep keys in the environmen
 The `Qwen3-VL` label in v2 tool descriptions names the relative image-coordinate
 convention: `u` and `v` range from 0 to 1000. The configured main agent supplies
 those coordinates to the local RGB-D grasp planner. The
-[tool-routing observation](../validation_results/model-service-provenance-20261003/README.md)
+[tool-routing observation](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/model-service-provenance-20261003/README.md)
 records the active model configuration and the v2 catalog used for validation.
 
 ### Chat Completions services

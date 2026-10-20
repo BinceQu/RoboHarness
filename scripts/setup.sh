@@ -12,6 +12,8 @@ if [[ "$mode" != all && "$mode" != agent ]]; then
 fi
 if [[ $# -gt 0 ]]; then shift; fi
 git submodule update --init --recursive
+# Reference results are hosted outside git; the runner verifies their hashes.
+python3 scripts/fetch_assets.py --group reference
 "$PYTHON_BIN" -m venv harness/claude_code/.venv
 harness/claude_code/.venv/bin/python -m pip install -r requirements/agent.txt -e harness/claude_code -e harness/codex
 if [[ "$mode" == agent ]]; then exit 0; fi

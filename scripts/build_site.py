@@ -8,6 +8,7 @@ import json
 import shutil
 from pathlib import Path
 
+import fetch_assets
 import method_video
 
 
@@ -16,12 +17,25 @@ REPO = "https://github.com/BinceQu/RoboHarness"
 INSTANCES = [301, 304, 306, 308, 310]
 
 
-def recorded_rollouts():
+def media_source(relative, expected, media):
+    """Return the page URL of a video hosted outside git, checking its locked hash."""
+    lock = fetch_assets.lock(ROOT)
+    row = fetch_assets.entry(lock, "docs/" + relative.as_posix())
+    if row["sha256"] != expected:
+        raise ValueError(f"Locked asset differs from the page manifest: {relative}")
+    if media == "remote":
+        return fetch_assets.url(lock, row)
+    if not fetch_assets.verified(ROOT / row["path"], row):
+        raise ValueError(f"Missing or changed local video; run scripts/fetch_assets.py --group media: {relative}")
+    return f"{relative.as_posix()}?v={expected[:12]}"
+
+
+def recorded_rollouts(media):
     manifest = json.loads((ROOT / "website/rollouts.json").read_text())
     if manifest["version"] != 1:
         raise ValueError("Unsupported recording manifest")
     recordings = manifest["recordings"]
-    assets = set()
+    assets, sources = set(), {}
     for task_id, recording in recordings.items():
         if recording["q"] is not None:
             candidates = [row["q"] for row in recording["candidates"] if row["q"] is not None]
@@ -37,10 +51,14 @@ def recorded_rollouts():
             path = (ROOT / "docs" / relative).resolve()
             if not path.is_relative_to(ROOT / "docs/assets/rollouts"):
                 raise ValueError(f"Invalid recording asset path: {relative}")
-            if hashlib.sha256(path.read_bytes()).hexdigest() != recording[key + "Sha256"]:
+            if key == "video":
+                sources[task_id] = media_source(relative, recording["videoSha256"], media)
+                if media == "remote":
+                    continue
+            elif hashlib.sha256(path.read_bytes()).hexdigest() != recording[key + "Sha256"]:
                 raise ValueError(f"Recording asset hash mismatch: {relative}")
             assets.add(relative)
-    return recordings, assets
+    return recordings, assets, sources
 
 
 def official_instructions():
@@ -155,7 +173,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=ROOT / "_site")
     parser.add_argument("--latest-method", action="store_true", help="Use the latest completed method export when its local directory is available")
+    parser.add_argument("--media", choices=("remote", "local"), default="remote",
+                        help="Link videos to the pinned asset repository, or copy verified local copies (offline package)")
     args = parser.parse_args()
+    if args.latest_method and args.media != "local":
+        parser.error("--latest-method uses a local export; add --media local")
     output = args.output.resolve()
     # Do not overwrite source directories, including an accidentally selected root.
     if output == ROOT or ROOT.is_relative_to(output) or any(
@@ -163,11 +185,15 @@ def main():
     ):
         parser.error("choose a separate generated-output directory")
     source = ROOT / "website"
-    prepared_method = method_video.latest(ROOT) if args.latest_method else method_video.snapshot(ROOT)
+    prepared_method = method_video.latest(ROOT) if args.latest_method else method_video.snapshot(ROOT, args.media)
     method = prepared_method[0]
+    if prepared_method[1] is None:
+        method_source = media_source(method_video.VIDEO, method["videoSha256"], "remote")
+    else:
+        method_source = f'{method_video.VIDEO.as_posix()}?v={method["videoSha256"][:12]}'
     tasks = archive_data()
     instructions = official_instructions()
-    recordings, media_assets = recorded_rollouts()
+    recordings, media_assets, video_sources = recorded_rollouts(args.media)
     if not set(recordings).issubset(task["id"] for task in tasks):
         raise ValueError("Recording manifest refers to an unknown task")
     for task in tasks:
@@ -181,13 +207,13 @@ def main():
             task["rollout"] = {key: recording[key] for key in (
                 "run", "instance", "q", "label", "video", "poster", "duration",
                 "defaultPlaybackRate", "missingTailSeconds")}
-            for asset in ("video", "poster"):
-                task["rollout"][asset] += "?v=" + recording[asset + "Sha256"][:12]
+            task["rollout"]["video"] = video_sources[task["id"]]
+            task["rollout"]["poster"] += "?v=" + recording["posterSha256"][:12]
     replacements = {
         "{{ARCHIVE_ROWS}}": archive_rows(tasks), "{{TASK_CARDS}}": task_cards(tasks),
         "{{STYLE_VERSION}}": hashlib.sha256((source / "styles.css").read_bytes()).hexdigest()[:12],
         "{{SCRIPT_VERSION}}": hashlib.sha256((source / "app.js").read_bytes()).hexdigest()[:12],
-        "{{METHOD_VERSION}}": method["videoSha256"][:12],
+        "{{METHOD_VIDEO}}": html.escape(method_source),
         "{{METHOD_POSTER_VERSION}}": method["posterSha256"][:12],
         "{{METHOD_WIDTH}}": str(method["width"]), "{{METHOD_HEIGHT}}": str(method["height"]),
         "{{TASK_DATA}}": json.dumps(tasks, separators=(",", ":")).replace("<", "\\u003c"),

@@ -69,7 +69,7 @@ the opt-in pinned real-CLI suite ran eight tests with no skips. Both archived
 Skill-list variants passed real activation, deactivation and compaction, and
 their captured system prompts explicitly report a non-Git working directory
 without gitStatus text. The local test model received no robot actions.
-See [the controlled startup audit](../validation_results/native-startup-context-20261001/audit.json).
+See [the controlled startup audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/native-startup-context-20261001/audit.json).
 
 The runtime now rejects a known initial native Skill-listing mismatch while
 the agent is still running instead of discovering it only in the final report.
@@ -185,16 +185,16 @@ task08=15078. Budgets remain 10535, 27392 and 17886 (2025 ×2). These ports
 are explicit session launch arguments; subsequent launches also default to
 15070 plus the task index, with configuration isolated to this session.
 Each task runs in its own user service, with a separate strict result reporter.
-The [current report](../validation_results/gpu5-20260930-r5/README.md) and
-[launch audit](../validation_results/gpu5-20260930-r5/launch_audit.json) record
+The [current report](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/gpu5-20260930-r5/README.md) and
+[launch audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/gpu5-20260930-r5/launch_audit.json) record
 progress. Starting these processes is not evidence that scores match.
-The [live budget/context audit](../validation_results/gpu5-20260930-r5/budget_audit.json)
+The [live budget/context audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/gpu5-20260930-r5/budget_audit.json)
 checks the first sessions against their archived prompts, startup context,
 skill listing and namespaces, and confirms each limit in the process arguments,
-environment, monitor and evaluator log. The [native watch audit](../validation_results/gpu5-20260930-r5/native_watch_audit.json)
+environment, monitor and evaluator log. The [native watch audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/gpu5-20260930-r5/native_watch_audit.json)
 confirms the workaround in all three actual evaluator processes. The first
 agent-visible head-camera frames agree visually with the archived layouts and
-viewpoints, with small rendering differences; [frame hashes and limitations](../validation_results/gpu5-20260930-r5/initial_frame_audit.json)
+viewpoints, with small rendering differences; [frame hashes and limitations](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/gpu5-20260930-r5/initial_frame_audit.json)
 are recorded. This is not a pixel-identical or complete state comparison.
 
 The independent clone was updated to runtime commit 23fefd0. All 40 current
@@ -202,7 +202,7 @@ runner/report/budget/entrypoint/native-watch checks pass there, and the pinned
 native ABI check succeeds in the actual evaluator environment.
 It was then advanced to reporter commit fcaed41; all 28 current
 runner/report/budget/session-ownership checks pass in that clone. The
-[reporter regression audit](../validation_results/gpu5-20260930-r5/reporter_regression.json)
+[reporter regression audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/gpu5-20260930-r5/reporter_regression.json)
 records the command, source commit and test-log hash. The three evaluation
 controllers retain their original process identities and runtime source; only
 the independent reporting service was reloaded with local process checking.
@@ -221,7 +221,7 @@ readable by the current account, so an OOM or other external kill is not ruled o
 The observed step counts and elapsed times are below the configured limits.
 The stale running statuses were corrected to failed/interrupted, while the
 original summaries, trajectories and logs were retained. The
-[interruption audit](../validation_results/gpu5-20260930-r2/interruption_audit.json)
+[interruption audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/gpu5-20260930-r2/interruption_audit.json)
 records the process identities and log hashes. At approximately 10:24 CST, all
 three tasks were relaunched from their initial scenes as independent one-shot
 user services, using the same archived configurations and all five instances.
@@ -244,11 +244,11 @@ with the same Carbonite BaseMutex::unlock ownership assertion:
 cleaned up their remaining owned processes; systemd recorded service failures
 at 17:17:02–04 CST. None of the 15 selected cases produced an official score.
 The common initiating trigger remains unresolved. The
-[native crash audit](../validation_results/gpu5-20260930-r4/simulator_crash_audit.json)
+[native crash audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/gpu5-20260930-r4/simulator_crash_audit.json)
 preserves the assertion excerpts, log hashes, last step counts and service
 exit records. These failures do not establish an archived score mismatch.
 
-The [pre-interruption audit](../validation_results/gpu5-20260930-r2/budget_audit.json)
+The [pre-interruption audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/gpu5-20260930-r2/budget_audit.json)
 confirmed 10535, 27392 and 17886 steps for the preceding three attempts through evaluator
 arguments, environment, monitor and evaluator logs. Their first Claude sessions
 match the archived SessionStart text, recorded MCP instruction preview, native
@@ -257,7 +257,7 @@ frames were also visually compared against the archived first frames; scene
 layout and starting viewpoint agree, with small rendering differences. This
 visual check does not claim pixel-identical or complete simulator states.
 
-The [first-attempt budget audit](../validation_results/gpu5-20260929/budget_audit.json)
+The [first-attempt budget audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/gpu5-20260929/budget_audit.json)
 matches all nine limits to their original archive JSON fields and hashes.
 For those three evaluators, command-line arguments, environment, monitor
 and evaluator log all agree on 10535, 15239 and 17886 steps respectively.
@@ -267,7 +267,7 @@ The first attempt's task06 instance 301 scored **0.555556**, compared
 with **1.0** in the archive. The model declared completion after 6354 steps;
 it did not reach the 15239-step limit. This case has not reproduced its archived
 score. Its original evaluator JSON and hash are preserved in the
-[first-attempt report](../validation_results/gpu5-20260929/README.md).
+[first-attempt report](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/gpu5-20260929/README.md).
 
 Those three attempts were stopped after finding model-visible context drift:
 the later source harness advertised three skills instead of the archived seven,
@@ -279,14 +279,14 @@ finding another launcher difference: native Skill listing was suppressed,
 and some cases used a different MCP namespace. All 45 source transcripts
 were subsequently matched to restore each case's recorded namespace and exact
 prompt bytes, including final newlines stripped by monitor records.
-Those [intermediate attempts](../validation_results/gpu5-20260930/README.md)
+Those [intermediate attempts](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/gpu5-20260930/README.md)
 are retained separately. The observed score difference
 does not establish that this context drift caused the failure.
 
 The next task01/task08 initialization attempts exhausted local scratch space
 and exited with signal 11 after texture-cache write errors. No agent case or
 official score was produced. Their
-[failure summaries](../validation_results/gpu5-20260930-r2/initialization_failures.json)
+[failure summaries](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/gpu5-20260930-r2/initialization_failures.json)
 are retained. Caches from stopped validation attempts were removed, and the
 two runs were restarted. The launcher now checks scratch space before launch.
 
@@ -294,8 +294,8 @@ Task06's corrected harness did match the archived startup text, native skills,
 tool namespace and 15239-step limit. Comparing first observations then exposed
 a different archived starting state in instance 301: the source scene had
 already received seven interface operations before the selected Claude session.
-The [live context audit](../validation_results/gpu5-20260930-r2/task06_context_audit.json)
-and [archived initial-state evidence](../reference_results/initial_states.json)
+The [live context audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/gpu5-20260930-r2/task06_context_audit.json)
+and [archived initial-state evidence](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/reference_results/initial_states.json)
 preserve this finding. That fresh-reset attempt was stopped as a diagnostic;
 task03 replaces task06 in the three-task score validation. The source Q=1.0 and
 task06 mean remain unchanged. See [provenance](provenance.md) for the limitation.
@@ -304,7 +304,7 @@ task06 mean remain unchanged. See [provenance](provenance.md) for the limitation
 means have been reproduced.** Each run writes its official results and
 per-case differences to its own `summary.json` when cases finish.
 
-The earlier local watcher updated the [r4 result report](../validation_results/gpu5-20260930-r4/README.md)
+The earlier local watcher updated the [r4 result report](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/gpu5-20260930-r4/README.md)
 and exited after all three runs failed. No fresh scoring JSON was available. It does not
 substitute archived scores for missing new results.
 
@@ -323,4 +323,4 @@ Datasets and the SAM 2 checkpoint remain external dependencies.
 
 Acceptance follows each complete task mean, not exact per-case score agreement.
 The current reporter and queued validation source apply the clarified rule.
-See [the mean-Q regression and activation audit](../validation_results/mean-q-acceptance-20261001/README.md).
+See [the mean-Q regression and activation audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/mean-q-acceptance-20261001/README.md).

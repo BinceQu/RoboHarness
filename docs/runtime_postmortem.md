@@ -40,7 +40,7 @@ The runtime investigation identified these independent defects:
    adapter calls, and a surviving September 16 profile contains the earlier
    six-tool exclusion list. Archive mode now selects that earlier list while
    standalone mode retains the supplied default. The saved
-   [audit](../validation_results/archive-tool-profile-20261001/audit.json)
+   [audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/archive-tool-profile-20261001/audit.json)
    distinguishes registered error-returning calls from successful actions.
 
 New launches also verify that emitted listing while the agent is running. A
@@ -101,7 +101,7 @@ tracked worktree. This prevents ongoing edits to the development checkout from
 entering later cases of the same long-running validation. The original r5
 controllers were left running.
 
-The [pinned-source startup audit](../validation_results/pinned-runner-startup-20261001/README.md)
+The [pinned-source startup audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/pinned-runner-startup-20261001/README.md)
 exercises the real `Run.start_agent` path, launcher, native CLI and recorder for
 three representative archived cases. It verifies both MCP namespaces, both
 native Skill-listing patterns, source prompt hashes and case session identity.
@@ -115,7 +115,7 @@ The queued tasks use disjoint triples within 15070–15078, and the queue checks
 those actual ports before launch. The runner uses the same explicit values
 for its plan, interface environment, policy server, idle gate, evaluator and
 port locks. No global configuration or running r5 service is changed.
-The [session port audit](../validation_results/session-port-routing-20261001/README.md)
+The [session port audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/session-port-routing-20261001/README.md)
 records the selected listeners, updated pinned revision, regression evidence
 and unchanged r5 process identities.
 
@@ -126,7 +126,7 @@ show a placement miss; the archived prompt then directs termination for a
 remaining outside can less than 0.5 m away. A comparison of archived gripper
 responses does not establish a control-timing regression. This is diagnostic
 evidence only; it does not isolate the failure cause or validate the queued
-fixes. See [the outcome audit](../validation_results/task01-301-r5-outcome-20261001/README.md).
+fixes. See [the outcome audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/task01-301-r5-outcome-20261001/README.md).
 
 ## Completed r5 task01/308 outcome
 
@@ -145,7 +145,7 @@ interface, the release and the queued checkout. This establishes an action
 sequence difference and its immediate release mechanism, not a newly introduced
 gripper policy or the cause of the model's changed choice. The native-context
 corrections still require r6 verification. See the
-[feedback, image and archive comparison](../validation_results/task01-308-r5-outcome-20261003/README.md).
+[feedback, image and archive comparison](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/task01-308-r5-outcome-20261003/README.md).
 
 ## Observed r5 task03/301 wall-clock cutoff
 
@@ -159,7 +159,7 @@ Case 304 started automatically at 19:29:55. The previous agent processes
 exited and the controller, interface and evaluator continued running. The
 reporter preserves the official score while rejecting it for strict
 reproduction verification. The queued r6 configuration already disables this
-extra wall-clock cap. See [the cutoff and handoff evidence](../validation_results/task03-301-r5-timeout-20261001/README.md).
+extra wall-clock cap. See [the cutoff and handoff evidence](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/task03-301-r5-timeout-20261001/README.md).
 
 The same cutoff subsequently affected task08/304: its official score is Q=0
 at 12,089 of 17,886 allowed steps. Both truncated cases are now mandatory fresh
@@ -174,7 +174,7 @@ On October 3, task03/306 provided the first live verification that the
 temporary supervisor prevented the old deadline from truncating an active
 case: the original agent and native CLI continued, then produced a new
 tool call and result while the monitor advanced another nine steps. The
-[continuation audit](../validation_results/task03-306-r5-past-24h-20261003/README.md)
+[continuation audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/task03-306-r5-past-24h-20261003/README.md)
 preserves process identities, native transcript byte-range hashes and actual
 HTTP observations. Final scoring and the held coordinator's normal handoff
 were pending at that observation and subsequently completed as recorded below.
@@ -188,7 +188,7 @@ at 02:59:49. Instance 308 started with a new agent and session on port 15078
 while the same interface and evaluator remained alive. The legacy controller
 labels the existing result evaluator_end; the supervisor events preserve the
 earlier model_done trigger. The
-[completion audit](../validation_results/task08-306-r5-completion-20261004/README.md)
+[completion audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/task08-306-r5-completion-20261004/README.md)
 records both labels, source hashes, process identities and the next native
 session's first tool call. This validates the operational handoff, while r5
 remains diagnostic and the complete task mean is still unverified.
@@ -199,7 +199,7 @@ On October 4 the supervisor requested model completion at
 original coordinator at 12:35:12. Its old agent and native CLI exited, and
 instance 308 started a fresh native session on port 15073 while retaining
 the same interface and evaluator. The
-[task03 completion audit](../validation_results/task03-306-r5-completion-20261004/README.md)
+[task03 completion audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/task03-306-r5-completion-20261004/README.md)
 verifies the score and prompt hashes, process identities, supervisor events
 and the next session's first camera call/result pair. The observed trigger
 was model_done; the resumed controller labels the existing result evaluator_end.
@@ -207,7 +207,7 @@ No wall-clock cutoff submitted this case. Its Q differs from the archived
 case Q=2/7; the complete five-case mean remains unverified, and the earlier
 truncated instance 301 remains a mandatory fresh retest.
 
-The subsequent [task03/306 outcome audit](../validation_results/task03-306-r5-outcome-20261004/README.md)
+The subsequent [task03/306 outcome audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/task03-306-r5-outcome-20261004/README.md)
 finds a wrong-object grasp: the second confirmed closure is visibly on a
 plate carrying pizza, although the actual archived task prompt restricts
 the episode to two empty bowls. Its native click and planner input both
@@ -228,7 +228,7 @@ postdate that replay and name the same Qwen model; their hashes were checked
 again. On October 3, the live endpoint reports the September 5 vLLM version,
 the same model and checkpoint path, and a 262144-token context limit.
 
-The [model service audit](../validation_results/model-service-provenance-20261003/README.md)
+The [model service audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/model-service-provenance-20261003/README.md)
 preserves the source hashes and original launch script. It does not establish
 which launch arguments or sampling defaults applied to every paper rollout,
 or identical historical/current weights. The saved visual check was not rerun
@@ -241,7 +241,7 @@ Execution time depends on hardware, model serving, queueing and concurrent
 load. The evaluation budget is measured in simulation control steps.
 A wall-clock cutoff can end an episode before that budget is consumed.
 
-The [response comparison](../validation_results/native-latency-comparison-20261001/README.md)
+The [response comparison](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/native-latency-comparison-20261001/README.md)
 records source hashes, response counts and output-token statistics. The
 trajectories contain different actions and are not a controlled inference
 speed benchmark.
@@ -252,7 +252,7 @@ numeric lip conditions; later selections passed. One attached memory snapshot
 was unavailable and recovered on the next call. A subsequent chassis action
 completed normally. The archived case also contains repeated bindings and
 unavailable tracking snapshots, so this observation does not establish a new
-release defect. The [binding audit](../validation_results/task08-306-r5-tracking-20261003/README.md)
+release defect. The [binding audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/task08-306-r5-tracking-20261003/README.md)
 retains source hashes, coordinates, historical counts and the limits of the
 comparison. It supplies no new Q-score.
 
@@ -266,7 +266,7 @@ The next grasp-planning call completed at 03:16:30 and returned an error;
 a subsequent height adjustment completed successfully at 03:18:26. Ticks
 advanced to 4,945 and then 4,972, with the same agent and simulator processes.
 No restart or runtime configuration change was needed. The
-[event audit](../validation_results/native-latency-comparison-20261001/task03-304-compaction-20261002.json)
+[event audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/native-latency-comparison-20261001/task03-304-compaction-20261002.json)
 preserves selected event metadata, source-record hashes and observed ticks.
 
 An unchanged tick count or low sampled GPU utilization alone does not establish

@@ -38,13 +38,13 @@ than adding its hash without testing.
 
 ## Evidence and verification
 
-The [native diagnostic audit](../validation_results/native-asset-reload-20260930/audit.json)
-and [faulting thread stack](../validation_results/native-asset-reload-20260930/control-fault-stack.txt)
+The [native diagnostic audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/native-asset-reload-20260930/audit.json)
+and [faulting thread stack](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/native-asset-reload-20260930/control-fault-stack.txt)
 preserve the control evidence. These diagnostics produce no reproduction
 score. The repaired runtime passed 20 content-preserving texture mtime events, a
 90-second observation window and an explicit official scene reset on GPU 5.
 Camera frames were available before and after, and only the device watch
-remained. See [fixed regression](../validation_results/native-asset-reload-20260930/fixed-regression.json).
+remained. See [fixed regression](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/native-asset-reload-20260930/fixed-regression.json).
 Only new official scoring JSON can establish score reproduction.
 
 CPU regressions exercise unknown binaries, version mismatch, missing symbols,

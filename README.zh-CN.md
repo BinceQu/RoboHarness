@@ -35,10 +35,10 @@ harness/
   codex/            Codex harness
 prompt/             各项家居操作任务的专用提示词
 tasks/              任务定义、评测实例和步数预算
-reference_results/  参考评测成绩
+reference_results/  参考评测成绩（托管于 Hugging Face，setup.sh 自动下载）
 roboharness/        任务运行与评测流程
 scripts/            安装、一键运行、验证和成绩报告
-validation_results/ 评测报告与成绩
+validation_results/ 评测报告与成绩（托管于 Hugging Face）
 ```
 
 ## 安装
@@ -52,6 +52,12 @@ cd RoboHarness
 ./scripts/setup.sh
 cp configs/example.json configs/local.json
 ```
+
+视频、参考成绩和验证报告托管在 Hugging Face 数据集
+[RoboHarness-assets](https://huggingface.co/datasets/BinceQu/RoboHarness-assets)，
+由 `assets.lock.json` 固定版本与 SHA-256，因此 clone 体积很小。`setup.sh` 会下载运行器所需的参考成绩；
+`python3 scripts/fetch_assets.py --group all` 下载全部文件并逐一校验。论文与项目主页对应
+[`v1.0-paper`](https://github.com/BinceQu/RoboHarness/releases/tag/v1.0-paper) 版本。
 
 按[安装说明](docs/setup.md)准备 BEHAVIOR 数据与 Claude Code 2.1.259，
 并在 `configs/local.json` 中填写本机的数据目录和 Python 路径。

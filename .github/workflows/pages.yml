@@ -8,6 +8,8 @@ on:
       - docs/assets/**
       - scripts/build_site.py
       - scripts/method_video.py
+      - scripts/fetch_assets.py
+      - assets.lock.json
       - tasks/**
       - prompt/**
       - .github/workflows/pages.yml

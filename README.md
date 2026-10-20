@@ -37,9 +37,9 @@ The reported BEHAVIOR results use Claude Code 2.1.259 with
 | [`harness/codex/`](harness/codex) | Codex harness |
 | [`prompt/`](prompt) | Task-specific instructions for household manipulation |
 | [`tasks/`](tasks) | Task definitions, evaluation instances and step budgets |
-| [`reference_results/`](reference_results) | Reference evaluator scores |
+| [`reference_results/`](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/tree/main/v1/reference_results) | Reference evaluator scores (hosted on Hugging Face; `setup.sh` fetches them) |
 | [`roboharness/`](roboharness) | Task runner and evaluation pipeline |
-| [`validation_results/`](validation_results) | Evaluation reports and scores |
+| [`validation_results/`](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/tree/main/v1/validation_results) | Evaluation reports and scores (hosted on Hugging Face) |
 
 ## Installation
 
@@ -54,6 +54,13 @@ cd RoboHarness
 ./scripts/setup.sh
 cp configs/example.json configs/local.json
 ```
+
+Videos, reference results and validation reports are hosted in the
+[RoboHarness-assets](https://huggingface.co/datasets/BinceQu/RoboHarness-assets)
+dataset, pinned by `assets.lock.json`, so cloning stays small. `setup.sh`
+fetches the reference results the runner needs; `python3 scripts/fetch_assets.py --group all`
+fetches everything and verifies each SHA-256. The paper and project page correspond to
+the [`v1.0-paper`](https://github.com/BinceQu/RoboHarness/releases/tag/v1.0-paper) release.
 
 Follow the [installation guide](docs/setup.md) to obtain the licensed datasets,
 install Claude Code 2.1.259, and configure the model endpoint and authentication.

@@ -4,6 +4,10 @@ Description=Refresh the complete RoboHarness offline homepage
 [Service]
 Type=simple
 WorkingDirectory=/mnt/nas_nfs/home/bince/RoboHarness
+# Videos are fetched from and published to the Hugging Face asset repository.
+# This file supplies HF_TOKEN (write access) and any HTTPS proxy, e.g.
+# HTTPS_PROXY=http://100.84.44.101:7890; publishing also needs huggingface_hub.
+EnvironmentFile=-%h/.config/roboharness/publisher.env
 ExecStart=/usr/bin/python3 /mnt/nas_nfs/home/bince/RoboHarness/scripts/package_site.py --output /home/bince/roboharness_homepage --zip /home/bince/roboharness_homepage.zip --watch --interval 30 --publish-method
 Restart=on-failure
 RestartSec=20

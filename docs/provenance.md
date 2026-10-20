@@ -59,7 +59,7 @@ renamed JSON output; those directory values are kept unchanged.
   cannot reproduce this case's starting state from the available records.
   This limitation is recorded in its manifest and prevents a final strict
   reproduction claim in the combined report, even if numerical means match.
-  [Initial observation evidence](../reference_results/initial_states.json)
+  [Initial observation evidence](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/reference_results/initial_states.json)
   records all 45 first robot observations and the earlier task06/301 API log
   entries. These observations are not complete simulator snapshots.
 
@@ -113,7 +113,7 @@ responses, three pixel-policy rejections and one transport timeout. These
 records establish that the adapter exposed and dispatched those tools; they
 do not establish successful robot actions. `cut_object` is recovered from the
 surviving profile, with no archived call observed. The
-[tool-profile audit](../validation_results/archive-tool-profile-20261001/audit.json)
+[tool-profile audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/archive-tool-profile-20261001/audit.json)
 records the exact source profile, hashes and call evidence. Runtime validation
 also checks the MCP recorder's actual profile and catalog, because a matching
 native Skill listing cannot detect missing direct tools.
@@ -159,7 +159,7 @@ difference; it remains a separate unresolved fidelity observation.
 These experiments use **Challenge 2025, multiplier 2**. The exact final integer
 limits are taken from the archived plans and original ×2 task table, including
 their original rounding. They are not recalculated from the 2026 statistics.
-The [archive budget audit](../validation_results/gpu5-20260929/budget_audit.json)
+The [archive budget audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/gpu5-20260929/budget_audit.json)
 records each source JSON field and SHA-256, alongside the live evaluator checks.
 
 | Task | Maximum simulation steps |

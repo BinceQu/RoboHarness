@@ -12,12 +12,15 @@ import subprocess
 import tempfile
 import time
 
+import fetch_assets
+
 
 ROOT = Path(__file__).resolve().parents[1]
 VIDEO = Path("assets/method/roboharness-method.mp4")
 POSTER = Path("assets/method/roboharness-method-poster.jpg")
 MANIFEST = Path("assets/method/manifest.json")
-PUBLISH_PATHS = ["website/method-video.json", "docs/" + str(VIDEO), "docs/" + str(POSTER)]
+# The video itself is hosted outside git; only its pinned lock entry is committed.
+PUBLISH_PATHS = ["website/method-video.json", "docs/" + str(POSTER), str(fetch_assets.LOCK)]
 
 
 def digest(path):
@@ -46,13 +49,20 @@ def source_candidates(config):
     return sorted(candidates, reverse=True)
 
 
-def snapshot(root=ROOT):
+def snapshot(root=ROOT, media="local"):
+    """Return the published method film; with remote media the video is not read locally."""
     metadata = configuration(root)["published"]
     if not metadata:
         raise ValueError("No published method video is available")
     video, poster = root / "docs" / VIDEO, root / "docs" / POSTER
-    if digest(video) != metadata["videoSha256"] or digest(poster) != metadata["posterSha256"]:
-        raise ValueError("Published method video or poster hash mismatch")
+    if digest(poster) != metadata["posterSha256"]:
+        raise ValueError("Published method poster hash mismatch")
+    if fetch_assets.entry(fetch_assets.lock(root), "docs/" + VIDEO.as_posix())["sha256"] != metadata["videoSha256"]:
+        raise ValueError("Published method video differs from its asset lock")
+    if media == "remote":
+        return metadata, None, poster
+    if not video.is_file() or digest(video) != metadata["videoSha256"]:
+        raise ValueError("Missing or changed local method video; run scripts/fetch_assets.py --group media")
     return metadata, video, poster
 
 
@@ -106,6 +116,8 @@ def copy_assets(output, prepared):
     metadata, video, poster = prepared
     for source, relative, expected in [(video, VIDEO, metadata["videoSha256"]),
                                        (poster, POSTER, metadata["posterSha256"])]:
+        if source is None:
+            continue
         target = output / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(source, target)
@@ -132,6 +144,16 @@ def write_snapshot(root, prepared):
             temporary.unlink(missing_ok=True)
     config["published"] = metadata
     (root / "website/method-video.json").write_text(json.dumps(config, indent=2) + "\n")
+
+
+def upload_video(root, metadata):
+    """Host the snapshot's video in the asset repository and pin it in the lock."""
+    lock = fetch_assets.lock(root)
+    path = "docs/" + VIDEO.as_posix()
+    if fetch_assets.entry(lock, path)["sha256"] == metadata["videoSha256"]:
+        return
+    fetch_assets.upload(root, root / path, path, "media", "v1/" + path,
+                        f"Update method video to {metadata['sourceFile']}")
 
 
 def git(root, *arguments, capture=False):
@@ -201,9 +223,8 @@ def _publish_package(output, root=ROOT):
     git(checkout, "reset", "--hard", "origin/main")
     for key in ("user.name", "user.email"):
         git(checkout, "config", key, git(root, "config", "--get", key, capture=True))
-    if metadata["bytes"] >= 100 * 1024 * 1024:
-        raise ValueError("Method export exceeds GitHub's single-file limit; offline sync remains available")
     write_snapshot(checkout, (metadata, output / VIDEO, output / POSTER))
+    upload_video(checkout, metadata)
     git(checkout, "add", "--", *PUBLISH_PATHS)
     dirty = git(checkout, "diff", "--cached", "--name-only", capture=True)
     if dirty:
@@ -219,6 +240,7 @@ def main():
     parser.parse_args()
     prepared = latest()
     write_snapshot(ROOT, prepared)
+    upload_video(ROOT, prepared[0])
     print(json.dumps(prepared[0]), flush=True)
 
 

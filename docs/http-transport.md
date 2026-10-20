@@ -3,7 +3,7 @@
 An observation recorded at **2026-10-01 01:18:28 Asia/Shanghai** captured a
 real, ten-second connection timeout while the task03 evaluator and agent
 were still alive. The evidence is in
-[the transport audit](../validation_results/http-transport-20261001/audit.json).
+[the transport audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/http-transport-20261001/audit.json).
 
 The exception originated in Python's `socket.create_connection`, before any
 HTTP request was sent. At the same time, the diagnostic client's socket was
@@ -53,8 +53,8 @@ three live interfaces. Their active session IDs and budgets remained the
 expected values. These are transport checks, **not completed task scores**.
 
 An independent clone of commit `a57d196` also passed all 33 root tests using
-its own Python environment. See the [clone audit](../validation_results/http-transport-20261001/independent-clone-audit.json)
-and [test log](../validation_results/http-transport-20261001/independent-clone-tests.txt).
+its own Python environment. See the [clone audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/http-transport-20261001/independent-clone-audit.json)
+and [test log](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/http-transport-20261001/independent-clone-tests.txt).
 
 ### Recovery from a captured live collision
 
@@ -70,7 +70,7 @@ That real connection timed out after 3.005 seconds; the handler retried with
 normal ephemeral allocation, connected from source port `38676`, and
 returned the expected active session and 10535-step budget in 3.115 seconds
 overall. No timeout exception was simulated. The procedure and captured
-records are in the [live retry audit](../validation_results/http-transport-20261001/live-retry-audit.json).
+records are in the [live retry audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/http-transport-20261001/live-retry-audit.json).
 
 This verifies recovery from the captured connection conflict in a separate
 client process. It does not establish why the older closing socket remained,
@@ -105,7 +105,7 @@ the relevant client source matches its launch commit. However, no
 per-attempt stack or socket snapshot was captured during the original
 00:06 failure, so its exact transport phase and cause remain unproven.
 
-The [agent tool audit](../validation_results/http-transport-20261001/agent-tool-audit.json)
+The [agent tool audit](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/blob/main/v1/validation_results/http-transport-20261001/agent-tool-audit.json)
 preserves the invocation/result timestamps, server records, step counts,
 source hashes and exact byte-prefix hashes of the live logs. It also
 distinguishes task01's stale-image rejection and task08's out-of-range
