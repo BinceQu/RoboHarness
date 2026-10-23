@@ -99,7 +99,7 @@ Wrapper options:
   --port PORT             BEHAVIOR API port (default: 15060)
   --prompt-image FILE     Attach a first-turn image; repeat up to eight times
   --qwen-url URL          OpenAI /v1 or /v1/chat/completions endpoint
-  --qwen-model MODEL      Upstream model name (default: Qwen3.8-27B)
+  --qwen-model MODEL      Upstream model name (default: Qwen3.8-Flash-Next-MLX-oQ6-MTP)
   --claude-bin FILE       Claude Code executable
   -h, --help              Show this help
 

@@ -20,9 +20,10 @@ import unittest
 
 from fake_behavior import FakeBehaviorClient
 from embodied_claude_code.launcher import EMBODIED_TOOL_GLOBS
+from embodied_claude_code.qwen_bridge import DEFAULT_MODEL
 
 ROOT = Path(__file__).resolve().parents[1]
-MODEL = "Qwen3.8-Flash-Next-FP8"
+MODEL = DEFAULT_MODEL
 SUMMARY_REQUEST = "Your task is to create a detailed summary of the conversation so far"
 
 
@@ -73,6 +74,10 @@ class NativeSkillLifecycleTests(unittest.TestCase):
                         self.send_json({"diagnostic_ok": True})
                     elif self.path in ("/api/state", "/api/v2/tools"):
                         self.send_json(fake.get_json(self.path))
+                    elif self.path == "/api/rollout_budget" and not archived:
+                        # The current adapter probes read-only budget telemetry;
+                        # this local fixture has no running simulator counters.
+                        self.send_json({"available": False})
                     else:
                         unexpected.append(self.path)
                         self.send_json({"error": "unexpected request"}, 404)
@@ -97,7 +102,7 @@ class NativeSkillLifecycleTests(unittest.TestCase):
                         summaries.append(payload)
                         content = [{"type": "text", "text": (
                             "<summary>This is a local lifecycle test. Native pick-up-object and "
-                            "close-box were loaded and explicitly deactivated. No robot motion "
+                            "place-object-in-container were loaded and explicitly deactivated. No robot motion "
                             "occurred. Current task Skill is null. List Skills, then report "
                             "NATIVE_LIFECYCLE_OK. Do not reactivate historical Skills.</summary>"
                         )}]
@@ -113,8 +118,8 @@ class NativeSkillLifecycleTests(unittest.TestCase):
                             1: ((mcp_prefix + "activate_skill", {"name": "pick-up-object"}) if slash else
                                 ("Skill", {"skill": "embodied-claude-code:pick-up-object"})),
                             2: (mcp_prefix + "deactivate_skill", {"name": "pick-up-object", "reason": "cancelled; local test"}),
-                            3: ("Skill", {"skill": "embodied-claude-code:close-box"}),
-                            4: (mcp_prefix + "deactivate_skill", {"name": "close-box", "reason": "cancelled; local test"}),
+                            3: ("Skill", {"skill": "embodied-claude-code:place-object-in-container"}),
+                            4: (mcp_prefix + "deactivate_skill", {"name": "place-object-in-container", "reason": "cancelled; local test"}),
                             5: (mcp_prefix + "activate_skill", {}),
                         }
                         if step in plan:
@@ -225,7 +230,7 @@ class NativeSkillLifecycleTests(unittest.TestCase):
                 prompt = (
                     "/embodied-claude-code:pick-up-object" if slash else
                     "This is a local lifecycle diagnostic. Activate then cancel pick-up-object and "
-                    "close-box, list Skills, then say NATIVE_LIFECYCLE_OK. Do not call robot tools."
+                    "place-object-in-container, list Skills, then say NATIVE_LIFECYCLE_OK. Do not call robot tools."
                 )
                 command = [
                     claude, "--print", "--verbose", "--output-format", "stream-json", "--max-turns", "8",
@@ -292,7 +297,7 @@ class NativeSkillLifecycleTests(unittest.TestCase):
             self.assertTrue(any(event.get("subtype") == "compact_boundary" for event in events))
             self.assertEqual(len(requests), 6, completed.stdout[-5000:])
             self.assertEqual([state["active_task_skill"] if state else None for state in snapshots],
-                             [None, "pick-up-object", None, "close-box", None, None],
+                             [None, "pick-up-object", None, "place-object-in-container", None, None],
                              completed.stderr + completed.stdout[:3000] + completed.stdout[-4000:] + diagnostics)
             self.assertEqual(json.loads(state_path.read_text())["active_task_skill"], None)
             self.assertEqual(monitor[-1]["loaded_skills"], ["behavior-v2-baseline"])

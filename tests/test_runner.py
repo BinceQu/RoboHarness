@@ -20,7 +20,9 @@ class ArchivedCases(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             config = Path(directory) / 'config.json'
             config.write_text('{}')
-            for args, diagnostic in (([], False), (['--model', 'different-model'], True),
+            archived_model = runner.load_task('task01')['model']
+            for args, diagnostic in (([], True), (['--model', archived_model], False),
+                                     (['--model', 'different-model'], True),
                                      (['--harness', 'codex'], True)):
                 with self.subTest(args=args):
                     stream = io.StringIO()
@@ -87,6 +89,18 @@ class ArchivedCases(unittest.TestCase):
 
 
 class WallClockBudget(unittest.TestCase):
+    def test_model_timeouts_fit_child_process_millisecond_timers(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'config.json'
+            for key in ('model_request_timeout_s', 'model_stream_idle_timeout_s'):
+                path.write_text(json.dumps({key: 259200}))
+                self.assertEqual(runner.read_config(path)[key], 259200)
+                for value in (0, -1, True, None, '259200', 1.5, 2147484):
+                    with self.subTest(key=key, value=value):
+                        path.write_text(json.dumps({key: value}))
+                        with self.assertRaisesRegex(ValueError, key):
+                            runner.read_config(path)
+
     def test_cap_requires_explicit_finite_non_negative_configuration(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / 'config.json'
@@ -217,12 +231,14 @@ class NativeContextRuntime(unittest.TestCase):
             root = Path(directory)
             task = runner.load_task('task01')
             config = root / 'config.json'
-            config.write_text('{}')
+            config.write_text(json.dumps({'model_request_timeout_s': 259200,
+                                          'model_stream_idle_timeout_s': 1800}))
             run = runner.Run({'run_dir': directory, 'run_id': 'test-isolated-workspace',
                               'task_config': task, 'port': 15079, 'harness': 'claude_code'},
                              runner.read_config(config))
             run.env = {'XDG_RUNTIME_DIR': str(root / 'runtime'), 'GIT_DIR': '/borrowed/git',
-                       'GIT_WORK_TREE': '/borrowed/worktree', 'GIT_INDEX_FILE': '/borrowed/index'}
+                       'GIT_WORK_TREE': '/borrowed/worktree', 'GIT_INDEX_FILE': '/borrowed/index',
+                       'API_TIMEOUT_MS': '600000', 'CLAUDE_STREAM_IDLE_TIMEOUT_MS': '300000'}
             run.spawn = Mock()
             run.write_summary = Mock()
             run.log = Mock()
@@ -232,6 +248,10 @@ class NativeContextRuntime(unittest.TestCase):
             self.assertEqual(actual.kwargs['cwd'], root / 'runtime/agent-workspaces/instance_301/embodied_claude_code')
             self.assertFalse(any(k.startswith('GIT_') for k in actual.args[2]))
             self.assertEqual(run.env['GIT_DIR'], '/borrowed/git')
+            self.assertEqual(actual.args[2]['API_TIMEOUT_MS'], '259200000')
+            self.assertEqual(actual.args[2]['CLAUDE_STREAM_IDLE_TIMEOUT_MS'], '1800000')
+            self.assertEqual(run.env['API_TIMEOUT_MS'], '600000')
+            self.assertEqual(run.env['CLAUDE_STREAM_IDLE_TIMEOUT_MS'], '300000')
             self.assertEqual(json.loads((root / 'instance_301/case.json').read_text())['agent_cwd'], str(actual.kwargs['cwd']))
 
     def setUp(self):

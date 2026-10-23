@@ -101,8 +101,8 @@ The repository installer prepares the simulator and harness environments; it
 does not install an LLM serving engine, download LLM weights or start inference.
 
 Install Claude Code **2.1.259** separately and make `claude` available on PATH.
-The launcher checks this version before starting the simulator. For the paper
-configuration, serve `Qwen3.8-Flash-Next-FP8` with an Anthropic-compatible
+The launcher checks this version before starting the simulator. For the released
+configuration, serve `Qwen3.8-Flash-Next-MLX-oQ6-MTP` with an Anthropic-compatible
 `/v1/messages` API that supports images, tools and streaming. Configure the
 server's model ID, context capacity and tool parser for that checkpoint.
 
@@ -140,7 +140,7 @@ export QWEN_API_KEY='YOUR_UPSTREAM_SERVICE_KEY'
 ./harness/claude_code/scripts/qwen-anthropic-bridge \
   --host 127.0.0.1 --port 15079 \
   --upstream http://YOUR_MODEL_HOST:31000/v1/chat/completions \
-  --model Qwen3.8-Flash-Next-FP8
+  --model Qwen3.8-Flash-Next-MLX-oQ6-MTP
 ```
 
 Use an empty `QWEN_API_KEY` if the upstream server requires no authentication.
@@ -153,7 +153,7 @@ check and session configuration steps:
 
 ```bash
 export ROBOHARNESS_MODEL_URL='http://127.0.0.1:15079'
-export ROBOHARNESS_MODEL='Qwen3.8-Flash-Next-FP8'
+export ROBOHARNESS_MODEL='Qwen3.8-Flash-Next-MLX-oQ6-MTP'
 export ANTHROPIC_API_KEY='local-no-auth'
 export ANTHROPIC_AUTH_TOKEN="$ANTHROPIC_API_KEY"
 ```
@@ -191,6 +191,13 @@ After saving model access and installation paths as shown in the README, use
 file does not yet exist. Later changes to `configs/local.json` are not copied
 into an existing session file. `ROBOHARNESS_SESSION_CONFIG` can select a different
 session file. Global Claude and Codex configuration remains separate.
+
+`session_timeout_s: 0` leaves the episode's official step budget authoritative.
+`model_request_timeout_s` controls the Claude Code request deadline (default
+259200 seconds); `model_stream_idle_timeout_s` controls how long to wait without
+streaming progress (default 1800 seconds, the CLI's byte-idle ceiling). These
+are transport limits, not expected inference durations. They apply only to the
+evaluation process; the model server can impose separate limits.
 
 All three listeners can be selected in that session file with a `task_ports`
 mapping, for example:

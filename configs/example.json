@@ -4,9 +4,11 @@
   "agent_python": "harness/claude_code/.venv/bin/python",
   "data_path": "data",
   "model_url": "http://127.0.0.1:31000",
-  "model": "Qwen3.8-Flash-Next-FP8",
+  "model": "Qwen3.8-Flash-Next-MLX-oQ6-MTP",
   "startup_timeout_s": 2400,
   "session_timeout_s": 0,
+  "model_request_timeout_s": 259200,
+  "model_stream_idle_timeout_s": 1800,
   "nofile_soft_limit": 65536,
   "unmask_evaluator_cuda": false
 }

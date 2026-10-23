@@ -148,13 +148,15 @@ def read_config(path: Path | None) -> dict:
         'agent_python': str(ROOT / 'harness/claude_code/.venv/bin/python'),
         'data_path': str(ROOT / 'data'),
         'model_url': os.environ.get('ROBOHARNESS_MODEL_URL', 'http://127.0.0.1:31000'),
-        'model': 'Qwen3.8-Flash-Next-FP8',
+        'model': 'Qwen3.8-Flash-Next-MLX-oQ6-MTP',
         'claude_bin': shutil.which('claude') or 'claude',
         'codex_bin': shutil.which('codex') or 'codex',
         'startup_timeout_s': 2400,
         # Wall time is not part of the archived rollout budget. Operators may
         # opt into a safety cap; 0 leaves the official step budget authoritative.
         'session_timeout_s': 0,
+        'model_request_timeout_s': 259200,
+        'model_stream_idle_timeout_s': 1800,
         'nofile_soft_limit': 65536,
         'cache_dir': str(Path(os.environ.get('XDG_CACHE_HOME', Path.home() / '.cache')) / 'roboharness'),
         'evaluator_dependencies': '',
@@ -170,8 +172,16 @@ def read_config(path: Path | None) -> dict:
     if (isinstance(timeout, bool) or not isinstance(timeout, (int, float))
             or not math.isfinite(timeout) or timeout < 0):
         raise ValueError('session_timeout_s must be a finite non-negative number; 0 disables the wall-clock cap.')
+    for key in ('model_request_timeout_s', 'model_stream_idle_timeout_s'):
+        if type(defaults[key]) is not int or not 1 <= defaults[key] <= 2147483:
+            raise ValueError(f'{key} must be an integer from 1 to 2147483 seconds.')
     if type(defaults['nofile_soft_limit']) is not int or defaults['nofile_soft_limit'] < 1024:
         raise ValueError('nofile_soft_limit must be an integer >= 1024.')
+    fraction = defaults.get('texture_memory_fraction')
+    if fraction is not None and (isinstance(fraction, bool)
+            or not isinstance(fraction, (int, float)) or not math.isfinite(fraction)
+            or not 0.01 <= fraction <= 0.6):
+        raise ValueError('texture_memory_fraction must be between 0.01 and 0.6.')
     for key in ('interface_python', 'evaluator_python', 'agent_python', 'data_path', 'cache_dir',
                 'interface_dependencies', 'evaluator_dependencies'):
         if defaults[key]:
@@ -325,7 +335,10 @@ class Run:
         atomic_json(self.path / 'runtime_config.json', {**{
             key: self.config[key] for key in ('interface_python', 'evaluator_python', 'agent_python',
                 'data_path', 'unmask_evaluator_cuda', 'interface_dependencies', 'evaluator_dependencies',
-                'session_timeout_s', 'nofile_soft_limit')}, 'file_descriptor_limit': nofile})
+                'session_timeout_s', 'model_request_timeout_s', 'model_stream_idle_timeout_s',
+                'nofile_soft_limit')}, 'texture_memory_fraction': self.config.get('texture_memory_fraction'),
+                'write_head_video': self.config.get('write_head_video', False),
+                'file_descriptor_limit': nofile})
         # No inherited source checkout, plugin cache, simulator root or stale session.
         env = {k: v for k, v in os.environ.items() if not k.startswith(
             ('BEHAVIOR_', 'OMNIGIBSON_', 'EMBODIED_', 'CLAUDE_', 'QWEN_', 'ROBOHARNESS_'))
@@ -377,6 +390,10 @@ class Run:
             'NO_PROXY': 'localhost,127.0.0.1,::1', 'no_proxy': 'localhost,127.0.0.1,::1',
         })
         env.pop('DISPLAY', None)
+        if self.config.get('texture_memory_fraction') is not None:
+            env['BEHAVIOR_EVAL_TEST_TEXTURE_MEMORY_FRACTION'] = str(self.config['texture_memory_fraction'])
+        if self.config.get('write_head_video'):
+            env['BEHAVIOR_EVAL_TEST_WRITE_HEAD_VIDEO'] = '1'
         # The native cache remains private to this release, and only numerical
         # dependencies may be taken from a separately configured installation.
         py = self.config['interface_python']
@@ -509,6 +526,10 @@ class Run:
         })
         harness = ROOT / 'harness' / self.plan['harness']
         if self.plan['harness'] == 'claude_code':
+            # Keep slow remote inference from inheriting the CLI's short request
+            # deadline. These overrides apply only to this evaluation's child.
+            env['API_TIMEOUT_MS'] = str(self.config['model_request_timeout_s'] * 1000)
+            env['CLAUDE_STREAM_IDLE_TIMEOUT_MS'] = str(self.config['model_stream_idle_timeout_s'] * 1000)
             # Do not let shell-level Git overrides reintroduce a source checkout
             # into the independent native workspace. This affects only this child.
             for key in list(env):
@@ -761,6 +782,9 @@ def main(argv=None):
                 except BlockingIOError:
                     raise ValueError(f'Another RoboHarness run owns port {selected}.')
                 with socket.socket() as sock:
+                    # A recently closed connection may remain in TIME_WAIT.
+                    # Match the servers' reuse policy while still rejecting a live listener.
+                    sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
                     sock.bind(('127.0.0.1', selected))
             def stop(signum, frame):
                 raise KeyboardInterrupt(f'Received signal {signum}')

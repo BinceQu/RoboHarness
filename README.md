@@ -24,8 +24,8 @@ positions via optical-flow tracking and depth back-projection; with this
 information, it composes accurate primitive actions to perform complex
 manipulation.
 
-The reported BEHAVIOR results use Claude Code 2.1.259 with
-`Qwen3.8-Flash-Next-FP8` and the R1 Pro robot. A Codex harness is also available.
+The released evaluation setup uses Claude Code 2.1.259 with
+`Qwen3.8-Flash-Next-MLX-oQ6-MTP` and the R1 Pro robot. A Codex harness is also available.
 
 ## What is included
 
@@ -75,8 +75,8 @@ and agent environments; it does not download LLM weights or start a model server
 **1. Connect to your model service.**
 
 The default Claude Code harness uses an **Anthropic-compatible `/v1/messages`
-endpoint with image input, tool calls and streaming**. The paper configuration
-uses `Qwen3.8-Flash-Next-FP8`. If your server only provides OpenAI Chat
+endpoint with image input, tool calls and streaming**. The released configuration
+uses `Qwen3.8-Flash-Next-MLX-oQ6-MTP`. If your server only provides OpenAI Chat
 Completions, follow the [bridge setup](docs/setup.md#chat-completions-services)
 first. Codex uses a different [Responses configuration](docs/setup.md#codex-model-service).
 
@@ -85,7 +85,7 @@ the host, served model ID and key below with your service's values:
 
 ```bash
 export ROBOHARNESS_MODEL_URL='http://YOUR_MODEL_HOST:31000'
-export ROBOHARNESS_MODEL='Qwen3.8-Flash-Next-FP8'
+export ROBOHARNESS_MODEL='Qwen3.8-Flash-Next-MLX-oQ6-MTP'
 export ANTHROPIC_API_KEY='YOUR_MODEL_SERVER_KEY'
 export ANTHROPIC_AUTH_TOKEN="$ANTHROPIC_API_KEY"
 ```

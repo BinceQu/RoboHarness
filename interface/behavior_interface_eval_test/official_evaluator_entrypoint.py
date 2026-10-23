@@ -820,6 +820,9 @@ def main() -> None:
     import omnigibson.eval.eval as eval_module
     from omnigibson.eval.eval import main as official_main
     from omnigibson.eval.evaluator import Evaluator
+    if os.getenv('BEHAVIOR_EVAL_TEST_WRITE_HEAD_VIDEO') == '1':
+        from roboharness.head_video import install as install_head_video
+        install_head_video(Evaluator)
     is_batched = hasattr(Evaluator, "load_batch") and not hasattr(Evaluator, "step")
     if is_batched:
         from behavior_interface_eval_test.official_evaluator_v393 import route_evaluator_class
