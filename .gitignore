@@ -30,5 +30,10 @@ relay_auth.json
 
 # Hosted on Hugging Face and pinned in assets.lock.json; fetch with scripts/fetch_assets.py.
 *.mp4
+*.webm
+*.mov
+*.mkv
+*.avi
+*.m4v
 /reference_results/
 /validation_results/

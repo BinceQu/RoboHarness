@@ -703,9 +703,9 @@
    "path": "validation_results/gpu5-20260930-r5/README.md",
    "group": "validation",
    "remote": "v1/validation_results/gpu5-20260930-r5/README.md",
-   "revision": "7e73016ce196802ffa89673b04905c605cbbf951",
-   "bytes": 4037,
-   "sha256": "f3e25f058a8cad33eec604f52e6832685a165e498dcfe57de486fef1074ab77d"
+   "revision": "ed8e4fd6c6b6e1370fe62ddcbe6e12b50dd1fc45",
+   "bytes": 4241,
+   "sha256": "e135e5b89b0cfbfa2186087b7935be08dc1c79b86f509e1e91085390b9233802"
   },
   {
    "path": "validation_results/gpu5-20260930-r5/budget_audit.json",
@@ -743,9 +743,9 @@
    "path": "validation_results/gpu5-20260930-r5/report.json",
    "group": "validation",
    "remote": "v1/validation_results/gpu5-20260930-r5/report.json",
-   "revision": "7e73016ce196802ffa89673b04905c605cbbf951",
-   "bytes": 51123,
-   "sha256": "62b2adfc25f00c94692876a3c97e663f8214111471c2bf054339bed2c843ec4e"
+   "revision": "ed8e4fd6c6b6e1370fe62ddcbe6e12b50dd1fc45",
+   "bytes": 53678,
+   "sha256": "63e606b8c903490c3beffb1f1ba64b9ca2f098ff333e891c640489b93e93329e"
   },
   {
    "path": "validation_results/gpu5-20260930-r5/reporter_regression.json",
@@ -828,6 +828,14 @@
    "sha256": "f933ff613f601f43739e19752b03220a3fd1c34ce66562127bc89791ee44c624"
   },
   {
+   "path": "validation_results/gpu5-20260930-r5/task03/cleaning_up_plates_and_food_310_0.json",
+   "group": "validation",
+   "remote": "v1/validation_results/gpu5-20260930-r5/task03/cleaning_up_plates_and_food_310_0.json",
+   "revision": "ed8e4fd6c6b6e1370fe62ddcbe6e12b50dd1fc45",
+   "bytes": 559,
+   "sha256": "be298abd3206e7f5b575db092319be76e7e3ccaeff3404ff381316f763413a0b"
+  },
+  {
    "path": "validation_results/gpu5-20260930-r5/task08/rearranging_kitchen_furniture_301_0.json",
    "group": "validation",
    "remote": "v1/validation_results/gpu5-20260930-r5/task08/rearranging_kitchen_furniture_301_0.json",
@@ -850,6 +858,54 @@
    "revision": "7e73016ce196802ffa89673b04905c605cbbf951",
    "bytes": 545,
    "sha256": "3161269594eba92d5feae599a124b38e11ec091c4476abe83e6deeaa939991bf"
+  },
+  {
+   "path": "validation_results/gpu5-20260930-r5/task08/rearranging_kitchen_furniture_308_0.json",
+   "group": "validation",
+   "remote": "v1/validation_results/gpu5-20260930-r5/task08/rearranging_kitchen_furniture_308_0.json",
+   "revision": "ed8e4fd6c6b6e1370fe62ddcbe6e12b50dd1fc45",
+   "bytes": 547,
+   "sha256": "e4adb9c33c577264a8e1f9490cceeb11a03eaeafbee8b47bae7d88f9793dd518"
+  },
+  {
+   "path": "validation_results/gpu5-20260930-r5/task08/rearranging_kitchen_furniture_310_0.json",
+   "group": "validation",
+   "remote": "v1/validation_results/gpu5-20260930-r5/task08/rearranging_kitchen_furniture_310_0.json",
+   "revision": "ed8e4fd6c6b6e1370fe62ddcbe6e12b50dd1fc45",
+   "bytes": 546,
+   "sha256": "2f09cc14226d05c873dc079be6b0031e878e3d339f0adfe8ba3826fd24f56271"
+  },
+  {
+   "path": "validation_results/gpu5-20260930-r6/README.md",
+   "group": "validation",
+   "remote": "v1/validation_results/gpu5-20260930-r6/README.md",
+   "revision": "ed8e4fd6c6b6e1370fe62ddcbe6e12b50dd1fc45",
+   "bytes": 872,
+   "sha256": "fa7b3eb9bbead0957e45a5ef1eb582bd9c9913a000ae9a264f862f30a27781db"
+  },
+  {
+   "path": "validation_results/gpu5-20260930-r6/report.json",
+   "group": "validation",
+   "remote": "v1/validation_results/gpu5-20260930-r6/report.json",
+   "revision": "ed8e4fd6c6b6e1370fe62ddcbe6e12b50dd1fc45",
+   "bytes": 10654,
+   "sha256": "3ac876dbc862a117b8cde462f89039c73b9be18a9b4d37ddcd53e1a493d2f9a2"
+  },
+  {
+   "path": "validation_results/gpu5-20260930-r6/task01/picking_up_trash_301_0.json",
+   "group": "validation",
+   "remote": "v1/validation_results/gpu5-20260930-r6/task01/picking_up_trash_301_0.json",
+   "revision": "ed8e4fd6c6b6e1370fe62ddcbe6e12b50dd1fc45",
+   "bytes": 548,
+   "sha256": "45103dbafcade90fecfa215b84f4f2e3735e2234ca007f55d2b3462cd8492923"
+  },
+  {
+   "path": "validation_results/gpu5-20260930-r6/task01/picking_up_trash_304_0.json",
+   "group": "validation",
+   "remote": "v1/validation_results/gpu5-20260930-r6/task01/picking_up_trash_304_0.json",
+   "revision": "ed8e4fd6c6b6e1370fe62ddcbe6e12b50dd1fc45",
+   "bytes": 537,
+   "sha256": "282ae5f4a97ba07373bbe4ee78922e74f3f9186862eb2b86114f2b6b90ab7866"
   },
   {
    "path": "validation_results/gpu5-20260930-task06-diagnostic/README.md",
