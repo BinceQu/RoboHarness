@@ -264,8 +264,6 @@ BibTeX formats from [`CITATION.cff`](CITATION.cff).
 
 ## Development and license
 
-**Contributors:** [BinceQu](https://github.com/BinceQu) and **Codex** (AI coding agent).
-
 Run the installed environments' CPU checks with `./scripts/check.sh`.
 See [contribution guidelines](CONTRIBUTING.md) for focused checks and the
 information needed in a reproducibility issue.

@@ -14,8 +14,6 @@
 
 ## 项目介绍
 
-**贡献者：** [BinceQu](https://github.com/BinceQu) 和 **Codex**（AI 编程助手）。
-
 RoboHarness 无需训练模型，将视觉点选、关键点跟踪和几何约束相结合，为 LLM agent
 提供具身控制面板。
 
