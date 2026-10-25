@@ -1,0 +1,1311 @@
+[
+  {
+    "name": "adjust_chassis",
+    "description": "只调整底盘：机体系 forward/translation(+左/-右) 同帧合成为二维直移，随后执行水平 spin；不改 pitch/upward，完成后拍 head camera。",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "forward": {
+          "type": "number",
+          "default": 0.0,
+          "description": "m(+前进/-倒车)"
+        },
+        "translation": {
+          "type": "number",
+          "default": 0.0,
+          "description": "m(+左移/-右移)"
+        },
+        "spin": {
+          "type": "number",
+          "default": 0.0,
+          "description": "deg(+左转CCW/-右转)"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "adjust_height",
+    "description": "只调整机器人高度 upward，单位米；超出 submission-local LUT 可达范围时自动饱和到最高或最低缓存行，完成后拍 head camera。",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "upward": {
+          "type": "number",
+          "default": 0.0,
+          "description": "m(+升/-降)"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "adjust_left_eef_pose_in_head_frame",
+    "description": "Adjust the left EEF by incremental translation and local-gripper RPY. For translation, use only x/y/z in the current robot base frame (+X forward, +Y left, +Z up), or only forward/leftward/upward in the starting head-camera frame. Never mix the two parameter families, even when one value is zero. y and leftward have the same positive-left sign but belong to different frames. For a horizontal push, issue short +x increments and verify external-object motion from the next evaluator RGB-D observation; tool success itself means the requested EEF pose converged.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "number",
+          "description": "Robot-base delta: +X is chassis-forward. Use short +X increments for chassis-horizontal pushing. Use only with y/z; never combine with camera-frame parameters.; m"
+        },
+        "y": {
+          "type": "number",
+          "description": "Robot-base delta: +Y is chassis-left. Same positive-left sign as leftward, but base-fixed rather than camera-rotated.; m"
+        },
+        "z": {
+          "type": "number",
+          "description": "Robot-base delta: +Z is chassis-up. Use only with x/y.; m"
+        },
+        "forward": {
+          "type": "number",
+          "description": "Starting-head-camera delta along the viewing direction. This includes a vertical component when the camera is pitched and is not chassis-horizontal forward. Use only with leftward/upward; never combine with x/y/z.; m"
+        },
+        "leftward": {
+          "type": "number",
+          "description": "Starting-head-camera delta toward image left. Same positive-left sign as y, but follows camera orientation.; m"
+        },
+        "upward": {
+          "type": "number",
+          "description": "Starting-head-camera delta toward image up. Use only with forward/leftward.; m"
+        },
+        "roll": {
+          "type": "number",
+          "default": 0.0,
+          "description": "deg(left gripper local axis)"
+        },
+        "pitch": {
+          "type": "number",
+          "default": 0.0,
+          "description": "deg(+ fingertips-up)"
+        },
+        "yaw": {
+          "type": "number",
+          "default": 0.0,
+          "description": "deg(left gripper local axis)"
+        },
+        "pos_tol": {
+          "type": "number",
+          "default": 0.012,
+          "description": "m"
+        },
+        "ori_tol_deg": {
+          "type": "number",
+          "default": 3.0,
+          "description": "deg"
+        },
+        "max_steps": {
+          "type": "number",
+          "default": 240,
+          "description": "observation/action steps"
+        },
+        "timeout_s": {
+          "type": "number",
+          "default": 60.0,
+          "description": "s"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "adjust_left_eef_pose_in_wrist_frame",
+    "description": "以实时 left wrist camera 为机体系调整左 EEF；平移单位统一为米，roll/pitch/yaw 为夹爪局部轴增量。旋转阶段固定 J1-J4，仅求解和驱动 J5-J7；J8 不参与并保持锁定。执行后返回左腕视图。",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "forward": {
+          "type": "number",
+          "default": 0.0,
+          "description": "m(+沿左腕视线向前/-向后)"
+        },
+        "leftward": {
+          "type": "number",
+          "default": 0.0,
+          "description": "m(+画面向左/-向右，与底部x标尺方向相反)"
+        },
+        "upward": {
+          "type": "number",
+          "default": 0.0,
+          "description": "m(+画面向上/-向下)"
+        },
+        "roll": {
+          "type": "number",
+          "default": 0.0,
+          "description": "deg(夹爪局部 roll 增量；仅 J5-J7 求解)"
+        },
+        "pitch": {
+          "type": "number",
+          "default": 0.0,
+          "description": "deg(夹爪局部 pitch 增量；+为指尖上抬)"
+        },
+        "yaw": {
+          "type": "number",
+          "default": 0.0,
+          "description": "deg(夹爪局部 yaw 增量；仅 J5-J7 求解)"
+        },
+        "pos_tol": {
+          "type": "number",
+          "default": 0.012,
+          "description": "m"
+        },
+        "ori_tol_deg": {
+          "type": "number",
+          "default": 3.0,
+          "description": "deg(最终夹爪姿态收敛容差)"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "adjust_pitch",
+    "description": "只调整机器人俯仰 pitch：正值仰头，负值俯身；完成后拍 head camera。",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "degree": {
+          "type": "number",
+          "default": 0.0,
+          "description": "deg(+仰头/-俯身，纯q3)"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "adjust_right_eef_pose_in_head_frame",
+    "description": "Adjust the right EEF by incremental translation and local-gripper RPY. For translation, use only x/y/z in the current robot base frame (+X forward, +Y left, +Z up), or only forward/leftward/upward in the starting head-camera frame. Never mix the two parameter families, even when one value is zero. y and leftward have the same positive-left sign but belong to different frames. For a horizontal push, issue short +x increments and verify external-object motion from the next evaluator RGB-D observation; tool success itself means the requested EEF pose converged.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "number",
+          "description": "Robot-base delta: +X is chassis-forward. Use short +X increments for chassis-horizontal pushing. Use only with y/z; never combine with camera-frame parameters.; m"
+        },
+        "y": {
+          "type": "number",
+          "description": "Robot-base delta: +Y is chassis-left. Same positive-left sign as leftward, but base-fixed rather than camera-rotated.; m"
+        },
+        "z": {
+          "type": "number",
+          "description": "Robot-base delta: +Z is chassis-up. Use only with x/y.; m"
+        },
+        "forward": {
+          "type": "number",
+          "description": "Starting-head-camera delta along the viewing direction. This includes a vertical component when the camera is pitched and is not chassis-horizontal forward. Use only with leftward/upward; never combine with x/y/z.; m"
+        },
+        "leftward": {
+          "type": "number",
+          "description": "Starting-head-camera delta toward image left. Same positive-left sign as y, but follows camera orientation.; m"
+        },
+        "upward": {
+          "type": "number",
+          "description": "Starting-head-camera delta toward image up. Use only with forward/leftward.; m"
+        },
+        "roll": {
+          "type": "number",
+          "default": 0.0,
+          "description": "deg(right gripper local axis)"
+        },
+        "pitch": {
+          "type": "number",
+          "default": 0.0,
+          "description": "deg(+ fingertips-up)"
+        },
+        "yaw": {
+          "type": "number",
+          "default": 0.0,
+          "description": "deg(right gripper local axis)"
+        },
+        "pos_tol": {
+          "type": "number",
+          "default": 0.012,
+          "description": "m"
+        },
+        "ori_tol_deg": {
+          "type": "number",
+          "default": 3.0,
+          "description": "deg"
+        },
+        "max_steps": {
+          "type": "number",
+          "default": 240,
+          "description": "observation/action steps"
+        },
+        "timeout_s": {
+          "type": "number",
+          "default": 60.0,
+          "description": "s"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "adjust_right_eef_pose_in_wrist_frame",
+    "description": "以实时 right wrist camera 为机体系调整右 EEF；平移单位统一为米，roll/pitch/yaw 为夹爪局部轴增量。旋转阶段固定 J1-J4，仅求解和驱动 J5-J7；J8 不参与并保持锁定。执行后返回右腕视图。",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "forward": {
+          "type": "number",
+          "default": 0.0,
+          "description": "m(+沿右腕视线向前/-向后)"
+        },
+        "leftward": {
+          "type": "number",
+          "default": 0.0,
+          "description": "m(+画面向左/-向右，与底部x标尺方向相反)"
+        },
+        "upward": {
+          "type": "number",
+          "default": 0.0,
+          "description": "m(+画面向上/-向下)"
+        },
+        "roll": {
+          "type": "number",
+          "default": 0.0,
+          "description": "deg(夹爪局部 roll 增量；仅 J5-J7 求解)"
+        },
+        "pitch": {
+          "type": "number",
+          "default": 0.0,
+          "description": "deg(夹爪局部 pitch 增量；+为指尖上抬)"
+        },
+        "yaw": {
+          "type": "number",
+          "default": 0.0,
+          "description": "deg(夹爪局部 yaw 增量；仅 J5-J7 求解)"
+        },
+        "pos_tol": {
+          "type": "number",
+          "default": 0.012,
+          "description": "m"
+        },
+        "ori_tol_deg": {
+          "type": "number",
+          "default": 3.0,
+          "description": "deg(最终夹爪姿态收敛容差)"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "capture_head_camera",
+    "description": "拍一张 head camera 主视图，返回 image_id（后续点选/规划都基于它）。",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "capture_left_wrist_camera",
+    "description": "拍左腕 RGB + depth，不追加 head capture。图中红色图层对应左夹爪两爪中间区域；红色像素表示非机器人可见 3D 点严格落在该区域内；底边 x(m) 标尺以夹爪开口中心为 0，向右为正，范围 ±0.02m，每格 0.01m。",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "capture_right_wrist_camera",
+    "description": "拍右腕 RGB + depth，不追加 head capture。图中红色图层对应右夹爪两爪中间区域；红色像素表示非机器人可见 3D 点严格落在该区域内；底边 x(m) 标尺以夹爪开口中心为 0，向右为正，范围 ±0.02m，每格 0.01m。",
+    "input_schema": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "close_gripper",
+    "description": "闭合指定 left/right 夹爪；不移动 EEF，完成后返回对应 wrist camera 视图。",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "arm": {
+          "type": "string",
+          "enum": [
+            "right",
+            "left"
+          ],
+          "default": "right"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "arm"
+      ]
+    }
+  },
+  {
+    "name": "exec_plan_pose",
+    "description": "执行 plan_id 对应的 EEF pose：当前→safe→目标 pose，不合爪；press_point 直接回放规划阶段已验证的 GPU IK anchors；完成后拍实际执行臂的 wrist camera。",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "plan_id": {
+          "type": "string"
+        },
+        "arm": {
+          "type": "string",
+          "enum": [
+            "",
+            "left",
+            "right"
+          ]
+        },
+        "back_m": {
+          "type": "string",
+          "default": "0.10",
+          "description": "后退安全距离(m)，默认0.10"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "plan_id"
+      ]
+    }
+  },
+  {
+    "name": "measure_shoulder_distance",
+    "description": "Measure shoulder distances to a visible surface in the latest head image. Requires image_id, u and v. Object names and privileged object AABBs are not inputs.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "image_id": {
+          "type": "string",
+          "description": "The latest clickable head-camera image_id, actually 720 x 720; re-ground the point when image_id changes. Wrist images are not clickable."
+        },
+        "u": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 719,
+          "description": "Integer original-image pixel column in the latest 720 x 720 head image: 0 is the left edge and 719 is the right edge. Do not normalize or rescale."
+        },
+        "v": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 719,
+          "description": "Integer original-image pixel row in the latest 720 x 720 head image: 0 is the top edge and 719 is the bottom edge. Do not normalize or rescale."
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "image_id",
+        "u",
+        "v"
+      ]
+    }
+  },
+  {
+    "name": "move_chassis_to_directly_facing_surface",
+    "description": "在同一张冻结 head RGB-D 图上选择恰好三个不共线的表面点。工具反投影三点并取三角形中心；法向符号自动选择为与冻结 head 相机视线成钝角的一侧。底盘中心先平移到中心沿该法向 0.8m 后投影到地面的 XY 点，再原地旋转，使机器人前向与该法向的水平投影平行且方向相反。三点顺序不会翻转最终法向；执行只使用 official action，并由后续 base_qvel proprioception 验证。",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "image_id": {
+          "type": "string",
+          "description": "The latest clickable head-camera image_id, actually 720 x 720; re-ground the point when image_id changes. Wrist images are not clickable."
+        },
+        "points": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "u": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 719,
+                "description": "Integer original-image pixel column in the latest 720 x 720 head image: 0 is the left edge and 719 is the right edge. Do not normalize or rescale."
+              },
+              "v": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 719,
+                "description": "Integer original-image pixel row in the latest 720 x 720 head image: 0 is the top edge and 719 is the bottom edge. Do not normalize or rescale."
+              }
+            },
+            "required": [
+              "u",
+              "v"
+            ],
+            "type": "object"
+          }
+        },
+        "nav_timeout_s": {
+          "type": "number",
+          "default": 120.0,
+          "description": "s"
+        },
+        "pos_tol_m": {
+          "type": "number",
+          "default": 0.04,
+          "description": "m"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "image_id",
+        "points"
+      ]
+    }
+  },
+  {
+    "name": "move_chassis_to_floor_point",
+    "description": "点选可见地板/地面点：保持当前 yaw，按起始机体系 forward/leftward 向量直接同步平移，使蓝色路径起始线中点到达点选位置；身体不动。",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "image_id": {
+          "type": "string",
+          "description": "The latest clickable head-camera image_id, actually 720 x 720; re-ground the point when image_id changes. Wrist images are not clickable."
+        },
+        "u": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 719,
+          "description": "Integer original-image pixel column in the latest 720 x 720 head image: 0 is the left edge and 719 is the right edge. Do not normalize or rescale."
+        },
+        "v": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 719,
+          "description": "Integer original-image pixel row in the latest 720 x 720 head image: 0 is the top edge and 719 is the bottom edge. Do not normalize or rescale."
+        },
+        "nav_timeout_s": {
+          "type": "number",
+          "default": 120.0,
+          "description": "s(XY 平移阶段超时)"
+        },
+        "ground_tol_m": {
+          "type": "number",
+          "default": 0.04,
+          "description": "m(反解点离地面顶面的容差)"
+        },
+        "pos_tol_m": {
+          "type": "number",
+          "default": 0.12,
+          "description": "m(XY 到点容差)"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "image_id",
+        "u",
+        "v"
+      ]
+    }
+  },
+  {
+    "name": "move_to_reach_point",
+    "description": "点选 (u,v) 反解 3D reach point，并移动到底盘/肩部可达位置；keep_ori_arm 仅在底盘旋转完成后的最终俯仰阶段生效，保持原 J1-J4 轨迹不变并逐帧仅用 J5-J7 追踪入口世界系 EEF 姿态；EEF 平移只监控。",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "image_id": {
+          "type": "string",
+          "description": "The latest clickable head-camera image_id, actually 720 x 720; re-ground the point when image_id changes. Wrist images are not clickable."
+        },
+        "u": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 719,
+          "description": "Integer original-image pixel column in the latest 720 x 720 head image: 0 is the left edge and 719 is the right edge. Do not normalize or rescale."
+        },
+        "v": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 719,
+          "description": "Integer original-image pixel row in the latest 720 x 720 head image: 0 is the top edge and 719 is the bottom edge. Do not normalize or rescale."
+        },
+        "reach": {
+          "type": "number",
+          "default": 0.0,
+          "description": "m(弦球半径，0=默认0.60m)"
+        },
+        "nav_timeout_s": {
+          "type": "number",
+          "default": 120.0,
+          "description": "s(底盘闭环导航超时，默认120)"
+        },
+        "keep_ori_arm": {
+          "type": "string",
+          "enum": [
+            "none",
+            "left",
+            "right",
+            "both"
+          ],
+          "default": "none"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "image_id",
+        "u",
+        "v"
+      ]
+    }
+  },
+  {
+    "name": "move_tracked_point",
+    "description": "Plan or move one to six point references. Ordinary names must be active in track_object_distance. The on-hand names left_finger_tip, right_finger_tip, and gripper_slide_center instead use the selected gripper's live evaluator proprioception and submission-local FK and do not need tracking. Each finger-tip name is the center of that finger's narrow physical front contact cap at max +Z_EEF on the exact red-overlay mesh, and moves with the observed finger-prismatic joint. execution_mode defaults to exec; plan returns the frozen-head red final-EEF overlay and a signed arm-only plan_id executable by exec_plan_pose without moving. It uses the same current-to-safe then safe-to-final compiler as an RGB-D Lite grasp plan and pins the live trunk throughout execution. Mark each point on-hand or frozen off-hand, optionally select touch, flatwise, plane-parallel, collinear, line-vertical-to-plane, vertical-to-ground, faceto, or reverse-faceto, and optionally enter target x/y/z as a finite number, a variable identifier, or an affine expression such as z+0.08, 2*z, (a+b)/2, or a-b. Reusing a variable imposes that relation across any point and axis; an identifier used once leaves that degree of freedom for the nearest reachable solution. Optional strict inequalities compare a variable or affine function with a finite constant using > or <; for example a-b > 0 selects the signed solution with a above b. Inequalities are solved jointly and rechecked against the final live tracked points. All on-hand points must belong to the same rigid object. Quick geometry and XYZ constraints are solved jointly. Four-point collinear uses the submitted row order as the directed axial order (for example 1,3,4,2). Vertical-to-ground uses two on-hand points for equal X/Y, or three on-hand points for a plane whose unit normal has Z=0, with no fixed heading. Faceto and reverse-faceto require exactly three ordered on-hand surface points and no off-hand points. The displayed row order 1,2,3 is preserved: faceto requires those points to wind clockwise in the frozen head-camera image, while reverse-faceto requires counterclockwise winding. Their outward triangle normal is aligned as closely as possible to the frozen head-camera optical-forward direction (or its opposite for reverse-faceto); the reported angle is the acute angle. Optional typed common_plane, oriented_plane_normal, and align_vector relations are checked by the local solver. The nearest EEF is selected from live local FK, and success requires subsequent proprioception and live tracked-point convergence. Collinear point rows specify spatial axial order, not execution order. Preserve each group's exact row order, including interleaved on/off-hand points; 1,3,2 means point 3 lies between 1 and 2. The canonical reading direction is robot-base left-to-right (-Y) for a Y-dominant line, top-to-bottom (-Z) for a Z-dominant line, and near-to-far (+X) for an X-dominant line; ties prefer Y, then Z, then X. It does not depend on camera viewpoint. This also applies when numeric/affine XYZ constraints imply three or more collinear points. Reversing rows requests the opposite physical order. Order violations cannot be returned as successful approximate or overlap-fallback plans.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "execution_mode": {
+          "type": "string",
+          "enum": [
+            "exec",
+            "plan"
+          ],
+          "default": "exec",
+          "description": "exec moves immediately; plan returns a red final-EEF overlay and an arm-only plan_id for exec_plan_pose without moving; execution uses current-to-safe then safe-to-final with the live trunk pinned"
+        },
+        "points": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "description": "An active tracked name, or on-hand predefined EEF point left_finger_tip, right_finger_tip, or gripper_slide_center (no tracking required). The finger-tip names denote the narrow physical front contact-cap centers at max +Z_EEF on the exact red plan-overlay mesh.",
+                "type": "string"
+              },
+              "role": {
+                "enum": [
+                  "on_hand",
+                  "off_hand"
+                ],
+                "type": "string"
+              },
+              "target_xyz_m": {
+                "oneOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "x": {
+                        "oneOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                            "type": "string"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "expr": {
+                                "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                                "type": "string"
+                              },
+                              "free": {
+                                "const": true
+                              },
+                              "var": {
+                                "pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "var"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "expr": {
+                                "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "expr"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "free": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "free"
+                            ],
+                            "type": "object"
+                          }
+                        ]
+                      },
+                      "y": {
+                        "oneOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                            "type": "string"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "expr": {
+                                "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                                "type": "string"
+                              },
+                              "free": {
+                                "const": true
+                              },
+                              "var": {
+                                "pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "var"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "expr": {
+                                "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "expr"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "free": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "free"
+                            ],
+                            "type": "object"
+                          }
+                        ]
+                      },
+                      "z": {
+                        "oneOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                            "type": "string"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "expr": {
+                                "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                                "type": "string"
+                              },
+                              "free": {
+                                "const": true
+                              },
+                              "var": {
+                                "pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "var"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "expr": {
+                                "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "expr"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "free": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "free"
+                            ],
+                            "type": "object"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "x",
+                      "y",
+                      "z"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "items": {
+                      "oneOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                          "type": "string"
+                        },
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "expr": {
+                              "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                              "type": "string"
+                            },
+                            "free": {
+                              "const": true
+                            },
+                            "var": {
+                              "pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "var"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "expr": {
+                              "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "expr"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "free": {
+                              "const": true
+                            }
+                          },
+                          "required": [
+                            "free"
+                          ],
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "maxItems": 3,
+                    "minItems": 3,
+                    "type": "array"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "type": "object"
+          },
+          "description": "Each points[] item allows only name, role, and target_xyz_m. Put x/y/z inside target_xyz_m; do not put x/y/z on the point root."
+        },
+        "relations": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "properties": {
+              "direction_robot_base": {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              "mode": {
+                "enum": [
+                  "same",
+                  "opposite",
+                  "parallel"
+                ],
+                "type": "string"
+              },
+              "normal_robot_base": {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              "offset_m": {},
+              "point_names": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "type": {
+                "enum": [
+                  "common_plane",
+                  "oriented_plane_normal",
+                  "align_vector",
+                  "vertical_to_ground"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "point_names"
+            ],
+            "type": "object"
+          }
+        },
+        "inequalities": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "lhs": {
+                "description": "Variable or affine function, for example a-b, 2*a-b, or (a+b)/2",
+                "pattern": "^(?:\\?|[A-Za-z0-9_().+*/\\-\\s]{1,256})$",
+                "type": "string"
+              },
+              "op": {
+                "enum": [
+                  ">",
+                  "<"
+                ],
+                "type": "string"
+              },
+              "rhs": {
+                "description": "Finite constant in metres.",
+                "type": "number"
+              }
+            },
+            "required": [
+              "lhs",
+              "op",
+              "rhs"
+            ],
+            "type": "object"
+          },
+          "description": "Optional strict affine variable inequalities solved jointly with every XYZ and geometry constraint. The left side uses the same safe affine grammar as target coordinates, the operator is > or <, and the right side is a finite constant. For example, a-b > 0 selects the solution where a is above b."
+        },
+        "quick_constraint": {
+          "type": "object",
+          "description": "Optional role-based geometry preset solved jointly with all supplied XYZ and typed relations"
+        },
+        "quick_constraints": {
+          "type": "array",
+          "items": {
+            "properties": {
+              "axial_mode": {
+                "enum": [
+                  "ordered_containment",
+                  "segment_overlap",
+                  "line_only"
+                ],
+                "type": "string"
+              },
+              "axial_point_order": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "off_hand_points": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "on_hand_points": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "type": {
+                "enum": [
+                  "touch",
+                  "flatwise",
+                  "plane_parallel",
+                  "collinear",
+                  "line_vertical_to_plane",
+                  "vertical_to_ground",
+                  "faceto",
+                  "reverse_faceto"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "on_hand_points",
+              "off_hand_points"
+            ],
+            "type": "object"
+          },
+          "description": "Optional named preset groups solved simultaneously with all supplied XYZ and typed relations"
+        },
+        "pos_tol": {
+          "type": "number",
+          "default": 0.03,
+          "description": "m"
+        },
+        "ori_tol_deg": {
+          "type": "number",
+          "default": 20.0,
+          "description": "deg"
+        },
+        "max_steps": {
+          "type": "integer",
+          "default": 360
+        },
+        "timeout_s": {
+          "type": "number",
+          "default": 90.0,
+          "description": "s"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "points"
+      ]
+    }
+  },
+  {
+    "name": "open_gripper",
+    "description": "打开指定 left/right 夹爪；不移动 EEF。",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "arm": {
+          "type": "string",
+          "enum": [
+            "right",
+            "left"
+          ],
+          "default": "right"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "arm"
+      ]
+    }
+  },
+  {
+    "name": "plan_grasp_point_filter_rgbd_lite",
+    "description": "轻量 RGBD 抓取：候选、过滤和输出保持完整版本逻辑；冷启动 IK 使用 split8，完整 warm-start 阶段使用等状态量 warm32x6；不启用候选压缩。",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "image_id": {
+          "type": "string",
+          "description": "The latest clickable head-camera image_id, actually 720 x 720; re-ground the point when image_id changes. Wrist images are not clickable."
+        },
+        "u": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 719,
+          "description": "Integer original-image pixel column in the latest 720 x 720 head image: 0 is the left edge and 719 is the right edge. Do not normalize or rescale."
+        },
+        "v": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 719,
+          "description": "Integer original-image pixel row in the latest 720 x 720 head image: 0 is the top edge and 719 is the bottom edge. Do not normalize or rescale."
+        },
+        "plan_arm": {
+          "type": "string",
+          "enum": [
+            "any",
+            "left",
+            "right"
+          ],
+          "default": "any"
+        },
+        "seed": {
+          "type": "number",
+          "default": 42,
+          "description": "姿态采样种子"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "image_id",
+        "u",
+        "v"
+      ]
+    }
+  },
+  {
+    "name": "plan_press_point",
+    "description": "Unavailable in this evaluator profile. Returns a failure without sending joint commands or creating a plan. The legacy press planner requires privileged geometry; use documented joint_control or end-effector movement tools for observable, bounded motions.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "image_id": {
+          "type": "string",
+          "description": "The latest clickable head-camera image_id, actually 720 x 720; re-ground the point when image_id changes. Wrist images are not clickable."
+        },
+        "u": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 719,
+          "description": "Integer original-image pixel column in the latest 720 x 720 head image: 0 is the left edge and 719 is the right edge. Do not normalize or rescale."
+        },
+        "v": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 719,
+          "description": "Integer original-image pixel row in the latest 720 x 720 head image: 0 is the top edge and 719 is the bottom edge. Do not normalize or rescale."
+        },
+        "plan_arm": {
+          "type": "string",
+          "enum": [
+            "any",
+            "left",
+            "right"
+          ],
+          "default": "any"
+        },
+        "seed": {
+          "type": "number",
+          "default": 42,
+          "description": "姿态采样种子"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "image_id",
+        "u",
+        "v"
+      ]
+    }
+  },
+  {
+    "name": "reset_body",
+    "description": "腰部三关节复位直立；keep_ori_arm 保持入口 J1-J4 命令不变，每帧仅用 J5-J7 追踪入口世界系 EEF 姿态；EEF 平移只监控；其余手臂全关节锁定；完成后拍主视图。",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "keep_ori_arm": {
+          "type": "string",
+          "enum": [
+            "none",
+            "left",
+            "right",
+            "both"
+          ],
+          "default": "none"
+        },
+        "timeout_s": {
+          "type": "number",
+          "default": 45.0,
+          "description": "s"
+        },
+        "trunk_max_step": {
+          "type": "number",
+          "default": 0.06,
+          "description": "rad/步"
+        },
+        "shoulder_iters": {
+          "type": "number",
+          "default": 4,
+          "description": "兼容保留/已忽略"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "robot_step",
+    "description": "Execute a validated 27-element atomic controller action for a fixed number of 30 Hz ticks.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "steps": {
+          "type": "integer",
+          "default": 1,
+          "minimum": 1,
+          "maximum": 900
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "action"
+      ]
+    }
+  },
+  {
+    "name": "set_arm_to_grasp_position",
+    "description": "将选定手臂闭环移动到固定 grasp-prep。每条 action 都由最新 proprio 的 qpos/qvel 节流；成功需位置和速度连续稳定；仍有实际进展时 timeout_s 最多续期两次，失败则锁住最后实测姿态。J8 始终锁定 0rad；当前 official_v2 固定关节替代仅支持 keep_ori_arm=none。完成或失败后都拍 head camera。",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "arm": {
+          "type": "string",
+          "enum": [
+            "right",
+            "left",
+            "both"
+          ],
+          "default": "right"
+        },
+        "keep_ori_arm": {
+          "type": "string",
+          "enum": [
+            "none",
+            "left",
+            "right",
+            "both"
+          ],
+          "default": "none"
+        },
+        "gripper": {
+          "type": "string",
+          "enum": [
+            "open",
+            "keep"
+          ],
+          "default": "keep"
+        },
+        "max_dq_per_step": {
+          "type": "number",
+          "default": 0.3,
+          "description": "rad/frame"
+        },
+        "tol": {
+          "type": "number",
+          "default": 0.08,
+          "description": "rad"
+        },
+        "timeout_s": {
+          "type": "number",
+          "default": 15.0,
+          "description": "s"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "spin_to_facing_point",
+    "description": "只水平旋转底盘，让选中的 head 图点落到画面中线；不俯仰、不平移。",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "image_id": {
+          "type": "string",
+          "description": "The latest clickable head-camera image_id, actually 720 x 720; re-ground the point when image_id changes. Wrist images are not clickable."
+        },
+        "u": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 719,
+          "description": "Integer original-image pixel column in the latest 720 x 720 head image: 0 is the left edge and 719 is the right edge. Do not normalize or rescale."
+        },
+        "v": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 719,
+          "description": "Integer original-image pixel row in the latest 720 x 720 head image: 0 is the top edge and 719 is the bottom edge. Do not normalize or rescale."
+        },
+        "max_abs_spin": {
+          "type": "number",
+          "default": 60.0,
+          "description": "deg(安全限幅)"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "image_id",
+        "u",
+        "v"
+      ]
+    }
+  },
+  {
+    "name": "track_object_distance",
+    "description": "Bind every UV to the exact frozen head capture named by image_id, then track multiple model-named surface points; publish only current depth_m and xyz_in_robot_base_coord_m=[x, y, z] in memory. xyz_in_robot_base_coord_m is measured in meters in the current robot chassis frame: +X always points chassis-forward, +Y chassis-left, and +Z chassis-up. A stale image binding or replay gap fails instead of applying UV to a newer frame. capture_replay_history_was_evicted_by_its_bounded_storage_policy means capture a new head image and select the points on that new image. Delete an entry when the point leaves view or tracking is lost.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "image_id": {
+          "type": "string",
+          "description": "The latest clickable head-camera image_id, actually 720 x 720; re-ground the point when image_id changes. Wrist images are not clickable."
+        },
+        "points": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "items": {
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "u": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 719,
+                "description": "Integer original-image pixel column in the latest 720 x 720 head image: 0 is the left edge and 719 is the right edge. Do not normalize or rescale."
+              },
+              "v": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 719,
+                "description": "Integer original-image pixel row in the latest 720 x 720 head image: 0 is the top edge and 719 is the bottom edge. Do not normalize or rescale."
+              }
+            },
+            "required": [
+              "name",
+              "u",
+              "v"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "image_id",
+        "points"
+      ]
+    }
+  }
+]

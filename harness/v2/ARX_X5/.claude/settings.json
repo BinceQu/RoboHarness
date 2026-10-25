@@ -1,0 +1,10 @@
+{
+  "autoCompactWindow": 180000,
+  "env": {"API_TIMEOUT_MS":"3600000", "CLAUDE_STREAM_IDLE_TIMEOUT_MS":"3600000"},
+  "hooks": {
+    "SessionStart": [{"hooks":[{"type":"command","command":".venv/bin/python -m tools.util.session_context","timeout":15}]}],
+    "PreToolUse": [{"matcher":"Bash","hooks":[{"type":"command","command":".venv/bin/python -m tools.util.observation_hook","timeout":15}]}],
+    "PostToolUse": [{"matcher":"Bash","hooks":[{"type":"command","command":".venv/bin/python -m tools.util.observation_hook","timeout":30}]}],
+    "PostToolUseFailure": [{"matcher":"Bash","hooks":[{"type":"command","command":".venv/bin/python -m tools.util.observation_hook","timeout":30}]}]
+  }
+}

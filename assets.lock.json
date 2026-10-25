@@ -76,6 +76,550 @@
    "sha256": "713fa485b5bc9753c117a39e58cd1728286da259dd248adaf77e91ebdaca06fc"
   },
   {
+   "path": "harness/v2/ARX_X5/robot_config/meshes/base_link.STL",
+   "group": "v2-x5",
+   "remote": "v2/ARX_X5/robot_config/meshes/base_link.STL",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 1611284,
+   "sha256": "898dbe3af3a98857358ac5a3d74e085ec9c69946737e767dad139776761cbd92"
+  },
+  {
+   "path": "harness/v2/ARX_X5/robot_config/meshes/camera.glb",
+   "group": "v2-x5",
+   "remote": "v2/ARX_X5/robot_config/meshes/camera.glb",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 15899328,
+   "sha256": "9833e436988bcd83f3113ab1071428427c80d6a1392d9e0b7cf35d2b6e949d7c"
+  },
+  {
+   "path": "harness/v2/ARX_X5/robot_config/meshes/camera_base.glb",
+   "group": "v2-x5",
+   "remote": "v2/ARX_X5/robot_config/meshes/camera_base.glb",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 62332,
+   "sha256": "d771a24ab886166536ffe4a0719af1163e44fac4067e07110cf72a7a01d260b0"
+  },
+  {
+   "path": "harness/v2/ARX_X5/robot_config/meshes/link1.STL",
+   "group": "v2-x5",
+   "remote": "v2/ARX_X5/robot_config/meshes/link1.STL",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 162184,
+   "sha256": "04a52b86a5b28c847377a9167e7effab0478fa591052e83b0b32cf8709bb3885"
+  },
+  {
+   "path": "harness/v2/ARX_X5/robot_config/meshes/link2.STL",
+   "group": "v2-x5",
+   "remote": "v2/ARX_X5/robot_config/meshes/link2.STL",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 4353884,
+   "sha256": "2865da6a962c814abaf9251497bcf5f5e3b67610e3b657ddcaa9de8b3d45e83e"
+  },
+  {
+   "path": "harness/v2/ARX_X5/robot_config/meshes/link3.STL",
+   "group": "v2-x5",
+   "remote": "v2/ARX_X5/robot_config/meshes/link3.STL",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 1052684,
+   "sha256": "3ac2411b0cbffcf4808cae4c215cfeab607f240cd124eeba209ac7986ac047c0"
+  },
+  {
+   "path": "harness/v2/ARX_X5/robot_config/meshes/link4.STL",
+   "group": "v2-x5",
+   "remote": "v2/ARX_X5/robot_config/meshes/link4.STL",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 142784,
+   "sha256": "3447ddef920c22e4607b887e1cc588037dfb51c37825c4cac86a5391425469c4"
+  },
+  {
+   "path": "harness/v2/ARX_X5/robot_config/meshes/link5.STL",
+   "group": "v2-x5",
+   "remote": "v2/ARX_X5/robot_config/meshes/link5.STL",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 679584,
+   "sha256": "934b3e70ce2987f8de999de29d8ef72c8370dced8e9fdf6f9ddd3e7e24c1e464"
+  },
+  {
+   "path": "harness/v2/ARX_X5/robot_config/meshes/link6.STL",
+   "group": "v2-x5",
+   "remote": "v2/ARX_X5/robot_config/meshes/link6.STL",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 643784,
+   "sha256": "32dca4ededcf3215163207b9aea1046114ae59921555d1e068ee46fa6e53915e"
+  },
+  {
+   "path": "harness/v2/ARX_X5/robot_config/meshes/link7.STL",
+   "group": "v2-x5",
+   "remote": "v2/ARX_X5/robot_config/meshes/link7.STL",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 65284,
+   "sha256": "ec3d40b39cccde0075ca3d16603f14f180fce41a46b446473d384def7a1b0be0"
+  },
+  {
+   "path": "harness/v2/ARX_X5/robot_config/meshes/link8.STL",
+   "group": "v2-x5",
+   "remote": "v2/ARX_X5/robot_config/meshes/link8.STL",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 65284,
+   "sha256": "29f7a8379cad81797e82e4ba099455cc275ac6ac5bb9e264ce46719fd7d2bb60"
+  },
+  {
+   "path": "harness/v2/ARX_X5/tools/util/assets/x5_gripper_geometry_open_3mm.npz",
+   "group": "v2-x5",
+   "remote": "v2/ARX_X5/tools/util/assets/x5_gripper_geometry_open_3mm.npz",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 228339,
+   "sha256": "74c40afe0f6313fda1cbd324989903ada6f06824fc26b6ac340281a6558f50f2"
+  },
+  {
+   "path": "harness/v2/ARX_X5/tools/util/assets/x5_path_halfspaces_v1.npz",
+   "group": "v2-x5",
+   "remote": "v2/ARX_X5/tools/util/assets/x5_path_halfspaces_v1.npz",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 383330,
+   "sha256": "7b640d05b76205aa957199d92765c1952d67b447ae91057ce2a7ee027defe698"
+  },
+  {
+   "path": "harness/v2/ARX_X5/tools/util/assets/x5_self_collision_v1.npz",
+   "group": "v2-x5",
+   "remote": "v2/ARX_X5/tools/util/assets/x5_self_collision_v1.npz",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 81349,
+   "sha256": "0769bb3be845d9b373115c830f4077f95e429db9cdfdfcdd43672600119bce82"
+  },
+  {
+   "path": "harness/v2/ARX_X5/tools/util/assets/x5_visual_surface_samples_v1.npz",
+   "group": "v2-x5",
+   "remote": "v2/ARX_X5/tools/util/assets/x5_visual_surface_samples_v1.npz",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 25241104,
+   "sha256": "528add832b73352d32bbe4de65be0d983a65c391de8a1aee656acaf4f3192592"
+  },
+  {
+   "path": "harness/v2/R1_pro/.dependencies/wheels/nvidia_curobo-0.0.0-cp310-cp310-linux_x86_64.whl",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/.dependencies/wheels/nvidia_curobo-0.0.0-cp310-cp310-linux_x86_64.whl",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 4135447,
+   "sha256": "0f26cede064318535e833b6140460ffbb9e19206948736018af4453fa1715387"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/base_link.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/base_link.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 16998061,
+   "sha256": "952edaabc3d16cee9f8ba723ad54501cf619bf9c6412ae00e84bafc662506a26"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/left_arm_base.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/left_arm_base.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 71375,
+   "sha256": "2b1c5d0dbc4542312104dbf9ab9291530c3fa262bb841d85782d4151664cd4f8"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/left_arm_base_link.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/left_arm_base_link.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 71380,
+   "sha256": "37a26b6c131fc9aa0839094bdc40cbe7f02894b44bf60d0caa9e956d1a631e95"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/left_arm_link1.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/left_arm_link1.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 131513,
+   "sha256": "d74eb29d28a45a3909b2fe03e8303c564ce2f7da84965c9198d936a7e51c028f"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/left_arm_link2.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/left_arm_link2.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 997737,
+   "sha256": "52876f1bbf6aa3a066655e1f6de7679651582131c834281834d662fa3424cb6e"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/left_arm_link3.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/left_arm_link3.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 919333,
+   "sha256": "bb79bb5852036de2b68d8cb34f5be2e5b693ad14f396eda58deb53814bd14e2d"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/left_arm_link4.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/left_arm_link4.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 1124649,
+   "sha256": "37c88ea7d6a390d82737b8b51d743ded49091894a285f9438676b058f395a071"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/left_arm_link5.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/left_arm_link5.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 1733686,
+   "sha256": "58004b43b584ffe3558547dd46a7b185c825870e1897e9ff70c34eb3000130f2"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/left_arm_link6.STL",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/left_arm_link6.STL",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 306184,
+   "sha256": "edafb192f239c8b0aa89874980eb06c353b2c94c02b4d055707590b6cba80ac3"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/left_arm_link6.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/left_arm_link6.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 579163,
+   "sha256": "f04e840eb74795d0ee0aef73607d2ffd42f5640ce98bcca147e530789b44798d"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/left_arm_link7.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/left_arm_link7.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 660065,
+   "sha256": "0a6d12f97fa0f219dfdeb30f5119caaa2d5c842b6d4d46a67239bac96b2566e7"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/left_gripper_finger_link1.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/left_gripper_finger_link1.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 478540,
+   "sha256": "fd374bc0d08ed62484233858c88606daf2f9df93dd0bf97b01189f19cfb96931"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/left_gripper_finger_link2.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/left_gripper_finger_link2.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 395922,
+   "sha256": "0810e76e5383d60ecd83ce230a28dacf4e7a368fcdfee74bd5d858ecc73262d1"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/left_gripper_link.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/left_gripper_link.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 241122,
+   "sha256": "5f3d6cd9e6108ccfe42f8f22944276ba531462f6fabd5888a38e3cffecf6f596"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/left_realsense_link.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/left_realsense_link.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 1228582,
+   "sha256": "8617cd535edbb55aeb706beb6de33996c5056670423600fc3bc3afae51081eeb"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/right_arm_base_link.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/right_arm_base_link.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 95882,
+   "sha256": "ae844e9a0cde62c312cbbb48e04b72f788dd464030e92cf535c0810d022e9db8"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/right_arm_link1.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/right_arm_link1.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 128486,
+   "sha256": "2238073490cc21a4185f6a517c97f41c4bc9a6b3e306e52fcb427ebc45ff2857"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/right_arm_link2.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/right_arm_link2.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 1007875,
+   "sha256": "b18e358563f2ddcbbba0e71f938d250d2f8cb55aad350322cd3adb70490dd334"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/right_arm_link3.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/right_arm_link3.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 920535,
+   "sha256": "2b639267dc9653801a379a158d78edeb3b880c99e17cf1cefbed71003ffeba09"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/right_arm_link4.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/right_arm_link4.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 1138546,
+   "sha256": "3e6fa7f2ffde117df1e7e8a16837d86ef9a9af180cea2b57dc0702afb0f5f3ba"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/right_arm_link5.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/right_arm_link5.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 1739548,
+   "sha256": "e33c60c7d24f4d5bd18e6f11b113f3e9b3dea6f204261f6680b1579ce496acc0"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/right_arm_link6.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/right_arm_link6.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 565888,
+   "sha256": "bed99c9c4ec7347617e11bb2e78af606298c01fd16a3fd1d756560e9d6358a10"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/right_arm_link7.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/right_arm_link7.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 578631,
+   "sha256": "3a88d2bd16e41ceb1694080988cf4c66552256d89edc3d476fbcb8682e567e9c"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/right_gripper_finger2.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/right_gripper_finger2.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 408180,
+   "sha256": "14761b42ed4990139e03be87d4a8339912ddc669ead36cb9938663eed40f908c"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/right_gripper_finger_link1.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/right_gripper_finger_link1.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 385671,
+   "sha256": "176accc44e8d5af78e9fa8970261496447b327756f159765d872640c2e36cde3"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/right_gripper_finger_link2.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/right_gripper_finger_link2.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 479863,
+   "sha256": "ef6fda4c694c3863fa84240881997a49a4990e4e128a55505443593913bc6186"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/right_gripper_link.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/right_gripper_link.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 225249,
+   "sha256": "39dcdbd1878badad82f28ad9942af4f631749d891a6d07dc7fb933163f8cbfd9"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/right_realsense_link.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/right_realsense_link.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 1229604,
+   "sha256": "d3c3a219b46776d98eb661c16e39cd892cc36bb722c616adc40640cccf225353"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/steer_motor_link1.STL",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/steer_motor_link1.STL",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 833884,
+   "sha256": "c65f641c1cb62e1e7ca3957c08b6ebb411fd914a4908483faf69ecb6520dff34"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/steer_motor_link1.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/steer_motor_link1.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 1538799,
+   "sha256": "94660fe46b37184e276b5ea69a7ace92b478bcade56cd2cd9323145329ce67d2"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/steer_motor_link2.STL",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/steer_motor_link2.STL",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 715784,
+   "sha256": "b7961835873a3dcbc61e07c77fc88d1cd975ee2f796bfc35990d381218cf67e8"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/steer_motor_link2.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/steer_motor_link2.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 1333566,
+   "sha256": "a57cd653ea205ef0ab95f6cee078a96eaaef5547b5a68166c4b51f98b2813fae"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/steer_motor_link3.STL",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/steer_motor_link3.STL",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 728384,
+   "sha256": "bb93fb5e995b1fec2dd0a57d7108c8c20108cc2d68c3d84d43aba4b30ac0c8fb"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/steer_motor_link3.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/steer_motor_link3.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 1318221,
+   "sha256": "8b362bd4b3a4c57a04d881e46d94138c494ae60712d6b75854e3aa63fa1a4c7c"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/torso_link1.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/torso_link1.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 2606650,
+   "sha256": "60352bbef5346ead8294f8f9215bf10c10d03da6cd3544a36515a1c11ec0bd40"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/torso_link2.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/torso_link2.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 1083483,
+   "sha256": "399a1a4ecdb6ea1b254970dee8af0f689aa7a15da4944ef608562731530010ca"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/torso_link3.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/torso_link3.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 908116,
+   "sha256": "422e2f51ee6b214d2304ba37c394ed174741bc0f5b9e980e6343c1e31ed81e71"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/torso_link4.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/torso_link4.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 7329476,
+   "sha256": "c73983626cb8f504575a89811c562af9566666671a6e74e6167c0a96090ae5f4"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/wheel_motor_link1.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/wheel_motor_link1.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 13454,
+   "sha256": "313336f9a4bcc23849492e93d96ad2565201f813beb430d38efff1ae43a43eb1"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/wheel_motor_link2.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/wheel_motor_link2.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 12938,
+   "sha256": "cece54c698f60cb4c9a40ab58e6ec7c37617b6f562d98eec1250a54982b96680"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/wheel_motor_link3.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/wheel_motor_link3.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 14181,
+   "sha256": "5245e4a6a4f297502d570cea73a930104c1583c0ae807531d53d119ac99b4cc9"
+  },
+  {
+   "path": "harness/v2/R1_pro/robot_config/meshes/zed_link.obj",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/robot_config/meshes/zed_link.obj",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 606374,
+   "sha256": "3dedcaba3bfbecf76d5a4a40dc64e4acd513db5e2fc41492df94137a37ee7116"
+  },
+  {
+   "path": "harness/v2/R1_pro/tools/util/geometry/assets/r1pro_gripper_geometry_3mm.npz",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/tools/util/geometry/assets/r1pro_gripper_geometry_3mm.npz",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 848294,
+   "sha256": "4320fc97090bd5342a6ce45100dfdc07c03a802a25ce697ba06584119be4f4ec"
+  },
+  {
+   "path": "harness/v2/R1_pro/tools/util/geometry/assets/r1pro_gripper_visual_mesh_open.npz",
+   "group": "v2-r1pro",
+   "remote": "v2/R1_pro/tools/util/geometry/assets/r1pro_gripper_visual_mesh_open.npz",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 215891,
+   "sha256": "d7ba61c53fa077fd4abb9b9f6d815413bbbabb7f0ba11483da63888ceb8ca9f8"
+  },
+  {
+   "path": "harness/v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq199/img_000017.depth.npy",
+   "group": "v2-tests",
+   "remote": "v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq199/img_000017.depth.npy",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 1228928,
+   "sha256": "46c90b10d82325fd7413b3c90acca8a27287fd09d60d86b40f260592367a2a09"
+  },
+  {
+   "path": "harness/v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq199/img_000017.rgb.npy",
+   "group": "v2-tests",
+   "remote": "v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq199/img_000017.rgb.npy",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 921728,
+   "sha256": "c912913996a2cf60f0abca4aefcfcd7e30e86d82b1da8635ceeeaad035b243fb"
+  },
+  {
+   "path": "harness/v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq199/img_000018.depth.npy",
+   "group": "v2-tests",
+   "remote": "v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq199/img_000018.depth.npy",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 1228928,
+   "sha256": "d7e440f359af23c6601ef86a9f24e0032cdcd2bbdaec9df9a3be76539dbce709"
+  },
+  {
+   "path": "harness/v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq199/img_000018.rgb.npy",
+   "group": "v2-tests",
+   "remote": "v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq199/img_000018.rgb.npy",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 921728,
+   "sha256": "beb6abd73694509383f2f7375224658c8e213f5e32d544a6b4550401c82a6b95"
+  },
+  {
+   "path": "harness/v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq214_actual_zplus/img_000019.depth.npy",
+   "group": "v2-tests",
+   "remote": "v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq214_actual_zplus/img_000019.depth.npy",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 1228928,
+   "sha256": "0fe1044c302e507f2439b77c464c3b68b7ce96a7b82321af03f7046367edd8f5"
+  },
+  {
+   "path": "harness/v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq214_actual_zplus/img_000019.rgb.npy",
+   "group": "v2-tests",
+   "remote": "v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq214_actual_zplus/img_000019.rgb.npy",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 921728,
+   "sha256": "db509680638f0af6b0d3fcd9bffb691a3fe25ce2ba3012cc7abca414af88688c"
+  },
+  {
+   "path": "harness/v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq214_actual_zplus/img_000020.depth.npy",
+   "group": "v2-tests",
+   "remote": "v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq214_actual_zplus/img_000020.depth.npy",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 1228928,
+   "sha256": "e39ece6e7b8247ce17eea06e8e95e973882ccda9ab6baad35d5f380f7e675513"
+  },
+  {
+   "path": "harness/v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq214_actual_zplus/img_000020.rgb.npy",
+   "group": "v2-tests",
+   "remote": "v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq214_actual_zplus/img_000020.rgb.npy",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 921728,
+   "sha256": "fa727b811bfa3250cda5aca6d11112877cc04b503aa81adb32a5791919201d35"
+  },
+  {
    "path": "reference_results/initial_states.json",
    "group": "reference",
    "remote": "v1/reference_results/initial_states.json",

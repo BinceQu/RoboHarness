@@ -1,0 +1,599 @@
+"""Shared robot functions used by: adjust_chassis, adjust_height, adjust_left_eef_pose_in_head_frame, adjust_left_eef_pose_in_wrist_frame, adjust_pitch, adjust_right_eef_pose_in_head_frame, adjust_right_eef_pose_in_wrist_frame, capture_head_camera, capture_left_wrist_camera, capture_right_wrist_camera, close_gripper, exec_plan_pose, measure_shoulder_distance, move_chassis_to_directly_facing_surface, move_chassis_to_floor_point, move_to_reach_point, move_tracked_point, open_gripper, plan_grasp_point_filter_rgbd_lite, plan_press_point, reset_body, set_arm_to_grasp_position, spin_to_facing_point, track_object_distance, tracked_point_planning_worker.
+
+All commands and geometry execute locally; no macro RPC or external project.
+"""
+from __future__ import annotations
+
+from tools.util.geometry.contract import ARM_DOF
+from tools.util.geometry.trunk_vertical_lift_local import TRUNK_JOINT_LIMITS
+import numpy as np
+import os
+import re
+import threading
+
+
+CONTROL_HZ = 30.0
+
+
+
+_CAPTURE_TRACE_ENABLED = (
+    os.environ.get("BEHAVIOR_OFFICIAL_CAPTURE_TRACE", "0")
+    .strip()
+    .lower()
+    in {"1", "true", "yes", "on"}
+)
+
+
+
+GRIPPER_CLOSE_UPPER_LIMIT_M = 0.05
+
+
+
+GRIPPER_OPEN_EFFORT_N = 3.0
+
+
+
+GRIPPER_OPEN_MAX_STEPS = 6
+
+
+
+GRIPPER_CLOSE_FULL_OPEN_QPOS_TOLERANCE_M = 0.0005
+
+
+
+TRUNK_LIMITS = TRUNK_JOINT_LIMITS.copy()
+
+
+
+if "_SESSION_LOCK" not in globals():
+    _SESSION_LOCK = threading.Lock()
+
+
+
+JOINT_TRAJECTORY_SCHEMA = "official_v2_joint_trajectory"
+
+
+
+JOINT_TRAJECTORY_SCHEMA_VERSION = 2
+
+
+
+MAX_PLAN_RECORD_BYTES = 8 * 1024 * 1024
+
+
+
+MAX_TRAJECTORY_WAYPOINTS = 4096
+
+
+
+DEFAULT_TRAJECTORY_STEP_RAD = 0.08
+
+
+
+TRAJECTORY_STEP_VALIDATION_EPS_RAD = 1e-6
+
+
+
+TRAJECTORY_JOINT_LIMIT_NUMERIC_TOLERANCE_RAD = 1e-6
+
+
+
+DEFAULT_START_ARM_TOLERANCE_RAD = 0.12
+
+
+
+DEFAULT_START_TRUNK_TOLERANCE_RAD = 0.08
+
+
+
+DEFAULT_START_GRIPPER_TOLERANCE_RAD = 0.01
+
+
+
+DEFAULT_WAYPOINT_SETTLE_TOLERANCE_RAD = 0.055
+
+
+
+DEFAULT_WAYPOINT_MAX_TRACKING_ERROR_RAD = 0.35
+
+
+
+DEFAULT_WAYPOINT_TIMEOUT_S = 1.5
+
+
+
+DEFAULT_TRACKING_STALL_STEPS = 15
+
+
+
+EXEC_SAFE_BACK_MIN_M = 0.0
+
+
+
+EXEC_SAFE_BACK_MAX_M = 0.50
+
+
+
+EXEC_SAFE_POS_TOL_M = 0.030
+
+
+
+EXEC_SAFE_ORI_TOL_DEG = 10.0
+
+
+
+EXEC_SAFE_FINAL_BRANCH_GAP_RAD = 0.85
+
+
+
+EXEC_FINAL_PLAN_POS_TOL_M = 0.010
+
+
+
+EXEC_FINAL_PLAN_ORI_TOL_DEG = 3.0
+
+
+
+EXEC_FINAL_PAIR_POS_TOL_M = 2.0 * EXEC_FINAL_PLAN_POS_TOL_M + 1e-4
+
+
+
+EXEC_FINAL_PAIR_ORI_TOL_DEG = 2.0 * EXEC_FINAL_PLAN_ORI_TOL_DEG + 1e-3
+
+
+
+ADJUST_HEIGHT_DEFAULT_TOLERANCE_RAD = 0.025
+
+
+
+ADJUST_HEIGHT_WAYPOINT_ADVANCE_TOLERANCE_RAD = 0.025
+
+
+
+ADJUST_HEIGHT_REQUIRED_STABLE_STEPS = 5
+
+
+
+ADJUST_HEIGHT_TRACKING_STALL_STEPS = 20
+
+
+
+ADJUST_HEIGHT_STABLE_QVEL_RAD_S = 0.05
+
+
+
+LOCKED_J8_INDEX = 7 if ARM_DOF == 8 else None
+
+
+
+LOCKED_J8_VALUE_RAD = 0.0
+
+
+
+LOCKED_J8_CAPTURE_TOLERANCE_RAD = 0.035
+
+
+
+LOCKED_J8_SERIALIZED_TOLERANCE_RAD = 1e-9
+
+
+
+_SESSION_ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$")
+
+
+
+_PLAN_ID_RE = re.compile(r"^plan_[A-Za-z0-9_-]{1,64}$")
+
+
+
+REACH_MAX_SHOULDER_DISTANCE_M = 0.70
+
+
+
+ADJUST_CHASSIS_FORWARD_TOL_M = 0.004
+
+
+
+ADJUST_CHASSIS_STALL_STEPS = 20
+
+
+
+ADJUST_CHASSIS_STALL_RATIO = 0.22
+
+
+
+ADJUST_CHASSIS_MIN_QVEL_MPS = 0.012
+
+
+
+ADJUST_CHASSIS_RETREAT_INITIAL_MPS = 0.08
+
+
+
+ADJUST_CHASSIS_RETREAT_MAX_MPS = 0.32
+
+
+
+ADJUST_CHASSIS_RETREAT_STALL_STEPS = 15
+
+
+
+ADJUST_CHASSIS_RETREAT_MIN_M = 0.025
+
+
+
+ADJUST_CHASSIS_RETREAT_MAX_M = 0.16
+
+
+
+ADJUST_CHASSIS_RETREAT_MARGIN_M = 0.015
+
+
+
+ADJUST_CHASSIS_SETTLE_STEPS = 15
+
+
+
+ADJUST_CHASSIS_SETTLE_SPEED_MPS = 0.015
+
+
+
+ADJUST_CHASSIS_SETTLE_YAW_RATE_RADPS = 0.02
+
+
+
+ADJUST_CHASSIS_BASE_MAX_LIN_MPS = 0.75
+
+
+
+ADJUST_CHASSIS_BASE_MAX_ANG_RADPS = 1.0
+
+
+
+ADJUST_CHASSIS_LINEAR_DECEL_MPS2 = 0.35
+
+
+
+ADJUST_CHASSIS_LINEAR_NEAR_SPEED_MPS = 0.10
+
+
+
+ADJUST_CHASSIS_LINEAR_FINAL_SPEED_MPS = 0.06
+
+
+
+ADJUST_CHASSIS_SPIN_GAIN = 1.8
+
+
+
+NAVIGATE_TO_LINEAR_DECEL_MPS2 = 2.0
+
+
+
+NAVIGATE_TO_SPIN_GAIN = 6.0
+
+
+
+_ARM_AXES = np.array(
+    [
+        [0.0, 1.0, 0.0],
+        [1.0, 0.0, 0.0],
+        [0.0, 0.0, 1.0],
+        [0.0, 1.0, 0.0],
+        [0.0, 0.0, 1.0],
+        [0.0, 1.0, 0.0],
+        [1.0, 0.0, 0.0],
+        [0.0, 0.0, 1.0],
+    ],
+    dtype=np.float64,
+)
+
+
+
+_ARM_BASE_ORIGINS = {
+    "left": np.array([-0.00048618, 0.097234, 0.30302], dtype=np.float64),
+    "right": np.array([-0.00048706, -0.097236, 0.30302], dtype=np.float64),
+}
+
+
+
+_ARM_JOINT_ORIGINS = {
+    "left": np.array(
+        [
+            [0.0, 0.0735, 0.0],
+            [0.025012, 0.081265, 0.0],
+            [-0.025012, 0.0, -0.1155],
+            [0.0, 0.035065, -0.1945],
+            [0.0, -0.035065, -0.095],
+            [0.0, -0.028, -0.16305],
+            [0.0295, 0.028, 0.0],
+            [-0.0295, 0.0, -0.16065],
+        ],
+        dtype=np.float64,
+    ),
+    "right": np.array(
+        [
+            [0.0, -0.0735, 0.0],
+            [0.023988, -0.081265, 0.0],
+            [-0.023988, 0.0, -0.1155],
+            [0.0, 0.035058, -0.1945],
+            [0.0, -0.035058, -0.095],
+            [0.0, 0.028001, -0.16305],
+            [0.0295, -0.028001, 0.0],
+            [-0.0295, 0.0, -0.16065],
+        ],
+        dtype=np.float64,
+    ),
+}
+
+
+
+_ARM_LIMITS = {
+    "left": np.array(
+        [
+            [-4.4506, 1.3090],
+            [-0.1745, 3.1416],
+            [-2.356196, 2.356196],
+            [-2.0944, 0.3491],
+            [-2.356196, 2.356196],
+            [-1.047198, 1.047198],
+            [-1.5708, 1.5708],
+            [0.0, 0.0],
+        ],
+        dtype=np.float64,
+    ),
+    "right": np.array(
+        [
+            [-4.4506, 1.3090],
+            [-3.1416, 0.1745],
+            [-2.356196, 2.356196],
+            [-2.0944, 0.3491],
+            [-2.356196, 2.356196],
+            [-1.047198, 1.047198],
+            [-1.5708, 1.5708],
+            [0.0, 0.0],
+        ],
+        dtype=np.float64,
+    ),
+}
+
+
+
+ADJUST_EEF_LOCAL_BUILD = (
+    "official_v2_observation_static_fk_action_v2_j567_v36_guided_safety_bounded"
+)
+
+
+
+ADJUST_EEF_RELINEARIZATION_MULTIPLIER = 10
+
+
+
+ADJUST_EEF_GUIDED_RELINEARIZATION_MULTIPLIER = 4
+
+
+
+ADJUST_EEF_GUIDED_JOINT_TRACKING_MULTIPLIER = 3
+
+
+
+ADJUST_EEF_GUIDED_STEP_SCALE = 2.0
+
+
+
+ADJUST_EEF_SETTLE_MIN_STEPS = 0
+
+
+
+ADJUST_EEF_SETTLE_MAX_STEPS = 2
+
+
+
+ADJUST_EEF_FAILURE_SETTLE_STEPS = 2
+
+
+
+ADJUST_EEF_SUCCESS_SETTLE_MAX_STEPS = 1
+
+
+
+ADJUST_EEF_SETTLED_QVEL_RAD_S = 0.03
+
+
+
+ADJUST_EEF_ADAPTIVE_MAX_SCALE = 2.0
+
+
+
+ADJUST_EEF_ADAPTIVE_MIN_SCALE = 0.5
+
+
+
+ADJUST_EEF_ADAPTIVE_SCALE_INCREMENT = 0.5
+
+
+
+ADJUST_EEF_ADAPTIVE_GOOD_PROGRESS_RATIO = 0.85
+
+
+
+ADJUST_EEF_ADAPTIVE_POOR_PROGRESS_RATIO = 0.45
+
+
+
+ADJUST_EEF_ADAPTIVE_GOOD_TRACKING_ERROR_RAD = 0.018
+
+
+
+ADJUST_EEF_ADAPTIVE_POOR_TRACKING_ERROR_RAD = 0.035
+
+
+
+ADJUST_EEF_ADAPTIVE_NEAR_POSITION_M = 0.035
+
+
+
+ADJUST_EEF_ADAPTIVE_NEAR_ORIENTATION_DEG = 6.0
+
+
+
+ADJUST_EEF_STALL_STEPS = 3
+
+
+
+ADJUST_EEF_MIN_COMMAND_RAD = 0.003
+
+
+
+ADJUST_EEF_MIN_PROGRESS_RATIO = 0.15
+
+
+
+ADJUST_EEF_POSE_STALL_STEPS = 6
+
+
+
+ADJUST_EEF_POSE_PROGRESS_EPS = 0.01
+
+
+
+ADJUST_EEF_GROSS_PREFLIGHT_MAX_NORMALIZED_ERROR = 4.0
+
+
+
+ADJUST_EEF_ORIENTATION_DIVERGENCE_MARGIN_DEG = 12.0
+
+
+
+ADJUST_EEF_ORIENTATION_DIVERGENCE_TOL_MULTIPLIER = 4.0
+
+
+
+ADJUST_EEF_NEAR_ZERO_COMMAND_RAD = 0.0005
+
+
+
+ADJUST_EEF_NEAR_ZERO_COMMAND_STEPS = 3
+
+
+
+ADJUST_EEF_MAX_TRACKING_ERROR_RAD = 0.010
+
+
+
+ADJUST_EEF_BASE_LINEAR_DISTURBANCE_MPS = 0.003
+
+
+
+ADJUST_EEF_BASE_YAW_DISTURBANCE_RAD_S = 0.003
+
+
+
+ADJUST_EEF_BASE_IMMEDIATE_LINEAR_MPS = 0.012
+
+
+
+ADJUST_EEF_BASE_IMMEDIATE_YAW_RAD_S = 0.012
+
+
+
+ADJUST_EEF_BASE_DISTURBANCE_STEPS = 3
+
+
+
+ADJUST_EEF_BASE_TRANSLATION_LIMIT_M = 0.001
+
+
+
+ADJUST_EEF_BASE_YAW_LIMIT_RAD = 0.002
+
+
+
+ADJUST_EEF_TRUNK_DRIFT_LIMIT_RAD = 0.005
+
+
+
+MOVE_POINT_TO_POINT_MAX_TRANSLATION_M = 0.75
+
+
+
+MOVE_POINT_TO_POINT_START_ARM_TOLERANCE_RAD = 0.03
+
+
+
+MOVE_POINT_TO_POINT_START_GRIPPER_TOLERANCE_RAD = 0.01
+
+
+
+MOVE_POINT_TO_POINT_STALL_POSITION_DELTA_RAD = 1.0e-4
+
+
+
+MOVE_POINT_TO_POINT_STALL_QVEL_RAD_S = 0.03
+
+
+
+MOVE_POINT_TO_POINT_GRIPPER_SERVO_KP_N_PER_M = 40.0
+
+
+
+MOVE_POINT_TO_POINT_GRIPPER_SERVO_KD_N_PER_MPS = 1.0
+
+
+
+MOVE_POINT_TO_POINT_GRIPPER_SERVO_MAX_N = 0.5
+
+
+
+MOVE_TRACKED_POINT_OVERLAP_POSE_FAMILY_BASE_COUNT = 3
+
+
+
+MOVE_TRACKED_POINT_OVERLAP_POSE_FAMILY_MAX_IK_TARGETS = 32
+
+
+
+MOVE_TRACKED_POINT_OVERLAP_POSE_FAMILY_COARSE_BASE_COUNT = 1
+
+
+
+MOVE_TRACKED_POINT_OVERLAP_POSE_FAMILY_COARSE_MAX_IK_TARGETS = 8
+
+
+
+MOVE_TRACKED_POINT_OVERLAP_POSE_FAMILY_COARSE_ANGLE_OFFSETS_DEG = (
+    -20.0,
+    0.0,
+    20.0,
+)
+
+
+
+MOVE_TRACKED_POINT_OVERLAP_POSE_FAMILY_ANGLE_OFFSETS_DEG = (
+    -20.0,
+    -10.0,
+    0.0,
+    10.0,
+    20.0,
+)
+
+
+
+MOVE_TRACKED_POINT_MAX_JOINT_STEP_RAD = 0.018
+
+
+
+MOVE_TRACKED_POINT_GRIPPER_OPEN_HOLD_THRESHOLD_M = 0.045
+
+
+
+MOVE_TRACKED_POINT_GRIPPER_OPEN_RECOVERY_DEADBAND_M = 0.001
+
+
+
+MOVE_TRACKED_POINT_GRIPPER_OPEN_RECOVERY_EFFORT_N = 3.0
+
+
+
+MOVE_TRACKED_OVERLAP_FALLBACK_POLICY = "best_accuracy_then_minimum_overlap_v1"
+

@@ -1,0 +1,37 @@
+{
+  "source_sha256": "75bf7818f314042c72e40390e6c8978aa905f9a934015d0c29499e107f0e505e",
+  "reviewed_updates": {
+    "plan_press_point": {
+      "date": "2026-10-13",
+      "baseline_sha256": "0c9ccdcc5dd84296c73e92cea17815753d0d4aed35725dbcde02d15e0d84f095",
+      "sha256": "34d89639266b6fe821c7d5c47f77e2d3af90c0f70ab076c66bbc872bace16c52",
+      "reason": "An unavailable capability must reject without sending a hold command or consuming a tick. The official observation-only boundary remains enforced. Regression: test_unavailable_tools_send_no_commands_and_return_current_head."
+    }
+  },
+  "functions": {
+    "capture_head_camera": "d6aaeb17a140f8a4e389303a2d310dc90f438cad39a2d44cd59dc3c8832c8480",
+    "capture_left_wrist_camera": "dd1d24e15d7b1cbf70ebaba6e52f675dca198f487935b4afc9aa58e3b5562326",
+    "capture_right_wrist_camera": "974f12781256f35c689e1bc8937900fa35979c817af690a2f5d70b0b86acc9c4",
+    "track_object_distance": "29cb55aa42fac7431336133df9dd3f891e63ade1d75760c2871934a1965f53b9",
+    "move_chassis_to_floor_point": "4a23bf005aaa14c281a1731bc559399d7e4ba2346ff92c7ee5dc3dd33cc1fd7c",
+    "move_chassis_to_directly_facing_surface": "76e5d18d1d88366d4f9a6bdedd969e4714f7fdcb8d87c22c08286070b5340de9",
+    "adjust_chassis": "e9c6c67e9d000b79fc67ed341d9324172bd70858a110237cad7e561815255f24",
+    "adjust_pitch": "e513100ebb91f94fa1e88c269cdb52371bab68d8bee938a50d1310d03ed3f5bf",
+    "adjust_height": "1c0163a87aae9a802367e48eebad97fd70c41cab905204128d91b9de81304a56",
+    "spin_to_facing_point": "0caa3f67194f1bd87aa3fd0ea202ad860788cf6227f3a8d79d6224bb0d03290c",
+    "open_gripper": "16b8fc6db4815846a76cf5524eee5d77a9f7c96685e6792b5f60f2d580dda140",
+    "close_gripper": "c9e1101bd668f559339734aeaf9b3b2d0498155da90cd23ec14030a89f9505af",
+    "adjust_left_eef_pose_in_head_frame": "00d4cc977ab3698e7b0702000f1fbcce78e5a61db2faf2738533a30541a2db5d",
+    "adjust_right_eef_pose_in_head_frame": "86806956ee4ce27940602c6cd281f1db6c8225b91582f7e5b9936e30ef22c28e",
+    "adjust_left_eef_pose_in_wrist_frame": "3565f0f77115fff2dbf93827ca132a83edeae3db34dded6289aa596f05f303ce",
+    "adjust_right_eef_pose_in_wrist_frame": "ef1e0a6143f891790b0fdaf8b2d29c515e7bbdbcb714d4fee597763c704618ad",
+    "move_tracked_point": "0c2e16df9a4ab50a9f50ab1e120e319dde4435859a60f290189337fa87468f0b",
+    "move_to_reach_point": "7353d4a5e7db0f22f90faa9a53926100977fb8634c9c557f915a319ea8011abd",
+    "measure_shoulder_distance": "25b63251846552f4bdc088beb8ff173fe6d1f828dc89b902e479fac21fde5531",
+    "plan_grasp_point_filter_rgbd_lite": "a6157f9ff9327c024409edc252e5b20f1a39886a79049e7800201ee04f4dd73b",
+    "plan_press_point": "0c9ccdcc5dd84296c73e92cea17815753d0d4aed35725dbcde02d15e0d84f095",
+    "exec_plan_pose": "39344614a882bfc96fdaa4bb753b7601d5624771083889c8d2e9c431345e62c7",
+    "set_arm_to_grasp_position": "2b8f3e8f1072f10ec5fb6add771d7d63dc5ca0e88b9ff1b21f2355bb027a389f",
+    "reset_body": "f8db5dcaf9366907a51ba0ec12cf8254851df2f8566ad3156172ea9ba45a9df7"
+  }
+}

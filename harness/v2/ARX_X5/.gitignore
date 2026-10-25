@@ -1,0 +1,11 @@
+.python/
+.venv/
+.runtime/
+.session.json
+__pycache__/
+*.pyc
+.pytest_cache/
+perception/*
+!perception/README.md
+tool_call_history/*
+!tool_call_history/README.md

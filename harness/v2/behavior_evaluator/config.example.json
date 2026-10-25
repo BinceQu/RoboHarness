@@ -1,0 +1,21 @@
+{
+  "interface_python": "/path/to/behavior/bin/python",
+  "evaluator_python": "/path/to/behavior-eval-test-v391/bin/python",
+  "agent_python": "/path/to/RoboHarness/harness/v2/R1_pro/.venv/bin/python",
+  "data_path": "/path/to/behavior-data",
+  "model_url": "http://127.0.0.1:31000",
+  "model": "Qwen3.8-Flash-Next-FP8",
+  "claude_bin": "/path/to/claude",
+  "evaluator_dependencies": "/path/to/behavior_official_deps_v3.9.3",
+  "cache_dir": "/path/to/roboharness-v2-cache",
+  "unmask_evaluator_cuda": false,
+  "startup_timeout_s": 2400,
+  "session_timeout_s": 0,
+  "task_ports": {
+    "task01": {
+      "http": 16071,
+      "policy": 16070,
+      "gate": 16072
+    }
+  }
+}

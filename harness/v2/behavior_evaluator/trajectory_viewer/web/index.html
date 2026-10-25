@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RoboHarness · 工作区轨迹</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<header><div class="brand">ROBOHARNESS V2 <span>轨迹浏览</span></div><div class="header-right"><span id="connection" role="status">正在读取记录…</span><label><input id="live" type="checkbox" checked> 自动刷新</label><button id="refresh">刷新</button></div></header>
+<main>
+<section class="session-bar"><div><p class="eyebrow">R1 PRO / WORKSPACE HARNESS</p><h1 id="title">模型的完整轨迹</h1><p id="subtitle">Thinking → Tool call → Tool result → Images</p></div><div class="session-picker"><label for="session">选择轨迹</label><select id="session" aria-label="选择轨迹"></select></div></section>
+<nav class="tabs" aria-label="轨迹视图"><button data-tab="calls" class="active">动作轨迹</button><button data-tab="access">工作区访问</button><button data-tab="about">说明与成绩</button><button data-tab="native">原始日志</button></nav>
+<section id="calls-tab" class="tab-content">
+<div class="conversation-controls"><select id="call-filter" aria-label="筛选工具调用"><option value="all">All tools · 全部工具</option><option value="action">Action only · Robot</option></select><input id="call-search" type="search" placeholder="搜索 Thinking、调用命令、返回内容" aria-label="搜索工具调用"><span id="call-count"></span><button id="first">回到开头</button><button id="latest">到最新</button></div>
+<div class="conversation-head"><span>Thinking <small>调用前的模型原文</small></span><span>Tool call <small>完整命令与参数</small></span><span>Tool result <small>文字返回</small></span><span>Images <small>工具返回的图片</small></span></div>
+<div id="conversation-list"><p class="empty">正在读取原生会话…</p></div>
+<p class="footnote">按原生会话顺序展示已保存的内容，图片取自实际 image block。长文本可展开；未记录的系统提示词和请求时的上下文裁剪无法从历史日志还原。</p>
+</section>
+<section id="native-tab" class="tab-content" hidden><div class="notice">原生 Claude JSONL 的已保存记录。图片读取自原始记录中的实际 image block；Thinking 按日志原文显示。没有保存的系统提示词不会补写。</div><div class="filters"><input id="native-search" type="search" placeholder="搜索完整原文" aria-label="搜索原始会话"><select id="native-kind" aria-label="消息类型"><option value="">全部消息</option><option value="assistant">模型输出 / Thinking / 工具请求</option><option value="user">Prompt / 工具回包</option><option value="system">原生系统事件 / 压缩</option><option value="attachment">上下文与 Hook 事件</option></select><button id="native-go">搜索</button><button id="native-prev">上一页</button><button id="native-next">下一页</button><span id="native-count"></span></div><div id="native-list"></div></section>
+<section id="access-tab" class="tab-content" hidden><div class="notice">执行工具不等于阅读工具实现。这里分别记录原生 Read / 文本读取、参数 schema、Python 执行、程序读文件和 Skill 注入；每项都可跳回原始消息核对。</div><div id="access-summary" class="stats compact-stats"></div><div class="filters"><input id="access-search" type="search" placeholder="搜索文件路径" aria-label="搜索工作区访问"><select id="access-kind" aria-label="访问方式"><option value="">全部访问方式</option></select></div><div class="table-wrap"><table><thead><tr><th>文件 / 路径</th><th>访问方式</th><th>次数</th><th>原始证据</th></tr></thead><tbody id="access-list"></tbody></table></div><div id="skill-access"></div><p class="footnote">Shell 和 Python 读取基于可识别的命令与字面量路径；不能覆盖动态生成的任意路径，也不能证明模型理解了文件内容。自动库加载不计为模型阅读。</p></section>
+<section id="about-tab" class="tab-content" hidden><section id="stats" class="stats"></section><div class="about-grid"><section class="panel"><h2>这轮的正式成绩</h2><div id="scores"></div></section><section class="panel"><h2>轨迹展示范围</h2><p>All tools 包括 Bash、Read、搜索、查看 schema 等每一次原生工具调用。Action only 筛选机器人 Python 工具和关节 API 调用，包含感知与 Skill 切换，不含只读源码和查看 schema。</p><p>Thinking 按模型回复 ID 关联；工具返回按 tool_use_id 配对。并行调用共用 Thinking 时会明确标注。调用命令保留原文，结构化返回按字段显示，图片可点击打开原尺寸。</p><p>User、压缩摘要及已保存的上下文注入仍按顺序列出。Hook 的执行状态、时间戳、重复 stdout 和事件 JSON 只留在原始日志中。这里是已保存的对话历史，不能还原未保存的完整系统提示词，也不代表压缩后仍携带全部历史。</p></section></div><section class="panel"><h2>任务 Prompt 与来源</h2><p id="provenance"></p><a id="prompt-link" target="_blank">打开本次原始 Prompt</a><details id="prompt-details"><summary>展开完整任务 Prompt</summary><pre id="prompt-text"></pre></details><p id="audit-status"></p></section></section>
+</main>
+<dialog id="image-dialog"><div class="dialog-bar"><span id="image-caption"></span><a id="image-original" target="_blank">打开原图</a><button id="close-image">关闭</button></div><img id="full-image" alt="轨迹原始图像"></dialog>
+<script src="/app.js"></script>
+</body></html>

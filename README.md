@@ -35,6 +35,7 @@ The reported BEHAVIOR results use Claude Code 2.1.259 with
 | [`interface/`](interface) | RGB-D observations, robot control and interactive interface |
 | [`harness/claude_code/`](harness/claude_code) | Claude Code harness |
 | [`harness/codex/`](harness/codex) | Codex harness |
+| [`harness/v2/`](harness/v2) | RoboHarness V2 workspace harness (R1 Pro on BEHAVIOR, ARX X5 on RoboDojo); separate entry point, not used by the commands below |
 | [`prompt/`](prompt) | Task-specific instructions for household manipulation |
 | [`tasks/`](tasks) | Task definitions, evaluation instances and step budgets |
 | [`reference_results/`](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/tree/main/v1/reference_results) | Reference evaluator scores (hosted on Hugging Face; `setup.sh` fetches them) |

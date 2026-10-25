@@ -1,0 +1,44 @@
+{
+  "schema": "robodojo_multicamera_tracking_fixture_v1",
+  "source": {
+    "interface_port": 15052,
+    "session_id": "web-25052-03a6dbc3-8643-4bdf-b35c-604a6697fbe7",
+    "episode_id": "c01fe9c05657457ba250dfd044d88525",
+    "observation_sequence": 199,
+    "task": "insert_key"
+  },
+  "semantic_seed_points": [
+    {
+      "image_id": "img_000017",
+      "camera_role": "right_wrist",
+      "qwen_relative_uv": [499, 641]
+    },
+    {
+      "image_id": "img_000018",
+      "camera_role": "head",
+      "qwen_relative_uv": [598, 536]
+    }
+  ],
+  "annotation_interpretation": {
+    "same_object": true,
+    "same_exact_material_point": false,
+    "reason": "The supplied clicks land on different locations on the key. Exact RGB-D unprojection differs by about 10 mm; same-material-point cross-view reprojection is the coordinate-frame acceptance test."
+  },
+  "measured_baseline": {
+    "official_hand_eye_translation_error_m": 1.4338053153902897e-08,
+    "official_hand_eye_max_rotation_element_error": 1.902493071245161e-07,
+    "supplied_seed_position_error_m": 0.010761877843291825,
+    "wrist_seed_reprojected_into_head_qwen_uv": [593.3556854453811, 543.6755482948131],
+    "wrist_to_head_corresponding_surface_error_m": 5.049581098157595e-06,
+    "head_seed_reprojected_into_wrist_qwen_uv": [554.466608192939, 571.7021186299743],
+    "head_to_wrist_corresponding_surface_error_m": 0.000861383856836513,
+    "right_eef_z_motion_max_tracking_error_m": 0.0010715700285955205,
+    "right_eef_z_motion_final_tracking_error_m": 0.0010515564900356535
+  },
+  "acceptance": {
+    "cross_camera_position_error_m_max": 0.005,
+    "cross_camera_comparison": "reproject_the_same_material_point_and_resample_evaluator_depth",
+    "right_eef_test_delta_in_robodojo_env_m": [0.0, 0.0, 0.1],
+    "post_motion_cross_camera_position_error_m_max": 0.005
+  }
+}

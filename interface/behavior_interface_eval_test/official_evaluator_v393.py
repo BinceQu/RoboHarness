@@ -15,6 +15,10 @@ from behavior_interface_eval_test.rollout_budget import (
     ROLLOUT_BUDGET_KEY, budget_snapshot, unavailable,
 )
 
+# Opt-in for workspace (V2) runs, whose sequential instances may follow a task
+# whose transition rules deleted task objects. Unset keeps the official path.
+RESTORE_TASK_OBJECTS = os.environ.get("BEHAVIOR_EVAL_TEST_RESTORE_TASK_OBJECTS") == "1"
+
 
 def route_evaluator_class(base_cls):
     class RouteEvaluator(base_cls):
@@ -28,6 +32,13 @@ def route_evaluator_class(base_cls):
             self._budget_episode_id = uuid.uuid4().hex
             self._resident_tick_budget = None
             super().__init__(cfg)
+            if RESTORE_TASK_OBJECTS:
+                from behavior_interface_eval_test.evaluator_lifecycle import (
+                    configure_headless_property_window, task_object_names,
+                )
+                self._route_object_names = task_object_names(self.route_state.env_accessor)
+                if cfg.get("headless"):
+                    configure_headless_property_window()
 
         @property
         def route_state(self):
@@ -63,7 +74,18 @@ def route_evaluator_class(base_cls):
         def load_batch(self, env_idx_to_instance, **kwargs):
             if set(env_idx_to_instance) != {0}:
                 raise ValueError("A route can load only logical environment 0")
+            if RESTORE_TASK_OBJECTS:
+                from behavior_interface_eval_test.evaluator_lifecycle import (
+                    restore_removed_task_objects, task_object_names,
+                )
+                restored = restore_removed_task_objects(
+                    self.route_state.env_accessor, self._route_object_names)
+                if restored:
+                    print("[v2-evaluator] Restored removed task objects before loading the next instance: "
+                          + ", ".join(restored), flush=True)
             result = super().load_batch(env_idx_to_instance, **kwargs)
+            if RESTORE_TASK_OBJECTS:
+                self._route_object_names = task_object_names(self.route_state.env_accessor)
             self._budget_episode_id = uuid.uuid4().hex
             self._operator_current_instance_id = int(env_idx_to_instance[0])
             port = os.environ.get("BEHAVIOR_EVAL_TEST_PORT", "")

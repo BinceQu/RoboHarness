@@ -31,6 +31,7 @@ interface/          RGB-D 观测、机器人控制和交互界面
 harness/
   claude_code/      Claude Code harness
   codex/            Codex harness
+  v2/               RoboHarness V2 工作空间式 harness（独立入口，下文命令不使用）
 prompt/             各项家居操作任务的专用提示词
 tasks/              任务定义、评测实例和步数预算
 reference_results/  参考评测成绩（托管于 Hugging Face，setup.sh 自动下载）

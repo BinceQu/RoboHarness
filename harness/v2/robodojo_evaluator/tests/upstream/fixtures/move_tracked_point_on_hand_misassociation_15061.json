@@ -1,0 +1,24 @@
+{
+  "source_job": "job-1788239934861",
+  "observation_sequence": 5840,
+  "image_size": [720, 720],
+  "intrinsics": {
+    "fx": 306.0,
+    "fy": 306.0,
+    "cx": 360.0,
+    "cy": 360.0
+  },
+  "expected": [
+    {"pixel": [456.87, 252.25], "depth_m": 0.33323},
+    {"pixel": [569.88, 245.71], "depth_m": 0.28808}
+  ],
+  "wrong_individual_candidates": [
+    {"pixel": [459.57, 262.66], "depth_m": 0.33397},
+    {"pixel": [566.99, 288.00], "depth_m": 0.24886}
+  ],
+  "reference_pair_distance_m": 0.10303208678537976,
+  "wrong_raw_pair_distance_m": 0.11435671825955408,
+  "wrong_raw_pair_distance_error_m": 0.011324631474174326,
+  "pair_distance_gate_m": 0.025,
+  "eef_anchor_gate_m": 0.050
+}

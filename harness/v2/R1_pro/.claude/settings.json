@@ -1,0 +1,94 @@
+{
+  "env": {
+    "API_TIMEOUT_MS": "3600000",
+    "CLAUDE_STREAM_IDLE_TIMEOUT_MS": "3600000",
+    "CLAUDE_CODE_TOTAL_TOKENS_REMINDER": "off"
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -m tools.util.stop_check",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -m tools.util.observation_hook",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash|TaskOutput",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -m tools.util.observation_hook",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "Bash|TaskOutput",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -m tools.util.observation_hook",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact|fork",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -m tools.util.session_context --part 1",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "python -m tools.util.session_context --part 2",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "python -m tools.util.session_context --part 3",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "python -m tools.util.session_context --part 4",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "python -m tools.util.session_context --part 5",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "python -m tools.util.session_context --part 6",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "totalTokensReminder": "off"
+}

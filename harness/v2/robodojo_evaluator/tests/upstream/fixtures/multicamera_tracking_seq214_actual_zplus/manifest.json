@@ -1,0 +1,44 @@
+{
+  "schema": "robodojo_multicamera_tracking_fixture_v1",
+  "source": {
+    "interface_port": 15052,
+    "session_id": "web-25052-03a6dbc3-8643-4bdf-b35c-604a6697fbe7",
+    "episode_id": "c01fe9c05657457ba250dfd044d88525",
+    "observation_sequence": 214,
+    "task": "insert_key"
+  },
+  "motion": {
+    "tool": "adjust_right_eef_pose_in_head_frame",
+    "request_delta_m": [0.0, 0.0, 0.1],
+    "start_eef_position_robodojo_env_m": [
+      0.12326258420944214,
+      -0.1555979996919632,
+      0.9236468076705933
+    ],
+    "observed_eef_position_robodojo_env_m": [
+      0.12338094413280487,
+      -0.1557953655719757,
+      1.019161343574524
+    ],
+    "observed_translation_norm_m": 0.0955148082152187,
+    "position_tolerance_m": 0.008,
+    "action_steps": 15,
+    "sequence_before": 199,
+    "sequence_after": 214
+  },
+  "captures": [
+    {
+      "image_id": "img_000019",
+      "camera_role": "head"
+    },
+    {
+      "image_id": "img_000020",
+      "camera_role": "right_wrist"
+    }
+  ],
+  "paired_pre_motion_fixture": "../multicamera_tracking_seq199",
+  "acceptance": {
+    "same_material_point_cross_camera_error_m_max": 0.005,
+    "wrist_camera_pose_source": "right_eef_pose_times_official_x5_hand_eye"
+  }
+}

@@ -1,0 +1,462 @@
+{
+  "urdf_sha256": "f617d7c9d4ab8744a5b3664afe7364aacb742d39d5a3f552dcab36dc058a72e1",
+  "renderer": "llvmpipe (LLVM 15.0.7, 256 bits)",
+  "joints": [
+    {
+      "name": "torso_joint1",
+      "action_index": 3,
+      "meaning": "Lower torso pitch; changes the trunk's lean and camera position.",
+      "command": "absolute angle in rad",
+      "position_unit": "rad",
+      "position_limits": [
+        -1.1345,
+        1.8326
+      ],
+      "axis_in_joint_frame": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "parent": "base_link",
+      "child": "torso_link1",
+      "diagram": "joints/torso_joint1.png"
+    },
+    {
+      "name": "torso_joint2",
+      "action_index": 4,
+      "meaning": "Middle torso pitch; combines with T1/T3 to change height.",
+      "command": "absolute angle in rad",
+      "position_unit": "rad",
+      "position_limits": [
+        -2.7925,
+        2.5307
+      ],
+      "axis_in_joint_frame": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "parent": "torso_link1",
+      "child": "torso_link2",
+      "diagram": "joints/torso_joint2.png"
+    },
+    {
+      "name": "torso_joint3",
+      "action_index": 5,
+      "meaning": "Upper torso pitch; combines with T1/T2 to orient the chest/head.",
+      "command": "absolute angle in rad",
+      "position_unit": "rad",
+      "position_limits": [
+        -1.8326,
+        1.5708
+      ],
+      "axis_in_joint_frame": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "parent": "torso_link2",
+      "child": "torso_link3",
+      "diagram": "joints/torso_joint3.png"
+    },
+    {
+      "name": "torso_joint4",
+      "action_index": 6,
+      "meaning": "Chest yaw. Locked at zero by the submitted evaluator profile.",
+      "command": "0 only (locked)",
+      "position_unit": "rad",
+      "position_limits": [
+        -3.0543,
+        3.0543
+      ],
+      "axis_in_joint_frame": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "parent": "torso_link3",
+      "child": "torso_link4",
+      "diagram": "joints/torso_joint4.png"
+    },
+    {
+      "name": "left_arm_joint1",
+      "action_index": 7,
+      "meaning": "First shoulder rotation: moves the entire arm about the marked axis.",
+      "command": "absolute angle in rad",
+      "position_unit": "rad",
+      "position_limits": [
+        -4.4506,
+        1.309
+      ],
+      "axis_in_joint_frame": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "parent": "left_arm_base_link",
+      "child": "left_arm_link1",
+      "diagram": "joints/left_arm_joint1.png"
+    },
+    {
+      "name": "left_arm_joint2",
+      "action_index": 8,
+      "meaning": "Second shoulder rotation: swings the entire upper arm about its local axis.",
+      "command": "absolute angle in rad",
+      "position_unit": "rad",
+      "position_limits": [
+        -0.1745,
+        3.1416
+      ],
+      "axis_in_joint_frame": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "parent": "left_arm_link1",
+      "child": "left_arm_link2",
+      "diagram": "joints/left_arm_joint2.png"
+    },
+    {
+      "name": "left_arm_joint3",
+      "action_index": 9,
+      "meaning": "Upper-arm axial rotation: changes the elbow's bending plane.",
+      "command": "absolute angle in rad",
+      "position_unit": "rad",
+      "position_limits": [
+        -2.356196,
+        2.356196
+      ],
+      "axis_in_joint_frame": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "parent": "left_arm_link2",
+      "child": "left_arm_link3",
+      "diagram": "joints/left_arm_joint3.png"
+    },
+    {
+      "name": "left_arm_joint4",
+      "action_index": 10,
+      "meaning": "Elbow bend: rotates the forearm relative to the upper arm.",
+      "command": "absolute angle in rad",
+      "position_unit": "rad",
+      "position_limits": [
+        -2.0944,
+        0.3491
+      ],
+      "axis_in_joint_frame": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "parent": "left_arm_link3",
+      "child": "left_arm_link4",
+      "diagram": "joints/left_arm_joint4.png"
+    },
+    {
+      "name": "left_arm_joint5",
+      "action_index": 11,
+      "meaning": "Forearm axial rotation: rotates the wrist and gripper about the forearm.",
+      "command": "absolute angle in rad",
+      "position_unit": "rad",
+      "position_limits": [
+        -2.356196,
+        2.356196
+      ],
+      "axis_in_joint_frame": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "parent": "left_arm_link4",
+      "child": "left_arm_link5",
+      "diagram": "joints/left_arm_joint5.png"
+    },
+    {
+      "name": "left_arm_joint6",
+      "action_index": 12,
+      "meaning": "Wrist bend: changes fingertip direction relative to the forearm.",
+      "command": "absolute angle in rad",
+      "position_unit": "rad",
+      "position_limits": [
+        -1.047198,
+        1.047198
+      ],
+      "axis_in_joint_frame": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "parent": "left_arm_link5",
+      "child": "left_arm_link6",
+      "diagram": "joints/left_arm_joint6.png"
+    },
+    {
+      "name": "left_arm_joint7",
+      "action_index": 13,
+      "meaning": "Final wrist rotation before J8; see the marked local axis.",
+      "command": "absolute angle in rad",
+      "position_unit": "rad",
+      "position_limits": [
+        -1.5708,
+        1.5708
+      ],
+      "axis_in_joint_frame": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "parent": "left_arm_link6",
+      "child": "left_arm_link7",
+      "diagram": "joints/left_arm_joint7.png"
+    },
+    {
+      "name": "left_arm_joint8",
+      "action_index": 14,
+      "meaning": "Tool-axis roll. Direct joint commands can rotate it; baseline motion tools normally pin it at zero.",
+      "command": "absolute angle in rad",
+      "position_unit": "rad",
+      "position_limits": [
+        -3.141592653589793,
+        3.141592653589793
+      ],
+      "axis_in_joint_frame": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "parent": "left_arm_link7",
+      "child": "left_gripper_link",
+      "diagram": "joints/left_arm_joint8.png"
+    },
+    {
+      "name": "left_gripper_finger_joint1",
+      "action_index": 15,
+      "meaning": "First sliding finger. Position 0 m = closed, 0.05 m = open; action is effort in N.",
+      "command": "force in N, \u221220\u2026+20",
+      "position_unit": "m",
+      "position_limits": [
+        0.0,
+        0.05
+      ],
+      "axis_in_joint_frame": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "parent": "left_gripper_link",
+      "child": "left_gripper_finger_link1",
+      "diagram": "joints/left_gripper_finger_joint1.png"
+    },
+    {
+      "name": "left_gripper_finger_joint2",
+      "action_index": 16,
+      "meaning": "Opposing sliding finger. Position 0 m = closed, 0.05 m = open; action is effort in N.",
+      "command": "force in N, \u221220\u2026+20",
+      "position_unit": "m",
+      "position_limits": [
+        0.0,
+        0.05
+      ],
+      "axis_in_joint_frame": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "parent": "left_gripper_link",
+      "child": "left_gripper_finger_link2",
+      "diagram": "joints/left_gripper_finger_joint2.png"
+    },
+    {
+      "name": "right_arm_joint1",
+      "action_index": 17,
+      "meaning": "First shoulder rotation: moves the entire arm about the marked axis.",
+      "command": "absolute angle in rad",
+      "position_unit": "rad",
+      "position_limits": [
+        -4.4506,
+        1.309
+      ],
+      "axis_in_joint_frame": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "parent": "right_arm_base_link",
+      "child": "right_arm_link1",
+      "diagram": "joints/right_arm_joint1.png"
+    },
+    {
+      "name": "right_arm_joint2",
+      "action_index": 18,
+      "meaning": "Second shoulder rotation: swings the entire upper arm about its local axis.",
+      "command": "absolute angle in rad",
+      "position_unit": "rad",
+      "position_limits": [
+        -3.1416,
+        0.1745
+      ],
+      "axis_in_joint_frame": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "parent": "right_arm_link1",
+      "child": "right_arm_link2",
+      "diagram": "joints/right_arm_joint2.png"
+    },
+    {
+      "name": "right_arm_joint3",
+      "action_index": 19,
+      "meaning": "Upper-arm axial rotation: changes the elbow's bending plane.",
+      "command": "absolute angle in rad",
+      "position_unit": "rad",
+      "position_limits": [
+        -2.356196,
+        2.356196
+      ],
+      "axis_in_joint_frame": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "parent": "right_arm_link2",
+      "child": "right_arm_link3",
+      "diagram": "joints/right_arm_joint3.png"
+    },
+    {
+      "name": "right_arm_joint4",
+      "action_index": 20,
+      "meaning": "Elbow bend: rotates the forearm relative to the upper arm.",
+      "command": "absolute angle in rad",
+      "position_unit": "rad",
+      "position_limits": [
+        -2.0944,
+        0.3491
+      ],
+      "axis_in_joint_frame": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "parent": "right_arm_link3",
+      "child": "right_arm_link4",
+      "diagram": "joints/right_arm_joint4.png"
+    },
+    {
+      "name": "right_arm_joint5",
+      "action_index": 21,
+      "meaning": "Forearm axial rotation: rotates the wrist and gripper about the forearm.",
+      "command": "absolute angle in rad",
+      "position_unit": "rad",
+      "position_limits": [
+        -2.356196,
+        2.356196
+      ],
+      "axis_in_joint_frame": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "parent": "right_arm_link4",
+      "child": "right_arm_link5",
+      "diagram": "joints/right_arm_joint5.png"
+    },
+    {
+      "name": "right_arm_joint6",
+      "action_index": 22,
+      "meaning": "Wrist bend: changes fingertip direction relative to the forearm.",
+      "command": "absolute angle in rad",
+      "position_unit": "rad",
+      "position_limits": [
+        -1.047198,
+        1.047198
+      ],
+      "axis_in_joint_frame": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "parent": "right_arm_link5",
+      "child": "right_arm_link6",
+      "diagram": "joints/right_arm_joint6.png"
+    },
+    {
+      "name": "right_arm_joint7",
+      "action_index": 23,
+      "meaning": "Final wrist rotation before J8; see the marked local axis.",
+      "command": "absolute angle in rad",
+      "position_unit": "rad",
+      "position_limits": [
+        -1.5708,
+        1.5708
+      ],
+      "axis_in_joint_frame": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "parent": "right_arm_link6",
+      "child": "right_arm_link7",
+      "diagram": "joints/right_arm_joint7.png"
+    },
+    {
+      "name": "right_arm_joint8",
+      "action_index": 24,
+      "meaning": "Tool-axis roll. Direct joint commands can rotate it; baseline motion tools normally pin it at zero.",
+      "command": "absolute angle in rad",
+      "position_unit": "rad",
+      "position_limits": [
+        -3.141592653589793,
+        3.141592653589793
+      ],
+      "axis_in_joint_frame": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "parent": "right_arm_link7",
+      "child": "right_gripper_link",
+      "diagram": "joints/right_arm_joint8.png"
+    },
+    {
+      "name": "right_gripper_finger_joint1",
+      "action_index": 25,
+      "meaning": "First sliding finger. Position 0 m = closed, 0.05 m = open; action is effort in N.",
+      "command": "force in N, \u221220\u2026+20",
+      "position_unit": "m",
+      "position_limits": [
+        0.0,
+        0.05
+      ],
+      "axis_in_joint_frame": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "parent": "right_gripper_link",
+      "child": "right_gripper_finger_link1",
+      "diagram": "joints/right_gripper_finger_joint1.png"
+    },
+    {
+      "name": "right_gripper_finger_joint2",
+      "action_index": 26,
+      "meaning": "Opposing sliding finger. Position 0 m = closed, 0.05 m = open; action is effort in N.",
+      "command": "force in N, \u221220\u2026+20",
+      "position_unit": "m",
+      "position_limits": [
+        0.0,
+        0.05
+      ],
+      "axis_in_joint_frame": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "parent": "right_gripper_link",
+      "child": "right_gripper_finger_link2",
+      "diagram": "joints/right_gripper_finger_joint2.png"
+    }
+  ]
+}

@@ -1,0 +1,184 @@
+{
+  "ok": true,
+  "model": "reverse_phase2_theta90_off_manifold",
+  "z_start_m": 0.7222,
+  "z_end_m": 0.6765,
+  "z_upright_m": 1.148,
+  "total_drop_from_upright_m": 0.4715,
+  "phase2_extra_drop_m": 0.0457,
+  "dz_step_m": 0.01,
+  "n_levels": 7,
+  "n_samples": 7,
+  "limited_by": "q2_limit",
+  "limit_detail": {
+    "q1_limit_rad": null,
+    "q2_limit_rad": 2.5307,
+    "q3_limit_rad": null
+  },
+  "phase2_plan": {
+    "ok": true,
+    "phase": "reverse_theta90_q1q2_coupled_solve_q3",
+    "theta_z_hold_deg": 90.0,
+    "dq_rad": 0.012,
+    "coupling": "|dq2|=|dq1|, q3 from IK",
+    "on_sine_manifold": false,
+    "z_start": 0.7222,
+    "q_start": [
+      -0.8475,
+      2.3867,
+      1.5392
+    ],
+    "limited_by": "q2_limit",
+    "q2_limit_rad": 2.5307,
+    "z_end": 0.6765,
+    "z_drop_m": 0.0458,
+    "n_waypoints": 13,
+    "q_end": [
+      -0.9915,
+      2.5307,
+      1.544
+    ],
+    "theta_z_end_deg": 89.72,
+    "theta_z_spread_deg": 0.276
+  },
+  "q_phase1_end": [
+    -0.8475,
+    2.3867,
+    1.5392
+  ],
+  "samples": [
+    {
+      "i": 0,
+      "phase": 2,
+      "z_target_m": 0.73,
+      "upward_m": -0.418,
+      "ok": true,
+      "q1_rad": -0.8475,
+      "q2_rad": 2.38668,
+      "q3_rad": 1.53919,
+      "chest_z_world_m": 0.7222,
+      "theta_z_deg": 90.0,
+      "on_sine_manifold": true,
+      "trunk_q": [
+        -0.8475,
+        2.38668,
+        1.53919,
+        0.0001
+      ]
+    },
+    {
+      "i": 1,
+      "phase": 2,
+      "z_target_m": 0.72,
+      "upward_m": -0.428,
+      "ok": true,
+      "q1_rad": -0.85486,
+      "q2_rad": 2.39405,
+      "q3_rad": 1.54214,
+      "chest_z_world_m": 0.72,
+      "theta_z_deg": 89.831,
+      "on_sine_manifold": true,
+      "trunk_q": [
+        -0.85486,
+        2.39405,
+        1.54214,
+        0.0001
+      ]
+    },
+    {
+      "i": 2,
+      "phase": 2,
+      "z_target_m": 0.71,
+      "upward_m": -0.438,
+      "ok": true,
+      "q1_rad": -0.88754,
+      "q2_rad": 2.42673,
+      "q3_rad": 1.544,
+      "chest_z_world_m": 0.71,
+      "theta_z_deg": 89.724,
+      "on_sine_manifold": true,
+      "trunk_q": [
+        -0.88754,
+        2.42673,
+        1.544,
+        0.0001
+      ]
+    },
+    {
+      "i": 3,
+      "phase": 2,
+      "z_target_m": 0.7,
+      "upward_m": -0.448,
+      "ok": true,
+      "q1_rad": -0.91938,
+      "q2_rad": 2.45857,
+      "q3_rad": 1.544,
+      "chest_z_world_m": 0.7,
+      "theta_z_deg": 89.724,
+      "on_sine_manifold": true,
+      "trunk_q": [
+        -0.91938,
+        2.45857,
+        1.544,
+        0.0001
+      ]
+    },
+    {
+      "i": 4,
+      "phase": 2,
+      "z_target_m": 0.69,
+      "upward_m": -0.458,
+      "ok": true,
+      "q1_rad": -0.95044,
+      "q2_rad": 2.48963,
+      "q3_rad": 1.544,
+      "chest_z_world_m": 0.69,
+      "theta_z_deg": 89.724,
+      "on_sine_manifold": true,
+      "trunk_q": [
+        -0.95044,
+        2.48963,
+        1.544,
+        0.0001
+      ]
+    },
+    {
+      "i": 5,
+      "phase": 2,
+      "z_target_m": 0.68,
+      "upward_m": -0.468,
+      "ok": true,
+      "q1_rad": -0.98085,
+      "q2_rad": 2.52004,
+      "q3_rad": 1.544,
+      "chest_z_world_m": 0.68,
+      "theta_z_deg": 89.724,
+      "on_sine_manifold": true,
+      "trunk_q": [
+        -0.98085,
+        2.52004,
+        1.544,
+        0.0001
+      ]
+    },
+    {
+      "i": 6,
+      "phase": 2,
+      "z_target_m": 0.67,
+      "upward_m": -0.478,
+      "ok": true,
+      "q1_rad": -0.9915,
+      "q2_rad": 2.53068,
+      "q3_rad": 1.544,
+      "chest_z_world_m": 0.6765,
+      "theta_z_deg": 89.724,
+      "on_sine_manifold": true,
+      "trunk_q": [
+        -0.9915,
+        2.53068,
+        1.544,
+        0.0001
+      ]
+    }
+  ]
+}
