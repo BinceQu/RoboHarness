@@ -1,6 +1,6 @@
 # Claude Code harness
 
-The released evaluation setup uses this harness with Qwen3.8-Flash-Next-MLX-oQ6-MTP.
+The paper experiments use this harness with Qwen3.8-Flash-Next-FP8.
 First start your model service, verify its Messages endpoint, and save its
 address, model ID and local data paths using the repository's
 [Run a task guide](../../README.md#run-a-task). Keep the service running and

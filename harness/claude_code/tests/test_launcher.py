@@ -19,7 +19,7 @@ class LauncherArgumentTests(unittest.TestCase):
         with patch.dict(os.environ, {}, clear=True):
             options, remaining = launcher._parse([])
         self.assertEqual(options.port, 15060)
-        self.assertEqual(options.qwen_model, "Qwen3.8-Flash-Next-MLX-oQ6-MTP")
+        self.assertEqual(options.qwen_model, "Qwen3.8-27B")
         self.assertEqual(
             options.qwen_url,
             "http://127.0.0.1:31000/v1/chat/completions",
@@ -197,7 +197,7 @@ class LauncherIntegrationTests(unittest.TestCase):
         self.assertFalse(post_monitor.call_args.kwargs["resume"])
         self.assertEqual(env["BEHAVIOR_BASE_URL"], "http://127.0.0.1:15063")
         self.assertEqual(env["ANTHROPIC_BASE_URL"], "http://127.0.0.1:18123")
-        self.assertEqual(env["QWEN_MODEL"], "Qwen3.8-Flash-Next-MLX-oQ6-MTP")
+        self.assertEqual(env["QWEN_MODEL"], "Qwen3.8-27B")
         self.assertEqual(
             env["CLAUDE_PLUGIN_DATA"],
             str(

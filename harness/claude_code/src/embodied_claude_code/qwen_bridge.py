@@ -32,7 +32,7 @@ from .coordinates import (
 
 
 DEFAULT_UPSTREAM = "http://127.0.0.1:31000/v1/chat/completions"
-DEFAULT_MODEL = "Qwen3.8-Flash-Next-MLX-oQ6-MTP"
+DEFAULT_MODEL = "Qwen3.8-27B"
 MAX_REQUEST_BYTES = 64 * 1024 * 1024
 
 # A tool result can contain a navigation/path overlay that is useful for a

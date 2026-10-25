@@ -20,10 +20,9 @@ import unittest
 
 from fake_behavior import FakeBehaviorClient
 from embodied_claude_code.launcher import EMBODIED_TOOL_GLOBS
-from embodied_claude_code.qwen_bridge import DEFAULT_MODEL
 
 ROOT = Path(__file__).resolve().parents[1]
-MODEL = DEFAULT_MODEL
+MODEL = "Qwen3.8-Flash-Next-FP8"
 SUMMARY_REQUEST = "Your task is to create a detailed summary of the conversation so far"
 
 

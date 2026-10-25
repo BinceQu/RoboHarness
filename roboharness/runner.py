@@ -148,7 +148,7 @@ def read_config(path: Path | None) -> dict:
         'agent_python': str(ROOT / 'harness/claude_code/.venv/bin/python'),
         'data_path': str(ROOT / 'data'),
         'model_url': os.environ.get('ROBOHARNESS_MODEL_URL', 'http://127.0.0.1:31000'),
-        'model': 'Qwen3.8-Flash-Next-MLX-oQ6-MTP',
+        'model': 'Qwen3.8-Flash-Next-FP8',
         'claude_bin': shutil.which('claude') or 'claude',
         'codex_bin': shutil.which('codex') or 'codex',
         'startup_timeout_s': 2400,

@@ -20,9 +20,7 @@ class ArchivedCases(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             config = Path(directory) / 'config.json'
             config.write_text('{}')
-            archived_model = runner.load_task('task01')['model']
-            for args, diagnostic in (([], True), (['--model', archived_model], False),
-                                     (['--model', 'different-model'], True),
+            for args, diagnostic in (([], False), (['--model', 'different-model'], True),
                                      (['--harness', 'codex'], True)):
                 with self.subTest(args=args):
                     stream = io.StringIO()

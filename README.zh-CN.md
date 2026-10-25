@@ -20,7 +20,7 @@ RoboHarness 无需训练模型，将视觉点选、关键点跟踪和几何约�
 LLM 在二维图像中标记感兴趣的点，并通过光流跟踪与深度反投影持续获取这些点的位置；
 借助这些信息，它能够组合准确的基本动作，完成复杂操作。
 
-当前发布配置使用 Claude Code 2.1.259、`Qwen3.8-Flash-Next-MLX-oQ6-MTP` 和 R1 Pro 机器人。
+BEHAVIOR 实验使用 Claude Code 2.1.259、`Qwen3.8-Flash-Next-FP8` 和 R1 Pro 机器人。
 仓库同时提供 Codex harness。
 
 ## 仓库结构
@@ -68,7 +68,7 @@ cp configs/example.json configs/local.json
 **1. 连接自己的模型服务。**
 
 默认的 Claude Code harness 使用 **Anthropic 兼容的 `/v1/messages` 接口**，
-服务须支持图片输入、工具调用和流式输出。当前发布配置使用 `Qwen3.8-Flash-Next-MLX-oQ6-MTP`。
+服务须支持图片输入、工具调用和流式输出。论文配置使用 `Qwen3.8-Flash-Next-FP8`。
 如果服务只支持 OpenAI Chat Completions，先按[桥接说明](docs/setup.md#chat-completions-services)
 配置适配器；Codex 使用另一套 [Responses 配置](docs/setup.md#codex-model-service)。
 
@@ -76,7 +76,7 @@ cp configs/example.json configs/local.json
 
 ```bash
 export ROBOHARNESS_MODEL_URL='http://YOUR_MODEL_HOST:31000'
-export ROBOHARNESS_MODEL='Qwen3.8-Flash-Next-MLX-oQ6-MTP'
+export ROBOHARNESS_MODEL='Qwen3.8-Flash-Next-FP8'
 export ANTHROPIC_API_KEY='YOUR_MODEL_SERVER_KEY'
 export ANTHROPIC_AUTH_TOKEN="$ANTHROPIC_API_KEY"
 ```

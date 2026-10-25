@@ -19,12 +19,12 @@ import threading
 import time
 import unittest
 
-from embodied_claude_code.qwen_bridge import DEFAULT_MODEL, BridgeConfig, call_upstream
+from embodied_claude_code.qwen_bridge import BridgeConfig, call_upstream
 
 
 ROOT = Path(__file__).resolve().parents[1]
 NOTE = ROOT / "tests" / "fixtures" / "native_compaction_note.txt"
-MODEL = DEFAULT_MODEL
+MODEL = "Qwen3.8-Flash-Next-FP8"
 SUMMARY_REQUEST = "Your task is to create a detailed summary of the conversation so far"
 
 
