@@ -1,10 +1,16 @@
 #!/usr/bin/env python3
-"""Build the static project page from the checked-in experiment manifests."""
+"""Build the static project site: the portal at /, the paper page at /v1/ and the V2 page at /v2/.
+
+The paper page is generated from the checked-in experiment manifests; the
+portal and V2 pages are copied from website/portal and website/v2, with
+{{ASSET:path}} markers resolved to locked, externally hosted files.
+"""
 
 import argparse
 import hashlib
 import html
 import json
+import re
 import shutil
 from pathlib import Path
 
@@ -28,6 +34,54 @@ def media_source(relative, expected, media):
     if not fetch_assets.verified(ROOT / row["path"], row):
         raise ValueError(f"Missing or changed local video; run scripts/fetch_assets.py --group media: {relative}")
     return f"{relative.as_posix()}?v={expected[:12]}"
+
+
+# Static pages copied around the generated paper page, and their site folders.
+STATIC_PAGES = (("portal", ""), ("v2", "v2"))
+
+
+def published_path(path):
+    """Site location of a locked repository file when videos are embedded locally."""
+    if path.startswith("docs/assets/"):
+        return "v1/" + path.removeprefix("docs/")
+    if path.startswith("website/v2/"):
+        return "v2/" + path.removeprefix("website/v2/")
+    raise ValueError(f"No site location for asset: {path}")
+
+
+def static_pages(output, media):
+    lock = fetch_assets.lock(ROOT)
+    embedded = set()
+    for name, folder in STATIC_PAGES:
+        source = ROOT / "website" / name
+        prefix = "../" * len(Path(folder).parts)
+
+        def asset(match):
+            row = fetch_assets.entry(lock, match[1])
+            if media == "remote":
+                return html.escape(fetch_assets.url(lock, row))
+            if not fetch_assets.verified(ROOT / row["path"], row):
+                raise ValueError(f"Missing or changed local asset; run scripts/fetch_assets.py --group {row['group']}: {row['path']}")
+            embedded.add(row["path"])
+            return prefix + published_path(row["path"]) + "?v=" + row["sha256"][:12]
+
+        for path in sorted(source.rglob("*")):
+            if not path.is_file() or path.suffix == ".mp4":
+                continue
+            target = output / folder / path.relative_to(source)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            if path.suffix == ".html":
+                page = re.sub(r"\{\{ASSET:([^}]+)\}\}", asset, path.read_text())
+                if "{{" in page:
+                    raise ValueError(f"Unresolved page template marker: {path}")
+                target.write_text(page)
+            else:
+                shutil.copyfile(path, target)
+    for path in sorted(embedded):
+        target = output / published_path(path)
+        if not target.exists():
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(ROOT / path, target)
 
 
 def recorded_rollouts(media):
@@ -225,25 +279,29 @@ def main():
         page = page.replace(marker, value)
     if "{{" in page:
         raise ValueError("Unresolved page template marker")
-    (output / "assets").mkdir(parents=True, exist_ok=True)
+    paper = output / "v1"
+    (paper / "assets").mkdir(parents=True, exist_ok=True)
     # A reused generated directory must not retain old private trace exports.
-    for stale in (output / "assets/rollouts").glob("*-trace.json"):
+    for stale in (paper / "assets/rollouts").glob("*-trace.json"):
         stale.unlink()
-    (output / "index.html").write_text(page)
+    (paper / "index.html").write_text(page)
     for asset in ("styles.css", "app.js"):
-        shutil.copyfile(source / asset, output / asset)
+        shutil.copyfile(source / asset, paper / asset)
     for asset in (ROOT / "docs" / "assets").iterdir():
         if asset.suffix in (".png", ".pdf", ".svg"):
-            shutil.copyfile(asset, output / "assets" / asset.name)
+            shutil.copyfile(asset, paper / "assets" / asset.name)
     for relative in sorted(media_assets):
-        target = output / relative
+        target = paper / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / "docs" / relative, target)
-    shutil.copyfile(source / "rollouts.json", output / "assets/rollouts/manifest.json")
-    method_video.copy_assets(output, prepared_method)
-    shutil.copyfile(ROOT / "docs/assets/roboharness-icon.svg", output / "favicon.svg")
+    shutil.copyfile(source / "rollouts.json", paper / "assets/rollouts/manifest.json")
+    method_video.copy_assets(paper, prepared_method)
+    shutil.copyfile(ROOT / "docs/assets/roboharness-icon.svg", paper / "favicon.svg")
+    (paper / ".nojekyll").touch()
+    static_pages(output, args.media)
     (output / ".nojekyll").touch()
-    print(f"Built {output}: {len(tasks)} tasks, {len(recordings)} recorded head-camera rollouts, method {method['sourceFile']}")
+    print(f"Built {output}: portal, v2 and paper page (v1) with {len(tasks)} tasks, "
+          f"{len(recordings)} recorded head-camera rollouts, method {method['sourceFile']}")
 
 
 if __name__ == "__main__":

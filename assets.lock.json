@@ -2074,6 +2074,14 @@
    "revision": "7e73016ce196802ffa89673b04905c605cbbf951",
    "bytes": 44647,
    "sha256": "1e869780cee58ae2c423261578c2fb661319356054af0fbca8d557c2e36560e6"
+  },
+  {
+   "path": "website/v2/assets/video-roboharness-v2-film-superres.mp4",
+   "group": "media",
+   "remote": "v2/site/video-roboharness-v2-film-superres.mp4",
+   "revision": "6ef20797d4d7d03120a2d3c69bcba8d120451992",
+   "bytes": 70698088,
+   "sha256": "95f0567a4709dd13e960ea5a843e10ab9cf6ec44e7563d5e6724dd265655b5c9"
   }
  ]
 }

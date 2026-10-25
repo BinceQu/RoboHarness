@@ -74,13 +74,14 @@ def _package(output, archive=None):
         shutil.copyfile(ROOT / "LICENSE", licenses / "LICENSE.txt")
         shutil.copyfile(ROOT / "THIRD_PARTY_NOTICES.md", licenses / "THIRD_PARTY_NOTICES.txt")
         # Keep the legal documents available when the laptop is offline.
-        page = staging / "index.html"
-        text = page.read_text().replace(
-            "https://github.com/BinceQu/RoboHarness/blob/main/LICENSE", "licenses/LICENSE.txt"
-        ).replace(
-            "https://github.com/BinceQu/RoboHarness/blob/main/THIRD_PARTY_NOTICES.md", "licenses/THIRD_PARTY_NOTICES.txt"
-        )
-        page.write_text(text)
+        for page in staging.rglob("*.html"):
+            prefix = "../" * (len(page.relative_to(staging).parts) - 1)
+            text = page.read_text().replace(
+                "https://github.com/BinceQu/RoboHarness/blob/main/LICENSE", prefix + "licenses/LICENSE.txt"
+            ).replace(
+                "https://github.com/BinceQu/RoboHarness/blob/main/THIRD_PARTY_NOTICES.md", prefix + "licenses/THIRD_PARTY_NOTICES.txt"
+            )
+            page.write_text(text)
         files = {path.relative_to(staging).as_posix(): {"bytes": path.stat().st_size, "sha256": digest(path)}
                  for path in sorted(staging.rglob("*")) if path.is_file()}
         manifest = {
