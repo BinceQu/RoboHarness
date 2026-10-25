@@ -76,6 +76,70 @@
    "sha256": "713fa485b5bc9753c117a39e58cd1728286da259dd248adaf77e91ebdaca06fc"
   },
   {
+   "path": "eval/robodojo/tests/upstream/fixtures/multicamera_tracking_seq199/img_000017.depth.npy",
+   "group": "v2-tests",
+   "remote": "v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq199/img_000017.depth.npy",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 1228928,
+   "sha256": "46c90b10d82325fd7413b3c90acca8a27287fd09d60d86b40f260592367a2a09"
+  },
+  {
+   "path": "eval/robodojo/tests/upstream/fixtures/multicamera_tracking_seq199/img_000017.rgb.npy",
+   "group": "v2-tests",
+   "remote": "v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq199/img_000017.rgb.npy",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 921728,
+   "sha256": "c912913996a2cf60f0abca4aefcfcd7e30e86d82b1da8635ceeeaad035b243fb"
+  },
+  {
+   "path": "eval/robodojo/tests/upstream/fixtures/multicamera_tracking_seq199/img_000018.depth.npy",
+   "group": "v2-tests",
+   "remote": "v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq199/img_000018.depth.npy",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 1228928,
+   "sha256": "d7e440f359af23c6601ef86a9f24e0032cdcd2bbdaec9df9a3be76539dbce709"
+  },
+  {
+   "path": "eval/robodojo/tests/upstream/fixtures/multicamera_tracking_seq199/img_000018.rgb.npy",
+   "group": "v2-tests",
+   "remote": "v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq199/img_000018.rgb.npy",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 921728,
+   "sha256": "beb6abd73694509383f2f7375224658c8e213f5e32d544a6b4550401c82a6b95"
+  },
+  {
+   "path": "eval/robodojo/tests/upstream/fixtures/multicamera_tracking_seq214_actual_zplus/img_000019.depth.npy",
+   "group": "v2-tests",
+   "remote": "v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq214_actual_zplus/img_000019.depth.npy",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 1228928,
+   "sha256": "0fe1044c302e507f2439b77c464c3b68b7ce96a7b82321af03f7046367edd8f5"
+  },
+  {
+   "path": "eval/robodojo/tests/upstream/fixtures/multicamera_tracking_seq214_actual_zplus/img_000019.rgb.npy",
+   "group": "v2-tests",
+   "remote": "v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq214_actual_zplus/img_000019.rgb.npy",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 921728,
+   "sha256": "db509680638f0af6b0d3fcd9bffb691a3fe25ce2ba3012cc7abca414af88688c"
+  },
+  {
+   "path": "eval/robodojo/tests/upstream/fixtures/multicamera_tracking_seq214_actual_zplus/img_000020.depth.npy",
+   "group": "v2-tests",
+   "remote": "v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq214_actual_zplus/img_000020.depth.npy",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 1228928,
+   "sha256": "e39ece6e7b8247ce17eea06e8e95e973882ccda9ab6baad35d5f380f7e675513"
+  },
+  {
+   "path": "eval/robodojo/tests/upstream/fixtures/multicamera_tracking_seq214_actual_zplus/img_000020.rgb.npy",
+   "group": "v2-tests",
+   "remote": "v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq214_actual_zplus/img_000020.rgb.npy",
+   "revision": "1191980a56905982ffaa487d36d659745883e970",
+   "bytes": 921728,
+   "sha256": "fa727b811bfa3250cda5aca6d11112877cc04b503aa81adb32a5791919201d35"
+  },
+  {
    "path": "harness/v2/ARX_X5/robot_config/meshes/base_link.STL",
    "group": "v2-x5",
    "remote": "v2/ARX_X5/robot_config/meshes/base_link.STL",
@@ -554,70 +618,6 @@
    "revision": "1191980a56905982ffaa487d36d659745883e970",
    "bytes": 215891,
    "sha256": "d7ba61c53fa077fd4abb9b9f6d815413bbbabb7f0ba11483da63888ceb8ca9f8"
-  },
-  {
-   "path": "harness/v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq199/img_000017.depth.npy",
-   "group": "v2-tests",
-   "remote": "v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq199/img_000017.depth.npy",
-   "revision": "1191980a56905982ffaa487d36d659745883e970",
-   "bytes": 1228928,
-   "sha256": "46c90b10d82325fd7413b3c90acca8a27287fd09d60d86b40f260592367a2a09"
-  },
-  {
-   "path": "harness/v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq199/img_000017.rgb.npy",
-   "group": "v2-tests",
-   "remote": "v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq199/img_000017.rgb.npy",
-   "revision": "1191980a56905982ffaa487d36d659745883e970",
-   "bytes": 921728,
-   "sha256": "c912913996a2cf60f0abca4aefcfcd7e30e86d82b1da8635ceeeaad035b243fb"
-  },
-  {
-   "path": "harness/v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq199/img_000018.depth.npy",
-   "group": "v2-tests",
-   "remote": "v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq199/img_000018.depth.npy",
-   "revision": "1191980a56905982ffaa487d36d659745883e970",
-   "bytes": 1228928,
-   "sha256": "d7e440f359af23c6601ef86a9f24e0032cdcd2bbdaec9df9a3be76539dbce709"
-  },
-  {
-   "path": "harness/v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq199/img_000018.rgb.npy",
-   "group": "v2-tests",
-   "remote": "v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq199/img_000018.rgb.npy",
-   "revision": "1191980a56905982ffaa487d36d659745883e970",
-   "bytes": 921728,
-   "sha256": "beb6abd73694509383f2f7375224658c8e213f5e32d544a6b4550401c82a6b95"
-  },
-  {
-   "path": "harness/v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq214_actual_zplus/img_000019.depth.npy",
-   "group": "v2-tests",
-   "remote": "v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq214_actual_zplus/img_000019.depth.npy",
-   "revision": "1191980a56905982ffaa487d36d659745883e970",
-   "bytes": 1228928,
-   "sha256": "0fe1044c302e507f2439b77c464c3b68b7ce96a7b82321af03f7046367edd8f5"
-  },
-  {
-   "path": "harness/v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq214_actual_zplus/img_000019.rgb.npy",
-   "group": "v2-tests",
-   "remote": "v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq214_actual_zplus/img_000019.rgb.npy",
-   "revision": "1191980a56905982ffaa487d36d659745883e970",
-   "bytes": 921728,
-   "sha256": "db509680638f0af6b0d3fcd9bffb691a3fe25ce2ba3012cc7abca414af88688c"
-  },
-  {
-   "path": "harness/v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq214_actual_zplus/img_000020.depth.npy",
-   "group": "v2-tests",
-   "remote": "v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq214_actual_zplus/img_000020.depth.npy",
-   "revision": "1191980a56905982ffaa487d36d659745883e970",
-   "bytes": 1228928,
-   "sha256": "e39ece6e7b8247ce17eea06e8e95e973882ccda9ab6baad35d5f380f7e675513"
-  },
-  {
-   "path": "harness/v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq214_actual_zplus/img_000020.rgb.npy",
-   "group": "v2-tests",
-   "remote": "v2/robodojo_evaluator/tests/upstream/fixtures/multicamera_tracking_seq214_actual_zplus/img_000020.rgb.npy",
-   "revision": "1191980a56905982ffaa487d36d659745883e970",
-   "bytes": 921728,
-   "sha256": "fa727b811bfa3250cda5aca6d11112877cc04b503aa81adb32a5791919201d35"
   },
   {
    "path": "reference_results/initial_states.json",

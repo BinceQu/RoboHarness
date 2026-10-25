@@ -7,8 +7,8 @@ import unittest
 from unittest.mock import patch
 from urllib.error import URLError
 
-from roboharness.http_transport import LoopbackHTTPConnection
-from roboharness.runner import request_json
+from runner.http_transport import LoopbackHTTPConnection
+from runner.core import request_json
 
 
 @contextmanager

@@ -13,9 +13,9 @@ import sys
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
-from roboharness.runner import atomic_json, load_task, official_result, read_json, validate_archive_protocol
-from roboharness.native_context import contract as native_contract, inspect_case
+sys.path.insert(0, str(ROOT / 'eval'))
+from runner.core import atomic_json, load_task, official_result, read_json, validate_archive_protocol
+from runner.native_context import contract as native_contract, inspect_case
 
 
 def local_process_state(identity: dict) -> dict:

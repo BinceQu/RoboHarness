@@ -7,11 +7,11 @@ import unittest
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path[:0] = [str(ROOT / 'interface'), str(ROOT / 'harness/claude_code/src')]
+sys.path[:0] = [str(ROOT / 'eval/behavior'), str(ROOT / 'harness/v1/claude_code/src')]
 from flask import Flask
 from official_eval_harness.session_guard import install_session_guard
 from embodied_claude_code.config import validate_owned_origin, ConfigurationError
-from roboharness.runner import process_start
+from runner.core import process_start
 
 
 class SessionOwnership(unittest.TestCase):

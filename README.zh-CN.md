@@ -12,6 +12,12 @@
 
 </div>
 
+## 动态
+
+- **2026-10-25** · RoboHarness V2 开源：以工作空间作为机器人 harness（[`harness/v2`](harness/v2)）。
+- **2026-10-07** · 代码在 GitHub 开源。
+- **2026-09-29** · 论文发布于 arXiv：[RoboHarness: A Simple Harness Outperforms VLA and World Action Models](https://arxiv.org/abs/2610.14018)。
+
 ## 项目介绍
 
 RoboHarness 无需训练模型，将视觉点选、关键点跟踪和几何约束相结合，为 LLM agent
@@ -23,22 +29,32 @@ LLM 在二维图像中标记感兴趣的点，并通过光流跟踪与深度反�
 BEHAVIOR 实验使用 Claude Code 2.1.259、`Qwen3.8-Flash-Next-FP8` 和 R1 Pro 机器人。
 仓库同时提供 Codex harness。
 
+RoboHarness V2 用 agent 直接工作其中的机器人工作空间取代工具插件：工作空间里有机器人模型、
+关节说明、可读的 Python 工具和技能。它在相同的任务和评测器上运行，通过 `--harness v2` 选择，
+详见 [`harness/v2`](harness/v2/README.md)。下文命令使用 V1，可复现论文成绩。
+
 ## 仓库结构
 
 ```text
-BEHAVIOR/           BEHAVIOR 仿真器与评测器，固定为 v3.9.1
-interface/          RGB-D 观测、机器人控制和交互界面
-harness/
-  claude_code/      Claude Code harness
-  codex/            Codex harness
-  v2/               RoboHarness V2 工作空间式 harness（独立入口，下文命令不使用）
-prompt/             各项家居操作任务的专用提示词
-tasks/              任务定义、评测实例和步数预算
-reference_results/  参考评测成绩（托管于 Hugging Face，setup.sh 自动下载）
-roboharness/        任务运行与评测流程
-scripts/            安装、一键运行、验证和成绩报告
-validation_results/ 评测报告与成绩（托管于 Hugging Face）
+RoboHarness/
+├── run.sh              入口：./run.sh --task task01 [--harness claude_code|codex|v2]
+├── harness/            agent 侧：agent 如何看到和控制机器人
+│   ├── v1/             论文版本：claude_code/ 与 codex/ 插件
+│   └── v2/             工作空间式 harness：R1_pro/ 与 ARX_X5/ 工作空间
+├── eval/               评测侧
+│   ├── runner/         ./run.sh 背后的任务运行器：启动评测器与 agent，收集官方成绩
+│   ├── behavior/       BEHAVIOR 接口：RGB-D 观测、机器人控制、官方评测器封装
+│   ├── robodojo/       V2 的 RoboDojo 桥接
+│   └── viewer/         只读轨迹查看器
+├── BEHAVIOR/           BEHAVIOR 仿真器与评测器（子模块），固定为 v3.9.1
+├── tasks/              任务定义、评测实例和步数预算
+├── prompt/             各项家居操作任务的专用提示词
+├── configs/            示例配置
+└── scripts/            安装、检查、资产下载与项目主页构建
 ```
+
+参考成绩 `reference_results/` 与评测报告 `validation_results/` 托管于 Hugging Face，
+`setup.sh` 会自动下载参考成绩。评测侧的详细说明见 [`eval/README.md`](eval/README.md)。
 
 ## 安装
 

@@ -14,8 +14,8 @@ if [[ $# -gt 0 ]]; then shift; fi
 git submodule update --init --recursive
 # Reference results are hosted outside git; the runner verifies their hashes.
 python3 scripts/fetch_assets.py --group reference
-"$PYTHON_BIN" -m venv harness/claude_code/.venv
-harness/claude_code/.venv/bin/python -m pip install -r requirements/agent.txt -e harness/claude_code -e harness/codex
+"$PYTHON_BIN" -m venv harness/v1/claude_code/.venv
+harness/v1/claude_code/.venv/bin/python -m pip install -r requirements/agent.txt -e harness/v1/claude_code -e harness/v1/codex
 if [[ "$mode" == agent ]]; then exit 0; fi
 "$PYTHON_BIN" -m venv .venv-interface
 .venv-interface/bin/python -m pip install -c requirements/interface.txt torch==2.6.0 torchvision==0.21.0 --index-url https://download.pytorch.org/whl/cu124
@@ -40,6 +40,6 @@ PATH="$ROOT/.venv-interface/bin:$PATH" GIT_LFS_SKIP_SMUDGE=1 \
 # Converge the observed version drift without resolving their contradictory
 # SDK metadata or changing additional packages in the numerical environment.
 .venv-evaluator/bin/python -m pip install --no-deps -r requirements/evaluator-runtime.txt
-"$PYTHON_BIN" -c 'from roboharness.assets import prepare_robot_asset; print(prepare_robot_asset())'
+PYTHONPATH="$ROOT/eval" "$PYTHON_BIN" -c 'from runner.assets import prepare_robot_asset; print(prepare_robot_asset())'
 "$PYTHON_BIN" scripts/setup_perception.py
 echo 'Environments ready. Configure data and model access as described in docs/setup.md.'

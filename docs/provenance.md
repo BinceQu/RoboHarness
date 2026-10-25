@@ -124,7 +124,7 @@ byte for byte (SHA-256
 The activated pick-up-object, place-object-in-container,
 traverse-narrow-passages and open-doors-and-drawers bodies also match every
 saved activation in those transcripts.
-[The regression fixture](../harness/claude_code/tests/fixtures/archive_context.json)
+[The regression fixture](../harness/v1/claude_code/tests/fixtures/archive_context.json)
 records source transcript hashes and recovered context/skill hashes.
 Claude truncates the saved MCP instruction attachment after 2,048 characters;
 the fixture verifies that recorded prefix, not the unrecorded suffix.

@@ -6,16 +6,10 @@ manuals, readable Python tools, skills, current perception and its own call
 history. Every tool ultimately sends the evaluator's atomic joint/controller
 commands, which the agent can also send directly.
 
-The simulator, task definitions, prompts, budgets and scoring are the ones the
-V1 runner uses (`../../run.sh`); only the agent side differs. Running the
-repository README's commands still uses V1 and reproduces the paper results.
-
 ```text
 harness/v2/
-├── R1_pro/               # R1 Pro workspace for BEHAVIOR (27-value controller command)
-├── ARX_X5/               # dual ARX X5 workspace for RoboDojo (14 joint scalars)
-├── behavior_evaluator/   # runs archived BEHAVIOR cases with fresh R1_pro copies
-└── robodojo_evaluator/   # connects ARX_X5 copies to a RoboDojo evaluator
+├── R1_pro/   # R1 Pro workspace for BEHAVIOR (27-value controller command)
+└── ARX_X5/   # dual ARX X5 workspace for RoboDojo (14 joint scalars)
 ```
 
 Each workspace is self-contained: `tools/NAME.py` holds a tool's algorithm,
@@ -25,6 +19,12 @@ instructions. A workspace never imports code from outside its directory.
 Agents operate with ordinary shell and file access, for example
 `python tools/capture_head_camera.py '{}'`, so any coding agent can use it;
 `tools/util/launch.py` starts Claude Code with the workspace's image hooks.
+
+The evaluation side is shared with V1 and lives in [`eval/`](../../eval):
+the runner ([`eval/runner`](../../eval/runner)), the BEHAVIOR evaluator wrapper
+([`eval/behavior`](../../eval/behavior)), the RoboDojo bridge
+([`eval/robodojo`](../../eval/robodojo/README.md)) and read-only trajectory
+viewers ([`eval/viewer`](../../eval/viewer)).
 
 ## Setup
 
@@ -42,39 +42,41 @@ follow the repository README and [setup guide](../../docs/setup.md) first.
 
 ## BEHAVIOR
 
-Copy [`behavior_evaluator/config.example.json`](behavior_evaluator/config.example.json),
-fill in the evaluator paths from your V1 configuration and set `agent_python`
-to `harness/v2/R1_pro/.venv/bin/python`. Then, from the repository root:
+V2 uses the same runner, configuration, tasks, prompts, budgets, evaluator and
+scoring as V1; only `--harness v2` selects the workspace agent side:
 
 ```bash
-harness/v2/R1_pro/.venv/bin/python harness/v2/behavior_evaluator/run.py \
-  --task task01 --gpu 0 --config my-v2-config.json --dry-run
-harness/v2/R1_pro/.venv/bin/python harness/v2/behavior_evaluator/run.py \
-  --task task01 --gpu 0 --config my-v2-config.json
+./run.sh --harness v2 --task task01 --gpu 0 --dry-run
+./run.sh --harness v2 --task task01 --gpu 0
 ```
 
-Each case gets a fresh copy of `R1_pro` under the run directory. The evaluator
-connects to a local atomic action driver; a separate read-only monitor serves
-status. `--smoke` runs an unscored physical check on the first instance, and
+The runner re-executes itself under `harness/v2/R1_pro/.venv/bin/python`
+(override with `workspace_python` in the configuration; see
+[`configs/v2.example.json`](../../configs/v2.example.json)). Each case gets a
+fresh copy of `R1_pro` under the run directory. The evaluator connects to a
+local atomic action driver; a separate read-only monitor serves status.
+`--smoke` runs an unscored physical check on the first instance, and
 `--instances` selects a diagnostic subset. Sequential instances use the
 evaluator's opt-in restoration of task objects that a previous instance's
-transition rules deleted. Browse finished runs with the read-only
-[trajectory viewer](behavior_evaluator/trajectory_viewer/README.md).
+transition rules deleted; V1 runs never enable it. Browse finished runs with
+the read-only [trajectory viewer](../../eval/viewer/behavior/README.md).
 
 ## RoboDojo
 
-`robodojo_evaluator` drives a private copy of `ARX_X5` with an existing
-RoboDojo checkout; set `ROBODOJO_ROOT` and `ROBODOJO_EVALUATOR_ENV` or pass
-`--robodojo` / `--evaluator-env`. See its [README](robodojo_evaluator/README.md).
+[`eval/robodojo`](../../eval/robodojo/README.md) drives a private copy of
+`ARX_X5` with an existing RoboDojo checkout; set `ROBODOJO_ROOT` and
+`ROBODOJO_EVALUATOR_ENV` or pass `--robodojo` / `--evaluator-env`.
 
 ## Tests
 
 ```bash
+python3 scripts/fetch_assets.py --group v2-tests   # RoboDojo fixtures
 cd harness/v2
-python3 ../../scripts/fetch_assets.py --group v2-tests   # RoboDojo fixtures
-R1_pro/.venv/bin/python -m pytest R1_pro/.dev/tests behavior_evaluator -q
-ARX_X5/.venv/bin/python -m pytest robodojo_evaluator/tests robodojo_evaluator/trajectory_viewer -q
+R1_pro/.venv/bin/python -m pytest R1_pro/.dev/tests -q
+cd ../../eval/robodojo
+../../harness/v2/ARX_X5/.venv/bin/python -m pytest tests ../viewer/robodojo -q
 ```
 
-`behavior_evaluator/test_evaluator_lifecycle.py` also checks that the default
-(V1) evaluator path never resets or rebinds task objects.
+The evaluator change V2 relies on is covered by
+`eval/behavior/behavior_interface_eval_test/test_evaluator_lifecycle.py`, which
+also checks that the default (V1) path never resets or rebinds task objects.

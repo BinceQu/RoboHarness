@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def recover(source: Path) -> dict:
-    index = json.loads((ROOT / 'harness/claude_code/tests/fixtures/archive_context.json').read_text())
+    index = json.loads((ROOT / 'harness/v1/claude_code/tests/fixtures/archive_context.json').read_text())
     patterns, cases = {}, []
     for item in index['sources']:
         path = (source / item['path']).resolve()
@@ -59,7 +59,7 @@ def recover(source: Path) -> dict:
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--behavior-source', type=Path, required=True)
-    parser.add_argument('--output', type=Path, default=ROOT / 'harness/claude_code/profiles/archived-native-context.json')
+    parser.add_argument('--output', type=Path, default=ROOT / 'harness/v1/claude_code/profiles/archived-native-context.json')
     args = parser.parse_args()
     result = recover(args.behavior_source.resolve())
     args.output.write_text(json.dumps(result, indent=2, ensure_ascii=False) + '\n')

@@ -9,7 +9,7 @@ import tempfile
 import unittest
 from unittest.mock import Mock, patch
 
-from roboharness import runner
+from runner import core as runner
 
 
 class ListenerPorts(unittest.TestCase):
@@ -105,7 +105,7 @@ class ListenerPorts(unittest.TestCase):
                 fcntl.flock(held, fcntl.LOCK_EX | fcntl.LOCK_NB)
                 error = io.StringIO()
                 with patch.object(runner, 'preflight'), \
-                     patch('roboharness.assets.prepare_robot_asset'), \
+                     patch('runner.assets.prepare_robot_asset'), \
                      patch.object(runner, 'Run') as run, contextlib.redirect_stderr(error):
                     code = runner.main(['--task', 'task01', '--config', str(config)])
                 self.assertEqual(code, 1)

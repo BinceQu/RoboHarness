@@ -22,7 +22,7 @@ relay_auth.json
 !BEHAVIOR/
 
 *.lock
-!interface/behavior_interface/rtabmap_slam/upstream.lock
+!eval/behavior/behavior_interface/rtabmap_slam/upstream.lock
 .codex-home/
 .claude-home/
 /data__*/

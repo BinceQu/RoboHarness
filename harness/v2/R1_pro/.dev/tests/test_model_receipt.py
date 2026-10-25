@@ -247,7 +247,7 @@ def test_required_navigation_tracking_budget_plan_and_record_evidence_survives(t
 @pytest.mark.parametrize("relative", [False, True])
 def test_delivery_auditor_accepts_public_paths_and_uses_saved_hashes(tmp_path, monkeypatch, relative):
     from pathlib import Path
-    evaluator = Path(__file__).resolve().parents[3] / "behavior_evaluator"
+    evaluator = Path(__file__).resolve().parents[5] / "eval/runner/audit"
     monkeypatch.syspath_prepend(str(evaluator))
     from audit_episode_delivery import audit
     root = tmp_path / "workspace"

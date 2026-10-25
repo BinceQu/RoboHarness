@@ -68,7 +68,7 @@ def main():
     source, output = args.behavior_source.resolve(), args.output.resolve()
     root = source / 'test_results'
     context_index = load(Path(__file__).resolve().parents[1] /
-                         'harness/claude_code/tests/fixtures/archive_context.json')
+                         'harness/v1/claude_code/tests/fixtures/archive_context.json')
     contexts = {(s['task'], s['instance_id']): s for s in context_index['sources']}
     summary = []
     for index, (name, budget) in TASKS.items():

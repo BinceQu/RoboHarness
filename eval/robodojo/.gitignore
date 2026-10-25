@@ -1,0 +1,10 @@
+.dev/
+runs/
+__pycache__/
+*.pyc
+.pytest_cache/
+# Test fixtures are hosted in the asset dataset (group v2-tests in
+# ../../assets.lock.json); fetch them with scripts/fetch_assets.py.
+*.npy
+validation/*
+!validation/render_memory.py

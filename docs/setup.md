@@ -137,7 +137,7 @@ start the included bridge in a **separate terminal on the evaluation machine**:
 
 ```bash
 export QWEN_API_KEY='YOUR_UPSTREAM_SERVICE_KEY'
-./harness/claude_code/scripts/qwen-anthropic-bridge \
+./harness/v1/claude_code/scripts/qwen-anthropic-bridge \
   --host 127.0.0.1 --port 15079 \
   --upstream http://YOUR_MODEL_HOST:31000/v1/chat/completions \
   --model Qwen3.8-Flash-Next-FP8

@@ -7,7 +7,7 @@ from unittest.mock import patch
 
 from behavior_interface.agent_monitor import challenge_instance_max_ticks
 from official_eval_harness.catalog import challenge_2025_max_ticks, resolve_task
-from roboharness import runner
+from runner import core as runner
 
 
 class ArchivedBudget(unittest.TestCase):

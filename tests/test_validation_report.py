@@ -12,7 +12,7 @@ import unittest
 from unittest import mock
 
 from scripts.report_validation import collect, main
-from roboharness.runner import load_task, process_start
+from runner.core import load_task, process_start
 
 
 class ValidationReport(unittest.TestCase):

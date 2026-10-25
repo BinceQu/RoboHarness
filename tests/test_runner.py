@@ -12,7 +12,7 @@ import unittest
 from unittest.mock import Mock, patch
 import uuid
 
-from roboharness import runner
+from runner import core as runner
 
 
 class ArchivedCases(unittest.TestCase):
@@ -43,7 +43,7 @@ class ArchivedCases(unittest.TestCase):
         used = set()
         count = 0
         contexts = runner.read_json(runner.ROOT /
-            'harness/claude_code/tests/fixtures/archive_context.json')['sources']
+            'harness/v1/claude_code/tests/fixtures/archive_context.json')['sources']
         contexts = {(row['task'], row['instance_id']): row for row in contexts}
         for path in sorted((runner.ROOT / 'tasks').glob('*.json')):
             task = runner.load_task(path.stem)
@@ -207,7 +207,7 @@ class FileDescriptorLimit(unittest.TestCase):
         before = resource.getrlimit(resource.RLIMIT_NOFILE)
         code = '''
 import json, resource, subprocess, sys
-from roboharness.runner import ensure_file_limit
+from runner.core import ensure_file_limit
 soft, hard = resource.getrlimit(resource.RLIMIT_NOFILE)
 resource.setrlimit(resource.RLIMIT_NOFILE, (1024, hard))
 record = ensure_file_limit(4096)

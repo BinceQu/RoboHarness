@@ -14,6 +14,12 @@
 
 </div>
 
+## News
+
+- **2026-10-25** · RoboHarness V2 open-sourced: Workspaces as Robot Harness ([`harness/v2`](harness/v2)).
+- **2026-10-07** · Code open-sourced on GitHub.
+- **2026-09-29** · Paper available on arXiv: [RoboHarness: A Simple Harness Outperforms VLA and World Action Models](https://arxiv.org/abs/2610.14018).
+
 ## Overview
 
 Without training models, RoboHarness combines visual clicks, keypoint tracking,
@@ -27,20 +33,42 @@ manipulation.
 The reported BEHAVIOR results use Claude Code 2.1.259 with
 `Qwen3.8-Flash-Next-FP8` and the R1 Pro robot. A Codex harness is also available.
 
-## What is included
+RoboHarness V2 replaces the tool plugin with a robot workspace that the agent
+works inside: robot model, joint manuals, readable Python tools and skills.
+It runs on the same tasks and evaluator with `--harness v2`; see
+[`harness/v2`](harness/v2/README.md). The commands below use V1 and reproduce
+the paper results.
 
-| Component | Purpose |
+## Repository structure
+
+```text
+RoboHarness/
+├── run.sh           # entry point: ./run.sh --task task01 [--harness claude_code|codex|v2]
+├── harness/         # agent side: how the agent sees and controls the robot
+│   ├── v1/          #   paper version: Claude Code and Codex plugins
+│   └── v2/          #   workspace harness: R1 Pro and ARX X5 workspaces
+├── eval/            # evaluation side: runner, BEHAVIOR interface, RoboDojo bridge, viewers
+├── BEHAVIOR/        # official simulator and evaluator (submodule)
+├── tasks/ prompt/   # task definitions and archived prompts
+├── configs/         # example configurations
+└── scripts/ docs/ tests/ website/
+```
+
+| Path | Purpose |
 | --- | --- |
+| [`harness/v1/claude_code/`](harness/v1/claude_code) | Claude Code harness used for the paper results |
+| [`harness/v1/codex/`](harness/v1/codex) | Codex harness |
+| [`harness/v2/`](harness/v2) | V2 workspace harness (R1 Pro on BEHAVIOR, ARX X5 on RoboDojo); `--harness v2` |
+| [`eval/runner/`](eval/runner) | Task runner behind `./run.sh`: starts the evaluator stack and agent, collects official scores |
+| [`eval/behavior/`](eval/behavior) | BEHAVIOR interface: RGB-D observations, robot control and the official evaluator wrapper |
+| [`eval/robodojo/`](eval/robodojo) | RoboDojo bridge for V2 |
 | [`BEHAVIOR/`](BEHAVIOR) | BEHAVIOR simulator and evaluator, pinned to v3.9.1 |
-| [`interface/`](interface) | RGB-D observations, robot control and interactive interface |
-| [`harness/claude_code/`](harness/claude_code) | Claude Code harness |
-| [`harness/codex/`](harness/codex) | Codex harness |
-| [`harness/v2/`](harness/v2) | RoboHarness V2 workspace harness (R1 Pro on BEHAVIOR, ARX X5 on RoboDojo); separate entry point, not used by the commands below |
-| [`prompt/`](prompt) | Task-specific instructions for household manipulation |
 | [`tasks/`](tasks) | Task definitions, evaluation instances and step budgets |
+| [`prompt/`](prompt) | Task-specific instructions for household manipulation |
 | [`reference_results/`](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/tree/main/v1/reference_results) | Reference evaluator scores (hosted on Hugging Face; `setup.sh` fetches them) |
-| [`roboharness/`](roboharness) | Task runner and evaluation pipeline |
 | [`validation_results/`](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/tree/main/v1/validation_results) | Evaluation reports and scores (hosted on Hugging Face) |
+
+See [`eval/README.md`](eval/README.md) for the evaluation side in more detail.
 
 ## Installation
 
@@ -229,19 +257,6 @@ tolerance of `1e-6`. Individual instance scores may differ. `--require-match`
 exits nonzero if a task is incomplete, its mean differs, or the run fails the
 evaluation checks. Use `--check-live` on the evaluation host; omit it when
 analyzing copied runs. Add `--watch` for continuous reporting.
-
-## Generalization across objects
-
-[![The 100 objects used to evaluate generalization across objects](docs/assets/object-generalization.png)](docs/assets/object-generalization.pdf)
-
-The 100 objects used to evaluate generalization across objects. The catalog is
-drawn from the BEHAVIOR object library.
-
-[![Successes out of 100 objects versus estimated hours of robot data](docs/assets/robot-data-comparison.png)](docs/assets/robot-data-comparison.pdf)
-
-Successes out of 100 objects versus estimated hours of robot data. Colors: VLA
-(blue), world action model (green), RoboHarness (red), and the ASPIRE-pick
-baseline (gray).
 
 ## Citation
 

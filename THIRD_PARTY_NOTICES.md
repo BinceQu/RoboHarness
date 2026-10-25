@@ -14,9 +14,9 @@
   [facebookresearch/sam2](https://github.com/facebookresearch/sam2), under its
   applicable Apache 2.0 notices. They are not part of the Git release.
 - The interface bundles DejaVu Sans Bold for observation labels. Its full
-  license is beside the font under `interface/behavior_interface_eval_test/tool/official_v2/assets/`.
+  license is beside the font under `eval/behavior/behavior_interface_eval_test/tool/official_v2/assets/`.
   Optional RTAB-Map is fetched from the commit and archive hash in
-  `interface/behavior_interface/rtabmap_slam/upstream.lock` under BSD-3-Clause;
+  `eval/behavior/behavior_interface/rtabmap_slam/upstream.lock` under BSD-3-Clause;
   the archived task runner disables the spatial map.
 - The project page and READMEs include the figures and wordmark from the supplied
   `roboharness.zip` archive. Original PDFs and web renders are in `docs/assets/`;

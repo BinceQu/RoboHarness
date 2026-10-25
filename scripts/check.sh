@@ -3,16 +3,16 @@ set -euo pipefail
 ROOT=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
 cd "$ROOT"
 INTERFACE_PYTHON=${ROBOHARNESS_INTERFACE_PYTHON:-$ROOT/.venv-interface/bin/python}
-AGENT_PYTHON=${ROBOHARNESS_AGENT_PYTHON:-$ROOT/harness/claude_code/.venv/bin/python}
-export PYTHONPATH="$ROOT:$ROOT/interface:$ROOT/harness/claude_code/src"
+AGENT_PYTHON=${ROBOHARNESS_AGENT_PYTHON:-$ROOT/harness/v1/claude_code/.venv/bin/python}
+export PYTHONPATH="$ROOT/eval:$ROOT/eval/behavior:$ROOT/harness/v1/claude_code/src"
 python3 scripts/fetch_assets.py --group reference
-python3 -c 'from roboharness.assets import prepare_robot_asset; prepare_robot_asset()'
+python3 -c 'from runner.assets import prepare_robot_asset; prepare_robot_asset()'
 "$INTERFACE_PYTHON" -m unittest discover -s tests -v
 "$INTERFACE_PYTHON" -m unittest behavior_interface_eval_test.test_official_protocol behavior_interface_eval_test.test_official_rgbd_wrapper behavior_interface_eval_test.test_custom_robot_profile
 "$INTERFACE_PYTHON" -m unittest behavior_interface_eval_test.test_native_asset_watches behavior_interface_eval_test.test_official_evaluator_entrypoint
-cd harness/claude_code
+cd harness/v1/claude_code
 export PYTHONPATH="$PWD/src:$PWD/tests"
 "$AGENT_PYTHON" -m unittest discover -s tests
-cd "$ROOT/harness/codex"
+cd "$ROOT/harness/v1/codex"
 export PYTHONPATH="$PWD/src:$PWD/tests"
 "$AGENT_PYTHON" -m unittest discover -s tests

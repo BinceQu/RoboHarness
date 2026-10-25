@@ -1,6 +1,6 @@
 # Third-party notices
 
-- The separate `behavior_evaluator` component contains the pinned BEHAVIOR
+- The repository's separate `eval/` and `BEHAVIOR/` directories contain the pinned BEHAVIOR
   checkout and its licenses. This robot workspace does not import it.
 - The custom R1Pro profile derives from OmniGibson Robot Assets. The
   [upstream robot asset repository](https://huggingface.co/datasets/behavior-1k/omnigibson-robot-assets)

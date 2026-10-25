@@ -7,7 +7,7 @@ import tempfile
 import unittest
 from unittest import mock
 
-from roboharness.native_context import (
+from runner.native_context import (
     ROOT, PROFILE, contract, create_workspace, inspect_case, inspect_listing,
     inspect_tool_profile, seed,
 )
@@ -28,7 +28,7 @@ class NativeContextTests(unittest.TestCase):
             (git_root / '.git').write_text('gitdir: /not-needed-for-this-check')
             with self.assertRaisesRegex(ValueError, 'outside Git worktrees'):
                 create_workspace(git_root / 'cache', 301)
-            from roboharness.runner import preflight
+            from runner.core import preflight
             with self.assertRaisesRegex(ValueError, 'outside Git worktrees'):
                 preflight({'cache_dir': str(git_root / 'cache')}, 'claude_code')
             link = root / 'linked-cache'
@@ -206,7 +206,7 @@ class MCPToolProfileTests(unittest.TestCase):
                      'requires the pinned real CLI and harness test dependencies')
 class NativeContextCLITests(unittest.TestCase):
     def test_both_recorded_listings_with_real_cli_hooks_mcp_and_compaction(self):
-        harness_tests = str(ROOT / 'harness/claude_code/tests')
+        harness_tests = str(ROOT / 'harness/v1/claude_code/tests')
         sys.path.insert(0, harness_tests)
         try:
             from test_native_skill_lifecycle import NativeSkillLifecycleTests

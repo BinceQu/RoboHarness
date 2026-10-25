@@ -20,8 +20,3 @@ perception/*
 tool_call_history/*
 !tool_call_history/README.md
 skills/active.json
-behavior_evaluator/runs/
-behavior_evaluator/validation/
-robodojo_evaluator/runs/
-robodojo_evaluator/validation/*
-!robodojo_evaluator/validation/render_memory.py
