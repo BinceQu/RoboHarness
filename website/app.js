@@ -4,8 +4,7 @@
   const tasks = JSON.parse(document.getElementById("archive-data").textContent);
   const cards = tasks.map(task => document.getElementById(`card-${task.id}`));
   const carousel = document.getElementById("task-carousel");
-  const command = document.getElementById("setup-command");
-  const feedback = document.getElementById("copy-feedback");
+  const copyButtons = document.querySelectorAll(".copy-button[data-copy]");
   const motion = matchMedia("(prefers-reduced-motion: reduce)");
   const rates = [1, 2, 4, 8];
   let playbackRate = 4;
@@ -106,19 +105,21 @@
     video.autoplay = !motion.matches;
     if (motion.matches) video.pause();
   });
-  document.getElementById("copy-command").addEventListener("click", async () => {
+  copyButtons.forEach(button => button.addEventListener("click", async () => {
+    const source = document.getElementById(button.dataset.copy);
+    const feedback = button.closest("section").querySelector(".copy-feedback");
     try {
-      await navigator.clipboard.writeText(command.textContent);
-      feedback.textContent = "Commands copied.";
+      await navigator.clipboard.writeText(source.textContent);
+      feedback.textContent = button.dataset.copied;
     } catch {
       const range = document.createRange();
-      range.selectNodeContents(command);
+      range.selectNodeContents(source);
       const selection = window.getSelection();
       selection.removeAllRanges();
       selection.addRange(range);
-      feedback.textContent = "Select and copy the highlighted commands.";
+      feedback.textContent = "Select and copy the highlighted text.";
     }
-  });
+  }));
   addEventListener("popstate", () => {
     const id = new URLSearchParams(location.search).get("task") || "task01";
     const index = tasks.findIndex(task => task.id === id);
@@ -129,6 +130,6 @@
   const initial = tasks.findIndex(task => task.id === (query.get("task") || "task01"));
   showTask(initial < 0 ? tasks.findIndex(task => task.id === "task01") : initial);
   carousel.hidden = false;
-  document.getElementById("copy-command").hidden = false;
+  copyButtons.forEach(button => { button.hidden = false; });
   if (query.has("trace")) shareTask();
 })();

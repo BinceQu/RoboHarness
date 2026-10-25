@@ -4,7 +4,7 @@
 
 ## A Simple Harness Outperforms VLA and World Action Models
 
-**[Project Page](https://bincequ.github.io/RoboHarness/) · [Quick Start](#run-a-task) · [Documentation](docs/setup.md) · [中文](README.zh-CN.md)**
+**[Project Page](https://bincequ.github.io/RoboHarness/) · [Quick Start](#run-a-task) · [Documentation](docs/setup.md) · [Citation](#citation) · [中文](README.zh-CN.md)**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-263c78?style=flat-square)](LICENSE) [![Benchmark](https://img.shields.io/badge/BEHAVIOR-Challenge_2025-d56045?style=flat-square)](#reproduction-contract)
 
@@ -241,6 +241,26 @@ drawn from the BEHAVIOR object library.
 Successes out of 100 objects versus estimated hours of robot data. Colors: VLA
 (blue), world action model (green), RoboHarness (red), and the ASPIRE-pick
 baseline (gray).
+
+## Citation
+
+If you use RoboHarness in your research, please cite our paper:
+
+```bibtex
+@misc{qu2026roboharness,
+  title         = {RoboHarness: A Simple Harness Outperforms VLA and World Action Models},
+  author        = {Bince Qu and Wei Chen and Bo Zhang},
+  year          = {2026},
+  eprint        = {2610.14018},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.RO},
+  doi           = {10.48550/arXiv.2610.14018},
+  url           = {https://arxiv.org/abs/2610.14018}
+}
+```
+
+GitHub's **Cite this repository** button provides the same reference in APA and
+BibTeX formats from [`CITATION.cff`](CITATION.cff).
 
 ## Development and license
 

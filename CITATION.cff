@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: "If you use RoboHarness, please cite the paper below."
+type: software
+title: "RoboHarness"
+authors:
+  - family-names: Qu
+    given-names: Bince
+  - family-names: Chen
+    given-names: Wei
+  - family-names: Zhang
+    given-names: Bo
+repository-code: "https://github.com/BinceQu/RoboHarness"
+url: "https://bincequ.github.io/RoboHarness/"
+license: MIT
+keywords:
+  - robotics
+  - mobile manipulation
+  - coding agents
+  - large language models
+preferred-citation:
+  type: article
+  title: "RoboHarness: A Simple Harness Outperforms VLA and World Action Models"
+  authors:
+    - family-names: Qu
+      given-names: Bince
+    - family-names: Chen
+      given-names: Wei
+    - family-names: Zhang
+      given-names: Bo
+  journal: "arXiv preprint arXiv:2610.14018"
+  year: 2026
+  month: 9
+  doi: "10.48550/arXiv.2610.14018"
+  url: "https://arxiv.org/abs/2610.14018"

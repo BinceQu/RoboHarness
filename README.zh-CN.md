@@ -4,7 +4,7 @@
 
 ### 一个简单而有效的机器人 harness
 
-**[项目主页](https://bincequ.github.io/RoboHarness/) · [English](README.md) · [安装说明](docs/setup.md) · [任务提示词](docs/case-prompts.md)**
+**[项目主页](https://bincequ.github.io/RoboHarness/) · [English](README.md) · [安装说明](docs/setup.md) · [任务提示词](docs/case-prompts.md) · [引用](#引用)**
 
 [![RoboHarness 总览](docs/assets/overview.png)](docs/assets/overview.pdf)
 
@@ -205,6 +205,26 @@ python3 scripts/report_validation.py runs/task01-001 \
 报告逐任务比较完整的五例均分与参考值，容限为 `1e-6`，单例分数允许不同。
 `--require-match` 在任务未完成、均分不匹配或未通过评测检查时返回非零退出码。
 在评测主机上使用 `--check-live`；分析复制来的运行目录时省略它。添加 `--watch` 可持续更新报告。
+
+## 引用
+
+如果 RoboHarness 对你的研究有帮助，请引用我们的论文：
+
+```bibtex
+@misc{qu2026roboharness,
+  title         = {RoboHarness: A Simple Harness Outperforms VLA and World Action Models},
+  author        = {Bince Qu and Wei Chen and Bo Zhang},
+  year          = {2026},
+  eprint        = {2610.14018},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.RO},
+  doi           = {10.48550/arXiv.2610.14018},
+  url           = {https://arxiv.org/abs/2610.14018}
+}
+```
+
+也可以点击 GitHub 仓库页右侧的 **Cite this repository**，获取由
+[`CITATION.cff`](CITATION.cff) 生成的 APA 或 BibTeX 格式。
 
 ## 开发与许可
 

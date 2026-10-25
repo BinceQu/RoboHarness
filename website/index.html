@@ -125,13 +125,40 @@
       <div class="command-panel">
         <div class="command-toolbar">
           <span>Bash</span>
-          <button type="button" class="copy-button" id="copy-command" hidden aria-label="Copy setup commands">Copy</button>
+          <button type="button" class="copy-button" data-copy="setup-command" data-copied="Commands copied." hidden aria-label="Copy setup commands">Copy</button>
         </div>
         <pre><code id="setup-command">git clone --recurse-submodules https://github.com/BinceQu/RoboHarness.git
 cd RoboHarness
 bash scripts/setup.sh</code></pre>
       </div>
-      <p class="copy-feedback" id="copy-feedback" role="status" aria-live="polite"></p>
+      <p class="copy-feedback" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="container reproduce-section citation-section" id="citation" aria-labelledby="citation-title">
+      <div class="reproduce-heading">
+        <div>
+          <h2 id="citation-title">Citation</h2>
+          <p>If you use RoboHarness in your research, please cite our paper.</p>
+        </div>
+        <a class="button" href="https://arxiv.org/abs/2610.14018" target="_blank" rel="noopener noreferrer">arXiv <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="command-panel">
+        <div class="command-toolbar">
+          <span>BibTeX</span>
+          <button type="button" class="copy-button" data-copy="citation-bibtex" data-copied="BibTeX copied." hidden aria-label="Copy BibTeX citation">Copy</button>
+        </div>
+        <pre><code id="citation-bibtex">@misc{qu2026roboharness,
+  title         = {RoboHarness: A Simple Harness Outperforms VLA and World Action Models},
+  author        = {Bince Qu and Wei Chen and Bo Zhang},
+  year          = {2026},
+  eprint        = {2610.14018},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.RO},
+  doi           = {10.48550/arXiv.2610.14018},
+  url           = {https://arxiv.org/abs/2610.14018}
+}</code></pre>
+      </div>
+      <p class="copy-feedback" role="status" aria-live="polite"></p>
     </section>
   </main>
 
