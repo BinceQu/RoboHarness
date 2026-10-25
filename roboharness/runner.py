@@ -155,8 +155,10 @@ def read_config(path: Path | None) -> dict:
         # Wall time is not part of the archived rollout budget. Operators may
         # opt into a safety cap; 0 leaves the official step budget authoritative.
         'session_timeout_s': 0,
-        'model_request_timeout_s': 259200,
-        'model_stream_idle_timeout_s': 1800,
+        # Unset keeps the Claude Code CLI's own transport deadlines, as in the
+        # archived runs. Operators may opt into longer limits for slow services.
+        'model_request_timeout_s': None,
+        'model_stream_idle_timeout_s': None,
         'nofile_soft_limit': 65536,
         'cache_dir': str(Path(os.environ.get('XDG_CACHE_HOME', Path.home() / '.cache')) / 'roboharness'),
         'evaluator_dependencies': '',
@@ -173,8 +175,8 @@ def read_config(path: Path | None) -> dict:
             or not math.isfinite(timeout) or timeout < 0):
         raise ValueError('session_timeout_s must be a finite non-negative number; 0 disables the wall-clock cap.')
     for key in ('model_request_timeout_s', 'model_stream_idle_timeout_s'):
-        if type(defaults[key]) is not int or not 1 <= defaults[key] <= 2147483:
-            raise ValueError(f'{key} must be an integer from 1 to 2147483 seconds.')
+        if defaults[key] is not None and (type(defaults[key]) is not int or not 1 <= defaults[key] <= 2147483):
+            raise ValueError(f'{key} must be unset or an integer from 1 to 2147483 seconds.')
     if type(defaults['nofile_soft_limit']) is not int or defaults['nofile_soft_limit'] < 1024:
         raise ValueError('nofile_soft_limit must be an integer >= 1024.')
     fraction = defaults.get('texture_memory_fraction')
@@ -526,10 +528,12 @@ class Run:
         })
         harness = ROOT / 'harness' / self.plan['harness']
         if self.plan['harness'] == 'claude_code':
-            # Keep slow remote inference from inheriting the CLI's short request
-            # deadline. These overrides apply only to this evaluation's child.
-            env['API_TIMEOUT_MS'] = str(self.config['model_request_timeout_s'] * 1000)
-            env['CLAUDE_STREAM_IDLE_TIMEOUT_MS'] = str(self.config['model_stream_idle_timeout_s'] * 1000)
+            # Optional longer deadlines for slow remote inference. They apply
+            # only to this evaluation's child; unset leaves the CLI defaults.
+            for key, variable in (('model_request_timeout_s', 'API_TIMEOUT_MS'),
+                                  ('model_stream_idle_timeout_s', 'CLAUDE_STREAM_IDLE_TIMEOUT_MS')):
+                if self.config[key] is not None:
+                    env[variable] = str(self.config[key] * 1000)
             # Do not let shell-level Git overrides reintroduce a source checkout
             # into the independent native workspace. This affects only this child.
             for key in list(env):

@@ -91,9 +91,12 @@ class WallClockBudget(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / 'config.json'
             for key in ('model_request_timeout_s', 'model_stream_idle_timeout_s'):
-                path.write_text(json.dumps({key: 259200}))
-                self.assertEqual(runner.read_config(path)[key], 259200)
-                for value in (0, -1, True, None, '259200', 1.5, 2147484):
+                path.write_text('{}')
+                self.assertIsNone(runner.read_config(path)[key])
+                for value in (None, 259200):
+                    path.write_text(json.dumps({key: value}))
+                    self.assertEqual(runner.read_config(path)[key], value)
+                for value in (0, -1, True, '259200', 1.5, 2147484):
                     with self.subTest(key=key, value=value):
                         path.write_text(json.dumps({key: value}))
                         with self.assertRaisesRegex(ValueError, key):
@@ -225,32 +228,33 @@ assert ensure_file_limit(2048)['soft'] == 4096
 
 class NativeContextRuntime(unittest.TestCase):
     def test_agent_launch_uses_private_workspace_without_inherited_git_settings(self):
-        with tempfile.TemporaryDirectory(dir='/var/tmp') as directory:
-            root = Path(directory)
-            task = runner.load_task('task01')
-            config = root / 'config.json'
-            config.write_text(json.dumps({'model_request_timeout_s': 259200,
-                                          'model_stream_idle_timeout_s': 1800}))
-            run = runner.Run({'run_dir': directory, 'run_id': 'test-isolated-workspace',
-                              'task_config': task, 'port': 15079, 'harness': 'claude_code'},
-                             runner.read_config(config))
-            run.env = {'XDG_RUNTIME_DIR': str(root / 'runtime'), 'GIT_DIR': '/borrowed/git',
-                       'GIT_WORK_TREE': '/borrowed/worktree', 'GIT_INDEX_FILE': '/borrowed/index',
-                       'API_TIMEOUT_MS': '600000', 'CLAUDE_STREAM_IDLE_TIMEOUT_MS': '300000'}
-            run.spawn = Mock()
-            run.write_summary = Mock()
-            run.log = Mock()
-            with patch.object(runner, 'request_json', side_effect=lambda port, route, body, **kw: {'ok': True, **body}):
-                run.start_agent(task['cases'][0])
-            actual = run.spawn.call_args
-            self.assertEqual(actual.kwargs['cwd'], root / 'runtime/agent-workspaces/instance_301/embodied_claude_code')
-            self.assertFalse(any(k.startswith('GIT_') for k in actual.args[2]))
-            self.assertEqual(run.env['GIT_DIR'], '/borrowed/git')
-            self.assertEqual(actual.args[2]['API_TIMEOUT_MS'], '259200000')
-            self.assertEqual(actual.args[2]['CLAUDE_STREAM_IDLE_TIMEOUT_MS'], '1800000')
-            self.assertEqual(run.env['API_TIMEOUT_MS'], '600000')
-            self.assertEqual(run.env['CLAUDE_STREAM_IDLE_TIMEOUT_MS'], '300000')
-            self.assertEqual(json.loads((root / 'instance_301/case.json').read_text())['agent_cwd'], str(actual.kwargs['cwd']))
+        timeouts = {'model_request_timeout_s': 259200, 'model_stream_idle_timeout_s': 1800}
+        # Unset timeouts leave the inherited CLI settings as in the archived runs.
+        for settings, expected in (({}, ('600000', '300000')), (timeouts, ('259200000', '1800000'))):
+            with self.subTest(settings=settings), tempfile.TemporaryDirectory(dir='/var/tmp') as directory:
+                root = Path(directory)
+                task = runner.load_task('task01')
+                config = root / 'config.json'
+                config.write_text(json.dumps(settings))
+                run = runner.Run({'run_dir': directory, 'run_id': 'test-isolated-workspace',
+                                  'task_config': task, 'port': 15079, 'harness': 'claude_code'},
+                                 runner.read_config(config))
+                run.env = {'XDG_RUNTIME_DIR': str(root / 'runtime'), 'GIT_DIR': '/borrowed/git',
+                           'GIT_WORK_TREE': '/borrowed/worktree', 'GIT_INDEX_FILE': '/borrowed/index',
+                           'API_TIMEOUT_MS': '600000', 'CLAUDE_STREAM_IDLE_TIMEOUT_MS': '300000'}
+                run.spawn = Mock()
+                run.write_summary = Mock()
+                run.log = Mock()
+                with patch.object(runner, 'request_json', side_effect=lambda port, route, body, **kw: {'ok': True, **body}):
+                    run.start_agent(task['cases'][0])
+                actual = run.spawn.call_args
+                self.assertEqual(actual.kwargs['cwd'], root / 'runtime/agent-workspaces/instance_301/embodied_claude_code')
+                self.assertFalse(any(k.startswith('GIT_') for k in actual.args[2]))
+                self.assertEqual(run.env['GIT_DIR'], '/borrowed/git')
+                self.assertEqual((actual.args[2]['API_TIMEOUT_MS'], actual.args[2]['CLAUDE_STREAM_IDLE_TIMEOUT_MS']), expected)
+                self.assertEqual(run.env['API_TIMEOUT_MS'], '600000')
+                self.assertEqual(run.env['CLAUDE_STREAM_IDLE_TIMEOUT_MS'], '300000')
+                self.assertEqual(json.loads((root / 'instance_301/case.json').read_text())['agent_cwd'], str(actual.kwargs['cwd']))
 
     def setUp(self):
         directory = tempfile.TemporaryDirectory()

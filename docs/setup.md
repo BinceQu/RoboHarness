@@ -193,11 +193,12 @@ into an existing session file. `ROBOHARNESS_SESSION_CONFIG` can select a differe
 session file. Global Claude and Codex configuration remains separate.
 
 `session_timeout_s: 0` leaves the episode's official step budget authoritative.
-`model_request_timeout_s` controls the Claude Code request deadline (default
-259200 seconds); `model_stream_idle_timeout_s` controls how long to wait without
-streaming progress (default 1800 seconds, the CLI's byte-idle ceiling). These
-are transport limits, not expected inference durations. They apply only to the
-evaluation process; the model server can impose separate limits.
+Optional `model_request_timeout_s` and `model_stream_idle_timeout_s` raise the
+Claude Code request deadline and the wait without streaming progress (for
+example 259200 and 1800 seconds for a slow remote service). They are unset by
+default, which keeps the CLI's own limits as in the archived runs. These are
+transport limits, not expected inference durations; they apply only to the
+evaluation process, and the model server can impose separate limits.
 
 All three listeners can be selected in that session file with a `task_ports`
 mapping, for example:
