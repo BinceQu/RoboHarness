@@ -15,3 +15,4 @@ document.querySelectorAll('a.zoom').forEach(a=>a.addEventListener('click',e=>{e.
 const box=document.createElement('div');box.className='lightbox';box.innerHTML='<img alt="">';box.firstChild.src=a.href;
 const close=()=>{box.remove();document.removeEventListener('keydown',esc)};const esc=ev=>{if(ev.key==='Escape')close()};
 box.addEventListener('click',close);document.addEventListener('keydown',esc);document.body.appendChild(box)}));
+document.querySelector('.copy').addEventListener('click',e=>{navigator.clipboard.writeText(document.getElementById('bibtex').textContent).then(()=>{e.target.textContent='Copied';setTimeout(()=>e.target.textContent='Copy',1600)})});
