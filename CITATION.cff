@@ -10,7 +10,7 @@ authors:
   - family-names: Zhang
     given-names: Bo
 repository-code: "https://github.com/BinceQu/RoboHarness"
-url: "https://bincequ.github.io/RoboHarness/"
+url: "https://roboharness-lab.github.io/"
 license: MIT
 keywords:
   - robotics

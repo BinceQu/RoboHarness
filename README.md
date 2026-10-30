@@ -4,7 +4,7 @@
 
 ## A Simple Harness Outperforms VLA and World Action Models
 
-**[Project Page](https://bincequ.github.io/RoboHarness/) · [Quick Start](#run-a-task) · [Documentation](docs/setup.md) · [Citation](#citation) · [中文](README.zh-CN.md)**
+**[Project Page](https://roboharness-lab.github.io/) · [Quick Start](#run-a-task) · [Documentation](docs/setup.md) · [Citation](#citation) · [中文](README.zh-CN.md)**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-263c78?style=flat-square)](LICENSE) [![Benchmark](https://img.shields.io/badge/BEHAVIOR-Challenge_2025-d56045?style=flat-square)](#reproduction-contract)
 

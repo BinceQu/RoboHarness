@@ -7,6 +7,7 @@ on:
       - website/**
       - docs/assets/**
       - scripts/build_site.py
+      - scripts/build_pages_redirects.py
       - scripts/method_video.py
       - scripts/fetch_assets.py
       - assets.lock.json
@@ -24,7 +25,7 @@ concurrency:
 
 jobs:
   deploy:
-    if: ${{ github.event.repository.private == false }}
+    if: ${{ github.repository == 'BinceQu/RoboHarness' && github.event.repository.private == false }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -40,12 +41,31 @@ jobs:
         run: python3 scripts/fetch_assets.py --check-remote --group media
       - name: Build static page from archived manifests
         run: python3 scripts/build_site.py
+      - name: Check out organization website
+        uses: actions/checkout@v6
+        with:
+          repository: roboharness-lab/roboharness-lab.github.io
+          ref: main
+          path: _published_site
+          ssh-key: ${{ secrets.PAGES_DEPLOY_KEY }}
+      - name: Publish organization website
+        run: |
+          rsync -a --delete --exclude=.git/ --exclude=README.md _site/ _published_site/
+          git -C _published_site config user.name BinceQu
+          git -C _published_site config user.email 129478693+BinceQu@users.noreply.github.com
+          git -C _published_site add --all
+          if ! git -C _published_site diff --cached --quiet; then
+            git -C _published_site commit -m "Publish website from BinceQu/RoboHarness@${GITHUB_SHA}"
+            git -C _published_site push origin HEAD:main
+          fi
+      - name: Build redirects for the former project URL
+        run: python3 scripts/build_pages_redirects.py
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload page
         uses: actions/upload-pages-artifact@v4
         with:
-          path: _site
+          path: _legacy_site
       - name: Deploy page
         id: deployment
         uses: actions/deploy-pages@v4

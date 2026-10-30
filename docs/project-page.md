@@ -1,7 +1,7 @@
 # Project homepage
 
-The project page is prepared for
-[bincequ.github.io/RoboHarness](https://bincequ.github.io/RoboHarness/).
+The project page is published at
+[roboharness-lab.github.io](https://roboharness-lab.github.io/).
 The source is in [`website/`](../website). It uses HTML, CSS and JavaScript,
 with no Node.js build dependencies or third-party scripts.
 
@@ -141,19 +141,27 @@ removes trace JSON exported by earlier versions of the page.
 
 ## Deployment
 
-The deployment job is skipped while the repository is private.
+Website source remains in this repository. The
+[`pages.yml` workflow](../.github/workflows/pages.yml) builds changes to the page,
+task manifests or prompts on `main`, then publishes the generated `_site/` to
+[`roboharness-lab/roboharness-lab.github.io`](https://github.com/roboharness-lab/roboharness-lab.github.io).
+The website repository uses **Settings → Pages → Deploy from a branch → main →
+/(root)**, with `.nojekyll` included. Edit the source here; the generated website
+is replaced on each publication. The workflow can also be run manually.
 
-In the repository's **Settings → Pages**, select **GitHub Actions** as the
-publishing source. The [`pages.yml` workflow](../.github/workflows/pages.yml)
-builds and deploys changes to the page, task manifests or prompts on `main`.
-It can also be run manually. Only the generated `_site/`
-files enter the Pages artifact; local run data and credentials are not included.
+The source repository's `PAGES_DEPLOY_KEY` Actions secret is the private half of
+a write-enabled deploy key registered only on the website repository. This lets
+the workflow publish the site without using a personal account token. The
+deployment job runs only in the public `BinceQu/RoboHarness` repository.
 
-For branch-based publishing, build into a fresh directory, commit its contents
-to a separate `gh-pages` branch, and select **Deploy from a branch → gh-pages →
-/(root)** in Pages settings. Include the generated `.nojekyll` file. The branch
-must contain the generated site at its root, not the source `website/` template.
-This mode requires rebuilding and pushing the site after source changes.
+The former address, `https://bincequ.github.io/RoboHarness/`, remains published
+using **GitHub Actions** in the source repository's Pages settings. After building
+the new site, `scripts/build_pages_redirects.py` produces `_legacy_site/` with
+HTML redirects to the new origin. They preserve paths, query parameters and
+fragments, including `/v1/?task=task03#task-results` and `/v2/`. Existing links
+to images, PDFs and other static files still work at the former address. The
+redirect artifact contains only generated public files, with no local run data
+or credentials.
 
 A successful Git push does not confirm that Pages is live. Check the Pages
 deployment status and open the published URL without signing in. If GitHub

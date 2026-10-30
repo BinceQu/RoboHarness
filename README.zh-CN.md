@@ -4,7 +4,7 @@
 
 ### 一个简单而有效的机器人 harness
 
-**[项目主页](https://bincequ.github.io/RoboHarness/) · [English](README.md) · [安装说明](docs/setup.md) · [任务提示词](docs/case-prompts.md) · [引用](#引用)**
+**[项目主页](https://roboharness-lab.github.io/) · [English](README.md) · [安装说明](docs/setup.md) · [任务提示词](docs/case-prompts.md) · [引用](#引用)**
 
 [![RoboHarness 总览](docs/assets/overview.png)](docs/assets/overview.pdf)
 
