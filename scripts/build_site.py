@@ -296,7 +296,7 @@ def main():
         shutil.copyfile(ROOT / "docs" / relative, target)
     shutil.copyfile(source / "rollouts.json", paper / "assets/rollouts/manifest.json")
     method_video.copy_assets(paper, prepared_method)
-    shutil.copyfile(ROOT / "docs/assets/roboharness-icon.svg", paper / "favicon.svg")
+    shutil.copyfile(source / "portal/favicon.svg", paper / "favicon.svg")
     (paper / ".nojekyll").touch()
     static_pages(output, args.media)
     (output / ".nojekyll").touch()
