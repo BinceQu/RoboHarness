@@ -4,48 +4,34 @@
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
   const title = (name) => name.replace(/_/g, " ");
   const band = (e) => e.q === null ? "q-none" : e.q >= 1 ? "q-full" : e.q > 0 ? "q-mid" : "q-zero";
-  const qText = (e) => e.q === null ? "—" : e.q.toFixed(e.q % 1 ? 2 : 1);
+  const qText = (e) => e.q === null ? "—" : (e.status === "estimated" ? "≈" : "") + e.q.toFixed(e.q % 1 ? 2 : 1);
   const time = (s) => s >= 60 ? `${Math.floor(s / 60)}m ${String(Math.round(s % 60)).padStart(2, "0")}s` : `${Math.round(s)}s`;
-  const FILTERS = [["all", "All", () => true], ["full", "Full success", (e) => e.q >= 1],
-    ["mid", "Partial", (e) => e.q > 0 && e.q < 1], ["zero", "Zero", (e) => e.q === 0], ["none", "Unscored", (e) => e.q === null]];
   const SPEEDS = [1, 2, 4, 8, 16];
-  let data, shown = [], current = -1, filter = "all", speed = 4;
+  let data, shown = [], current = -1, speed = 4;
 
   fetch("episodes.json").then((r) => r.json()).then((d) => { data = d; render(); });
 
   function render() {
     const s = data.summary;
-    $("stats").innerHTML = [["key", s.mean_q.toFixed(3), `mean Q · ${s.scored} scored tasks`], ["", s.tasks, "tasks attempted"],
+    $("stats").innerHTML = [["key", s.mean_q.toFixed(3), `mean Q · ${s.estimated} video estimate`], ["", s.tasks, "tasks attempted"],
       ["", s.full_success, "full success"], ["", s.partial, "partial score"], ["", s.zero, "zero score"]]
       .map(([c, b, t]) => `<div class="stat ${c}"><b>${b}</b><span>${t}</span></div>`).join("");
     $("strip").innerHTML = data.episodes.map((e) =>
       `<button type="button" class="${band(e)}" data-id="${e.id}" title="${e.id.toUpperCase()} ${esc(title(e.task))} · Q ${qText(e)}"></button>`).join("");
     $("strip").addEventListener("click", (ev) => ev.target.dataset.id && openId(ev.target.dataset.id));
-    $("chips").innerHTML = FILTERS.map(([k, label, f]) =>
-      `<button type="button" class="chip${k === filter ? " on" : ""}" data-k="${k}">${label}<small>${data.episodes.filter(f).length}</small></button>`).join("");
-    $("chips").addEventListener("click", (ev) => {
-      const b = ev.target.closest(".chip"); if (!b) return;
-      filter = b.dataset.k; document.querySelectorAll(".chip").forEach((c) => c.classList.toggle("on", c === b)); layout();
-    });
     $("settings").innerHTML = Object.entries(data.settings).map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("");
     $("v-settings").innerHTML = $("settings").innerHTML;
     $("v-speed").insertAdjacentHTML("beforeend", SPEEDS.map((x) => `<button type="button" data-x="${x}">${x}×</button>`).join(""));
     $("v-speed").addEventListener("click", (ev) => ev.target.dataset.x && setSpeed(+ev.target.dataset.x));
     $("search").addEventListener("input", layout);
-    $("sort").addEventListener("change", layout);
     layout();
     if (location.hash.length > 1) openId(location.hash.slice(1));
   }
 
   function layout() {
     const q = $("search").value.trim().toLowerCase().replace(/\s+/g, "_");
-    const keep = FILTERS.find(([k]) => k === filter)[2];
-    shown = data.episodes.filter((e) => keep(e) && (!q || e.task.includes(q) || e.id.includes(q)));
-    const order = $("sort").value, val = (e) => e.q === null ? -1 : e.q;
-    if (order === "q-desc") shown.sort((a, b) => val(b) - val(a) || a.task_id - b.task_id);
-    if (order === "q-asc") shown.sort((a, b) => val(a) - val(b) || a.task_id - b.task_id);
-    if (order === "len") shown.sort((a, b) => b.steps - a.steps);
-    if (order === "id") shown.sort((a, b) => a.task_id - b.task_id);
+    shown = data.episodes.filter((e) => !q || e.task.includes(q) || e.id.includes(q));
+    shown.sort((a, b) => a.task_id - b.task_id);
     $("grid").innerHTML = shown.map((e, i) => `
       <button type="button" class="tile" data-i="${i}" aria-label="Open ${esc(title(e.task))}">
         <div class="media"><img loading="lazy" src="${base}${e.media.posters.file}" alt="">
@@ -82,7 +68,7 @@
   }
   function openId(id) {
     let i = shown.findIndex((e) => e.id === id);
-    if (i < 0) { filter = "all"; $("search").value = ""; document.querySelectorAll(".chip").forEach((c) => c.classList.toggle("on", c.dataset.k === "all")); layout(); i = shown.findIndex((e) => e.id === id); }
+    if (i < 0) { $("search").value = ""; layout(); i = shown.findIndex((e) => e.id === id); }
     if (i >= 0) open(i);
   }
   function open(i) {
@@ -92,9 +78,10 @@
     $("v-title").textContent = title(e.task);
     video.poster = base + e.media.posters.file;
     video.src = base + e.media.videos.file;
+    $("v-trajectory").href = base + `trajectories/${e.id}.tar.gz` + "?download=true";
     setSpeed(e.video_seconds > 120 ? 8 : e.video_seconds > 40 ? 4 : 2);
     video.play().catch(() => {});
-    const m = [[qText(e), e.q === null ? "no official score" : e.success ? "Q · task succeeded" : "Q · official q-score"],
+    const m = [[qText(e), e.status === "estimated" ? "Q · video estimate" : e.q === null ? "no official score" : e.success ? "Q · task succeeded" : "Q · official q-score"],
       [`${e.steps.toLocaleString()} / ${e.max_ticks.toLocaleString()}`, "ticks used / budget"],
       [time(e.sim_seconds), "simulated time"], [e.bash_calls ?? "—", "Bash calls by the agent"],
       [title(e.scene), "scene"]];

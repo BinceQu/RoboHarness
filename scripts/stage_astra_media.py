@@ -20,8 +20,6 @@ PREVIEW_SECONDS = 8
 PREVIEW_SIZE = 336
 # The evaluator puts two wrist views on the left and the square head view on the right.
 HEAD_CROP = "crop=ih:ih:iw-ih:0"
-# Full-success tasks tiled 4 x 3 into the portal card video.
-MONTAGE = ["t00", "t02", "t06", "t30", "t38", "t43", "t44", "t53", "t58", "t60", "t87", "t91"]
 
 
 def probe(path):
@@ -72,20 +70,28 @@ def stage(source, key, out, duration):
             for kind, path in (("videos", video), ("previews", preview), ("posters", poster))}
 
 
-def montage(out):
-    video, poster = out / "card" / "montage-head.mp4", out / "card" / "montage-head-poster.jpg"
-    video.parent.mkdir(exist_ok=True)
-    if not video.exists():
-        inputs = [arg for key in MONTAGE for arg in ("-threads", "1", "-i", str(out / "previews" / f"{key}-head.mp4"))]
-        layout = "|".join(f"{(i % 4) * PREVIEW_SIZE}_{(i // 4) * PREVIEW_SIZE}" for i in range(len(MONTAGE)))
-        tiles = "".join(f"[{i}]" for i in range(len(MONTAGE)))
-        ffmpeg(*inputs, "-filter_complex_threads", "2", "-filter_complex",
-               f"{tiles}xstack=inputs={len(MONTAGE)}:layout={layout},pad=1792:1008:(ow-iw)/2:0:color=0x111923,format=yuv420p[v]",
-               "-map", "[v]", "-an", "-c:v", "libx264", "-threads", "2", "-preset", "slow", "-crf", "26", "-movflags", "+faststart", str(video))
-    if not poster.exists():
-        ffmpeg("-ss", "6", "-i", str(video), "-frames:v", "1", "-q:v", "3", str(poster))
-    return {name: {"file": f"card/{path.name}", "bytes": path.stat().st_size, "sha256": sha256(path)}
-            for name, path in (("video", video), ("poster", poster))}
+def recorded_card(out, recording=None):
+    """Crop the selected browser recording without changing frame order or timing."""
+    video = out / "card/portal-recording.mp4"
+    poster = out / "card/portal-recording-poster.jpg"
+    provenance = out / "card/portal-recording.json"
+    video.parent.mkdir(parents=True, exist_ok=True)
+    if recording is not None:
+        duration, width, _ = probe(recording)
+        crop_height = round(width * 9 / 16 / 2) * 2
+        ffmpeg("-threads", "2", "-i", str(recording), "-an", "-vf", f"crop=iw:{crop_height}:0:0",
+               "-filter_threads", "1", "-c:v", "libx264", "-threads", "3", "-preset", "slow",
+               "-crf", "18", "-tune", "fastdecode", "-bf", "0", "-g", "60",
+               "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(video))
+        ffmpeg("-i", str(video), "-frames:v", "1", "-q:v", "2", str(poster))
+        provenance.write_text(json.dumps({"source_file": recording.name,
+            "source_sha256": sha256(recording), "source_seconds": duration,
+            "crop": [0, 0, width, crop_height], "playback_rate": 1,
+            "description": "Video area cropped from the selected browser recording; original frame order and timing."}, indent=2) + "\n")
+    if not all(path.is_file() for path in (video, poster, provenance)):
+        raise ValueError("Pass --card-recording to stage the selected portal recording")
+    return {name: {"file": str(path.relative_to(out)), "bytes": path.stat().st_size, "sha256": sha256(path)}
+            for name, path in (("video", video), ("poster", poster), ("provenance", provenance))}
 
 
 def bash_calls(stream):
@@ -100,8 +106,31 @@ def bash_calls(stream):
     return count
 
 
+def apply_estimates(rows):
+    estimates = json.loads((ROOT / "website/astra/estimates.json").read_text())
+    for row in rows:
+        row["score_source"] = "official" if row["status"] == "scored" else None
+        if row["id"] in estimates and row["status"] != "scored":
+            estimate = estimates[row["id"]]
+            row.update(status="estimated", q=estimate["q"], official_q=None,
+                       score_source="video_estimate", estimate=estimate,
+                       note="Video-estimated Q ≈ 0.50 at the last recorded tick (11904). "
+                            "Toaster and French press are in the cabinet; the food processor is outside and the doors remain open. "
+                            "The run is incomplete and has no official final score.")
+    official = [row for row in rows if row["status"] == "scored"]
+    scored = [row for row in rows if row["q"] is not None]
+    return {"tasks": len(rows), "scored": len(scored), "official_scored": len(official),
+            "estimated": sum(row["status"] == "estimated" for row in rows),
+            "mean_q": sum(row["q"] for row in scored) / len(scored),
+            "official_mean_q": sum(row["q"] for row in official) / len(official),
+            "full_success": sum(row["q"] >= 1 for row in scored),
+            "partial": sum(0 < row["q"] < 1 for row in scored),
+            "zero": sum(row["q"] == 0 for row in scored)}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--card-recording", type=Path, help="Selected browser recording; crop its video area at the original playback timing")
     parser.add_argument("run", type=Path, help="codex-astra-b19-gpu5-20261016/run")
     parser.add_argument("--out", type=Path, required=True, help="media staging directory (not in git)")
     parser.add_argument("--jobs", type=int, default=6)
@@ -165,14 +194,10 @@ def main():
         "Tick budget": "official per-task max ticks (shown per episode)",
         "Rendering": f"low-memory profile, texture memory fraction {render['texture_memory_fraction']}",
     }
-    scored = [r for r in rows if r["status"] == "scored"]
-    summary = {"tasks": len(rows), "scored": len(scored),
-               "mean_q": round(sum(r["q"] for r in scored) / len(scored), 4),
-               "full_success": sum(1 for r in scored if r["q"] >= 1.0),
-               "partial": sum(1 for r in scored if 0 < r["q"] < 1.0),
-               "zero": sum(1 for r in scored if r["q"] == 0)}
+    summary = apply_estimates(rows)
+    card = recorded_card(args.out, args.card_recording)
     page = {"version": 1, "title": "GPT-6 Astra on RoboHarness V2", "benchmark": "BEHAVIOR Challenge 2026 · tasks 0–99",
-            "summary": summary, "settings": settings, "card": montage(args.out), "episodes": rows}
+            "summary": summary, "settings": settings, "card": card, "episodes": rows}
     target = ROOT / "website" / "astra" / "episodes.json"
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(page, ensure_ascii=False, indent=1) + "\n")

@@ -1,0 +1,16 @@
+{
+  "t08": {
+    "q": 0.5,
+    "source": "video_estimate",
+    "last_recorded_tick": 11904,
+    "reviewed_video_seconds": [0, 396.8],
+    "conditions": [
+      {"condition": "Toaster inside the chosen cabinet", "estimated_satisfied": true, "credit": 0.25},
+      {"condition": "French press inside the same cabinet", "estimated_satisfied": true, "credit": 0.25},
+      {"condition": "Food processor inside the same cabinet", "estimated_satisfied": false, "credit": 0},
+      {"condition": "Cabinet closed", "estimated_satisfied": false, "credit": 0}
+    ],
+    "evidence": "The final head-camera frames show the toaster and French press on the lower shelf of the same cabinet. The food processor is still held outside the cabinet, and its doors remain open. The final agent messages describe recovering and regrasping the processor after it fell back onto the countertop.",
+    "limitation": "Visual estimate at the recorded endpoint; the evaluator did not produce a final score. Inside/open predicates cannot be verified exactly from RGB alone. No credit is assigned for actions that might have occurred after the recording stopped."
+  }
+}

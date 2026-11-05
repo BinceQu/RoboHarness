@@ -1,32 +1,40 @@
 (() => {
   const wall = document.querySelector('.video-wall');
   if (!wall) return;
-  const videos = [...wall.querySelectorAll('video')];
+  const video = wall.querySelector('video');
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
-  const started = performance.now();
-  let nearby = false;
-
-  // Keep repeated tiles at the same point in the clip as the wall loops.
-  const sync = (video) => {
-    if (Number.isFinite(video.duration) && video.duration > 0) {
-      video.currentTime = ((performance.now() - started) / 1000) % video.duration;
+  let nearby = false, loaded = false, loading = false;
+  const active = () => nearby && !document.hidden && !motion.matches;
+  const update = () => {
+    if (!active() || !loaded) { video.pause(); return; }
+    video.play().catch(() => wall.classList.remove('is-playing'));
+  };
+  const load = async () => {
+    if (loading || loaded || motion.matches) return;
+    loading = true;
+    try {
+      // Buffer once; the chosen recording already contains the complete scrolling effect.
+      const response = await fetch(video.dataset.src);
+      if (!response.ok) throw new Error(`Video wall: HTTP ${response.status}`);
+      const blob = await response.blob();
+      video.src = URL.createObjectURL(blob);
+      video.load();
+    } catch (error) {
+      loading = false;
+      console.warn('Unable to load the video wall.', error);
     }
   };
-  const update = () => {
-    const playing = nearby && !document.hidden && !motion.matches;
-    wall.classList.toggle('is-playing', playing);
-    videos.forEach((video) => {
-      if (!playing) { video.pause(); return; }
-      if (!video.hasAttribute('src')) video.src = video.dataset.src;
-      sync(video);
-      video.play().catch(() => {});
-    });
-  };
-  videos.forEach((video) => video.addEventListener('loadedmetadata', () => sync(video)));
+  video.addEventListener('canplay', () => { loaded = true; update(); });
+  video.addEventListener('playing', () => wall.classList.add('is-playing'));
+  ['waiting', 'pause', 'ended', 'error'].forEach((event) =>
+    video.addEventListener(event, () => wall.classList.remove('is-playing')));
   new IntersectionObserver(([entry]) => {
     nearby = entry.isIntersecting;
-    update();
+    load(); update();
   }, {rootMargin: '180px 0px'}).observe(wall);
   document.addEventListener('visibilitychange', update);
-  motion.addEventListener('change', update);
+  motion.addEventListener('change', () => { load(); update(); });
+  window.addEventListener('online', load);
+  window.addEventListener('pageshow', update);
+  load();
 })();

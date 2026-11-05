@@ -44,19 +44,12 @@ ASTRA_MEDIA = ROOT / "website/astra/media.json"
 
 
 def astra_card_tiles(media_base):
-    """Repeat a six-column video grid for a continuous rightward scroll."""
+    """Embed the selected browser recording's video area with its original timing."""
     page = json.loads((ROOT / "website/astra/episodes.json").read_text())
-    episodes = [row for row in page["episodes"] if row["q"] == 1][:18]
-    if len(episodes) != 18:
-        raise ValueError("The portal video wall needs 18 full-success previews")
-    tiles = []
-    for row in episodes:
-        preview = html.escape(media_base + row["media"]["previews"]["file"], quote=True)
-        poster = html.escape(media_base + row["media"]["posters"]["file"], quote=True)
-        tiles.append(f'<div class="video-wall-tile"><video muted loop playsinline preload="none" '
-                     f'poster="{poster}" data-src="{preview}"></video></div>')
-    group = '<div class="video-wall-group">' + "".join(tiles) + '</div>'
-    return '<div class="video-wall-track">' + group * 2 + '</div>'
+    video = html.escape(media_base + page["card"]["video"]["file"], quote=True)
+    poster = html.escape(media_base + page["card"]["poster"]["file"], quote=True)
+    return (f'<video class="video-wall-recording" muted loop playsinline preload="none" '
+            f'poster="{poster}" data-src="{video}"></video>')
 
 
 def astra_media_base(local_dir):

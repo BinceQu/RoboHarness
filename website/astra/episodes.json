@@ -4,10 +4,13 @@
  "benchmark": "BEHAVIOR Challenge 2026 · tasks 0–99",
  "summary": {
   "tasks": 100,
-  "scored": 99,
-  "mean_q": 0.4567,
+  "scored": 100,
+  "official_scored": 99,
+  "estimated": 1,
+  "mean_q": 0.45716622266622264,
+  "official_mean_q": 0.45673355824870976,
   "full_success": 26,
-  "partial": 42,
+  "partial": 43,
   "zero": 31
  },
  "settings": {
@@ -29,14 +32,19 @@
  },
  "card": {
   "video": {
-   "file": "card/montage-head.mp4",
-   "bytes": 4328751,
-   "sha256": "a931023e155b3cb3904192ea66dd262223ad642e2c502c33df14a958a28bba69"
+   "file": "card/portal-recording.mp4",
+   "bytes": 53232874,
+   "sha256": "d5e73a72116f570864cdfc0ab8225450af545d7e4ed857ea75461468e03e6cd7"
   },
   "poster": {
-   "file": "card/montage-head-poster.jpg",
-   "bytes": 160888,
-   "sha256": "f8f8ec83753abd78739b36fca0d4d1076caa49bf2d13cc7e2e304952e69bd3ec"
+   "file": "card/portal-recording-poster.jpg",
+   "bytes": 119568,
+   "sha256": "cfba915aaa8cafad30f31b77689f1b9574663228e7032f9a08c62dd3d2128fff"
+  },
+  "provenance": {
+   "file": "card/portal-recording.json",
+   "bytes": 342,
+   "sha256": "10a12cb23a31b01ca287463575862b49887738a8070332c9cafc26175568a789"
   }
  },
  "episodes": [
@@ -75,7 +83,8 @@
      "sha256": "8a9030665c36036814099170c4c8815edde04254fcb24126231aa440e514ffdb"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t01",
@@ -112,7 +121,8 @@
      "sha256": "160e6ce85177b0cc9a8cf0739a92f18be4acdaa73afe484873e574e516dfe35c"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t02",
@@ -149,7 +159,8 @@
      "sha256": "da9c9d27dbceee9b3174b920876b23cff97292384ba6e3a412925f2755b3552c"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t03",
@@ -186,7 +197,8 @@
      "sha256": "80c620b0b8e5c32cfbc84bfbcf10c75e32ea8deafb097ada08359c3dd10cd5e6"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t04",
@@ -223,7 +235,8 @@
      "sha256": "b1972fd70febc0aa93fc8077b6b74ca80e3229495e7141b57aff040bd2f8337b"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t05",
@@ -260,7 +273,8 @@
      "sha256": "bb900052b801f6cb11c254710650b51f9e99bef5740bc346d8ea95c947ec35c2"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t06",
@@ -297,7 +311,8 @@
      "sha256": "22f945ca67315cfc53b67ca7cec2fe32e35c94c55d460f5c8c57d1d29ed6c6f7"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t07",
@@ -334,7 +349,8 @@
      "sha256": "0ed6c2da064fa87dafc3fa8e75c70b0acb6d3d94e3f96e7553d17105cb8f593b"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t08",
@@ -344,12 +360,12 @@
    "rollout": 0,
    "scene": "house_double_floor_lower",
    "max_ticks": 13414,
-   "status": "unscored",
-   "q": null,
+   "status": "estimated",
+   "q": 0.5,
    "success": null,
    "steps": 11904,
    "sim_seconds": 396.8,
-   "note": "This attempt ended at tick 11904 before the evaluator scored it; no official score.",
+   "note": "Video-estimated Q ≈ 0.50 at the last recorded tick (11904). Toaster and French press are in the cabinet; the food processor is outside and the doors remain open. The run is incomplete and has no official final score.",
    "prompt": "Operate in this independent R1_pro workspace. First read AGENTS.md and the baseline Skill. Named tools and skill activation in the task mean Bash calls: python tools/TOOL_NAME.py '{\"argument\":\"value\"}'. Read tools/README.md and each tool file; --schema prints its accepted inputs. Inspect the actual newest images attached to Bash results before the next visual decision. If only paths appear, use native view_image. Current head clicks use original 720 x 720 pixels and current image_id. Perception and tool_call_history contain only this session. Do not read other episodes, evaluation source, answers or scoring files. Do not modify tools or task instructions during evaluation.\n\nComplete the task below and earn the highest possible score within the simulation tick budget.\n\nTask: Rearranging Kitchen Furniture\nOfficial task objective: Move the toaster, food processor, and French press from the kitchen countertop into the same kitchen cabinet, and make sure that cabinet is closed at the end.\n\nScoring: 1 point for full success. Otherwise, each amount below is earned only by a condition that was false initially and is true at the end. Initially true conditions add no partial credit but are still required. For alternative object/container assignments, only the best single consistent assignment counts; incompatible assignments cannot be added together.\n\n- The toaster is inside the chosen kitchen cabinet: 0.25 point.\n- The food processor is inside that same cabinet: 0.25 point.\n- The French press is inside that same cabinet: 0.25 point.\n- That cabinet is closed: 0.25 point.\n\nKeep checking the scoring conditions until the evaluator ends the rollout or the tick budget runs out. Do not give up, end early, or reset the scene yourself. A reset alone does not prove full score.\n\nrollout_budget is used_ticks/total_ticks. Robot movements and executed actions consume ticks; thinking and planning alone do not. Keep the original integers. Null counters or available=false mean unknown, not exhausted.\n",
    "bash_calls": 569,
    "video_seconds": 396.8,
@@ -372,7 +388,42 @@
      "sha256": "089cdd5a0b5fe2a5714e56190c0596985bd20965b92fb5610064cf68f102ecc1"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "video_estimate",
+   "official_q": null,
+   "estimate": {
+    "q": 0.5,
+    "source": "video_estimate",
+    "last_recorded_tick": 11904,
+    "reviewed_video_seconds": [
+     0,
+     396.8
+    ],
+    "conditions": [
+     {
+      "condition": "Toaster inside the chosen cabinet",
+      "estimated_satisfied": true,
+      "credit": 0.25
+     },
+     {
+      "condition": "French press inside the same cabinet",
+      "estimated_satisfied": true,
+      "credit": 0.25
+     },
+     {
+      "condition": "Food processor inside the same cabinet",
+      "estimated_satisfied": false,
+      "credit": 0
+     },
+     {
+      "condition": "Cabinet closed",
+      "estimated_satisfied": false,
+      "credit": 0
+     }
+    ],
+    "evidence": "The final head-camera frames show the toaster and French press on the lower shelf of the same cabinet. The food processor is still held outside the cabinet, and its doors remain open. The final agent messages describe recovering and regrasping the processor after it fell back onto the countertop.",
+    "limitation": "Visual estimate at the recorded endpoint; the evaluator did not produce a final score. Inside/open predicates cannot be verified exactly from RGB alone. No credit is assigned for actions that might have occurred after the recording stopped."
+   }
   },
   {
    "id": "t09",
@@ -409,7 +460,8 @@
      "sha256": "48d2f0ddf91da3e92008931df0227f59b9e3007862bf8836e8b474642f4dd399"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t10",
@@ -446,7 +498,8 @@
      "sha256": "878adee4e9c8d620860fa5e47ebbb4f95b2715644ff4e647eddf4771e8f077b6"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t11",
@@ -483,7 +536,8 @@
      "sha256": "a1f5f107826556fdd664dafb9b701764f392966a7d6408dbb3280a0df6f77de4"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t12",
@@ -520,7 +574,8 @@
      "sha256": "42fa5d93aced0e2777fcf483faa52b2f6872c1981d8250303c4b449a7bfa454d"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t13",
@@ -557,7 +612,8 @@
      "sha256": "ecd9543d7ba2441d1befd0b584205295439f97db8df960707a77dd96eea26c4f"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t14",
@@ -594,7 +650,8 @@
      "sha256": "27110f76e9f56255194305d561016067b950cd8896bacd3609d9f8010d39c5a5"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t15",
@@ -631,7 +688,8 @@
      "sha256": "ab4cd2abab2bb8a3916126edf0f839e69ea549ba235023f9adc2e5c8d7949a05"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t16",
@@ -668,7 +726,8 @@
      "sha256": "8f14214e64349cba4fbb08ca05e32906198d133f9796ca809369140027886b02"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t17",
@@ -705,7 +764,8 @@
      "sha256": "c821ff1c818eb3c15e47a5eda192ebc219585f333a189a04812e3c8e79c982da"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t18",
@@ -742,7 +802,8 @@
      "sha256": "c5d3ac9ddd5325163e70afb4a4608b617e3255feca09183ca297892fab1822a6"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t19",
@@ -779,7 +840,8 @@
      "sha256": "a375d362c1d29ebe0171a59c945fa7ac3c6ef75cb6992f75e3d9da2e70ab90bb"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t20",
@@ -816,7 +878,8 @@
      "sha256": "6dfd71e46a03d81e283f09ca22cdf527962d32d55f812196313391bd40c5dc61"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t21",
@@ -853,7 +916,8 @@
      "sha256": "40475963d3f71825be38aa572535b1a76efbf262dfe59874ed2b6a6e6a26de93"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t22",
@@ -890,7 +954,8 @@
      "sha256": "94cd1d5734cd45ba571b64f10730ed055d2f0621e8a4656ab59eb2089813d57c"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t23",
@@ -927,7 +992,8 @@
      "sha256": "d46c3dc77da54a8b8fdfae9064b17063743160d0a734cb7797419ff109242441"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t24",
@@ -964,7 +1030,8 @@
      "sha256": "8b0c624b4b235d2751a949bacd099303f00c1376ed20c3533d0c5908d7332a02"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t25",
@@ -1001,7 +1068,8 @@
      "sha256": "fbb806dcaf05c0e70d486b073877dfb1183c235b151dc13da729b85487b57eca"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t26",
@@ -1038,7 +1106,8 @@
      "sha256": "147ff9d949e4994601b5cb48da038e5c9c17ee724abe04edf3a01fc23be09590"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t27",
@@ -1075,7 +1144,8 @@
      "sha256": "f0349e6b8e14eb70450b972b0649e45c647fbeee201546ae0a5ef002d38a52f5"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t28",
@@ -1112,7 +1182,8 @@
      "sha256": "2ff7d3fa371478639ad8d4863f1baf638e2ae4a035130ffdd6354fb070d7fed2"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t29",
@@ -1149,7 +1220,8 @@
      "sha256": "dbc4e572bf5e967d8bab8a389c4c1fafa3a57baf9e32c0f946f1f0caa1e0b93f"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t30",
@@ -1186,7 +1258,8 @@
      "sha256": "9ed2af205fb3a33f7a2ee490101feacfdf834fb1eafb72a2e479983c1694a921"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t31",
@@ -1223,7 +1296,8 @@
      "sha256": "2b7cc8d83080cab17876f5e8296d9e690857eefe731c7a67d6489cfeb94aa380"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t32",
@@ -1260,7 +1334,8 @@
      "sha256": "5027a28794f6ece028c07bde9c37225391478af611f0179046587109f9e1e1e2"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t33",
@@ -1297,7 +1372,8 @@
      "sha256": "6983b17ec2ee00674f643a4b1130e8c3c4c05b38e033e26ea2f74f41441bb763"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t34",
@@ -1334,7 +1410,8 @@
      "sha256": "c32c048265c088bd9e275af9e4e9218343214ebd449c94865bf6ab83bb35ae75"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t35",
@@ -1371,7 +1448,8 @@
      "sha256": "18c89177ce981302e72a99fd1fc34056cfd15068b573578507709e9d426c3fad"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t36",
@@ -1408,7 +1486,8 @@
      "sha256": "a3036d246bab42f0e83576435544ac7d061434a96728c457243fa1495d7d997e"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t37",
@@ -1445,7 +1524,8 @@
      "sha256": "3ed34cbeeb9e93cc2970a485ac1560b66ea40c5595fd397ee8c4ed084d825fb8"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t38",
@@ -1482,7 +1562,8 @@
      "sha256": "cb19e12c776a71e85aa4a532be84c45a1d59d91f0d61b0b44d0ac4c312238b86"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t39",
@@ -1519,7 +1600,8 @@
      "sha256": "c3f873eef3f9a38bf302346569f01ad27ee48cd432647a7a6fc6751278a36cd7"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t40",
@@ -1556,7 +1638,8 @@
      "sha256": "5a945cd4c2f94a2ce660b16e51cae6a51ef631c0bb1392d28ce28171997dbc33"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t41",
@@ -1593,7 +1676,8 @@
      "sha256": "72e237e2a064524b631c95a39b038ec2d55082862cb91e3ae7a7e6f7a180d3e2"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t42",
@@ -1630,7 +1714,8 @@
      "sha256": "4176e72646ecdcf71b1555685643c7accf3adbb3dfd5e2227abe8fcc6208886f"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t43",
@@ -1667,7 +1752,8 @@
      "sha256": "15935df79876ffe5abb2ee5cca51e044bc7ec2c2a05f9549d825d43f73f0044b"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t44",
@@ -1704,7 +1790,8 @@
      "sha256": "9b9a65c3abdc254b9e601ed52e5e5c616f77b6c63958811de7416046d4fa7e82"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t45",
@@ -1741,7 +1828,8 @@
      "sha256": "bd002212a5819d06cc1a96c410c9226dc913b688a1548dee9308445059657297"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t46",
@@ -1778,7 +1866,8 @@
      "sha256": "1d383fc87cd72a859ee72c6c90e27c3f7a46320e6bd2f673df07f748ce45a7e6"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t47",
@@ -1815,7 +1904,8 @@
      "sha256": "7d236c8df865b85308d3ee60326812b12ccc33fa12b488425a8b46947120cc5b"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t48",
@@ -1852,7 +1942,8 @@
      "sha256": "56aba0aade405e32bdd1b027943e7c669aaf7b13a88640db92aac605b74a9ec7"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t49",
@@ -1889,7 +1980,8 @@
      "sha256": "0eb4f711650b0ea081c9bae3179de90c759ae4779c83f84b855135852ccb2fe5"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t50",
@@ -1926,7 +2018,8 @@
      "sha256": "508da2227ec36ca6203470e36a21887185230d594fcb2f4e9a11322447b83166"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t51",
@@ -1963,7 +2056,8 @@
      "sha256": "fd15b1e2ca2fa1244ee4ee8cd7a418f4eeea974b7c7ed6a6a874b9291ef9567c"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t52",
@@ -2000,7 +2094,8 @@
      "sha256": "02229e7cd9f82b4c42c4a1cf47f766624f249274ddc7ce99119bc90d39d53d43"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t53",
@@ -2037,7 +2132,8 @@
      "sha256": "18699b4e2fcaa6e9d7367ed83063897ed821d7e6504edfa27d54e4c6702872b9"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t54",
@@ -2074,7 +2170,8 @@
      "sha256": "43236e0904c7c75164aa2ad046f312036b22f0dec94885c317ffb70acf89ca95"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t55",
@@ -2111,7 +2208,8 @@
      "sha256": "d57c66987e18c5070d5034c565f770cddcad67a3bc91a048a5740873bdaa8a7b"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t56",
@@ -2148,7 +2246,8 @@
      "sha256": "ff260c7fbf8b4ac5a33673a8ff009bbc1bc90279425489d051ad9d9c82c300e9"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t57",
@@ -2185,7 +2284,8 @@
      "sha256": "54e612d038ea6b73c1e1a0ef7a6d13f151fba18c27ae7aea11c8e84dd06ea814"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t58",
@@ -2222,7 +2322,8 @@
      "sha256": "867acb99ac9ee5fa11472031da35e429b9872509317b8863d5c72c1dcb1afd6c"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t59",
@@ -2259,7 +2360,8 @@
      "sha256": "b4662776888b02c16c3ba921b114eaa52d510bf344f17705e082aba3838c8526"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t60",
@@ -2296,7 +2398,8 @@
      "sha256": "23cf91828199f5e0ed444b31583727de9d90dbc788e8d6afa789d9d196b2f446"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t61",
@@ -2333,7 +2436,8 @@
      "sha256": "49d1d8c3ad376ca8757535212611494f3899b5bb74ded6376c7aacbe76b65253"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t62",
@@ -2370,7 +2474,8 @@
      "sha256": "f0faacc80baf5de345405ea5f2ab7ea532c1e4668d46aacb20d467cab633e5d1"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t63",
@@ -2407,7 +2512,8 @@
      "sha256": "f968d1f17caecd0998fe782b0e04f03f7822fa241b6b210d7ed933a2481664c8"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t64",
@@ -2444,7 +2550,8 @@
      "sha256": "ccbd779252ab826ed82836515c55bb101e9aab38018a6a39c18a719d041173a8"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t65",
@@ -2481,7 +2588,8 @@
      "sha256": "fa6dea27c47335cd657824e35bb9227ff4f30b21458cc5f49fed64a2ab0ab5ac"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t66",
@@ -2518,7 +2626,8 @@
      "sha256": "6d0a6e827b1a06817c483440525d3158d559be7874205bec1f183205c73750b6"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t67",
@@ -2555,7 +2664,8 @@
      "sha256": "c6046167749037e3a62bbaccd6089218b1b8cb4f6dad0c57ec0350681a6c25a7"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t68",
@@ -2592,7 +2702,8 @@
      "sha256": "1fc546d8e633ccc0cc9e2449509035a1650f5879928a762d9d2f1e3a265327e4"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t69",
@@ -2629,7 +2740,8 @@
      "sha256": "661b22aacada4da3063523af66ade6ac3e94caaffc72b02497924137d2ec9d0a"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t70",
@@ -2666,7 +2778,8 @@
      "sha256": "01ef4799b2efbef25f27481e2197b11fd4b3887ff6d3d6c0c2e5002202b2b2ee"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t71",
@@ -2703,7 +2816,8 @@
      "sha256": "5fc34f3f93e4cc80999c7e576e1c20b1059f14e07517d568882f83cd608ff0e2"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t72",
@@ -2740,7 +2854,8 @@
      "sha256": "d2155ed24521f6b1716f21f7963ac86c30f49c1e38c3e203d13eb7a986dcd692"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t73",
@@ -2777,7 +2892,8 @@
      "sha256": "c27fb2d1a64b22b9c4b20a63000cd4c6228076f04d372560b92eac5529cea853"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t74",
@@ -2814,7 +2930,8 @@
      "sha256": "a8ae687d5735b5a0ee03662f7cc2c4ffbc86d1ca0126fbb0fe4351c1d1ed6aab"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t75",
@@ -2851,7 +2968,8 @@
      "sha256": "29d29bf6176ab90d939665aad487201b8813662928c7e9a7b109ab5e9cc287cf"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t76",
@@ -2888,7 +3006,8 @@
      "sha256": "968c7016cd5f652b19ef5883a7c117d8c0938dc9562e1716cd22541d106f605f"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t77",
@@ -2925,7 +3044,8 @@
      "sha256": "cd6fac6c2a3cf8195a135b38187f6aa9c9b1b639b54b2f37719f099b99313849"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t78",
@@ -2962,7 +3082,8 @@
      "sha256": "b6f02a8eab2496b268aa76061b04103a7a3993e6aa2d4b2b1be4216452d558de"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t79",
@@ -2999,7 +3120,8 @@
      "sha256": "945fd1abab8f6c1af026009fe542ac05cf63641a019a08e624e00f8adccbdaec"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t80",
@@ -3036,7 +3158,8 @@
      "sha256": "75178000a3b2bfa47032b592c8831c38ec09a8c0b4c241e13e3f6228dcce29bf"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t81",
@@ -3073,7 +3196,8 @@
      "sha256": "ac5749d99de2967c16dd5e01647b17d04b5a886b2db398c3a7b0718de087720f"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t82",
@@ -3110,7 +3234,8 @@
      "sha256": "223d4816856d66d7b0c06d16e385d03d45fc71ecf246787f01913f1c778ef2e1"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t83",
@@ -3147,7 +3272,8 @@
      "sha256": "ae6dea1e5bece82958df9088663587163797fb190c56abd4f50a37bcf96584f8"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t84",
@@ -3184,7 +3310,8 @@
      "sha256": "4d33e8dacb637d7014d6e9224d65389d6bc8f531c1770e7c971fc6dfeb058f06"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t85",
@@ -3221,7 +3348,8 @@
      "sha256": "eb5b346bcd776b0442ce49271726dc4ce0add0573f071c493aa4da113df298c7"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t86",
@@ -3258,7 +3386,8 @@
      "sha256": "3f9efba65d63c22c21997d6d1e95798c99e9d2183187e40a6d904e855022d288"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t87",
@@ -3295,7 +3424,8 @@
      "sha256": "bd6a423ffa768108735a77218af955bf1fc7083a345456b51d51259cb93b9f85"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t88",
@@ -3332,7 +3462,8 @@
      "sha256": "44843f5997cc18d3f01359fd05f44a5a8f3dd138bf29851254e68a01ae87d0c0"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t89",
@@ -3369,7 +3500,8 @@
      "sha256": "388514595149ce2785003714aa235f5890a424b96511e3becce81d86ed495464"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t90",
@@ -3406,7 +3538,8 @@
      "sha256": "af53769e6db28d89ae2ac92a0f9fde86215556c644d6e338b1351a7359d7d3b0"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t91",
@@ -3443,7 +3576,8 @@
      "sha256": "f69695b90609278713db885b7987018578e6402d1c10ca550d9eb42b4e0603a0"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t92",
@@ -3480,7 +3614,8 @@
      "sha256": "9ba698f31b78c690a122b881a36b20595954784bb8f434f80fd573a0146459ab"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t93",
@@ -3517,7 +3652,8 @@
      "sha256": "61b7af2f033611b598aa0c14a72118ebb8c81f5651687e85cad96a7ec48ef4b4"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t94",
@@ -3554,7 +3690,8 @@
      "sha256": "ed7660f0329151fc187b307eff029370c509a07354e9874f254df06cac8c447e"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t95",
@@ -3591,7 +3728,8 @@
      "sha256": "cd9df8e5f53ee6155f4cde521b104452a6874ca22c6e6618f3e239f1e5a04349"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t96",
@@ -3628,7 +3766,8 @@
      "sha256": "514101c832de4a1aa6956a8bef9d9c2e90cb41723cdf2a76af6bb172e753873a"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t97",
@@ -3665,7 +3804,8 @@
      "sha256": "de80ef74894c9849d18c838c6e979ce42225ee896d38f7d931267c28cadbdbf2"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t98",
@@ -3702,7 +3842,8 @@
      "sha256": "93e779c1ecd69948a470fd311986e42a2210f0b47e5f0bcce6f6eb31e3e8e4bd"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   },
   {
    "id": "t99",
@@ -3739,7 +3880,8 @@
      "sha256": "9970ae2002a29c21a487ecb59eb4e2592146ecb215683806bbd7b5e7154c3ab3"
     }
    },
-   "video_view": "head"
+   "video_view": "head",
+   "score_source": "official"
   }
  ]
 }
