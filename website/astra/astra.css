@@ -35,7 +35,7 @@ a{color:inherit;text-decoration:none}img{display:block;max-width:100%}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(236px,1fr));gap:18px;margin-top:22px}
 .tile{position:relative;display:block;width:100%;padding:0;border:1px solid var(--rule);border-radius:14px;overflow:hidden;background:#fff;text-align:left;font:inherit;color:inherit;cursor:zoom-in;transition:border-color .16s,box-shadow .16s,transform .16s}
 .tile:hover,.tile:focus-visible{border-color:#c9d1de;box-shadow:0 12px 30px rgba(32,46,70,.12);transform:translateY(-2px);outline:0}
-.tile .media{position:relative;aspect-ratio:3/2;background:#111923}
+.tile .media{position:relative;aspect-ratio:1;background:#111923}
 .tile img,.tile video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .tile video{opacity:0;transition:opacity .2s}.tile.playing video{opacity:1}
 .tile .tid{position:absolute;top:9px;left:9px;padding:2px 9px;border-radius:20px;background:rgba(17,25,35,.72);color:#fff;font:600 12px var(--mono)}
@@ -59,7 +59,7 @@ dialog::backdrop{background:rgba(14,20,32,.74);backdrop-filter:blur(3px)}
 .v-head h3{margin:2px 0 0;font:400 26px/1.2 var(--serif);text-transform:capitalize}
 .v-nav{display:flex;gap:8px}.v-nav button{width:38px;height:38px;border:1px solid var(--rule);border-radius:50%;background:#fff;font-size:20px;line-height:1;color:var(--ink);cursor:pointer}
 .v-nav button:hover{border-color:var(--ink);background:var(--wash)}
-.v-stage{background:#0d131c}.v-stage video{display:block;width:100%;max-height:68vh;aspect-ratio:3/2;margin:0 auto;background:#0d131c}
+.v-stage{background:#0d131c}.v-stage video{display:block;width:min(100%,68vh);height:auto;aspect-ratio:1;margin:0 auto;background:#0d131c}
 .v-speed{display:flex;align-items:center;gap:6px;padding:12px 24px 0;color:var(--muted);font-size:13px}
 .v-speed span{margin-right:4px}.v-speed button{border:1px solid var(--rule);background:#fff;border-radius:20px;padding:3px 11px;font:600 12.5px var(--mono);color:var(--ink);cursor:pointer}
 .v-speed button.on{background:var(--ink);border-color:var(--ink);color:#fff}

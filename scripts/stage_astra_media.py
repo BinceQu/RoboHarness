@@ -2,9 +2,9 @@
 """Stage the GPT-6 Astra x RoboHarness V2 BEHAVIOR rollouts for the project site.
 
 Reads one private run directory and writes, outside git:
-  videos/tNN.mp4    original stream, remuxed losslessly with faststart
-  previews/tNN.mp4  8 s silent time-lapse for the gallery grid
-  posters/tNN.jpg   frame near the end of the rollout
+  videos/tNN-head.mp4    head-camera crop at the recorded resolution and frame rate
+  previews/tNN-head.mp4  8 s silent head-camera time-lapse for the gallery grid
+  posters/tNN-head.jpg   head-camera frame near the end of the rollout
 and website/astra/episodes.json with scores, prompts and agent settings.
 """
 
@@ -17,6 +17,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PREVIEW_SECONDS = 8
+PREVIEW_SIZE = 336
+# The evaluator puts two wrist views on the left and the square head view on the right.
+HEAD_CROP = "crop=ih:ih:iw-ih:0"
 # Full-success tasks tiled 4 x 3 into the portal card video.
 MONTAGE = ["t00", "t02", "t06", "t30", "t38", "t43", "t44", "t53", "t58", "t60", "t87", "t91"]
 
@@ -38,34 +41,47 @@ def sha256(path):
 
 
 def ffmpeg(*args):
-    subprocess.run(["nice", "-n", "19", "ffmpeg", "-nostdin", "-v", "error", "-y", *args], check=True)
+    target = Path(args[-1])
+    temporary = target.with_name(f".{target.stem}.partial{target.suffix}")
+    try:
+        subprocess.run(["nice", "-n", "19", "ffmpeg", "-nostdin", "-v", "error", "-y",
+                        *args[:-1], str(temporary)], check=True)
+        temporary.replace(target)
+    finally:
+        temporary.unlink(missing_ok=True)
 
 
 def stage(source, key, out, duration):
-    video, preview, poster = out / "videos" / f"{key}.mp4", out / "previews" / f"{key}.mp4", out / "posters" / f"{key}.jpg"
+    _, width, height = probe(source)
+    if width * 2 != height * 3:
+        raise ValueError(f"Expected the evaluator's 3:2 camera composite: {source} ({width}x{height})")
+    video, preview, poster = out / "videos" / f"{key}-head.mp4", out / "previews" / f"{key}-head.mp4", out / "posters" / f"{key}-head.jpg"
     if not video.exists():
-        ffmpeg("-i", str(source), "-map", "0:v:0", "-c", "copy", "-movflags", "+faststart", str(video))
+        ffmpeg("-threads", "2", "-i", str(source), "-map", "0:v:0", "-an", "-vf", HEAD_CROP,
+               "-filter_threads", "1", "-c:v", "libx264", "-threads", "2", "-preset", "fast",
+               "-crf", "18", "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(video))
     if not preview.exists():
         speed = min(1.0, PREVIEW_SECONDS / duration)
-        ffmpeg("-threads", "2", "-i", str(source), "-an", "-vf", f"setpts={speed:.6f}*PTS,fps=12,scale=336:224",
-               "-c:v", "libx264", "-preset", "slow", "-crf", "30", "-pix_fmt", "yuv420p", "-movflags", "+faststart",
+        ffmpeg("-threads", "2", "-i", str(video), "-an", "-vf", f"setpts={speed:.6f}*PTS,fps=12,scale={PREVIEW_SIZE}:{PREVIEW_SIZE}",
+               "-filter_threads", "1", "-c:v", "libx264", "-threads", "2", "-preset", "slow", "-crf", "28", "-pix_fmt", "yuv420p", "-movflags", "+faststart",
                str(preview))
     if not poster.exists():
-        ffmpeg("-ss", f"{duration * 0.92:.2f}", "-i", str(source), "-frames:v", "1", "-q:v", "4", str(poster))
-    return {kind: {"file": f"{kind}/{key}.{'jpg' if kind == 'posters' else 'mp4'}",
+        ffmpeg("-threads", "2", "-ss", f"{duration * 0.92:.2f}", "-i", str(video), "-frames:v", "1", "-q:v", "3", str(poster))
+    return {kind: {"file": f"{kind}/{path.name}",
                    "bytes": path.stat().st_size, "sha256": sha256(path)}
             for kind, path in (("videos", video), ("previews", preview), ("posters", poster))}
 
 
 def montage(out):
-    video, poster = out / "card" / "montage.mp4", out / "card" / "montage-poster.jpg"
+    video, poster = out / "card" / "montage-head.mp4", out / "card" / "montage-head-poster.jpg"
     video.parent.mkdir(exist_ok=True)
     if not video.exists():
-        inputs = [arg for key in MONTAGE for arg in ("-i", str(out / "previews" / f"{key}.mp4"))]
-        layout = "|".join(f"{(i % 4) * 336}_{(i // 4) * 224}" for i in range(len(MONTAGE)))
+        inputs = [arg for key in MONTAGE for arg in ("-threads", "1", "-i", str(out / "previews" / f"{key}-head.mp4"))]
+        layout = "|".join(f"{(i % 4) * PREVIEW_SIZE}_{(i // 4) * PREVIEW_SIZE}" for i in range(len(MONTAGE)))
         tiles = "".join(f"[{i}]" for i in range(len(MONTAGE)))
-        ffmpeg(*inputs, "-filter_complex", f"{tiles}xstack=inputs={len(MONTAGE)}:layout={layout},format=yuv420p[v]",
-               "-map", "[v]", "-an", "-c:v", "libx264", "-preset", "slow", "-crf", "26", "-movflags", "+faststart", str(video))
+        ffmpeg(*inputs, "-filter_complex_threads", "2", "-filter_complex",
+               f"{tiles}xstack=inputs={len(MONTAGE)}:layout={layout},pad=1792:1008:(ow-iw)/2:0:color=0x111923,format=yuv420p[v]",
+               "-map", "[v]", "-an", "-c:v", "libx264", "-threads", "2", "-preset", "slow", "-crf", "26", "-movflags", "+faststart", str(video))
     if not poster.exists():
         ffmpeg("-ss", "6", "-i", str(video), "-frames:v", "1", "-q:v", "3", str(poster))
     return {name: {"file": f"card/{path.name}", "bytes": path.stat().st_size, "sha256": sha256(path)}
@@ -121,7 +137,7 @@ def main():
         streams = sorted(attempt.glob("native/*/stream.jsonl"))
         row.update(prompt=prompt, bash_calls=sum(bash_calls(s) for s in streams) if streams else None)
         duration, width, height = probe(source)
-        row.update(video_seconds=round(duration, 1), width=width, height=height)
+        row.update(video_seconds=round(duration, 1), width=height, height=height, video_view="head")
         rows.append(row)
         work[key] = (source, duration)
 
@@ -143,7 +159,7 @@ def main():
         "Skills": "behavior-v2-baseline, pick-up-object, place-object-in-container, open-doors-and-drawers",
         "Prompt": "baseline_v3 task instructions, one per task",
         "Robot": "Galaxea R1 Pro (dual 7-DoF arms, torso, holonomic base)",
-        "Cameras": f"head RGB-D {render['head_rgbd_hw'][0]}x{render['head_rgbd_hw'][1]}, wrists RGB-D {render['left_wrist_rgbd_hw'][0]}x{render['left_wrist_rgbd_hw'][1]}",
+        "Video view": "Head camera only; recorded 448x448 pixels, original frame rate",
         "Benchmark": "BEHAVIOR Challenge 2026, official evaluator v3.9.3",
         "Episode": "public instance 301, rollout 0, seed 0; one attempt per task",
         "Tick budget": "official per-task max ticks (shown per episode)",
