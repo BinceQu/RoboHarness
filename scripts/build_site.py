@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Build the static project site: the portal at /, the paper page at /v1/ and the V2 page at /v2/.
+"""Build the static project site: the portal at /, the paper page at /v1/, the V2 page at /v2/
+and the GPT-6 Astra rollout gallery at /astra/.
 
 The paper page is generated from the checked-in experiment manifests; the
 portal and V2 pages are copied from website/portal and website/v2, with
@@ -37,7 +38,32 @@ def media_source(relative, expected, media):
 
 
 # Static pages copied around the generated paper page, and their site folders.
-STATIC_PAGES = (("portal", ""), ("v2", "v2"))
+STATIC_PAGES = (("portal", ""), ("v2", "v2"), ("astra", "astra"))
+# Gallery media live in one pinned folder of the asset repository (website/astra/media.json).
+ASTRA_MEDIA = ROOT / "website/astra/media.json"
+
+
+def astra_media_base(local_dir):
+    """Absolute URL of the pinned gallery media folder, or the site-relative local copy."""
+    if local_dir is not None:
+        return "astra/media/"
+    data = json.loads(ASTRA_MEDIA.read_text())
+    if not data.get("revision"):
+        raise ValueError("Astra gallery media are not uploaded yet; pin a revision in website/astra/media.json or pass --astra-media")
+    return f'https://huggingface.co/datasets/{data["repository"]}/resolve/{data["revision"]}/{data["remote"]}/'
+
+
+def link_astra_media(output, local_dir):
+    """Expose a local media folder to the preview build after checking every listed file."""
+    page = json.loads((ROOT / "website/astra/episodes.json").read_text())
+    for item in [*page["card"].values(), *(m for row in page["episodes"] for m in row["media"].values())]:
+        path = local_dir / item["file"]
+        if not path.is_file() or path.stat().st_size != item["bytes"]:
+            raise ValueError(f"Missing or changed local gallery media: {path}")
+    target = output / "astra/media"
+    if target.is_symlink() or target.exists():
+        target.unlink()
+    target.symlink_to(local_dir.resolve(), target_is_directory=True)
 
 
 def published_path(path):
@@ -49,8 +75,9 @@ def published_path(path):
     raise ValueError(f"No site location for asset: {path}")
 
 
-def static_pages(output, media):
+def static_pages(output, media, astra_dir=None):
     lock = fetch_assets.lock(ROOT)
+    astra_base = astra_media_base(astra_dir)
     embedded = set()
     for name, folder in STATIC_PAGES:
         source = ROOT / "website" / name
@@ -72,6 +99,8 @@ def static_pages(output, media):
             target.parent.mkdir(parents=True, exist_ok=True)
             if path.suffix == ".html":
                 page = re.sub(r"\{\{ASSET:([^}]+)\}\}", asset, path.read_text())
+                media_base = astra_base if astra_base.startswith("https://") else prefix + astra_base
+                page = page.replace("{{ASTRA_MEDIA}}", html.escape(media_base))
                 if "{{" in page:
                     raise ValueError(f"Unresolved page template marker: {path}")
                 target.write_text(page)
@@ -229,6 +258,7 @@ def main():
     parser.add_argument("--latest-method", action="store_true", help="Use the latest completed method export when its local directory is available")
     parser.add_argument("--media", choices=("remote", "local"), default="remote",
                         help="Link videos to the pinned asset repository, or copy verified local copies (offline package)")
+    parser.add_argument("--astra-media", type=Path, help="Local gallery media folder for a preview build (default: pinned asset repository)")
     args = parser.parse_args()
     if args.latest_method and args.media != "local":
         parser.error("--latest-method uses a local export; add --media local")
@@ -298,9 +328,11 @@ def main():
     method_video.copy_assets(paper, prepared_method)
     shutil.copyfile(source / "portal/favicon.svg", paper / "favicon.svg")
     (paper / ".nojekyll").touch()
-    static_pages(output, args.media)
+    static_pages(output, args.media, args.astra_media)
+    if args.astra_media:
+        link_astra_media(output, args.astra_media)
     (output / ".nojekyll").touch()
-    print(f"Built {output}: portal, v2 and paper page (v1) with {len(tasks)} tasks, "
+    print(f"Built {output}: portal, v2, astra and paper page (v1) with {len(tasks)} tasks, "
           f"{len(recordings)} recorded head-camera rollouts, method {method['sourceFile']}")
 
 

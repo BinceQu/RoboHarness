@@ -1,0 +1,61 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Every BEHAVIOR Challenge 2026 rollout of GPT-6 Astra running inside the RoboHarness V2 workspace, with prompts and agent settings.">
+<meta property="og:title" content="GPT-6 Astra on RoboHarness V2 · BEHAVIOR Challenge 2026">
+<meta property="og:url" content="https://roboharness-lab.github.io/astra/">
+<link rel="canonical" href="https://roboharness-lab.github.io/astra/">
+<link rel="icon" href="../favicon.ico?v=rh08-centered" sizes="any">
+<link rel="icon" type="image/svg+xml" sizes="any" href="../favicon.svg?v=rh08-centered">
+<title>GPT-6 Astra on RoboHarness V2 · BEHAVIOR Challenge 2026</title>
+<link rel="stylesheet" href="astra.css"></head>
+<body data-media="{{ASTRA_MEDIA}}">
+<nav class="top"><div class="wrap">
+  <a class="brand" href="../"><img src="../favicon.svg" alt="">RoboHarness</a>
+  <div class="links"><a href="../v1/">V1 Paper</a><a href="../v2/">V2</a><a class="on" href="./">Astra results</a>
+  <a href="https://huggingface.co/datasets/BinceQu/RoboHarness-assets/tree/main/astra-v2-behavior" target="_blank" rel="noopener">Hugging Face</a>
+  <a href="https://github.com/BinceQu/RoboHarness" target="_blank" rel="noopener">GitHub</a></div>
+</div></nav>
+
+<header class="wrap hero">
+  <p class="eyebrow">RoboHarness V2 · BEHAVIOR Challenge 2026 · R1 Pro</p>
+  <h1>GPT-6 Astra runs all 100 BEHAVIOR tasks from inside a robot workspace</h1>
+  <p class="lede">One native Codex session per task, started in a fresh RoboHarness V2 workspace. No task-specific training, no demonstrations. Each tile is the single counted attempt of that task: successes, partial scores and failures alike.</p>
+  <div class="stats" id="stats"></div>
+  <div class="strip" id="strip" aria-label="Score of every task, in task order"></div>
+  <p class="strip-legend"><span><i class="q-full"></i>Q = 1</span><span><i class="q-mid"></i>0 &lt; Q &lt; 1</span><span><i class="q-zero"></i>Q = 0</span><span><i class="q-none"></i>unscored</span><span class="hint">Each cell is one task in task order — click to open it.</span></p>
+</header>
+
+<section class="wrap controls" aria-label="Filter and sort">
+  <div class="chips" id="chips" role="tablist"></div>
+  <div class="tools">
+    <input id="search" type="search" placeholder="Search tasks" aria-label="Search tasks">
+    <select id="sort" aria-label="Sort">
+      <option value="id">Task ID</option><option value="q-desc">Score: high → low</option>
+      <option value="q-asc">Score: low → high</option><option value="len">Longest rollouts</option>
+    </select>
+  </div>
+</section>
+
+<main class="wrap"><div class="grid" id="grid"></div><p class="empty" id="empty" hidden>No task matches.</p></main>
+
+<section class="wrap setup">
+  <h2>Setup shared by every rollout</h2>
+  <dl class="settings" id="settings"></dl>
+  <p class="foot">Videos are the evaluator's recordings at their original resolution and frame rate; grid previews are 8-second time-lapses. Q is the official BEHAVIOR q-score of instance 301. The prompt shown with each episode is the exact text delivered to the agent.</p>
+</section>
+
+<dialog id="viewer" aria-labelledby="v-title">
+  <div class="v-head">
+    <div><p class="v-id" id="v-id"></p><h3 id="v-title"></h3></div>
+    <div class="v-nav"><button type="button" id="v-prev" aria-label="Previous task">‹</button><button type="button" id="v-next" aria-label="Next task">›</button><button type="button" id="v-close" aria-label="Close">✕</button></div>
+  </div>
+  <div class="v-stage"><video id="v-video" controls playsinline preload="metadata"></video></div>
+  <div class="v-speed" id="v-speed"><span>Speed</span></div>
+  <div class="v-metrics" id="v-metrics"></div>
+  <div class="v-cols">
+    <section><div class="v-label">Prompt <button type="button" class="copy" id="v-copy">Copy</button></div><pre id="v-prompt"></pre></section>
+    <section><div class="v-label">Astra settings</div><dl class="settings compact" id="v-settings"></dl></section>
+  </div>
+</dialog>
+<script src="astra.js"></script>
+</body></html>
