@@ -14,6 +14,7 @@
 
 ## 动态
 
+- **2026-11-05** · 发布 GPT-6 Astra 在 RoboHarness V2 中对 100 个 BEHAVIOR 任务的 [zero-shot 结果](https://roboharness-lab.github.io/astra/)，全部轨迹、提示词和 agent 设置已在 [Hugging Face 开源](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/tree/main/astra-v2-behavior)。
 - **2026-10-25** · RoboHarness V2 开源：以工作空间作为机器人 harness（[`harness/v2`](harness/v2)）。
 - **2026-10-07** · 代码在 GitHub 开源。
 - **2026-09-29** · 论文发布于 arXiv：[RoboHarness: A Simple Harness Outperforms VLA and World Action Models](https://arxiv.org/abs/2610.14018)。

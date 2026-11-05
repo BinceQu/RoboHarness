@@ -16,6 +16,7 @@
 
 ## News
 
+- **2026-11-05** · [GPT-6 Astra zero-shot performance on 100 BEHAVIOR tasks](https://roboharness-lab.github.io/astra/) with RoboHarness V2. All rollout trajectories, prompts and agent settings are [open-sourced on Hugging Face](https://huggingface.co/datasets/BinceQu/RoboHarness-assets/tree/main/astra-v2-behavior).
 - **2026-10-25** · RoboHarness V2 open-sourced: Workspaces as Robot Harness ([`harness/v2`](harness/v2)).
 - **2026-10-07** · Code open-sourced on GitHub.
 - **2026-09-29** · Paper available on arXiv: [RoboHarness: A Simple Harness Outperforms VLA and World Action Models](https://arxiv.org/abs/2610.14018).
