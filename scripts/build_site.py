@@ -43,6 +43,22 @@ STATIC_PAGES = (("portal", ""), ("v2", "v2"), ("astra", "astra"))
 ASTRA_MEDIA = ROOT / "website/astra/media.json"
 
 
+def astra_card_tiles(media_base):
+    """Repeat a six-column video grid for a continuous rightward scroll."""
+    page = json.loads((ROOT / "website/astra/episodes.json").read_text())
+    episodes = [row for row in page["episodes"] if row["q"] == 1][:18]
+    if len(episodes) != 18:
+        raise ValueError("The portal video wall needs 18 full-success previews")
+    tiles = []
+    for row in episodes:
+        preview = html.escape(media_base + row["media"]["previews"]["file"], quote=True)
+        poster = html.escape(media_base + row["media"]["posters"]["file"], quote=True)
+        tiles.append(f'<div class="video-wall-tile"><video muted loop playsinline preload="none" '
+                     f'poster="{poster}" data-src="{preview}"></video></div>')
+    group = '<div class="video-wall-group">' + "".join(tiles) + '</div>'
+    return '<div class="video-wall-track">' + group * 2 + '</div>'
+
+
 def astra_media_base(local_dir):
     """Absolute URL of the pinned gallery media folder, or the site-relative local copy."""
     if local_dir is not None:
@@ -100,6 +116,8 @@ def static_pages(output, media, astra_dir=None):
             if path.suffix == ".html":
                 page = re.sub(r"\{\{ASSET:([^}]+)\}\}", asset, path.read_text())
                 media_base = astra_base if astra_base.startswith("https://") else prefix + astra_base
+                if "{{ASTRA_TILES}}" in page:
+                    page = page.replace("{{ASTRA_TILES}}", astra_card_tiles(media_base))
                 page = page.replace("{{ASTRA_MEDIA}}", html.escape(media_base))
                 if "{{" in page:
                     raise ValueError(f"Unresolved page template marker: {path}")

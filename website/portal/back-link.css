@@ -1,0 +1,5 @@
+.go-back{position:absolute;top:16px;left:20px;z-index:3;display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:8px 15px;border:1px solid #e3e7ee;border-radius:24px;background:#fff;color:#202e46;font:500 14px/1.4 "Helvetica Neue",Arial,sans-serif;text-decoration:none}
+.go-back svg{flex:none}
+.go-back:hover{border-color:#202e46;background:#f6f8fb;color:#202e46}
+.go-back:focus-visible{outline:3px solid #c95e43;outline-offset:3px}
+@media(max-width:560px){.go-back{left:14px}}

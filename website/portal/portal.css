@@ -14,6 +14,13 @@ a{color:inherit;text-decoration:none}img{display:block;max-width:100%;height:aut
 .card:hover{border-color:#c9d1de;box-shadow:0 10px 30px rgba(32,46,70,.08)}
 .card .media{aspect-ratio:16/9;background:#111923}
 .card .media video{display:block;width:100%;height:100%;object-fit:cover}
+.video-wall{position:relative;overflow:hidden}
+.video-wall-track{position:absolute;inset:0 auto 0 0;display:flex;width:225%;animation:drift-right 90s linear infinite paused;will-change:transform}
+.video-wall-group{flex:0 0 50%;min-width:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr))}
+.video-wall-tile{min-width:0;min-height:0;overflow:hidden}
+.video-wall.is-playing .video-wall-track{animation-play-state:running}
+@keyframes drift-right{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+@media(prefers-reduced-motion:reduce){.video-wall-track{animation:none;transform:translateX(-50%)}}
 .badge{height:44px;width:auto;align-self:flex-start;margin-bottom:4px}
 .card .body{padding:24px 28px 28px;display:flex;flex-direction:column;flex:1}
 .card h2{font-family:var(--serif);font-weight:400;font-size:27px;line-height:1.25;margin:8px 0 10px;letter-spacing:-.015em}

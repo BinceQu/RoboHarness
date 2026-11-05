@@ -156,7 +156,7 @@ figcaption { margin-top: 18px; font-size: 13px; line-height: 1.7; color: var(--m
 
 @media (max-width: 900px) {
   .container { width: calc(100% - 64px); }
-  .hero { padding-top: 72px; }
+  .hero { padding-top: 84px; }
   .hero h1 { font-size: clamp(36px, 5.1vw, 47px); }
   .object-study { grid-template-columns: 1fr; gap: 36px; }
   .object-copy { max-width: 660px; margin-inline: auto; }
@@ -172,7 +172,7 @@ figcaption { margin-top: 18px; font-size: 13px; line-height: 1.7; color: var(--m
 
 @media (max-width: 680px) {
   .container { width: calc(100% - 40px); }
-  .hero { padding-block: 58px 38px; }
+  .hero { padding-block: 84px 38px; }
   .hero-wordmark { width: 225px; margin-bottom: 26px; }
   .hero h1 { font-size: clamp(33px, 6.1vw, 41px); line-height: 1.16; letter-spacing: -.04em; }
   .hero-description { max-width: 340px; margin: 20px auto 0; font-size: 16px; }
