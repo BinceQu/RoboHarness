@@ -35,5 +35,4 @@ a{color:inherit;text-decoration:none}img{display:block;max-width:100%;height:aut
 .bib pre{margin:0;padding:22px 26px;overflow-x:auto;font:13.5px/1.65 "SFMono-Regular",Consolas,"Liberation Mono",monospace;color:var(--ink)}
 .copy{position:absolute;top:12px;right:12px;border:1px solid var(--rule);background:#fff;border-radius:20px;padding:5px 14px;font:600 12.5px var(--sans);color:var(--ink);cursor:pointer}
 .copy:hover{border-color:var(--ink)}
-.kicker{margin:0;color:var(--blue);font-size:12.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase}
 @media (max-width:760px){.cards{grid-template-columns:1fr}.news li{grid-template-columns:1fr;gap:2px}}
